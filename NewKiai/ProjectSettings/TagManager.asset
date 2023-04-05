@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - FxTemporaire
+  - Skill
+  - Ground
+  - Scenary
+  - Bound
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -12,7 +18,7 @@ TagManager:
   - Water
   - UI
   - Enemy
-  - 
+  - Ground
   - 
   - 
   - 
@@ -40,4 +46,25 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Bkg
+    uniqueID: 3620711915
+    locked: 0
+  - name: Bk2
+    uniqueID: 4064553065
+    locked: 0
+  - name: Bk1
+    uniqueID: 1504665869
+    locked: 0
+  - name: Gameplay
+    uniqueID: 448257151
+    locked: 0
+  - name: Fr1
+    uniqueID: 2165414797
+    locked: 0
+  - name: Fr2
+    uniqueID: 1794954071
+    locked: 0
+  - name: HUD
+    uniqueID: 3085114499
     locked: 0
