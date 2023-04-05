@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "com.esotericsoftware.spine.timeline": "file:C:/Users/Utente/Pictures/SpinePack/com.esotericsoftware.spine.timeline-4.1",
+    "com.esotericsoftware.spine.urp-shaders": "file:C:/Users/Utente/Pictures/SpinePack/com.esotericsoftware.spine.urp-shaders-4.1-2019.1",
     "com.unity.cinemachine": "2.8.9",
     "com.unity.collab-proxy": "2.0.1",
     "com.unity.feature.2d": "1.0.0",

@@ -1,0 +1,2944 @@
+fileFormatVersion: 2
+guid: c22ca42027edbc046bd20ed29697141b
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 128
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Mix_Env_1_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1555
+        width: 510
+        height: 493
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 077a2fed796fed34ea4359d7a3d06d72
+      internalID: 1276577131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_4
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1795
+        width: 249
+        height: 253
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4cdf8f8f6daa8bf40b91f0b0575f3988
+      internalID: -504434697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_6
+      rect:
+        serializedVersion: 2
+        x: 785
+        y: 1805
+        width: 83
+        height: 243
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f5fd8b81ba8e9e4c9ef370f471829db
+      internalID: 1198138599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_7
+      rect:
+        serializedVersion: 2
+        x: 904
+        y: 1805
+        width: 83
+        height: 243
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 355cdc6c9f3116c46866cd7290998fb7
+      internalID: -1870104391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_8
+      rect:
+        serializedVersion: 2
+        x: 1036
+        y: 1925
+        width: 98
+        height: 115
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aba4f129f2e4f574c83ed5b4b7f69498
+      internalID: -2102389558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_9
+      rect:
+        serializedVersion: 2
+        x: 1160
+        y: 1671
+        width: 490
+        height: 364
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f506c5702ef475a4db6050274c7aa494
+      internalID: -494811644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_13
+      rect:
+        serializedVersion: 2
+        x: 1664
+        y: 1793
+        width: 114
+        height: 255
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d94b8a8f4b3aee40b0a59aa2a37c573
+      internalID: 2103399606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_14
+      rect:
+        serializedVersion: 2
+        x: 1835
+        y: 1793
+        width: 42
+        height: 255
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 745121f338a99684083e0de73405ce80
+      internalID: 50080155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_15
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 1792
+        width: 128
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0b22e040c5e35d4290012b5916cffc5
+      internalID: -1817983832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_16
+      rect:
+        serializedVersion: 2
+        x: 2066
+        y: 1805
+        width: 68
+        height: 203
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d4a5edfe07f5b547a8091174bf9e105
+      internalID: -1003601615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_25
+      rect:
+        serializedVersion: 2
+        x: 1026
+        y: 1797
+        width: 120
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d048c8ee5973b7a46a87e862125931cb
+      internalID: -913718781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_38
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1554
+        width: 254
+        height: 238
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a10ba2f800d61f24a86db016f8e08d40
+      internalID: 1698162863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_41
+      rect:
+        serializedVersion: 2
+        x: 767
+        y: 1555
+        width: 257
+        height: 238
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8200cde5185b794ebb4ab356219aa43
+      internalID: 868237484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_42
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1664
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01f3a8e44667ca74d9bec14c9b6fa224
+      internalID: -1498461348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_47
+      rect:
+        serializedVersion: 2
+        x: 1676
+        y: 1545
+        width: 92
+        height: 218
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70758c7a097b91b4393f0cd267bc40f0
+      internalID: -233298598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_48
+      rect:
+        serializedVersion: 2
+        x: 1827
+        y: 1550
+        width: 42
+        height: 230
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f260e127aa24655488f4b7b18740f801
+      internalID: 1189106529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_49
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 1674
+        width: 128
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa1ec8178d46a6f4295c0451f4ff1161
+      internalID: 1264773702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_50
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 1546
+        width: 128
+        height: 244
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf480e6bf63bc194bb232f6bbccbee60
+      internalID: -15836700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_57
+      rect:
+        serializedVersion: 2
+        x: 1029
+        y: 1423
+        width: 240
+        height: 223
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90da496150309a04886155592e994168
+      internalID: -1415557702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_59
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 1543
+        width: 113
+        height: 103
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9cee47ced0d44b6438c3b1d0c94caac2
+      internalID: -2051128317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_60
+      rect:
+        serializedVersion: 2
+        x: 1411
+        y: 1542
+        width: 114
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c1bdb3bfc16f5f44b7249c29df01ef8
+      internalID: -14718185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_61
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1550
+        width: 128
+        height: 85
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79e66ef77ff22bb40a1a5d7befd86f3c
+      internalID: 2101285858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_64
+      rect:
+        serializedVersion: 2
+        x: 1947
+        y: 1545
+        width: 68
+        height: 119
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00b380debf09e3b428c56f0681d04c4c
+      internalID: 2079327233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_66
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 1175
+        width: 213
+        height: 354
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41805ba51d4ae19429246c282e68de1a
+      internalID: -993139835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_68
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 1178
+        width: 215
+        height: 358
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d93f68e4e9e4e1041b8e96fc3a4154ba
+      internalID: -391170911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_70
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1408
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd4defadc483e2945ba92f0747facf65
+      internalID: 1478495653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_71
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 1408
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a541eaa5d52f92c4c9be5f3a66ed297e
+      internalID: -346395147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_72
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 1408
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb7ba5406e079ce46b7d88764967ed30
+      internalID: -1932718358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_73
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 1408
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7eaac41704455d428101df451028b28
+      internalID: -1380486916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_76
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 1421
+        width: 128
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f688ca0b91cc2146b7c63a5dfa15d5d
+      internalID: -1829961568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_77
+      rect:
+        serializedVersion: 2
+        x: 1416
+        y: 1416
+        width: 110
+        height: 106
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68bdd795df73f364bb0473391bcd42a1
+      internalID: -1356606963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_78
+      rect:
+        serializedVersion: 2
+        x: 1543
+        y: 1421
+        width: 231
+        height: 112
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dcc43d6fae13a944abdb76e72b8dcff5
+      internalID: 1236234571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_80
+      rect:
+        serializedVersion: 2
+        x: 1792
+        y: 1415
+        width: 128
+        height: 121
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f925beecf73a5d4f96181039280b0c0
+      internalID: -1969113980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_81
+      rect:
+        serializedVersion: 2
+        x: 1931
+        y: 1287
+        width: 100
+        height: 236
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b954a4112c52b7e428b2b57787743061
+      internalID: -792971705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_82
+      rect:
+        serializedVersion: 2
+        x: 2082
+        y: 1416
+        width: 55
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3022f5ccafb213146ad1d384d3c44903
+      internalID: 1003015854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_87
+      rect:
+        serializedVersion: 2
+        x: 539
+        y: 1164
+        width: 64
+        height: 244
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06a9717ee9e7e7546a0e9d65e2484602
+      internalID: -1771074322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_88
+      rect:
+        serializedVersion: 2
+        x: 669
+        y: 1164
+        width: 61
+        height: 244
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39d242e7600e5c248966d15d1e667928
+      internalID: -1126702464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_89
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 1280
+        width: 128
+        height: 126
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a3c7b398a6c20548936c1c96312b364
+      internalID: -76351118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_90
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 1284
+        width: 121
+        height: 110
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8892126fdb0f5564391ea4554c920c1d
+      internalID: -811417442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_91
+      rect:
+        serializedVersion: 2
+        x: 1043
+        y: 1289
+        width: 90
+        height: 115
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd7c97eae35f0e643a2a1223c5e6d229
+      internalID: -1600734871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_92
+      rect:
+        serializedVersion: 2
+        x: 1174
+        y: 1280
+        width: 71
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1211aa35a8168f4ab83c262f5a4a8ff
+      internalID: 440089890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_95
+      rect:
+        serializedVersion: 2
+        x: 1547
+        y: 1154
+        width: 87
+        height: 198
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 561d6b0a82220644581e9d43f26adf04
+      internalID: 61650975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_97
+      rect:
+        serializedVersion: 2
+        x: 1792
+        y: 1280
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2eb8cbc8b9b828147b5cf28123a25ac2
+      internalID: 1456481440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_99
+      rect:
+        serializedVersion: 2
+        x: 2085
+        y: 1288
+        width: 55
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df97d32eec5948d4192c629f78c19926
+      internalID: -364593931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_106
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 1152
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 474153506c69903418cae1487462c09c
+      internalID: 186671672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_107
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 1152
+        width: 252
+        height: 105
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7179b0860815b91499ba47fa6aba6a86
+      internalID: -285830632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_109
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1152
+        width: 362
+        height: 259
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6fb6c3a5ac9556641a0565dfb24fac58
+      internalID: 237761130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_113
+      rect:
+        serializedVersion: 2
+        x: 1667
+        y: 1157
+        width: 121
+        height: 201
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60542550f7b5b034498887c6a740a3d3
+      internalID: -1997633873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_114
+      rect:
+        serializedVersion: 2
+        x: 1816
+        y: 1162
+        width: 74
+        height: 118
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a316f8759fe5c81469ab250e95b5b040
+      internalID: -431874276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_115
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 1161
+        width: 128
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7af290c50ffca324ebb33d8123988155
+      internalID: -1704725681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_116
+      rect:
+        serializedVersion: 2
+        x: 2070
+        y: 1166
+        width: 86
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2b1a8b391019594ca76eb51b9242727
+      internalID: 287365496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_120
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 900
+        width: 128
+        height: 252
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05ba35620155e414785ee370ed025d55
+      internalID: 969365637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_121
+      rect:
+        serializedVersion: 2
+        x: 517
+        y: 903
+        width: 237
+        height: 249
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73ccebb6c96939f40a470263ff9c0b1c
+      internalID: -419033296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_123
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 1024
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00a494c7b4423f547972f1f95a33379f
+      internalID: 926170205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_124
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 1024
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44885b37167b15e48b7a9e806d70c23f
+      internalID: -949808317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_125
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1024
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24e85bcdfd99f2246952d06ce93f96fe
+      internalID: -1528685323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_126
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1024
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee137e21d3d871247913e5892fe8af0d
+      internalID: 1660543018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_127
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 1024
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0de4046195bc934189102139d50206d
+      internalID: -933618814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_128
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 1024
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d2e945449d045646a2a6bea5b37d4f1
+      internalID: -1786929867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_129
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1024
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83cc829f58ceace46902456c256812c4
+      internalID: -2038068431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_130
+      rect:
+        serializedVersion: 2
+        x: 1664
+        y: 1024
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 742d309133cf3784e96342566eb3f737
+      internalID: 691423096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_131
+      rect:
+        serializedVersion: 2
+        x: 1792
+        y: 895
+        width: 249
+        height: 257
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0c4ec713bf566a48bc6a6d6d5c4559e
+      internalID: 288830133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_133
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 1024
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b26caaef7b9f23b49b00a91670f5bae5
+      internalID: -1236081398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_139
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 896
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5e537b02d5e9a24792cd8ba20c96239
+      internalID: 1612206490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_140
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 643
+        width: 384
+        height: 381
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85bb44dfd3aaaf64d95a7dd4023d9311
+      internalID: 323689932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_143
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 642
+        width: 378
+        height: 382
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f362d6ca47b78fc48a6e33079b5c6f4a
+      internalID: 1031844014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_146
+      rect:
+        serializedVersion: 2
+        x: 1664
+        y: 896
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4bf514fb511ce14384e62ea9890cf5f
+      internalID: -1744977796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_149
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 896
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96a5c4d858dec794db20d62c43c78061
+      internalID: -187314307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_150
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 768
+        width: 336
+        height: 381
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2d47c250ca4dab48a974b52b09e8bc0
+      internalID: 1980295080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_152
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 644
+        width: 239
+        height: 252
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aaad128f139753f47912086867b558de
+      internalID: -1343728234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_155
+      rect:
+        serializedVersion: 2
+        x: 639
+        y: 643
+        width: 257
+        height: 253
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1345dae5b082ee34ba5b1c5cd385df48
+      internalID: 762211180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_162
+      rect:
+        serializedVersion: 2
+        x: 1664
+        y: 768
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7b063cbb4f3c2b4296d59ca458a8ffb
+      internalID: -368942817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_163
+      rect:
+        serializedVersion: 2
+        x: 1792
+        y: 642
+        width: 128
+        height: 254
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0f3b291b3d053241a6910ac535cd533
+      internalID: -1715061772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_164
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 768
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ff9ac6e7d792a94da6a6d24ac8bf4cd
+      internalID: -2016893239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_165
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 675
+        width: 128
+        height: 221
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6000f7be03f88a4f9b3c61eb60e2788
+      internalID: -2013009136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_166
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 520
+        width: 128
+        height: 248
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0c6d1625be6c294f819587916e3e62d
+      internalID: -77484324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_167
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 525
+        width: 128
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: adce542a58b4a8f4db7b39d95dfdb3ac
+      internalID: -1963291829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_168
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 640
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6cf5e294d317f04185a33d27d3cd78d
+      internalID: 875601892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_179
+      rect:
+        serializedVersion: 2
+        x: 1664
+        y: 640
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5874f1febf97d2147b68e6c8a351aee6
+      internalID: -215827781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_181
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 640
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15108294d64fda04682a8af9c106f2aa
+      internalID: 1459147298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_185
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 389
+        width: 242
+        height: 251
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9515b94ea15273a43a979004952f783d
+      internalID: 1573639593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_187
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 389
+        width: 243
+        height: 251
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 393b2add3fcb98240aa876886f86017c
+      internalID: -640121998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_189
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 408
+        width: 95
+        height: 221
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 794fd9611ded8184ebed958ef44f5464
+      internalID: -804204589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_190
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 389
+        width: 246
+        height: 251
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 339c45ca123ad7940a48614117dc0297
+      internalID: -1406681609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_192
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 512
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36b5c13cb85d82c4bbf6a791a52fd353
+      internalID: 779997729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_193
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 512
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a98b12252662a6488598f7a0a662bb0
+      internalID: -1963313349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_194
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 512
+        width: 252
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63ba01a2e8d3e0846a99cc0cf4a12310
+      internalID: 881313169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_196
+      rect:
+        serializedVersion: 2
+        x: 1664
+        y: 512
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c75e7d83834ccb4f81ef41680cabf38
+      internalID: -1338534848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_197
+      rect:
+        serializedVersion: 2
+        x: 1792
+        y: 512
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de0fb661ae7ca454cbb86187274d2019
+      internalID: -89720563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_198
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 512
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9664d2a8c7c333d4bb212fcb76281a6d
+      internalID: -916553807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_199
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 512
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95ec71b08f6be5b4683e09ffe068b875
+      internalID: 1399667933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_200
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4eea051c7c45e714d8c9b42eb5ed992a
+      internalID: -933927255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_201
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 384
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37ef8baaea49ff34e85406dfa02cdfdd
+      internalID: 1667951141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_209
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 384
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 640f5e2519cff1d4aa9068fa05dbc566
+      internalID: -489136459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_210
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 384
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26d35aa0791b2b6409c97a3ebe9cf4e4
+      internalID: -1782790482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_211
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 384
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 733199878e2d7634cb30bb0b6e558aa3
+      internalID: -322986407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_212
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 384
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c51b2df379dd914081f032a022a2109
+      internalID: 1057262472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_213
+      rect:
+        serializedVersion: 2
+        x: 1664
+        y: 384
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c776e7124be1f6643a15b28c49b74b27
+      internalID: -2054000405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_214
+      rect:
+        serializedVersion: 2
+        x: 1792
+        y: 384
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e290d2d4d55b5544facaec8b6525b8fb
+      internalID: 1139361910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_216
+      rect:
+        serializedVersion: 2
+        x: 1937
+        y: 384
+        width: 239
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c619d8276150114fa90965ea6e93e31
+      internalID: 1444207956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_217
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 16
+        width: 214
+        height: 345
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f35230daf678e5444aceb6b166645f7a
+      internalID: 808649358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_219
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 133
+        width: 105
+        height: 219
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f6b769b919605e468b5c42368969830
+      internalID: -249749217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_220
+      rect:
+        serializedVersion: 2
+        x: 402
+        y: 134
+        width: 93
+        height: 216
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95f15fdeeacadb742aedae447d17f8b5
+      internalID: -351689858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_221
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 256
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f4a0571996071248872ae2325150f07
+      internalID: 651482878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_222
+      rect:
+        serializedVersion: 2
+        x: 659
+        y: 15
+        width: 90
+        height: 358
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 146ab348e45440240985d900088c2816
+      internalID: 1899444555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_223
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 21
+        width: 128
+        height: 357
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6704d72a88157a445b639b5dc8ca68d9
+      internalID: -571055165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_224
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 28
+        width: 128
+        height: 327
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c5e19b30f4c0fa4e8e097eb5bb728d1
+      internalID: -1797862952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_225
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 256
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4dea5f1a4c02a7f4ab6184e39ce6559b
+      internalID: -1962344773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_226
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 256
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3af3ed51b9231cc4a9213a2cc17c9691
+      internalID: 736830370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_227
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 267
+        width: 238
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57eacb07fca4e6644bbee97db329bb33
+      internalID: -1826995759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_229
+      rect:
+        serializedVersion: 2
+        x: 1544
+        y: 266
+        width: 232
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c489148373c1aba48b618f36c85b37f8
+      internalID: -2146306585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_231
+      rect:
+        serializedVersion: 2
+        x: 1792
+        y: 256
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ec9208b726758b499bab5de0b60fa51
+      internalID: 30060847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_232
+      rect:
+        serializedVersion: 2
+        x: 1937
+        y: 256
+        width: 239
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4a65bf2d8f733e4aa79f91767388a7d
+      internalID: -585036825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_238
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5be93d0500b201b49a6560b0f26b318e
+      internalID: 1494249451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_242
+      rect:
+        serializedVersion: 2
+        x: 1053
+        y: 18
+        width: 74
+        height: 226
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7dde33755beb45e40bf06d4937e6a1ab
+      internalID: -297169395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_243
+      rect:
+        serializedVersion: 2
+        x: 1168
+        y: 19
+        width: 216
+        height: 224
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22354291ca6600f48b9f93cd573c6acb
+      internalID: 1701791771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_245
+      rect:
+        serializedVersion: 2
+        x: 1423
+        y: 19
+        width: 219
+        height: 225
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6d121fecd2bc75488e8be373da9cd98
+      internalID: -1303558164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_247
+      rect:
+        serializedVersion: 2
+        x: 1664
+        y: 8
+        width: 255
+        height: 248
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1ccc5f2a6d401d489153c4c85b27dc3
+      internalID: 43054715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_250
+      rect:
+        serializedVersion: 2
+        x: 1919
+        y: 7
+        width: 255
+        height: 243
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2909b8ac4171b1f43b92eddb0d21d5b5
+      internalID: 1518887297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_253
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 12
+        width: 247
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22214d7c1133dd540bd1c7a164e7b73a
+      internalID: 2138277845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mix_Env_1_255
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 13
+        width: 128
+        height: 99
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bf7a72c0e7c01f44b858378026b6d80
+      internalID: 1896347849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Mix_Env_1_0: 1276577131
+      Mix_Env_1_1: -1257860495
+      Mix_Env_1_10: -1321410720
+      Mix_Env_1_100: -1805152557
+      Mix_Env_1_101: -1602154573
+      Mix_Env_1_102: 1993486803
+      Mix_Env_1_103: 2049899752
+      Mix_Env_1_104: -982350449
+      Mix_Env_1_105: -2112394744
+      Mix_Env_1_106: 186671672
+      Mix_Env_1_107: -285830632
+      Mix_Env_1_108: -1837527162
+      Mix_Env_1_109: 237761130
+      Mix_Env_1_11: 1405590985
+      Mix_Env_1_110: -784724291
+      Mix_Env_1_111: -2055694477
+      Mix_Env_1_112: -36217000
+      Mix_Env_1_113: -1997633873
+      Mix_Env_1_114: -431874276
+      Mix_Env_1_115: -1704725681
+      Mix_Env_1_116: 287365496
+      Mix_Env_1_117: -1355663548
+      Mix_Env_1_118: -31361258
+      Mix_Env_1_119: 610018069
+      Mix_Env_1_12: -243595029
+      Mix_Env_1_120: 969365637
+      Mix_Env_1_121: -419033296
+      Mix_Env_1_122: -1042569863
+      Mix_Env_1_123: 926170205
+      Mix_Env_1_124: -949808317
+      Mix_Env_1_125: -1528685323
+      Mix_Env_1_126: 1660543018
+      Mix_Env_1_127: -933618814
+      Mix_Env_1_128: -1786929867
+      Mix_Env_1_129: -2038068431
+      Mix_Env_1_13: 2103399606
+      Mix_Env_1_130: 691423096
+      Mix_Env_1_131: 288830133
+      Mix_Env_1_132: 1882213822
+      Mix_Env_1_133: -1236081398
+      Mix_Env_1_134: 1005696967
+      Mix_Env_1_135: -1410621432
+      Mix_Env_1_136: -1550810005
+      Mix_Env_1_137: 1224576601
+      Mix_Env_1_138: -2088399200
+      Mix_Env_1_139: 1612206490
+      Mix_Env_1_14: 50080155
+      Mix_Env_1_140: 323689932
+      Mix_Env_1_141: 810740794
+      Mix_Env_1_142: -107198444
+      Mix_Env_1_143: 1031844014
+      Mix_Env_1_144: 1647374161
+      Mix_Env_1_145: -2092033009
+      Mix_Env_1_146: -1744977796
+      Mix_Env_1_147: 1605619649
+      Mix_Env_1_148: -960664979
+      Mix_Env_1_149: -187314307
+      Mix_Env_1_15: -1817983832
+      Mix_Env_1_150: 1980295080
+      Mix_Env_1_151: 1491348423
+      Mix_Env_1_152: -1343728234
+      Mix_Env_1_153: 984725580
+      Mix_Env_1_154: -1153590919
+      Mix_Env_1_155: 762211180
+      Mix_Env_1_156: -1840554812
+      Mix_Env_1_157: 2074678314
+      Mix_Env_1_158: 1857194947
+      Mix_Env_1_159: 1698139319
+      Mix_Env_1_16: -1003601615
+      Mix_Env_1_160: 433231309
+      Mix_Env_1_161: 1029009350
+      Mix_Env_1_162: -368942817
+      Mix_Env_1_163: -1715061772
+      Mix_Env_1_164: -2016893239
+      Mix_Env_1_165: -2013009136
+      Mix_Env_1_166: -77484324
+      Mix_Env_1_167: -1963291829
+      Mix_Env_1_168: 875601892
+      Mix_Env_1_169: 1663880237
+      Mix_Env_1_17: 184444848
+      Mix_Env_1_170: 251116055
+      Mix_Env_1_171: 1968538790
+      Mix_Env_1_172: -477531193
+      Mix_Env_1_173: -1302641472
+      Mix_Env_1_174: 1433446236
+      Mix_Env_1_175: -524868593
+      Mix_Env_1_176: 850085105
+      Mix_Env_1_177: 2107080040
+      Mix_Env_1_178: -120622022
+      Mix_Env_1_179: -215827781
+      Mix_Env_1_18: 867020557
+      Mix_Env_1_180: -1915224008
+      Mix_Env_1_181: 1459147298
+      Mix_Env_1_182: -1603859456
+      Mix_Env_1_183: 1311290598
+      Mix_Env_1_184: 1543818740
+      Mix_Env_1_185: 1573639593
+      Mix_Env_1_186: 1557653815
+      Mix_Env_1_187: -640121998
+      Mix_Env_1_188: -837673219
+      Mix_Env_1_189: -804204589
+      Mix_Env_1_19: 131675201
+      Mix_Env_1_190: -1406681609
+      Mix_Env_1_191: -1725480607
+      Mix_Env_1_192: 779997729
+      Mix_Env_1_193: -1963313349
+      Mix_Env_1_194: 881313169
+      Mix_Env_1_195: -1754208281
+      Mix_Env_1_196: -1338534848
+      Mix_Env_1_197: -89720563
+      Mix_Env_1_198: -916553807
+      Mix_Env_1_199: 1399667933
+      Mix_Env_1_2: -1886292187
+      Mix_Env_1_20: -1420086351
+      Mix_Env_1_200: -933927255
+      Mix_Env_1_201: 1667951141
+      Mix_Env_1_202: 661292847
+      Mix_Env_1_203: -1974675976
+      Mix_Env_1_204: 2139138291
+      Mix_Env_1_205: -1792867651
+      Mix_Env_1_206: -1696510984
+      Mix_Env_1_207: 1161909567
+      Mix_Env_1_208: -1640953685
+      Mix_Env_1_209: -489136459
+      Mix_Env_1_21: -45128027
+      Mix_Env_1_210: -1782790482
+      Mix_Env_1_211: -322986407
+      Mix_Env_1_212: 1057262472
+      Mix_Env_1_213: -2054000405
+      Mix_Env_1_214: 1139361910
+      Mix_Env_1_215: 464012921
+      Mix_Env_1_216: 1444207956
+      Mix_Env_1_217: 808649358
+      Mix_Env_1_218: -172994920
+      Mix_Env_1_219: -249749217
+      Mix_Env_1_22: -131595451
+      Mix_Env_1_220: -351689858
+      Mix_Env_1_221: 651482878
+      Mix_Env_1_222: 1899444555
+      Mix_Env_1_223: -571055165
+      Mix_Env_1_224: -1797862952
+      Mix_Env_1_225: -1962344773
+      Mix_Env_1_226: 736830370
+      Mix_Env_1_227: -1826995759
+      Mix_Env_1_228: -33631327
+      Mix_Env_1_229: -2146306585
+      Mix_Env_1_23: -532236077
+      Mix_Env_1_230: -454429027
+      Mix_Env_1_231: 30060847
+      Mix_Env_1_232: -585036825
+      Mix_Env_1_233: -867741705
+      Mix_Env_1_234: 944816655
+      Mix_Env_1_235: -1343414079
+      Mix_Env_1_236: -1944160888
+      Mix_Env_1_237: 1899364330
+      Mix_Env_1_238: 1494249451
+      Mix_Env_1_239: -1170216799
+      Mix_Env_1_24: 544423802
+      Mix_Env_1_240: -315012011
+      Mix_Env_1_241: -31662997
+      Mix_Env_1_242: -297169395
+      Mix_Env_1_243: 1701791771
+      Mix_Env_1_244: 571713506
+      Mix_Env_1_245: -1303558164
+      Mix_Env_1_246: 1171030125
+      Mix_Env_1_247: 43054715
+      Mix_Env_1_248: 618592648
+      Mix_Env_1_249: -921402183
+      Mix_Env_1_25: -913718781
+      Mix_Env_1_250: 1518887297
+      Mix_Env_1_251: 864401333
+      Mix_Env_1_252: 1677087000
+      Mix_Env_1_253: 2138277845
+      Mix_Env_1_254: 837054720
+      Mix_Env_1_255: 1896347849
+      Mix_Env_1_256: -1645826652
+      Mix_Env_1_257: -1430904217
+      Mix_Env_1_258: 1607552704
+      Mix_Env_1_259: -81287579
+      Mix_Env_1_26: -341248305
+      Mix_Env_1_260: -586736593
+      Mix_Env_1_261: 814261503
+      Mix_Env_1_262: -540227624
+      Mix_Env_1_263: 1181938592
+      Mix_Env_1_264: 857323323
+      Mix_Env_1_265: 306246272
+      Mix_Env_1_266: 117491840
+      Mix_Env_1_267: 186341183
+      Mix_Env_1_27: 1482462273
+      Mix_Env_1_28: 678997275
+      Mix_Env_1_29: -453910382
+      Mix_Env_1_3: 254048612
+      Mix_Env_1_30: 58320722
+      Mix_Env_1_31: -1706916036
+      Mix_Env_1_32: -773297137
+      Mix_Env_1_33: 1143829
+      Mix_Env_1_34: 826558476
+      Mix_Env_1_35: 634549750
+      Mix_Env_1_36: -176932634
+      Mix_Env_1_37: 1513310852
+      Mix_Env_1_38: 1698162863
+      Mix_Env_1_39: -1171099503
+      Mix_Env_1_4: -504434697
+      Mix_Env_1_40: -781733876
+      Mix_Env_1_41: 868237484
+      Mix_Env_1_42: -1498461348
+      Mix_Env_1_43: 831449784
+      Mix_Env_1_44: 1894293212
+      Mix_Env_1_45: -344926265
+      Mix_Env_1_46: 1193611761
+      Mix_Env_1_47: -233298598
+      Mix_Env_1_48: 1189106529
+      Mix_Env_1_49: 1264773702
+      Mix_Env_1_5: -433193288
+      Mix_Env_1_50: -15836700
+      Mix_Env_1_51: 577666636
+      Mix_Env_1_52: 1525174141
+      Mix_Env_1_53: 44725573
+      Mix_Env_1_54: -319654447
+      Mix_Env_1_55: -1787084689
+      Mix_Env_1_56: -2076559701
+      Mix_Env_1_57: -1415557702
+      Mix_Env_1_58: -1978069169
+      Mix_Env_1_59: -2051128317
+      Mix_Env_1_6: 1198138599
+      Mix_Env_1_60: -14718185
+      Mix_Env_1_61: 2101285858
+      Mix_Env_1_62: 638967386
+      Mix_Env_1_63: 281219048
+      Mix_Env_1_64: 2079327233
+      Mix_Env_1_65: 614793233
+      Mix_Env_1_66: -993139835
+      Mix_Env_1_67: 1375512951
+      Mix_Env_1_68: -391170911
+      Mix_Env_1_69: 40977648
+      Mix_Env_1_7: -1870104391
+      Mix_Env_1_70: 1478495653
+      Mix_Env_1_71: -346395147
+      Mix_Env_1_72: -1932718358
+      Mix_Env_1_73: -1380486916
+      Mix_Env_1_74: -1908788719
+      Mix_Env_1_75: -771681259
+      Mix_Env_1_76: -1829961568
+      Mix_Env_1_77: -1356606963
+      Mix_Env_1_78: 1236234571
+      Mix_Env_1_79: -539414640
+      Mix_Env_1_8: -2102389558
+      Mix_Env_1_80: -1969113980
+      Mix_Env_1_81: -792971705
+      Mix_Env_1_82: 1003015854
+      Mix_Env_1_83: 372827378
+      Mix_Env_1_84: -788728480
+      Mix_Env_1_85: -394167705
+      Mix_Env_1_86: -438426817
+      Mix_Env_1_87: -1771074322
+      Mix_Env_1_88: -1126702464
+      Mix_Env_1_89: -76351118
+      Mix_Env_1_9: -494811644
+      Mix_Env_1_90: -811417442
+      Mix_Env_1_91: -1600734871
+      Mix_Env_1_92: 440089890
+      Mix_Env_1_93: -502226446
+      Mix_Env_1_94: 154394360
+      Mix_Env_1_95: 61650975
+      Mix_Env_1_96: -110128890
+      Mix_Env_1_97: 1456481440
+      Mix_Env_1_98: 1500598581
+      Mix_Env_1_99: -364593931
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

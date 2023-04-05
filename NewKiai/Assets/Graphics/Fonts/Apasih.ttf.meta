@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: c26cbf4b9390d0c42bc38918f39c9dbe
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Apasih
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 72f6e93147a726742bf740118cc80d13, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
