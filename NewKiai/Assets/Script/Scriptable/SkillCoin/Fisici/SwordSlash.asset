@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7ec8756eac038249924a1cb3ca756d2, type: 3}
+  m_Name: SwordSlash
+  m_EditorClassIdentifier: 
+  id: 7
+  SkillName: SwordSlash
+  Description: '"A simple sharp gust of swords that strikes and wounds the enemy"'
+  value: 20
+  icon: {fileID: 21300000, guid: 6407e14507f423945aefb9be9bf31922, type: 3}

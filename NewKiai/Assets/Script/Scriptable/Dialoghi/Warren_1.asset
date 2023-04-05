@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bda5d524272e1946883d7614e323dd0, type: 3}
+  m_Name: Warren_1
+  m_EditorClassIdentifier: 
+  id: 5
+  CharacterName: Warren
+  dialogue: []
+  Startdialogue:
+  - "Ainard! Come stai caro fratello? I ragazzi mi hanno detto che la madre ha parlato,
+    \xE8 vero? Immaginavo che sarebbe successo prima o poi."
+  - "Ad ogni modo, lo sai quanto sono scrupoloso e ti ho trovato in difficolt\xE0
+    nell'arena nell'utilizzo delle richieste. Non hai studiato nella libreria della
+    madre, vero? Immaginavo, sei proprio un ignorantone. "
+  - "Guarda, solo perch\xE9 ti voglio bene ti ho preparato una pergamena, \xE8 un
+    riassunto su come puoi usare la richiesta chiamata \"Shotgun\", \xE8 pi\xF9 potente
+    rispetto al \"Globo\" ma ha una gitata molto corta, usala con saggezza."
+  - "Potrai equipaggiare la richiesta nel menu rapido al santuario laggi\xF9, dammi
+    retta e fallo, ti sar\xE0 molto utile."
+  Middledialogue:
+  - Beh fratellino, le nostre strade si divideranno, ho intenzione di dirigermi a
+    Nowhere e aprire un ciosco. Il santuario ha bisogno di entrate del resto.
+  - In missione assieme a voi? Capisco che mi vedi grande e grosso, ma ti assicuro
+    che nell'arena me la darei a gambe levate. Combattere non fa per me.
+  - "Fidati se ti dico che sono pi\xF9 utile in altri modi, aspetta e vedrai."
+  Endingdialogue:
+  - "Cerca di avere pazienza con Darren, \xE8 un po' scorbutico ma ha il cuore d'oro.\nBeh
+    che dire,  fratellino, buona fortuna con il tuo viaggio."
+  - La madre ti osserva!
+  First: 0
+  Middle: 0
+  End: 0

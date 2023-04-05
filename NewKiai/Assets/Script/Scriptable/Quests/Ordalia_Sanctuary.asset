@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ecce37879c6b3e4c9471d6464d3a78f, type: 3}
+  m_Name: Ordalia_Sanctuary
+  m_EditorClassIdentifier: 
+  id: 1
+  CharacterName: Bernard
+  questName: Ordalia for the mother
+  Description: The mother wants see your dedition for her, so give the peaceful death
+    to your die brothers. Praise the mother.
+  value: 1
+  Bigicon: {fileID: 21300000, guid: bebe89e0d94de394eb2adb4caf4eaf42, type: 3}
+  Startdialogue:
+  - Hello brot...What? The mother talk with you? Really?
+  - The time has come! What a great news, so we can start our journey for revenge
+    other brothers, didn't you?
+  - 'Mh, but first maybe it''s better if we clean the cave from the die bodies of
+    our brothers. You know... If other people want to join in the cult, maybe it''s
+    not a good idea see all this die bodies. '
+  - 'Anyway, do you remember how to fight, right? Mh, I don''t sure... Maybe I can
+    test your skills?
+
+    Look, if you defeat all die brothers I will give you the
+    key for the main door. What you think?'
+  - C'mon, let's go, Ainard!
+  Middledialogue:
+  - So, the arena is in front of you.... So... That's it.
+  - Good luck!
+  Endingdialogue:
+  - "Not bad, Ainard, not bad at all! You make The mother very proud. So... \nTake
+    the key, a promise is a promise."
+  - Take care of you, ok? We will see soon dear brothers.
+  Afterdialogue:
+  - 'Take care of you, ok? We will see soon dear brothers. '
+  - The mother see you.
+  isActive: 1
+  isComplete: 0
+  AfterQuest: 0

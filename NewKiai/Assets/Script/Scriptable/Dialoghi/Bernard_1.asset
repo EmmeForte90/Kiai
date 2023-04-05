@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bda5d524272e1946883d7614e323dd0, type: 3}
+  m_Name: Bernard_1
+  m_EditorClassIdentifier: 
+  id: 0
+  CharacterName: Bernard
+  dialogue:
+  - Ah... Are you hear the words of our mother, brother?
+  - The time has finally come! Soon we will avenge ourselves on the treacherous king,
+    Garland the Dark.
+  - But first, it would be a good idea to brush up on our skills, right? Later on,
+    you can take on the empty shells left by our brethren.
+  - Give them the peace they deserve and show us what you can do. Do you remember
+    how to attack, right?
+  value: 0
