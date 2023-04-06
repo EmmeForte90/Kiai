@@ -90,7 +90,8 @@ public class Move : MonoBehaviour
     [SerializeField] public Transform circlePoint;
     [SerializeField] public Transform slashpoint;
     [SerializeField] GameObject VFXHeal;
-
+    private bool vfx = false;
+    private float vfxTimer = 0.5f;
     
 
    
@@ -217,12 +218,14 @@ private int comboCount = 0;
 
     [Header("Attacks")]
     public int Damage;
+    private int timeScale = 1;
+    private int FastCombo = 3;
     private float comboTimer; //imposta la durata del timer a 1 secondi
     public float comboDurata = 0.5f; //imposta la durata del timer a 1 secondi
     [SerializeField] public int comboCounter = 0; // contatore delle combo
-    [SerializeField] float nextAttackTime = 0f;
-    [SerializeField] float attackRate = 0.5f;
-    [SerializeField] public float shootTimer = 2f; // tempo per completare una combo
+    private float ShotTimer = 0f;
+    private float attackRate = 0.5f;
+    //[SerializeField] public float shootTimer = 2f; // tempo per completare una combo
     [SerializeField] private GameObject bullet;
     [SerializeField] private int style = 0;
     // Dichiarazione delle variabili
@@ -241,7 +244,6 @@ private int comboCount = 0;
     [HideInInspector]public bool isAttacking = false; // vero se il personaggio sta attaccando
     private bool isAttackingAir = false; // vero se il personaggio sta attaccando
     private bool isBlast = false; // vero se il personaggio sta attaccando
-
     public bool stopInput = false;
     public bool NotStrangeAnimationTalk = false;
 
@@ -337,6 +339,12 @@ if(!stopInput)
             lastTimeGround -= Time.deltaTime;
             modifyPhysics();
         }
+
+        if(vfx)
+        {vfxTimer -= Time.deltaTime; //decrementa il timer ad ogni frame
+        if (vfxTimer <= 0f) {
+        vfx = false;
+        }}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
  // Controllo se il personaggio è a contatto con un muro
@@ -416,7 +424,7 @@ if (Input.GetButtonDown("Jump"))
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////             
 
 // gestione dell'input dello sparo
-if (Input.GetButtonDown("Fire2") || L2 == 1 && isBlast && Time.time >= nextAttackTime)
+if (Input.GetButtonDown("Fire2") || L2 == 1 && isBlast && Time.time >= ShotTimer)
 {
     //Se non hai finito gli utilizzi
 /*    if(UpdateMenuRapido.Instance.Vbottom > 0 ||
@@ -433,7 +441,7 @@ if (Input.GetButtonDown("Fire2") || L2 == 1 && isBlast && Time.time >= nextAttac
     //L Animazione è gestita dagli script dei bullets visto che cambia a seconda del bullet
     Blast();
     isBlast = false;
-    nextAttackTime = Time.time + 1f / attackRate;
+    ShotTimer = Time.time + 1f / attackRate;
     } else if(UpdateMenuRapido.Instance.Vbottom == 0 ||
     UpdateMenuRapido.Instance.Vup == 0 ||
     UpdateMenuRapido.Instance.Vleft == 0 ||
@@ -444,7 +452,7 @@ if (Input.GetButtonDown("Fire2") || L2 == 1 && isBlast && Time.time >= nextAttac
     
 }
 // ripristina la possibilità di attaccare dopo il tempo di attacco
-if (!isBlast && Time.time >= nextAttackTime)
+if (!isBlast && Time.time >= ShotTimer)
 {
     isBlast = true;
 }
@@ -571,28 +579,68 @@ AddCombo();
 
 if(GameplayManager.instance.styleIcon[0] == true)
 {if (style == 0 && comboCount == 3) //Normal
-{comboCount = 0;}}
-
+{
+if (_skeletonAnimation != null)
+{
+_skeletonAnimation.timeScale = timeScale; // Impostare il valore di time scale
+}
+comboCount = 0;}}
+///////////////////////
 if(GameplayManager.instance.styleIcon[1] == true)
 {if (style == 1 && comboCount == 2) //Rock
-{comboCount = 0;}}
-
+{
+if (_skeletonAnimation != null)
+{
+_skeletonAnimation.timeScale = timeScale; // Impostare il valore di time scale
+}  
+comboCount = 0;}}
+///////////////////////////////////
 if(GameplayManager.instance.styleIcon[2] == true)
 {if (style == 2 && comboCount == 3) //Fire
-{comboCount = 0;}}
-
+{
+if (_skeletonAnimation != null)
+{
+_skeletonAnimation.timeScale = timeScale; // Impostare il valore di time scale
+}  
+comboCount = 0;}}
+//////////////////////////////////
 if(GameplayManager.instance.styleIcon[3] == true)
 {if (style == 3 && comboCount == 4) //Wind
-{comboCount = 0;}}
-
+{
+if (_skeletonAnimation != null)
+{
+_skeletonAnimation.timeScale = FastCombo;// Impostare il valore di time scale
+} 
+comboCount = 0;}}
+///////////////////////////////////
 if(GameplayManager.instance.styleIcon[4] == true)
 {if (style == 4 && comboCount == 1) //Water
-{comboCount = 0;}}
-
+{
+if (_skeletonAnimation != null)
+{
+_skeletonAnimation.timeScale = timeScale; // Impostare il valore di time scale
+}
+comboCount = 0;}}
+////////////////////////////
 if(GameplayManager.instance.styleIcon[5] == true)
 {if (style == 5 && comboCount == 3) //Void
-{comboCount = 0;}}
+{
+if (_skeletonAnimation != null)
+{
+_skeletonAnimation.timeScale = FastCombo; // Impostare il valore di time scale
 }
+comboCount = 0;}}
+}
+/*
+if (TimeAtk > 0) {
+TimeAtk -= Time.deltaTime; //decrementa il timer ad ogni frame
+if (TimeAtk <= 0f) {
+AttackRate = true;
+}
+}else if (TimeAtk == 0) 
+{
+AttackRate = false;
+}*/
 
 /*if (comboCount > 0) {
 comboTimer -= Time.deltaTime; //decrementa il timer ad ogni frame
@@ -1890,8 +1938,13 @@ private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
     currentAnimationName = idleAnimationName;
 
      // Reset the attack state
+    
     isAttacking = false;
     isAttackingAir = false;
+    /*if (_skeletonAnimation != null)
+    {
+    _skeletonAnimation.timeScale = timeScale; // Impostare il valore di time scale
+    } */ 
 
 }
 public void Stooping()
@@ -2090,29 +2143,44 @@ void HandleEvent (TrackEntry trackEntry, Spine.Event e) {
 
 if (e.Data.Name == "VFXpesante") {
         // Inserisci qui il codice per gestire l'evento.
+        if(!vfx)
+        {
         Instantiate(pesante, slashpoint.position, transform.rotation);
+        vfx = true;
+        }
     }
 
 //Normal VFX
     if (e.Data.Name == "slash_h2_normal") {     
     // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
     
+    if(!vfx)
+        {
         Instantiate(attack_h2, slashpoint.position, attack_h2.transform.rotation);
         PlayMFX(1);
+        }
     }
     
     if (e.Data.Name == "slash_h_normal") {     
     // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
-    
+    if(!vfx)
+        {
         Instantiate(attack_h, slashpoint.position, attack_h.transform.rotation);
-        PlayMFX(1);
+        PlayMFX(1);       
+        vfx = true;
+        }
+        
     }
 
     if (e.Data.Name == "slash_v_normal") {     
     // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
-    
+    if(!vfx)
+        {
         Instantiate(attack, slashpoint.position, attack.transform.rotation);
-        PlayMFX(1);
+        PlayMFX(1);      
+        vfx = true;
+        }
+       
     }
 
 //Fire VFX

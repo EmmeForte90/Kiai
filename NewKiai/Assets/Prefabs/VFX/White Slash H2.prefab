@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1463595629105335354}
   - component: {fileID: 8219169084095633893}
+  - component: {fileID: 7819409661567019204}
   m_Layer: 0
   m_Name: White Slash H2
   m_TagString: Untagged
@@ -46,6 +47,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0.5
+--- !u!114 &7819409661567019204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2720468780408856054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb25b2255bd28c149a9926bee655bf9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3113936751945685486
 GameObject:
   m_ObjectHideFlags: 0

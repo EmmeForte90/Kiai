@@ -14656,6 +14656,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4529612254666499776}
   - component: {fileID: 8587332928842194796}
+  - component: {fileID: -3774671198704893262}
   m_Layer: 0
   m_Name: Vento_S_H
   m_TagString: Untagged
@@ -14692,6 +14693,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0.5
+--- !u!114 &-3774671198704893262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5138095282731792299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb25b2255bd28c149a9926bee655bf9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5365046555266893762
 GameObject:
   m_ObjectHideFlags: 0
