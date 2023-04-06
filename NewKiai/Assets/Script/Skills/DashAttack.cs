@@ -16,7 +16,7 @@ public class DashAttack : MonoBehaviour
     {
         if(upper)
         {
-        Move.instance.attackupper();
+        //Move.instance.attackupper();
         Invoke("Destroy", lifeTime);
         }else if(!upper)
         {

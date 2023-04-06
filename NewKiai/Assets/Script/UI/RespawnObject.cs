@@ -42,7 +42,7 @@ void Update()
             //InventoryManager.Instance.ListItems();
             Move.instance.AnimationRest();
             Move.instance.Stop();
-            GameplayManager.instance.Shrine.gameObject.SetActive(true);
+            //GameplayManager.instance.Shrine.gameObject.SetActive(true);
             GameplayManager.instance.Restore();
 
            // Selectionmenu.gameObject.SetActive(true);
@@ -63,7 +63,7 @@ void Update()
             GameplayManager.instance.StopInputResume();
             Move.instance.StopinputFalse();
             UIControllers.instance.SetSelectedGameObjectToSettings();
-            GameplayManager.instance.Shrine.gameObject.SetActive(false);
+          //  GameplayManager.instance.Shrine.gameObject.SetActive(false);
             //Selectionmenu.gameObject.SetActive(false);   
             isPray = false;
             Move.instance.isPray = false;

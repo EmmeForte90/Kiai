@@ -29,10 +29,7 @@ public class GameplayManager : MonoBehaviour
     public bool gameplayOff = false;
     public bool StopDefaultSkill = false;
 
-    [Header("Shrine")]
-    [SerializeField]public GameObject Shrine;
-    [SerializeField]public GameObject ScegliSkill;
-    [SerializeField]public GameObject SelectStage;
+   
 
     [Header("Money")]
     [SerializeField] int money = 0;
@@ -44,7 +41,12 @@ public class GameplayManager : MonoBehaviour
     public bool PauseStop = false;
     //Variabile del testo dei money
 
-   
+    [Header("Style")]
+    [SerializeField] public GameObject[] StyleS;
+    [SerializeField] public GameObject Selector;
+    [SerializeField] bool[] styleIcon;
+    
+    
 
     [Header("Fade")]
     [SerializeField] GameObject callFadeIn;
@@ -55,23 +57,6 @@ public class GameplayManager : MonoBehaviour
     [SerializeField] public GameObject PauseMenu;
     private GameObject Scenary;
 
-    [Header("Personaggio")]
-    public bool Ainard = false;
-    public bool Milner = false;
-    public bool Galliard = false;
-
-
-    [HideInInspector]
-    public int selectedId = -1; // Id dell'abilità selezionata
-    [HideInInspector]
-
-    public int idup= -1; // Id dell'abilità selezionata
-    [HideInInspector]
-
-    public int MXVup; // Id dell'abilità selezionata
-       
-    [SerializeField] TextMeshProUGUI SkillUp_T;
-    [SerializeField] Image SkillUp;
     
     [Header("Difficoltà del gioco")]
     public bool Easy = false;
@@ -125,6 +110,7 @@ public class GameplayManager : MonoBehaviour
         virtualCamera = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
         //player = GameObject.FindWithTag("Player");
         Menu = GameObject.FindWithTag("Bound");
+            toy = GameObject.FindWithTag("Player");
 
 
         
@@ -157,6 +143,12 @@ public class GameplayManager : MonoBehaviour
         moneyTextM.text = money.ToString();    
         //Il testo assume il valore dello money
     }
+
+public void StyleActivated(int id)
+{
+    StyleS[id].SetActive(true);
+    styleIcon[id] = true;   
+}
 
 public void SetDifficultAtt(){
 
@@ -272,7 +264,7 @@ public void Restore()
     // Ripristina L'essenza
     if (PlayerHealth.Instance.gameObject.activeSelf)
     {
-        PlayerHealth.Instance.currentEssence = PlayerHealth.Instance.maxEssence;
+        PlayerHealth.Instance.currentKiai = PlayerHealth.Instance.maxKiai;
         PlayerHealth.Instance.EssenceImg();
     }
 }

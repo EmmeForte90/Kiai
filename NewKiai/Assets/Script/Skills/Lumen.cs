@@ -26,7 +26,7 @@ public class Lumen : MonoBehaviour
     [SerializeField] AudioSource SBomb;
 void Start()
 {
-    Move.instance.Evocation();
+   // Move.instance.Evocation();
     Move.instance.Stop();
     timer = shieldDuration;
 }

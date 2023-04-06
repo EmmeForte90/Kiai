@@ -22,7 +22,7 @@ public class Wall : MonoBehaviour
 
     private void Start()
     {
-        Move.instance.Bigblast();
+       // Move.instance.Bigblast();
         Move.instance.Stop();
         // resetta la scala e il timer
         transform.localScale = Vector3.zero;

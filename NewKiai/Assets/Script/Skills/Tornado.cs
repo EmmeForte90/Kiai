@@ -15,7 +15,7 @@ public class Tornado : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Move.instance.Tornado();
+        //Move.instance.Tornado();
          Invoke("Destroy", lifeTime);
           
           // Imposta l'oggetto Tornado come figlio del player

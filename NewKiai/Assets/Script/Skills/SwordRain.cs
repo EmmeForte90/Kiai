@@ -24,7 +24,7 @@ public class SwordRain : MonoBehaviour
     void Start()
     {
         if (!hasStarted) {
-            Move.instance.SwordRain();
+            //Move.instance.SwordRain();
             hasStarted = true;
         }
     }

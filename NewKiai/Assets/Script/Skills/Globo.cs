@@ -46,7 +46,7 @@ public class Globo : MonoBehaviour
         }
         else if(Needtwohands)
         {
-            Move.instance.Bigblast();
+            //Move.instance.Bigblast();
         }
         Move.instance.Stop();
 

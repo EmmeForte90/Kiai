@@ -23,7 +23,7 @@ public class Multilunge : MonoBehaviour
         {
             Left.gameObject.SetActive(true);
         }
-       Move.instance.Multilunge();
+      // Move.instance.Multilunge();
         Invoke("Destroy", lifeTime);
     } 
     public void Update()

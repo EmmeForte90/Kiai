@@ -35,7 +35,7 @@ private void Start()
         //startingPosition = transform.position;
         target = GameObject.FindWithTag("Player");
         Invoke("Destroy", lifeTime);
-        Move.instance.Evocation();
+       // Move.instance.Evocation();
         Move.instance.Stop();
 
     }

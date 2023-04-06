@@ -553,11 +553,11 @@ void EssenceGive()
 
     if (randomChance <= 8) // Se il numero casuale è compreso tra 1 e 8 (80% di probabilità), aggiungi 5 di essenza
     {
-        PlayerHealth.Instance.currentEssence += 5;
+        PlayerHealth.Instance.currentKiai += 5;
     }
     else // Se il numero casuale è compreso tra 9 e 10 (20% di probabilità), aggiungi 10 di essenza
     {
-        PlayerHealth.Instance.currentEssence += 10;
+        PlayerHealth.Instance.currentKiai += 10;
     }
 }
 public void Die()

@@ -17,7 +17,7 @@ public class Shield : MonoBehaviour
 
     void Start()
     {
-        Move.instance.Evocation();
+        //Move.instance.Evocation();
         Move.instance.Stop();
         timer = shieldDuration;
     }

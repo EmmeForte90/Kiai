@@ -34,7 +34,7 @@ public class SlashGlobe : MonoBehaviour
             rb.velocity = -transform.right * speed;
             transform.localScale = new Vector3(-1, 1, 1);
         }
-         Move.instance.Slash();
+         //Move.instance.Slash();
         Move.instance.Stop();
 
     }

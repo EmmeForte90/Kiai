@@ -6,28 +6,23 @@ using UnityEngine;
 
 public class PlayerWeaponManager : MonoBehaviour
 {
-   [Header("Skill")]
-    [SerializeField] private GameObject Upper;
-    [SerializeField] private GameObject Swordrain;
-    [SerializeField] private GameObject Tornado;
-    [SerializeField] private GameObject Spinner;
-    [SerializeField] private GameObject DashLunge;
-    [SerializeField] private GameObject Multilunge;
-    [SerializeField] private GameObject Slash;
-    [SerializeField] private GameObject PenetratingSlash;
-    [SerializeField] private GameObject Globo;
-    [SerializeField] private GameObject Shotgun;
-    [SerializeField] private GameObject Dashsaw;
-    [SerializeField] private GameObject Wall;
+    [Header("Skill")]
+    private int Normal = 0;
+    private int Fire = 1;
+    private int Water = 2;
+    private int Wind = 3;
+    private int Void = 4;
+    private int Rock = 5;
+
+    [Header("Items")]
+    [SerializeField] private GameObject kunai;
+    [SerializeField] private GameObject Shuriken;
     [SerializeField] private GameObject Bomb;
-    [SerializeField] private GameObject Boomerang;
-    [SerializeField] private GameObject Gladio;
-    [SerializeField] private GameObject Lumen;
-    [SerializeField] private GameObject Turris;
-    [SerializeField] private GameObject Shield;
-    [SerializeField] private GameObject Flame;
-    [SerializeField] private GameObject Aura;
-    [SerializeField] private GameObject Heal;
+    [SerializeField] private GameObject Spille;
+    [SerializeField] private GameObject freccia;
+    [SerializeField] private GameObject Taneghasima;
+    [SerializeField] private GameObject multishuriken;
+    [SerializeField] private GameObject Gigashuriken;
 
     public static PlayerWeaponManager instance;
 
@@ -36,100 +31,71 @@ public class PlayerWeaponManager : MonoBehaviour
         instance = this;
     }
 
-    public void SetWeapon(int WeaponID)
+    public void SetStyle(int StyleID)
 {
-    switch (WeaponID)
+    switch (StyleID)
     {
+    case 0:
+    Move.instance.SetStylePrefab(Normal);
+    break;
+    
     case 1:
-    Move.instance.SetBulletPrefab(Upper);
+    Move.instance.SetStylePrefab(Rock);
     break;
     
     case 2:
-    Move.instance.SetBulletPrefab(Swordrain);
+    Move.instance.SetStylePrefab(Fire);
     break;
 
     case 3:
-    Move.instance.SetBulletPrefab(Tornado);
+    Move.instance.SetStylePrefab(Wind);
     break;
 
     case 4:
-    Move.instance.SetBulletPrefab(Spinner);
+    Move.instance.SetStylePrefab(Water);
     break;
 
     case 5:
-    Move.instance.SetBulletPrefab(DashLunge);
-    break;
-        
-    case 6:
-    Move.instance.SetBulletPrefab(Multilunge);
-    break;
-
-    case 7:
-    Move.instance.SetBulletPrefab(Slash);
-    break;
-
-    case 8:
-    Move.instance.SetBulletPrefab(PenetratingSlash);
-    break;
-
-    case 9:
-    Move.instance.SetBulletPrefab(Globo);
-    break;
-
-    case 10:
-    Move.instance.SetBulletPrefab(Shotgun);
-    break;
-
-    case 11:
-    Move.instance.SetBulletPrefab(Dashsaw);
-    break;
-
-    case 12:
-    Move.instance.SetBulletPrefab(Wall);
-    break;
-
-    case 13:
-    Move.instance.SetBulletPrefab(Bomb);
-    break;
-
-    case 14:
-    Move.instance.SetBulletPrefab(Boomerang);
-    break;
-
-    case 15:
-    Move.instance.SetBulletPrefab(Gladio);
-    break;
-
-    case 16:
-    Move.instance.SetBulletPrefab(Lumen);
-    break;
-
-    case 17:
-    Move.instance.SetBulletPrefab(Turris);
-    break;
-
-    case 18:
-    Move.instance.SetBulletPrefab(Shield);
-    break;
-
-    case 19:
-    Move.instance.SetBulletPrefab(Flame);
-    break;
-
-    case 20:
-    Move.instance.SetBulletPrefab(Aura);
-    break;
-
-    case 21:
-    Move.instance.SetBulletPrefab(Heal);
-    break;
-     
+    Move.instance.SetStylePrefab(Void);
+    break; 
+      
     }
     
 
  }
    
+public void SetWeapon(int WeaponID)
+{
+    switch (WeaponID)
+    {
+    case 0:
+    Move.instance.SetBulletPrefab(kunai);
+    break;
+    
+    case 1:
+    Move.instance.SetBulletPrefab(Shuriken);
+    break;
+    
+    case 2:
+    Move.instance.SetBulletPrefab(Bomb);
+    break;
 
+    case 3:
+    Move.instance.SetBulletPrefab(Spille);
+    break;
+
+    case 4:
+    Move.instance.SetBulletPrefab(freccia);
+    break;
+
+    case 5:
+    Move.instance.SetBulletPrefab(Taneghasima);
+    break; 
+      
+    }
+    
+
+ }
 
 }
 

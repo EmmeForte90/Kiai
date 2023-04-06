@@ -10,7 +10,7 @@ public class AuraAndHeal : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     { 
-        Move.instance.Evocation();
+        //Move.instance.Evocation();
         Move.instance.Stop();
         if(isAura)
     {
@@ -35,7 +35,7 @@ public class AuraAndHeal : MonoBehaviour
     } else if(IsHeal)
     {
       //Ripristina L'essenza
-            PlayerHealth.Instance.currentEssence = PlayerHealth.Instance.maxEssence;
+          //  PlayerHealth.Instance.currentEssence = PlayerHealth.Instance.maxEssence;
             PlayerHealth.Instance.EssenceImg();
             Invoke("Destroy", lifeTime);
 

@@ -9,7 +9,7 @@ public class Parallax : MonoBehaviour
     private Transform cam; //riferimento alla telecamera principale
     private Vector3 previousCamPos; //posizione precedente della telecamera
     private CinemachineVirtualCamera virtualCamera; //riferimento alla virtual camera di Cinemachine
-    private CinemachineBasicMultiChannelPerlin noise; //riferimento al modulo noise di Cinemachine
+   // private CinemachineBasicMultiChannelPerlin noise; //riferimento al modulo noise di Cinemachine
     private Collider2D myCollider; //riferimento al collider del background
 public float depth; //fattore di profondità del background
 
@@ -19,7 +19,7 @@ void Start()
     cam = Camera.main.transform; //ottieni il riferimento alla telecamera principale
     previousCamPos = cam.position; //imposta la posizione precedente della telecamera
     virtualCamera = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
-    noise = virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>(); //ottieni il riferimento al modulo noise di Cinemachine
+   // noise = virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>(); //ottieni il riferimento al modulo noise di Cinemachine
     myCollider = GetComponent<Collider2D>(); //ottieni il riferimento al collider del background
 
     //aggiorna la posizione del background con la profondità di campo desiderata

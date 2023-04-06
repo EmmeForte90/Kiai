@@ -52,6 +52,8 @@ Debug.Log("AudioMixer aggiunto correttamente agli AudioSource.");
             sgm[i] = gameObject.AddComponent<AudioSource>(); // crea un nuovo AudioSource come componente del game object attuale (quello a cui è attaccato lo script)
             sgm[i].clip = SoundDestroy[i]; // assegna l'AudioClip corrispondente all'AudioSource creato
             sgm[i].playOnAwake = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
+            sgm[i].loop = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
+
         }
  // Aggiunge i canali audio degli AudioSource all'output del mixer
         foreach (AudioSource audioSource in sgm)

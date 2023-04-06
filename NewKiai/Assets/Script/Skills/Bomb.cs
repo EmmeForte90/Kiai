@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Bomb : MonoBehaviour
 {
@@ -17,11 +18,22 @@ public class Bomb : MonoBehaviour
     public Rigidbody2D rb;
 
       [Header("Audio")]
-[SerializeField] AudioSource SExp;
-[SerializeField] AudioSource SBomb;
+    [SerializeField] public AudioClip[] list; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
+    private AudioSource[] sgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
+    private bool sgmActive = false;
+    public AudioMixer SFX;
     // Start is called before the first frame update
     void Start()
     {
+        sgm = new AudioSource[list.Length]; // inizializza l'array di AudioSource con la stessa lunghezza dell'array di AudioClip
+        for (int i = 0; i < list.Length; i++) // scorre la lista di AudioClip
+        {
+            sgm[i] = gameObject.AddComponent<AudioSource>(); // crea un nuovo AudioSource come componente del game object attuale (quello a cui è attaccato lo script)
+            sgm[i].clip = list[i]; // assegna l'AudioClip corrispondente all'AudioSource creato
+            sgm[i].playOnAwake = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
+            sgm[i].loop = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
+
+        }
             target = GameObject.FindWithTag(targetTag);
             Move.instance.Throw();
             Move.instance.Stop();
@@ -66,7 +78,7 @@ public class Bomb : MonoBehaviour
         if(other.gameObject.tag == "Enemy")
         //Se il proiettile tocca il nemico
         {            
-            SExp.Play();
+            //SExp.Play();
 
             Instantiate(Explode, transform.position, transform.rotation);
             IDamegable hit = other.GetComponent<IDamegable>();
@@ -77,7 +89,7 @@ public class Bomb : MonoBehaviour
         if(other.gameObject.tag == "Ground")
         //Se il proiettile tocca il nemico
         {     
-            SExp.Play();       
+            //SExp.Play();       
             Instantiate(Explode, transform.position, transform.rotation);
             Destroy(gameObject);
             //Viene distrutto
