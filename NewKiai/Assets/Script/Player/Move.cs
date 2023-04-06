@@ -453,16 +453,30 @@ if (!isBlast && Time.time >= nextAttackTime)
 // gestione dell'input dello sparo
 if (Input.GetButtonDown("R1"))
 {
-    //print("Hai premuto R1");
-    MaxStyle++;
-    changeStyle();
+//print("Hai premuto R1");
+if(GameplayManager.instance.styleIcon[1] ||
+GameplayManager.instance.styleIcon[2] ||
+GameplayManager.instance.styleIcon[3] ||
+GameplayManager.instance.styleIcon[4] ||
+GameplayManager.instance.styleIcon[5])
+{
+MaxStyle++;
+changeStyle();
+}
 }
 
 if (Input.GetButtonDown("L1"))
 {
-    //print("Hai premuto L1");
-    MaxStyle--;
-    changeStyle();
+//print("Hai premuto L1");
+if(GameplayManager.instance.styleIcon[1] ||
+GameplayManager.instance.styleIcon[2] ||
+GameplayManager.instance.styleIcon[3] ||
+GameplayManager.instance.styleIcon[4] ||
+GameplayManager.instance.styleIcon[5])
+{
+MaxStyle--;
+changeStyle();
+}
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*if (isHeal && PlayerHealth.Instance.currentEssence == 0 || isDeath) 
@@ -1474,6 +1488,7 @@ public void AddCombo()
         comboCount++;
 
 //Normal style
+if(GameplayManager.instance.styleIcon[0] == true){
 if(style == 0)
 {
         switch (comboCount)
@@ -1534,8 +1549,10 @@ if(style == 0)
                 break;
         }
     }
+}
 //Rock style
-else if(style == 1)
+if(GameplayManager.instance.styleIcon[1] == true){
+if(style == 1)
 {
         switch (comboCount)
         {
@@ -1594,12 +1611,13 @@ else if(style == 1)
                 break;
         }
     }
-    
+} 
 
 
 
 //Fire style
-else if(style == 2)
+if(GameplayManager.instance.styleIcon[2] == true){
+if(style == 2)
 {
         switch (comboCount)
         {
@@ -1659,13 +1677,14 @@ else if(style == 2)
         }
     }
 
-
+}
 
 
 
 
 //Wind style
-else if(style == 3)
+if(GameplayManager.instance.styleIcon[3] == true){
+if(style == 3)
 {
         switch (comboCount)
         {
@@ -1724,10 +1743,11 @@ else if(style == 3)
                 break;
         }
     }
-
+}
 
 //Water style
-else if(style == 4)
+if(GameplayManager.instance.styleIcon[4] == true){
+if(style == 4)
 {
         switch (comboCount)
         {
@@ -1786,11 +1806,12 @@ else if(style == 4)
                 break;
         }
     }
-
+}
 
 
 //Void style
-else if(style == 5)
+if(GameplayManager.instance.styleIcon[5] == true){
+if(style == 5)
 {
         switch (comboCount)
         {
@@ -1849,18 +1870,13 @@ else if(style == 5)
                 break;
         }
     }
-
-
-
-
-
-
-
-
-
-    }
+}
 
 }
+
+}
+
+
 private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
 {
     // Remove the event listener
