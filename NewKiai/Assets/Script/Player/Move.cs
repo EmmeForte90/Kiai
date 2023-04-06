@@ -221,7 +221,6 @@ private int comboCount = 0;
     [SerializeField] private GameObject bullet;
     [SerializeField] private int style = 0;
     // Dichiarazione delle variabili
-     [SerializeField] public int TESTID = 0;
     private int MaxStyle;
     private int currentTime;
     private int timeLimit = 3; // Tempo massimo per caricare l'attacco
@@ -602,7 +601,7 @@ else if (Input.GetButtonDown("SlotBottom")|| DpadY == -1)
 if(Input.GetKeyDown(KeyCode.X))
             {
                 Debug.Log("Recupero!");
-                GameplayManager.instance.StyleActivated(TESTID);
+              //  GameplayManager.instance.StyleActivated(TESTID);
               //  PlayerHealth.Instance.IncreaseEssence(10);
                 //PlayerHealth.Instance.currentHealth = PlayerHealth.Instance.maxHealth;
                 //PlayerHealth.Instance.currentEssence = PlayerHealth.Instance.maxEssence;
