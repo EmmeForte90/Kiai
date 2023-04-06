@@ -461,6 +461,7 @@ GameplayManager.instance.styleIcon[4] ||
 GameplayManager.instance.styleIcon[5])
 {
 MaxStyle++;
+comboCount = 0;
 changeStyle();
 }
 }
@@ -475,6 +476,7 @@ GameplayManager.instance.styleIcon[4] ||
 GameplayManager.instance.styleIcon[5])
 {
 MaxStyle--;
+comboCount = 0;
 changeStyle();
 }
 }
@@ -592,13 +594,13 @@ if(GameplayManager.instance.styleIcon[5] == true)
 {comboCount = 0;}}
 }
 
-if (comboCount > 0) {
+/*if (comboCount > 0) {
 comboTimer -= Time.deltaTime; //decrementa il timer ad ogni frame
 if (comboTimer <= 0f) {
 comboCount = 0; //ripristina il comboCount a 0 quando il timer raggiunge 0
 comboTimer = comboDurata; //riavvia il timer alla sua durata originale
 }
-}
+}*/
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     #region testForanysituation
             if(Input.GetKeyDown(KeyCode.C))
