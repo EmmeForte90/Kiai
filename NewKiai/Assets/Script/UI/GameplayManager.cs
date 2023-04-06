@@ -44,7 +44,7 @@ public class GameplayManager : MonoBehaviour
     [Header("Style")]
     [SerializeField] public GameObject[] StyleS;
     [SerializeField] public GameObject Selector;
-    [SerializeField] bool[] styleIcon;
+    [SerializeField] public bool[] styleIcon;
     
     
 

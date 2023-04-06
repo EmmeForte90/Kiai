@@ -91,16 +91,8 @@ public class Move : MonoBehaviour
     [SerializeField] public Transform slashpoint;
     [SerializeField] GameObject VFXHeal;
 
-    [Header("NormalStyle")]
-    [SerializeField] GameObject attack;
-    [SerializeField] GameObject attack_h;
-    [SerializeField] GameObject attack_h2;
-    [SerializeField] GameObject attack_air_bottom;
-    [SerializeField] GameObject attack_air_up;
-
-
-
     
+
    
     [Header("Animations")]
     [SpineAnimation][SerializeField] private string idleAnimationName;
@@ -124,6 +116,15 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField] private string UpAnimationName;
     [SpineAnimation][SerializeField] private string respawnAnimationName;
     ///////////////////////////////////////////////////////////////////////////
+        [Header("NormalStyle")]
+    [SerializeField] GameObject attack;
+    [SerializeField] GameObject attack_h;
+    [SerializeField] GameObject attack_h2;
+    [SerializeField] GameObject attack_air_bottom;
+    [SerializeField] GameObject attack_air_up;
+    [SpineAnimation][SerializeField] private string attackNormal1AnimationName;
+    [SpineAnimation][SerializeField] private string attackNormal2AnimationName;
+    [SpineAnimation][SerializeField] private string attackNormal3AnimationName;
         [Header("Fire")]
     [SpineAnimation][SerializeField] private string fireposAnimationName;
     [SerializeField] GameObject attack_f_v;
@@ -178,6 +179,8 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField] private string attackWind1AnimationName;
     [SpineAnimation][SerializeField] private string attackWind2AnimationName;
     [SpineAnimation][SerializeField] private string attackWind3AnimationName;
+    [SpineAnimation][SerializeField] private string attackWind4AnimationName;
+
         [Header("Void")]
     [SpineAnimation][SerializeField] private string voidposAnimationName;
     [SerializeField] GameObject attack_m_v;
@@ -214,6 +217,8 @@ private int comboCount = 0;
 
     [Header("Attacks")]
     public int Damage;
+    private float comboTimer; //imposta la durata del timer a 1 secondi
+    public float comboDurata = 0.5f; //imposta la durata del timer a 1 secondi
     [SerializeField] public int comboCounter = 0; // contatore delle combo
     [SerializeField] float nextAttackTime = 0f;
     [SerializeField] float attackRate = 0.5f;
@@ -543,52 +548,43 @@ else if (Input.GetButtonDown("SlotBottom")|| DpadY == -1)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 
-        if (Input.GetButtonDown("Fire1") && !isAttacking)
-        {
-            if(!isAttackingAir)
-            {
-            if(!NotStrangeAnimationTalk)
-            {  
-            //Se non sta facendo un attacco caricato
-            if(!isCharging)
-            {
-            isAttacking = true;
-            AddCombo();
-            if(style == 0)
-            {
-            if(comboCount == 3)
-            { comboCount = 0;}
-            }else if(style == 1)
-            {
-            if(comboCount == 3)
-            { comboCount = 0;}
-            }else if(style == 2)
-            {
-            if(comboCount == 3)
-            { comboCount = 0;}
-            }else if(style == 3)
-            {
-            if(comboCount == 3)
-            { comboCount = 0;}
-            }else if(style == 4)
-            {
-            if(comboCount == 3)
-            { comboCount = 0;}
-            }else if(style == 5)
-            {
-            if(comboCount == 3)
-            { comboCount = 0;}
-            }
+if (Input.GetButtonDown("Fire1") && !isAttacking && !isAttackingAir && !NotStrangeAnimationTalk && !isCharging) 
+{
+isAttacking = true;
+AddCombo();
 
+if(GameplayManager.instance.styleIcon[0] == true)
+{if (style == 0 && comboCount == 3) //Normal
+{comboCount = 0;}}
 
+if(GameplayManager.instance.styleIcon[1] == true)
+{if (style == 1 && comboCount == 2) //Rock
+{comboCount = 0;}}
 
+if(GameplayManager.instance.styleIcon[2] == true)
+{if (style == 2 && comboCount == 3) //Fire
+{comboCount = 0;}}
 
+if(GameplayManager.instance.styleIcon[3] == true)
+{if (style == 3 && comboCount == 4) //Wind
+{comboCount = 0;}}
 
-            }
-            }
-            }
+if(GameplayManager.instance.styleIcon[4] == true)
+{if (style == 4 && comboCount == 1) //Water
+{comboCount = 0;}}
 
-        }
+if(GameplayManager.instance.styleIcon[5] == true)
+{if (style == 5 && comboCount == 3) //Void
+{comboCount = 0;}}
+}
+
+if (comboCount > 0) {
+comboTimer -= Time.deltaTime; //decrementa il timer ad ogni frame
+if (comboTimer <= 0f) {
+comboCount = 0; //ripristina il comboCount a 0 quando il timer raggiunge 0
+comboTimer = comboDurata; //riavvia il timer alla sua durata originale
+}
+}
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     #region testForanysituation
             if(Input.GetKeyDown(KeyCode.C))
@@ -707,59 +703,80 @@ public void changeStyle()
      if(MaxStyle >= 5)
     {
         MaxStyle = 5;
+        if(GameplayManager.instance.styleIcon[5] == true)
+        {
         PlayerWeaponManager.instance.SetStyle(5);
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[5].transform.position;
         VoidPose();
+        }
     }
     else if(MaxStyle <= 0)
     {
         MaxStyle = 0;
+    if(GameplayManager.instance.styleIcon[0] == true)
+        {
         PlayerWeaponManager.instance.SetStyle(0);
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[0].transform.position;
         NormalPose();
+        }        
     }else if(MaxStyle == 1)
     {
+    if(GameplayManager.instance.styleIcon[1] == true)
+        {
         MaxStyle = 1;
         PlayerWeaponManager.instance.SetStyle(1);
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[1].transform.position;
         RockPose();
-
+        }        
     }else if(MaxStyle == 2)
-    {
+    { 
+    if(GameplayManager.instance.styleIcon[2] == true)
+        {
         MaxStyle = 2;
         PlayerWeaponManager.instance.SetStyle(2);
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[2].transform.position;
         FirePose();
-
+        }        
     }else if(MaxStyle == 3)
     {
-        MaxStyle = 3;
+    if(GameplayManager.instance.styleIcon[3] == true)
+        {
+            MaxStyle = 3;
         PlayerWeaponManager.instance.SetStyle(3);
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[3].transform.position;
         WindPose();
-
+        }       
     }else if(MaxStyle == 4)
-    {        
+    {            
+    if(GameplayManager.instance.styleIcon[4] == true)
+        {
         MaxStyle = 4;
         PlayerWeaponManager.instance.SetStyle(4);
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[4].transform.position;
         WaterPose();
-
+        }       
     }else if(MaxStyle == 5)
-    {
-         MaxStyle = 5;
+    {    
+    if(GameplayManager.instance.styleIcon[5] == true)
+        {
+        MaxStyle = 5;
         PlayerWeaponManager.instance.SetStyle(5);
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[5].transform.position;
         VoidPose();
+        }        
     }else if(MaxStyle == -1)
-    {
-        MaxStyle = 0;
+    {   
+    if(GameplayManager.instance.styleIcon[0] == true)
+        {
+            MaxStyle = 0;
         PlayerWeaponManager.instance.SetStyle(0);
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[0].transform.position;
         NormalPose();
-
+        }        
     }
 }
+
+
 public void attackDash()
 {
             attackNormal = true;
@@ -1463,9 +1480,133 @@ if(style == 0)
         {
             //Setta lo stato d'animazione ed esegue l'animazione in base al conto della combo
             case 1:
-                if (currentAnimationName != attackFire1AnimationName)
+                if (currentAnimationName != attackNormal1AnimationName)
                 {Stop();
                         
+                    _spineAnimationState.SetAnimation(2, attackNormal1AnimationName, false);
+                    currentAnimationName = attackNormal1AnimationName;
+                    _spineAnimationState.Event += HandleEvent;
+
+                    //Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+                break;
+            case 2:
+                if (currentAnimationName != attackNormal2AnimationName)
+                {Stop();
+                    _spineAnimationState.SetAnimation(2, attackNormal2AnimationName, false);
+                    currentAnimationName = attackNormal2AnimationName;
+                    _spineAnimationState.Event += HandleEvent;
+
+                    //Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+                break;
+            case 3:
+            if (currentAnimationName != attackNormal3AnimationName)
+                {Stop();
+                    _spineAnimationState.SetAnimation(2, attackNormal3AnimationName, false);
+                    currentAnimationName = attackFire3AnimationName;
+                    _spineAnimationState.Event += HandleEvent;
+
+                    //Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+                
+                break;
+            case 4:
+            //Lunge
+                if (currentAnimationName != attackFire1AnimationName)
+                {Stop();
+                    _spineAnimationState.SetAnimation(2, attackFire1AnimationName, false);
+                    currentAnimationName = attackFire1AnimationName;
+                    _spineAnimationState.Event += HandleEvent;
+
+                    //Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+                break;
+            default:
+                break;
+        }
+    }
+//Rock style
+else if(style == 1)
+{
+        switch (comboCount)
+        {
+            //Setta lo stato d'animazione ed esegue l'animazione in base al conto della combo
+            case 1:
+                if (currentAnimationName != attackRock1AnimationName)
+                {Stop();
+                    _spineAnimationState.SetAnimation(2, attackRock1AnimationName, false);
+                    currentAnimationName = attackRock1AnimationName;
+                    _spineAnimationState.Event += HandleEvent;
+
+                    //Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+                break;
+            case 2:
+                if (currentAnimationName != attackRock2AnimationName)
+                {Stop();
+                    _spineAnimationState.SetAnimation(2, attackRock2AnimationName, false);
+                    currentAnimationName = attackRock2AnimationName;
+                    _spineAnimationState.Event += HandleEvent;
+
+                    //Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+                break;
+            case 3:
+            if (currentAnimationName != attackRock3AnimationName)
+                {Stop();
+                    _spineAnimationState.SetAnimation(2, attackRock3AnimationName, false);
+                    currentAnimationName = attackRock3AnimationName;
+                    _spineAnimationState.Event += HandleEvent;
+
+                    //Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+                
+                break;
+            case 4:
+            //Lunge
+                if (currentAnimationName != attackFire1AnimationName)
+                {Stop();
+                    _spineAnimationState.SetAnimation(2, attackFire1AnimationName, false);
+                    currentAnimationName = attackFire1AnimationName;
+                    _spineAnimationState.Event += HandleEvent;
+
+                    //Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+                break;
+            default:
+                break;
+        }
+    }
+    
+
+
+
+//Fire style
+else if(style == 2)
+{
+        switch (comboCount)
+        {
+            //Setta lo stato d'animazione ed esegue l'animazione in base al conto della combo
+            case 1:
+                if (currentAnimationName != attackFire1AnimationName)
+                {Stop();
                     _spineAnimationState.SetAnimation(2, attackFire1AnimationName, false);
                     currentAnimationName = attackFire1AnimationName;
                     _spineAnimationState.Event += HandleEvent;
@@ -1517,17 +1658,23 @@ if(style == 0)
                 break;
         }
     }
-//Fire style
-else if(style == 1)
+
+
+
+
+
+
+//Wind style
+else if(style == 3)
 {
         switch (comboCount)
         {
             //Setta lo stato d'animazione ed esegue l'animazione in base al conto della combo
             case 1:
-                if (currentAnimationName != attackFire1AnimationName)
+                if (currentAnimationName != attackWind1AnimationName)
                 {Stop();
-                    _spineAnimationState.SetAnimation(2, attackFire1AnimationName, false);
-                    currentAnimationName = attackFire1AnimationName;
+                    _spineAnimationState.SetAnimation(2, attackWind1AnimationName, false);
+                    currentAnimationName = attackWind1AnimationName;
                     _spineAnimationState.Event += HandleEvent;
 
                     //Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
@@ -1536,10 +1683,10 @@ else if(style == 1)
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
                 break;
             case 2:
-                if (currentAnimationName != attackFire2AnimationName)
+                if (currentAnimationName != attackWind2AnimationName)
                 {Stop();
-                    _spineAnimationState.SetAnimation(2, attackFire1AnimationName, false);
-                    currentAnimationName = attackFire2AnimationName;
+                    _spineAnimationState.SetAnimation(2, attackWind2AnimationName, false);
+                    currentAnimationName = attackWind2AnimationName;
                     _spineAnimationState.Event += HandleEvent;
 
                     //Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
@@ -1548,10 +1695,10 @@ else if(style == 1)
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
                 break;
             case 3:
-            if (currentAnimationName != attackFire3AnimationName)
+            if (currentAnimationName != attackWind3AnimationName)
                 {Stop();
-                    _spineAnimationState.SetAnimation(2, attackFire3AnimationName, false);
-                    currentAnimationName = attackFire3AnimationName;
+                    _spineAnimationState.SetAnimation(2, attackWind3AnimationName, false);
+                    currentAnimationName = attackWind3AnimationName;
                     _spineAnimationState.Event += HandleEvent;
 
                     //Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
@@ -1562,10 +1709,10 @@ else if(style == 1)
                 break;
             case 4:
             //Lunge
-                if (currentAnimationName != attackFire1AnimationName)
+                if (currentAnimationName != attackWind4AnimationName)
                 {Stop();
-                    _spineAnimationState.SetAnimation(2, attackFire1AnimationName, false);
-                    currentAnimationName = attackFire1AnimationName;
+                    _spineAnimationState.SetAnimation(2, attackWind4AnimationName, false);
+                    currentAnimationName = attackWind4AnimationName;
                     _spineAnimationState.Event += HandleEvent;
 
                     //Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
@@ -1577,12 +1724,10 @@ else if(style == 1)
                 break;
         }
     }
-    
-
 
 
 //Water style
-else if(style == 2)
+else if(style == 4)
 {
         switch (comboCount)
         {
@@ -1644,74 +1789,8 @@ else if(style == 2)
 
 
 
-
-
-
-//Wind style
-else if(style == 3)
-{
-        switch (comboCount)
-        {
-            //Setta lo stato d'animazione ed esegue l'animazione in base al conto della combo
-            case 1:
-                if (currentAnimationName != attackFire1AnimationName)
-                {Stop();
-                    _spineAnimationState.SetAnimation(2, attackFire1AnimationName, false);
-                    currentAnimationName = attackFire1AnimationName;
-                    _spineAnimationState.Event += HandleEvent;
-
-                    //Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
-                }
-                // Add event listener for when the animation completes
-                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
-                break;
-            case 2:
-                if (currentAnimationName != attackFire2AnimationName)
-                {Stop();
-                    _spineAnimationState.SetAnimation(2, attackFire1AnimationName, false);
-                    currentAnimationName = attackFire2AnimationName;
-                    _spineAnimationState.Event += HandleEvent;
-
-                    //Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
-                }
-                // Add event listener for when the animation completes
-                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
-                break;
-            case 3:
-            if (currentAnimationName != attackFire3AnimationName)
-                {Stop();
-                    _spineAnimationState.SetAnimation(2, attackFire3AnimationName, false);
-                    currentAnimationName = attackFire3AnimationName;
-                    _spineAnimationState.Event += HandleEvent;
-
-                    //Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
-                }
-                // Add event listener for when the animation completes
-                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
-                
-                break;
-            case 4:
-            //Lunge
-                if (currentAnimationName != attackFire1AnimationName)
-                {Stop();
-                    _spineAnimationState.SetAnimation(2, attackFire1AnimationName, false);
-                    currentAnimationName = attackFire1AnimationName;
-                    _spineAnimationState.Event += HandleEvent;
-
-                    //Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
-                }
-                // Add event listener for when the animation completes
-                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
-                break;
-            default:
-                break;
-        }
-    }
-
-
-
 //Void style
-else if(style == 4)
+else if(style == 5)
 {
         switch (comboCount)
         {
@@ -1745,69 +1824,6 @@ else if(style == 4)
                 {Stop();
                     _spineAnimationState.SetAnimation(2, attackVoid3AnimationName, false);
                     currentAnimationName = attackVoid3AnimationName;
-                    _spineAnimationState.Event += HandleEvent;
-
-                    //Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
-                }
-                // Add event listener for when the animation completes
-                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
-                
-                break;
-            case 4:
-            //Lunge
-                if (currentAnimationName != attackFire1AnimationName)
-                {Stop();
-                    _spineAnimationState.SetAnimation(2, attackFire1AnimationName, false);
-                    currentAnimationName = attackFire1AnimationName;
-                    _spineAnimationState.Event += HandleEvent;
-
-                    //Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
-                }
-                // Add event listener for when the animation completes
-                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
-                break;
-            default:
-                break;
-        }
-    }
-
-
-
-//Rock style
-else if(style == 5)
-{
-        switch (comboCount)
-        {
-            //Setta lo stato d'animazione ed esegue l'animazione in base al conto della combo
-            case 1:
-                if (currentAnimationName != attackRock1AnimationName)
-                {Stop();
-                    _spineAnimationState.SetAnimation(2, attackRock1AnimationName, false);
-                    currentAnimationName = attackRock1AnimationName;
-                    _spineAnimationState.Event += HandleEvent;
-
-                    //Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
-                }
-                // Add event listener for when the animation completes
-                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
-                break;
-            case 2:
-                if (currentAnimationName != attackRock2AnimationName)
-                {Stop();
-                    _spineAnimationState.SetAnimation(2, attackRock2AnimationName, false);
-                    currentAnimationName = attackRock2AnimationName;
-                    _spineAnimationState.Event += HandleEvent;
-
-                    //Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
-                }
-                // Add event listener for when the animation completes
-                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
-                break;
-            case 3:
-            if (currentAnimationName != attackRock3AnimationName)
-                {Stop();
-                    _spineAnimationState.SetAnimation(2, attackRock3AnimationName, false);
-                    currentAnimationName = attackRock3AnimationName;
                     _spineAnimationState.Event += HandleEvent;
 
                     //Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
@@ -2077,7 +2093,7 @@ if (e.Data.Name == "VFXpesante") {
     if (e.Data.Name == "slash_v_normal") {     
     // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
     
-        Instantiate(attack_v_v, slashpoint.position, attack_v_v.transform.rotation);
+        Instantiate(attack, slashpoint.position, attack.transform.rotation);
         PlayMFX(1);
     }
 

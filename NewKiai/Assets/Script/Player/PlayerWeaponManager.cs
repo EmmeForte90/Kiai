@@ -8,11 +8,11 @@ public class PlayerWeaponManager : MonoBehaviour
 {
     [Header("Skill")]
     private int Normal = 0;
-    private int Fire = 1;
-    private int Water = 2;
+    private int Rock = 1;
+    private int Fire = 2;
     private int Wind = 3;
-    private int Void = 4;
-    private int Rock = 5;
+    private int Water = 4;
+    private int Void = 5;
 
     [Header("Items")]
     [SerializeField] private GameObject kunai;
