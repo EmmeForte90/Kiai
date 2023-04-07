@@ -143,14 +143,11 @@ public class Move : MonoBehaviour
     [SerializeField] GameObject attack_w_v;
     [SerializeField] GameObject attack_w_h;
     [SerializeField] GameObject attack_w_h2;
-   // [SerializeField] GameObject attack_w_l;
-   // [SerializeField] GameObject attack_w_b;
-  //  [SerializeField] GameObject attack_w_a;
-    [SerializeField] GameObject attack_w_air_bottom;
-    [SerializeField] GameObject attack_w_air_up;
+    [SerializeField] GameObject attack_w_air;
     [SpineAnimation][SerializeField] private string attackWater1AnimationName;
     [SpineAnimation][SerializeField] private string attackWater2AnimationName;
     [SpineAnimation][SerializeField] private string attackWater3AnimationName;
+    [SpineAnimation][SerializeField] private string WaterjumpAnimationName;
         [Header("Rock")]
     [SpineAnimation][SerializeField] private string rockposAnimationName;
     [SerializeField] GameObject attack_r_v;
@@ -412,19 +409,30 @@ if (Input.GetButtonDown("Jump"))
         // controlla se il player è in aria e preme il tasto di attacco e il tasto direzionale basso
          if (!isGrounded() && Input.GetButtonDown("Fire1") && vertDir < 0)
         {
-            isAttackingAir = true;
-            DownAtk();
-
-        } else  if (!isGrounded() && Input.GetButtonDown("Fire1") && vertDir > 0)
+            if(GameplayManager.instance.styleIcon[4] == true)
+            {if (style == 4) //Water
+            {isAttackingAir = true;
+            WaterJumpAtk();}}
+            else{isAttackingAir = true;
+            DownAtk();}
+        } 
+        else if (!isGrounded() && Input.GetButtonDown("Fire1") && vertDir > 0)
         {
-            isAttackingAir = true;
-            UpAtk();
-
-        }      
-                   
-                    
-                
-                
+            if(GameplayManager.instance.styleIcon[4] == true)
+            {if (style == 4) //Water
+            {isAttackingAir = true;
+            WaterJumpAtk();}}
+            else
+            {isAttackingAir = true;
+            UpAtk();} 
+        }
+        else if (!isGrounded() && Input.GetButtonDown("Fire1"))
+        {
+            if(GameplayManager.instance.styleIcon[4] == true)
+            {if (style == 4) //Water
+            {isAttackingAir = true;
+            WaterJumpAtk();}}
+        }           
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////             
 
 // gestione dell'input dello sparo
@@ -1399,7 +1407,21 @@ public void AnimationCharge()
                 // Add event listener for when the animation completes
                // _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
+public void WaterJumpAtk()
+{
+    if (currentAnimationName != WaterjumpAnimationName)
+                {    
+                    _spineAnimationState.ClearTrack(2);
+                    _spineAnimationState.ClearTrack(1);
+                    _spineAnimationState.SetAnimation(2, WaterjumpAnimationName, true);
+                    currentAnimationName = WaterjumpAnimationName;
+                                        _spineAnimationState.Event += HandleEvent;
 
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+            _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
 public void dashAnm()
 {
     if (currentAnimationName != dashAnimationName)
@@ -2199,6 +2221,16 @@ if (e.Data.Name == "VFXpesante") {
 
     if (e.Data.Name == "slash_v_water") {     
     // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
+    if(!vfx)
+        {
+        Instantiate(attack_w_v, slashpoint.position, attack_w_v.transform.rotation);
+        PlayMFX(1);
+        vfx = true;
+        }
+        
+    }
+
+if (e.Data.Name == "waterjump") {     
     if(!vfx)
         {
         Instantiate(attack_w_v, slashpoint.position, attack_w_v.transform.rotation);
