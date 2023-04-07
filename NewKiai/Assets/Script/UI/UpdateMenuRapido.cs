@@ -7,44 +7,45 @@ using TMPro;
 public class UpdateMenuRapido : MonoBehaviour
 {
     // Mappa che mappa gli id delle skill ai loro valori
-    Dictionary<int, Skill> skillMap = new Dictionary<int, Skill>();
+    Dictionary<int, Item> itemMap = new Dictionary<int, Item>();
 [SerializeField] public Sprite icon0; // Define icon1 as an Image variable
 [SerializeField] public Sprite icon1; // Define icon1 as an Image variable
 [SerializeField] public Sprite icon2; // Define icon1 as an Image variable
 [SerializeField] public Sprite icon3; // Define icon1 as an Image variable
 
  [HideInInspector]
-    public int idleft = -1; // Id dell'abilità selezionata
-    [HideInInspector]
-    public int idright = -1; // Id dell'abilità selezionata
-    [HideInInspector]
-    public int idup= -1; // Id dell'abilità selezionata
-    [HideInInspector]
-    public int idbottom= -1; // Id dell'abilità selezionata
+    public int selectedId = -1; // Id dell'abilità selezionata  
+    public int Slot1= -1; // Id dell'abilità selezionata
+    public int Slot2 = -1; // Id dell'abilità selezionata 
+    public int Slot3 = -1; // Id dell'abilità selezionata
+    public int Slot4= -1; // Id dell'abilità selezionata 
+    public int Slot5= -1; // Id dell'abilità selezionata
+    public int Slot6= -1; // Id dell'abilità selezionata
 
-    
-    public int Vleft; // Id dell'abilità selezionata
-  
-    public int Vright; // Id dell'abilità selezionata
-    
-    public int Vup; // Id dell'abilità selezionata
-    
-    public int Vbottom; // Id dell'abilità selezionata
 
-    [SerializeField] public TextMeshProUGUI SkillLeft_T;
-    [SerializeField] public TextMeshProUGUI SkillRight_T;
-    [SerializeField] public TextMeshProUGUI SkillUp_T;
-    [SerializeField] public TextMeshProUGUI SkillBottom_T;
+    public int MXV1; // Id dell'abilità selezionata
+    public int MXV2; // Id dell'abilità selezionata
+    public int MXV3; // Id dell'abilità selezionata
+    public int MXV4; // Id dell'abilità selezionata
+    public int MXV5; // Id dell'abilità selezionata
+    public int MXV6; // Id dell'abilità selezionata
 
-    [SerializeField] public Image SkillLeft;
-    [SerializeField] public Image SkillRight;
-    [SerializeField] public Image SkillUp;
-    [SerializeField] public Image SkillBottom;
+    [SerializeField]public TextMeshProUGUI Slot1_T;
+    [SerializeField]public TextMeshProUGUI Slot2_T;
+    [SerializeField]public TextMeshProUGUI Slot3_T;
+    [SerializeField]public TextMeshProUGUI Slot4_T;
+    [SerializeField]public TextMeshProUGUI Slot5_T;
+    [SerializeField]public TextMeshProUGUI Slot6_T;
 
-    [SerializeField] public Image SkillLeftsel;
-    [SerializeField] public Image SkillRightsel;
-    [SerializeField] public Image SkillUpsel;
-    [SerializeField] public Image SkillBottomsel;
+
+    [SerializeField]public Image Slot1_I;
+    [SerializeField]public Image Slot2_I;
+    [SerializeField]public Image Slot3_I;
+    [SerializeField]public Image Slot4_I;
+    [SerializeField]public Image Slot5_I;
+    [SerializeField]public Image Slot6_I;
+
+
     public float timeSelection = 0.1f; // ritardo tra la spawn di ogni moneta
 
 
@@ -63,33 +64,24 @@ public static UpdateMenuRapido Instance;
 public void Selup()
     {
         
-        PlayerWeaponManager.instance.SetWeapon(SkillMenu.Instance.selectedId);
-        SkillUpsel.gameObject.SetActive(true);
-        SkillLeftsel.gameObject.SetActive(false);        
-        SkillRightsel.gameObject.SetActive(false);
-        SkillBottomsel.gameObject.SetActive(false);
+        PlayerWeaponManager.instance.SetWeapon(ItemRapidMenu.Instance.selectedId);
+    
         //StartCoroutine(closeSel());
 
     }
 
 public void Selbottom()
     {
-        PlayerWeaponManager.instance.SetWeapon(SkillMenu.Instance.selectedId);
-        SkillBottomsel.gameObject.SetActive(true);
-        SkillLeftsel.gameObject.SetActive(false);
-        SkillUpsel.gameObject.SetActive(false);
-        SkillRightsel.gameObject.SetActive(false);
+        PlayerWeaponManager.instance.SetWeapon(ItemRapidMenu.Instance.selectedId);
+       
         //StartCoroutine(closeSel());
 
     }
 
 public void Selleft()
     {
-        PlayerWeaponManager.instance.SetWeapon(SkillMenu.Instance.selectedId);
-        SkillLeftsel.gameObject.SetActive(true);
-        SkillUpsel.gameObject.SetActive(false);
-        SkillRightsel.gameObject.SetActive(false);
-        SkillBottomsel.gameObject.SetActive(false);
+        PlayerWeaponManager.instance.SetWeapon(ItemRapidMenu.Instance.selectedId);
+      
        // StartCoroutine(closeSel());
 
     }
@@ -97,11 +89,8 @@ public void Selleft()
     
 public void Selright()
     {
-        PlayerWeaponManager.instance.SetWeapon(SkillMenu.Instance.selectedId);
-        SkillRightsel.gameObject.SetActive(true);
-        SkillLeftsel.gameObject.SetActive(false);
-        SkillUpsel.gameObject.SetActive(false);
-        SkillBottomsel.gameObject.SetActive(false);
+        PlayerWeaponManager.instance.SetWeapon(ItemRapidMenu.Instance.selectedId);
+      
         //StartCoroutine(closeSel());
 
     }
@@ -110,10 +99,7 @@ IEnumerator closeSel()
 
     
         yield return new WaitForSeconds(timeSelection);
-                SkillLeftsel.gameObject.SetActive(false);
-                SkillUpsel.gameObject.SetActive(false);
-                SkillRightsel.gameObject.SetActive(false);
-                SkillBottomsel.gameObject.SetActive(false);
+    
 
 
 }

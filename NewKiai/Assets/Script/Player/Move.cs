@@ -538,7 +538,7 @@ if (Input.GetButtonUp("Heal"))
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Scelta della skill dal menu rapido
-if (Input.GetButtonDown("SlotUp") || DpadY == 1)
+/*if (Input.GetButtonDown("SlotUp") || DpadY == 1)
 {
     if (UpdateMenuRapido.Instance.idup > 0)
 {
@@ -588,7 +588,7 @@ else if (Input.GetButtonDown("SlotBottom")|| DpadY == -1)
     slotR = false;
     }
 }
-
+*/
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 
 if (Input.GetButtonDown("Fire1") && !isAttacking && !isAttackingAir && !NotStrangeAnimationTalk && !isCharging) 
@@ -1233,95 +1233,7 @@ void Blast()
 {
         isBlast = true;
        // Debug.Log("il blast è partito");
-        if(slotB)
-        {
-            if(UpdateMenuRapido.Instance.Vbottom > 0)
-            {
-        UpdateMenuRapido.Instance.Vbottom--;
-        UpdateMenuRapido.Instance.SkillBottom_T.text = UpdateMenuRapido.Instance.Vbottom.ToString();
-       // Instantiate(blam, gun.position, transform.rotation);
-        //Eccezioni di spawn
-        if(UpdateMenuRapido.Instance.idbottom == 3 || 
-        UpdateMenuRapido.Instance.idbottom == 2 || 
-        UpdateMenuRapido.Instance.idbottom == 1)
-        {
-        Instantiate(bullet, transform.position, transform.rotation);
-        }
-        else if(UpdateMenuRapido.Instance.idbottom == 15)
-        {
-        Instantiate(bullet, top.position, transform.rotation);
-        }
-        else
-        {
-        Instantiate(bullet, gun.position, transform.rotation);
-        }
-
-            }
-        }else if(slotU)
-        {
-            if(UpdateMenuRapido.Instance.Vup > 0)
-            {
-        UpdateMenuRapido.Instance.Vup--;
-        UpdateMenuRapido.Instance.SkillUp_T.text = UpdateMenuRapido.Instance.Vup.ToString();
-      //  Instantiate(blam, gun.position, transform.rotation);
-        //Eccezioni di spawn
-        if(UpdateMenuRapido.Instance.idup == 3 || 
-        UpdateMenuRapido.Instance.idup == 2 || 
-        UpdateMenuRapido.Instance.idup == 1 )
-        {
-        Instantiate(bullet, transform.position, transform.rotation);
-        }else if(UpdateMenuRapido.Instance.idup == 15)
-        {
-        Instantiate(bullet, top.position, transform.rotation);
-        }else
-        {
-        Instantiate(bullet, gun.position, transform.rotation);
-        }            
-        }
-        }else if(slotL)
-        {
-            if(UpdateMenuRapido.Instance.Vleft > 0)
-            {
-        UpdateMenuRapido.Instance.Vleft--;
-        UpdateMenuRapido.Instance.SkillLeft_T.text = UpdateMenuRapido.Instance.Vleft.ToString();
-       // Instantiate(blam, gun.position, transform.rotation);
-        //Eccezioni di spawn
-        if(UpdateMenuRapido.Instance.idleft == 3 || 
-        UpdateMenuRapido.Instance.idleft == 2 ||
-        UpdateMenuRapido.Instance.idleft == 1)
-        {
-        Instantiate(bullet, transform.position, transform.rotation);
-        }else if(UpdateMenuRapido.Instance.idleft == 15)
-        {
-        Instantiate(bullet, top.position, transform.rotation);
-        }else
-        {
-        Instantiate(bullet, gun.position, transform.rotation);
-        }            
-        }
-        }else if(slotR)
-        {
-            if(UpdateMenuRapido.Instance.Vright > 0)
-            {
-        UpdateMenuRapido.Instance.Vright--;
-        UpdateMenuRapido.Instance.SkillRight_T.text = UpdateMenuRapido.Instance.Vright.ToString();
-     //   Instantiate(blam, gun.position, transform.rotation);
-        //Eccezioni di spawn
-        if(UpdateMenuRapido.Instance.idright == 3 || 
-        UpdateMenuRapido.Instance.idright == 2 || 
-        UpdateMenuRapido.Instance.idright == 1 )
-        {
-        Instantiate(bullet, transform.position, transform.rotation);
-        }else if(UpdateMenuRapido.Instance.idright == 15)
-        {
-        Instantiate(bullet, top.position, transform.rotation);
-        }else
-        {
-        Instantiate(bullet, gun.position, transform.rotation);
-        }            
-        }
-        }
-        
+    
         
 }
 

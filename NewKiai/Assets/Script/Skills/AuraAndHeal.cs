@@ -15,7 +15,7 @@ public class AuraAndHeal : MonoBehaviour
         if(isAura)
     {
         //Ripristina gli utilizzi se hai gli slot pieni
-            if(UpdateMenuRapido.Instance.idup > 0 || 
+          /*  if(UpdateMenuRapido.Instance.idup > 0 || 
             UpdateMenuRapido.Instance.idleft > 0 || 
             UpdateMenuRapido.Instance.idbottom > 0||
             UpdateMenuRapido.Instance.idright > 0 )
@@ -31,7 +31,7 @@ public class AuraAndHeal : MonoBehaviour
             UpdateMenuRapido.Instance.SkillRight_T.text = UpdateMenuRapido.Instance.Vright.ToString();
 
             Invoke("Destroy", lifeTime);
-            }
+            }*/
     } else if(IsHeal)
     {
       //Ripristina L'essenza

@@ -186,6 +186,7 @@ public void OnQuestButtonClicked(int itemId, Image previewImages, TextMeshProUGU
         // Assegna i valori desiderati ai componenti dell'immagine di preview e della descrizione
         previewImages.sprite = itemDatabase.Find(q => q.id == itemId).icon;
         descriptions.text = itemDatabase.Find(q => q.id == itemId).Description;
+        NameItems.text = itemDatabase.Find(q => q.id == itemId).itemName;
     }
 }
 

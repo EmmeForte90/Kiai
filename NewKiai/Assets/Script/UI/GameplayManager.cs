@@ -239,7 +239,7 @@ public void EnemyDefeat()
 public void Restore()
 {
     // Ripristina gli utilizzi se hai gli slot pieni
-    if (UpdateMenuRapido.Instance != null && SkillMenu.Instance != null && 
+   /* if (UpdateMenuRapido.Instance != null && SkillMenu.Instance != null && 
         UpdateMenuRapido.Instance.gameObject.activeSelf && SkillMenu.Instance.gameObject.activeSelf &&
         (UpdateMenuRapido.Instance.idup > 0 || UpdateMenuRapido.Instance.idleft > 0 ||
          UpdateMenuRapido.Instance.idbottom > 0 || UpdateMenuRapido.Instance.idright > 0))
@@ -254,7 +254,7 @@ public void Restore()
         UpdateMenuRapido.Instance.SkillLeft_T.text = UpdateMenuRapido.Instance.Vleft.ToString();
         UpdateMenuRapido.Instance.SkillRight_T.text = UpdateMenuRapido.Instance.Vright.ToString();
     }
-
+*/
 // Ripristina L'essenza
     if (PlayerHealth.Instance.gameObject.activeSelf)
     {
