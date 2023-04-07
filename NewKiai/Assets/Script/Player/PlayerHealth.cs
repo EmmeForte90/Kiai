@@ -11,12 +11,19 @@ public class PlayerHealth : MonoBehaviour
     public float maxHealth = 100f;
     public float currentHealth;
     public Scrollbar healthBar;
+    public float maxStamina = 100f;
+    public float currentStamina;
+    public Scrollbar staminaBar;
     public GameObject Kiai;
     public float currentKiai;
     public float maxKiai = 100f; // il massimo valore di essenza disponibile
     public float KiaiPerSecond = 10f; // quantità di essenza consumata ogni secondo
     public float hpIncreasePerSecond = 10f; // quantità di hp incrementata ogni secondo quando il tasto viene premuto
-    
+    public bool Restore = false; 
+    public float timerestore = 2f; // il massimo valore di essenza disponibile
+    public float timeStart; // il massimo valore di essenza disponibile
+
+
     
    
    
@@ -35,6 +42,7 @@ public static PlayerHealth Instance;
     {
         currentHealth = maxHealth;
         currentKiai = 0;
+        currentStamina = maxStamina;
         //currentMana = maxMana;
     }
 
@@ -43,7 +51,41 @@ public static PlayerHealth Instance;
         healthBar.size = currentHealth / maxHealth;
         //manaBar.size = currentMana / maxMana;
         healthBar.size = Mathf.Clamp(healthBar.size, 0.01f, 1);
+        staminaBar.size = currentStamina / maxStamina;
+        //manaBar.size = currentMana / maxMana;
+        staminaBar.size = Mathf.Clamp(staminaBar.size, 0.01f, 1);
         //manaBar.size = Mathf.Clamp(manaBar.size, 0.01f, 1);
+       
+        if(currentStamina <= 0)
+        {
+        StartCoroutine(waitrestorestamina());
+        }
+        if(currentStamina != maxStamina && timeStart <= 0)
+        {
+        StartCoroutine(waitrestorestamina());
+        }
+
+
+        if (currentStamina != maxStamina) {
+        timeStart -= Time.deltaTime; //decrementa il timer ad ogni frame
+        if (timeStart <= 0f) {
+        timeStart = timerestore; //riavvia il timer alla sua durata originale
+        }
+        }
+
+
+        if(Restore)
+        {
+        currentStamina += Time.deltaTime;
+        }
+
+        if(currentStamina >= 100)
+        {
+            Restore = false;
+        }
+
+
+
     }
 
     public void Damage(float damage)
@@ -56,6 +98,11 @@ public static PlayerHealth Instance;
         {
             Move.instance.Respawn();
         }
+    }
+IEnumerator waitrestorestamina()
+    {
+        yield return new WaitForSeconds(timerestore);
+        Restore = true;
     }
 
 IEnumerator waitHurt()

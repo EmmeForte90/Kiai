@@ -160,6 +160,8 @@ public class Move : MonoBehaviour
     [SerializeField] GameObject attack_r_air_up;
     [SerializeField] GameObject pesante;
     [SerializeField] GameObject charge;
+    [SpineAnimation][SerializeField] private string chargeAnimationName;
+    [SpineAnimation][SerializeField] private string releaseAnimationName;
     [SpineAnimation][SerializeField] private string attackRock1AnimationName;
     [SpineAnimation][SerializeField] private string attackRock2AnimationName;
     [SpineAnimation][SerializeField] private string attackRock3AnimationName;
@@ -200,11 +202,12 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField] private string throwAnimationName;
     [SpineAnimation][SerializeField] private string bigthrowAnimationName;
     [SpineAnimation][SerializeField] private string SpecialAnimationName;
-    [SpineAnimation][SerializeField] private string chargeAnimationName;
     [SpineAnimation][SerializeField] private string DashAttackAnimationName;
     [SpineAnimation][SerializeField] private string pesanteAnimationName;
     [SpineAnimation][SerializeField] private string swordDownAnimationName;
-
+    [SpineAnimation][SerializeField] private string guardDownAnimationName;
+    [SpineAnimation][SerializeField] private string guardEndDownAnimationName;
+    [SpineAnimation][SerializeField] private string guardHitDownAnimationName;
     /////////////////////////////////////////////////////////////////////
 
 
@@ -228,7 +231,7 @@ private int comboCount = 0;
     private float attackRate = 0.5f;
     //[SerializeField] public float shootTimer = 2f; // tempo per completare una combo
     [SerializeField] private GameObject bullet;
-    [SerializeField] private int style = 0;
+    [HideInInspector] public int style = 0;
     // Dichiarazione delle variabili
     private int MaxStyle;
     private int currentTime;
@@ -239,6 +242,7 @@ private int comboCount = 0;
     [HideInInspector]public bool isCharging;
     private bool touchGround;
     private bool isDashing;
+    [HideInInspector]public bool isGuard;
     [HideInInspector]public bool isPray;//DPad del joypad per il menu rapido
     [HideInInspector]public bool isHeal;
     [HideInInspector]public bool isDeath;
@@ -317,6 +321,8 @@ if(!stopInput)
         {
         if(!isHeal)
         {
+        if(!isGuard || !isCharging)
+        {
         horDir = Input.GetAxisRaw("Horizontal");
         vertDir = Input.GetAxisRaw("Vertical");
         DpadX = Input.GetAxis("DPad X");
@@ -324,7 +330,7 @@ if(!stopInput)
         L2 = Input.GetAxis("L2");
         R2 = Input.GetAxis("R2");
         style = MaxStyle;
-
+        }
         }
         if (isGrounded())
         {
@@ -711,7 +717,32 @@ if(Input.GetButtonDown("Hsword"))
             }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
-if(GameplayManager.instance.unlockCrash)
+if(GameplayManager.instance.styleIcon[0] == true)
+{if (style == 0) //Normal
+{
+ if (Input.GetButton("Fire3") && !isGuard)
+{
+isGuard = true;
+GuardAnm();
+Stop();
+}
+if (Input.GetButtonUp("Fire3"))
+{
+if (isGuard)
+{ 
+endGuard();
+isGuard = false;
+}
+}
+if (isGuard)
+{
+Stop();
+}
+}
+}
+
+if(GameplayManager.instance.styleIcon[1] == true)
+{if (style == 1) //Rock
 {
  if (Input.GetButtonDown("Fire3") && !isCharging && Time.time - timeSinceLastAttack > attackRate)
     {
@@ -753,6 +784,7 @@ if(GameplayManager.instance.unlockCrash)
     {
         Stop();
     }
+}
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   if ( GameplayManager.instance.unlockDash)
@@ -1395,6 +1427,44 @@ private void OnJumpAnimationComplete(Spine.TrackEntry trackEntry)
     isAttackingAir = false;
 }
 
+public void GuardAnm()
+{
+    if (currentAnimationName != guardDownAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, guardDownAnimationName, true);
+                    currentAnimationName = guardDownAnimationName;
+                         _spineAnimationState.Event += HandleEvent;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+               //_spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+public void endGuard()
+{
+    if (currentAnimationName != guardEndDownAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, guardEndDownAnimationName, false);
+                    currentAnimationName = guardEndDownAnimationName;
+                         _spineAnimationState.Event += HandleEvent;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+               _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+
+public void GuardHit()
+{
+    if (currentAnimationName != guardHitDownAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, guardHitDownAnimationName, false);
+                    currentAnimationName = guardHitDownAnimationName;
+                         _spineAnimationState.Event += HandleEvent;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+
 public void AnimationCharge()
 {
     if (currentAnimationName != chargeAnimationName)
@@ -1492,10 +1562,10 @@ public void Throw()
 }
 public void AnimationChargeRelease()
 {
-    if (currentAnimationName != pesanteAnimationName)
+    if (currentAnimationName != releaseAnimationName)
                 {
-                    _spineAnimationState.SetAnimation(2, pesanteAnimationName, false);
-                    currentAnimationName = pesanteAnimationName;
+                    _spineAnimationState.SetAnimation(2, releaseAnimationName, false);
+                    currentAnimationName = releaseAnimationName;
                    // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
                 // Add event listener for when the animation completes
@@ -2042,6 +2112,8 @@ public void respawnWakeup()
 }
 
 private void moving() {
+   if(!isGuard || !isCharging)
+   {
     if(!isTouchingWall)
     {
         if(!stopInput)
@@ -2099,6 +2171,7 @@ private void moving() {
     }else{    _spineAnimationState.ClearTrack(1);}
     }
     }
+}
 }
 
 
@@ -2346,10 +2419,16 @@ if (e.Data.Name == "waterjump") {
 
 
 if (e.Data.Name == "soundWalk") {
+       if(!isGuard || !isCharging)
+       {
        PlayMFX(0);
+       }else{}
     }
 if (e.Data.Name == "soundRun") {
+       if(!isGuard || !isCharging)
+       {
        PlayMFX(0);
+       }else{}
     }
 if (e.Data.Name == "SoundCharge") {
             
