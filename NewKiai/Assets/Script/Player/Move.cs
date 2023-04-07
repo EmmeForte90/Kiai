@@ -2190,7 +2190,15 @@ private void moving() {
            // sgmActive = true;
         }
     }
-
+public void StopMFX(int soundToPlay)
+    {
+        if (!sgmActive)
+        {
+            //sgm[soundToPlay].pitch = Random.Range(.9f, 1.1f);
+            sgm[soundToPlay].Stop();
+           // sgmActive = true;
+        }
+    }
 void HandleEvent (TrackEntry trackEntry, Spine.Event e) {
 
 if (e.Data.Name == "VFXpesante") {
@@ -2419,16 +2427,16 @@ if (e.Data.Name == "waterjump") {
 
 
 if (e.Data.Name == "soundWalk") {
-       if(!isGuard || !isCharging)
-       {
-       PlayMFX(0);
-       }else{}
+       if(isGuard || isCharging)
+       {StopMFX(0);}
+       else 
+       {PlayMFX(0);}
     }
 if (e.Data.Name == "soundRun") {
-       if(!isGuard || !isCharging)
-       {
-       PlayMFX(0);
-       }else{}
+       if(isGuard || isCharging)
+       {StopMFX(0);}
+       else
+       {PlayMFX(0);}
     }
 if (e.Data.Name == "SoundCharge") {
             
