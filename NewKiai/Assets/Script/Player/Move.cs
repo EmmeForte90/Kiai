@@ -82,14 +82,13 @@ public class Move : MonoBehaviour
     public string sceneName; // il nome della scena in cui si trova il punto di respawn
 
     [Header("VFX")]
-    // Variabile per il gameobject del proiettile
-   // [SerializeField] GameObject blam;
     [SerializeField] public Transform gun;
     [SerializeField] public Transform top;
     [SerializeField] GameObject Circle;
     [SerializeField] public Transform circlePoint;
     [SerializeField] public Transform slashpoint;
     [SerializeField] GameObject VFXHeal;
+    [SerializeField] GameObject VFXWindSlash;
     private bool vfx = false;
     private float vfxTimer = 0.5f;
     
@@ -207,6 +206,8 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField] private string chargeAnimationName;
     [SpineAnimation][SerializeField] private string DashAttackAnimationName;
     [SpineAnimation][SerializeField] private string pesanteAnimationName;
+    [SpineAnimation][SerializeField] private string swordDownAnimationName;
+
     /////////////////////////////////////////////////////////////////////
 
 
@@ -679,6 +680,8 @@ comboTimer = comboDurata; //riavvia il timer alla sua durata originale
 if(Input.GetKeyDown(KeyCode.X))
             {
                 Debug.Log("Recupero!");
+                PlayMFX(5);
+                repostsword();
               //  GameplayManager.instance.StyleActivated(TESTID);
               //  PlayerHealth.Instance.IncreaseEssence(10);
                 //PlayerHealth.Instance.currentHealth = PlayerHealth.Instance.maxHealth;
@@ -687,7 +690,17 @@ if(Input.GetKeyDown(KeyCode.X))
 
             
             #endregion
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 
+if(Input.GetButtonDown("Hsword"))
+            {
+                PlayMFX(5);
+                repostsword();
+                if (_skeletonAnimation != null)
+                {
+                _skeletonAnimation.timeScale = timeScale; // Impostare il valore di time scale
+                }
+            }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 if(GameplayManager.instance.unlockCrash)
@@ -757,7 +770,7 @@ if(GameplayManager.instance.unlockCrash)
         else if (stopInput)
         {//Bloccato
         }
-if (!isPray)
+        if (!isPray)
         {
         // gestione dell'input del Menu 
         if (Input.GetButtonDown("Pause") && !stopInput)
@@ -1709,7 +1722,6 @@ if(style == 3)
                     _spineAnimationState.SetAnimation(2, attackWind1AnimationName, false);
                     currentAnimationName = attackWind1AnimationName;
                     _spineAnimationState.Event += HandleEvent;
-
                     //Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
                 // Add event listener for when the animation completes
@@ -1946,6 +1958,24 @@ public void respawnRest()
 
 }
 
+public void repostsword()
+{
+    if (currentAnimationName != swordDownAnimationName)
+                {
+                    Stop();
+                    _spineAnimationState.SetAnimation(2, swordDownAnimationName, false);
+                    currentAnimationName = swordDownAnimationName;
+                    _spineAnimationState.Event += HandleEvent;
+
+                    //Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                //_spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+
+}
+
+
 public void AnimationRest()
 {
     if (currentAnimationName != RestAnimationName)
@@ -2085,6 +2115,7 @@ if (e.Data.Name == "VFXpesante") {
         {
         Instantiate(attack_h2, slashpoint.position, attack_h2.transform.rotation);
         PlayMFX(1);
+        vfx = true;
         }
     }
     
@@ -2216,6 +2247,7 @@ if (e.Data.Name == "VFXpesante") {
     if(!vfx)
         {
        Instantiate(attack_v_h2, slashpoint.position, attack_v_h.transform.rotation);
+        Instantiate(VFXWindSlash, gun.position, transform.rotation);
         PlayMFX(1);
         vfx = true;
         }
@@ -2227,6 +2259,7 @@ if (e.Data.Name == "VFXpesante") {
     if(!vfx)
         {
         Instantiate(attack_v_h, slashpoint.position, attack_v_h.transform.rotation);
+        Instantiate(VFXWindSlash, gun.position, transform.rotation);
         PlayMFX(1);
         vfx = true;
         }
@@ -2237,7 +2270,8 @@ if (e.Data.Name == "VFXpesante") {
     // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
     if(!vfx)
         {
-         Instantiate(attack_v_v, slashpoint.position, attack_v_v.transform.rotation);
+        Instantiate(attack_v_v, slashpoint.position, attack_v_v.transform.rotation);
+        Instantiate(VFXWindSlash, gun.position, transform.rotation);
         PlayMFX(1);
         vfx = true;
         }
