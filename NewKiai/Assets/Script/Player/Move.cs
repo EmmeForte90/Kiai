@@ -87,6 +87,7 @@ public class Move : MonoBehaviour
     [SerializeField] GameObject Circle;
     [SerializeField] public Transform circlePoint;
     [SerializeField] public Transform slashpoint;
+    [SerializeField] public Transform slashpoint1;
     [SerializeField] GameObject VFXHeal;
     [SerializeField] GameObject VFXWindSlash;
     private bool vfx = false;
@@ -646,7 +647,7 @@ if (_skeletonAnimation != null)
 {
 _skeletonAnimation.timeScale = timeScale; // Impostare il valore di time scale
 }
-if(comboCount >= 2)
+if(comboCount >= 3)
 {
 comboCount = 0;}}}
 ////////////////////////////
@@ -1425,6 +1426,10 @@ private void OnJumpAnimationComplete(Spine.TrackEntry trackEntry)
      // Reset the attack state
     isAttacking = false;
     isAttackingAir = false;
+    if (_skeletonAnimation != null)
+    {
+    _skeletonAnimation.timeScale = timeScale; // Impostare il valore di time scale
+    }
 }
 
 public void GuardAnm()
@@ -1882,6 +1887,30 @@ if(style == 4)
                 // Add event listener for when the animation completes                
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
                 break;
+            case 2:
+                if (currentAnimationName != attackWater2AnimationName)
+                {Stop();
+                    _spineAnimationState.SetAnimation(2, attackWater2AnimationName, false);
+                    currentAnimationName = attackWater2AnimationName;
+                    _spineAnimationState.Event += HandleEvent;
+
+                    //Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes                
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+                break;
+            case 3:
+                if (currentAnimationName != attackWater3AnimationName)
+                {Stop();
+                    _spineAnimationState.SetAnimation(2, attackWater3AnimationName, false);
+                    currentAnimationName = attackWater3AnimationName;
+                    _spineAnimationState.Event += HandleEvent;
+
+                    //Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes                
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+                break;
             default:
                 break;
         }
@@ -1971,10 +2000,10 @@ private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
     
     isAttacking = false;
     isAttackingAir = false;
-    /*if (_skeletonAnimation != null)
+    if (_skeletonAnimation != null)
     {
     _skeletonAnimation.timeScale = timeScale; // Impostare il valore di time scale
-    } */ 
+    }
 
 }
 public void Stooping()
@@ -2201,14 +2230,6 @@ public void StopMFX(int soundToPlay)
     }
 void HandleEvent (TrackEntry trackEntry, Spine.Event e) {
 
-if (e.Data.Name == "VFXpesante") {
-        // Inserisci qui il codice per gestire l'evento.
-        if(!vfx)
-        {
-        Instantiate(pesante, slashpoint.position, transform.rotation);
-        vfx = true;
-        }
-    }
 
 //Normal VFX
     if (e.Data.Name == "slash_h2_normal") {     
@@ -2310,7 +2331,26 @@ if (e.Data.Name == "VFXpesante") {
         }
         
     }
-
+ if (e.Data.Name == "slash_v_water2") {     
+    // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
+    if(!vfx)
+        {
+        Instantiate(attack_w_h, slashpoint.position, attack_w_h.transform.rotation);
+        PlayMFX(1);
+        vfx = true;
+        }
+        
+    }
+    if (e.Data.Name == "slash_v_water3") {     
+    // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
+    if(!vfx)
+        {
+        Instantiate(attack_w_h2, slashpoint1.position, attack_w_h2.transform.rotation);
+        PlayMFX(1);
+        vfx = true;
+        }
+        
+    }
 if (e.Data.Name == "waterjump") {     
     if(!vfx)
         {
@@ -2427,26 +2467,37 @@ if (e.Data.Name == "waterjump") {
 
 
 if (e.Data.Name == "soundWalk") {
-       if(isGuard || isCharging)
+       if(isGuard || isCharging || isAttacking || isAttackingAir)
        {StopMFX(0);}
        else 
        {PlayMFX(0);}
     }
 if (e.Data.Name == "soundRun") {
-       if(isGuard || isCharging)
+       if(isGuard || isCharging || isAttacking || isAttackingAir)
        {StopMFX(0);}
        else
        {PlayMFX(0);}
     }
-if (e.Data.Name == "SoundCharge") {
-            
+if (e.Data.Name == "charge") {
+         if(!vfx)
+        {  
         Instantiate(charge, transform.position, transform.rotation);
-        PlayMFX(4);
+        PlayMFX(3); 
+        vfx = true;
+        }
     }
 if (e.Data.Name == "dash") {
             
     PlayMFX(5);
 
+    }
+    if (e.Data.Name == "pesante") {
+        if(!vfx)
+        {  
+        Instantiate(pesante, slashpoint.position, pesante.transform.rotation);
+        PlayMFX(1);
+        vfx = true;
+        }
     }
     if (e.Data.Name == "downslash") {
 if(!vfx)
