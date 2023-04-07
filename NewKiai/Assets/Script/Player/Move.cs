@@ -640,7 +640,7 @@ if (_skeletonAnimation != null)
 {
 _skeletonAnimation.timeScale = timeScale; // Impostare il valore di time scale
 }
-if(comboCount >= 1)
+if(comboCount >= 2)
 {
 comboCount = 0;}}}
 ////////////////////////////
