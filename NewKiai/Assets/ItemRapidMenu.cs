@@ -150,8 +150,7 @@ public static ItemRapidMenu Instance;
         UpdateMenuRapido.Instance.Slot2_T.text = selcetedItem.value.ToString();
         UpdateMenuRapido.Instance.Slot2 = selcetedItem.value;
         UpdateMenuRapido.Instance.Slot2_I.sprite = selcetedItem.icon;
-        MXV2 = selcetedItem.value;
-        
+        MXV2 = selcetedItem.value;   
     }
 }  
 public void Assign3()

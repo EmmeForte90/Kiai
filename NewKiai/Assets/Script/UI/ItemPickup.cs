@@ -30,7 +30,7 @@ public void Update()
         InventoryManager.Instance.ItemActive(IDItem);
         if( AssignItem.Instance == null)
         {
-        AssignItem.Instance.AssignId(IDItem);
+        //AssignItem.Instance.AssignId(IDItem);
         }
         isCollected = true; // Imposta la variabile booleana a "true" quando l'oggetto viene raccolto
     }

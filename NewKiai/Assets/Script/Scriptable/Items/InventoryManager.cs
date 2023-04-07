@@ -25,7 +25,21 @@ public class InventoryManager : MonoBehaviour
     public TextMeshProUGUI Num;
     public TextMeshProUGUI NameItems;
 
+ [Header("MenuSlot")]
+[SerializeField]public TextMeshProUGUI Slot1_T;
+    [SerializeField]public TextMeshProUGUI Slot2_T;
+    [SerializeField]public TextMeshProUGUI Slot3_T;
+    [SerializeField]public TextMeshProUGUI Slot4_T;
+    [SerializeField]public TextMeshProUGUI Slot5_T;
+    [SerializeField]public TextMeshProUGUI Slot6_T;
 
+
+    [SerializeField]public Image Slot1_I;
+    [SerializeField]public Image Slot2_I;
+    [SerializeField]public Image Slot3_I;
+    [SerializeField]public Image Slot4_I;
+    [SerializeField]public Image Slot5_I;
+    [SerializeField]public Image Slot6_I;
 
      // Id unico del bottone della item selezionata
     private static int uniqueId;
@@ -187,6 +201,8 @@ public void OnQuestButtonClicked(int itemId, Image previewImages, TextMeshProUGU
         previewImages.sprite = itemDatabase.Find(q => q.id == itemId).icon;
         descriptions.text = itemDatabase.Find(q => q.id == itemId).Description;
         NameItems.text = itemDatabase.Find(q => q.id == itemId).itemName;
+
+
     }
 }
 
