@@ -12,6 +12,8 @@ TagManager:
   - Enemy
   - Ordalia
   - Door
+  - Hitbox
+  - Hitbox_E
   layers:
   - Default
   - TransparentFX

@@ -111,6 +111,7 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField] private string hurtAnimationName;
     [SpineAnimation][SerializeField] private string HealAnimationName;
     [SpineAnimation][SerializeField] private string deathAnimationName;
+    [SpineAnimation][SerializeField] private string tiredAnimationName;
     [SpineAnimation][SerializeField] private string RestAnimationName;
     [SpineAnimation][SerializeField] private string respawnRestAnimationName;
     [SpineAnimation][SerializeField] private string UpAnimationName;
@@ -204,7 +205,8 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField] private string DashAttackAnimationName;
     [SpineAnimation][SerializeField] private string pesanteAnimationName;
     [SpineAnimation][SerializeField] private string swordDownAnimationName;
-
+    [SpineAnimation][SerializeField] private string GuardAnimationName;
+    [SpineAnimation][SerializeField] private string GuardhitAnimationName;
     /////////////////////////////////////////////////////////////////////
 
 
@@ -218,17 +220,19 @@ private int comboCount = 0;
     public int Damage;
     private int timeScale = 1;
     private int FastCombo = 2;
+    private float slowCombo = 0.3f;
     private float TimeAtk = 4f;
     private bool canAttack = true;
-    private bool ComboFinish;
-    private float comboTimer; //imposta la durata del timer a 1 secondi
-    public float comboDurata = 0.5f; //imposta la durata del timer a 1 secondi
+    [HideInInspector] public bool isGuard;
+    //private bool ComboFinish;
+    //private float comboTimer; //imposta la durata del timer a 1 secondi
+    //public float comboDurata = 0.5f; //imposta la durata del timer a 1 secondi
     [SerializeField] public int comboCounter = 0; // contatore delle combo
     private float ShotTimer = 0f;
     private float attackRate = 0.5f;
     //[SerializeField] public float shootTimer = 2f; // tempo per completare una combo
     [SerializeField] private GameObject bullet;
-    [SerializeField] private int style = 0;
+    [HideInInspector] public int style = 0;
     // Dichiarazione delle variabili
     private int MaxStyle;
     private int currentTime;
@@ -236,7 +240,7 @@ private int comboCount = 0;
     private int maxDamage = 50; // Danno massimo dell'attacco caricato
     private int minDamage = 10; // Danno minimo dell'attacco non caricato
     private float timeSinceLastAttack = 0f;
-    [HideInInspector]public bool isCharging;
+    [HideInInspector] public bool isCharging;
     private bool touchGround;
     private bool isDashing;
     [HideInInspector]public bool isPray;//DPad del joypad per il menu rapido
@@ -245,8 +249,8 @@ private int comboCount = 0;
     [HideInInspector]public bool isAttacking = false; // vero se il personaggio sta attaccando
     private bool isAttackingAir = false; // vero se il personaggio sta attaccando
     private bool isBlast = false; // vero se il personaggio sta attaccando
-    public bool stopInput = false;
-    public bool NotStrangeAnimationTalk = false;
+    [HideInInspector] public bool stopInput = false;
+    [HideInInspector] public bool NotStrangeAnimationTalk = false;
 
     private int facingDirection = 1; // La direzione in cui il personaggio sta guardando: 1 per destra, -1 per sinistra
     
@@ -616,7 +620,7 @@ if(GameplayManager.instance.styleIcon[2] == true)
 {
 if (_skeletonAnimation != null)
 {
-_skeletonAnimation.timeScale = timeScale; // Impostare il valore di time scale
+_skeletonAnimation.timeScale = slowCombo; // Impostare il valore di time scale
 }  
 if(comboCount >= 3)
 {
@@ -711,27 +715,50 @@ if(Input.GetButtonDown("Hsword"))
             }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
-if(GameplayManager.instance.unlockCrash)
+if(PlayerHealth.Instance.currentStamina > 0)
 {
  if (Input.GetButtonDown("Fire3") && !isCharging && Time.time - timeSinceLastAttack > attackRate)
     {
+        if(GameplayManager.instance.styleIcon[1] == true)
+        {if (style == 1) //Rock
+        {
         isCharging = true;
         AnimationCharge();
         Stop();
         // Inizializza il timer al tempo massimo
         currentTime = timeLimit;
         InvokeRepeating("CountDown", 1f, 1f);
-    }
+        }
+        }else
+        {        
+        isGuard = true;
+        }
+        }
 
     if (Input.GetButtonDown("Fire3") && isCharging)
+    {if(GameplayManager.instance.styleIcon[1] == true)
+    {if (style == 1) //Rock
     {
         Stop();
         // Decrementa il timer di un secondo
         currentTime--;
         // Aggiorna il danno dell'attacco in base al tempo rimanente
         Damage = minDamage + (maxDamage - minDamage) * currentTime / timeLimit;
+    }}}else
+    {
+        Stop();
+        isGuard = true;
+        GuardAnm();
+    }
+    
+    if (Input.GetButtonUp("Fire3") && isGuard)
+    {
+        isGuard = false;
     }
 
+    {if(GameplayManager.instance.styleIcon[1] == true)
+    {if (style == 1) //Rock
+    {
     if (Input.GetButtonUp("Fire3") && isCharging)
     {
         if (currentTime == 0)
@@ -748,12 +775,14 @@ if(GameplayManager.instance.unlockCrash)
         timeSinceLastAttack = Time.time;
         CancelInvoke("CountDown");
     }
+    }}}
 
     if (isCharging)
     {
         Stop();
     }
 }
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   if ( GameplayManager.instance.unlockDash)
         {
@@ -1393,6 +1422,32 @@ private void OnJumpAnimationComplete(Spine.TrackEntry trackEntry)
      // Reset the attack state
     isAttacking = false;
     isAttackingAir = false;
+}
+
+public void GuardAnm()
+{
+    if (currentAnimationName != GuardAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, GuardAnimationName, true);
+                    currentAnimationName = GuardAnimationName;
+                         _spineAnimationState.Event += HandleEvent;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+               // _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+
+public void GuardHit()           
+{
+    if (currentAnimationName != GuardhitAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, GuardhitAnimationName, false);
+                    currentAnimationName = GuardhitAnimationName;
+                         _spineAnimationState.Event += HandleEvent;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+               // _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 
 public void AnimationCharge()
