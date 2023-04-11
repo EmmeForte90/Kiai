@@ -107,7 +107,6 @@ public class Move : MonoBehaviour
         [Header("HpAnm")]
 
     [SpineAnimation][SerializeField] private string hurtAnimationName;
-    [SpineAnimation][SerializeField] private string HealAnimationName;
     [SpineAnimation][SerializeField] private string deathAnimationName;
     [SpineAnimation][SerializeField] private string RestAnimationName;
     [SpineAnimation][SerializeField] private string respawnRestAnimationName;
@@ -197,8 +196,6 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField] private string upatkjumpAnimationName;
     [SpineAnimation][SerializeField] private string downatkjumpAnimationName;
     /////////////////////////////////////////////////////////////////////
-    [SpineAnimation][SerializeField] private string throwAnimationName;
-    [SpineAnimation][SerializeField] private string bigthrowAnimationName;
     [SpineAnimation][SerializeField] private string SpecialAnimationName;
     [SpineAnimation][SerializeField] private string DashAttackAnimationName;
     [SpineAnimation][SerializeField] private string pesanteAnimationName;
@@ -207,7 +204,12 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField] private string guardEndDownAnimationName;
     [SpineAnimation][SerializeField] private string guardHitDownAnimationName;
     /////////////////////////////////////////////////////////////////////
-
+    [Header("Items")]
+    [SpineAnimation][SerializeField] private string HealAnimationName;
+    [SpineAnimation][SerializeField] private string throwAnimationName;
+    [SpineAnimation][SerializeField] private string bigthrowAnimationName;
+    [SpineAnimation][SerializeField] private string BowAnimationName;
+    [SpineAnimation][SerializeField] private string RifleAnimationName;
 
 private string currentAnimationName;
 
@@ -1519,8 +1521,29 @@ public void Blasting()
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 
+public void Bow()
+{
+    if (currentAnimationName != BowAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, BowAnimationName, false);
+                    currentAnimationName = BowAnimationName;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
 
-
+public void Rifle()
+{
+    if (currentAnimationName != RifleAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, RifleAnimationName, false);
+                    currentAnimationName = RifleAnimationName;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
 
 public void Special()
 {

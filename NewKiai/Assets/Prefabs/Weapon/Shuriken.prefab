@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 183260821265666962}
   - component: {fileID: 183260821265666989}
-  - component: {fileID: 183260821265666988}
+  - component: {fileID: 7252155812427380380}
   - component: {fileID: -3525215551662867126}
   - component: {fileID: 5937847581482816759}
   m_Layer: 0
@@ -87,7 +87,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &183260821265666988
+--- !u!114 &7252155812427380380
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -96,17 +96,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 183260821265666991}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4214d1fd4f0bfdf4b998a3c0cf321cce, type: 3}
+  m_Script: {fileID: 11500000, guid: 26a482ca21a5d0045b94c1e14ae8f460, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  Explode: {fileID: 6277231454409640187, guid: 32425d44a5ce0b9488d7881e1f00c227, type: 3}
+  Explode: {fileID: 4331965279904828745, guid: 1b79c7dad815f1544b564d01f2920de0, type: 3}
   damage: 50
   rotationSpeed: 2500
-  isRotating: 1
-  kunai: 1
-  Needtwohands: 0
-  isBig: 0
   lifeTime: 0.5
   list: []
   SFX: {fileID: 24100000, guid: 63f598184995bda419cd1ee5db5e6d03, type: 2}
