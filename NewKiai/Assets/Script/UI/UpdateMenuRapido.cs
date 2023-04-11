@@ -12,8 +12,8 @@ public class UpdateMenuRapido : MonoBehaviour
  [HideInInspector]
     public int selectedId = -1; // Id dell'abilità selezionata  
     public int Slot1= -1; // Id dell'abilità selezionata
-    public int Slot2 = -1; // Id dell'abilità selezionata 
-    public int Slot3 = -1; // Id dell'abilità selezionata
+    public int Slot2= -1; // Id dell'abilità selezionata 
+    public int Slot3= -1; // Id dell'abilità selezionata
     public int Slot4= -1; // Id dell'abilità selezionata 
     public int Slot5= -1; // Id dell'abilità selezionata
     public int Slot6= -1; // Id dell'abilità selezionata
