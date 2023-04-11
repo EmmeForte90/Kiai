@@ -84,7 +84,7 @@ public static UpdateMenuRapido Instance;
 public void Selup()
     {
         
-        PlayerWeaponManager.instance.SetWeapon(ItemRapidMenu.Instance.selectedId);
+        PlayerWeaponManager.instance.SetWeapon(ItemRapidMenu.Instance.Slot1);
         selSlot1.SetActive(true);
         selSlot2.SetActive(false);
         selSlot3.SetActive(false);
@@ -102,7 +102,7 @@ public void Selup()
 
 public void Selleft()
     {
-        PlayerWeaponManager.instance.SetWeapon(ItemRapidMenu.Instance.selectedId);
+        PlayerWeaponManager.instance.SetWeapon(ItemRapidMenu.Instance.Slot2);
         selSlot1.SetActive(false);
         selSlot2.SetActive(true);
         selSlot3.SetActive(false);
@@ -118,7 +118,7 @@ public void Selleft()
     
 public void Selright()
     {
-        PlayerWeaponManager.instance.SetWeapon(ItemRapidMenu.Instance.selectedId);
+        PlayerWeaponManager.instance.SetWeapon(ItemRapidMenu.Instance.Slot3);
         selSlot1.SetActive(false);
         selSlot2.SetActive(false);
         selSlot3.SetActive(true);
@@ -133,7 +133,7 @@ public void Selright()
 
 public void Selbottom()
     {
-        PlayerWeaponManager.instance.SetWeapon(ItemRapidMenu.Instance.selectedId);
+        PlayerWeaponManager.instance.SetWeapon(ItemRapidMenu.Instance.Slot4);
         selSlot1.SetActive(false);
         selSlot2.SetActive(false);
         selSlot3.SetActive(false);

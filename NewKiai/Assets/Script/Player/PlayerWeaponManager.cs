@@ -68,27 +68,27 @@ public void SetWeapon(int WeaponID)
 {
     switch (WeaponID)
     {
-    case 0:
+    case 1:
     Move.instance.SetBulletPrefab(kunai);
     break;
     
-    case 1:
+    case 2:
     Move.instance.SetBulletPrefab(Shuriken);
     break;
     
-    case 2:
+    case 3:
     Move.instance.SetBulletPrefab(Bomb);
     break;
 
-    case 3:
+    case 4:
     Move.instance.SetBulletPrefab(Spille);
     break;
 
-    case 4:
+    case 5:
     Move.instance.SetBulletPrefab(freccia);
     break;
 
-    case 5:
+    case 6:
     Move.instance.SetBulletPrefab(Taneghasima);
     break; 
       

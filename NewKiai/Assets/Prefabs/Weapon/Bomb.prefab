@@ -104,7 +104,7 @@ MonoBehaviour:
   damage: 50
   LaunchOffset: {x: 0, y: 0, z: 0}
   targetTag: Enemy
-  rb: {fileID: 0}
+  rb: {fileID: 8517300511900586290}
   list: []
   SFX: {fileID: 0}
 --- !u!50 &8517300511900586290

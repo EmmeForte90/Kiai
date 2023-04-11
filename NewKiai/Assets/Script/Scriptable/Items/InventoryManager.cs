@@ -180,7 +180,7 @@ public void ListItem(int itemId)
 
     // Aggiungi un listener per il click del bottone
     var button = InventoryItem.GetComponent<Button>();
-    button.onClick.AddListener(() => OnQuestButtonClicked(item.id, previewImages, descriptions));
+    button.onClick.AddListener(() => OnQuestButtonClicked(item.id, previewImages, descriptions, selectedId));
         }
 }
     }
@@ -202,7 +202,7 @@ public void ListItem(int itemId)
 
     
 
-public void OnQuestButtonClicked(int itemId, Image previewImages, TextMeshProUGUI descriptions)
+public void OnQuestButtonClicked(int itemId, Image previewImages, TextMeshProUGUI descriptions, int selectedId)
 {
     if (itemId >= 0)
     {
@@ -211,12 +211,13 @@ public void OnQuestButtonClicked(int itemId, Image previewImages, TextMeshProUGU
         previewImages.sprite = itemDatabase.Find(q => q.id == itemId).icon;
         descriptions.text = itemDatabase.Find(q => q.id == itemId).Description;
         NameItems.text = itemDatabase.Find(q => q.id == itemId).itemName;
+        selectedId = itemDatabase.Find(q => q.id == itemId).id;
         if(ItemRapidMenu.Instance.isSlot1)
         {
             ItemRapidMenu.Instance.Slot1_T.text = itemDatabase.Find(q => q.id == itemId).value.ToString();
             ItemRapidMenu.Instance.Slot1_I.sprite = itemDatabase.Find(q => q.id == itemId).icon;
-            ItemRapidMenu.Instance.Slot1 = itemDatabase.Find(q => q.id == itemId).id;
-            UpdateMenuRapido.Instance.Slot1 = itemDatabase.Find(q => q.id == itemId).id;
+            ItemRapidMenu.Instance.Slot1 = selectedId;
+            UpdateMenuRapido.Instance.Slot1 = selectedId;
             UpdateMenuRapido.Instance.Slot1_T.text = itemDatabase.Find(q => q.id == itemId).value.ToString();
             UpdateMenuRapido.Instance.Slot1 = itemDatabase.Find(q => q.id == itemId).value;
             UpdateMenuRapido.Instance.Slot1_I.sprite = itemDatabase.Find(q => q.id == itemId).icon;
@@ -226,8 +227,8 @@ public void OnQuestButtonClicked(int itemId, Image previewImages, TextMeshProUGU
         {
             ItemRapidMenu.Instance.Slot2_T.text = itemDatabase.Find(q => q.id == itemId).value.ToString();
             ItemRapidMenu.Instance.Slot2_I.sprite = itemDatabase.Find(q => q.id == itemId).icon;
-            ItemRapidMenu.Instance.Slot2 = itemDatabase.Find(q => q.id == itemId).id;
-            UpdateMenuRapido.Instance.Slot2 = itemDatabase.Find(q => q.id == itemId).id;
+            ItemRapidMenu.Instance.Slot2 = selectedId;
+            UpdateMenuRapido.Instance.Slot2 = selectedId;
             UpdateMenuRapido.Instance.Slot2_T.text = itemDatabase.Find(q => q.id == itemId).value.ToString();
             UpdateMenuRapido.Instance.Slot2 = itemDatabase.Find(q => q.id == itemId).value;
             UpdateMenuRapido.Instance.Slot2_I.sprite = itemDatabase.Find(q => q.id == itemId).icon;
@@ -236,8 +237,8 @@ public void OnQuestButtonClicked(int itemId, Image previewImages, TextMeshProUGU
         {
             ItemRapidMenu.Instance.Slot3_T.text = itemDatabase.Find(q => q.id == itemId).value.ToString();
             ItemRapidMenu.Instance.Slot3_I.sprite = itemDatabase.Find(q => q.id == itemId).icon;
-            ItemRapidMenu.Instance.Slot3 = itemDatabase.Find(q => q.id == itemId).id;
-            UpdateMenuRapido.Instance.Slot3 = itemDatabase.Find(q => q.id == itemId).id;
+            ItemRapidMenu.Instance.Slot3 = selectedId;
+            UpdateMenuRapido.Instance.Slot3 = selectedId;
             UpdateMenuRapido.Instance.Slot3_T.text = itemDatabase.Find(q => q.id == itemId).value.ToString();
             UpdateMenuRapido.Instance.Slot3 = itemDatabase.Find(q => q.id == itemId).value;
             UpdateMenuRapido.Instance.Slot3_I.sprite = itemDatabase.Find(q => q.id == itemId).icon;
@@ -246,8 +247,8 @@ public void OnQuestButtonClicked(int itemId, Image previewImages, TextMeshProUGU
         {
             ItemRapidMenu.Instance.Slot4_T.text = itemDatabase.Find(q => q.id == itemId).value.ToString();
             ItemRapidMenu.Instance.Slot4_I.sprite = itemDatabase.Find(q => q.id == itemId).icon;
-            ItemRapidMenu.Instance.Slot4 = itemDatabase.Find(q => q.id == itemId).id;
-            UpdateMenuRapido.Instance.Slot4 = itemDatabase.Find(q => q.id == itemId).id;
+            ItemRapidMenu.Instance.Slot4 = selectedId;
+            UpdateMenuRapido.Instance.Slot4 = selectedId;
             UpdateMenuRapido.Instance.Slot4_T.text = itemDatabase.Find(q => q.id == itemId).value.ToString();
             UpdateMenuRapido.Instance.Slot4 = itemDatabase.Find(q => q.id == itemId).value;
             UpdateMenuRapido.Instance.Slot4_I.sprite = itemDatabase.Find(q => q.id == itemId).icon;
@@ -256,8 +257,8 @@ public void OnQuestButtonClicked(int itemId, Image previewImages, TextMeshProUGU
         {
             ItemRapidMenu.Instance.Slot5_T.text = itemDatabase.Find(q => q.id == itemId).value.ToString();
             ItemRapidMenu.Instance.Slot5_I.sprite = itemDatabase.Find(q => q.id == itemId).icon;
-            ItemRapidMenu.Instance.Slot5 = itemDatabase.Find(q => q.id == itemId).id;
-            UpdateMenuRapido.Instance.Slot5 = itemDatabase.Find(q => q.id == itemId).id;
+            ItemRapidMenu.Instance.Slot5 = selectedId;
+            UpdateMenuRapido.Instance.Slot5 = selectedId;
             UpdateMenuRapido.Instance.Slot5_T.text = itemDatabase.Find(q => q.id == itemId).value.ToString();
             UpdateMenuRapido.Instance.Slot5 = itemDatabase.Find(q => q.id == itemId).value;
             UpdateMenuRapido.Instance.Slot5_I.sprite = itemDatabase.Find(q => q.id == itemId).icon;
@@ -266,8 +267,8 @@ public void OnQuestButtonClicked(int itemId, Image previewImages, TextMeshProUGU
         {
             ItemRapidMenu.Instance.Slot6_T.text = itemDatabase.Find(q => q.id == itemId).value.ToString();
             ItemRapidMenu.Instance.Slot6_I.sprite = itemDatabase.Find(q => q.id == itemId).icon;
-            ItemRapidMenu.Instance.Slot6 = itemDatabase.Find(q => q.id == itemId).id;
-           UpdateMenuRapido.Instance.Slot6 = itemDatabase.Find(q => q.id == itemId).id;
+            ItemRapidMenu.Instance.Slot6 = selectedId;
+           UpdateMenuRapido.Instance.Slot6 = selectedId;
             UpdateMenuRapido.Instance.Slot6_T.text = itemDatabase.Find(q => q.id == itemId).value.ToString();
             UpdateMenuRapido.Instance.Slot6 = itemDatabase.Find(q => q.id == itemId).value;
             UpdateMenuRapido.Instance.Slot6_I.sprite = itemDatabase.Find(q => q.id == itemId).icon;
@@ -276,8 +277,8 @@ public void OnQuestButtonClicked(int itemId, Image previewImages, TextMeshProUGU
         {
             ItemRapidMenu.Instance.Slot7_T.text = itemDatabase.Find(q => q.id == itemId).value.ToString();
             ItemRapidMenu.Instance.Slot7_I.sprite = itemDatabase.Find(q => q.id == itemId).icon;
-            ItemRapidMenu.Instance.Slot7 = itemDatabase.Find(q => q.id == itemId).id;
-            UpdateMenuRapido.Instance.Slot7 = itemDatabase.Find(q => q.id == itemId).id;
+            ItemRapidMenu.Instance.Slot7 = selectedId;
+            UpdateMenuRapido.Instance.Slot7 = selectedId;
             UpdateMenuRapido.Instance.Slot7_T.text = itemDatabase.Find(q => q.id == itemId).value.ToString();
             UpdateMenuRapido.Instance.Slot7 = itemDatabase.Find(q => q.id == itemId).value;
             UpdateMenuRapido.Instance.Slot7_I.sprite = itemDatabase.Find(q => q.id == itemId).icon;
@@ -286,8 +287,8 @@ public void OnQuestButtonClicked(int itemId, Image previewImages, TextMeshProUGU
         {
             ItemRapidMenu.Instance.Slot8_T.text = itemDatabase.Find(q => q.id == itemId).value.ToString();
             ItemRapidMenu.Instance.Slot8_I.sprite = itemDatabase.Find(q => q.id == itemId).icon;
-            ItemRapidMenu.Instance.Slot8 = itemDatabase.Find(q => q.id == itemId).id;
-            UpdateMenuRapido.Instance.Slot8 = itemDatabase.Find(q => q.id == itemId).id;
+            ItemRapidMenu.Instance.Slot8 = selectedId;
+            UpdateMenuRapido.Instance.Slot8 = selectedId;
             UpdateMenuRapido.Instance.Slot8_T.text = itemDatabase.Find(q => q.id == itemId).value.ToString();
             UpdateMenuRapido.Instance.Slot8 = itemDatabase.Find(q => q.id == itemId).value;
             UpdateMenuRapido.Instance.Slot8_I.sprite = itemDatabase.Find(q => q.id == itemId).icon;
