@@ -14,17 +14,18 @@ public class Pickup : MonoBehaviour
     //Animatore
     bool wasCollected = false;
     private Rigidbody2D rb; // componente Rigidbody2D del personaggio
+    [SerializeField] float lifeTime = 20f;
 
     [SerializeField]  GameObject light;
     //Bool per evitare che la moneta sia raccolta più volte
-    [SerializeField] public bool isHeal;
+    //[SerializeField] public bool isHeal;
 
 
 void Start()
 {
     myAnimator = GetComponent<Animator>();
     //Recupera i componenti dell'animator
-    
+ Invoke("Destroy", lifeTime);
 
 }
 
@@ -33,7 +34,7 @@ void Start()
     {
 
         #region CollCoin
-        if (other.gameObject.tag == "Player" && !wasCollected && !isHeal)
+        if (other.gameObject.tag == "Player" && !wasCollected)
         //Se il player tocca la moneta e non è stato collezionata
         {
             wasCollected = true;
@@ -58,7 +59,10 @@ void Start()
         
        
     }
-
+ private void Destroy()
+    {
+        Destroy(gameObject);
+    }
 #region Funzione per cancellare l'item
     void takeCoin()
     {

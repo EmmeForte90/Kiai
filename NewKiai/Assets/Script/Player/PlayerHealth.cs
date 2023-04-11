@@ -22,11 +22,7 @@ public class PlayerHealth : MonoBehaviour
     public bool Restore = false; 
     public float timerestore = 2f; // il massimo valore di essenza disponibile
     public float timeStart; // il massimo valore di essenza disponibile
-
-
-    
-   
-   
+ 
 public static PlayerHealth Instance;
 
 

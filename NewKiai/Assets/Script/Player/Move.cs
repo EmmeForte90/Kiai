@@ -1314,13 +1314,13 @@ public void AnimationHeal()
 {
     if (currentAnimationName != HealAnimationName)
                 {
-                    _spineAnimationState.SetAnimation(2, HealAnimationName, true);
+                    _spineAnimationState.SetAnimation(2, HealAnimationName, false);
                     currentAnimationName = HealAnimationName;
                          _spineAnimationState.Event += HandleEvent;
                    // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
                 // Add event listener for when the animation completes
-                //_spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 
 public void wallJump()

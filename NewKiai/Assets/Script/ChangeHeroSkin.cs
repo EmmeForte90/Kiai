@@ -18,8 +18,8 @@ public class ChangeHeroSkin : MonoBehaviour
 	Skin characterSkin;
 
 	// for repacking the skin to a new atlas texture
-	public Material runtimeMaterial;
-	public Texture2D runtimeAtlas;
+	private Material runtimeMaterial;
+	private Texture2D runtimeAtlas;
 
 // Equipment skins
 public enum ItemSlot
@@ -42,7 +42,7 @@ public enum ItemSlot
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Y))
         {
 			UpdateCharacterSkin();
 			UpdateCombinedSkin();

@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26a482ca21a5d0045b94c1e14ae8f460, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 15
   Explode: {fileID: 4331965279904828745, guid: 1b79c7dad815f1544b564d01f2920de0, type: 3}
   damage: 50
   rotationSpeed: 2500
@@ -286,7 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26a482ca21a5d0045b94c1e14ae8f460, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 5
   Explode: {fileID: 4331965279904828745, guid: 1b79c7dad815f1544b564d01f2920de0, type: 3}
   damage: 50
   rotationSpeed: 2500
