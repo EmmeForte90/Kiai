@@ -60,11 +60,9 @@ public class Move : MonoBehaviour
     
     float coyoteCounter = 0f;
 
-    //COYOTE TIME: can jump for a short time after leave ground
     [SerializeField] private float coyoteTime;
     private float lastTimeGround;
     
-    //JUMP DELAY: avoid jump only when touch ground
     [SerializeField] private float jumpDelay;
     private float lastTimeJump;
 
@@ -77,7 +75,6 @@ public class Move : MonoBehaviour
    
     [HideInInspector] public bool slotR,slotL,slotU,slotB = false;
     [Header("Respawn")]
-    //[HideInInspector]
     private Transform respawnPoint; // il punto di respawn del giocatore
     public string sceneName; // il nome della scena in cui si trova il punto di respawn
 
@@ -233,8 +230,10 @@ private int comboCount = 0;
     //[SerializeField] public float shootTimer = 2f; // tempo per completare una combo
     [SerializeField] private GameObject bullet;
     [HideInInspector] public int style = 0;
+    [HideInInspector] public int item = 0;
     // Dichiarazione delle variabili
     private int MaxStyle;
+    private int MaxItem;
     private int currentTime;
     private int timeLimit = 3; // Tempo massimo per caricare l'attacco
     private int maxDamage = 50; // Danno massimo dell'attacco caricato
@@ -331,6 +330,7 @@ if(!stopInput)
         L2 = Input.GetAxis("L2");
         R2 = Input.GetAxis("R2");
         style = MaxStyle;
+        item = MaxItem;
         }
         }
         if (isGrounded())
@@ -446,28 +446,35 @@ if (Input.GetButtonDown("Jump"))
 if (Input.GetButtonDown("Fire2") || L2 == 1 && isBlast && Time.time >= ShotTimer)
 {
     //Se non hai finito gli utilizzi
-/*    if(UpdateMenuRapido.Instance.Vbottom > 0 ||
-    UpdateMenuRapido.Instance.Vup > 0 ||
-    UpdateMenuRapido.Instance.Vleft > 0 ||
-    UpdateMenuRapido.Instance.Vright > 0)
+   if(
+    ItemRapidMenu.Instance.MXV1 > 0 ||
+    ItemRapidMenu.Instance.MXV2 > 0 ||
+    ItemRapidMenu.Instance.MXV3 > 0 ||
+    ItemRapidMenu.Instance.MXV4 > 0 ||
+    ItemRapidMenu.Instance.MXV5 > 0)
     {
         //Se lo slot non è vuoto
-    if(UpdateMenuRapido.Instance.idup > 0 || 
-    UpdateMenuRapido.Instance.idright > 0 || 
-    UpdateMenuRapido.Instance.idleft > 0 || 
-    UpdateMenuRapido.Instance.idbottom > 0 )
+    if(
+    ItemRapidMenu.Instance.Slot1 > 0 || 
+    ItemRapidMenu.Instance.Slot2 > 0 || 
+    ItemRapidMenu.Instance.Slot3 > 0 || 
+    ItemRapidMenu.Instance.Slot4 > 0 ||
+    ItemRapidMenu.Instance.Slot5 > 0  
+     )
        
     //L Animazione è gestita dagli script dei bullets visto che cambia a seconda del bullet
     Blast();
     isBlast = false;
     ShotTimer = Time.time + 1f / attackRate;
-    } else if(UpdateMenuRapido.Instance.Vbottom == 0 ||
-    UpdateMenuRapido.Instance.Vup == 0 ||
-    UpdateMenuRapido.Instance.Vleft == 0 ||
-    UpdateMenuRapido.Instance.Vright == 0)
+    } else if(
+    ItemRapidMenu.Instance.MXV1 == 0 ||
+    ItemRapidMenu.Instance.MXV2 == 0 ||
+    ItemRapidMenu.Instance.MXV3 == 0 ||
+    ItemRapidMenu.Instance.MXV4 == 0 ||
+    ItemRapidMenu.Instance.MXV5 == 0 )
     {
         
-    }*/
+    }
     
 }
 // ripristina la possibilità di attaccare dopo il tempo di attacco
@@ -481,7 +488,8 @@ if (!isBlast && Time.time >= ShotTimer)
 if (Input.GetButtonDown("R1"))
 {
 //print("Hai premuto R1");
-if(GameplayManager.instance.styleIcon[1] ||
+if(
+GameplayManager.instance.styleIcon[1] ||
 GameplayManager.instance.styleIcon[2] ||
 GameplayManager.instance.styleIcon[3] ||
 GameplayManager.instance.styleIcon[4] ||
@@ -496,7 +504,8 @@ changeStyle();
 if (Input.GetButtonDown("L1"))
 {
 //print("Hai premuto L1");
-if(GameplayManager.instance.styleIcon[1] ||
+if(
+GameplayManager.instance.styleIcon[1] ||
 GameplayManager.instance.styleIcon[2] ||
 GameplayManager.instance.styleIcon[3] ||
 GameplayManager.instance.styleIcon[4] ||
@@ -538,12 +547,12 @@ if (Input.GetButtonUp("Heal"))
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Scelta della skill dal menu rapido
-/*if (Input.GetButtonDown("SlotUp") || DpadY == 1)
+if (Input.GetButtonDown("SlotUp") || DpadY == 1)
 {
-    if (UpdateMenuRapido.Instance.idup > 0)
+    if (UpdateMenuRapido.Instance.Slot1 > 0)
 {
    UpdateMenuRapido.Instance.Selup();
-    PlayerWeaponManager.instance.SetWeapon(SkillMenu.Instance.idup);
+//    PlayerWeaponManager.instance.SetWeapon(SkillMenu.Instance.idup);
 
     slotU = true;
     slotB = false;
@@ -553,11 +562,11 @@ if (Input.GetButtonUp("Heal"))
 }
 else if (Input.GetButtonDown("SlotRight") || DpadX == 1)
 {
-    if (UpdateMenuRapido.Instance.idright > 0)
+    if (UpdateMenuRapido.Instance.Slot2 > 0)
 {
       UpdateMenuRapido.Instance.Selright();
       //SkillMenu.Instance.AssignId();
-        PlayerWeaponManager.instance.SetWeapon(SkillMenu.Instance.idright);
+      //  PlayerWeaponManager.instance.SetWeapon(SkillMenu.Instance.idright);
     slotU = false;
     slotB = false;
     slotL = false;
@@ -566,10 +575,10 @@ else if (Input.GetButtonDown("SlotRight") || DpadX == 1)
 }
 else if (Input.GetButtonDown("SlotLeft")|| DpadX == -1)
 {
-    if (UpdateMenuRapido.Instance.idleft > 0)
+    if (UpdateMenuRapido.Instance.Slot3 > 0)
 {
       UpdateMenuRapido.Instance.Selleft();
-    PlayerWeaponManager.instance.SetWeapon(SkillMenu.Instance.idleft);
+    //PlayerWeaponManager.instance.SetWeapon(ItemRapidMenu.Instance.selectedId);
     slotU = false;
     slotB = false;
     slotL = true;
@@ -578,17 +587,17 @@ else if (Input.GetButtonDown("SlotLeft")|| DpadX == -1)
 }
 else if (Input.GetButtonDown("SlotBottom")|| DpadY == -1)
 {
-    if (UpdateMenuRapido.Instance.idbottom > 0)
+    if (UpdateMenuRapido.Instance.Slot4 > 0)
     {
       UpdateMenuRapido.Instance.Selbottom();
-    PlayerWeaponManager.instance.SetWeapon(SkillMenu.Instance.idbottom);
+    //PlayerWeaponManager.instance.SetWeapon(ItemRapidMenu.Instance.selectedId);
     slotU = false;
     slotB = true;
     slotL = false;
     slotR = false;
     }
 }
-*/
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 
 if (Input.GetButtonDown("Fire1") && !isAttacking && !isAttackingAir && !NotStrangeAnimationTalk && !isCharging) 
@@ -911,7 +920,94 @@ public void changeStyle()
         }        
     }
 }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+public void changeItem()
+{
 
+switch (MaxItem) {
+        case 0:
+        InventoryManager.Instance.SlotTot[0].transform.position = InventoryManager.Instance.SlotTot[0].transform.position;
+        InventoryManager.Instance.SlotTot[1].transform.position = InventoryManager.Instance.SlotTot[1].transform.position;
+        InventoryManager.Instance.SlotTot[2].transform.position = InventoryManager.Instance.SlotTot[2].transform.position;
+        InventoryManager.Instance.SlotTot[3].transform.position = InventoryManager.Instance.SlotTot[3].transform.position;
+        InventoryManager.Instance.SlotTot[4].transform.position = InventoryManager.Instance.SlotTot[4].transform.position;
+        InventoryManager.Instance.SlotTot[5].transform.position = InventoryManager.Instance.SlotTot[5].transform.position;
+        InventoryManager.Instance.SlotTot[0].transform.localScale = new Vector3(2,2,2);
+        break;
+
+        case 1:
+        InventoryManager.Instance.SlotTot[0].transform.position = InventoryManager.Instance.SlotTot[1].transform.position;
+        InventoryManager.Instance.SlotTot[1].transform.position = InventoryManager.Instance.SlotTot[0].transform.position;
+        InventoryManager.Instance.SlotTot[2].transform.position = InventoryManager.Instance.SlotTot[2].transform.position;
+        InventoryManager.Instance.SlotTot[3].transform.position = InventoryManager.Instance.SlotTot[3].transform.position;
+        InventoryManager.Instance.SlotTot[4].transform.position = InventoryManager.Instance.SlotTot[4].transform.position;
+        InventoryManager.Instance.SlotTot[5].transform.position = InventoryManager.Instance.SlotTot[5].transform.position;
+        InventoryManager.Instance.SlotTot[1].transform.localScale = new Vector3(2,2,2);
+        break;
+
+        case 2:
+        InventoryManager.Instance.SlotTot[0].transform.position = InventoryManager.Instance.SlotTot[2].transform.position;
+        InventoryManager.Instance.SlotTot[1].transform.position = InventoryManager.Instance.SlotTot[1].transform.position;
+        InventoryManager.Instance.SlotTot[2].transform.position = InventoryManager.Instance.SlotTot[0].transform.position;
+        InventoryManager.Instance.SlotTot[3].transform.position = InventoryManager.Instance.SlotTot[3].transform.position;
+        InventoryManager.Instance.SlotTot[4].transform.position = InventoryManager.Instance.SlotTot[4].transform.position;
+        InventoryManager.Instance.SlotTot[5].transform.position = InventoryManager.Instance.SlotTot[5].transform.position;
+        InventoryManager.Instance.SlotTot[2].transform.localScale = new Vector3(2,2,2);
+        break;
+
+        case 3:
+       InventoryManager.Instance.SlotTot[0].transform.position = InventoryManager.Instance.SlotTot[3].transform.position;
+        InventoryManager.Instance.SlotTot[1].transform.position = InventoryManager.Instance.SlotTot[1].transform.position;
+        InventoryManager.Instance.SlotTot[2].transform.position = InventoryManager.Instance.SlotTot[2].transform.position;
+        InventoryManager.Instance.SlotTot[3].transform.position = InventoryManager.Instance.SlotTot[0].transform.position;
+        InventoryManager.Instance.SlotTot[4].transform.position = InventoryManager.Instance.SlotTot[4].transform.position;
+        InventoryManager.Instance.SlotTot[5].transform.position = InventoryManager.Instance.SlotTot[5].transform.position;
+        InventoryManager.Instance.SlotTot[3].transform.localScale = new Vector3(2,2,2);
+        break; 
+        
+        case 4:
+        InventoryManager.Instance.SlotTot[0].transform.position = InventoryManager.Instance.SlotTot[4].transform.position;
+        InventoryManager.Instance.SlotTot[1].transform.position = InventoryManager.Instance.SlotTot[1].transform.position;
+        InventoryManager.Instance.SlotTot[2].transform.position = InventoryManager.Instance.SlotTot[2].transform.position;
+        InventoryManager.Instance.SlotTot[3].transform.position = InventoryManager.Instance.SlotTot[3].transform.position;
+        InventoryManager.Instance.SlotTot[4].transform.position = InventoryManager.Instance.SlotTot[0].transform.position;
+        InventoryManager.Instance.SlotTot[5].transform.position = InventoryManager.Instance.SlotTot[5].transform.position;
+        InventoryManager.Instance.SlotTot[4].transform.localScale = new Vector3(2,2,2);
+        break; 
+        
+        case 5:
+        InventoryManager.Instance.SlotTot[0].transform.position = InventoryManager.Instance.SlotTot[5].transform.position;
+        InventoryManager.Instance.SlotTot[1].transform.position = InventoryManager.Instance.SlotTot[1].transform.position;
+        InventoryManager.Instance.SlotTot[2].transform.position = InventoryManager.Instance.SlotTot[2].transform.position;
+        InventoryManager.Instance.SlotTot[3].transform.position = InventoryManager.Instance.SlotTot[3].transform.position;
+        InventoryManager.Instance.SlotTot[4].transform.position = InventoryManager.Instance.SlotTot[4].transform.position;
+        InventoryManager.Instance.SlotTot[5].transform.position = InventoryManager.Instance.SlotTot[0].transform.position;
+        InventoryManager.Instance.SlotTot[5].transform.localScale = new Vector3(2,2,2);
+        break;
+
+        case -1:
+         MaxItem = 0;
+        InventoryManager.Instance.SlotTot[0].transform.position = InventoryManager.Instance.SlotTot[0].transform.position;
+        InventoryManager.Instance.SlotTot[1].transform.position = InventoryManager.Instance.SlotTot[1].transform.position;
+        InventoryManager.Instance.SlotTot[2].transform.position = InventoryManager.Instance.SlotTot[2].transform.position;
+        InventoryManager.Instance.SlotTot[3].transform.position = InventoryManager.Instance.SlotTot[3].transform.position;
+        InventoryManager.Instance.SlotTot[4].transform.position = InventoryManager.Instance.SlotTot[4].transform.position;
+        InventoryManager.Instance.SlotTot[5].transform.position = InventoryManager.Instance.SlotTot[5].transform.position;
+        InventoryManager.Instance.SlotTot[5].transform.localScale = new Vector3(2,2,2);
+        break;
+        case >= 5:
+         MaxItem = 5;
+        InventoryManager.Instance.SlotTot[0].transform.position = InventoryManager.Instance.SlotTot[5].transform.position;
+        InventoryManager.Instance.SlotTot[1].transform.position = InventoryManager.Instance.SlotTot[1].transform.position;
+        InventoryManager.Instance.SlotTot[2].transform.position = InventoryManager.Instance.SlotTot[2].transform.position;
+        InventoryManager.Instance.SlotTot[3].transform.position = InventoryManager.Instance.SlotTot[3].transform.position;
+        InventoryManager.Instance.SlotTot[4].transform.position = InventoryManager.Instance.SlotTot[4].transform.position;
+        InventoryManager.Instance.SlotTot[5].transform.position = InventoryManager.Instance.SlotTot[0].transform.position;
+        InventoryManager.Instance.SlotTot[5].transform.localScale = new Vector3(2,2,2);
+        break;
+
+}
+}
 
 public void attackDash()
 {

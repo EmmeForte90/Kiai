@@ -30,6 +30,8 @@ public class ItemRapidMenu : MonoBehaviour
 [SerializeField] private Sprite icon19; // Define icon1 as an Image variable
 [SerializeField] private Sprite icon20; // Define icon1 as an Image variable
 [SerializeField] private Sprite icon21; // Define icon1 as an Image variable
+   
+    public float timeSelection = 0.1f; // ritardo tra la spawn di ogni moneta
 
     [HideInInspector]
     public int selectedId = -1; // Id dell'abilità selezionata  
@@ -39,6 +41,8 @@ public class ItemRapidMenu : MonoBehaviour
     public int Slot4= -1; // Id dell'abilità selezionata 
     public int Slot5= -1; // Id dell'abilità selezionata
     public int Slot6= -1; // Id dell'abilità selezionata
+    public int Slot7= -1; // Id dell'abilità selezionata
+    public int Slot8= -1; // Id dell'abilità selezionata
 
 
     public int MXV1; // Id dell'abilità selezionata
@@ -47,17 +51,22 @@ public class ItemRapidMenu : MonoBehaviour
     public int MXV4; // Id dell'abilità selezionata
     public int MXV5; // Id dell'abilità selezionata
     public int MXV6; // Id dell'abilità selezionata
+    public int MXV7; // Id dell'abilità selezionata
+    public int MXV8; // Id dell'abilità selezionata
 
     private float horDir;
     private float vertDir;
        
     [HideInInspector]
+    public bool isSlot0;
     public bool isSlot1;
     public bool isSlot2;
     public bool isSlot3;
     public bool isSlot4;
     public bool isSlot5;
     public bool isSlot6;
+    public bool isSlot7;
+    public bool isSlot8;
 
 
     [SerializeField]public TextMeshProUGUI Slot1_T;
@@ -66,7 +75,8 @@ public class ItemRapidMenu : MonoBehaviour
     [SerializeField]public TextMeshProUGUI Slot4_T;
     [SerializeField]public TextMeshProUGUI Slot5_T;
     [SerializeField]public TextMeshProUGUI Slot6_T;
-
+    [SerializeField]public TextMeshProUGUI Slot7_T;
+    [SerializeField]public TextMeshProUGUI Slot8_T;
 
     [SerializeField]public Image Slot1_I;
     [SerializeField]public Image Slot2_I;
@@ -74,6 +84,8 @@ public class ItemRapidMenu : MonoBehaviour
     [SerializeField]public Image Slot4_I;
     [SerializeField]public Image Slot5_I;
     [SerializeField]public Image Slot6_I;
+    [SerializeField]public Image Slot7_I;
+    [SerializeField]public Image Slot8_I;
 
 public static ItemRapidMenu Instance;
 
@@ -141,65 +153,120 @@ public static ItemRapidMenu Instance;
          MXV1 = selcetedItem.value;
     }
 */
+   public void Assign0()
+{    
+    isSlot0 = true;
+    isSlot1 = false;
+    isSlot2 = false;
+    isSlot3 = false;
+    isSlot4 = false;
+    isSlot5 = false;
+    isSlot6 = false;
+    isSlot7 = false;
+    isSlot8 = false;
 
+}
    public void Assign1()
-{
+{    
+    isSlot0 = false;
     isSlot1 = true;
     isSlot2 = false;
     isSlot3 = false;
     isSlot4 = false;
     isSlot5 = false;
     isSlot6 = false;
-    
+    isSlot7 = false;
+    isSlot8 = false;
 }
   
 public void Assign2()
-{
+{    
+    isSlot0 = false;
     isSlot1 = false;
     isSlot2 = true;
     isSlot3 = false;
     isSlot4 = false;
     isSlot5 = false;
     isSlot6 = false;
+    isSlot7 = false;
+    isSlot8 = false;
 }
   
 public void Assign3()
 {
-   isSlot1 = false;
+    isSlot0 = false;
+    isSlot1 = false;
     isSlot2 = false;
     isSlot3 = true;
     isSlot4 = false;
     isSlot5 = false;
     isSlot6 = false;
+    isSlot7 = false;
+    isSlot8 = false;
 }
 
  public void Assign4()
 {
+    isSlot0 = false;
     isSlot1 = false;
     isSlot2 = false;
     isSlot3 = false;
     isSlot4 = true;
     isSlot5 = false;
     isSlot6 = false;
+    isSlot7 = false;
+    isSlot8 = false;
 }
 public void Assign5()
 {
+    isSlot0 = false;
     isSlot1 = false;
     isSlot2 = false;
     isSlot3 = false;
     isSlot4 = false;
     isSlot5 = true;
     isSlot6 = false;
+    isSlot7 = false;
+    isSlot8 = false;
 }
 public void Assign6()
 {
+    isSlot0 = false;
     isSlot1 = false;
     isSlot2 = false;
     isSlot3 = false;
     isSlot4 = false;
     isSlot5 = false;
     isSlot6 = true;
+    isSlot7 = false;
+    isSlot8 = false;
 }
+public void Assign7()
+{
+    isSlot0 = false;
+    isSlot1 = false;
+    isSlot2 = false;
+    isSlot3 = false;
+    isSlot4 = false;
+    isSlot5 = false;
+    isSlot6 = false;
+    isSlot7 = true;
+    isSlot8 = false;
+}
+public void Assign8()
+{
+    isSlot0 = false;
+    isSlot1 = false;
+    isSlot2 = false;
+    isSlot3 = false;
+    isSlot4 = false;
+    isSlot5 = false;
+    isSlot6 = false;
+    isSlot7 = false;
+    isSlot8 = true;
+}
+
+
 }
 
 
