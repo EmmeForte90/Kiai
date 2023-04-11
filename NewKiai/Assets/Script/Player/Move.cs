@@ -445,6 +445,7 @@ if (Input.GetButtonDown("Jump"))
 // gestione dell'input dello sparo
 if (Input.GetButtonDown("Fire2") || L2 == 1 && isBlast && Time.time >= ShotTimer)
 {
+    //print("Spara");
     //Se non hai finito gli utilizzi
    if(
     ItemRapidMenu.Instance.MXV1 > 0 ||
@@ -551,8 +552,8 @@ if (Input.GetButtonDown("SlotUp") || DpadY == 1)
 {
     if (UpdateMenuRapido.Instance.Slot1 > 0)
 {
-   UpdateMenuRapido.Instance.Selup();
-//    PlayerWeaponManager.instance.SetWeapon(SkillMenu.Instance.idup);
+    UpdateMenuRapido.Instance.Selup();
+    //PlayerWeaponManager.instance.SetWeapon(ItemRapidMenu.Instance.selectedId);
 
     slotU = true;
     slotB = false;
@@ -562,11 +563,11 @@ if (Input.GetButtonDown("SlotUp") || DpadY == 1)
 }
 else if (Input.GetButtonDown("SlotRight") || DpadX == 1)
 {
-    if (UpdateMenuRapido.Instance.Slot2 > 0)
+    if (UpdateMenuRapido.Instance.Slot3 > 0)
 {
-      UpdateMenuRapido.Instance.Selright();
-      //SkillMenu.Instance.AssignId();
-      //  PlayerWeaponManager.instance.SetWeapon(SkillMenu.Instance.idright);
+    UpdateMenuRapido.Instance.Selright();
+    //SkillMenu.Instance.AssignId();
+    //PlayerWeaponManager.instance.SetWeapon(ItemRapidMenu.Instance.selectedId);
     slotU = false;
     slotB = false;
     slotL = false;
@@ -575,9 +576,9 @@ else if (Input.GetButtonDown("SlotRight") || DpadX == 1)
 }
 else if (Input.GetButtonDown("SlotLeft")|| DpadX == -1)
 {
-    if (UpdateMenuRapido.Instance.Slot3 > 0)
+    if (UpdateMenuRapido.Instance.Slot2 > 0)
 {
-      UpdateMenuRapido.Instance.Selleft();
+    UpdateMenuRapido.Instance.Selleft();
     //PlayerWeaponManager.instance.SetWeapon(ItemRapidMenu.Instance.selectedId);
     slotU = false;
     slotB = false;
@@ -589,7 +590,7 @@ else if (Input.GetButtonDown("SlotBottom")|| DpadY == -1)
 {
     if (UpdateMenuRapido.Instance.Slot4 > 0)
     {
-      UpdateMenuRapido.Instance.Selbottom();
+    UpdateMenuRapido.Instance.Selbottom();
     //PlayerWeaponManager.instance.SetWeapon(ItemRapidMenu.Instance.selectedId);
     slotU = false;
     slotB = true;
@@ -1328,8 +1329,62 @@ IEnumerator wak()
 void Blast()
 {
         isBlast = true;
-       // Debug.Log("il blast è partito");
-    
+        print("il blast è partito");
+        if(slotB)
+        {
+            if(UpdateMenuRapido.Instance.Slot4 > 0)
+            {
+        UpdateMenuRapido.Instance.Slot4--;
+        UpdateMenuRapido.Instance.Slot4_T.text = UpdateMenuRapido.Instance.Slot4.ToString();
+        Instantiate(bullet, gun.position, transform.rotation);
+        //Eccezioni di spawn
+        /*if(UpdateMenuRapido.Instance.idbottom == 3 || 
+        UpdateMenuRapido.Instance.idbottom == 2 || 
+        UpdateMenuRapido.Instance.idbottom == 1)
+        {
+        Instantiate(bullet, transform.position, transform.rotation);
+        }
+        else if(UpdateMenuRapido.Instance.idbottom == 15)
+        {
+        Instantiate(bullet, top.position, transform.rotation);
+        }
+        else
+        {
+        Instantiate(bullet, gun.position, transform.rotation);
+        }*/
+
+            }
+        }else if(slotU)
+        {
+            if(UpdateMenuRapido.Instance.Slot1 > 0)
+            {
+        UpdateMenuRapido.Instance.Slot1--;
+        UpdateMenuRapido.Instance.Slot1_T.text = UpdateMenuRapido.Instance.Slot1.ToString();
+        Instantiate(bullet, gun.position, transform.rotation);
+
+        //Eccezioni di spawn
+     
+        }
+        }else if(slotL)
+        {
+            if(UpdateMenuRapido.Instance.Slot2 > 0)
+            {
+        UpdateMenuRapido.Instance.Slot2--;
+        UpdateMenuRapido.Instance.Slot2_T.text = UpdateMenuRapido.Instance.Slot2.ToString();
+        Instantiate(bullet, gun.position, transform.rotation);
+
+        //Eccezioni di spawn          
+        }
+        }else if(slotR)
+        {
+            if(UpdateMenuRapido.Instance.Slot3 > 0)
+            {
+        UpdateMenuRapido.Instance.Slot3--;
+        UpdateMenuRapido.Instance.Slot3_T.text = UpdateMenuRapido.Instance.Slot3.ToString();
+        Instantiate(bullet, gun.position, transform.rotation);
+        //Eccezioni di spawn           
+        }
+        }
         
 }
 

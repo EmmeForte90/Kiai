@@ -168,6 +168,7 @@ public static ItemRapidMenu Instance;
 }
    public void Assign1()
 {    
+    
     isSlot0 = false;
     isSlot1 = true;
     isSlot2 = false;
