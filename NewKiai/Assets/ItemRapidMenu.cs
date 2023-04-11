@@ -50,6 +50,14 @@ public class ItemRapidMenu : MonoBehaviour
 
     private float horDir;
     private float vertDir;
+       
+    [HideInInspector]
+    public bool isSlot1;
+    public bool isSlot2;
+    public bool isSlot3;
+    public bool isSlot4;
+    public bool isSlot5;
+    public bool isSlot6;
 
 
     [SerializeField]public TextMeshProUGUI Slot1_T;
@@ -116,10 +124,8 @@ public static ItemRapidMenu Instance;
     {
         selectedId = id; // Assegna l'id dell'abilità selezionata
     }
-
-   public void Assign1()
-{
-    // Recupera la skill corrispondente all'id selezionato
+/*
+// Recupera la skill corrispondente all'id selezionato
     Item selcetedItem = itemMap[selectedId];
     //PlayerWeaponManager.instance.SetWeapon(selectedId);
 
@@ -134,95 +140,65 @@ public static ItemRapidMenu Instance;
          UpdateMenuRapido.Instance.Slot1_I.sprite = selcetedItem.icon;
          MXV1 = selcetedItem.value;
     }
-}
-  public void Assign2()
-{
-    // Recupera la skill corrispondente all'id selezionato
-    Item selcetedItem = itemMap[selectedId];
-    //PlayerWeaponManager.instance.SetWeapon(selectedId);
+*/
 
-    if (selectedId > 0)
-    {
-        Slot2_T.text = selcetedItem.value.ToString();
-        Slot2_I.sprite = selcetedItem.icon;
-        Slot2 = selectedId;
-        UpdateMenuRapido.Instance.Slot2 = selectedId;
-        UpdateMenuRapido.Instance.Slot2_T.text = selcetedItem.value.ToString();
-        UpdateMenuRapido.Instance.Slot2 = selcetedItem.value;
-        UpdateMenuRapido.Instance.Slot2_I.sprite = selcetedItem.icon;
-        MXV2 = selcetedItem.value;   
-    }
-}  
+   public void Assign1()
+{
+    isSlot1 = true;
+    isSlot2 = false;
+    isSlot3 = false;
+    isSlot4 = false;
+    isSlot5 = false;
+    isSlot6 = false;
+    
+}
+  
+public void Assign2()
+{
+    isSlot1 = false;
+    isSlot2 = true;
+    isSlot3 = false;
+    isSlot4 = false;
+    isSlot5 = false;
+    isSlot6 = false;
+}
+  
 public void Assign3()
 {
-    // Recupera la skill corrispondente all'id selezionato
-    Item selcetedItem = itemMap[selectedId];
-    //PlayerWeaponManager.instance.SetWeapon(selectedId);
+   isSlot1 = false;
+    isSlot2 = false;
+    isSlot3 = true;
+    isSlot4 = false;
+    isSlot5 = false;
+    isSlot6 = false;
+}
 
-    if (selectedId > 0)
-    {
-        Slot3_T.text = selcetedItem.value.ToString();
-        Slot3_I.sprite = selcetedItem.icon;
-        Slot3 = selectedId;
-        UpdateMenuRapido.Instance.Slot3 = selectedId;
-        UpdateMenuRapido.Instance.Slot3_T.text = selcetedItem.value.ToString();
-        UpdateMenuRapido.Instance.Slot3 = selcetedItem.value;
-        UpdateMenuRapido.Instance.Slot3_I.sprite = selcetedItem.icon;
-        MXV3 = selcetedItem.value;
-    }
-}  public void Assign4()
+ public void Assign4()
 {
-    // Recupera la skill corrispondente all'id selezionato
-    Item selcetedItem = itemMap[selectedId];
-   // PlayerWeaponManager.instance.SetWeapon(selectedId);
-
-    if (selectedId > 0)
-    {
-        Slot4_T.text = selcetedItem.value.ToString();
-        Slot4_I.sprite = selcetedItem.icon;
-        Slot4 = selectedId;
-        UpdateMenuRapido.Instance.Slot4 = selectedId;
-        UpdateMenuRapido.Instance.Slot4_T.text = selcetedItem.value.ToString();
-        UpdateMenuRapido.Instance.Slot4 = selcetedItem.value;
-        UpdateMenuRapido.Instance.Slot4_I.sprite = selcetedItem.icon;
-        MXV4 = selcetedItem.value;
-    }
+    isSlot1 = false;
+    isSlot2 = false;
+    isSlot3 = false;
+    isSlot4 = true;
+    isSlot5 = false;
+    isSlot6 = false;
 }
 public void Assign5()
 {
-    // Recupera la skill corrispondente all'id selezionato
-    Item selcetedItem = itemMap[selectedId];
-   // PlayerWeaponManager.instance.SetWeapon(selectedId);
-
-    if (selectedId > 0)
-    {
-        Slot5_T.text = selcetedItem.value.ToString();
-        Slot5_I.sprite = selcetedItem.icon;
-        Slot5 = selectedId;
-        UpdateMenuRapido.Instance.Slot5 = selectedId;
-        UpdateMenuRapido.Instance.Slot5_T.text = selcetedItem.value.ToString();
-        UpdateMenuRapido.Instance.Slot5 = selcetedItem.value;
-        UpdateMenuRapido.Instance.Slot5_I.sprite = selcetedItem.icon;
-        MXV5 = selcetedItem.value;
-    }
+    isSlot1 = false;
+    isSlot2 = false;
+    isSlot3 = false;
+    isSlot4 = false;
+    isSlot5 = true;
+    isSlot6 = false;
 }
 public void Assign6()
 {
-    // Recupera la skill corrispondente all'id selezionato
-    Item selcetedItem = itemMap[selectedId];
-   // PlayerWeaponManager.instance.SetWeapon(selectedId);
-
-    if (selectedId > 0)
-    {
-        Slot6_T.text = selcetedItem.value.ToString();
-        Slot6_I.sprite = selcetedItem.icon;
-        Slot6 = selectedId;
-        UpdateMenuRapido.Instance.Slot6 = selectedId;
-        UpdateMenuRapido.Instance.Slot6_T.text = selcetedItem.value.ToString();
-        UpdateMenuRapido.Instance.Slot6 = selcetedItem.value;
-        UpdateMenuRapido.Instance.Slot6_I.sprite = selcetedItem.icon;
-        MXV6 = selcetedItem.value;
-    }
+    isSlot1 = false;
+    isSlot2 = false;
+    isSlot3 = false;
+    isSlot4 = false;
+    isSlot5 = false;
+    isSlot6 = true;
 }
 }
 

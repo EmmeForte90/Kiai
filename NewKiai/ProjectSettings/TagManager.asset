@@ -15,6 +15,7 @@ TagManager:
   - Hitbox
   - Hitbox_E
   - Item
+  - Ch_Quest
   layers:
   - Default
   - TransparentFX
