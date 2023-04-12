@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Cinemachine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
+using UnityEngine.UI;
+using Cinemachine;
 using TMPro;
 using Spine.Unity.AttachmentTools;
 using Spine.Unity;
 using Spine;
-using UnityEngine.Audio;
-using UnityEngine.UI;
+
 
 public class GameplayManager : MonoBehaviour
 {
@@ -43,6 +44,7 @@ public class GameplayManager : MonoBehaviour
 
     [Header("Style")]
     [SerializeField] public GameObject[] StyleS;
+    [SerializeField] public GameObject[] StyleM;
     [SerializeField] public GameObject Selector;
     [SerializeField] public bool[] styleIcon;
     
@@ -56,8 +58,10 @@ public class GameplayManager : MonoBehaviour
     [Header("Pause")]
     [SerializeField] public GameObject PauseMenu;
     private GameObject Scenary;
+    public AudioMixer MSX;
+    public AudioMixer SFX;
+    public float dialogueDuration; // variable to set the duration of the dialogue
 
-    
     [Header("Difficoltà del gioco")]
     public bool Easy = false;
     public bool Normal = true;
@@ -69,7 +73,12 @@ public class GameplayManager : MonoBehaviour
     public bool unlockWalljump = false;
     public bool unlockDoubleJump = false;
     public bool unlockDash = false;
-    public bool unlockCrash = false;
+    public bool unlockRampino = false;
+   [SerializeField] public GameObject Walljump;   
+   [SerializeField] public GameObject DoubleJump;   
+   [SerializeField] public GameObject Dash;
+   [SerializeField] public GameObject Rampino;
+
     public bool startGame = false;
 
 
@@ -126,9 +135,14 @@ public class GameplayManager : MonoBehaviour
         }else
         {
         unlockWalljump = false;   
+        Walljump.gameObject.SetActive(false);
         unlockDoubleJump = false; 
-        unlockDash = false;  
-        unlockCrash = false; 
+        DoubleJump.gameObject.SetActive(false);
+        unlockDash = false;
+        Dash.gameObject.SetActive(false);  
+        unlockRampino = false; 
+        Rampino.gameObject.SetActive(false);  
+
         }
 
 
@@ -144,9 +158,23 @@ public class GameplayManager : MonoBehaviour
         //Il testo assume il valore dello money
     }
 
+public void Update()
+{
+       if(unlockWalljump) 
+       { Walljump.gameObject.SetActive(true);}
+        if(unlockDoubleJump) 
+       { DoubleJump.gameObject.SetActive(true);}
+        if(unlockDash) 
+       { Dash.gameObject.SetActive(true);}
+        if(unlockRampino) 
+       { Rampino.gameObject.SetActive(true);}
+}
+
+
 public void StyleActivated(int id)
 {
     StyleS[id].SetActive(true);
+    StyleM[id].SetActive(true);
     styleIcon[id] = true;   
 }
 
@@ -234,6 +262,24 @@ public void EnemyDefeat()
     {
            EnemyDefeated++;
     }
+
+ public void SetSFX(float volume)
+    {
+        SFX.SetFloat("Volume", volume);
+
+    }
+
+    public void SetVolume(float volume)
+    {
+        MSX.SetFloat("Volume", volume);
+
+    }
+public void SetDSpeed(float volume)
+    {
+       dialogueDuration = volume;
+
+    }
+
 
 
 public void Restore()

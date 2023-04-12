@@ -7,7 +7,7 @@ public class unlockSkill : MonoBehaviour
     public bool Isdoublejump = false;
     public bool IsDash = false;
     public bool Iswalljump = false;
-    public bool IsCrash = false;
+    public bool IsRampino = false;
     [SerializeField] GameObject VFX;
 
 
@@ -21,8 +21,8 @@ public class unlockSkill : MonoBehaviour
         }
         else if(Iswalljump)
         {GameplayManager.instance.unlockWalljump = true;
-        }else if(IsCrash)
-        {GameplayManager.instance.unlockCrash = true;
+        }else if(IsRampino)
+        {GameplayManager.instance.unlockRampino = true;
         }
         Destroy(gameObject);
     }
