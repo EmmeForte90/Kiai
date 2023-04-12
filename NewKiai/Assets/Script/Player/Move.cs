@@ -114,6 +114,7 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField] private string respawnAnimationName;
     ///////////////////////////////////////////////////////////////////////////
         [Header("NormalStyle")]
+    public GameObject S_Normal;
     [SerializeField] GameObject attack;
     [SerializeField] GameObject attack_h;
     [SerializeField] GameObject attack_h2;
@@ -123,19 +124,19 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField] private string attackNormal2AnimationName;
     [SpineAnimation][SerializeField] private string attackNormal3AnimationName;
         [Header("Fire")]
+    public GameObject S_Fire;
     [SpineAnimation][SerializeField] private string fireposAnimationName;
     [SerializeField] GameObject attack_f_v;
     [SerializeField] GameObject attack_f_h;
     [SerializeField] GameObject attack_f_h2;
-   // [SerializeField] GameObject attack_f_l;
-   // [SerializeField] GameObject attack_f_b;
-   // [SerializeField] GameObject attack_f_a;
+   
     [SerializeField] GameObject attack_f_air_bottom;
     [SerializeField] GameObject attack_f_air_up;
     [SpineAnimation][SerializeField] private string attackFire1AnimationName;
     [SpineAnimation][SerializeField] private string attackFire2AnimationName;
     [SpineAnimation][SerializeField] private string attackFire3AnimationName;
         [Header("Water")]
+    public GameObject S_Water;
     [SpineAnimation][SerializeField] private string waterposAnimationName;
     [SerializeField] GameObject attack_w_v;
     [SerializeField] GameObject attack_w_h;
@@ -146,13 +147,12 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField] private string attackWater3AnimationName;
     [SpineAnimation][SerializeField] private string WaterjumpAnimationName;
         [Header("Rock")]
+    public GameObject S_Rock;
     [SpineAnimation][SerializeField] private string rockposAnimationName;
     [SerializeField] GameObject attack_r_v;
     [SerializeField] GameObject attack_r_h;
     [SerializeField] GameObject attack_r_h2;
-  //  [SerializeField] GameObject attack_r_l;
-   // [SerializeField] GameObject attack_r_b;
-   // [SerializeField] GameObject attack_r_a;
+  
     [SerializeField] GameObject attack_r_air_bottom;
     [SerializeField] GameObject attack_r_air_up;
     [SerializeField] GameObject pesante;
@@ -163,13 +163,12 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField] private string attackRock2AnimationName;
     [SpineAnimation][SerializeField] private string attackRock3AnimationName;
         [Header("Wind")]
+    public GameObject S_Wind;
     [SpineAnimation][SerializeField] private string windposAnimationName;
     [SerializeField] GameObject attack_v_v;
     [SerializeField] GameObject attack_v_h;
     [SerializeField] GameObject attack_v_h2;
-    //[SerializeField] GameObject attack_v_l;
-   // [SerializeField] GameObject attack_v_b;
-    //[SerializeField] GameObject attack_v_a;
+    
     [SerializeField] GameObject attack_v_air_bottom;
     [SerializeField] GameObject attack_v_air_up;
     [SpineAnimation][SerializeField] private string attackWind1AnimationName;
@@ -178,13 +177,12 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField] private string attackWind4AnimationName;
 
         [Header("Void")]
+    public GameObject S_Void;
     [SpineAnimation][SerializeField] private string voidposAnimationName;
     [SerializeField] GameObject attack_m_v;
     [SerializeField] GameObject attack_m_h;
     [SerializeField] GameObject attack_m_h2;
-   // [SerializeField] GameObject attack_m_l;
-    //[SerializeField] GameObject attack_m_b;
-   // [SerializeField] GameObject attack_m_a;
+  
     [SerializeField] GameObject attack_m_air_bottom;
     [SerializeField] GameObject attack_m_air_up;
     [SpineAnimation][SerializeField] private string attackVoid1AnimationName;
@@ -1600,6 +1598,7 @@ public void NormalPose()
 {
     if (currentAnimationName != idleAnimationName)
                 {
+                Instantiate(S_Normal, top.transform.position, S_Normal.transform.rotation);
                     _spineAnimationState.SetAnimation(2, idleAnimationName, true);
                     currentAnimationName = idleAnimationName;
                    // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
@@ -1611,6 +1610,7 @@ public void FirePose()
 {
     if (currentAnimationName != fireposAnimationName)
                 {
+                    Instantiate(S_Fire, top.transform.position, S_Fire.transform.rotation);
                     _spineAnimationState.SetAnimation(2, fireposAnimationName, true);
                     currentAnimationName = fireposAnimationName;
                    // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
@@ -1622,6 +1622,7 @@ public void RockPose()
 {
     if (currentAnimationName != rockposAnimationName)
                 {
+                    Instantiate(S_Rock, top.transform.position, S_Rock.transform.rotation);
                     _spineAnimationState.SetAnimation(2, rockposAnimationName, true);
                     currentAnimationName = rockposAnimationName;
                    // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
@@ -1632,6 +1633,7 @@ public void RockPose()
 {
     if (currentAnimationName != waterposAnimationName)
                 {
+                    Instantiate(S_Water, top.transform.position, S_Water.transform.rotation);
                     _spineAnimationState.SetAnimation(2, waterposAnimationName, true);
                     currentAnimationName = waterposAnimationName;
                    // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
@@ -1643,6 +1645,7 @@ public void VoidPose()
 {
     if (currentAnimationName != voidposAnimationName)
                 {
+                    Instantiate(S_Void, top.transform.position, S_Void.transform.rotation);
                     _spineAnimationState.SetAnimation(2, voidposAnimationName, true);
                     currentAnimationName = voidposAnimationName;
                    // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
@@ -1654,6 +1657,7 @@ public void WindPose()
 {
     if (currentAnimationName != windposAnimationName)
                 {
+                    Instantiate(S_Wind, top.transform.position, S_Wind.transform.rotation);
                     _spineAnimationState.SetAnimation(2, windposAnimationName, true);
                     currentAnimationName = windposAnimationName;
                    // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
