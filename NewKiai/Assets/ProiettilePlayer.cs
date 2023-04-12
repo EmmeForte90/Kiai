@@ -80,6 +80,7 @@ Debug.Log("AudioMixer aggiunto correttamente agli AudioSource.");
     {
         if (other.gameObject.tag == "Enemy")
         {  
+            
             Instantiate(Explode, transform.position, transform.rotation);
             IDamegable hit = other.GetComponent<IDamegable>();
             hit.Damage(damage);

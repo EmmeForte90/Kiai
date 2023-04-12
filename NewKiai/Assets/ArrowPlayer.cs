@@ -17,6 +17,8 @@ public class ArrowPlayer : MonoBehaviour
     [SerializeField] float lifeTime = 1f;
     private GameObject target;
     public Rigidbody2D rb;
+    public SpriteRenderer sprite;
+
 
       [Header("Audio")]
     [SerializeField] public AudioClip[] list; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
@@ -60,17 +62,18 @@ public class ArrowPlayer : MonoBehaviour
 
     void FlipSprite()
     {
-        bool bulletHorSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
-        //se il player si sta muovendo le sue coordinate x sono maggiori di quelle e
-        //di un valore inferiore a 0
-
+       bool bulletHorSpeed = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
+//se il player si sta muovendo le sue coordinate x sono maggiori di quelle e
+//di un valore inferiore a 0
         if (bulletHorSpeed) //Se il player si sta muovendo
-        {
-            transform.localScale = new Vector2 (Mathf.Sign(rb.velocity.x), 1f);
-            //La scala assume un nuovo vettore e il rigidbody sull'asse x 
-            //viene modificato mentre quello sull'asse y no. 
-        }
-        
+{
+    transform.localScale = new Vector2 (Mathf.Sign(rb.velocity.x), 1f);
+    //La scala assume un nuovo vettore e il rigidbody sull'asse x 
+    //viene modificato mentre quello sull'asse y no.
+
+    float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
+    sprite.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+}    
         
     }
 

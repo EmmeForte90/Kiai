@@ -40,7 +40,9 @@ Debug.Log("AudioMixer aggiunto correttamente agli AudioSource.");
         //Recupera i componenti del rigidbody
         Move.instance.AnimationHeal();
         Move.instance.Stop();
-
+        Instantiate(Explode, transform.position, transform.rotation);
+        PlayerHealth.Instance.IncreaseHP(heal);
+        Invoke("Destroy", lifeTime);
     }
 
     public void PlaySFX(int soundToPlay)
@@ -52,21 +54,6 @@ Debug.Log("AudioMixer aggiunto correttamente agli AudioSource.");
         }
     }
    
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Player")
-        {  
-            Instantiate(Explode, transform.position, transform.rotation);
-            PlayerHealth.Instance.IncreaseHP(heal);
-            Invoke("Destroy", lifeTime);
-        }
-
-       
-
-       
-    }
-    
     
     private void Destroy()
     {

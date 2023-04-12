@@ -55,6 +55,7 @@ Debug.Log("AudioMixer aggiunto correttamente agli AudioSource.");
                 transform.localScale = new Vector3(-1, 1, 1);
 
         }
+        Move.instance.Throw();
         Move.instance.Stop();
 
         

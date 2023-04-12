@@ -154,5 +154,6 @@ MonoBehaviour:
   targetTag: Enemy
   lifeTime: 1
   rb: {fileID: 2153633973443890866}
+  sprite: {fileID: 609437601310200951}
   list: []
   SFX: {fileID: 24100000, guid: 63f598184995bda419cd1ee5db5e6d03, type: 2}

@@ -9,11 +9,7 @@ public class Kunai : MonoBehaviour
     [SerializeField] GameObject Explode;
    // [SerializeField] Transform prefabExp;
     [SerializeField] int damage = 50;
-    public float rotationSpeed = 2500f;
-    public bool isRotating = false;
-    public bool kunai = false;
-    public bool Needtwohands = false;
-    public bool isBig = false;
+   
 
     [SerializeField] float lifeTime = 0.5f;
     Rigidbody2D rb;
@@ -59,20 +55,10 @@ Debug.Log("AudioMixer aggiunto correttamente agli AudioSource.");
                 transform.localScale = new Vector3(-1, 1, 1);
 
         }
-        if(!Needtwohands)
-        {
-            Move.instance.Blasting();
-        }
-        else if(Needtwohands)
-        {
-            //Move.instance.Bigblast();
-        }
+        Move.instance.Throw();
         Move.instance.Stop();
 
-        if(isBig)
-        {
-            transform.localScale *= 1.5f;
-        }
+        
     }
 
     public void PlaySFX(int soundToPlay)
@@ -92,10 +78,8 @@ Debug.Log("AudioMixer aggiunto correttamente agli AudioSource.");
             Instantiate(Explode, transform.position, transform.rotation);
             IDamegable hit = other.GetComponent<IDamegable>();
             hit.Damage(damage);
-            if(kunai)
-            {
-                Destroy(gameObject);
-            }
+            Destroy(gameObject);
+            
         }
 
         if (other.gameObject.tag == "Ground")
@@ -103,14 +87,7 @@ Debug.Log("AudioMixer aggiunto correttamente agli AudioSource.");
             Instantiate(Explode, transform.position, transform.rotation);
             Invoke("Destroy", lifeTime);
         }
-        if (other.gameObject.tag == "Shield_E")
-        { 
-
-            if (!Needtwohands)
-        { 
-            Invoke("Destroy", lifeTime);
-        }
-    }
+        
     }
     private void Destroy()
     {
