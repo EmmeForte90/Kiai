@@ -17,6 +17,8 @@ public Sprite icon;
 [SerializeField][TextArea(3, 10)]
 public string Dialogue;
 public bool isConsumable = false;
+public bool isKatana = false;
+public bool isDress = false;
 
   public Item(string name, int value, Sprite icon)
     {

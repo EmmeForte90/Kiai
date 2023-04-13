@@ -19,17 +19,17 @@ MonoBehaviour:
   value: 1
   Bigicon: {fileID: 0}
   Startdialogue:
-  - 
-  - 
+  - Proviamo questa cosa
+  - Salvami la pallavcbvcbbdf
   Middledialogue:
-  - 
-  - 
+  - Muoviti
+  - Mi annoio
   Endingdialogue:
-  - 
-  - 
+  - Bravo
+  - KEK
   Afterdialogue:
-  - 
-  - 
+  - Ancora qui?
+  - Zucm o merl
   isActive: 0
   isComplete: 0
-  AfterQuest: 0
+  AfterQuest: 1

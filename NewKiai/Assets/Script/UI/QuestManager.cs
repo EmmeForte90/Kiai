@@ -76,12 +76,14 @@ public void ListQuest(int questId)
 
         // Recupera il riferimento al componente del titolo della quest e del bottone
         var questT = obj.transform.Find("Title_quest").GetComponent<TextMeshProUGUI>();
+        var questI = obj.transform.Find("Icon_item").GetComponent<Image>();
 
         // Assegna l'id univoco al game object istanziato
         obj.name = "QuestButton_" + quest.id;
 
         // Assegna il nome della quest al componente del titolo
         questT.text = quest.questName;
+        questI.color = Color.red;
 
         // Assegna i valori desiderati ai componenti dell'immagine di preview e della descrizione del pulsante della quest
         previewImages.sprite = quest.Bigicon;
@@ -90,11 +92,11 @@ public void ListQuest(int questId)
 
         // Aggiungi un listener per il click del bottone
         var button = obj.GetComponent<Button>();
-        button.onClick.AddListener(() => OnQuestButtonClicked(quest.id, previewImages, descriptions));
+        button.onClick.AddListener(() => OnQuestButtonClicked(quest.id, previewImages, descriptions, questI));
     }
 }
 
-public void OnQuestButtonClicked(int questId, Image previewImages, TextMeshProUGUI descriptions)
+public void OnQuestButtonClicked(int questId, Image previewImages, TextMeshProUGUI descriptions, Image questI)
 {    
    // print(questId+"  "+questDatabase.Count);
     //if (questId >= 0 && questId < questDatabase.Count) non so perché non funzionava
@@ -107,7 +109,10 @@ public void OnQuestButtonClicked(int questId, Image previewImages, TextMeshProUG
         previewImages.sprite = questDatabase.Find(q => q.id == questId).Bigicon;
         descriptions.text = questDatabase.Find(q => q.id == questId).Description;
         NameQ.text = questDatabase.Find(q => q.id == questId).questName;
-
+        if(_QuestComplete[questId])
+        {
+            questI.color = Color.black;
+        }
     }
     
 }
@@ -137,7 +142,9 @@ public void QuestActive(int id)
 public void QuestComplete(int id)
 {
     // Imposta lo stato di completamento della quest a true
-    _QuestComplete[id] = true;  
+    _QuestComplete[id] = true;
+
+  
 }
 
 

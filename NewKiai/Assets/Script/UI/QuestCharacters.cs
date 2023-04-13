@@ -1,17 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using UnityEngine.UI;
-using UnityEngine.Audio;
+using TMPro;
 using Spine.Unity;
-using Spine;
-using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 
 public class QuestCharacters : MonoBehaviour
 {
-    public Quests Quest;
+   public Quests Quest;
     public int IDQuest;
     public int IDCharacter;
     public TextMeshProUGUI CharacterName; // Reference to the TextMeshProUGUI component
@@ -45,23 +43,18 @@ public class QuestCharacters : MonoBehaviour
     private bool _isDialogueActive;
 
 [Header("Audio")]
-    [HideInInspector] public float basePitch = 1f;
-    [HideInInspector] public float randomPitchOffset = 0.1f;
-    [SerializeField] public AudioClip[] listSound; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
-    private AudioSource[] sgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
-    public AudioMixer SFX;
-    private bool sgmActive = false;
-    [SerializeField] float lifeTime = 2f;
+[SerializeField] public AudioClip[] listmusic; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
+private AudioSource[] bgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
+public AudioMixer SFX;
 
- [Header("Animations")]
+[Header("Animations")]
     [SpineAnimation][SerializeField] private string idleAnimationName;
     [SpineAnimation][SerializeField] private string HitAnimationName;
-     private string currentAnimationName;
-    private SkeletonAnimation _skeletonAnimation;
+    private string currentAnimationName;
+    public SkeletonAnimation _skeletonAnimation;
     private Spine.AnimationState _spineAnimationState;
     private Spine.Skeleton _skeleton;
     Spine.EventData eventData;
-
 public static QuestCharacters Instance;
 
 
@@ -72,6 +65,21 @@ void Awake()
         IDQuest = Quest.id;
         CharacterName.text = Quest.CharacterName;
 
+        bgm = new AudioSource[listmusic.Length]; // inizializza l'array di AudioSource con la stessa lunghezza dell'array di AudioClip
+        for (int i = 0; i < listmusic.Length; i++) // scorre la lista di AudioClip
+        {
+        bgm[i] = gameObject.AddComponent<AudioSource>(); // crea un nuovo AudioSource come componente del game object attuale (quello a cui è attaccato lo script)
+        bgm[i].clip = listmusic[i]; // assegna l'AudioClip corrispondente all'AudioSource creato
+        bgm[i].playOnAwake = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
+        bgm[i].loop = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
+
+        }
+
+        // Aggiunge i canali audio degli AudioSource all'output del mixer
+        foreach (AudioSource audioSource in bgm)
+        {
+        audioSource.outputAudioMixerGroup = SFX.FindMatchingGroups("Master")[0];
+        }
         _skeletonAnimation = GetComponent<SkeletonAnimation>();
         if (_skeletonAnimation == null) {
             Debug.LogError("Componente SkeletonAnimation non trovato!");
@@ -79,22 +87,6 @@ void Awake()
          _spineAnimationState = GetComponent<Spine.Unity.SkeletonAnimation>().AnimationState;
         _spineAnimationState = _skeletonAnimation.AnimationState;
         _skeleton = _skeletonAnimation.skeleton;
-        //rb = GetComponent<Rigidbody2D>();
-        sgm = new AudioSource[listSound.Length]; // inizializza l'array di AudioSource con la stessa lunghezza dell'array di AudioClip
-        for (int i = 0; i < listSound.Length; i++) // scorre la lista di AudioClip
-        {
-            sgm[i] = gameObject.AddComponent<AudioSource>(); // crea un nuovo AudioSource come componente del game object attuale (quello a cui è attaccato lo script)
-            sgm[i].clip = listSound[i]; // assegna l'AudioClip corrispondente all'AudioSource creato
-            sgm[i].playOnAwake = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
-            sgm[i].loop = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
-
-        }
- // Aggiunge i canali audio degli AudioSource all'output del mixer
-        foreach (AudioSource audioSource in sgm)
-        {
-        audioSource.outputAudioMixerGroup = SFX.FindMatchingGroups("Master")[0];
-        }
-
 }
 
 
@@ -103,15 +95,20 @@ void Awake()
         button.gameObject.SetActive(false); // Initially hide the dialogue text
         dialogueText.gameObject.SetActive(false); // Initially hide the dialogue text
         dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
-       // anim = GetComponent<Animator>();
+      //  anim = GetComponent<Animator>();
         
 
     }
 
     void Update()
     {
+        
+dialogueDuration = GameplayManager.instance.dialogueDuration;
 
-GameplayManager.instance.dialogueDuration = dialogueDuration;
+if(Talk)
+{Hit();}
+else
+{Idle();}
 
         if (FirstD)
 {
@@ -130,12 +127,7 @@ else if (Quest.AfterQuest)
     dialogue = Quest.Afterdialogue;
 }
 
-if(Talk)
-{Hit();}
-else
-{Idle();}
-
-        //anim.SetBool("talk", Talk);
+      //  anim.SetBool("talk", Talk);
         if(heFlip)
         {
         FacePlayer();
@@ -161,7 +153,7 @@ if(!notGo)
 
 public void clang()
 {
-sgm[0].Play();
+bgm[0].Play();
 }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -204,7 +196,7 @@ sgm[0].Play();
 {    
     Talk = true;
     //talk.Play();
-    sgm[1].Play();
+    bgm[1].Play();
     _isDialogueActive = true;
     elapsedTime = 0; // reset elapsed time
     dialogueBox.gameObject.SetActive(true); // Show dialogue box
@@ -242,6 +234,8 @@ sgm[0].Play();
             dialogueText.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
             if(FirstD)
             {
+                    print("inizia");
+
             StartCoroutine(StartQuest());
             }
             else if(Quest.isComplete)
@@ -266,10 +260,12 @@ sgm[0].Play();
 
  IEnumerator EndQuest()
 {
+        print("endQuest");
+
         notGo = true;
         QNameE.text = Quest.questName;
         QuestEnd.gameObject.SetActive(true); 
-        sgm[2].Play();
+        bgm[2].Play();
         yield return new WaitForSeconds(5f); 
         Instantiate(Reward, RewardPoint.position, transform.rotation);
         QuestEnd.gameObject.SetActive(false); 
@@ -286,10 +282,11 @@ sgm[0].Play();
             
  IEnumerator StartQuest()
 {            
+    print("StartQuest");
         notGo = true;
         QNameS.text = Quest.questName;
         Quest.isActive = true;
-        sgm[3].Play();
+        bgm[3].Play();
         QuestStart.gameObject.SetActive(true); 
         QuestManager.Instance.AddQuest(Quest);
         QuestManager.Instance.ListQuest(IDQuest);
@@ -319,9 +316,7 @@ sgm[0].Play();
         }
     }
 
-
-
-    public void Idle()
+     public void Idle()
 {
              if (currentAnimationName != idleAnimationName)
                 {  
@@ -335,7 +330,7 @@ public void Hit()
              if (currentAnimationName != HitAnimationName)
                 { 
                     //_spineAnimationState.ClearTrack(1);
-                    _spineAnimationState.SetAnimation(1, HitAnimationName, true);
+                    _spineAnimationState.SetAnimation(1, HitAnimationName, false);
                     currentAnimationName = HitAnimationName;
                 }
                 // Add event listener for when the animation completes
