@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 2
   CharacterName: Kitai
   dialogue:
-  - "Ehil\xF2, Nekotaro! Sei pronto a fare acquisti dal tuo vecchio Kitai?"
+  - "Ehil\xE0, Nekotaro! Sei pronto a fare acquisti dal tuo vecchio Kitai?"
   Startdialogue: []
   Middledialogue: []
   Endingdialogue: []

@@ -14,7 +14,7 @@ public class PuppetM : MonoBehaviour
     [SpineAnimation][SerializeField] private string idleAnimationName;
     [SpineAnimation][SerializeField] private string HitAnimationName;
      private string currentAnimationName;
-    private SkeletonAnimation _skeletonAnimation;
+    public SkeletonGraphic _skeletonAnimation;
     private Spine.AnimationState _spineAnimationState;
     private Spine.Skeleton _skeleton;
     Spine.EventData eventData;
@@ -25,6 +25,13 @@ public static PuppetM Instance;
 void Awake()
 {
         Instance = this;
+        _skeletonAnimation = GetComponent<SkeletonGraphic>();
+        if (_skeletonAnimation == null) {
+            Debug.LogError("Componente SkeletonAnimation non trovato!");
+        }        
+         _spineAnimationState = GetComponent<Spine.Unity.SkeletonGraphic>().AnimationState;
+        _spineAnimationState = _skeletonAnimation.AnimationState;
+       // _skeleton = _skeletonAnimation.skeleton;
 }
 
  public void Idle()
@@ -40,12 +47,12 @@ public void Hit()
 {
              if (currentAnimationName != HitAnimationName)
                 { 
-                    _spineAnimationState.ClearTrack(1);
-                    _spineAnimationState.SetAnimation(1, HitAnimationName, false);
+                   //_spineAnimationState.ClearTrack(1);
+                    _spineAnimationState.SetAnimation(1, HitAnimationName, true);
                     currentAnimationName = HitAnimationName;
                 }
                 // Add event listener for when the animation completes
-                _spineAnimationState.GetCurrent(1).Complete += OnAttackAnimationComplete;
+                //_spineAnimationState.GetCurrent(1).Complete += OnAttackAnimationComplete;
 }
 
 private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)

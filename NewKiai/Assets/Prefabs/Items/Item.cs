@@ -9,9 +9,13 @@ public class Item : ScriptableObject
 {
 public int id;
 public string itemName;
+[SerializeField][TextArea(3, 10)]
 public string Description;
 public int value;
+public int prices;
 public Sprite icon;
+[SerializeField][TextArea(3, 10)]
+public string Dialogue;
 public bool isConsumable = false;
 
   public Item(string name, int value, Sprite icon)

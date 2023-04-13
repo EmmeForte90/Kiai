@@ -334,8 +334,8 @@ public void Hit()
 {
              if (currentAnimationName != HitAnimationName)
                 { 
-                    _spineAnimationState.ClearTrack(1);
-                    _spineAnimationState.SetAnimation(1, HitAnimationName, false);
+                    //_spineAnimationState.ClearTrack(1);
+                    _spineAnimationState.SetAnimation(1, HitAnimationName, true);
                     currentAnimationName = HitAnimationName;
                 }
                 // Add event listener for when the animation completes
@@ -348,7 +348,7 @@ private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
     trackEntry.Complete -= OnAttackAnimationComplete;
 
     // Clear the track 1 and reset to the idle animation
-    _spineAnimationState.ClearTrack(1);
+    //_spineAnimationState.ClearTrack(1);
     _spineAnimationState.SetAnimation(1, idleAnimationName, true);
     currentAnimationName = idleAnimationName;
 

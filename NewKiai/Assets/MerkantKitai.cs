@@ -18,6 +18,7 @@ public class MerkantKitai : MonoBehaviour
     public TextMeshProUGUI Nameitem; // Reference to the TextMeshProUGUI component
     public TextMeshProUGUI Description; // Reference to the TextMeshProUGUI component
     public Image previewImages;
+    private int prices;
     
     public TextMeshProUGUI Value; // Reference to the TextMeshProUGUI component
     public Dialogues Dial;
@@ -167,14 +168,28 @@ sgm[0].Play();
 
 public void Buy(Item newItem)
 {
-InventoryManager.Instance.AddItem(newItem);
+    if(GameplayManager.instance.money >= prices)
+    {
+    InventoryManager.Instance.AddItem(newItem);
+    InventoryManager.Instance.ListItem(newItem.id);
+    dialogueMenu.text = "Thank you!"; // Reference to the TextMeshProUGUI component
+    GameplayManager.instance.money -= prices;
+    PuppetM.Instance.Idle();
+    }else if(GameplayManager.instance.money < prices)
+    {
+    dialogueMenu.text = "Sorry, buddy, you don't have much money"; // Reference to the TextMeshProUGUI component
+    PuppetM.Instance.Idle();
+    }
 }
 
 public void Preview(Item newItem)
 {
+prices = newItem.prices;
 Nameitem.text = newItem.itemName; // Reference to the TextMeshProUGUI component
 Description.text = newItem.Description; // Reference to the TextMeshProUGUI component
 previewImages.sprite = newItem.icon;
+dialogueMenu.text = newItem.Dialogue; // Reference to the TextMeshProUGUI component
+PuppetM.Instance.Hit();
 }
 
 
@@ -292,7 +307,7 @@ public void Hit()
 {
              if (currentAnimationName != HitAnimationName)
                 { 
-                    _spineAnimationState.ClearTrack(1);
+                    //_spineAnimationState.ClearTrack(1);
                     _spineAnimationState.SetAnimation(1, HitAnimationName, false);
                     currentAnimationName = HitAnimationName;
                 }
@@ -306,7 +321,7 @@ private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
     trackEntry.Complete -= OnAttackAnimationComplete;
 
     // Clear the track 1 and reset to the idle animation
-    _spineAnimationState.ClearTrack(1);
+    //_spineAnimationState.ClearTrack(1);
     _spineAnimationState.SetAnimation(1, idleAnimationName, true);
     currentAnimationName = idleAnimationName;
 

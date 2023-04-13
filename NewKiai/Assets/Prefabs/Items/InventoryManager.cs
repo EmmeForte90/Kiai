@@ -163,7 +163,7 @@ public void ListItem(int itemId)
         if (ItemAlreadyInList(item.id))
         {
             
-
+        if(item.isConsumable){
             // Se l'item è già presente nella lista, incrementa il suo valore
             foreach (Transform child in ItemContent.transform)
             {
@@ -177,6 +177,23 @@ public void ListItem(int itemId)
             }
             // Incrementa il valore dell'item
             val++;
+            }else
+            if(!item.isConsumable)
+            {
+            // Se l'item è già presente nella lista, incrementa il suo valore
+            foreach (Transform child in ItemContentIMP.transform)
+            {
+                if (child.name == "ItemButton_" + item.id)
+                {   
+                 
+                    // Aggiorna il testo del componente TextMeshProUGUI
+                    Num_C.text = item.value.ToString();
+                    break;
+                }
+            }
+            // Incrementa il valore dell'item
+            val++;
+            }
         }
         else
         {
