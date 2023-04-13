@@ -306,7 +306,7 @@ public static Move instance;
         audioSource.outputAudioMixerGroup = SFX.FindMatchingGroups("Master")[0];
         }
 
-Debug.Log("AudioMixer aggiunto correttamente agli AudioSource.");
+//Debug.Log("AudioMixer aggiunto correttamente agli AudioSource.");
 
 
     }

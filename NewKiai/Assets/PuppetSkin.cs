@@ -70,18 +70,12 @@ public enum ItemSlot
 	}
 
 	
-public void UpdateCharacterSkinUI()
+public void UpdateCharacterSkinUI(string characterSkin)
 {
-skeleton = _skeletonGraphic.Skeleton;
-if(skeleton == null)
-		{print("niente");}
-SkeletonData skeletonData = skeleton.Data;
-characterSkin = new Skin("character-base");
-// Note that the result Skin returned by calls to skeletonData.FindSkin()
-// could be cached once in Start() instead of searching for the same skin
-// every time. For demonstration purposes we keep it simple here.
-characterSkin.AddSkin(skeletonData.FindSkin(DressSkin));
-_skeletonGraphic.initialSkinName = characterSkin.Name;
+_skeletonGraphic.Skeleton.SetSkin(characterSkin);
+//_skeletonGraphic.Skeleton.SetSlotsToSetupPose();
+_skeletonGraphic.LateUpdate();
+//_skeletonGraphic.initialSkinName = characterSkin.Name;
 }
 
 public void UpdateCombinedSkinUI()

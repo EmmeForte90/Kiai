@@ -42,7 +42,7 @@ public class AudioManager : MonoBehaviour
         audioSource.outputAudioMixerGroup = MSX.FindMatchingGroups("Master")[0];
         }
 
-Debug.Log("AudioMixer aggiunto correttamente agli AudioSource.");
+//Debug.Log("AudioMixer aggiunto correttamente agli AudioSource.");
 
         
 
@@ -61,7 +61,7 @@ Debug.Log("AudioMixer aggiunto correttamente agli AudioSource.");
         audioSource.outputAudioMixerGroup = SFX.FindMatchingGroups("Master")[0];
         }
 
-Debug.Log("AudioMixer aggiunto correttamente agli AudioSource.");
+//Debug.Log("AudioMixer aggiunto correttamente agli AudioSource.");
 
 
 

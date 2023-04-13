@@ -433,8 +433,8 @@ public void OnQuestButtonClicked(int itemId, Image previewImages, TextMeshProUGU
             ChangeHeroSkin.Instance.UpdateCharacterSkin();
 		    ChangeHeroSkin.Instance.UpdateCombinedSkin(); 
             PuppetSkin.Instance.DressSkin = NameSkin;  
-		    PuppetSkin.Instance.UpdateCharacterSkinUI();
-		    PuppetSkin.Instance.UpdateCombinedSkinUI();
+		    PuppetSkin.Instance.UpdateCharacterSkinUI(NameSkin);
+		   // PuppetSkin.Instance.UpdateCombinedSkinUI();
     }else if(itemId >= 0 && isDress)
     {
             //ItemRapidMenu.Instance.SlotKat_T.text = itemDatabase.Find(q => q.id == itemId).value.ToString();
@@ -444,8 +444,8 @@ public void OnQuestButtonClicked(int itemId, Image previewImages, TextMeshProUGU
             ChangeHeroSkin.Instance.UpdateCharacterSkin();
 	    	ChangeHeroSkin.Instance.UpdateCombinedSkin();
             PuppetSkin.Instance.DressSkin = NameSkin;
-            PuppetSkin.Instance.UpdateCharacterSkinUI();
-		    PuppetSkin.Instance.UpdateCombinedSkinUI();
+            PuppetSkin.Instance.UpdateCharacterSkinUI(NameSkin);
+		   // PuppetSkin.Instance.UpdateCombinedSkinUI();
     }
     
 
