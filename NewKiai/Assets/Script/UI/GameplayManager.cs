@@ -33,7 +33,7 @@ public class GameplayManager : MonoBehaviour
    
 
     [Header("Money")]
-    [SerializeField] int money = 0;
+    [SerializeField] public int money = 0;
     [SerializeField] TextMeshProUGUI moneyText;
     [SerializeField] TextMeshProUGUI moneyTextM;
     [SerializeField] GameObject moneyObject;
