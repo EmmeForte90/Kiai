@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using Spine.Unity.AttachmentTools;
+using Spine;
+using Spine.Unity;
 
 [CreateAssetMenu(fileName ="New Item", menuName = "Item/Create New Item")]
 
@@ -14,11 +17,14 @@ public string Description;
 public int value;
 public int prices;
 public Sprite icon;
+public string NameSkin;
 [SerializeField][TextArea(3, 10)]
 public string Dialogue;
 public bool isConsumable = false;
+public bool isKey = false;
 public bool isKatana = false;
 public bool isDress = false;
+	
 
   public Item(string name, int value, Sprite icon)
     {

@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c85ffa15f85f8cf41a4902559ce464bb, type: 3}
   m_Name: Blu
   m_EditorClassIdentifier: 
-  id: 0
-  itemName: 
-  Description: 
-  value: 0
-  prices: 0
-  icon: {fileID: 0}
+  id: 100
+  itemName: Blu Kimono
+  Description: Blu like the sky, blu like the sea. Blu like my feet...
+  value: 1
+  prices: 1000
+  icon: {fileID: 21300000, guid: 7749c27e5a9845b48af27a1a7bed5047, type: 3}
+  NameSkin: Dress/Blu
   Dialogue: 
   isConsumable: 0
+  isKey: 0
   isKatana: 0
   isDress: 1

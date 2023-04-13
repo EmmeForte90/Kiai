@@ -8,7 +8,7 @@ public class ItemRapidMenu : MonoBehaviour
 {
     // Mappa che mappa gli id delle skill ai loro valori
     Dictionary<int, Item> itemMap = new Dictionary<int, Item>();
-[SerializeField] private Sprite icon0; // Define icon1 as an Image variable
+/*[SerializeField] private Sprite icon0; // Define icon1 as an Image variable
 [SerializeField] private Sprite icon1; // Define icon1 as an Image variable
 [SerializeField] private Sprite icon2; // Define icon1 as an Image variable
 [SerializeField] private Sprite icon3; // Define icon1 as an Image variable
@@ -29,7 +29,7 @@ public class ItemRapidMenu : MonoBehaviour
 [SerializeField] private Sprite icon18; // Define icon1 as an Image variable
 [SerializeField] private Sprite icon19; // Define icon1 as an Image variable
 [SerializeField] private Sprite icon20; // Define icon1 as an Image variable
-[SerializeField] private Sprite icon21; // Define icon1 as an Image variable
+[SerializeField] private Sprite icon21; // Define icon1 as an Image variable*/
    
     public float timeSelection = 0.1f; // ritardo tra la spawn di ogni moneta
 
@@ -43,6 +43,8 @@ public class ItemRapidMenu : MonoBehaviour
     public int Slot6= -1; // Id dell'abilità selezionata
     public int Slot7= -1; // Id dell'abilità selezionata
     public int Slot8= -1; // Id dell'abilità selezionata
+    public int SlotKat= -1; // Id dell'abilità selezionata
+    public int SlotDres= -1; // Id dell'abilità selezionata
 
 
     public int MXV1; // Id dell'abilità selezionata
@@ -67,7 +69,8 @@ public class ItemRapidMenu : MonoBehaviour
     public bool isSlot6;
     public bool isSlot7;
     public bool isSlot8;
-
+    public bool isSlotKat;
+    public bool isSlotDres;
 
     [SerializeField]public TextMeshProUGUI Slot1_T;
     [SerializeField]public TextMeshProUGUI Slot2_T;
@@ -86,7 +89,9 @@ public class ItemRapidMenu : MonoBehaviour
     [SerializeField]public Image Slot6_I;
     [SerializeField]public Image Slot7_I;
     [SerializeField]public Image Slot8_I;
-
+    [SerializeField]public Image SlotKat_I;
+    [SerializeField]public Image SlotDres_I;
+    
 public static ItemRapidMenu Instance;
 
 
@@ -101,7 +106,7 @@ public static ItemRapidMenu Instance;
     void Start()
     {
         // Aggiungi le tue skill alla mappa
-        itemMap.Add(-1, new Item("noSkill", 0, icon0));//Noitem
+       /* itemMap.Add(-1, new Item("noSkill", 0, icon0));//Noitem
         itemMap.Add(1, new Item("Item 1", 10, icon1));//Kunai
         itemMap.Add(2, new Item("Item 2", 5, icon2));//Shuriken
         itemMap.Add(3, new Item("Item 3", 5, icon3));//Bomb
@@ -123,7 +128,7 @@ public static ItemRapidMenu Instance;
         itemMap.Add(19, new Item("Item 19", 5, icon19));//flame
         itemMap.Add(20, new Item("Item 20", 3, icon20));//aura
         itemMap.Add(21, new Item("Item 21", 3, icon21));//heal
-
+*/
     }
 
     void Update()
@@ -153,6 +158,15 @@ public static ItemRapidMenu Instance;
          MXV1 = selcetedItem.value;
     }
 */
+ public void AssignKat()
+{    
+    isSlotKat = true;
+}
+
+ public void AssignDres()
+{    
+    isSlotDres = true;
+}
    public void Assign0()
 {    
     isSlot0 = true;

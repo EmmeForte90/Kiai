@@ -18,7 +18,9 @@ MonoBehaviour:
   value: 1
   prices: 1000
   icon: {fileID: 21300000, guid: 9f40f8e93cea5c94e912d52f291b3c3f, type: 3}
+  NameSkin: Katane/Kyushi
   Dialogue: 
   isConsumable: 0
+  isKey: 0
   isKatana: 1
   isDress: 0

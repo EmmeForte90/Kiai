@@ -29,6 +29,12 @@ public class InventoryManager : MonoBehaviour
     public TextMeshProUGUI NameItems_C;
 
    public  GameObject InventoryItem;
+
+   public Transform ItemContentKat;
+   public Transform ItemContentDres;
+
+
+
    [HideInInspector] public int qID;
     // Scriptable Object delle item
    public List<Item> itemDatabase;
@@ -162,7 +168,7 @@ public void ListItem(int itemId)
     {
         if (ItemAlreadyInList(item.id))
         {
-            
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if(item.isConsumable){
             // Se l'item è già presente nella lista, incrementa il suo valore
             foreach (Transform child in ItemContent.transform)
@@ -177,8 +183,10 @@ public void ListItem(int itemId)
             }
             // Incrementa il valore dell'item
             val++;
-            }else
-            if(!item.isConsumable)
+            }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            else
+            if(item.isKey)
             {
             // Se l'item è già presente nella lista, incrementa il suo valore
             foreach (Transform child in ItemContentIMP.transform)
@@ -194,6 +202,43 @@ public void ListItem(int itemId)
             // Incrementa il valore dell'item
             val++;
             }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            else
+            if(item.isKatana)
+            {
+            // Se l'item è già presente nella lista, incrementa il suo valore
+            foreach (Transform child in ItemContentKat.transform)
+            {
+                if (child.name == "ItemButton_" + item.id)
+                {   
+                 
+                    // Aggiorna il testo del componente TextMeshProUGUI
+                    //Num_C.text = item.value.ToString();
+                    break;
+                }
+            }
+            // Incrementa il valore dell'item
+            val++;
+            }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            else
+            if(item.isDress)
+            {
+            // Se l'item è già presente nella lista, incrementa il suo valore
+            foreach (Transform child in ItemContentDres.transform)
+            {
+                if (child.name == "ItemButton_" + item.id)
+                {   
+                 
+                    // Aggiorna il testo del componente TextMeshProUGUI
+                    //Num_C.text = item.value.ToString();
+                    break;
+                }
+            }
+            // Incrementa il valore dell'item
+            val++;
+            }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         }
         else
         {
@@ -201,7 +246,11 @@ public void ListItem(int itemId)
     // Istanzia il prefab del bottone della item nella lista UI
     if(item.isConsumable){InventoryItem = Instantiate(InventoryItem, ItemContent);}
     else
-    if(!item.isConsumable){InventoryItem = Instantiate(InventoryItem, ItemContentIMP);}
+    if(item.isKey){InventoryItem = Instantiate(InventoryItem, ItemContentIMP);}
+    else
+    if(item.isDress){InventoryItem = Instantiate(InventoryItem, ItemContentDres);}
+    else
+    if(item.isKatana){InventoryItem = Instantiate(InventoryItem, ItemContentKat);}
     // Recupera il riferimento al componente del titolo della item e del bottone
     //var questName = obj.transform.Find("Name_Item").GetComponent<TextMeshProUGUI>();
     var Itemimg = InventoryItem.transform.Find("Icon_item").GetComponent<Image>();
@@ -221,35 +270,35 @@ public void ListItem(int itemId)
     // Assegna i valori desiderati ai componenti dell'immagine di preview e della descrizione del pulsante della item
     if (previewImages != null)
     {
-       if(item.isConsumable){previewImages.sprite = item.icon;}
+       if(item.isConsumable || item.isKatana || item.isDress){previewImages.sprite = item.icon;}
        else
-        if(!item.isConsumable){previewImages_C.sprite = item.icon;}
+        if(item.isKey){previewImages_C.sprite = item.icon;}
     }
 
     if (descriptions != null)
     {
-        if(item.isConsumable){descriptions.text = item.Description;}
+        if(item.isConsumable || item.isKatana || item.isDress){descriptions.text = item.Description;}
         else
-        if(!item.isConsumable){descriptions_C.text = item.Description;}
+        if(item.isKey){descriptions_C.text = item.Description;}
     }
 
     if (Num != null)
     {
-        if(item.isConsumable){Num.text = val.ToString();}
+        if(item.isConsumable || item.isKatana || item.isDress){Num.text = val.ToString();}
         else
-        if(!item.isConsumable){Num_C.text = val.ToString();}
+        if(item.isKey){Num_C.text = val.ToString();}
     }
 
     if (NameItems != null)
     {
-        if(item.isConsumable){NameItems.text = item.itemName;}
+        if(item.isConsumable || item.isKatana || item.isDress){NameItems.text = item.itemName;}
         else
-        if(!item.isConsumable){NameItems_C.text = item.itemName;}
+        if(item.isKey){NameItems_C.text = item.itemName;}
     }
 
     // Aggiungi un listener per il click del bottone
     var button = InventoryItem.GetComponent<Button>();
-    button.onClick.AddListener(() => OnQuestButtonClicked(item.id, previewImages, descriptions, selectedId, item.isConsumable));
+    button.onClick.AddListener(() => OnQuestButtonClicked(item.id, previewImages, descriptions, selectedId, item.isConsumable, item.isKey, item.isKatana, item.isDress, item.NameSkin));
         }
 }
     }
@@ -271,7 +320,7 @@ public void ListItem(int itemId)
 
     
 
-public void OnQuestButtonClicked(int itemId, Image previewImages, TextMeshProUGUI descriptions, int selectedId, bool isConsumable)
+public void OnQuestButtonClicked(int itemId, Image previewImages, TextMeshProUGUI descriptions, int selectedId, bool isConsumable, bool isKey, bool isKatana, bool isDress, string NameSkin)
 {
     if (itemId >= 0 && isConsumable)
     {
@@ -369,12 +418,34 @@ public void OnQuestButtonClicked(int itemId, Image previewImages, TextMeshProUGU
             ItemRapidMenu.Instance.MXV8 = itemDatabase.Find(q => q.id == itemId).value;
         }
 
-    }else if(itemId >= 0 && !isConsumable)
+    }else if(itemId >= 0 && isKey)
     {
         previewImages_C.sprite = itemDatabase.Find(q => q.id == itemId).icon;
         descriptions_C.text = itemDatabase.Find(q => q.id == itemId).Description;
         NameItems_C.text = itemDatabase.Find(q => q.id == itemId).itemName;
         selectedId = itemDatabase.Find(q => q.id == itemId).id;
+    }else if(itemId >= 0 && isKatana)
+    {
+            //ItemRapidMenu.Instance.SlotKat_T.text = itemDatabase.Find(q => q.id == itemId).value.ToString();
+            ItemRapidMenu.Instance.SlotKat_I.sprite = itemDatabase.Find(q => q.id == itemId).icon;
+            ItemRapidMenu.Instance.SlotKat = selectedId;
+            ChangeHeroSkin.Instance.katana = NameSkin;
+            ChangeHeroSkin.Instance.UpdateCharacterSkin();
+		    ChangeHeroSkin.Instance.UpdateCombinedSkin(); 
+            PuppetSkin.Instance.DressSkin = NameSkin;  
+		    PuppetSkin.Instance.UpdateCharacterSkinUI();
+		    PuppetSkin.Instance.UpdateCombinedSkinUI();
+    }else if(itemId >= 0 && isDress)
+    {
+            //ItemRapidMenu.Instance.SlotKat_T.text = itemDatabase.Find(q => q.id == itemId).value.ToString();
+            ItemRapidMenu.Instance.SlotDres_I.sprite = itemDatabase.Find(q => q.id == itemId).icon;
+            ItemRapidMenu.Instance.SlotDres = selectedId;
+            ChangeHeroSkin.Instance.DressSkin = NameSkin;
+            ChangeHeroSkin.Instance.UpdateCharacterSkin();
+	    	ChangeHeroSkin.Instance.UpdateCombinedSkin();
+            PuppetSkin.Instance.DressSkin = NameSkin;
+            PuppetSkin.Instance.UpdateCharacterSkinUI();
+		    PuppetSkin.Instance.UpdateCombinedSkinUI();
     }
     
 

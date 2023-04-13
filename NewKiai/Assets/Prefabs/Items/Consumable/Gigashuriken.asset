@@ -16,5 +16,10 @@ MonoBehaviour:
   itemName: GigaShuriken
   Description: A big shuriken
   value: 1
-  icon: {fileID: 0}
+  prices: 500
+  icon: {fileID: 21300000, guid: a2e12df401a7528419b72909940eb60f, type: 3}
+  Dialogue: 
   isConsumable: 1
+  isKey: 0
+  isKatana: 0
+  isDress: 0

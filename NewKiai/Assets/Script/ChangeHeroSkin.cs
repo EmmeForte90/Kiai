@@ -13,6 +13,8 @@ public class ChangeHeroSkin : MonoBehaviour
 	[SpineSkin] public string katana = "default";
 	
 	SkeletonAnimation skeletonAnimation;
+	//public SkeletonGraphic _skeletonGraphic;
+	Skeleton skeleton;
 	// This "naked body" skin will likely change only once upon character creation,
 	// so we store this combined set of non-equipment Skins for later re-use.
 	Skin characterSkin;
@@ -20,6 +22,8 @@ public class ChangeHeroSkin : MonoBehaviour
 	// for repacking the skin to a new atlas texture
 	private Material runtimeMaterial;
 	private Texture2D runtimeAtlas;
+
+public static ChangeHeroSkin Instance;
 
 // Equipment skins
 public enum ItemSlot
@@ -30,15 +34,16 @@ public enum ItemSlot
 }
 	void Awake()
 	{
-		
+		if (Instance == null)
+        {
+            Instance = this;
+        }
 		skeletonAnimation = this.GetComponent<SkeletonAnimation>();
+		//_skeletonGraphic = this.GetComponent<SkeletonGraphic>();
+
 	}
 
-	void Start()
-	{
-		UpdateCharacterSkin();
-		UpdateCombinedSkin();
-	}
+	
 
     private void Update()
     {
@@ -49,11 +54,6 @@ public enum ItemSlot
 		}
     }
 
-    public void Equip()
-	{
-		UpdateCharacterSkin();
-		UpdateCombinedSkin();
-	}
 
 	public void OptimizeSkin()
 	{
@@ -81,9 +81,11 @@ public enum ItemSlot
 		Resources.UnloadUnusedAssets();
 	}
 
-	void UpdateCharacterSkin()
+	public void UpdateCharacterSkin()
 	{
-		Skeleton skeleton = skeletonAnimation.Skeleton;
+		skeleton = skeletonAnimation.Skeleton;
+		if(skeleton == null)
+		{print("niente");}
 		SkeletonData skeletonData = skeleton.Data;
 		characterSkin = new Skin("character-base");
 		// Note that the result Skin returned by calls to skeletonData.FindSkin()
@@ -92,18 +94,22 @@ public enum ItemSlot
 		characterSkin.AddSkin(skeletonData.FindSkin(DressSkin));
 	}
 
+
+
 	void AddEquipmentSkinsTo(Skin combinedSkin)
 	{
-		Skeleton skeleton = skeletonAnimation.Skeleton;
+		skeleton = skeletonAnimation.Skeleton;
 		SkeletonData skeletonData = skeleton.Data;
 		if (!string.IsNullOrEmpty(DressSkin)) combinedSkin.AddSkin(skeletonData.FindSkin(DressSkin));
 		if (!string.IsNullOrEmpty(katana)) combinedSkin.AddSkin(skeletonData.FindSkin(katana));
 		
 	}
 
-	void UpdateCombinedSkin()
+	public void UpdateCombinedSkin()
 	{
-		Skeleton skeleton = skeletonAnimation.Skeleton;
+		skeleton = skeletonAnimation.Skeleton;
+		if(skeleton == null)
+		{print("niente");}
 		Skin resultCombinedSkin = new Skin("character-combined");
 
 		resultCombinedSkin.AddSkin(characterSkin);
@@ -112,5 +118,7 @@ public enum ItemSlot
 		skeleton.SetSkin(resultCombinedSkin);
 		skeleton.SetSlotsToSetupPose();
 	}
+
+	
 }
 
