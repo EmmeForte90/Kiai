@@ -88,10 +88,6 @@ public class GameplayManager : MonoBehaviour
     private GameObject[] Door;
     public bool[] DoorActive;
 
-    private GameObject[] SkillDi;
-    [SerializeField] public bool[] SkillActive;
-    [SerializeField] public GameObject[] SkillM;
-    [SerializeField] public GameObject[] SkillS;
 
     public static GameplayManager instance;
 
@@ -426,28 +422,7 @@ private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         }
     }
 
-// Itera attraverso tutti gli oggetti trovati
-    foreach (GameObject Character in SkillIt)
-    {
-        // Ottiene il componente QuestCharacters
-        SkillItem SkillItT = Character.GetComponent<SkillItem>();
 
-        // Verifica se il componente esiste
-        if (SkillItT != null)
-        {
-            // Verifica se l'id della quest corrisponde all'id di un gameobject in OrdaliaActive
-            int Id = SkillItT.id;
-            for (int i = 0; i < SkillActive.Length; i++)
-            {
-                if (SkillActive[i] && i == Id)
-                {
-                    // Imposta ordaliT.FirstD a false
-                    SkillItT.SkillDosentExist();
-                    break;
-                }
-            }
-        }
-    }
     
     foreach (GameObject Character in Door)
     {
@@ -484,13 +459,7 @@ public void DoorAct(int id)
     DoorActive[id] = true;   
 }
 
-public void SkillAc(int id)
-{
-    // Imposta lo stato della quest a true
-    SkillActive[id] = true;   
-    SkillM[id].gameObject.SetActive(true);
-    SkillS[id].gameObject.SetActive(true);
-}
+
 
     IEnumerator Restart()
     {
