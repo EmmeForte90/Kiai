@@ -223,7 +223,7 @@ private int comboCount = 0;
      
 
     [Header("Attacks")]
-    public int Damage;
+    //public int Damage;
     private int timeScale = 1;
     private int FastCombo = 2;
     private float TimeAtk = 4f;
@@ -243,8 +243,8 @@ private int comboCount = 0;
     private int MaxItem;
     private int currentTime;
     private int timeLimit = 3; // Tempo massimo per caricare l'attacco
-    private int maxDamage = 50; // Danno massimo dell'attacco caricato
-    private int minDamage = 10; // Danno minimo dell'attacco non caricato
+    private int maxDamage = 100; // Danno massimo dell'attacco caricato
+    private int minDamage = 50; // Danno minimo dell'attacco non caricato
     private float timeSinceLastAttack = 0f;
     [HideInInspector]public bool isCharging;
     private bool touchGround;
@@ -648,6 +648,7 @@ if (Input.GetButtonDown("Fire1") && !isAttacking && !isAttackingAir && !NotStran
 {
 isAttacking = true;
 AddCombo();
+//QUI PUOI DECIDERE QUANTE COMBO FARE PER STILE//
 
 if(GameplayManager.instance.styleIcon[0] == true)
 {if (style == 0) //Normal
@@ -678,7 +679,7 @@ if (_skeletonAnimation != null)
 {
 _skeletonAnimation.timeScale = timeScale; // Impostare il valore di time scale
 }  
-if(comboCount >= 3)
+if(comboCount >= 2)
 {
 comboCount = 0;}}}
 //////////////////////////////////
@@ -814,22 +815,22 @@ if(GameplayManager.instance.styleIcon[1] == true)
         // Decrementa il timer di un secondo
         currentTime--;
         // Aggiorna il danno dell'attacco in base al tempo rimanente
-        Damage = minDamage + (maxDamage - minDamage) * currentTime / timeLimit;
+        HitboxPlayer.Instance.Damage = minDamage + (maxDamage - minDamage) * currentTime / timeLimit;
     }
 
     if (Input.GetButtonUp("Fire3") && isCharging)
     {
         if (currentTime == 0)
         {
-            Damage = maxDamage;
+            HitboxPlayer.Instance.Damage = maxDamage;
         }
         else
         {
-            Damage = minDamage + (maxDamage - minDamage) * currentTime / timeLimit;
+            HitboxPlayer.Instance.Damage = minDamage + (maxDamage - minDamage) * currentTime / timeLimit;
         }
         AnimationChargeRelease();
         isCharging = false;
-        Debug.Log("Charge ratio: " + (float)currentTime / timeLimit + ", Damage: " + Damage);
+        Debug.Log("Charge ratio: " + (float)currentTime / timeLimit + ", Damage: " + HitboxPlayer.Instance.Damage);
         timeSinceLastAttack = Time.time;
         CancelInvoke("CountDown");
     }
@@ -891,74 +892,82 @@ public void changeStyle()
      if(MaxStyle >= 5)
     {
         MaxStyle = 5;
-        if(GameplayManager.instance.styleIcon[5] == true)
+        if(GameplayManager.instance.styleIcon[5] == true)//Void
         {
         PlayerWeaponManager.instance.SetStyle(5);
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[5].transform.position;
+        HitboxPlayer.Instance.Damage = 2;
         VoidPose();
         }
     }
     else if(MaxStyle <= 0)
     {
         MaxStyle = 0;
-    if(GameplayManager.instance.styleIcon[0] == true)
+    if(GameplayManager.instance.styleIcon[0] == true)//Normal
         {
         PlayerWeaponManager.instance.SetStyle(0);
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[0].transform.position;
+        HitboxPlayer.Instance.Damage = 10;
         NormalPose();
         }        
     }else if(MaxStyle == 1)
     {
-    if(GameplayManager.instance.styleIcon[1] == true)
+    if(GameplayManager.instance.styleIcon[1] == true)//Rock
         {
         MaxStyle = 1;
         PlayerWeaponManager.instance.SetStyle(1);
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[1].transform.position;
+        HitboxPlayer.Instance.Damage = 50;
         RockPose();
         }        
     }else if(MaxStyle == 2)
     { 
-    if(GameplayManager.instance.styleIcon[2] == true)
+    if(GameplayManager.instance.styleIcon[2] == true)//Fire
         {
         MaxStyle = 2;
         PlayerWeaponManager.instance.SetStyle(2);
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[2].transform.position;
+        HitboxPlayer.Instance.Damage = 30;
         FirePose();
         }        
     }else if(MaxStyle == 3)
     {
-    if(GameplayManager.instance.styleIcon[3] == true)
+    if(GameplayManager.instance.styleIcon[3] == true)//Wind
         {
             MaxStyle = 3;
         PlayerWeaponManager.instance.SetStyle(3);
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[3].transform.position;
+        HitboxPlayer.Instance.Damage = 5;
         WindPose();
         }       
     }else if(MaxStyle == 4)
     {            
-    if(GameplayManager.instance.styleIcon[4] == true)
+    if(GameplayManager.instance.styleIcon[4] == true)//Water
         {
         MaxStyle = 4;
         PlayerWeaponManager.instance.SetStyle(4);
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[4].transform.position;
+        HitboxPlayer.Instance.Damage = 5;
         WaterPose();
         }       
     }else if(MaxStyle == 5)
     {    
-    if(GameplayManager.instance.styleIcon[5] == true)
+    if(GameplayManager.instance.styleIcon[5] == true)//Void
         {
         MaxStyle = 5;
         PlayerWeaponManager.instance.SetStyle(5);
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[5].transform.position;
+        HitboxPlayer.Instance.Damage = 2;
         VoidPose();
         }        
     }else if(MaxStyle == -1)
     {   
-    if(GameplayManager.instance.styleIcon[0] == true)
+    if(GameplayManager.instance.styleIcon[0] == true)//Normal
         {
             MaxStyle = 0;
         PlayerWeaponManager.instance.SetStyle(0);
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[0].transform.position;
+        HitboxPlayer.Instance.Damage = 10;
         NormalPose();
         }        
     }
@@ -1623,10 +1632,10 @@ void CountDown()
     currentTime--;
     if (currentTime == 0)
     {
-        Damage = maxDamage;
+        HitboxPlayer.Instance.Damage = maxDamage;
         AnimationChargeRelease();
         isCharging = false;
-        Debug.Log("Charge ratio: 1.0, Damage: " + Damage);
+        Debug.Log("Charge ratio: 1.0, Damage: " + HitboxPlayer.Instance.Damage);
         timeSinceLastAttack = Time.time;
         CancelInvoke("CountDown");
     }
