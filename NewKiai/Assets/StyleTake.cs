@@ -7,7 +7,7 @@ public class StyleTake : MonoBehaviour
     [SerializeField] public int StyleID = 0;
     [SerializeField] GameObject VFX;
     public bool isCollected = false;
-
+    [SerializeField] AudioClip PickupSFX;
 
 
 public void Update()
@@ -27,6 +27,7 @@ public void Update()
         if (collision.CompareTag("Player"))
         {
         Pickup();
+        AudioSource.PlayClipAtPoint(PickupSFX, Camera.main.transform.position);
         Instantiate(VFX, transform.position, transform.rotation);
 
         }

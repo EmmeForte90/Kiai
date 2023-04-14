@@ -19432,6 +19432,7 @@ MonoBehaviour:
   StyleID: 2
   VFX: {fileID: 5709588290376515584, guid: 53f550a9368eec8439757b4c9a8d9400, type: 3}
   isCollected: 0
+  PickupSFX: {fileID: 8300000, guid: 404db6561b4b18741b50b657d8943d3b, type: 3}
 --- !u!1 &3161069360903552457
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,7 +9,7 @@ public class SlashWind : MonoBehaviour
     public float speed = 10f; // velocità del proiettile
     [SerializeField] GameObject Explode;
     [SerializeField] Transform prefabExp;
-    [SerializeField] int damage = 10;
+    //[SerializeField] int damage = 10;
 
     [SerializeField] float lifeTime = 0.5f;
     Rigidbody2D rb;
@@ -70,9 +70,10 @@ public class SlashWind : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {  
+            GameplayManager.instance.ComboCount();
             Instantiate(Explode, transform.position, transform.rotation);
             IDamegable hit = other.GetComponent<IDamegable>();
-            hit.Damage(damage);
+            hit.Damage(HitboxPlayer.Instance.Damage);
             PlaySFX(0);
 
         }
