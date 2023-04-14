@@ -3499,6 +3499,7 @@ MonoBehaviour:
   slashpoint: {fileID: 71092193}
   slashpoint1: {fileID: 1722119052}
   VFXHeal: {fileID: 5334578351707258239, guid: 7a9cf26f8dfef1d4c8eb484077596b47, type: 3}
+  VFXHitGuard: {fileID: 715449030417092151, guid: 4d9b720303b97684bb97a9911845b6b8, type: 3}
   VFXWindSlash: {fileID: 5945266013669779061, guid: 9ad7f9eb1d5f61f4eb157906977c96d9, type: 3}
   VFXWindSlashTOP: {fileID: 1222622960148544934, guid: 0b421973ddf6cd9489f186b06063c6d7, type: 3}
   VFXWindSlashDOWN: {fileID: 3978827659523724154, guid: 7f3e134520e3b7f428c2402a488e635e, type: 3}
@@ -3638,6 +3639,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1a48c2aef9608c647a611bb6dfa1ab53, type: 3}
   - {fileID: 8300000, guid: d7604f1e00748e54b844fbabc644a0a4, type: 3}
   - {fileID: 8300000, guid: 047858c3a4bde1040afcdb657f27059c, type: 3}
+  - {fileID: 8300000, guid: 58e7340de4968214f8fbcbf785906c4d, type: 3}
   SFX: {fileID: 24100000, guid: 63f598184995bda419cd1ee5db5e6d03, type: 2}
   rb: {fileID: 372084417}
 --- !u!114 &372084422
@@ -16068,7 +16070,7 @@ MonoBehaviour:
   m_Interactable: 1
   m_TargetGraphic: {fileID: 622835870}
   m_HandleRect: {fileID: 622835869}
-  m_Direction: 0
+  m_Direction: 1
   m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
@@ -27439,7 +27441,7 @@ MonoBehaviour:
   m_Interactable: 1
   m_TargetGraphic: {fileID: 1222722035}
   m_HandleRect: {fileID: 1222722034}
-  m_Direction: 0
+  m_Direction: 1
   m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0

@@ -22,7 +22,10 @@ public class PlayerHealth : MonoBehaviour
     public bool Restore = false; 
     public float timerestore = 2f; // il massimo valore di essenza disponibile
     public float timeStart; // il massimo valore di essenza disponibile
- 
+    
+    public float t_store = 2f; // il massimo valore di essenza disponibile
+    public float t_Start; // il massimo valore di essenza disponibile
+
 public static PlayerHealth Instance;
 
 
@@ -45,34 +48,42 @@ public static PlayerHealth Instance;
     void Update()
     {
         healthBar.size = currentHealth / maxHealth;
-        //manaBar.size = currentMana / maxMana;
         healthBar.size = Mathf.Clamp(healthBar.size, 0.01f, 1);
         staminaBar.size = currentStamina / maxStamina;
-        //manaBar.size = currentMana / maxMana;
         staminaBar.size = Mathf.Clamp(staminaBar.size, 0.01f, 1);
-        //manaBar.size = Mathf.Clamp(manaBar.size, 0.01f, 1);
        
-        if(currentStamina <= 0)
+        /*if(currentStamina <= 0)
         {
-        StartCoroutine(waitrestorestamina());
+        t_Start -= Time.deltaTime; //decrementa il timer ad ogni frame
+        if (t_Start <= 0f) {
+        t_Start = t_store; //riavvia il timer alla sua durata originale
+        Restore = true;
         }
-        if(currentStamina != maxStamina && timeStart <= 0)
+        }*/
+
+        if(currentStamina < maxStamina && timeStart <= 0f)
         {
-        StartCoroutine(waitrestorestamina());
-        }
-
-
-        if (currentStamina != maxStamina) {
         timeStart -= Time.deltaTime; //decrementa il timer ad ogni frame
-        if (timeStart <= 0f) {
+        if (timeStart <= 0f) 
+        {
         timeStart = timerestore; //riavvia il timer alla sua durata originale
         }
+        }
+
+        if(currentStamina <= 0)
+        {
+            currentStamina = 1;
+        }
+
+        if (timeStart == timerestore) 
+        {
+        Restore = true;
         }
 
 
         if(Restore)
         {
-        currentStamina += Time.deltaTime;
+        currentStamina += 20f * Time.deltaTime;
         }
 
         if(currentStamina >= 100)

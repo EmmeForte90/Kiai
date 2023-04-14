@@ -87,6 +87,7 @@ public class Move : MonoBehaviour
     [SerializeField] public Transform slashpoint;
     [SerializeField] public Transform slashpoint1;
     [SerializeField] GameObject VFXHeal;
+    [SerializeField] GameObject VFXHitGuard;
     [SerializeField] GameObject VFXWindSlash;
     [SerializeField] GameObject VFXWindSlashTOP;
     [SerializeField] GameObject VFXWindSlashDOWN;
@@ -688,8 +689,10 @@ changeStyle();
 if(Input.GetKeyDown(KeyCode.X))
             {
                 Debug.Log("Recupero!");
-                PlayMFX(5);
-                repostsword();
+                GuardHit(); 
+                PlayerHealth.Instance.currentStamina -= 50;
+                //PlayMFX(5);
+                //repostsword();
               //  GameplayManager.instance.StyleActivated(TESTID);
               //  PlayerHealth.Instance.IncreaseEssence(10);
                 //PlayerHealth.Instance.currentHealth = PlayerHealth.Instance.maxHealth;
@@ -1658,13 +1661,15 @@ public void GuardHit()
 {
     if (currentAnimationName != guardHitDownAnimationName)
                 {
+                    PlayMFX(6);
+                    Instantiate(VFXHitGuard, slashpoint.position, VFXHitGuard.transform.rotation);
                     _spineAnimationState.SetAnimation(2, guardHitDownAnimationName, false);
                     currentAnimationName = guardHitDownAnimationName;
                          _spineAnimationState.Event += HandleEvent;
                    // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
                 // Add event listener for when the animation completes
-                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+              //  _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 
 public void GuardArmAnm()
@@ -1696,13 +1701,15 @@ public void GuardArmHit()
 {
     if (currentAnimationName != guardNoHitSAnimationName)
                 {
+                    PlayMFX(6);
+                    Instantiate(VFXHitGuard, slashpoint.position, VFXHitGuard.transform.rotation);
                     _spineAnimationState.SetAnimation(2, guardNoHitSAnimationName, false);
                     currentAnimationName = guardNoHitSAnimationName;
                          _spineAnimationState.Event += HandleEvent;
                    // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
                 // Add event listener for when the animation completes
-                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+               // _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 
 
