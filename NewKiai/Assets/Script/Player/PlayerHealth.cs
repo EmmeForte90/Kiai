@@ -87,6 +87,7 @@ public static PlayerHealth Instance;
     public void Damage(float damage)
     {
         Move.instance.AnmHurt();
+        GameplayManager.instance.ResetComboCount();
         // invincibilità per tot tempo
         StartCoroutine(waitHurt());
         currentHealth -= damage;

@@ -6,7 +6,7 @@ public class HitboxPlayer : MonoBehaviour
 {
     [SerializeField] public Transform Pos;
     private bool take = false;
-    //[SerializeField] AudioSource SClang;
+    
 
     public static HitboxPlayer Instance;
 
@@ -30,6 +30,7 @@ void OnTriggerEnter2D(Collider2D other)
         if(other.gameObject.tag == "Enemy" || other.gameObject.tag == "Boss")
         //Se il proiettile tocca il nemico
         {       
+            GameplayManager.instance.ComboCount();
 
 if(GameplayManager.instance.styleIcon[0] == true)
 {if (Move.instance.style == 0) //Normal

@@ -202,7 +202,6 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField] private string downatkjumpAnimationName;
     /////////////////////////////////////////////////////////////////////
      [Header("Special")]
-    [SpineAnimation][SerializeField] private string SpecialAnimationName;
     [SpineAnimation][SerializeField] private string DashAttackAnimationName;
     //[SpineAnimation][SerializeField] private string pesanteAnimationName;
     [SpineAnimation][SerializeField] private string swordDownAnimationName;
@@ -1593,17 +1592,6 @@ public void Rifle()
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 
-public void Special()
-{
-    if (currentAnimationName != SpecialAnimationName)
-                {
-                    _spineAnimationState.SetAnimation(2, SpecialAnimationName, false);
-                    currentAnimationName = SpecialAnimationName;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
-                }
-                // Add event listener for when the animation completes
-                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
-}
 
 
 
@@ -1716,6 +1704,74 @@ public void WindPose()
                 //_spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+public void KiaiNormal()
+{
+    if (currentAnimationName != KiaiNormalAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, KiaiNormalAnimationName, false);
+                    currentAnimationName = KiaiNormalAnimationName;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+public void KiaiRock()
+{
+    if (currentAnimationName != KiaiRockAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, KiaiRockAnimationName, false);
+                    currentAnimationName = KiaiRockAnimationName;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+public void KiaiWater()
+{
+    if (currentAnimationName != KiaiWaterAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, KiaiWaterAnimationName, false);
+                    currentAnimationName = KiaiWaterAnimationName;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+public void KiaiWind()
+{
+    if (currentAnimationName != KiaiWindAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, KiaiWindAnimationName, false);
+                    currentAnimationName = KiaiWindAnimationName;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+public void KiaiVoid()
+{
+    if (currentAnimationName != KiaiVoidAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, KiaiVoidAnimationName, false);
+                    currentAnimationName = KiaiVoidAnimationName;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+public void KiaiFire()
+{
+    if (currentAnimationName != KiaiFireAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, KiaiFireAnimationName, false);
+                    currentAnimationName = KiaiFireAnimationName;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 public void AddCombo()
 {
     //Se sta attaccando
@@ -2380,6 +2436,7 @@ void HandleEvent (TrackEntry trackEntry, Spine.Event e) {
         
     }
 
+
     if (e.Data.Name == "slash_v_water") {     
     // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
     if(!vfx)
@@ -2522,8 +2579,67 @@ if (e.Data.Name == "waterjump") {
         }
        
     }
+if (e.Data.Name == "VFXKiaiFire") {     
+    // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
+    if(!vfx)
+        {
+        //Instantiate(attack_w_h, slashpoint.position, attack_w_h.transform.rotation);
+        //PlayMFX(1);
+        vfx = true;
+        }
+        
+    }
+    if (e.Data.Name == "VFXKiaiWater") {     
+    // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
+    if(!vfx)
+        {
+        //Instantiate(attack_w_h, slashpoint.position, attack_w_h.transform.rotation);
+        //PlayMFX(1);
+        vfx = true;
+        }
+        
+    }
+    if (e.Data.Name == "VFXKiaiRock") {     
+    // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
+    if(!vfx)
+        {
+        //Instantiate(attack_w_h, slashpoint.position, attack_w_h.transform.rotation);
+        //PlayMFX(1);
+        vfx = true;
+        }
+        
+    }
+if (e.Data.Name == "VFXKiaiWind") {     
+    // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
+    if(!vfx)
+        {
+        //Instantiate(attack_w_h, slashpoint.position, attack_w_h.transform.rotation);
+        //PlayMFX(1);
+        vfx = true;
+        }
+        
+    }
 
-
+if (e.Data.Name == "VFXKiaiNormal") {     
+    // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
+    if(!vfx)
+        {
+        //Instantiate(attack_w_h, slashpoint.position, attack_w_h.transform.rotation);
+        //PlayMFX(1);
+        vfx = true;
+        }
+        
+    }
+if (e.Data.Name == "VFXKiaiVoid") {     
+    // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
+    if(!vfx)
+        {
+        //Instantiate(attack_w_h, slashpoint.position, attack_w_h.transform.rotation);
+        //PlayMFX(1);
+        vfx = true;
+        }
+        
+    }
 
 if (e.Data.Name == "soundWalk") {
        if(isGuard || isCharging || isAttacking || isAttackingAir)

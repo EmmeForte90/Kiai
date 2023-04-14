@@ -23,7 +23,10 @@ public class GameplayManager : MonoBehaviour
     private GameObject Actor; // Variabile per il player
     private GameObject Menu; // Variabile per il player
     private Health Enemy;
-
+    public GameObject comboC; // Variabile per il player
+    [SerializeField] TextMeshProUGUI ComboValue;
+    public float comboTimer = 3f; 
+    public int C_Count = 0;
 
     private CinemachineVirtualCamera virtualCamera;
     [HideInInspector]
@@ -164,8 +167,39 @@ public void Update()
        { Dash.gameObject.SetActive(true);}
         if(unlockRampino) 
        { Rampino.gameObject.SetActive(true);}
+
+       if(C_Count > 0)
+       {
+        comboC.gameObject.SetActive(true);
+       }else if(C_Count <= 0)
+       {
+        comboC.gameObject.SetActive(false);
+       }
+
+        if (C_Count > 0) 
+        {
+        comboTimer -= Time.deltaTime; //decrementa il timer ad ogni frame
+        if (comboTimer <= 0f) {
+        ResetComboCount(); //ripristina il comboCount a 0 quando il timer raggiunge 0
+        }
+        }
+
 }
 
+ 
+
+public void ComboCount()
+{
+C_Count++;
+comboTimer = 3f; //decrementa il timer ad ogni frame
+ComboValue.text = C_Count.ToString();
+}
+
+public void ResetComboCount()
+{
+C_Count = 0;
+ComboValue.text = C_Count.ToString();
+}
 
 public void StyleActivated(int id)
 {
