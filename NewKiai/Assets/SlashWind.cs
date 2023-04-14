@@ -21,6 +21,8 @@ public class SlashWind : MonoBehaviour
     private AudioSource[] sgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
     public AudioMixer SFX;
     private bool sgmActive = false;
+    public bool isTop = false;
+    public bool isBottom = false;
 
     // Start is called before the first frame update
     void Start()
@@ -46,17 +48,24 @@ public class SlashWind : MonoBehaviour
         //Recupera i componenti dello script
         //La variabile è uguale alla scala moltiplicata la velocità del proiettile
         //Se il player si gira  anche lo spawn del proiettile farà lo stesso
-        if(Move.instance.transform.localScale.x > 0)
+        if(Move.instance.transform.localScale.x > 0 && !isTop && !isBottom)
         {
             rb.velocity = transform.right * speed;
             transform.localScale = new Vector3(1, 1, 1);
         } 
-        else if(Move.instance.transform.localScale.x < 0)
+        else if(Move.instance.transform.localScale.x < 0 && !isTop && !isBottom)
         {
             rb.velocity = -transform.right * speed;
             transform.localScale = new Vector3(-1, 1, 1);
+        }else if(isTop && !isBottom)
+        {
+            rb.velocity = transform.up * speed;
+            transform.localScale = new Vector3(1, 1, 1);
+        }else if(!isTop && isBottom)
+        {
+            rb.velocity = -transform.up * speed;
+            transform.localScale = new Vector3(1, 1, 1);
         }
-         //Move.instance.Slash();
         Move.instance.Stop();
         PlaySFX(1);
     }

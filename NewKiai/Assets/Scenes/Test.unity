@@ -813,7 +813,7 @@ GameObject:
   m_Component:
   - component: {fileID: 71092193}
   m_Layer: 3
-  m_Name: SlashP
+  m_Name: SlashP1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3260,6 +3260,7 @@ Transform:
   - {fileID: 1722119052}
   - {fileID: 810228723}
   - {fileID: 1805569010}
+  - {fileID: 1571058180}
   - {fileID: 1086181139}
   m_Father: {fileID: 1825305928}
   m_RootOrder: 4
@@ -3492,12 +3493,15 @@ MonoBehaviour:
   sceneName: 
   gun: {fileID: 71092193}
   top: {fileID: 1805569010}
+  bottom: {fileID: 1571058180}
   Circle: {fileID: 4971197863994821707, guid: 2853d211d4214d647a1a0bf75c1fb0cf, type: 3}
   circlePoint: {fileID: 810228723}
   slashpoint: {fileID: 71092193}
   slashpoint1: {fileID: 1722119052}
   VFXHeal: {fileID: 5334578351707258239, guid: 7a9cf26f8dfef1d4c8eb484077596b47, type: 3}
   VFXWindSlash: {fileID: 5945266013669779061, guid: 9ad7f9eb1d5f61f4eb157906977c96d9, type: 3}
+  VFXWindSlashTOP: {fileID: 1222622960148544934, guid: 0b421973ddf6cd9489f186b06063c6d7, type: 3}
+  VFXWindSlashDOWN: {fileID: 3978827659523724154, guid: 7f3e134520e3b7f428c2402a488e635e, type: 3}
   idleAnimationName: idle
   walkAnimationName: Movement/WalkCycles/walk
   runAnimationName: Movement/WalkCycles/run
@@ -3524,6 +3528,8 @@ MonoBehaviour:
   attackNormal1AnimationName: Attack/SwordPlay/Normal/attack_horizontal
   attackNormal2AnimationName: Attack/SwordPlay/Normal/attack_2hit_horizontal
   attackNormal3AnimationName: Attack/SwordPlay/Normal/attack_vertical
+  upatkjumpAnimationName: Attack/Jump_Attack/Normal/jump_normal_attack_top
+  downatkjumpAnimationName: Attack/Jump_Attack/Normal/jump_normal_attack_bottom
   S_Fire: {fileID: 7125378950673475242, guid: 362a763872be0aa4fbf8a0b0bfc99159, type: 3}
   fireposAnimationName: Attack/SwordPosition/idle_fire
   KiaiFireAnimationName: Attack/Kiai/Fire_kiai
@@ -3535,6 +3541,8 @@ MonoBehaviour:
   attackFire1AnimationName: Attack/SwordPlay/Fire/attack_fire_horizontal
   attackFire2AnimationName: Attack/SwordPlay/Fire/attack_fire_2hit_horizontal
   attackFire3AnimationName: Attack/SwordPlay/Fire/attack_fire_vertical
+  upatkFirejumpAnimationName: Attack/Jump_Attack/Fire/jump_fire_attack_top
+  downatkFirejumpAnimationName: Attack/Jump_Attack/Fire/jump_fire_attack_bottom
   S_Water: {fileID: 3652232480539716872, guid: 129d8aa0184444441b048b53b23e6d77, type: 3}
   waterposAnimationName: Attack/SwordPosition/idle_water
   KiaiWaterAnimationName: Attack/Kiai/Water_kiai
@@ -3575,6 +3583,8 @@ MonoBehaviour:
   attackWind2AnimationName: Attack/SwordPlay/Wind/attack_wind_2hit_horizontal
   attackWind3AnimationName: Attack/SwordPlay/Wind/attack_wind_lunge
   attackWind4AnimationName: Attack/SwordPlay/Wind/attack_wind_vertical
+  upatkWindjumpAnimationName: Attack/Jump_Attack/Wind/jump_wind_attack_top
+  downatkWindjumpAnimationName: Attack/Jump_Attack/Wind/jump_wind_attack_bottom
   S_Void: {fileID: 2672608363936665784, guid: e496893ecb0e4864f8dfccc530bd769a, type: 3}
   voidposAnimationName: Attack/SwordPosition/idle_soul
   KiaiVoidAnimationName: Attack/Kiai/Void_kiai
@@ -3586,8 +3596,8 @@ MonoBehaviour:
   attackVoid1AnimationName: Attack/SwordPlay/Void/attack_void_horizzontal
   attackVoid2AnimationName: Attack/SwordPlay/Void/attack_void_lunge
   attackVoid3AnimationName: Attack/SwordPlay/Void/attack_void_vertical
-  upatkjumpAnimationName: Attack/Jump_Attack/Fire/jump_fire_attack_top
-  downatkjumpAnimationName: Attack/Jump_Attack/Fire/jump_fire_attack_bottom
+  upatkVoidjumpAnimationName: 
+  downatkVoidjumpAnimationName: 
   DashAttackAnimationName: Attack/SwordPlay/dashAtk
   swordDownAnimationName: Attack/Movement/hide_sword
   guardDownAnimationName: Attack/SwordPlay/guard
@@ -13811,7 +13821,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 372084413}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1086181140
 MonoBehaviour:
@@ -20949,6 +20959,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1566285734}
   m_CullTransparentMesh: 1
+--- !u!1 &1571058179
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1571058180}
+  m_Layer: 3
+  m_Name: BottomP
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1571058180
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571058179}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.067, y: -0.02, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 372084413}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1571500130
 GameObject:
   m_ObjectHideFlags: 0
@@ -22781,7 +22822,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1722119052}
   m_Layer: 3
-  m_Name: SlashP (1)
+  m_Name: SlashP2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

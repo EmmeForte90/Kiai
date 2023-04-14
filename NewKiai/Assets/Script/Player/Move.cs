@@ -22,7 +22,7 @@ public class Move : MonoBehaviour
     [HideInInspector] public bool isBump = false;
 
     [HideInInspector] public float horDir;
-    [HideInInspector] public float vertDir;
+     public float vertDir;
     [HideInInspector] public float DpadX;//DPad del joypad per il menu rapido
     [HideInInspector] public float DpadY;//DPad del joypad per il menu rapido
     public float L2;
@@ -41,6 +41,7 @@ public class Move : MonoBehaviour
     private bool attackUpper;
     public float dashCoolDown = 1f;
     private float coolDownTime;
+    private bool drawsword = false;
 
     [Header("Jump")]
     [SerializeField] private float jumpForce;
@@ -81,12 +82,17 @@ public class Move : MonoBehaviour
     [Header("VFX")]
     [SerializeField] public Transform gun;
     [SerializeField] public Transform top;
+    [SerializeField] public Transform bottom;
+
     [SerializeField] GameObject Circle;
     [SerializeField] public Transform circlePoint;
     [SerializeField] public Transform slashpoint;
     [SerializeField] public Transform slashpoint1;
     [SerializeField] GameObject VFXHeal;
     [SerializeField] GameObject VFXWindSlash;
+    [SerializeField] GameObject VFXWindSlashTOP;
+    [SerializeField] GameObject VFXWindSlashDOWN;
+
     private bool vfx = false;
     private float vfxTimer = 0.5f;
     
@@ -124,6 +130,8 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField] private string attackNormal1AnimationName;
     [SpineAnimation][SerializeField] private string attackNormal2AnimationName;
     [SpineAnimation][SerializeField] private string attackNormal3AnimationName;
+    [SpineAnimation][SerializeField] private string upatkjumpAnimationName;
+    [SpineAnimation][SerializeField] private string downatkjumpAnimationName;
         [Header("Fire")]
     public GameObject S_Fire;
     [SpineAnimation][SerializeField] private string fireposAnimationName;
@@ -137,6 +145,8 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField] private string attackFire1AnimationName;
     [SpineAnimation][SerializeField] private string attackFire2AnimationName;
     [SpineAnimation][SerializeField] private string attackFire3AnimationName;
+    [SpineAnimation][SerializeField] private string upatkFirejumpAnimationName;
+    [SpineAnimation][SerializeField] private string downatkFirejumpAnimationName;
         [Header("Water")]
     public GameObject S_Water;
     [SpineAnimation][SerializeField] private string waterposAnimationName;
@@ -182,7 +192,8 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField] private string attackWind2AnimationName;
     [SpineAnimation][SerializeField] private string attackWind3AnimationName;
     [SpineAnimation][SerializeField] private string attackWind4AnimationName;
-
+    [SpineAnimation][SerializeField] private string upatkWindjumpAnimationName;
+    [SpineAnimation][SerializeField] private string downatkWindjumpAnimationName;
         [Header("Void")]
     public GameObject S_Void;
     [SpineAnimation][SerializeField] private string voidposAnimationName;
@@ -195,11 +206,9 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField] private string attackVoid1AnimationName;
     [SpineAnimation][SerializeField] private string attackVoid2AnimationName;
     [SpineAnimation][SerializeField] private string attackVoid3AnimationName;
-        [Header("JumpAtk")]
+    [SpineAnimation][SerializeField] private string upatkVoidjumpAnimationName;
+    [SpineAnimation][SerializeField] private string downatkVoidjumpAnimationName;
 
-
-    [SpineAnimation][SerializeField] private string upatkjumpAnimationName;
-    [SpineAnimation][SerializeField] private string downatkjumpAnimationName;
     /////////////////////////////////////////////////////////////////////
      [Header("Special")]
     [SpineAnimation][SerializeField] private string DashAttackAnimationName;
@@ -417,47 +426,6 @@ if (Input.GetButtonDown("Jump"))
             canDoubleJump = true;
             Invoke("SetWallJumpedToFalse", 0.5f);
         }
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
-        // controlla se il player è in aria e preme il tasto di attacco e il tasto direzionale basso
-         if (!isGrounded() && Input.GetButtonDown("Fire1") && vertDir < 0)
-        {
-            if(GameplayManager.instance.styleIcon[4] == true)
-            {if (style == 4) //Water
-            {isAttackingAir = true;
-            WaterJumpAtk();}}
-            else if(GameplayManager.instance.styleIcon[2] == true)
-            {if (style == 2) //Rock
-            {isAttackingAir = true;
-            RockJumpAtk();}}  
-            else{isAttackingAir = true;
-            DownAtk();}
-        } 
-        else if (!isGrounded() && Input.GetButtonDown("Fire1") && vertDir > 0)
-        {
-            if(GameplayManager.instance.styleIcon[4] == true)
-            {if (style == 4) //Water
-            {isAttackingAir = true;
-            WaterJumpAtk();}}
-            else if(GameplayManager.instance.styleIcon[2] == true)
-            {if (style == 2) //Rock
-            {isAttackingAir = true;
-            RockJumpAtk();}}  
-            else{isAttackingAir = true;
-            UpAtk();} 
-        }
-        else if (!isGrounded() && Input.GetButtonDown("Fire1"))
-        {
-            if(GameplayManager.instance.styleIcon[4] == true)
-            {if (style == 4) //Water
-            {isAttackingAir = true;
-            WaterJumpAtk();}}
-            else if(GameplayManager.instance.styleIcon[2] == true)
-            {if (style == 2) //Rock
-            {isAttackingAir = true;
-            RockJumpAtk();}} 
-        }           
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////             
 
 // gestione dell'input dello sparo
@@ -526,9 +494,163 @@ if (!isBlast && Time.time >= ShotTimer)
 {
     isBlast = true;
 }
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////             
 
-// gestione dell'input dello sparo
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Scelta della skill dal menu rapido
+if (Input.GetButtonDown("SlotUp") || DpadY == 1)
+{
+    if (UpdateMenuRapido.Instance.Slot1 > 0)
+{
+    UpdateMenuRapido.Instance.Selup();
+    slotU = true;
+    slotB = false;
+    slotL = false;
+    slotR = false;
+}
+}
+else if (Input.GetButtonDown("SlotRight") || DpadX == 1)
+{
+    if (UpdateMenuRapido.Instance.Slot3 > 0)
+{
+    UpdateMenuRapido.Instance.Selright();
+    slotU = false;
+    slotB = false;
+    slotL = false;
+    slotR = true;
+}
+}
+else if (Input.GetButtonDown("SlotLeft")|| DpadX == -1)
+{
+    if (UpdateMenuRapido.Instance.Slot2 > 0)
+{
+    UpdateMenuRapido.Instance.Selleft();
+    slotU = false;
+    slotB = false;
+    slotL = true;
+    slotR = false;
+}
+}
+else if (Input.GetButtonDown("SlotBottom")|| DpadY == -1)
+{
+    if (UpdateMenuRapido.Instance.Slot4 > 0)
+    {
+    UpdateMenuRapido.Instance.Selbottom();
+    slotU = false;
+    slotB = true;
+    slotL = false;
+    slotR = false;
+    }
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+/*if (isHeal && PlayerHealth.Instance.currentEssence == 0 || isDeath) 
+{
+    isHeal = false;
+    AnimationHealEnd();
+}
+
+
+if (PlayerHealth.Instance.currentEssence > 0) 
+{
+if (Input.GetButtonDown("Heal") && !isHeal && PlayerHealth.Instance.currentHealth != PlayerHealth.Instance.maxHealth)
+{
+    Stop();
+    isHeal = true;
+    AnimationHeal();
+}
+}
+
+
+if (PlayerHealth.Instance.currentEssence > 0) 
+{
+if (Input.GetButtonUp("Heal"))
+{
+    isHeal = false;
+    AnimationHealEnd();
+}
+}*/
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
+//Attacco
+if (Input.GetButtonDown("Fire1") && !isAttacking && !isAttackingAir && !NotStrangeAnimationTalk && !isCharging) 
+{
+isAttacking = true;
+drawsword = true;
+ComboContatore();
+AddCombo();
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Attacco in salto
+        // controlla se il player è in aria e preme il tasto di attacco e il tasto direzionale basso
+         if (!isGrounded() && Input.GetButtonDown("Fire1") && vertDir < 0)
+        {
+            if(GameplayManager.instance.styleIcon[4] == true)
+            {if (style == 4) //Water
+            {WaterJumpAtk();}}
+            if(GameplayManager.instance.styleIcon[1] == true)
+            {if (style == 1) //Rock
+            {RockJumpAtk();}} 
+            if(GameplayManager.instance.styleIcon[2] == true)
+            {if (style == 2) //Fire
+            {DownAtkFire();}}  
+            if(GameplayManager.instance.styleIcon[3] == true)
+            {if (style == 3) //Wind
+            {DownAtkWind();}}  
+            if(GameplayManager.instance.styleIcon[5] == true)
+            {if (style == 5) //Void
+            {DownAtkVoid();}}  
+            if(GameplayManager.instance.styleIcon[0] == true)
+            {if (style == 0)//Normal
+            {DownAtk();}}
+            isAttackingAir = true;
+            drawsword = true;
+        } 
+        else if (!isGrounded() && Input.GetButtonDown("Fire1") && vertDir > 0)
+        {
+            if(GameplayManager.instance.styleIcon[4] == true)
+            {if (style == 4) //Water
+            {WaterJumpAtk();}}
+            if(GameplayManager.instance.styleIcon[1] == true)
+            {if (style == 1) //Rock
+            {RockJumpAtk();}} 
+            if(GameplayManager.instance.styleIcon[2] == true)
+            {if (style == 2) //Fire
+            {UpAtkFire();}}  
+            if(GameplayManager.instance.styleIcon[3] == true)
+            {if (style == 3) //Wind
+            {UpAtkWind();}}  
+            if(GameplayManager.instance.styleIcon[5] == true)
+            {if (style == 5) //Void
+            {UpAtkVoid();}}  
+            if(GameplayManager.instance.styleIcon[0] == true)
+            {if (style == 0)//Normal
+            {UpAtk();}}
+            isAttackingAir = true;
+            drawsword = true;
+        }
+        else if (!isGrounded() && Input.GetButtonDown("Fire1"))
+        {
+            if(GameplayManager.instance.styleIcon[4] == true)
+            {if (style == 4) //Water
+            {WaterJumpAtk();}}
+            if(GameplayManager.instance.styleIcon[1] == true)
+            {if (style == 1) //Rock
+            {RockJumpAtk();}}  
+            drawsword = true;
+        }           
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
+//Riporre spada
+if(drawsword)
+{if(Input.GetButtonDown("Hsword"))
+            {drawsword = false;
+            PlayMFX(5);
+            repostsword();
+            if (_skeletonAnimation != null)
+            {_skeletonAnimation.timeScale = timeScale;}}
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////             
+//Cambio stile
 if (Input.GetButtonDown("R1"))
 {
 //print("Hai premuto R1");
@@ -558,185 +680,7 @@ GameplayManager.instance.styleIcon[5])
 MaxStyle--;
 comboCount = 0;
 changeStyle();
-}
-}
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*if (isHeal && PlayerHealth.Instance.currentEssence == 0 || isDeath) 
-{
-    isHeal = false;
-    AnimationHealEnd();
-}
-
-
-if (PlayerHealth.Instance.currentEssence > 0) 
-{
-if (Input.GetButtonDown("Heal") && !isHeal && PlayerHealth.Instance.currentHealth != PlayerHealth.Instance.maxHealth)
-{
-    Stop();
-    isHeal = true;
-    AnimationHeal();
-}
-}
-
-
-if (PlayerHealth.Instance.currentEssence > 0) 
-{
-if (Input.GetButtonUp("Heal"))
-{
-    isHeal = false;
-    AnimationHealEnd();
-}
-}*/
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//Scelta della skill dal menu rapido
-if (Input.GetButtonDown("SlotUp") || DpadY == 1)
-{
-    if (UpdateMenuRapido.Instance.Slot1 > 0)
-{
-    UpdateMenuRapido.Instance.Selup();
-    //PlayerWeaponManager.instance.SetWeapon(ItemRapidMenu.Instance.selectedId);
-
-    slotU = true;
-    slotB = false;
-    slotL = false;
-    slotR = false;
-}
-}
-else if (Input.GetButtonDown("SlotRight") || DpadX == 1)
-{
-    if (UpdateMenuRapido.Instance.Slot3 > 0)
-{
-    UpdateMenuRapido.Instance.Selright();
-    //SkillMenu.Instance.AssignId();
-    //PlayerWeaponManager.instance.SetWeapon(ItemRapidMenu.Instance.selectedId);
-    slotU = false;
-    slotB = false;
-    slotL = false;
-    slotR = true;
-}
-}
-else if (Input.GetButtonDown("SlotLeft")|| DpadX == -1)
-{
-    if (UpdateMenuRapido.Instance.Slot2 > 0)
-{
-    UpdateMenuRapido.Instance.Selleft();
-    //PlayerWeaponManager.instance.SetWeapon(ItemRapidMenu.Instance.selectedId);
-    slotU = false;
-    slotB = false;
-    slotL = true;
-    slotR = false;
-}
-}
-else if (Input.GetButtonDown("SlotBottom")|| DpadY == -1)
-{
-    if (UpdateMenuRapido.Instance.Slot4 > 0)
-    {
-    UpdateMenuRapido.Instance.Selbottom();
-    //PlayerWeaponManager.instance.SetWeapon(ItemRapidMenu.Instance.selectedId);
-    slotU = false;
-    slotB = true;
-    slotL = false;
-    slotR = false;
-    }
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
-
-if (Input.GetButtonDown("Fire1") && !isAttacking && !isAttackingAir && !NotStrangeAnimationTalk && !isCharging) 
-{
-isAttacking = true;
-AddCombo();
-//QUI PUOI DECIDERE QUANTE COMBO FARE PER STILE//
-
-if(GameplayManager.instance.styleIcon[0] == true)
-{if (style == 0) //Normal
-{
-if (_skeletonAnimation != null)
-{
-_skeletonAnimation.timeScale = timeScale; // Impostare il valore di time scale
-}
-if(comboCount >= 3)
-{
-comboCount = 0;}}}
-///////////////////////
-if(GameplayManager.instance.styleIcon[1] == true)
-{if (style == 1) //Rock
-{
-if (_skeletonAnimation != null)
-{
-_skeletonAnimation.timeScale = timeScale; // Impostare il valore di time scale
-}  
-if(comboCount >= 2)
-{
-comboCount = 0;}}}
-///////////////////////////////////
-if(GameplayManager.instance.styleIcon[2] == true)
-{if (style == 2 && canAttack) //Fire
-{
-if (_skeletonAnimation != null)
-{
-_skeletonAnimation.timeScale = timeScale; // Impostare il valore di time scale
-}  
-if(comboCount >= 2)
-{
-comboCount = 0;}}}
-//////////////////////////////////
-if(GameplayManager.instance.styleIcon[3] == true)
-{if (style == 3) //Wind
-{
-if (_skeletonAnimation != null)
-{
-_skeletonAnimation.timeScale = FastCombo;// Impostare il valore di time scale
-} 
-if(comboCount >= 4)
-{
-comboCount = 0;}}}
-///////////////////////////////////
-if(GameplayManager.instance.styleIcon[4] == true)
-{if (style == 4) //Water
-{
-if (_skeletonAnimation != null)
-{
-_skeletonAnimation.timeScale = timeScale; // Impostare il valore di time scale
-}
-if(comboCount >= 3)
-{
-comboCount = 0;}}}
-////////////////////////////
-if(GameplayManager.instance.styleIcon[5] == true)
-{if (style == 5) //Void
-{
-if (_skeletonAnimation != null)
-{
-_skeletonAnimation.timeScale = FastCombo; // Impostare il valore di time scale
-}
-if(comboCount == 3)
-{
-comboCount = 0;}}}
-}
-
-
-
-/*
-if (TimeAtk > 0) {
-TimeAtk -= Time.deltaTime; //decrementa il timer ad ogni frame
-if (TimeAtk <= 0f) {
-canAttack = true;
-}
-}else if (TimeAtk == 0) 
-{
-canAttack = false;
-}*/
-
-/*if (comboCount > 0) {
-comboTimer -= Time.deltaTime; //decrementa il timer ad ogni frame
-if (comboTimer <= 0f) {
-comboCount = 0; //ripristina il comboCount a 0 quando il timer raggiunge 0
-comboTimer = comboDurata; //riavvia il timer alla sua durata originale
-}
-}*/
+}}
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     #region testForanysituation
             if(Input.GetKeyDown(KeyCode.C))
@@ -755,47 +699,24 @@ if(Input.GetKeyDown(KeyCode.X))
               //  PlayerHealth.Instance.IncreaseEssence(10);
                 //PlayerHealth.Instance.currentHealth = PlayerHealth.Instance.maxHealth;
                 //PlayerHealth.Instance.currentEssence = PlayerHealth.Instance.maxEssence;
-            }
-
-            
+            }   
             #endregion
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
-
-if(Input.GetButtonDown("Hsword"))
-            {
-                PlayMFX(5);
-                repostsword();
-                if (_skeletonAnimation != null)
-                {
-                _skeletonAnimation.timeScale = timeScale; // Impostare il valore di time scale
-                }
-            }
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
+//Guardia
 if(GameplayManager.instance.styleIcon[0] == true)
 {if (style == 0) //Normal
-{
- if (Input.GetButton("Fire3") && !isGuard)
-{
-isGuard = true;
+{if (Input.GetButton("Fire3") && !isGuard)
+{isGuard = true;
 GuardAnm();
 Stop();
-}
-if (Input.GetButtonUp("Fire3"))
-{
+}if (Input.GetButtonUp("Fire3"))
+{if (isGuard)
+{endGuard();
+isGuard = false;}}
 if (isGuard)
-{ 
-endGuard();
-isGuard = false;
-}
-}
-if (isGuard)
-{
-Stop();
-}
-}
-}
-
+{Stop();}}}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
+//Special
 if(GameplayManager.instance.styleIcon[1] == true)
 {if (style == 1) //Rock
 {
@@ -886,6 +807,75 @@ if(GameplayManager.instance.styleIcon[1] == true)
     }
 
  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
+public void ComboContatore()
+{
+//QUI PUOI DECIDERE QUANTE COMBO FARE PER STILE//
+if(GameplayManager.instance.styleIcon[0] == true)
+{if (style == 0) //Normal
+{
+if (_skeletonAnimation != null)
+{
+_skeletonAnimation.timeScale = timeScale; // Impostare il valore di time scale
+}
+if(comboCount >= 3)
+{
+comboCount = 0;}}}
+///////////////////////
+if(GameplayManager.instance.styleIcon[1] == true)
+{if (style == 1) //Rock
+{
+if (_skeletonAnimation != null)
+{
+_skeletonAnimation.timeScale = timeScale; // Impostare il valore di time scale
+}  
+if(comboCount >= 2)
+{
+comboCount = 0;}}}
+///////////////////////////////////
+if(GameplayManager.instance.styleIcon[2] == true)
+{if (style == 2 && canAttack) //Fire
+{
+if (_skeletonAnimation != null)
+{
+_skeletonAnimation.timeScale = timeScale; // Impostare il valore di time scale
+}  
+if(comboCount >= 2)
+{
+comboCount = 0;}}}
+//////////////////////////////////
+if(GameplayManager.instance.styleIcon[3] == true)
+{if (style == 3) //Wind
+{
+if (_skeletonAnimation != null)
+{
+_skeletonAnimation.timeScale = FastCombo;// Impostare il valore di time scale
+} 
+if(comboCount >= 4)
+{
+comboCount = 0;}}}
+///////////////////////////////////
+if(GameplayManager.instance.styleIcon[4] == true)
+{if (style == 4) //Water
+{
+if (_skeletonAnimation != null)
+{
+_skeletonAnimation.timeScale = timeScale; // Impostare il valore di time scale
+}
+if(comboCount >= 3)
+{
+comboCount = 0;}}}
+////////////////////////////
+if(GameplayManager.instance.styleIcon[5] == true)
+{if (style == 5) //Void
+{
+if (_skeletonAnimation != null)
+{
+_skeletonAnimation.timeScale = FastCombo; // Impostare il valore di time scale
+}
+if(comboCount == 3)
+{
+comboCount = 0;}}}
+}
 
 public void changeStyle()
 {
@@ -1335,18 +1325,175 @@ void Blast()
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-public void AnimationHeal()
+
+
+public void UpAtk()
 {
-    if (currentAnimationName != HealAnimationName)
+    if (currentAnimationName != upatkjumpAnimationName)
                 {
-                    _spineAnimationState.SetAnimation(2, HealAnimationName, false);
-                    currentAnimationName = HealAnimationName;
-                         _spineAnimationState.Event += HandleEvent;
+                    _spineAnimationState.SetAnimation(2, upatkjumpAnimationName, false);
+                    currentAnimationName = upatkjumpAnimationName;
+                                        _spineAnimationState.Event += HandleEvent;
+
                    // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
                 // Add event listener for when the animation completes
-                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+            _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+    
 }
+
+public void DownAtk()
+{
+    if (currentAnimationName != downatkjumpAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, downatkjumpAnimationName, false);
+                    currentAnimationName = downatkjumpAnimationName;
+                                        _spineAnimationState.Event += HandleEvent;
+
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+            _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+    
+}
+public void UpAtkFire()
+{
+    if (currentAnimationName != upatkFirejumpAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, upatkFirejumpAnimationName, false);
+                    currentAnimationName = upatkFirejumpAnimationName;
+                                        _spineAnimationState.Event += HandleEvent;
+
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+            _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+    
+}
+
+public void DownAtkFire()
+{
+    if (currentAnimationName != downatkFirejumpAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, downatkFirejumpAnimationName, false);
+                    currentAnimationName = downatkFirejumpAnimationName;
+                                        _spineAnimationState.Event += HandleEvent;
+
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+            _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+    
+}
+public void UpAtkWind()
+{
+    if (currentAnimationName != upatkWindjumpAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, upatkWindjumpAnimationName, false);
+                    currentAnimationName = upatkWindjumpAnimationName;
+                                        _spineAnimationState.Event += HandleEvent;
+
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+            _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+    
+}
+
+public void DownAtkWind()
+{
+    if (currentAnimationName != downatkWindjumpAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, downatkWindjumpAnimationName, false);
+                    currentAnimationName = downatkWindjumpAnimationName;
+                                        _spineAnimationState.Event += HandleEvent;
+
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+            _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+    
+}
+
+public void UpAtkVoid()
+{
+    if (currentAnimationName != upatkVoidjumpAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, upatkVoidjumpAnimationName, false);
+                    currentAnimationName = upatkVoidjumpAnimationName;
+                                        _spineAnimationState.Event += HandleEvent;
+
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+            _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+    
+}
+
+public void DownAtkVoid()
+{
+    if (currentAnimationName != downatkVoidjumpAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, downatkVoidjumpAnimationName, false);
+                    currentAnimationName = downatkVoidjumpAnimationName;
+                                        _spineAnimationState.Event += HandleEvent;
+
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+            _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+    
+}
+
+
+public void WaterJumpAtk()
+{
+    if (currentAnimationName != WaterjumpAnimationName)
+                {    
+                    _spineAnimationState.ClearTrack(2);
+                    _spineAnimationState.ClearTrack(1);
+                    _spineAnimationState.SetAnimation(2, WaterjumpAnimationName, true);
+                    currentAnimationName = WaterjumpAnimationName;
+                                        _spineAnimationState.Event += HandleEvent;
+
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+            _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+
+public void RockJumpAtk()
+{
+    if (currentAnimationName != RockjumpAnimationName)
+                {    
+                    _spineAnimationState.ClearTrack(2);
+                    _spineAnimationState.ClearTrack(1);
+                    _spineAnimationState.SetAnimation(2, RockjumpAnimationName, true);
+                    currentAnimationName = RockjumpAnimationName;
+                                        _spineAnimationState.Event += HandleEvent;
+
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+            _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+public void RockJumpLanding()
+{
+    if (currentAnimationName != RockjumpLandingAnimationName)
+                {    
+                    _spineAnimationState.ClearTrack(2);
+                    _spineAnimationState.ClearTrack(1);
+                    _spineAnimationState.SetAnimation(2, RockjumpLandingAnimationName, false);
+                    currentAnimationName = RockjumpLandingAnimationName;
+                                        _spineAnimationState.Event += HandleEvent;
+
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+            _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+
+
 
 public void wallJump()
 {
@@ -1362,38 +1509,6 @@ public void wallJump()
             _spineAnimationState.GetCurrent(1).Complete += OnJumpAnimationComplete;
     
 }
-
-public void UpAtk()
-{
-    if (currentAnimationName != upatkjumpAnimationName)
-                {
-                    _spineAnimationState.SetAnimation(2, upatkjumpAnimationName, true);
-                    currentAnimationName = upatkjumpAnimationName;
-                                        _spineAnimationState.Event += HandleEvent;
-
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
-                }
-                // Add event listener for when the animation completes
-            _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
-    
-}
-
-public void DownAtk()
-{
-    if (currentAnimationName != downatkjumpAnimationName)
-                {
-                    _spineAnimationState.SetAnimation(2, downatkjumpAnimationName, true);
-                    currentAnimationName = downatkjumpAnimationName;
-                                        _spineAnimationState.Event += HandleEvent;
-
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
-                }
-                // Add event listener for when the animation completes
-            _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
-    
-}
-
-
 private void wallSlide()
     {
         if (currentAnimationName != walljumpAnimationName) {
@@ -1440,6 +1555,19 @@ private void OnJumpAnimationComplete(Spine.TrackEntry trackEntry)
     _skeletonAnimation.timeScale = timeScale; // Impostare il valore di time scale
     }
 }
+public void AnimationHeal()
+{
+    if (currentAnimationName != HealAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, HealAnimationName, false);
+                    currentAnimationName = HealAnimationName;
+                         _spineAnimationState.Event += HandleEvent;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+
 
 public void GuardAnm()
 {
@@ -1491,52 +1619,7 @@ public void AnimationCharge()
                 // Add event listener for when the animation completes
                // _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
-public void WaterJumpAtk()
-{
-    if (currentAnimationName != WaterjumpAnimationName)
-                {    
-                    _spineAnimationState.ClearTrack(2);
-                    _spineAnimationState.ClearTrack(1);
-                    _spineAnimationState.SetAnimation(2, WaterjumpAnimationName, true);
-                    currentAnimationName = WaterjumpAnimationName;
-                                        _spineAnimationState.Event += HandleEvent;
 
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
-                }
-                // Add event listener for when the animation completes
-            _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
-}
-
-public void RockJumpAtk()
-{
-    if (currentAnimationName != RockjumpAnimationName)
-                {    
-                    _spineAnimationState.ClearTrack(2);
-                    _spineAnimationState.ClearTrack(1);
-                    _spineAnimationState.SetAnimation(2, RockjumpAnimationName, true);
-                    currentAnimationName = RockjumpAnimationName;
-                                        _spineAnimationState.Event += HandleEvent;
-
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
-                }
-                // Add event listener for when the animation completes
-            _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
-}
-public void RockJumpLanding()
-{
-    if (currentAnimationName != RockjumpLandingAnimationName)
-                {    
-                    _spineAnimationState.ClearTrack(2);
-                    _spineAnimationState.ClearTrack(1);
-                    _spineAnimationState.SetAnimation(2, RockjumpLandingAnimationName, false);
-                    currentAnimationName = RockjumpLandingAnimationName;
-                                        _spineAnimationState.Event += HandleEvent;
-
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
-                }
-                // Add event listener for when the animation completes
-            _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
-}
 public void dashAnm()
 {
     if (currentAnimationName != dashAnimationName)
@@ -2572,6 +2655,68 @@ if (e.Data.Name == "waterjump") {
     if(!vfx)
         {
         Instantiate(attack_m_h, slashpoint.position, attack_m_h.transform.rotation);
+        PlayMFX(1);
+        vfx = true;
+        }
+        
+    }
+if (e.Data.Name == "upNorm") {     
+    // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
+    if(!vfx)
+        {
+        Instantiate(attack_air_up, top.position, attack_air_up.transform.rotation);
+        PlayMFX(1);
+        vfx = true;
+        }
+        
+    }
+if (e.Data.Name == "bottomNorm") {     
+    // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
+    if(!vfx)
+        {
+        Instantiate(attack_air_bottom, bottom.position, attack_air_bottom.transform.rotation);
+        PlayMFX(1);
+        vfx = true;
+        }
+        
+    }
+ if (e.Data.Name == "upFire") {     
+    // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
+    if(!vfx)
+        {
+        Instantiate(attack_f_air_up, top.position, attack_f_air_up.transform.rotation);
+        PlayMFX(1);
+        vfx = true;
+        }
+        
+    }
+if (e.Data.Name == "bottomFire") {     
+    // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
+    if(!vfx)
+        {
+        Instantiate(attack_f_air_bottom, bottom.position, attack_f_air_bottom.transform.rotation);
+        PlayMFX(1);
+        vfx = true;
+        }
+        
+    }
+if (e.Data.Name == "upWind") {     
+    // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
+    if(!vfx)
+        {
+        Instantiate(attack_v_air_up, top.position, attack_v_air_up.transform.rotation);
+        Instantiate(VFXWindSlashTOP, top.position, VFXWindSlashTOP.transform.rotation);
+        PlayMFX(1);
+        vfx = true;
+        }
+        
+    }
+if (e.Data.Name == "bottomWind") {     
+    // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
+    if(!vfx)
+        {
+        Instantiate(attack_v_air_bottom, bottom.position, attack_v_air_bottom.transform.rotation);
+        Instantiate(VFXWindSlashDOWN, bottom.position, VFXWindSlashDOWN.transform.rotation);
         PlayMFX(1);
         vfx = true;
         }
