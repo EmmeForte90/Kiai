@@ -212,7 +212,9 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField] private string attackVoid3AnimationName;
     [SpineAnimation][SerializeField] private string upatkVoidjumpAnimationName;
     [SpineAnimation][SerializeField] private string downatkVoidjumpAnimationName;
-
+    [SpineAnimation][SerializeField] private string guardNoSAnimationName;
+    [SpineAnimation][SerializeField] private string guardNoEndSAnimationName;
+    [SpineAnimation][SerializeField] private string guardNoHitSAnimationName;
     /////////////////////////////////////////////////////////////////////
      [Header("Special")]
     [SpineAnimation][SerializeField] private string DashAttackAnimationName;
@@ -1608,6 +1610,7 @@ public void endGuard()
                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 
+
 public void GuardHit()
 {
     if (currentAnimationName != guardHitDownAnimationName)
@@ -1620,6 +1623,45 @@ public void GuardHit()
                 // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
+
+public void GuardArmAnm()
+{
+    if (currentAnimationName != guardNoSAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, guardNoSAnimationName, true);
+                    currentAnimationName = guardNoSAnimationName;
+                         _spineAnimationState.Event += HandleEvent;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+               //_spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+public void GuardArmAnmEnd()
+{
+    if (currentAnimationName != guardNoEndSAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, guardNoEndSAnimationName, false);
+                    currentAnimationName = guardNoEndSAnimationName;
+                         _spineAnimationState.Event += HandleEvent;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+               _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+
+public void GuardArmHit()
+{
+    if (currentAnimationName != guardNoHitSAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, guardNoHitSAnimationName, false);
+                    currentAnimationName = guardNoHitSAnimationName;
+                         _spineAnimationState.Event += HandleEvent;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+
 
 public void AnimationCharge()
 {

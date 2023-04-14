@@ -3603,6 +3603,9 @@ MonoBehaviour:
   attackVoid3AnimationName: Attack/SwordPlay/Void/attack_void_vertical
   upatkVoidjumpAnimationName: 
   downatkVoidjumpAnimationName: 
+  guardNoSAnimationName: Attack/SwordPlay/Void/guard_v
+  guardNoEndSAnimationName: Attack/SwordPlay/Void/guard_end_v
+  guardNoHitSAnimationName: Attack/SwordPlay/Void/guard_hit_v
   DashAttackAnimationName: Attack/SwordPlay/dashAtk
   swordDownAnimationName: Attack/Movement/hide_sword
   guardDownAnimationName: Attack/SwordPlay/guard
