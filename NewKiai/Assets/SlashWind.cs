@@ -51,20 +51,24 @@ public class SlashWind : MonoBehaviour
         if(Move.instance.transform.localScale.x > 0 && !isTop && !isBottom)
         {
             rb.velocity = transform.right * speed;
-            transform.localScale = new Vector3(1, 1, 1);
+            transform.localScale = new Vector2(1, 1);
         } 
         else if(Move.instance.transform.localScale.x < 0 && !isTop && !isBottom)
         {
             rb.velocity = -transform.right * speed;
-            transform.localScale = new Vector3(-1, 1, 1);
-        }else if(isTop && !isBottom)
+            transform.localScale = new Vector2(-1, 1);
+        }else if((Move.instance.transform.localScale.x < 0 || Move.instance.transform.localScale.x > 0)
+        && isTop && !isBottom)
         {
+            //rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * speed);   
             rb.velocity = transform.up * speed;
-            transform.localScale = new Vector3(1, 1, 1);
-        }else if(!isTop && isBottom)
+            transform.localScale = new Vector2(1, 1);
+        }else if((Move.instance.transform.localScale.x < 0 || Move.instance.transform.localScale.x > 0)
+        && !isTop && isBottom)
         {
+            //rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * -speed);
             rb.velocity = -transform.up * speed;
-            transform.localScale = new Vector3(1, 1, 1);
+            transform.localScale = new Vector2(1, -1);
         }
         Move.instance.Stop();
         PlaySFX(1);

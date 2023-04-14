@@ -16,19 +16,19 @@ public class Move : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float acceleration;
     [SerializeField] private float deceleration;
-    public float Test;
-    public float InvincibleTime = 1f;
+    [HideInInspector] public float Test;
+    [HideInInspector] public float InvincibleTime = 1f;
     [HideInInspector] public bool isHurt = false;
     [HideInInspector] public bool isBump = false;
 
     [HideInInspector] public float horDir;
-     public float vertDir;
+    [HideInInspector] public float vertDir;
     [HideInInspector] public float DpadX;//DPad del joypad per il menu rapido
     [HideInInspector] public float DpadY;//DPad del joypad per il menu rapido
-    public float L2;
-    public float R2;
+    [HideInInspector] public float L2;
+    [HideInInspector] public float R2;
 
-    public float runSpeedThreshold = 5f; // or whatever value you want
+    [HideInInspector] public float runSpeedThreshold = 5f; // or whatever value you want
     [Header("Dash")]
     public float dashForce = 50f;
     public float dashDuration = 0.5f;
@@ -39,7 +39,7 @@ public class Move : MonoBehaviour
     private float upperForceAtk = 0.5f;
     private bool attackNormal;
     private bool attackUpper;
-    public float dashCoolDown = 1f;
+    [HideInInspector] public float dashCoolDown = 1f;
     private float coolDownTime;
     private bool drawsword = false;
 
@@ -48,7 +48,7 @@ public class Move : MonoBehaviour
     [SerializeField] private float bumpForce;
     [SerializeField] private float knockForce;
     bool canDoubleJump = false;
-    public float groundDelay = 0.1f; // The minimum time before the player can jump again after touching the ground
+    [HideInInspector] public float groundDelay = 0.1f; // The minimum time before the player can jump again after touching the ground
     bool isTouchingWall = false;
     public LayerMask wallLayer;         // layer del muro
     public float wallJumpForce = 7f;    // forza del walljump
@@ -57,8 +57,6 @@ public class Move : MonoBehaviour
     public bool canWallJump = false;
     bool wallJumped = false;
 
-
-    
     float coyoteCounter = 0f;
 
     [SerializeField] private float coyoteTime;
@@ -100,15 +98,21 @@ public class Move : MonoBehaviour
    
     [Header("Animations")]
     [SpineAnimation][SerializeField] private string idleAnimationName;
+    [SpineAnimation][SerializeField] private string idleSwordAnimationName;
     [SpineAnimation][SerializeField] private string walkAnimationName;
+    [SpineAnimation][SerializeField] private string walkSwordAnimationName;
     [SpineAnimation][SerializeField] private string runAnimationName;
+    [SpineAnimation][SerializeField] private string runSwordAnimationName;
+    [SpineAnimation][SerializeField] private string talkAnimationName;
+    [Header("Jump")]
     [SpineAnimation][SerializeField] private string jumpAnimationName;
+    [SpineAnimation][SerializeField] private string jumpSwordAnimationName;
     [SpineAnimation][SerializeField] private string jumpDownAnimationName;
+    [SpineAnimation][SerializeField] private string jumpDownSwordAnimationName;
     [SpineAnimation][SerializeField] private string landingAnimationName;
     [SpineAnimation][SerializeField] private string walljumpAnimationName;
     [SpineAnimation][SerializeField] private string walljumpdownAnimationName;
     [SpineAnimation][SerializeField] private string dashAnimationName;
-    [SpineAnimation][SerializeField] private string talkAnimationName;
     //////////////////////////////////////////////////////////////////////////
         [Header("HpAnm")]
 
@@ -239,7 +243,7 @@ private int comboCount = 0;
     private bool canAttack = true;
     private bool ComboFinish;
     private float comboTimer; //imposta la durata del timer a 1 secondi
-    public float comboDurata = 0.5f; //imposta la durata del timer a 1 secondi
+    [HideInInspector] public float comboDurata = 0.5f; //imposta la durata del timer a 1 secondi
     [SerializeField] public int comboCounter = 0; // contatore delle combo
     private float ShotTimer = 0f;
     private float attackRate = 0.5f;
@@ -266,7 +270,7 @@ private int comboCount = 0;
     private bool isAttackingAir = false; // vero se il personaggio sta attaccando
     private bool isBlast = false; // vero se il personaggio sta attaccando
     public bool stopInput = false;
-    public bool NotStrangeAnimationTalk = false;
+    [HideInInspector] public bool NotStrangeAnimationTalk = false;
 
     private int facingDirection = 1; // La direzione in cui il personaggio sta guardando: 1 per destra, -1 per sinistra
     
@@ -278,19 +282,14 @@ private int comboCount = 0;
     public AudioMixer SFX;
     private bool sgmActive = false;
 
-
-
     private SkeletonAnimation _skeletonAnimation;
     private Spine.AnimationState _spineAnimationState;
     private Spine.Skeleton _skeleton;
     Spine.EventData eventData;
 
-
-
-    public Rigidbody2D rb;
+    [HideInInspector] public Rigidbody2D rb;
 
 public static Move instance;
-
 
     private void Awake()
     {
@@ -298,7 +297,6 @@ public static Move instance;
         {
             instance = this;
         }
-
         _skeletonAnimation = GetComponent<SkeletonAnimation>();
         if (_skeletonAnimation == null) {
             Debug.LogError("Componente SkeletonAnimation non trovato!");
@@ -321,14 +319,11 @@ public static Move instance;
         {
         audioSource.outputAudioMixerGroup = SFX.FindMatchingGroups("Master")[0];
         }
-
 //Debug.Log("AudioMixer aggiunto correttamente agli AudioSource.");
-
-
     }
     
-    private void Update()
-    {
+private void Update()
+{
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 if(!stopInput)
@@ -406,8 +401,6 @@ if (Input.GetButtonDown("Jump"))
         }
     }
 }
-
-
 
 // Wallslide
         if (isTouchingWall && !isGrounded() && rb.velocity.y < 0 &&  GameplayManager.instance.unlockWalljump)
@@ -703,10 +696,9 @@ if(Input.GetKeyDown(KeyCode.X))
             #endregion
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 //Guardia
-if(GameplayManager.instance.styleIcon[0] == true)
-{if (style == 0) //Normal
 {if (Input.GetButton("Fire3") && !isGuard)
 {isGuard = true;
+drawsword = true;
 GuardAnm();
 Stop();
 }if (Input.GetButtonUp("Fire3"))
@@ -714,15 +706,16 @@ Stop();
 {endGuard();
 isGuard = false;}}
 if (isGuard)
-{Stop();}}}
+{Stop();}}
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 //Special
 if(GameplayManager.instance.styleIcon[1] == true)
 {if (style == 1) //Rock
 {
- if (Input.GetButtonDown("Fire3") && !isCharging && Time.time - timeSinceLastAttack > attackRate)
+ if (Input.GetButtonDown("Fire2") && !isCharging && Time.time - timeSinceLastAttack > attackRate)
     {
         isCharging = true;
+        drawsword = true;
         AnimationCharge();
         Stop();
         // Inizializza il timer al tempo massimo
@@ -730,7 +723,7 @@ if(GameplayManager.instance.styleIcon[1] == true)
         InvokeRepeating("CountDown", 1f, 1f);
     }
 
-    if (Input.GetButtonDown("Fire3") && isCharging)
+    if (Input.GetButtonDown("Fire2") && isCharging)
     {
         Stop();
         // Decrementa il timer di un secondo
@@ -739,7 +732,7 @@ if(GameplayManager.instance.styleIcon[1] == true)
         HitboxPlayer.Instance.Damage = minDamage + (maxDamage - minDamage) * currentTime / timeLimit;
     }
 
-    if (Input.GetButtonUp("Fire3") && isCharging)
+    if (Input.GetButtonUp("Fire2") && isCharging)
     {
         if (currentTime == 0)
         {
@@ -909,6 +902,7 @@ public void changeStyle()
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[1].transform.position;
         HitboxPlayer.Instance.Damage = 50;
         RockPose();
+        drawsword = true;
         }        
     }else if(MaxStyle == 2)
     { 
@@ -919,6 +913,7 @@ public void changeStyle()
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[2].transform.position;
         HitboxPlayer.Instance.Damage = 30;
         FirePose();
+        drawsword = true;
         }        
     }else if(MaxStyle == 3)
     {
@@ -929,6 +924,7 @@ public void changeStyle()
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[3].transform.position;
         HitboxPlayer.Instance.Damage = 5;
         WindPose();
+        drawsword = true;
         }       
     }else if(MaxStyle == 4)
     {            
@@ -939,6 +935,7 @@ public void changeStyle()
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[4].transform.position;
         HitboxPlayer.Instance.Damage = 5;
         WaterPose();
+        drawsword = true;
         }       
     }else if(MaxStyle == 5)
     {    
@@ -959,6 +956,7 @@ public void changeStyle()
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[0].transform.position;
         HitboxPlayer.Instance.Damage = 10;
         NormalPose();
+        drawsword = true;
         }        
     }
 }
@@ -1331,6 +1329,8 @@ public void UpAtk()
 {
     if (currentAnimationName != upatkjumpAnimationName)
                 {
+                    _spineAnimationState.ClearTrack(2);
+                    _spineAnimationState.ClearTrack(1);
                     _spineAnimationState.SetAnimation(2, upatkjumpAnimationName, false);
                     currentAnimationName = upatkjumpAnimationName;
                                         _spineAnimationState.Event += HandleEvent;
@@ -1346,6 +1346,8 @@ public void DownAtk()
 {
     if (currentAnimationName != downatkjumpAnimationName)
                 {
+                    _spineAnimationState.ClearTrack(2);
+                    _spineAnimationState.ClearTrack(1);
                     _spineAnimationState.SetAnimation(2, downatkjumpAnimationName, false);
                     currentAnimationName = downatkjumpAnimationName;
                                         _spineAnimationState.Event += HandleEvent;
@@ -1404,6 +1406,7 @@ public void DownAtkWind()
 {
     if (currentAnimationName != downatkWindjumpAnimationName)
                 {
+                    _spineAnimationState.ClearTrack(2);
                     _spineAnimationState.SetAnimation(2, downatkWindjumpAnimationName, false);
                     currentAnimationName = downatkWindjumpAnimationName;
                                         _spineAnimationState.Event += HandleEvent;
@@ -1419,6 +1422,7 @@ public void UpAtkVoid()
 {
     if (currentAnimationName != upatkVoidjumpAnimationName)
                 {
+                    _spineAnimationState.ClearTrack(2);
                     _spineAnimationState.SetAnimation(2, upatkVoidjumpAnimationName, false);
                     currentAnimationName = upatkVoidjumpAnimationName;
                                         _spineAnimationState.Event += HandleEvent;
@@ -1544,9 +1548,19 @@ private void OnJumpAnimationComplete(Spine.TrackEntry trackEntry)
 
     // Clear the track 1 and reset to the idle animation
     _spineAnimationState.ClearTrack(1);
-    _spineAnimationState.SetAnimation(1, idleAnimationName, true);
-    currentAnimationName = idleAnimationName;
-
+    if(!drawsword)
+            {
+                if (currentAnimationName != idleAnimationName) {
+                    _spineAnimationState.SetAnimation(1, idleAnimationName, true);
+                    currentAnimationName = idleAnimationName;
+                }
+            } else if(drawsword)
+            {
+                if (currentAnimationName != idleSwordAnimationName) {
+                    _spineAnimationState.SetAnimation(1, idleSwordAnimationName, true);
+                    currentAnimationName = idleSwordAnimationName;
+                }
+            }
      // Reset the attack state
     isAttacking = false;
     isAttackingAir = false;
@@ -2200,11 +2214,20 @@ private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
 
     // Clear the track 1 and reset to the idle animation
     _spineAnimationState.ClearTrack(2);
-    _spineAnimationState.SetAnimation(1, idleAnimationName, true);
-    currentAnimationName = idleAnimationName;
-
+    if(!drawsword)
+            {
+                if (currentAnimationName != idleAnimationName) {
+                    _spineAnimationState.SetAnimation(1, idleAnimationName, true);
+                    currentAnimationName = idleAnimationName;
+                }
+            } else if(drawsword)
+            {
+                if (currentAnimationName != idleSwordAnimationName) {
+                    _spineAnimationState.SetAnimation(1, idleSwordAnimationName, true);
+                    currentAnimationName = idleSwordAnimationName;
+                }
+            }
      // Reset the attack state
-    
     isAttacking = false;
     isAttackingAir = false;
     if (_skeletonAnimation != null)
@@ -2364,41 +2387,82 @@ private void moving() {
             Test = speed;
             if (Mathf.Abs(Input.GetAxis("Horizontal")) < 0.01f) {
                 // Player is not moving
+                if(!drawsword)
+            {
                 if (currentAnimationName != idleAnimationName) {
                     _spineAnimationState.SetAnimation(1, idleAnimationName, true);
                     currentAnimationName = idleAnimationName;
                 }
+            } else if(drawsword)
+            {
+                if (currentAnimationName != idleSwordAnimationName) {
+                    _spineAnimationState.SetAnimation(1, idleSwordAnimationName, true);
+                    currentAnimationName = idleSwordAnimationName;
+                }
+            }
             } else if (speed > runSpeedThreshold) {
                 // Player is running
+                if(!drawsword)
+            {
                 if (currentAnimationName != runAnimationName) {
                     _spineAnimationState.SetAnimation(1, runAnimationName, true);
                     currentAnimationName = runAnimationName;
                 }
+            } else if(drawsword)
+            {
+                if (currentAnimationName != runSwordAnimationName) {
+                    _spineAnimationState.SetAnimation(1, runSwordAnimationName, true);
+                    currentAnimationName = runSwordAnimationName;
+                }
+            }
             } else {
                 // Player is walking
+                if(!drawsword)
+            {
                 if (currentAnimationName != walkAnimationName) {
                     _spineAnimationState.SetAnimation(1, walkAnimationName, true);
                     currentAnimationName = walkAnimationName;
                 }
+            } else if(drawsword)
+            {
+                if (currentAnimationName != walkSwordAnimationName) {
+                    _spineAnimationState.SetAnimation(1, walkSwordAnimationName, true);
+                    currentAnimationName = walkSwordAnimationName;
+                }
+            }
             }
             break;
 
         case > 0:
             // Player is jumping
-            
+            if(!drawsword)
+            {
             if (currentAnimationName != jumpAnimationName) {
                 _spineAnimationState.SetAnimation(1, jumpAnimationName, true);
                 currentAnimationName = jumpAnimationName;
-            }
+            }} else if(drawsword)
+            {
+            if (currentAnimationName != jumpSwordAnimationName) {
+                _spineAnimationState.SetAnimation(1, jumpSwordAnimationName, true);
+                currentAnimationName = jumpSwordAnimationName;
+            }}
             
             break;
 
         case < 0:
             // Player is falling
-            
+            if(!drawsword)
+            {
             if (currentAnimationName != jumpDownAnimationName) {
                 _spineAnimationState.SetAnimation(1, jumpDownAnimationName, true);
                 currentAnimationName = jumpDownAnimationName;
+            }
+            } else if(drawsword)
+            {
+            if (currentAnimationName != jumpDownSwordAnimationName) {
+                _spineAnimationState.SetAnimation(1, jumpDownSwordAnimationName, true);
+                currentAnimationName = jumpDownSwordAnimationName;
+            }
             }
             
             break;

@@ -83,6 +83,7 @@ public class GameplayManager : MonoBehaviour
    [SerializeField] public GameObject Rampino;
 
     public bool startGame = false;
+    [SerializeField] public Animator myAnimator;
 
 
     private GameObject[] Ordalia;
@@ -118,7 +119,7 @@ public class GameplayManager : MonoBehaviour
         virtualCamera = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
         //player = GameObject.FindWithTag("Player");
         Menu = GameObject.FindWithTag("Bound");
-            toy = GameObject.FindWithTag("Player");
+        toy = GameObject.FindWithTag("Player");
 
 
         
@@ -191,6 +192,7 @@ public void Update()
 public void ComboCount()
 {
 C_Count++;
+myAnimator.SetTrigger("Take");
 comboTimer = 3f; //decrementa il timer ad ogni frame
 ComboValue.text = C_Count.ToString();
 }

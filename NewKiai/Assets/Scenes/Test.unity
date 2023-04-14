@@ -3503,15 +3503,20 @@ MonoBehaviour:
   VFXWindSlashTOP: {fileID: 1222622960148544934, guid: 0b421973ddf6cd9489f186b06063c6d7, type: 3}
   VFXWindSlashDOWN: {fileID: 3978827659523724154, guid: 7f3e134520e3b7f428c2402a488e635e, type: 3}
   idleAnimationName: idle
+  idleSwordAnimationName: idle_sword
   walkAnimationName: Movement/WalkCycles/walk
+  walkSwordAnimationName: Movement/WalkCycles/walk_sword
   runAnimationName: Movement/WalkCycles/run
+  runSwordAnimationName: Movement/WalkCycles/run_sword
+  talkAnimationName: Movement/WalkCycles/talk
   jumpAnimationName: Movement/JumpCycles/jump_loop
+  jumpSwordAnimationName: Movement/JumpCycles/jump_loop_sword
   jumpDownAnimationName: Movement/JumpCycles/jump_fall
+  jumpDownSwordAnimationName: Movement/JumpCycles/jump_fall_sword
   landingAnimationName: Movement/JumpCycles/jump_landing
   walljumpAnimationName: Movement/JumpCycles/wallsliding
   walljumpdownAnimationName: Movement/JumpCycles/jump_fall
   dashAnimationName: Movement/WalkCycles/dash
-  talkAnimationName: Movement/WalkCycles/talk
   hurtAnimationName: Damage/hurt
   deathAnimationName: Damage/tired
   RestAnimationName: Maditation/meditation_surprise
@@ -4167,7 +4172,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 417887271}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.37, y: -3.19, z: 0}
+  m_LocalPosition: {x: 5.04, y: -3.19, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -26941,6 +26946,7 @@ MonoBehaviour:
   Dash: {fileID: 1363542455}
   Rampino: {fileID: 62324535}
   startGame: 0
+  myAnimator: {fileID: 1989886765}
   OrdaliaActive: 0000000000
   DoorActive: 0000000000
 --- !u!1 &1838457527
@@ -30286,13 +30292,14 @@ GameObject:
   - component: {fileID: 1989886762}
   - component: {fileID: 1989886764}
   - component: {fileID: 1989886763}
+  - component: {fileID: 1989886765}
   m_Layer: 5
   m_Name: ComboChain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1989886762
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30312,7 +30319,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 880, y: 282}
+  m_AnchoredPosition: {x: 1203, y: 282}
   m_SizeDelta: {x: 165.2784, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1989886763
@@ -30353,6 +30360,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1989886761}
   m_CullTransparentMesh: 1
+--- !u!95 &1989886765
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1989886761}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 037eb811eb3061a4d92e398647dd88ab, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1992072620
 GameObject:
   m_ObjectHideFlags: 0
