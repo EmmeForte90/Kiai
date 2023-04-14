@@ -698,17 +698,60 @@ if(Input.GetKeyDown(KeyCode.X))
             #endregion
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 //Guardia
-{if (Input.GetButton("Fire3") && !isGuard)
-{isGuard = true;
+if (Input.GetButton("Fire3") && !isGuard)
+{
+if(GameplayManager.instance.styleIcon[5] == true ||
+GameplayManager.instance.styleIcon[0] == true ||
+GameplayManager.instance.styleIcon[1] == true ||
+GameplayManager.instance.styleIcon[2] == true ||
+GameplayManager.instance.styleIcon[3] == true ||
+GameplayManager.instance.styleIcon[4] == true)
+{if (style == 5) //Rock
+{ 
+isGuard = true;
+GuardArmAnm();
+Stop();
+}
+else if(style == 0 || 
+style == 1 ||
+style == 2 ||
+style == 3 ||
+style == 4)
+{
+isGuard = true;
 drawsword = true;
 GuardAnm();
 Stop();
-}if (Input.GetButtonUp("Fire3"))
-{if (isGuard)
-{endGuard();
-isGuard = false;}}
+}}}
+
+if (Input.GetButtonUp("Fire3"))
+{
+if(GameplayManager.instance.styleIcon[5] == true ||
+GameplayManager.instance.styleIcon[0] == true ||
+GameplayManager.instance.styleIcon[1] == true ||
+GameplayManager.instance.styleIcon[2] == true ||
+GameplayManager.instance.styleIcon[3] == true ||
+GameplayManager.instance.styleIcon[4] == true)
+{    
 if (isGuard)
-{Stop();}}
+{
+if (style == 5) //Rock
+{isGuard = false;
+GuardArmAnmEnd();
+}
+else if(style == 0 || 
+style == 1 ||
+style == 2 ||
+style == 3 ||
+style == 4)
+{endGuard();
+isGuard = false;}
+}
+}
+}
+
+if (isGuard)
+{Stop();}
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 //Special
 if(GameplayManager.instance.styleIcon[1] == true)
