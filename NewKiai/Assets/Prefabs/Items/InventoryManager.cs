@@ -432,8 +432,10 @@ public void OnQuestButtonClicked(int itemId, Image previewImages, TextMeshProUGU
             ChangeHeroSkin.Instance.katana = NameSkin;
             ChangeHeroSkin.Instance.UpdateCharacterSkin();
 		    ChangeHeroSkin.Instance.UpdateCombinedSkin(); 
-            PuppetSkin.Instance.DressSkin = NameSkin;  
-		    PuppetSkin.Instance.UpdateCharacterSkinUI(NameSkin);
+            PuppetSkin.Instance.katana = NameSkin;
+            PuppetSkin.Instance.UpdateCharacterSkinUI(NameSkin);
+            PuppetSkin.Instance.UpdateCombinedSkinUI(); 
+
 		   // PuppetSkin.Instance.UpdateCombinedSkinUI();
     }else if(itemId >= 0 && isDress)
     {
@@ -445,6 +447,7 @@ public void OnQuestButtonClicked(int itemId, Image previewImages, TextMeshProUGU
 	    	ChangeHeroSkin.Instance.UpdateCombinedSkin();
             PuppetSkin.Instance.DressSkin = NameSkin;
             PuppetSkin.Instance.UpdateCharacterSkinUI(NameSkin);
+            PuppetSkin.Instance.UpdateCombinedSkinUI(); 
 		   // PuppetSkin.Instance.UpdateCombinedSkinUI();
     }
     

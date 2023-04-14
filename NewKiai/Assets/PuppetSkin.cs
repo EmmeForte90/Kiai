@@ -8,14 +8,11 @@ using Spine.Unity;
 public class PuppetSkin : MonoBehaviour
 {
    	// Character skins
-	[SpineSkin] public string DressSkin = "Nude";
-
+	[SpineSkin] public string DressSkin = "default";
 	[SpineSkin] public string katana = "default";
 	
 	SkeletonGraphic _skeletonGraphic;
 	Skeleton skeleton;
-	// This "naked body" skin will likely change only once upon character creation,
-	// so we store this combined set of non-equipment Skins for later re-use.
 	Skin characterSkin;
 
 	// for repacking the skin to a new atlas texture
@@ -37,9 +34,7 @@ public enum ItemSlot
         {
             Instance = this;
         }
-		//skeletonAnimation = this.GetComponent<SkeletonAnimation>();
 		_skeletonGraphic = this.GetComponent<SkeletonGraphic>();
-
 	}
 
 	
@@ -59,23 +54,16 @@ public enum ItemSlot
 		_skeletonGraphic.Skeleton.Skin = repackedSkin;
 		_skeletonGraphic.Skeleton.SetSlotsToSetupPose();
 		_skeletonGraphic.AnimationState.Apply(_skeletonGraphic.Skeleton);
-
-		// `GetRepackedSkin()` and each call to `GetRemappedClone()` with parameter `premultiplyAlpha` set to `true`
-		// cache necessarily created Texture copies which can be cleared by calling AtlasUtilities.ClearCache().
-		// You can optionally clear the textures cache after multiple repack operations.
-		// Just be aware that while this cleanup frees up memory, it is also a costly operation
-		// and will likely cause a spike in the framerate.
 		AtlasUtilities.ClearCache();
 		Resources.UnloadUnusedAssets();
 	}
 
 	
-public void UpdateCharacterSkinUI(string characterSkin)
+public void UpdateCharacterSkinUI(string CH)
 {
-_skeletonGraphic.Skeleton.SetSkin(characterSkin);
-//_skeletonGraphic.Skeleton.SetSlotsToSetupPose();
+_skeletonGraphic.Skeleton.SetSkin(CH);
+ characterSkin = new Skin(CH);
 _skeletonGraphic.LateUpdate();
-//_skeletonGraphic.initialSkinName = characterSkin.Name;
 }
 
 public void UpdateCombinedSkinUI()

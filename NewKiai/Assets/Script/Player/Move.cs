@@ -120,12 +120,14 @@ public class Move : MonoBehaviour
     [SerializeField] GameObject attack_h2;
     [SerializeField] GameObject attack_air_bottom;
     [SerializeField] GameObject attack_air_up;
+    [SpineAnimation][SerializeField] private string KiaiNormalAnimationName;
     [SpineAnimation][SerializeField] private string attackNormal1AnimationName;
     [SpineAnimation][SerializeField] private string attackNormal2AnimationName;
     [SpineAnimation][SerializeField] private string attackNormal3AnimationName;
         [Header("Fire")]
     public GameObject S_Fire;
     [SpineAnimation][SerializeField] private string fireposAnimationName;
+    [SpineAnimation][SerializeField] private string KiaiFireAnimationName;
     [SerializeField] GameObject attack_f_v;
     [SerializeField] GameObject attack_f_h;
     [SerializeField] GameObject attack_f_h2;
@@ -138,6 +140,7 @@ public class Move : MonoBehaviour
         [Header("Water")]
     public GameObject S_Water;
     [SpineAnimation][SerializeField] private string waterposAnimationName;
+    [SpineAnimation][SerializeField] private string KiaiWaterAnimationName;
     [SerializeField] GameObject attack_w_v;
     [SerializeField] GameObject attack_w_h;
     [SerializeField] GameObject attack_w_h2;
@@ -149,14 +152,17 @@ public class Move : MonoBehaviour
         [Header("Rock")]
     public GameObject S_Rock;
     [SpineAnimation][SerializeField] private string rockposAnimationName;
+    [SpineAnimation][SerializeField] private string KiaiRockAnimationName;
     [SerializeField] GameObject attack_r_v;
     [SerializeField] GameObject attack_r_h;
     [SerializeField] GameObject attack_r_h2;
   
-    [SerializeField] GameObject attack_r_air_bottom;
-    [SerializeField] GameObject attack_r_air_up;
+    [SerializeField] GameObject attack_r_air_Landing;
+    [SerializeField] GameObject attack_r_air_Charge;
     [SerializeField] GameObject pesante;
     [SerializeField] GameObject charge;
+    [SpineAnimation][SerializeField] private string RockjumpAnimationName;
+    [SpineAnimation][SerializeField] private string RockjumpLandingAnimationName;
     [SpineAnimation][SerializeField] private string chargeAnimationName;
     [SpineAnimation][SerializeField] private string releaseAnimationName;
     [SpineAnimation][SerializeField] private string attackRock1AnimationName;
@@ -165,6 +171,7 @@ public class Move : MonoBehaviour
         [Header("Wind")]
     public GameObject S_Wind;
     [SpineAnimation][SerializeField] private string windposAnimationName;
+    [SpineAnimation][SerializeField] private string KiaiWindAnimationName;
     [SerializeField] GameObject attack_v_v;
     [SerializeField] GameObject attack_v_h;
     [SerializeField] GameObject attack_v_h2;
@@ -179,10 +186,10 @@ public class Move : MonoBehaviour
         [Header("Void")]
     public GameObject S_Void;
     [SpineAnimation][SerializeField] private string voidposAnimationName;
+    [SpineAnimation][SerializeField] private string KiaiVoidAnimationName;
     [SerializeField] GameObject attack_m_v;
     [SerializeField] GameObject attack_m_h;
     [SerializeField] GameObject attack_m_h2;
-  
     [SerializeField] GameObject attack_m_air_bottom;
     [SerializeField] GameObject attack_m_air_up;
     [SpineAnimation][SerializeField] private string attackVoid1AnimationName;
@@ -194,9 +201,10 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField] private string upatkjumpAnimationName;
     [SpineAnimation][SerializeField] private string downatkjumpAnimationName;
     /////////////////////////////////////////////////////////////////////
+     [Header("Special")]
     [SpineAnimation][SerializeField] private string SpecialAnimationName;
     [SpineAnimation][SerializeField] private string DashAttackAnimationName;
-    [SpineAnimation][SerializeField] private string pesanteAnimationName;
+    //[SpineAnimation][SerializeField] private string pesanteAnimationName;
     [SpineAnimation][SerializeField] private string swordDownAnimationName;
     [SpineAnimation][SerializeField] private string guardDownAnimationName;
     [SpineAnimation][SerializeField] private string guardEndDownAnimationName;
@@ -420,6 +428,10 @@ if (Input.GetButtonDown("Jump"))
             {if (style == 4) //Water
             {isAttackingAir = true;
             WaterJumpAtk();}}
+            else if(GameplayManager.instance.styleIcon[2] == true)
+            {if (style == 2) //Rock
+            {isAttackingAir = true;
+            RockJumpAtk();}}  
             else{isAttackingAir = true;
             DownAtk();}
         } 
@@ -429,8 +441,11 @@ if (Input.GetButtonDown("Jump"))
             {if (style == 4) //Water
             {isAttackingAir = true;
             WaterJumpAtk();}}
-            else
+            else if(GameplayManager.instance.styleIcon[2] == true)
+            {if (style == 2) //Rock
             {isAttackingAir = true;
+            RockJumpAtk();}}  
+            else{isAttackingAir = true;
             UpAtk();} 
         }
         else if (!isGrounded() && Input.GetButtonDown("Fire1"))
@@ -439,6 +454,10 @@ if (Input.GetButtonDown("Jump"))
             {if (style == 4) //Water
             {isAttackingAir = true;
             WaterJumpAtk();}}
+            else if(GameplayManager.instance.styleIcon[2] == true)
+            {if (style == 2) //Rock
+            {isAttackingAir = true;
+            RockJumpAtk();}} 
         }           
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////             
 
@@ -1472,6 +1491,37 @@ public void WaterJumpAtk()
                     _spineAnimationState.ClearTrack(1);
                     _spineAnimationState.SetAnimation(2, WaterjumpAnimationName, true);
                     currentAnimationName = WaterjumpAnimationName;
+                                        _spineAnimationState.Event += HandleEvent;
+
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+            _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+
+public void RockJumpAtk()
+{
+    if (currentAnimationName != RockjumpAnimationName)
+                {    
+                    _spineAnimationState.ClearTrack(2);
+                    _spineAnimationState.ClearTrack(1);
+                    _spineAnimationState.SetAnimation(2, RockjumpAnimationName, true);
+                    currentAnimationName = RockjumpAnimationName;
+                                        _spineAnimationState.Event += HandleEvent;
+
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+            _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+public void RockJumpLanding()
+{
+    if (currentAnimationName != RockjumpLandingAnimationName)
+                {    
+                    _spineAnimationState.ClearTrack(2);
+                    _spineAnimationState.ClearTrack(1);
+                    _spineAnimationState.SetAnimation(2, RockjumpLandingAnimationName, false);
+                    currentAnimationName = RockjumpLandingAnimationName;
                                         _spineAnimationState.Event += HandleEvent;
 
                    // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");

@@ -8,15 +8,12 @@ using Spine.Unity;
 public class ChangeHeroSkin : MonoBehaviour
 {
 	// Character skins
-	[SpineSkin] public string DressSkin = "Nude";
+	[SpineSkin] public string DressSkin = "default";
 
 	[SpineSkin] public string katana = "default";
 	
 	SkeletonAnimation skeletonAnimation;
-	//public SkeletonGraphic _skeletonGraphic;
 	Skeleton skeleton;
-	// This "naked body" skin will likely change only once upon character creation,
-	// so we store this combined set of non-equipment Skins for later re-use.
 	Skin characterSkin;
 
 	// for repacking the skin to a new atlas texture
@@ -39,8 +36,6 @@ public enum ItemSlot
             Instance = this;
         }
 		skeletonAnimation = this.GetComponent<SkeletonAnimation>();
-		//_skeletonGraphic = this.GetComponent<SkeletonGraphic>();
-
 	}
 
 	
@@ -59,7 +54,6 @@ public enum ItemSlot
 	{
 		// Create a repacked skin.
 		Skin previousSkin = skeletonAnimation.Skeleton.Skin;
-		// Note: materials and textures returned by GetRepackedSkin() behave like 'new Texture2D()' and need to be destroyed
 		if (runtimeMaterial)
 			Destroy(runtimeMaterial);
 		if (runtimeAtlas)
@@ -71,12 +65,6 @@ public enum ItemSlot
 		skeletonAnimation.Skeleton.Skin = repackedSkin;
 		skeletonAnimation.Skeleton.SetSlotsToSetupPose();
 		skeletonAnimation.AnimationState.Apply(skeletonAnimation.Skeleton);
-
-		// `GetRepackedSkin()` and each call to `GetRemappedClone()` with parameter `premultiplyAlpha` set to `true`
-		// cache necessarily created Texture copies which can be cleared by calling AtlasUtilities.ClearCache().
-		// You can optionally clear the textures cache after multiple repack operations.
-		// Just be aware that while this cleanup frees up memory, it is also a costly operation
-		// and will likely cause a spike in the framerate.
 		AtlasUtilities.ClearCache();
 		Resources.UnloadUnusedAssets();
 	}
@@ -88,9 +76,6 @@ public enum ItemSlot
 		{print("niente");}
 		SkeletonData skeletonData = skeleton.Data;
 		characterSkin = new Skin("character-base");
-		// Note that the result Skin returned by calls to skeletonData.FindSkin()
-		// could be cached once in Start() instead of searching for the same skin
-		// every time. For demonstration purposes we keep it simple here.
 		characterSkin.AddSkin(skeletonData.FindSkin(DressSkin));
 	}
 
