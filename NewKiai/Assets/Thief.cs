@@ -40,13 +40,11 @@ public float attackCooldown = 1f; // durata del cooldown dell'attacco
 private float attackTimer;
 public float InvincibleTime = 1f;
 public int GuardChance = 3; // Se il numero casuale è compreso tra 1 e 8 (80% di probabilità), aggiungi 5 di essenza
-[SerializeField] private float knockForce = 10f;
 
 [Header("Abilitations")]
 private bool isChasing = false; // indica se il nemico sta inseguendo il player
 private bool isMove = false;
 private bool isAttacking = false;
-private bool isKnockback = false;
 private bool isHurt = false;
 private bool isDie = false;
 private bool pauseAtck = false;
@@ -61,11 +59,10 @@ private float waitDuration = 2f;
 private bool  isGuard = false;
 
 [Header("Knockback")]
-    private bool kb = false;
-    public float knockbackForce; // la forza del knockback
-    public float knockbackTime; // il tempo di knockback
-    public float jumpHeight; // l'altezza del salto
-    public float fallTime; // il tempo di caduta
+[SerializeField] private float knockForce = 1f;
+private float KnockTime; //decrementa il timer ad ogni frame
+public float Knockmax = 1f; //decrementa il timer ad ogni frame
+private bool isKnockback = false;
 
  [Header("Audio")]
  [HideInInspector] public float basePitch = 1f;
@@ -92,7 +89,8 @@ private AudioSource[] bgm; // array di AudioSource che conterrà gli oggetti Aud
     [SerializeField] GameObject attack;
     [SerializeField] GameObject attack_h;
     [SerializeField] GameObject attack_B;
-    [SerializeField] GameObject Sdeng;
+    [SerializeField] GameObject VFXSdeng;
+    [SerializeField] GameObject VFXHurt;
 
 
 
@@ -154,8 +152,10 @@ private void Update()
             if(Input.GetKeyDown(KeyCode.B))
             {
             Debug.Log("Il pulsante è stato premuto!");
+            rb.isKinematic = false;
+            isKnockback = true;
             Knockback();
-            Damage(10);
+            //Damage(10);
             }
             #endregion
             
@@ -220,6 +220,7 @@ if (health.currentHealth <= 0)
     isAttacking = false;
     isMove = false;
     isGuard = false;
+    Knockback();
     currentState = State.Knockback;
 } else if (isHurt) 
 { // controlla se il personaggio è stato colpito
@@ -282,6 +283,20 @@ if (Move.instance.isAttacking || Move.instance.isAttackingAir)
     RandomicDefence();
 }}
 
+if(isKnockback)
+{
+        KnockTime -= Time.deltaTime; //decrementa il timer ad ogni frame
+        if (KnockTime <= 0f) 
+        {
+        isKnockback = false; 
+        rb.isKinematic = true;
+        //rb.velocity = new Vector2(0f, 0f);
+        KnockTime = Knockmax;
+        currentState = State.Wait;
+        }
+}
+
+
 }
 
 //Il nemico torna a inseguirlo dopo tot tempo
@@ -302,7 +317,7 @@ private void Wait()
 // Controlla se l'oggetto deve essere in movimento, il rigedbody è in KInematic
 private void Moving()
 {
-    if (isMove && !isAttacking)
+    if (isMove && !isAttacking && !isKnockback)
     {
         // Controlla se l'oggetto deve spostarsi verso destra o sinistra
         if (transform.position.x < positions[id_positions].x)
@@ -372,7 +387,7 @@ private void Flip()
     }
 private void Chase()
 {
-    if(isChasing && !isAttacking)
+    if(isChasing && !isAttacking && !isKnockback)
     {
     // inseguimento del giocatore
     if (player.transform.position.x > transform.position.x)
@@ -392,7 +407,7 @@ private void Chase()
 }
 private void Attack()
 {
-    if (isAttacking) // Se il personaggio sta attaccando...
+    if (isAttacking && !isKnockback) // Se il personaggio sta attaccando...
     {
         if (attackTimer > 0) // ...e l'attacco non è ancora disponibile...
         {
@@ -443,8 +458,13 @@ void FacePlayer()
             }
         }
     }
+
 public void Knockback()
     {
+        if(isKnockback){
+        rb.velocity = new Vector2(0f, 0f);
+         // applica l'impulso del salto se il personaggio è a contatto con il terreno
+        print("dovrebbefare il knockback");
          // applica l'impulso del salto se il personaggio è a contatto con il terreno
         if (transform.localScale.x < 0)
         {
@@ -454,11 +474,7 @@ public void Knockback()
         {
         rb.AddForce(new Vector2(-knockForce, 0f), ForceMode2D.Impulse);
         }
-         else if (transform.localScale.x == 0)
-        {
-        rb.AddForce(new Vector2(-knockForce, 0f), ForceMode2D.Impulse);
         }
-        isKnockback = false;
     }
 
 void RandomicDefence()
@@ -511,7 +527,8 @@ public void Damage(int damage)
 
     if (isGuard) 
     {  
-    Instantiate(Sdeng, slashpoint.position, transform.rotation);
+    Instantiate(VFXSdeng, slashpoint.position, transform.rotation);
+    Move.instance.sbam();
     damage = 0;
     PlayMFX(2);
     return;
@@ -519,14 +536,15 @@ public void Damage(int damage)
 
     health.currentHealth -= damage;
     TemporaryChangeColor(Color.red);
-    Instantiate(Sdeng, hitpoint.position, transform.rotation);
+    Instantiate(VFXHurt, hitpoint.position, transform.rotation);
     PlayMFX(1);
     if (isSmall)
     {
         HurtAnm();
+        rb.isKinematic = false;
         isKnockback = true;
-        Knockback();        
-        currentState = State.Hurt;
+        Knockback();       
+        //currentState = State.Hurt;
     }
     if (!isHurt)
     {
