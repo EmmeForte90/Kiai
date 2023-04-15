@@ -865,7 +865,7 @@ if (FireSpecial)
 {
 if (style == 2) //Fire
 {FireSpecial = false;
-FireUpperEnd();
+attackupper();
 }}}}
 if (FireSpecial)
 {Stop();}
@@ -903,7 +903,9 @@ GameplayManager.instance.styleIcon[4] == true)
 WaterSpecial = true;
 drawsword = true;
 WaterLoop();
+Stop();
 }}}
+
 
 if (Input.GetButtonUp("Fire2"))
 {
@@ -919,6 +921,10 @@ if (WaterSpecial)
 if (style == 4) //Water
 {WaterSpecial = false;
 EndWater();
+
+if (WaterSpecial)
+{Stop();}
+
 }}}}
 #endregion
 
@@ -1170,13 +1176,13 @@ public void attackDash()
             DashAttack();        
 }
 
-/*public void attackupper()
+public void attackupper()
 {
             attackUpper = true;
             coolDownTime = dashCoolDown;
             dashTime = dashDuration;
-            Upper();        
-}*/
+            FireUpperEnd();
+}
 
 
     private void FixedUpdate()
@@ -1922,6 +1928,7 @@ public void HeavyHitRelease()
 {
     if (currentAnimationName != NHeavyReleaseAnimationName)
                 {
+                    attackDash();
                     PlayerHealth.Instance.currentStamina -= 30f;
                     _spineAnimationState.SetAnimation(2, NHeavyReleaseAnimationName, false);
                     currentAnimationName = NHeavyReleaseAnimationName;

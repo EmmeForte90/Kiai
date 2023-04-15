@@ -84,12 +84,14 @@ public static PlayerHealth Instance;
         if(Restore)
         {
         currentStamina += 20f * Time.deltaTime;
-        }
-
-        if(currentStamina >= 100)
+        if(currentStamina >= maxStamina)
         {
+            currentStamina = maxStamina;
             Restore = false;
         }
+        }
+
+        
 
 
 
