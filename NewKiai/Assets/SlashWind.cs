@@ -60,12 +60,12 @@ public class SlashWind : MonoBehaviour
         }
         else if ((Move.instance.transform.localScale.x < 0 || Move.instance.transform.localScale.x > 0) && isTop && !isBottom)
         {
-        rb.velocity = transform.up * speed;
+        rb.velocity = new Vector2(0, speed);
         transform.localScale = new Vector2(1, 1);
         }
         else if ((Move.instance.transform.localScale.x < 0 || Move.instance.transform.localScale.x > 0) && !isTop && isBottom)
         {
-        rb.velocity = -1 * transform.up * speed;
+        rb.velocity = new Vector2(0, -speed);
         transform.localScale = new Vector2(1, -1);
         }
         Move.instance.Stop();
