@@ -20,7 +20,6 @@ private float timeBeforeDestroying = 3f;
 
 [Header("Moving")]
 public float moveSpeed = 2f; // velocità di movimento
-[SerializeField] float atckForward = 5; // velocità di movimento
 [SerializeField] float pauseDuration = 0.5f; // durata della pausa
 private float pauseTimer; // timer per la pausa
 [SerializeField] private Vector3[] positions;
@@ -53,16 +52,18 @@ private bool firstattack = true;
 private bool isPlayerInAttackRange = false;
 private bool activeActions = true;
 private bool OneDie = false;
-public bool isSmall = false;
 private float waitTimer = 0f;
 private float waitDuration = 2f;
 private bool  isGuard = false;
 
 [Header("Knockback")]
+
 [SerializeField] private float knockForce = 1f;
 private float KnockTime; //decrementa il timer ad ogni frame
 public float Knockmax = 1f; //decrementa il timer ad ogni frame
 private bool isKnockback = false;
+[Tooltip("Mettilo true per far in modo che il nemico subisca un knockback quando colpito")]
+public bool isSmall = false;
 
  [Header("Audio")]
  [HideInInspector] public float basePitch = 1f;
@@ -819,10 +820,10 @@ if (e.Data.Name == "VFXSlashB") {
         // Inserisci qui il codice per gestire l'evento.
         if(horizontal == 1)
         {
-        transform.position += transform.right * atckForward * Time.deltaTime; //sposta il nemico in avanti
+        //transform.position += transform.right * atckForward * Time.deltaTime; //sposta il nemico in avanti
         } else if(horizontal == 1)
         {
-        transform.position += transform.right * -atckForward * Time.deltaTime; //sposta il nemico in avanti
+        //transform.position += transform.right * -atckForward * Time.deltaTime; //sposta il nemico in avanti
         } 
     }
 }

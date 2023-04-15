@@ -8,6 +8,7 @@ public class unlockSkill : MonoBehaviour
     public bool IsDash = false;
     public bool Iswalljump = false;
     public bool IsRampino = false;
+    private bool isCool = false;
     [SerializeField] GameObject VFX;
 
 
@@ -31,8 +32,12 @@ public class unlockSkill : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            if(!isCool)
+            {
             Pickup();
-                    Instantiate(VFX, transform.position, transform.rotation);
+            Instantiate(VFX, transform.position, transform.rotation);
+            isCool = true;
+            }
 
         }
     }

@@ -12,25 +12,22 @@ public class StyleTake : MonoBehaviour
 
 public void Update()
     {
-            if(isCollected)
-            {Destroy(gameObject);}
+        if(isCollected)
+        {Destroy(gameObject);}
     }
 
      
-    public void Pickup()
-    {
-        GameplayManager.instance.StyleActivated(StyleID);
-        isCollected = true; // Imposta la variabile booleana a "true" quando l'oggetto viene raccolto
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-        Pickup();
+        if(!isCollected)
+        {
+        GameplayManager.instance.StyleActivated(StyleID);
         AudioSource.PlayClipAtPoint(PickupSFX, Camera.main.transform.position);
         Instantiate(VFX, transform.position, transform.rotation);
-
+        isCollected = true;
+        }
         }
     }
-
 }

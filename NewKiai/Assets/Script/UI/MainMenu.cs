@@ -16,12 +16,6 @@ public class MainMenu : MonoBehaviour
     public GameObject mainmenu;
     public GameObject menu;
     public GameObject Music;
-    public string pGar;
-    public string pAst;
-    public string pMil;
-    public bool isAstra;
-    public bool isGarland;
-    public bool isPheresord;
 
     public string startScene;
     public float Timelife;
@@ -38,7 +32,7 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        AudioManager.instance.PlayMFX(0);
         resolutions = Screen.resolutions;
 
         List<string> options = new List<string>();
@@ -66,46 +60,13 @@ public void SetResolution(int resolutionIndex)
 
     Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
 }
-public void ChooseCharacter()
-    {
-        virtualCamera.Follow = player.transform;
-        mainmenu.gameObject.SetActive(false);
 
-    }
-public void notchoose()
-    {
-        virtualCamera.Follow = menu.transform;
-        mainmenu.gameObject.SetActive(true);
-
-    }
 
     public void StartGame()
     {
         StartCoroutine(fade());
-
     }
     
-    public void Phere()
-    {
-        isPheresord = true;
-        isAstra = false;
-        isGarland = false;
-    } 
-
-    public void Gar()
-    {
-        isPheresord = false;
-        isAstra = false;
-        isGarland = true;
-    } 
-    public void Astr()
-    {
-        isPheresord = false;
-        isAstra = true;
-        isGarland = false;
-
-    }
-
 
     public void Options()
     {
@@ -143,23 +104,9 @@ IEnumerator fade()
     {
         
         yield return new WaitForSeconds(Timelife);
-        Destroy(Music);
-       
-if (isGarland)
-{
-        SceneManager.LoadScene(pGar);
 
-} else if (isPheresord)
-{
-        SceneManager.LoadScene(pMil);
-
-} else if (isAstra)
-{
-        SceneManager.LoadScene(pAst);
-
-}
-
-            
+        AudioManager.instance.CrossFadeINAudio(0);
+        SceneManager.LoadScene(startScene);       
     }
 
 
