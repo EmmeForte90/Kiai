@@ -48,27 +48,25 @@ public class SlashWind : MonoBehaviour
         //Recupera i componenti dello script
         //La variabile è uguale alla scala moltiplicata la velocità del proiettile
         //Se il player si gira  anche lo spawn del proiettile farà lo stesso
-        if(Move.instance.transform.localScale.x > 0 && !isTop && !isBottom)
+        if (Move.instance.transform.localScale.x > 0 && !isTop && !isBottom)
         {
-            rb.velocity = transform.right * speed;
-            transform.localScale = new Vector2(1, 1);
-        } 
-        else if(Move.instance.transform.localScale.x < 0 && !isTop && !isBottom)
+        rb.velocity = transform.right * speed;
+        transform.localScale = new Vector2(1, 1);
+        }
+        else if (Move.instance.transform.localScale.x < 0 && !isTop && !isBottom)
         {
-            rb.velocity = -transform.right * speed;
-            transform.localScale = new Vector2(-1, 1);
-        }else if((Move.instance.transform.localScale.x < 0 || Move.instance.transform.localScale.x > 0)
-        && isTop && !isBottom)
+        rb.velocity = -transform.right * speed;
+        transform.localScale = new Vector2(-1, 1);
+        }
+        else if ((Move.instance.transform.localScale.x < 0 || Move.instance.transform.localScale.x > 0) && isTop && !isBottom)
         {
-            //rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * speed);   
-            rb.velocity = transform.up * speed;
-            transform.localScale = new Vector2(1, 1);
-        }else if((Move.instance.transform.localScale.x < 0 || Move.instance.transform.localScale.x > 0)
-        && !isTop && isBottom)
+        rb.velocity = transform.up * speed;
+        transform.localScale = new Vector2(1, 1);
+        }
+        else if ((Move.instance.transform.localScale.x < 0 || Move.instance.transform.localScale.x > 0) && !isTop && isBottom)
         {
-            //rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * -speed);
-            rb.velocity = -transform.up * speed;
-            transform.localScale = new Vector2(1, -1);
+        rb.velocity = -1 * transform.up * speed;
+        transform.localScale = new Vector2(1, -1);
         }
         Move.instance.Stop();
         PlaySFX(1);

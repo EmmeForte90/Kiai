@@ -27,6 +27,8 @@ public class Move : MonoBehaviour
     [HideInInspector] public float DpadY;//DPad del joypad per il menu rapido
     [HideInInspector] public float L2;
     [HideInInspector] public float R2;
+    
+    private VibrateCinemachine vibrateCinemachine;
 
     [HideInInspector] public float runSpeedThreshold = 5f; // or whatever value you want
     [Header("Dash")]
@@ -46,7 +48,7 @@ public class Move : MonoBehaviour
     [Header("Jump")]
     [SerializeField] private float jumpForce;
     [SerializeField] private float bumpForce;
-    [SerializeField] private float knockForce;
+    [SerializeField] private float knockForce = 10f;
     bool canDoubleJump = false;
     [HideInInspector] public float groundDelay = 0.1f; // The minimum time before the player can jump again after touching the ground
     bool isTouchingWall = false;
@@ -270,7 +272,7 @@ private int comboCount = 0;
     [HideInInspector]public bool isHeal;
     [HideInInspector]public bool isDeath;
     [HideInInspector]public bool isAttacking = false; // vero se il personaggio sta attaccando
-    private bool isAttackingAir = false; // vero se il personaggio sta attaccando
+    [HideInInspector]public bool isAttackingAir = false; // vero se il personaggio sta attaccando
     private bool isBlast = false; // vero se il personaggio sta attaccando
     public bool stopInput = false;
     [HideInInspector] public bool NotStrangeAnimationTalk = false;
@@ -323,6 +325,7 @@ public static Move instance;
         audioSource.outputAudioMixerGroup = SFX.FindMatchingGroups("Master")[0];
         }
 //Debug.Log("AudioMixer aggiunto correttamente agli AudioSource.");
+    vibrateCinemachine = GameObject.FindWithTag("MainCamera").GetComponent<VibrateCinemachine>(); //ottieni il riferimento alla virtual camera di Cinemachine
     }
     
 private void Update()
@@ -537,37 +540,7 @@ else if (Input.GetButtonDown("SlotBottom")|| DpadY == -1)
     slotR = false;
     }
 }
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-/*if (isHeal && PlayerHealth.Instance.currentEssence == 0 || isDeath) 
-{
-    isHeal = false;
-    AnimationHealEnd();
-}
-
-
-if (PlayerHealth.Instance.currentEssence > 0) 
-{
-if (Input.GetButtonDown("Heal") && !isHeal && PlayerHealth.Instance.currentHealth != PlayerHealth.Instance.maxHealth)
-{
-    Stop();
-    isHeal = true;
-    AnimationHeal();
-}
-}
-
-
-if (PlayerHealth.Instance.currentEssence > 0) 
-{
-if (Input.GetButtonUp("Heal"))
-{
-    isHeal = false;
-    AnimationHealEnd();
-}
-}*/
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
 //Attacco
 if (Input.GetButtonDown("Fire1") && !isAttacking && !isAttackingAir && !NotStrangeAnimationTalk && !isCharging) 
 {
@@ -691,12 +664,6 @@ if(Input.GetKeyDown(KeyCode.X))
                 Debug.Log("Recupero!");
                 GuardHit(); 
                 PlayerHealth.Instance.currentStamina -= 50;
-                //PlayMFX(5);
-                //repostsword();
-              //  GameplayManager.instance.StyleActivated(TESTID);
-              //  PlayerHealth.Instance.IncreaseEssence(10);
-                //PlayerHealth.Instance.currentHealth = PlayerHealth.Instance.maxHealth;
-                //PlayerHealth.Instance.currentEssence = PlayerHealth.Instance.maxEssence;
             }   
             #endregion
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
@@ -1211,6 +1178,19 @@ private void modifyPhysics()
         rb.gravityScale = gravityOnFall;
 
     }
+}
+
+
+public void sbam()
+{
+    vibrateCinemachine.Vibrate(0.2f, 0.2f);
+    //SuonoCrash
+}
+
+public void crashSlash()
+{
+    vibrateCinemachine.Vibrate(0.2f, 0.2f);
+    //SuonoCrash
 }
 
 public void StopinputTrue()

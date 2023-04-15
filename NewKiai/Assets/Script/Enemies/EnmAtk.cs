@@ -7,7 +7,7 @@ public class EnmAtk : MonoBehaviour
     public GameObject Hitbox;
     private Transform player;
     public float attackDamage = 10; // danno d'attacco
-    public float damagestamina = 30; // danno d'attacco
+    public float damagestamina = 50; // danno d'attacco
     private bool take = false;
 
     // Start is called before the first frame update
@@ -50,7 +50,7 @@ IEnumerator StopD()
                 if (!Move.instance.isHurt)
             {
             player.GetComponent<PlayerHealth>().Damage(attackDamage);
-                       Move.instance.Knockback();            
+            Move.instance.Knockback();            
 
             }}}if(Move.instance.isGuard)
             {
@@ -62,6 +62,7 @@ IEnumerator StopD()
     }else if (collision.gameObject.tag == "Hitbox")
     {
         take = true;
+            Move.instance.sbam();
            Move.instance.Knockback();            
            StartCoroutine(StopD());
 

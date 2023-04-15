@@ -163,12 +163,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa0b357a2efc7b4aa55285283d8d3f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinPickupSFX: {fileID: 8300000, guid: 3eaca7ca2bc926742a062bc41bca0986, type: 3}
+  coinPickupSFX: {fileID: 8300000, guid: 7bd7479ba9b3e314cabac247ffc1247e, type: 3}
   pointsForCoinPickup: 5
   loadDelay: 0.1
   myAnimator: {fileID: 8967968680885089744}
   lifeTime: 20
-  takeradious: 0.38
+  takeradious: 1
   light: {fileID: 8967968681365245898}
 --- !u!61 &8967968680885089747
 BoxCollider2D:
@@ -183,7 +183,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.01072992, y: -0.09959611}
+  m_Offset: {x: 0.005045183, y: -0.024382755}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -194,7 +194,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.10946258, y: 0.024369419}
+  m_Size: {x: 0.052615196, y: 0.17479613}
   m_EdgeRadius: 0
 --- !u!50 &8967968680885089748
 Rigidbody2D:

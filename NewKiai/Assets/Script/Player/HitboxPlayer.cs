@@ -46,8 +46,8 @@ if(GameplayManager.instance.styleIcon[0] == true)
         TimeHitbox = 0.5f;
         GameplayManager.instance.ComboCount();
         CanTake = true;
-        IDamegable hit = other.GetComponent<IDamegable>();
-//            hit.Damage(Move.instance.Damage);
+      IDamegable hit = other.GetComponent<IDamegable>();
+          hit.Damage(Damage);
             //Debug.Log("Damage:" + Player.Damage);
             if(Move.instance.rb.velocity.y > 0)
             {               
@@ -68,7 +68,7 @@ if(GameplayManager.instance.styleIcon[1] == true)
         GameplayManager.instance.ComboCount();
         CanTake = true;
         IDamegable hit = other.GetComponent<IDamegable>();
-           // hit.Damage(Move.instance.Damage);
+           hit.Damage(Damage);
             //Debug.Log("Damage:" + Player.Damage);
             if(Move.instance.rb.velocity.y > 0)
             {               
@@ -89,7 +89,7 @@ if(GameplayManager.instance.styleIcon[2] == true)
         GameplayManager.instance.ComboCount();
         CanTake = true;
         IDamegable hit = other.GetComponent<IDamegable>();
-          //  hit.Damage(Move.instance.Damage);
+          hit.Damage(Damage);
             //Debug.Log("Damage:" + Player.Damage);
             if(Move.instance.rb.velocity.y > 0)
             {               
@@ -110,7 +110,7 @@ if(GameplayManager.instance.styleIcon[3] == true)
         GameplayManager.instance.ComboCount();
         CanTake = true;
         IDamegable hit = other.GetComponent<IDamegable>();
-         //   hit.Damage(Move.instance.Damage);
+         hit.Damage(Damage);
             //Debug.Log("Damage:" + Player.Damage);
             if(Move.instance.rb.velocity.y > 0)
             {               
@@ -128,7 +128,7 @@ if(GameplayManager.instance.styleIcon[4] == true)
         TimeHitbox = 0.5f;
         GameplayManager.instance.ComboCount();
         IDamegable hit = other.GetComponent<IDamegable>();
-         //   hit.Damage(Move.instance.Damage);
+         hit.Damage(Damage);
             //Debug.Log("Damage:" + Player.Damage);
             if(Move.instance.rb.velocity.y > 0)
             {               
@@ -144,7 +144,7 @@ if(GameplayManager.instance.styleIcon[5] == true)
     TimeHitbox = 0.3f;
     GameplayManager.instance.ComboCount();
      IDamegable hit = other.GetComponent<IDamegable>();
-        //    hit.Damage(Move.instance.Damage);
+        hit.Damage(Damage);
             //Debug.Log("Damage:" + Player.Damage);
             if(Move.instance.rb.velocity.y > 0)
             {               
@@ -163,6 +163,8 @@ if(GameplayManager.instance.styleIcon[5] == true)
             Move.instance.Knockback();
             if(Move.instance.rb.velocity.y > 0)
             {
+                Move.instance.sbam();
+                Move.instance.Knockback(); 
                 Move.instance.isBump = true;
                 Move.instance.Bump();
             }
