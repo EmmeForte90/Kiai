@@ -153,6 +153,7 @@ private void Update()
         if(ContMosse == mosseMAX)
         { 
             EndDuello();
+            virtualCamera.Follow = toy.transform;
         }
     }
 

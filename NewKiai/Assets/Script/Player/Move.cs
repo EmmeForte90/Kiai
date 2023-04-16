@@ -189,6 +189,7 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField] private string attackWater3AnimationName;
     [SpineAnimation][SerializeField] private string WaterjumpAnimationName;
     private bool WaterSpecial = false;
+    private bool attackWater = false;
     [SpineAnimation][SerializeField] private string WaterLoopAnimationName;
     [SpineAnimation][SerializeField] private string WaterEndAnimationName;
     [SerializeField] GameObject attack_w_sp;
@@ -215,6 +216,7 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField] private string attackRock2AnimationName;
     [SpineAnimation][SerializeField] private string attackRock3AnimationName;
     private bool RockSpecial = false;
+    private bool attackRock = false;
         [Header("Wind")]
     public GameObject S_Wind;
     [Tooltip("Animazione a singolo frame")]
@@ -641,7 +643,7 @@ AddCombo();
             {DownAtkWind();}}  
             if(GameplayManager.instance.styleIcon[5] == true)
             {if (style == 5) //Void
-            {DownAtkVoid();}}  
+            {DownAtkVoid();  drawsword = false;}}  
             if(GameplayManager.instance.styleIcon[0] == true)
             {if (style == 0)//Normal
             {DownAtk();}}
@@ -664,7 +666,7 @@ AddCombo();
             {UpAtkWind();}}  
             if(GameplayManager.instance.styleIcon[5] == true)
             {if (style == 5) //Void
-            {UpAtkVoid();}}  
+            {UpAtkVoid(); drawsword = false;}}  
             if(GameplayManager.instance.styleIcon[0] == true)
             {if (style == 0)//Normal
             {UpAtk();}}
@@ -1059,7 +1061,15 @@ HeavyHitRelease();
         }
         checkFlip();
         moving();
-    }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
+//Bloccatori per animazioni
+if(attackRock)
+  {Stop();}  
+
+if(attackWater)
+  {Stop();}  
+    
+}
 
  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 public void ComboContatore()
@@ -1123,6 +1133,7 @@ comboCount = 0;}}}
 if(GameplayManager.instance.styleIcon[5] == true)
 {if (style == 5) //Void
 {
+drawsword = false;
 if (_skeletonAnimation != null)
 {
 _skeletonAnimation.timeScale = FastCombo; // Impostare il valore di time scale
@@ -1229,6 +1240,7 @@ public void changeStyle()
 
 public void attackDash()
 {
+    //Sistemare il cooldown
             attackNormal = true;
             coolDownTime = dashCoolDown;
             dashTime = dashDuration;
@@ -2618,6 +2630,7 @@ if(style == 4)
             case 1:
                 if (currentAnimationName != attackWater1AnimationName)
                 {Stop();
+                    attackDash();
                     _spineAnimationState.SetAnimation(2, attackWater1AnimationName, false);
                     currentAnimationName = attackWater1AnimationName;
                     _spineAnimationState.Event += HandleEvent;
@@ -2917,20 +2930,20 @@ private void moving() {
         case 0:
             float speed = Mathf.Abs(rb.velocity.x);
             Test = speed;
-            if (Mathf.Abs(Input.GetAxis("Horizontal")) < 0.01f) 
-            {
+            if (Mathf.Abs(Input.GetAxis("Horizontal")) < 0.01f) {
                 // Player is not moving
                 if(!drawsword)
             {
-                
-                if (currentAnimationName != idleAnimationName) 
-                {
+                if (currentAnimationName != idleAnimationName) {
                     _spineAnimationState.SetAnimation(1, idleAnimationName, true);
                     currentAnimationName = idleAnimationName;
                 }
-                
             } else if(drawsword)
             {
+                /*if (currentAnimationName != idleSwordAnimationName) {
+                    _spineAnimationState.SetAnimation(1, idleSwordAnimationName, true);
+                    currentAnimationName = idleSwordAnimationName;
+                }*/
                 if(style == 0)
                 {NormalPoseC();}
                 else if(style == 1)
@@ -2944,7 +2957,6 @@ private void moving() {
                 else if(style == 5)
                 {VoidPoseC();}
             }
-
             } else if (speed > runSpeedThreshold) {
                 // Player is running
                 if(!drawsword)
@@ -2956,10 +2968,9 @@ private void moving() {
             } else if(drawsword)
             {
                 if (currentAnimationName != runSwordAnimationName) {
-                    _spineAnimationState.SetAnimation(2, runSwordAnimationName, true);
+                    _spineAnimationState.SetAnimation(1, runSwordAnimationName, true);
                     currentAnimationName = runSwordAnimationName;
                 }
-                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
             }
             } else {
                 // Player is walking
@@ -2972,11 +2983,9 @@ private void moving() {
             } else if(drawsword)
             {
                 if (currentAnimationName != walkSwordAnimationName) {
-                    _spineAnimationState.SetAnimation(2, walkSwordAnimationName, true);
+                    _spineAnimationState.SetAnimation(1, walkSwordAnimationName, true);
                     currentAnimationName = walkSwordAnimationName;
                 }
-                // Add event listener for when the animation completes
-                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
             }
             }
             break;
@@ -3021,6 +3030,7 @@ private void moving() {
     }
 }
 }
+
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -3345,6 +3355,41 @@ if (e.Data.Name == "bottomWind") {
         }
        
     }
+
+if (e.Data.Name == "StoopingRock") {     
+    // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
+    if(!vfx)
+        {
+        attackRock = true;
+        vfx = true;
+        }
+    }
+if (e.Data.Name == "EndStoopingRock") {     
+    // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
+    if(!vfx)
+        {
+        attackRock = false;
+        vfx = true;
+        }
+    }
+if (e.Data.Name == "StoopingWater") {     
+    // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
+    if(!vfx)
+        {
+        attackWater = true;
+        vfx = true;
+        }
+    }
+if (e.Data.Name == "EndStoopingWater") {     
+    // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
+    if(!vfx)
+        {
+        attackWater = false;
+        vfx = true;
+        }
+    }
+
+
 
 if (e.Data.Name == "ShakeCam") {     
     // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
