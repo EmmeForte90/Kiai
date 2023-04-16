@@ -5,7 +5,6 @@ using UnityEngine;
 public class EnmAtk : MonoBehaviour
 {        
     public GameObject Hitbox;
-    private Transform player;
     public float attackDamage = 10; // danno d'attacco
     public float damagestamina = 50; // danno d'attacco
     private bool take = false;
@@ -13,7 +12,6 @@ public class EnmAtk : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-                player = GameObject.FindWithTag("Player").transform;
  
  if (GameplayManager.instance == null) return;
     
@@ -49,7 +47,7 @@ IEnumerator StopD()
             {
                 if (!Move.instance.isHurt)
             {
-            player.GetComponent<PlayerHealth>().Damage(attackDamage);
+            PlayerHealth.Instance.Damage(attackDamage);
             Move.instance.Knockback();            
 
             }}}if(Move.instance.isGuard)

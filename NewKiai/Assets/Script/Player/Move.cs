@@ -1400,6 +1400,9 @@ IEnumerator FinishKiai()
     yield return new WaitForSeconds(timeKiai);
     StopinputFalse();
     PlayerHealth.Instance.currentKiai = 0;
+    if (style == 0) //Normal
+    {Health.instance.currentHealth -= 100f;}
+
     KiaiReady = false;
 }
 
@@ -1442,12 +1445,6 @@ private void modifyPhysics()
 
 
 public void sbam()
-{
-    vibrateCinemachine.Vibrate(0.2f, 0.2f);
-    //SuonoCrash
-}
-
-public void crashSlash()
 {
     vibrateCinemachine.Vibrate(0.2f, 0.2f);
     //SuonoCrash
