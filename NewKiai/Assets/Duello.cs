@@ -47,6 +47,10 @@ public class Duello : MonoBehaviour
     public float DuelloTime;
     public int Duellomax = 1;
 
+    public int ContMosse;
+    public int mosseMAX = 5;
+
+
 
     public static Duello instance;
 
@@ -133,6 +137,7 @@ private void Update()
         { //Danno al boss
             buttonPressed = false; print("Hai vinto");
             End = false;
+            ContMosse++;
             StartCoroutine(NextButton());
         }
 
@@ -140,10 +145,17 @@ private void Update()
         { //Danno al boss
             buttonNotPressed = false; print("Hai Perso");
             End = false;
+            ContMosse++;
             StartCoroutine(NextButton());
         }
-            //{PlayerHealth.Instance.Damage(50); print("Hai perso");}
+        
+
+        if(ContMosse == mosseMAX)
+        { 
+            EndDuello();
         }
+    }
+
 }
 
 
@@ -223,6 +235,14 @@ public void sbam()
     //SuonoCrash
 }
 
+public void EndDuello()
+{
+    print("Il duello è finito");
+    Move.instance.StopinputFalse();
+    KiaiGive();
+    Destroy(gameObject);
+}
+
     void KiaiGive()
 {
     int randomChance = Random.Range(1, 10); // Genera un numero casuale compreso tra 1 e 10
@@ -237,5 +257,6 @@ public void sbam()
     }
 }
 }
+
 
 
