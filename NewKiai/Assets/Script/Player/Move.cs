@@ -97,9 +97,12 @@ public class Move : MonoBehaviour
 
     private bool vfx = false;
     private float vfxTimer = 0.5f;
-    
 
-   
+    [Header("TimerKiai")]
+    public float timerestoreKiai = 3f; // il massimo valore di essenza disponibile
+    public float timeKiai; // il massimo valore di essenza disponibile
+    public bool KiaiReady = false;
+    public bool GoKiai = false;
     [Header("Animations")]
 
     [SpineAnimation][SerializeField] private string walkAnimationName;
@@ -167,7 +170,7 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField] private string downatkFirejumpAnimationName;
     private bool FireSpecial = false;
     [SerializeField] GameObject attack_f_sp;
-    [SpineAnimation][SerializeField] private string UpperFireStartjumpAnimationName;
+    [SpineAnimation][SerializeField] private string UpperFireKiaijumpAnimationName;
     [SpineAnimation][SerializeField] private string UpperFireEndjumpAnimationName;
 
         [Header("Water")]
@@ -531,6 +534,38 @@ if (!isBlast && Time.time >= ShotTimer)
 {
     isBlast = true;
 }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Activate kiai
+if(KiaiReady)
+{
+if (Input.GetButtonDown("Fire2") || L2 == 1 && R2 == 1)
+{
+    StopinputTrue();
+    Stooping();
+    Stop();
+            if(GameplayManager.instance.styleIcon[4] == true)
+            {if (style == 4) //Water
+            {KiaiWater();}}
+            if(GameplayManager.instance.styleIcon[1] == true)
+            {if (style == 1) //Rock
+            {KiaiRock();}} 
+            if(GameplayManager.instance.styleIcon[2] == true)
+            {if (style == 2) //Fire
+            {KiaiFire();}}  
+            if(GameplayManager.instance.styleIcon[3] == true)
+            {if (style == 3) //Wind
+            {KiaiWind();}}  
+            if(GameplayManager.instance.styleIcon[5] == true)
+            {if (style == 5) //Void
+            {KiaiVoid();}}  
+            if(GameplayManager.instance.styleIcon[0] == true)
+            {if (style == 0)//Normal
+            {KiaiRock();}}
+            StartCoroutine(FinishKiai());
+        }
+        
+}
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Scelta della skill dal menu rapido
@@ -1360,6 +1395,16 @@ public void Knockback()
     }
 
 
+IEnumerator FinishKiai()
+{   
+    yield return new WaitForSeconds(timeKiai);
+    StopinputFalse();
+    PlayerHealth.Instance.currentKiai = 0;
+    KiaiReady = false;
+}
+
+
+ 
 // Metodo per ripristinare il valore di wallJumped dopo 0.5 secondi
     void SetWallJumpedToFalse()
     {
@@ -1990,10 +2035,10 @@ public void EndWater()
 
 public void FireUpper()
 {
-    if (currentAnimationName != UpperFireStartjumpAnimationName)
+    if (currentAnimationName != UpperFireKiaijumpAnimationName)
                 {
-                    _spineAnimationState.SetAnimation(2, UpperFireStartjumpAnimationName, false);
-                    currentAnimationName = UpperFireStartjumpAnimationName;
+                    _spineAnimationState.SetAnimation(2, UpperFireKiaijumpAnimationName, false);
+                    currentAnimationName = UpperFireKiaijumpAnimationName;
                    // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
                 // Add event listener for when the animation completes

@@ -133,12 +133,14 @@ public static PlayerHealth Instance;
             if(Arrived)
             {
             AnimationKiai.Instance.KiaiStart();
+            Move.instance.KiaiReady = true;
             Arrived = false;
             }
             Kiai.transform.localScale = new Vector3(1.6f, 1.6f, 1.6f);
         }
         if(currentKiai < maxKiai)
         {
+            Move.instance.KiaiReady = false;
             KiaiCom.gameObject.SetActive(false);
             Arrived = true;
 
