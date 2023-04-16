@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Spine.Unity;
 using Spine;
+using UnityEngine.Audio;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -14,7 +15,27 @@ public class PlayerHealth : MonoBehaviour
     public float maxStamina = 100f;
     public float currentStamina;
     public Scrollbar staminaBar;
+
+   
+
     public GameObject Kiai;
+    public GameObject KiaiCom;
+
+    public Image Kcol;
+    public Color normal;
+    public Color red;
+    public Color rock;
+    public Color wind;
+    public Color water;
+    public Color Void;
+    private string Normals = "default";
+    private string Fires = "Fire";
+    private string Rocks = "Heart";
+    private string Winds = "Wind";
+    private string Waters = "Water";
+    private string Voids = "Soul";
+    private bool Arrived = false;
+
     public float currentKiai;
     public float maxKiai = 100f; // il massimo valore di essenza disponibile
     public float KiaiPerSecond = 10f; // quantità di essenza consumata ogni secondo
@@ -37,11 +58,15 @@ public static PlayerHealth Instance;
         }
     }
 
+
         void Start()
     {
         currentHealth = maxHealth;
         currentKiai = 0;
         currentStamina = maxStamina;
+        AnimationKiai.Instance.KiaiS = Normals;
+            AnimationKiai.Instance.UpdateCharacterSkinUI(Normals);
+            Kcol.color = normal; 
         //currentMana = maxMana;
     }
 
@@ -91,11 +116,84 @@ public static PlayerHealth Instance;
         }
         }
 
+         if(currentKiai <= 0)
+        {
+            AnimationKiai.Instance.KiaiEmpty();
+            Kiai.gameObject.SetActive(false);
+            Kiai.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+        }
+        else if(currentKiai > 0)
+        {
+            Kiai.gameObject.SetActive(true);
+        }
+
+        if(currentKiai == maxKiai)
+        {
+            KiaiCom.gameObject.SetActive(true);
+            if(Arrived)
+            {
+            AnimationKiai.Instance.KiaiStart();
+            Arrived = false;
+            }
+            Kiai.transform.localScale = new Vector3(1.6f, 1.6f, 1.6f);
+        }
+        if(currentKiai < maxKiai)
+        {
+            KiaiCom.gameObject.SetActive(false);
+            Arrived = true;
+
+        }
+
+        if(currentKiai == 50)
+        {
+            Kiai.transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+        if(currentKiai == 30)
+        {
+            Kiai.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        }
+
+        ChangeSkinK();
         
 
 
-
     }
+
+public void ChangeSkinK()
+    {
+        if(GameplayManager.instance.styleIcon[5] == true ||
+            GameplayManager.instance.styleIcon[0] == true ||
+            GameplayManager.instance.styleIcon[1] == true ||
+            GameplayManager.instance.styleIcon[2] == true ||
+            GameplayManager.instance.styleIcon[3] == true ||
+            GameplayManager.instance.styleIcon[4] == true)
+            {if (Move.instance.style == 0)
+            {AnimationKiai.Instance.KiaiS = Normals;
+            AnimationKiai.Instance.UpdateCharacterSkinUI(Normals);
+            Kcol.color = normal; }
+            else if (Move.instance.style == 1)
+            {AnimationKiai.Instance.KiaiS = Rocks;
+            AnimationKiai.Instance.UpdateCharacterSkinUI(Rocks);
+            Kcol.color = rock; } 
+            else if (Move.instance.style == 2)
+            {AnimationKiai.Instance.KiaiS = Fires;
+            AnimationKiai.Instance.UpdateCharacterSkinUI(Fires);
+            Kcol.color = red; } 
+            else if (Move.instance.style == 3)
+            {AnimationKiai.Instance.KiaiS = Winds;
+            AnimationKiai.Instance.UpdateCharacterSkinUI(Winds);
+            Kcol.color = wind; } 
+            else if (Move.instance.style == 4)
+            {AnimationKiai.Instance.KiaiS = Waters;
+            AnimationKiai.Instance.UpdateCharacterSkinUI(Waters);
+            Kcol.color = water; } 
+            else if (Move.instance.style == 5)
+            {AnimationKiai.Instance.KiaiS = Voids;
+            AnimationKiai.Instance.UpdateCharacterSkinUI(Voids);
+            Kcol.color = Void; }
+            }
+    }
+            
 
     public void Damage(float damage)
     {
@@ -128,26 +226,16 @@ public void IncreaseHP(float amount)
     currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
 
     float scaleReduction = amount / maxHealth;
-    if(Kiai.transform.localScale != new Vector3(0, 0, 0))
-    {
-    Kiai.transform.localScale -= new Vector3(scaleReduction, scaleReduction, scaleReduction);
-    //Il valore del LocalScale deve essere un Vector3. In questo caso, stiamo settando la scala x,y,z tutti uguali in base alla salute attuale del personaggio.
-    }
-    currentKiai -= amount;
-    currentKiai = Mathf.Clamp(currentKiai, 0f, maxKiai);
-    if(currentKiai == 0)
-    {
-    Kiai.transform.localScale += new Vector3(0, 0, 0);
-    }
+    
 }
 
-public void IncreaseEssence(float amount)
+public void IncreaseKiai(float amount)
 {
     currentKiai += amount;
     currentKiai = Mathf.Clamp(currentKiai, 0f, maxKiai);
 
     float scaleReduction = amount / maxKiai;
-    if(Kiai.transform.localScale != new Vector3(0.5f, 0.5f, 0.5f))
+    if(Kiai.transform.localScale != new Vector3(0f, 0f, 0f))
     {
     Kiai.transform.localScale += new Vector3(scaleReduction, scaleReduction, scaleReduction);
     //Il valore del LocalScale deve essere un Vector3. In questo caso, stiamo settando la scala x,y,z tutti uguali in base alla salute attuale del personaggio.
@@ -160,10 +248,10 @@ public void IncreaseEssence(float amount)
 }
 
 
-public void EssenceImg()
+public void KiaiImg()
 {
     //Kiai.transform.localScale = new Vector3(currentHealth / maxHealth, currentHealth / maxHealth, currentHealth / maxHealth);
-float scale = currentHealth / maxHealth;
+    float scale = currentKiai / maxKiai;
     scale = Mathf.Clamp(scale, 0f, 0.5f);
     Kiai.transform.localScale = new Vector3(scale, scale, scale);
 }

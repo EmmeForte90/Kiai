@@ -36,7 +36,7 @@ public class AuraAndHeal : MonoBehaviour
     {
       //Ripristina L'essenza
           //  PlayerHealth.Instance.currentEssence = PlayerHealth.Instance.maxEssence;
-            PlayerHealth.Instance.EssenceImg();
+            //PlayerHealth.Instance.EssenceImg();
             Invoke("Destroy", lifeTime);
 
     }

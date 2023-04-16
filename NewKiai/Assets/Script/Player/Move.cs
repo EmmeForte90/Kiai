@@ -101,8 +101,7 @@ public class Move : MonoBehaviour
 
    
     [Header("Animations")]
-    [SpineAnimation][SerializeField] private string idleAnimationName;
-    [SpineAnimation][SerializeField] private string idleSwordAnimationName;
+
     [SpineAnimation][SerializeField] private string walkAnimationName;
     [SpineAnimation][SerializeField] private string walkSwordAnimationName;
     [SpineAnimation][SerializeField] private string runAnimationName;
@@ -129,6 +128,11 @@ public class Move : MonoBehaviour
     ///////////////////////////////////////////////////////////////////////////
         [Header("NormalStyle")]
     public GameObject S_Normal;
+    [Tooltip("Animazione a singolo frame")]
+    [SpineAnimation][SerializeField] private string idleSAnimationName;
+    [Tooltip("Animazione Completa")]
+    [SpineAnimation][SerializeField] private string idleAnimationName;
+    [SpineAnimation][SerializeField] private string idleSwordAnimationName;
     [SerializeField] GameObject attack;
     [SerializeField] GameObject attack_h;
     [SerializeField] GameObject attack_h2;
@@ -146,6 +150,9 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField] private string NHeavyAnimationName;
         [Header("Fire")]
     public GameObject S_Fire;
+    [Tooltip("Animazione a singolo frame")]
+    [SpineAnimation][SerializeField] private string fireposSAnimationName;
+    [Tooltip("Animazione Completa")]
     [SpineAnimation][SerializeField] private string fireposAnimationName;
     [SpineAnimation][SerializeField] private string KiaiFireAnimationName;
     [SerializeField] GameObject attack_f_v;
@@ -165,6 +172,9 @@ public class Move : MonoBehaviour
 
         [Header("Water")]
     public GameObject S_Water;
+    [Tooltip("Animazione a singolo frame")]
+    [SpineAnimation][SerializeField] private string waterposSAnimationName;
+    [Tooltip("Animazione Completa")]
     [SpineAnimation][SerializeField] private string waterposAnimationName;
     [SpineAnimation][SerializeField] private string KiaiWaterAnimationName;
     [SerializeField] GameObject attack_w_v;
@@ -182,6 +192,9 @@ public class Move : MonoBehaviour
 
         [Header("Rock")]
     public GameObject S_Rock;
+    [Tooltip("Animazione a singolo frame")]
+    [SpineAnimation][SerializeField] private string rockposSAnimationName;
+    [Tooltip("Animazione Completa")]
     [SpineAnimation][SerializeField] private string rockposAnimationName;
     [SpineAnimation][SerializeField] private string KiaiRockAnimationName;
     [SerializeField] GameObject attack_r_v;
@@ -201,6 +214,9 @@ public class Move : MonoBehaviour
     private bool RockSpecial = false;
         [Header("Wind")]
     public GameObject S_Wind;
+    [Tooltip("Animazione a singolo frame")]
+    [SpineAnimation][SerializeField] private string windposSAnimationName;
+    [Tooltip("Animazione Completa")]
     [SpineAnimation][SerializeField] private string windposAnimationName;
     [SpineAnimation][SerializeField] private string KiaiWindAnimationName;
     [SerializeField] GameObject attack_v_v;
@@ -220,6 +236,9 @@ public class Move : MonoBehaviour
 
         [Header("Void")]
     public GameObject S_Void;
+    [Tooltip("Animazione a singolo frame")]
+    [SpineAnimation][SerializeField] private string voidposSAnimationName;
+    [Tooltip("Animazione Completa")]
     [SpineAnimation][SerializeField] private string voidposAnimationName;
     [SpineAnimation][SerializeField] private string KiaiVoidAnimationName;
     [SerializeField] GameObject attack_m_v;
@@ -674,15 +693,17 @@ changeStyle();
             if(Input.GetKeyDown(KeyCode.C))
             {
                 Debug.Log("Ok testiamo!");
-                PlayerHealth.Instance.currentHealth = 10;
+                PlayerHealth.Instance.IncreaseKiai(10);
+                //PlayerHealth.Instance.currentHealth = 10;
                 //PlayerHealth.Instance.currentHealth = 0;
                 //Respawn();
             }
 if(Input.GetKeyDown(KeyCode.X))
             {
                 Debug.Log("Recupero!");
-                GuardHit(); 
-                PlayerHealth.Instance.currentStamina -= 50;
+                PlayerHealth.Instance.IncreaseKiai(-10);
+                //GuardHit(); 
+                //PlayerHealth.Instance.currentStamina -= 50;
             }   
             #endregion
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
@@ -1087,6 +1108,7 @@ public void changeStyle()
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[5].transform.position;
         HitboxPlayer.Instance.Damage = 2;
         VoidPose();
+        drawsword = false;
         }
     }
     else if(MaxStyle <= 0)
@@ -1098,6 +1120,7 @@ public void changeStyle()
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[0].transform.position;
         HitboxPlayer.Instance.Damage = 10;
         NormalPose();
+        drawsword = true;
         }        
     }else if(MaxStyle == 1)
     {
@@ -1152,6 +1175,7 @@ public void changeStyle()
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[5].transform.position;
         HitboxPlayer.Instance.Damage = 2;
         VoidPose();
+        drawsword = false;
         }        
     }else if(MaxStyle == -1)
     {   
@@ -2095,78 +2119,166 @@ void CountDown()
     }
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//SINGLE FRAME
+
 public void NormalPose()
 {
-    if (currentAnimationName != idleAnimationName)
+    if (currentAnimationName != idleSAnimationName)
                 {
+                Stop();
                 Instantiate(S_Normal, top.transform.position, S_Normal.transform.rotation);
-                    _spineAnimationState.SetAnimation(2, idleAnimationName, true);
-                    currentAnimationName = idleAnimationName;
+                    _spineAnimationState.SetAnimation(2, idleSAnimationName, false);
+                    currentAnimationName = idleSAnimationName;
+                Stop();
+
                    // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
                 // Add event listener for when the animation completes
-               // _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+               _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 public void FirePose()
 {
+    if (currentAnimationName != fireposSAnimationName)
+                {
+                    Stop();
+                    Instantiate(S_Fire, top.transform.position, S_Fire.transform.rotation);
+                    _spineAnimationState.SetAnimation(2, fireposSAnimationName, false);
+                    currentAnimationName = fireposSAnimationName;
+                    Stop();
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+public void RockPose()
+{
+    if (currentAnimationName != rockposSAnimationName)
+                {
+                    Stop();
+                    Instantiate(S_Rock, top.transform.position, S_Rock.transform.rotation);
+                    _spineAnimationState.SetAnimation(2, rockposSAnimationName, false);
+                    currentAnimationName = rockposSAnimationName;
+                    Stop();
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}public void WaterPose()
+{
+    if (currentAnimationName != waterposSAnimationName)
+                {
+                    Stop();
+                    Instantiate(S_Water, top.transform.position, S_Water.transform.rotation);
+                    _spineAnimationState.SetAnimation(2, waterposSAnimationName, false);
+                    currentAnimationName = waterposSAnimationName;
+                    Stop();
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+public void VoidPose()
+{
+    if (currentAnimationName != voidposSAnimationName)
+                {
+                    Stop();
+                    Instantiate(S_Void, top.transform.position, S_Void.transform.rotation);
+                    _spineAnimationState.SetAnimation(2, voidposSAnimationName, false);
+                    currentAnimationName = voidposSAnimationName;
+                    Stop();
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+public void WindPose()
+{
+    if (currentAnimationName != windposSAnimationName)
+                {
+                    Stop();
+                    Instantiate(S_Wind, top.transform.position, S_Wind.transform.rotation);
+                    _spineAnimationState.SetAnimation(2, windposSAnimationName, false);
+                    currentAnimationName = windposSAnimationName;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Complete Animations
+
+public void NormalPoseC()
+{
+    if (currentAnimationName != idleSwordAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(1, idleSwordAnimationName, true);
+                    currentAnimationName = idleSwordAnimationName;
+
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+               //_spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+public void FirePoseC()
+{
     if (currentAnimationName != fireposAnimationName)
                 {
-                    Instantiate(S_Fire, top.transform.position, S_Fire.transform.rotation);
-                    _spineAnimationState.SetAnimation(2, fireposAnimationName, true);
+                    _spineAnimationState.SetAnimation(1, fireposAnimationName, true);
                     currentAnimationName = fireposAnimationName;
                    // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
                 // Add event listener for when the animation completes
-                //_spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+               // _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
-public void RockPose()
+public void RockPoseC()
 {
     if (currentAnimationName != rockposAnimationName)
                 {
-                    Instantiate(S_Rock, top.transform.position, S_Rock.transform.rotation);
-                    _spineAnimationState.SetAnimation(2, rockposAnimationName, true);
+                    _spineAnimationState.SetAnimation(1, rockposAnimationName, true);
                     currentAnimationName = rockposAnimationName;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
-                }
-                // Add event listener for when the animation completes
-                //_spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
-}public void WaterPose()
-{
-    if (currentAnimationName != waterposAnimationName)
-                {
-                    Instantiate(S_Water, top.transform.position, S_Water.transform.rotation);
-                    _spineAnimationState.SetAnimation(2, waterposAnimationName, true);
-                    currentAnimationName = waterposAnimationName;
                    // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
                 // Add event listener for when the animation completes
                // _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
-public void VoidPose()
+public void WaterPoseC()
+{
+    if (currentAnimationName != waterposAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(1, waterposAnimationName, true);
+                    currentAnimationName = waterposAnimationName;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                //_spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+public void VoidPoseC()
 {
     if (currentAnimationName != voidposAnimationName)
                 {
-                    Instantiate(S_Void, top.transform.position, S_Void.transform.rotation);
-                    _spineAnimationState.SetAnimation(2, voidposAnimationName, true);
+                    _spineAnimationState.SetAnimation(1, voidposAnimationName, true);
                     currentAnimationName = voidposAnimationName;
                    // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
                 // Add event listener for when the animation completes
                 //_spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
-public void WindPose()
+public void WindPoseC()
 {
     if (currentAnimationName != windposAnimationName)
                 {
-                    Instantiate(S_Wind, top.transform.position, S_Wind.transform.rotation);
-                    _spineAnimationState.SetAnimation(2, windposAnimationName, true);
+                    _spineAnimationState.SetAnimation(1, windposAnimationName, true);
                     currentAnimationName = windposAnimationName;
                    // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
                 // Add event listener for when the animation completes
-                //_spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+               // _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 public void KiaiNormal()
 {
     if (currentAnimationName != KiaiNormalAnimationName)
@@ -2581,16 +2693,28 @@ private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
     _spineAnimationState.ClearTrack(2);
     if(!drawsword)
             {
-                if (currentAnimationName != idleAnimationName) {
+                
+                if (currentAnimationName != idleAnimationName) 
+                {
                     _spineAnimationState.SetAnimation(1, idleAnimationName, true);
                     currentAnimationName = idleAnimationName;
                 }
-            } else if(drawsword)
+                
+            }
+            else if(drawsword)
             {
-                if (currentAnimationName != idleSwordAnimationName) {
-                    _spineAnimationState.SetAnimation(1, idleSwordAnimationName, true);
-                    currentAnimationName = idleSwordAnimationName;
-                }
+                if(style == 0)
+                {NormalPoseC();}
+                else if(style == 1)
+                {RockPoseC();}
+                else if(style == 2)
+                {FirePoseC();}
+                else if(style == 3)
+                {WindPoseC();}
+                else if(style == 4)
+                {WaterPoseC();}
+                else if(style == 5)
+                {VoidPoseC();}
             }
      // Reset the attack state
     isAttacking = false;
@@ -2679,6 +2803,7 @@ public void repostsword()
     if (currentAnimationName != swordDownAnimationName)
                 {
                     Stop();
+                    _spineAnimationState.ClearTrack(2);
                     _spineAnimationState.SetAnimation(2, swordDownAnimationName, false);
                     currentAnimationName = swordDownAnimationName;
                     _spineAnimationState.Event += HandleEvent;
@@ -2750,21 +2875,34 @@ private void moving() {
         case 0:
             float speed = Mathf.Abs(rb.velocity.x);
             Test = speed;
-            if (Mathf.Abs(Input.GetAxis("Horizontal")) < 0.01f) {
+            if (Mathf.Abs(Input.GetAxis("Horizontal")) < 0.01f) 
+            {
                 // Player is not moving
                 if(!drawsword)
             {
-                if (currentAnimationName != idleAnimationName) {
+                
+                if (currentAnimationName != idleAnimationName) 
+                {
                     _spineAnimationState.SetAnimation(1, idleAnimationName, true);
                     currentAnimationName = idleAnimationName;
                 }
+                
             } else if(drawsword)
             {
-                if (currentAnimationName != idleSwordAnimationName) {
-                    _spineAnimationState.SetAnimation(1, idleSwordAnimationName, true);
-                    currentAnimationName = idleSwordAnimationName;
-                }
+                if(style == 0)
+                {NormalPoseC();}
+                else if(style == 1)
+                {RockPoseC();}
+                else if(style == 2)
+                {FirePoseC();}
+                else if(style == 3)
+                {WindPoseC();}
+                else if(style == 4)
+                {WaterPoseC();}
+                else if(style == 5)
+                {VoidPoseC();}
             }
+
             } else if (speed > runSpeedThreshold) {
                 // Player is running
                 if(!drawsword)
@@ -2776,9 +2914,10 @@ private void moving() {
             } else if(drawsword)
             {
                 if (currentAnimationName != runSwordAnimationName) {
-                    _spineAnimationState.SetAnimation(1, runSwordAnimationName, true);
+                    _spineAnimationState.SetAnimation(2, runSwordAnimationName, true);
                     currentAnimationName = runSwordAnimationName;
                 }
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
             }
             } else {
                 // Player is walking
@@ -2791,9 +2930,11 @@ private void moving() {
             } else if(drawsword)
             {
                 if (currentAnimationName != walkSwordAnimationName) {
-                    _spineAnimationState.SetAnimation(1, walkSwordAnimationName, true);
+                    _spineAnimationState.SetAnimation(2, walkSwordAnimationName, true);
                     currentAnimationName = walkSwordAnimationName;
                 }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
             }
             }
             break;

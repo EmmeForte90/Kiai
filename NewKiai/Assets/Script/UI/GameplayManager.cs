@@ -343,7 +343,7 @@ public void Restore()
     if (PlayerHealth.Instance.gameObject.activeSelf)
     {
         PlayerHealth.Instance.currentKiai = PlayerHealth.Instance.maxKiai;
-        PlayerHealth.Instance.EssenceImg();
+        PlayerHealth.Instance.KiaiImg();
     }
 }
 
