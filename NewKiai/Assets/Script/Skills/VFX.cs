@@ -6,14 +6,21 @@ public class VFX : MonoBehaviour
 {
     private GameObject player;
     public bool vertical;
-    private void Start()
-    {            
+    public bool OriginalSize;
+    public bool followPlayer = false;
+    
+private void Start()
+{            
         if (player == null)
         {
         player = GameObject.FindWithTag("Player");
         }
         
+        
+        if(!followPlayer)
         {
+            if(!OriginalSize)
+        {     
            if(!vertical)
         { 
         if(Move.instance.transform.localScale.x > 0)
@@ -34,12 +41,22 @@ public class VFX : MonoBehaviour
         {
                 transform.localScale = new Vector3(-1, 1, 1);
 
-        }}
-        
-        
-
-    }
-    
+        }
+        }} else if (OriginalSize)
+        {
+        //Preserva le sue dimensioni
+        }
+        }
 }
+
+private void Update()
+    {  
+        if(followPlayer)
+        {
+        transform.position = Move.instance.transform.position;
+
+        }
+    }
+
 }
 

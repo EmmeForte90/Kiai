@@ -9811,6 +9811,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vertical: 1
+  followPlayer: 0
 --- !u!114 &5622542231462005171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9823,7 +9824,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2e58ada369179c4ab61f0610e20a8a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 3
+  lifeTime: 1
 --- !u!1 &3059339421187847922
 GameObject:
   m_ObjectHideFlags: 0

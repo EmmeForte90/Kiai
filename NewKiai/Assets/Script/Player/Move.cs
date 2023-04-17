@@ -37,10 +37,11 @@ public class Move : MonoBehaviour
     private float dashTime;
     private bool dashing;
     private bool Atkdashing;
-    private float dashForceAtk = 10f;
-    private float upperForceAtk = 0.5f;
+    public float dashForceAtk = 5f;
+    public float upperForceAtk = 0.5f;
     private bool attackNormal;
     private bool attackUpper;
+    private bool StartKiai = false;
     [HideInInspector] public float dashCoolDown = 1f;
     private float coolDownTime;
     private bool drawsword = false;
@@ -422,12 +423,17 @@ if(!stopInput)
 isTouchingWall = Physics2D.Raycast(transform.position, direction, wallDistance, wallLayer);
  }
 
-if (Input.GetButtonDown("Jump"))
+if (Input.GetButtonDown("Jump") && !isGuard && !NotStrangeAnimationTalk  
+        && !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
+        && !StartKiai)
 {
             lastTimeJump = Time.time + jumpDelay;
 
         //Pre-interrupt jump if button released
-        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0)
+        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0 
+        && !isGuard && !NotStrangeAnimationTalk  
+        && !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
+        && !StartKiai)
         {
             lastTimeGround = 0; //Avoid spam button
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);   
@@ -460,7 +466,10 @@ if (Input.GetButtonDown("Jump"))
         
 
         // Walljump
-        if (Input.GetButtonDown("Jump") && isTouchingWall &&  GameplayManager.instance.unlockWalljump)
+        if (Input.GetButtonDown("Jump") && isTouchingWall &&  GameplayManager.instance.unlockWalljump
+        && !isGuard && !NotStrangeAnimationTalk  
+        && !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
+        && !StartKiai)
         {
            float horizontalVelocity = Mathf.Sign(transform.localScale.x) * wallJumpForce;
             rb.velocity = new Vector2(horizontalVelocity, jumpForce);
@@ -545,6 +554,7 @@ if (Input.GetButtonDown("Fire2") || L2 == 1 && R2 == 1)
     StopinputTrue();
     Stooping();
     Stop();
+    StartKiai = true;
             if(GameplayManager.instance.styleIcon[4] == true)
             {if (style == 4) //Water
             {KiaiWater();}}
@@ -617,7 +627,10 @@ else if (Input.GetButtonDown("SlotBottom")|| DpadY == -1)
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
 //Attacco
-if (Input.GetButtonDown("Fire1") && !isAttacking && !isAttackingAir && !NotStrangeAnimationTalk && !isCharging) 
+if (Input.GetButtonDown("Fire1") 
+&& !isAttacking && !isAttackingAir && !isGuard && !NotStrangeAnimationTalk && !isCharging 
+&& !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
+&& !StartKiai) 
 {
 isAttacking = true;
 drawsword = true;
@@ -627,7 +640,10 @@ AddCombo();
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Attacco in salto
         // controlla se il player è in aria e preme il tasto di attacco e il tasto direzionale basso
-         if (!isGrounded() && Input.GetButtonDown("Fire1") && vertDir < 0)
+         if (!isGrounded() && Input.GetButtonDown("Fire1") && vertDir < 0
+        && !NotStrangeAnimationTalk && !isGuard && !isCharging 
+        && !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
+        && !StartKiai)
         {
             if(GameplayManager.instance.styleIcon[4] == true)
             {if (style == 4) //Water
@@ -650,7 +666,10 @@ AddCombo();
             isAttackingAir = true;
             drawsword = true;
         } 
-        else if (!isGrounded() && Input.GetButtonDown("Fire1") && vertDir > 0)
+        else if (!isGrounded() && Input.GetButtonDown("Fire1") && vertDir > 0
+        && !NotStrangeAnimationTalk && !isGuard && !isCharging 
+        && !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
+        && !StartKiai)
         {
             if(GameplayManager.instance.styleIcon[4] == true)
             {if (style == 4) //Water
@@ -673,7 +692,10 @@ AddCombo();
             isAttackingAir = true;
             drawsword = true;
         }
-        else if (!isGrounded() && Input.GetButtonDown("Fire1"))
+        else if (!isGrounded() && Input.GetButtonDown("Fire1")
+        && !NotStrangeAnimationTalk && !isGuard && !isCharging 
+        && !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
+        && !StartKiai)
         {
             if(GameplayManager.instance.styleIcon[4] == true)
             {if (style == 4) //Water
@@ -686,7 +708,10 @@ AddCombo();
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 //Riporre spada
 if(drawsword)
-{if(Input.GetButtonDown("Hsword"))
+{if(Input.GetButtonDown("Hsword") 
+&& !isAttacking && !isAttackingAir && !isGuard && !NotStrangeAnimationTalk && !isCharging 
+&& !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
+&& !StartKiai)
             {drawsword = false;
             PlayMFX(5);
             repostsword();
@@ -745,7 +770,9 @@ if(Input.GetKeyDown(KeyCode.X))
             #endregion
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 //Guardia
-if (Input.GetButton("Fire3") && !isGuard)
+if (Input.GetButton("Fire3") && !isAttacking && !isAttackingAir && !isGuard && !NotStrangeAnimationTalk && !isCharging 
+&& !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
+&& !StartKiai)
 {
 if(GameplayManager.instance.styleIcon[5] == true ||
 GameplayManager.instance.styleIcon[0] == true ||
@@ -771,7 +798,9 @@ GuardAnm();
 Stop();
 }}}
 
-if (Input.GetButtonUp("Fire3"))
+if (Input.GetButtonUp("Fire3") && !isAttacking && !isAttackingAir && isGuard && !NotStrangeAnimationTalk && !isCharging 
+&& !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
+&& !StartKiai)
 {
 if(GameplayManager.instance.styleIcon[5] == true ||
 GameplayManager.instance.styleIcon[0] == true ||
@@ -802,7 +831,9 @@ if (isGuard)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 //Special
 #region Normal
-if (Input.GetButton("Fire2") && !NormalSpecial)
+if (Input.GetButton("Fire2") && !isAttacking && !isAttackingAir && !isGuard && !NotStrangeAnimationTalk && !isCharging 
+&& !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
+&& !StartKiai && isGrounded())
 {
 if(GameplayManager.instance.styleIcon[5] == true ||
 GameplayManager.instance.styleIcon[0] == true ||
@@ -818,7 +849,9 @@ HeavyHitS();
 Stop();
 }}}
 
-if (Input.GetButtonUp("Fire2"))
+if (Input.GetButtonUp("Fire2") && !isAttacking && !isAttackingAir && !isGuard && !NotStrangeAnimationTalk && !isCharging 
+&& !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && NormalSpecial && !VoidSpecial
+&& !StartKiai && isGrounded())
 {
 if(GameplayManager.instance.styleIcon[5] == true ||
 GameplayManager.instance.styleIcon[0] == true ||
@@ -848,7 +881,10 @@ GameplayManager.instance.styleIcon[3] == true ||
 GameplayManager.instance.styleIcon[4] == true)
 {if (style == 1) //Rock
 {
- if (Input.GetButtonDown("Fire2") && !isCharging && Time.time - timeSinceLastAttack > attackRate)
+ if (Input.GetButtonDown("Fire2") && !isCharging && Time.time - timeSinceLastAttack > attackRate
+&& !isAttacking && !isAttackingAir && !isGuard && !NotStrangeAnimationTalk 
+&& !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
+&& !StartKiai)
     {
         isCharging = true;
         drawsword = true;
@@ -859,7 +895,10 @@ GameplayManager.instance.styleIcon[4] == true)
         InvokeRepeating("CountDown", 1f, 1f);
     }
 
-    if (Input.GetButtonDown("Fire2") && isCharging)
+    if (Input.GetButtonDown("Fire2") && isCharging
+    && !isAttacking && !isAttackingAir && !isGuard && !NotStrangeAnimationTalk  
+&& !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
+&& !StartKiai)
     {
         Stop();
         // Decrementa il timer di un secondo
@@ -868,7 +907,10 @@ GameplayManager.instance.styleIcon[4] == true)
         HitboxPlayer.Instance.Damage = minDamage + (maxDamage - minDamage) * currentTime / timeLimit;
     }
 
-    if (Input.GetButtonUp("Fire2") && isCharging)
+    if (Input.GetButtonUp("Fire2") && isCharging
+    && !isAttacking && !isAttackingAir && !isGuard && !NotStrangeAnimationTalk  
+&& !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
+&& !StartKiai)
     {
         if (currentTime == 0)
         {
@@ -894,7 +936,10 @@ GameplayManager.instance.styleIcon[4] == true)
 #endregion
 
 #region Fire
-if (Input.GetButton("Fire2") && !FireSpecial)
+if (Input.GetButton("Fire2") && !FireSpecial
+&& !isAttacking && !isAttackingAir && !isGuard && !NotStrangeAnimationTalk && !isCharging 
+&& !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
+&& !StartKiai && isGrounded())
 {
 if(GameplayManager.instance.styleIcon[5] == true ||
 GameplayManager.instance.styleIcon[0] == true ||
@@ -910,7 +955,9 @@ FireUpper();
 Stop();
 }}}
 
-if (Input.GetButtonUp("Fire2"))
+if (Input.GetButtonUp("Fire2") && !isAttacking && !isAttackingAir && !isGuard && !NotStrangeAnimationTalk && !isCharging 
+&& FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
+&& !StartKiai)
 {
 if(GameplayManager.instance.styleIcon[5] == true ||
 GameplayManager.instance.styleIcon[0] == true ||
@@ -932,7 +979,10 @@ if (FireSpecial)
 #endregion
 
 #region Wind
-if (Input.GetButton("Fire2") && !WindSpecial)
+if (Input.GetButton("Fire2") && !WindSpecial
+&& !isAttacking && !isAttackingAir && !isGuard && !NotStrangeAnimationTalk && !isCharging 
+&& !FireSpecial && !WaterSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
+&& !StartKiai)
 {
 if(GameplayManager.instance.styleIcon[5] == true ||
 GameplayManager.instance.styleIcon[0] == true ||
@@ -948,7 +998,10 @@ WindLoop();
 #endregion
 
 #region Water
-if (Input.GetButton("Fire2") && !WaterSpecial)
+if (Input.GetButton("Fire2") && !WaterSpecial
+&& !isAttacking && !isAttackingAir && !isGuard && !NotStrangeAnimationTalk && !isCharging 
+&& !FireSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
+&& !StartKiai && isGrounded())
 {
 if(GameplayManager.instance.styleIcon[5] == true ||
 GameplayManager.instance.styleIcon[0] == true ||
@@ -965,7 +1018,9 @@ Stop();
 }}}
 
 
-if (Input.GetButtonUp("Fire2"))
+if (Input.GetButtonUp("Fire2")&& !isAttacking && !isAttackingAir && !isGuard && !NotStrangeAnimationTalk && !isCharging 
+&& !FireSpecial && WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
+&& !StartKiai)
 {
 if(GameplayManager.instance.styleIcon[5] == true ||
 GameplayManager.instance.styleIcon[0] == true ||
@@ -978,6 +1033,7 @@ if (WaterSpecial)
 {
 if (style == 4) //Water
 {WaterSpecial = false;
+attackWater = false;
 EndWater();
 
 if (WaterSpecial)
@@ -988,7 +1044,10 @@ if (WaterSpecial)
 
 
 #region Void
-if (Input.GetButton("Fire2") && !VoidSpecial)
+if (Input.GetButton("Fire2") && !VoidSpecial
+&& !isAttacking && !isAttackingAir && !isGuard && !NotStrangeAnimationTalk && !isCharging 
+&& !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial 
+&& !StartKiai)
 {
 if(GameplayManager.instance.styleIcon[5] == true ||
 GameplayManager.instance.styleIcon[0] == true ||
@@ -1002,7 +1061,9 @@ VoidSpecial = true;
 HeavyHitS();
 }}}
 
-if (Input.GetButtonUp("Fire2"))
+if (Input.GetButtonUp("Fire2")&& !isAttacking && !isAttackingAir && !isGuard && !NotStrangeAnimationTalk && !isCharging 
+&& !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && VoidSpecial
+&& !StartKiai)
 {
 if(GameplayManager.instance.styleIcon[5] == true ||
 GameplayManager.instance.styleIcon[0] == true ||
@@ -1022,7 +1083,7 @@ HeavyHitRelease();
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   if ( GameplayManager.instance.unlockDash)
         {
- if (Input.GetButtonUp("Dash") || R2 == 1 && !dashing && coolDownTime <= 0)
+ if (Input.GetButtonUp("Dash") ||  R2 == 1 && !dashing && coolDownTime <= 0)
         {
             dashing = true;
             coolDownTime = dashCoolDown;
@@ -1329,8 +1390,6 @@ public void attackupper()
         }
         else if (horDir > 0)
         {
-            //anim.SetTrigger("Dash");
-
             rb.AddForce(transform.right * dashForceAtk, ForceMode2D.Impulse);
             dashTime -= Time.deltaTime;
         }
@@ -1339,20 +1398,15 @@ public void attackupper()
             if (rb.transform.localScale.x == -1)
         {
 
-           rb.AddForce(-transform.right * dashForce, ForceMode2D.Impulse);
+           rb.AddForce(-transform.right * dashForceAtk, ForceMode2D.Impulse);
             dashTime -= Time.deltaTime;
         }
         else if (rb.transform.localScale.x == 1)
         {
-            //anim.SetTrigger("Dash");
-
-            rb.AddForce(transform.right * dashForce, ForceMode2D.Impulse);
+            rb.AddForce(transform.right * dashForceAtk, ForceMode2D.Impulse);
             dashTime -= Time.deltaTime;
         }
-                //dashing = false;
-                //Atkdashing = false;
         }
-
             if (dashTime <= 0)
             {
                 dashing = false;
@@ -2051,7 +2105,7 @@ public void FireUpper()
                    // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
                 // Add event listener for when the animation completes
-                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+                //_spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 public void FireUpperEnd()
 {
@@ -2070,6 +2124,7 @@ public void WindLoop()
 {
     if (currentAnimationName != TornadoWindjumpAnimationName)
                 {
+                    WindSpecial = false;
                     PlayerHealth.Instance.currentStamina -= 40f;
                     _spineAnimationState.SetAnimation(2, TornadoWindjumpAnimationName, false);
                     currentAnimationName = TornadoWindjumpAnimationName;
@@ -2774,6 +2829,7 @@ private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
      // Reset the attack state
     isAttacking = false;
     isAttackingAir = false;
+    StartKiai = false;
     if (_skeletonAnimation != null)
     {
     _skeletonAnimation.timeScale = timeScale; // Impostare il valore di time scale
@@ -3419,11 +3475,21 @@ if (e.Data.Name == "Wind_Special") {
         vfx = true;
         }
     }
+
+if (e.Data.Name == "Wind_SpecialEnd") {     
+    // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
+    if(!vfx)
+        {
+        WindSpecial = false;
+        vfx = true;
+        }
+    }
+
 if (e.Data.Name == "Fire_Special") {     
     // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
     if(!vfx)
         {
-        Instantiate(attack_f_sp, slashpoint.position, attack_f_sp.transform.rotation);
+        Instantiate(attack_f_sp, bottom.position, attack_f_sp.transform.rotation);
         PlayMFX(1);
         vfx = true;
         }
