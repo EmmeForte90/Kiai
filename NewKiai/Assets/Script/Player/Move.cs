@@ -755,7 +755,13 @@ changeStyle();
             if(Input.GetKeyDown(KeyCode.C))
             {
                 Debug.Log("Ok testiamo!");
-                PlayerHealth.Instance.IncreaseKiai(10);
+                Thief.instance.Damage(50);
+                if(Thief.instance == null)
+                {
+                    //Thief.instance = GameObject.FindWithTag("Enemy");
+                    Thief.instance.Damage(50);
+                }
+                //PlayerHealth.Instance.IncreaseKiai(10);
                 //PlayerHealth.Instance.currentHealth = 10;
                 //PlayerHealth.Instance.currentHealth = 0;
                 //Respawn();

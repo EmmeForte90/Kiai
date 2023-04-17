@@ -70,6 +70,7 @@ public class GameplayManager : MonoBehaviour
     public bool Normal = true;
     public bool Hard = false;
     public int EnemyDefeated = 0;
+    public int EnemyDWave = 0;
     public bool ordalia = false;
 
     [Header("Abilitazioni")]
@@ -187,7 +188,10 @@ public void Update()
 
 }
 
- 
+ public void Test()
+{
+Thief.instance.Damage(50);
+}
 
 public void ComboCount()
 {
@@ -293,6 +297,7 @@ public void DeactivationGame()
 public void EnemyDefeat()
     {
            EnemyDefeated++;
+           EnemyDWave++;
     }
 
  public void SetSFX(float volume)

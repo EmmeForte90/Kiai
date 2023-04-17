@@ -33,7 +33,6 @@ public float chaseSpeed = 4f; // velocità di inseguimento
 public float WaitAfterAtk = 2f;
 public float attackDamage = 10; // danno d'attacco
 public float sightRadius = 5f; // raggio di vista del nemico
-public float chaseThreshold = 2f; // soglia di distanza per iniziare l'inseguimento
 public float attackrange = 2f;
 public float attackCooldown = 1f; // durata del cooldown dell'attacco
 private float attackTimer;
@@ -318,6 +317,8 @@ private void Wait()
 // Controlla se l'oggetto deve essere in movimento, il rigedbody è in KInematic
 private void Moving()
 {
+    if(!GameplayManager.instance.ordalia)
+        {
     if (isMove && !isAttacking && !isKnockback)
     {
         // Controlla se l'oggetto deve spostarsi verso destra o sinistra
@@ -369,7 +370,7 @@ private void Moving()
         // Ferma l'animazione di movimento e attiva l'animazione di idle
         IdleAnm();
     }
-
+    }
     // Inverte l'orientamento dell'oggetto in base alla sua direzione di movimento
     Flip();
 
@@ -520,8 +521,6 @@ private void OnDrawGizmos()
     }
 #endregion
 
-
-
 public void Damage(int damage)
 {
     if (isDie) return;
@@ -552,6 +551,9 @@ public void Damage(int damage)
         StartCoroutine(WaitForHurt());
     }
 }
+
+
+
 private IEnumerator WaitForHurt()
 {
     isHurt = true;
@@ -797,7 +799,7 @@ if (e.Data.Name == "VFXslash") {
 
 if (e.Data.Name == "Destroy") {
         // Inserisci qui il codice per gestire l'evento.
-        Destroy(gameObject);
+        Destroy(Brain);
     }
 
 if (e.Data.Name == "VFXslash_h") {

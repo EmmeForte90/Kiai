@@ -14,6 +14,7 @@ public class Health : MonoBehaviour
     public float currentHealth = 100f;
     public Color originalColor;
     public float colorChangeDuration;
+    public float chaseThreshold = 2f; // soglia di distanza per iniziare l'inseguimento
 
 void Start()
 {
@@ -30,4 +31,9 @@ void Start()
     
     currentHealth = maxHealth;
 }
+
+
+
+
+
 }

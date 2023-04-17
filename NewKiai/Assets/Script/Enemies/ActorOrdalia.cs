@@ -34,6 +34,20 @@ public class ActorOrdalia : MonoBehaviour
             Debug.LogError("Componente SkeletonAnimation non trovato!");
         }       
     }
+
+public void FacePlayer()
+    {
+        
+            if (Move.instance.transform.position.x > transform.position.x)
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+            }
+            else
+            {
+                transform.localScale = new Vector3(-1, 1, 1);
+            }
+        }
+
    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //ANIMATIONS
 
