@@ -13,7 +13,6 @@ public class Thief : Health, IDamegable
 
 [Header("Enemy")]
 [SerializeField] GameObject Brain;
-private Health health;
 private Transform player;
 [SerializeField] LayerMask playerlayer;
 private float timeBeforeDestroying = 3f;
@@ -26,7 +25,7 @@ private float pauseTimer; // timer per la pausa
 private int id_positions;
 private float horizontal;
 private bool direction_x = true;
-private Rigidbody2D rb;
+public Rigidbody2D rb;
 
 [Header("Attack")]
 public float chaseSpeed = 4f; // velocità di inseguimento
@@ -65,11 +64,12 @@ private bool isKnockback = false;
 public bool isSmall = false;
 
  [Header("Audio")]
- [HideInInspector] public float basePitch = 1f;
+    [HideInInspector] public float basePitch = 1f;
     [HideInInspector] public float randomPitchOffset = 0.1f;
-[SerializeField] public AudioClip[] listmusic; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
-private AudioSource[] bgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
-   public AudioMixer SFX;
+    [SerializeField] public AudioClip[] listSound; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
+    private AudioSource[] bgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
+    public AudioMixer SFX;
+    private bool sgmActive = false;
 
 [Header("Drop")]
     public GameObject coinPrefab; // prefab per la moneta
@@ -121,9 +121,6 @@ public static Thief instance;
 
     private void Awake()
     {
-    rb = GetComponent<Rigidbody2D>();
-    health = GetComponent<Health>();
-    _skeletonAnimation = GetComponent<SkeletonAnimation>();
     if (_skeletonAnimation == null) {
         Debug.LogError("Componente SkeletonAnimation non trovato!");
     }
@@ -134,12 +131,20 @@ public static Thief instance;
         instance = this;
     }
     player = GameObject.FindWithTag("Player").transform;
-    bgm = new AudioSource[listmusic.Length]; // inizializza l'array di AudioSource con la stessa lunghezza dell'array di AudioClip
-    for (int i = 0; i < listmusic.Length; i++) // scorre la lista di AudioClip
-    {
-        bgm[i] = gameObject.AddComponent<AudioSource>(); // crea un nuovo AudioSource come componente del game object attuale (quello a cui è attaccato lo script)
-        bgm[i].clip = listmusic[i]; // assegna l'AudioClip corrispondente all'AudioSource creato
-    }
+    bgm = new AudioSource[listSound.Length]; // inizializza l'array di AudioSource con la stessa lunghezza dell'array di AudioClip
+        for (int i = 0; i < listSound.Length; i++) // scorre la lista di AudioClip
+        {
+            bgm[i] = gameObject.AddComponent<AudioSource>(); // crea un nuovo AudioSource come componente del game object attuale (quello a cui è attaccato lo script)
+            bgm[i].clip = listSound[i]; // assegna l'AudioClip corrispondente all'AudioSource creato
+            bgm[i].playOnAwake = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
+            bgm[i].loop = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
+
+        }
+ // Aggiunge i canali audio degli AudioSource all'output del mixer
+        foreach (AudioSource audioSource in bgm)
+        {
+        audioSource.outputAudioMixerGroup = SFX.FindMatchingGroups("Master")[0];
+        }
     }
 
 private void Update()
@@ -203,7 +208,7 @@ private void Update()
 return; // esce immediatamente se il personaggio è morto
 }
 
-if (health.currentHealth <= 0) 
+if (currentHealth <= 0) 
 { // controlla se il personaggio è morto
     isChasing = false;
     isAttacking = false;
@@ -534,7 +539,7 @@ public void Damage(int damage)
     return;
     }
 
-    health.currentHealth -= damage;
+    currentHealth -= damage;
     TemporaryChangeColor(Color.red);
     Instantiate(VFXHurt, hitpoint.position, transform.rotation);
     PlayMFX(1);
