@@ -48,6 +48,7 @@ public class Move : MonoBehaviour
 
     [Header("Jump")]
     [SerializeField] private float jumpForce;
+    [SerializeField] private float jumpForceX;
     [SerializeField] private float bumpForce;
     [SerializeField] private float knockForce = 10f;
     bool canDoubleJump = false;
@@ -336,7 +337,7 @@ private int comboCount = 0;
     private Spine.Skeleton _skeleton;
     Spine.EventData eventData;
 
-    [HideInInspector] public Rigidbody2D rb;
+    public Rigidbody2D rb;
 
 public static Move instance;
 
@@ -353,7 +354,7 @@ public static Move instance;
         _spineAnimationState = GetComponent<Spine.Unity.SkeletonAnimation>().AnimationState;
         _spineAnimationState = _skeletonAnimation.AnimationState;
         _skeleton = _skeletonAnimation.skeleton;
-        rb = GetComponent<Rigidbody2D>();
+        //rb = GetComponent<Rigidbody2D>();
         sgm = new AudioSource[listSound.Length]; // inizializza l'array di AudioSource con la stessa lunghezza dell'array di AudioClip
         for (int i = 0; i < listSound.Length; i++) // scorre la lista di AudioClip
         {
@@ -426,17 +427,30 @@ isTouchingWall = Physics2D.Raycast(transform.position, direction, wallDistance, 
 if (Input.GetButtonDown("Jump") && !isGuard && !NotStrangeAnimationTalk  
         && !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
         && !StartKiai)
-{
+{      
+      
+    wallJumped = false;
+    if(!isTouchingWall)
+        {
+            //print("Walljump not");
             lastTimeJump = Time.time + jumpDelay;
-
+        }
         //Pre-interrupt jump if button released
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0 
         && !isGuard && !NotStrangeAnimationTalk  
         && !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
         && !StartKiai)
         {
+        if(isTouchingWall)
+        {
+           // Vector2 direction = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
+        rb.velocity = new Vector2(-transform.localScale.x * 14, 18);
+        }
+        else
+        {
             lastTimeGround = 0; //Avoid spam button
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);   
+        }
         }
     
     if (canDoubleJump && GameplayManager.instance.unlockDoubleJump)
@@ -456,6 +470,26 @@ if (Input.GetButtonDown("Jump") && !isGuard && !NotStrangeAnimationTalk
         }
     }
 }
+if (Input.GetButtonDown("Jump") && !isGuard && !NotStrangeAnimationTalk && isTouchingWall 
+        && !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
+        && !StartKiai)
+{
+    // Walljump
+        //print("Walljump");
+        if(transform.localScale.x > 0)
+        {
+            horDir = -1;
+        rb.AddForce(new Vector2(jumpForceX, jumpForce), ForceMode2D.Impulse);
+        //rb.velocity = new Vector2(jumpForceX, jumpForce);}
+        }
+        else if(transform.localScale.x < 0)
+        {
+            horDir = 1;
+        rb.AddForce(new Vector2(-jumpForceX, jumpForce), ForceMode2D.Impulse);
+        //rb.velocity = new Vector2(-jumpForceX, jumpForce);}
+        //wallJumped = true;
+        }
+}
 
 // Wallslide
         if (isTouchingWall && !isGrounded() && rb.velocity.y < 0 &&  GameplayManager.instance.unlockWalljump)
@@ -466,7 +500,7 @@ if (Input.GetButtonDown("Jump") && !isGuard && !NotStrangeAnimationTalk
         
 
         // Walljump
-        if (Input.GetButtonDown("Jump") && isTouchingWall &&  GameplayManager.instance.unlockWalljump
+       /* if (Input.GetButtonDown("Jump") && isTouchingWall &&  GameplayManager.instance.unlockWalljump
         && !isGuard && !NotStrangeAnimationTalk  
         && !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
         && !StartKiai)
@@ -476,7 +510,7 @@ if (Input.GetButtonDown("Jump") && !isGuard && !NotStrangeAnimationTalk
             wallJumped = true;
             canDoubleJump = true;
             Invoke("SetWallJumpedToFalse", 0.5f);
-        }
+        }*/
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////             
 
 // gestione dell'input dello sparo
@@ -3070,6 +3104,8 @@ private void moving() {
 
         case < 0:
             // Player is falling
+            if(!isTouchingWall)
+            {
             if(!drawsword)
             {
             if (currentAnimationName != jumpDownAnimationName) {
@@ -3078,11 +3114,13 @@ private void moving() {
             }
             } else if(drawsword)
             {
+                
             if (currentAnimationName != jumpDownSwordAnimationName) {
                 _spineAnimationState.SetAnimation(1, jumpDownSwordAnimationName, true);
                 currentAnimationName = jumpDownSwordAnimationName;
             }
-            }
+            }}else if(isTouchingWall)
+            {wallSlide();}
             
             break;
     }
