@@ -86,13 +86,17 @@ public class GameplayManager : MonoBehaviour
     public bool startGame = false;
     [SerializeField] public Animator myAnimator;
 
-
+    [Header("Ordalie")]
     private GameObject[] Ordalia;
     public bool[] OrdaliaActive;
-
+    
+    [Header("Porte")]
     private GameObject[] Door;
     public bool[] DoorActive;
 
+    [Header("Boss")]
+    private GameObject[] Boss;
+    public bool[] BoosActive;
 
     public static GameplayManager instance;
 
@@ -439,6 +443,7 @@ private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     GameObject[] Ordalia = GameObject.FindGameObjectsWithTag("Ordalia");
     GameObject[] Door = GameObject.FindGameObjectsWithTag("Door");
     GameObject[] SkillIt = GameObject.FindGameObjectsWithTag("Skill");
+    GameObject[] BossIt = GameObject.FindGameObjectsWithTag("Boss");
 
     // Itera attraverso tutti gli oggetti trovati
     foreach (GameObject Character in Ordalia)
@@ -486,6 +491,7 @@ private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
             }
         }
     }
+
 }
 
 public void OrdaliaEnd(int id)
@@ -500,7 +506,11 @@ public void DoorAct(int id)
     DoorActive[id] = true;   
 }
 
-
+public void BossActive(int id)
+{
+    // Imposta lo stato della quest a true
+    BoosActive[id] = true;   
+}
 
     IEnumerator Restart()
     {

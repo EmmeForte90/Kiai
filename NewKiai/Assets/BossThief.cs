@@ -5,14 +5,34 @@ using Spine.Unity;
 using Spine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
+using UnityEngine.UI;
+using Cinemachine;
 
-
-public class BossThief : MonoBehaviour
+public class BossThief : MonoBehaviour, IDamegable
 {
 [SerializeField] public GameObject Boss;
+    
+    [Header("Sistema Di HP")]
+    public GameObject Camera;
+    private CinemachineVirtualCamera virtualCamera; //riferimento alla virtual camera di Cinemachine
+
+    [Header("Sistema Di HP")]
+    public float maxHealth = 100f;
+    public float currentHealth;
+    public Scrollbar healthBar;
+    public float maxStamina = 100f;
+    public float currentStamina;
+    public Scrollbar staminaBar;
+    public Color originalColor;
+    public float colorChangeDuration;
+    //public float chaseThreshold = 2f; // soglia di distanza per iniziare l'inseguimento
+   
 
     [Header("Moving")]
     public float moveSpeed = 2f; // velocità di movimento
+    private Transform player;
+    [SerializeField] LayerMask playerlayer;
+    public Transform JumpPoint;
     [SerializeField] float pauseDuration = 0.5f; // durata della pausa
     private float pauseTimer; // timer per la pausa
     [SerializeField] private Vector3[] positions;
@@ -23,28 +43,21 @@ public class BossThief : MonoBehaviour
     public float CrushForce = 10f;
     public float YValue = -3.1f;
 
-[Header("Sistema Di HP")]
-   // Enemy enemy;
-    public float maxHealth = 100f;
-    public float currentHealth = 100f;
-    public Color originalColor;
-    public float colorChangeDuration;
-    //public float chaseThreshold = 2f; // soglia di distanza per iniziare l'inseguimento
-    private Transform player;
-    [SerializeField] LayerMask playerlayer;
-    public Transform JumpPoint;
+
 
     [Header("Attacks")]
     public int AttackDamage = 20; // soglia di distanza per iniziare l'inseguimento
-    public float chaseSpeed = 4f; // velocità di inseguimento
-    public float WaitAfterAtk = 2f;
-    public float sightRadius = 5f; // raggio di vista del nemico
-    public float attackrange = 2f;
-    public float attackCooldown = 1f; // durata del cooldown dell'attacco
-    private float attackTimer;
+    public int AttackDamageLow = 5; // soglia di distanza per iniziare l'inseguimento
+    public float damagestamina = 5; // danno d'attacco
+    //public float chaseSpeed = 4f; // velocità di inseguimento
+    //public float WaitAfterAtk = 2f;
+    //public float sightRadius = 5f; // raggio di vista del nemico
+    //public float attackrange = 2f;
+    //public float attackCooldown = 1f; // durata del cooldown dell'attacco
+    //private float attackTimer;
     public float InvincibleTime = 1f;
-    public int GuardChance = 3; // Se il numero casuale è compreso tra 1 e 8 (80% di probabilità), aggiungi 5 di essenza
-    private int randomChance;
+    public int GuardChance = 1; // Se il numero casuale è compreso tra 1 e 8 (80% di probabilità), aggiungi 5 di essenza
+    public int randomChanceEN; // Genera un numero casuale compreso tra 1 e 10
     Vector2 moveDirection;
 
     [Header("Time for choose atk")]
@@ -96,6 +109,7 @@ public class BossThief : MonoBehaviour
     private bool Schiaccio = true;
     private float waitTimer = 0f;
     private float waitDuration = 2f;
+    private bool take = false;
 
 [Header("Animations")]
     [SpineAnimation][SerializeField] private string idleAnimationName;
@@ -160,6 +174,12 @@ private void Awake()
         }
     }
 
+
+public void BossDosentExist()
+{
+Destroy(Boss);
+}
+
 void Start()
 {
  if (GameplayManager.instance == null) return;
@@ -167,67 +187,54 @@ void Start()
     if (GameplayManager.instance.Easy)
     {
         maxHealth /= 2;
+        maxStamina -= 50;
     }
     else if (GameplayManager.instance.Hard)
     {
         maxHealth *= 2;
+        maxStamina += 50;
     }
     
     currentHealth = maxHealth;
+    currentStamina = maxStamina;
     player = GameObject.FindWithTag("Player").transform;
+    virtualCamera = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); 
+
 }
+
 
 private void Update()
     {
         if (!GameplayManager.instance.PauseStop)
         {
+        healthBar.size = currentHealth / maxHealth;
+        healthBar.size = Mathf.Clamp(healthBar.size, 0.01f, 1);
+        staminaBar.size = currentStamina / maxStamina;
+        staminaBar.size = Mathf.Clamp(staminaBar.size, 0.01f, 1);
             CheckState();
+            Button();
 
-            #region testDanno
-            if(Input.GetKeyDown(KeyCode.B))
-            {
-                //isJumpAttacking = true;
-                //isThrow = true;
-            isCharge = true;
-
-            //Debug.Log("Il pulsante è stato premuto!");
-            }
-            #endregion
-            
             switch (currentState)
             {
                 case State.Idle:
-                   IdleAnm();
                     break;
                 case State.Moving:
-                    Moving();
                     break;
                 case State.Jump:
-                    //isJumpAttacking = true;
                     break;
                 case State.Attack:
-                    //Attack();
-                    //FacePlayer();
                     break;
                 case State.Crush:
-                    Crush();
-                    CrushAnm();
                     break;
                 case State.Throw:
-                    //Throw();
                     break;
                 case State.Death:
-                    StartDie();
                     break;
                 case State.Hurt:
-                    HurtAnm();
-                    Wait();
                     break;
                 case State.Wait:
-                    Wait();
                     break;
                 case State.Guard:
-                    Guard();
                     break;
             }
         }
@@ -243,16 +250,23 @@ return; // esce immediatamente se il personaggio è morto
 
 if (currentHealth <= 0) 
 { // controlla se il personaggio è morto
+    ResetColor();
     isAttacking = false;
     isMove = false;
     isGuard = false;
     isDie = true;
+    isJumpAttacking = false; 
+    isThrow = false;
+    isCharge = false;  
     currentState = State.Death;
 }
 
 if (isWait) 
 { // controlla se il personaggio è morto
     ResetColor();
+    isJumpAttacking = false; 
+    isThrow = false;
+    isCharge = false;  
     isAttacking = false;
     isMove = false;
     isGuard = false;
@@ -261,8 +275,11 @@ if (isWait)
     currentState = State.Wait;
 }
 
-if (isJumpAttacking)
+if (isJumpAttacking && !isCharge && !isThrow)
 {
+    ResetColor();
+    currentState = State.Jump;
+
     if (jumpCount < 3)
     {
         if (rb.velocity.y == 0f)
@@ -319,8 +336,11 @@ if (isJumpAttacking)
 
 }
 
-if (isThrow)
+if (isThrow && !isJumpAttacking && !isCharge)
 {
+    ResetColor();
+    currentState = State.Throw;
+
     if (currentHealth > 250)
     {
         if (ThrowCount < 1)
@@ -361,27 +381,23 @@ if (isThrow)
     }
 }
 
-if (isCharge)
+
+if (isCharge && !isJumpAttacking && !isThrow)
 {
+        ResetColor();
+        currentState = State.Crush;
+
     if (currentHealth > 250)
     {
         if (HitCount < 1)
         {
-            print("StartCharge");
+            if (rb.velocity.y == 0f)
+            {
+                //print("StartCharge");
                 FacePlayer();
-                ChargeCrushAnm();
-                if(StartCharging)
-                {
-                    TimeForAtk -= Time.deltaTime; //decrementa il timer ad ogni frame
-                    if (TimeForAtk <= 0f) 
-                    {
-                    TimeForAtk = TimeForAtkMAX;
-                    CrushAnm();
-                    // incrementa il contatore dei colpi
-                    //HitCount++;
-                    }
-                }
-             
+                CrushAnm();
+                HitCount++;
+            } 
         }
         else 
         {
@@ -392,24 +408,15 @@ if (isCharge)
     }
     else if (currentHealth < 250) 
     {
-        if (HitCount < 3)
-        {            
-            //print("StartCharge");
+        if (HitCount < 1)
+        {
+            if (rb.velocity.y == 0f)
+            {
+                //print("Fury");
                 FacePlayer();
-                ChargeCrushAnm();
-                if(StartCharging)
-                {
-                    TimeForAtk -= Time.deltaTime; //decrementa il timer ad ogni frame
-                    if (TimeForAtk <= 0f) 
-                    {
-                    TimeForAtk = TimeForAtkMAX;
-                    CrushRageAnm();
-                    // incrementa il contatore dei colpi
-                    //HitCount++;
-                    //StartCharging = false;
-                    }
-                }
-             
+                CrushRageAnm();
+                HitCount++;
+            } 
         }
         else 
         {
@@ -419,44 +426,70 @@ if (isCharge)
         }
     }
 }
-      
 
 
-
-if (Vector2.Distance(hitpoint.transform.position, player.position) < attackrange) 
+/*
+if (Vector2.Distance(hitpoint.transform.position, player.position) < attackrange && 
+!isAttacking && !isJumpAttacking && !isCharge && !isThrow) 
 { // controlla se il personaggio è dentro il raggio d'attacco
     ResetColor();
     isAttacking = true;
-    Attack();
+    isJumpAttacking = false; 
+    isThrow = false;
+    isCharge = false;  
+    //Attack();
     FacePlayer();
     isMove = false;
     isPlayerInAttackRange = true;
     isGuard = false;
     currentState = State.Attack;
 } 
-else if (Vector2.Distance(hitpoint.transform.position, player.position) > attackrange && isPlayerInAttackRange) 
+else if (Vector2.Distance(hitpoint.transform.position, player.position) > attackrange && isPlayerInAttackRange &&
+!isJumpAttacking && !isCharge && !isThrow) 
 { // controlla se il personaggio è appena uscito dal raggio e si avvia il timer di attesa
     ResetColor();
     isAttacking = false;
+    isJumpAttacking = false; 
+    isThrow = false;
+    isCharge = false;  
     isMove = false;
     activeActions = false;
     isGuard = false;
     currentState = State.Wait;
-    StartCoroutine(waitChase());
-}
+}*/
 
 }
 
+IEnumerator StopD()
+    {
+        yield return new WaitForSeconds(0.5f);
+        take = false;
+    }
 
+private void Button()
+{
+    #region testDanno
+            if(Input.GetKeyDown(KeyCode.B))
+            {
+                //isJumpAttacking = true;
+                //isThrow = true;
+            isCharge = true;
 
+            //Debug.Log("Il pulsante è stato premuto!");
+            }
+            #endregion
+
+}
+
+ 
 
 //Il nemico torna al suo patter dattacco dopo tot tempo
-IEnumerator waitChase()
+/*IEnumerator waitChase()
     {
         yield return new WaitForSeconds(WaitAfterAtk);
         isPlayerInAttackRange = false;
         activeActions = true;
-    }
+    }*/
 
 
 //Aspetta
@@ -468,22 +501,53 @@ private void Wait()
     if (TimeForAtk <= 0f) 
     {
     TimeForAtk = TimeForAtkMAX;
-    //RandomicAttack();
+    RandomicAttack();
     }
 
 }
 
-//Crush
-private void Crush()
-{
-CrushAnm();
-}
+private void OnTriggerEnter2D(Collider2D collision)
+    {
+    if(!take)
+        {
+        if (collision.CompareTag("Player"))
+        {
+             take = true;
+            StartCoroutine(StopD());
+            if(!Move.instance.isGuard)
+            {
+            if (!Move.instance.isDeath)
+            {
+                if (!Move.instance.isHurt)
+            {
+            PlayerHealth.Instance.Damage(AttackDamageLow);
+            //Move.instance.Knockback();     
+            //print("Colpito");       
+
+            }}}if(Move.instance.isGuard)
+            {
+                Move.instance.KnockbackLong(); 
+                Move.instance.GuardHit(); 
+                PlayerHealth.Instance.currentStamina -= damagestamina;           
+            }
+
+    }else if (collision.gameObject.tag == "Hitbox")
+    {
+            take = true;
+        Move.instance.sbam();
+        Move.instance.KnockbackLong(); 
+                  
+           StartCoroutine(StopD());
+
+    }
+    }
+    }
 
 
 //Si muove da punto a punto
 private void Moving()
 {
-if (isMove && !isAttacking && !isJumpAttacking)
+if (isMove && !isAttacking && !isJumpAttacking && !isCharge && !isThrow)
     {
         // Controlla se l'oggetto deve spostarsi verso destra o sinistra
         if (transform.position.x < positions[id_positions].x)
@@ -536,7 +600,7 @@ if (isMove && !isAttacking && !isJumpAttacking)
     // Esegui l'animazione di movimento
     if(currentHealth > 250)
     { MovingAnm();}
-    else if(currentHealth <= 150)
+    else if(currentHealth <= 250)
     { RunAnm();}
 
 }
@@ -569,7 +633,7 @@ void FacePlayer()
         }
     }
 
-
+/*
 //Attacco
 private void Attack()
 {
@@ -613,18 +677,22 @@ private void Attack()
     }
            
             attackTimer = attackCooldown; // ...e reimposta il timer dell'attacco.
-}
+}*/
 
 //Danno
 public void Damage(int damage)
 {
     if (isDie) return;
 
+RandomicDefence();
+
     if (isGuard) 
     {  
+    Guard();
     Instantiate(VFXSdeng, slashpoint.position, transform.rotation);
     Move.instance.sbam();
-    damage = 0;
+    damage = 10;
+    currentStamina -= 10;
     PlayMFX(2);    
     KiaiGive();
 
@@ -652,29 +720,46 @@ void RandomicAttack()
 
     if (randomChance == 1) // Se il numero casuale è compreso tra 1 e 8 (80% di probabilità), aggiungi 5 di essenza
     {
-    isJumpAttacking = true;   
+    isJumpAttacking = true; 
+    isThrow = false;
+    isCharge = false;  
     } 
     else if (randomChance == 2) // Se il numero casuale è compreso tra 1 e 8 (80% di probabilità), aggiungi 5 di essenza
     {
-    currentState = State.Throw;
+    isThrow = true;
+    isJumpAttacking = false; 
+    isCharge = false;     
     }
     else if (randomChance == 3) // Se il numero casuale è compreso tra 1 e 8 (80% di probabilità), aggiungi 5 di essenza
     {
-    currentState = State.Throw;
+    isCharge = true;  
+    isThrow = true;
+    isJumpAttacking = false;    
     }
 }
 
 void RandomicDefence()
 {
-    int randomChance = Random.Range(1, 10); // Genera un numero casuale compreso tra 1 e 10
+    randomChanceEN = Random.Range(1, 10); // Genera un numero casuale compreso tra 1 e 10
 
-    if (randomChance <= GuardChance) // Se il numero casuale è compreso tra 1 e 8 (80% di probabilità), aggiungi 5 di essenza
+    if (randomChanceEN <= GuardChance) // Se il numero casuale è compreso tra 1 e 8 (80% di probabilità)
     {
     isMove = false;
     isAttacking = false;
     isGuard = true;
-    Guard();
+    isThrow = false;
+    isJumpAttacking = false; 
+    isCharge = false;  
     currentState = State.Guard;
+    }else if (randomChanceEN >= GuardChance) // Se il numero casuale è compreso tra 1 e 8 (80% di probabilità)
+    {
+    isMove = false;
+    isAttacking = false;
+    isGuard = false;
+    isThrow = false;
+    isJumpAttacking = false; 
+    isCharge = false;  
+    //Subisce il danno 
     }
 }
 
@@ -706,11 +791,11 @@ private void ResetColor()
 #region Gizmos
 private void OnDrawGizmos()
     {
-   // Gizmos.color = Color.red;
-   // Gizmos.DrawWireSphere(hitpoint.transform.position, chaseThreshold);
-    Gizmos.color = Color.blue;
-    Gizmos.DrawWireSphere(hitpoint.transform.position, attackrange);
-        Gizmos.DrawLine(lastPosition, lastPosition + Vector2.down * 2f);
+    //Gizmos.color = Color.red;
+    //Gizmos.DrawWireSphere(hitpoint.transform.position, chaseThreshold);
+    //Gizmos.color = Color.blue;
+    //Gizmos.DrawWireSphere(hitpoint.transform.position, attackrange);
+    //Gizmos.DrawLine(lastPosition, lastPosition + Vector2.down * 2f);
     //Debug.DrawRay(transform.position, new Vector3(chaseThreshold, 0), Color.red);
     }
 #endregion
@@ -783,12 +868,12 @@ public void Guard()
                 {    
                     //rb.velocity = new Vector3(0, 0);
                     _spineAnimationState.ClearTrack(2);
-                    _spineAnimationState.SetAnimation(1, GuardAnimationName, true);
+                    _spineAnimationState.SetAnimation(2, GuardAnimationName, true);
                     currentAnimationName = GuardAnimationName;
                     _spineAnimationState.Event += HandleEvent;
                 }
                 // Add event listener for when the animation completes
-                _spineAnimationState.GetCurrent(1).Complete += OnAttackAnimationComplete;
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 
 public void MovingAnm()
@@ -846,10 +931,10 @@ public void CrushAnm()
 {
     if (currentAnimationName != CrushAnmAnimationName)
                 {
-                    HitCount++;
                     _spineAnimationState.SetAnimation(2, CrushAnmAnimationName, false);
                     currentAnimationName = CrushAnmAnimationName;
                     _spineAnimationState.Event += HandleEvent;
+                    StartCharging = false;
                 }
                 // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
@@ -861,6 +946,7 @@ public void CrushRageAnm()
                     _spineAnimationState.SetAnimation(2, CrushRageAnmAnimationName, false);
                     currentAnimationName = CrushRageAnmAnimationName;
                     _spineAnimationState.Event += HandleEvent;
+                    StartCharging = false;
                 }
                 // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
@@ -944,6 +1030,8 @@ private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
     _spineAnimationState.ClearTrack(2);
     _spineAnimationState.SetAnimation(1, idleAnimationName, true);
     currentAnimationName = idleAnimationName;
+    isCharge = false;
+
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Audio

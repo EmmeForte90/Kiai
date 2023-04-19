@@ -46,7 +46,7 @@ if(GameplayManager.instance.styleIcon[0] == true)
         TimeHitbox = 0.5f;
         GameplayManager.instance.ComboCount();
         CanTake = true;
-      IDamegable hit = other.GetComponent<IDamegable>();
+        IDamegable hit = other.GetComponent<IDamegable>();
           hit.Damage(Damage);
             //Debug.Log("Damage:" + Player.Damage);
             if(Move.instance.rb.velocity.y > 0)

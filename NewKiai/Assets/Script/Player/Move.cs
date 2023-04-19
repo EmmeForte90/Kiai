@@ -50,7 +50,9 @@ public class Move : MonoBehaviour
     [SerializeField] private float jumpForce;
     [SerializeField] private float jumpForceX;
     [SerializeField] private float bumpForce;
-    [SerializeField] private float knockForce = 10f;
+    [SerializeField] public float knockForce = 10f;
+    [SerializeField] public float knockForceX = 10f;
+
     bool canDoubleJump = false;
     [HideInInspector] public float groundDelay = 0.1f; // The minimum time before the player can jump again after touching the ground
     bool isTouchingWall = false;
@@ -788,13 +790,14 @@ changeStyle();
     #region testForanysituation
             if(Input.GetKeyDown(KeyCode.C))
             {
-                Debug.Log("Ok testiamo!");
-                Thief.instance.Damage(50);
+                Debug.Log("KL");
+                KnockbackLong();
+                /*Thief.instance.Damage(50);
                 if(Thief.instance == null)
                 {
                     //Thief.instance = GameObject.FindWithTag("Enemy");
                     Thief.instance.Damage(50);
-                }
+                }*/
                 //PlayerHealth.Instance.IncreaseKiai(10);
                 //PlayerHealth.Instance.currentHealth = 10;
                 //PlayerHealth.Instance.currentHealth = 0;
@@ -802,8 +805,9 @@ changeStyle();
             }
 if(Input.GetKeyDown(KeyCode.X))
             {
-                Debug.Log("Recupero!");
-                PlayerHealth.Instance.IncreaseKiai(-10);
+                Debug.Log("NK");
+                Knockback();
+                //PlayerHealth.Instance.IncreaseKiai(-10);
                 //GuardHit(); 
                 //PlayerHealth.Instance.currentStamina -= 50;
             }   
@@ -1482,6 +1486,7 @@ public void Bump()
             isBump = false;
         }
     }
+
 public void Knockback()
     {
          // applica l'impulso del salto se il personaggio è a contatto con il terreno
@@ -1500,6 +1505,23 @@ public void Knockback()
        // lastTimeJump = Time.time + jumpDelay;
     }
 
+public void KnockbackLong()
+    {
+         // applica l'impulso del salto se il personaggio è a contatto con il terreno
+            if (transform.localScale.x < 0)
+        {
+        rb.AddForce(new Vector2(knockForceX, 2f), ForceMode2D.Force);
+        }
+        else if (transform.localScale.x > 0)
+        {
+        rb.AddForce(new Vector2(-knockForceX, 2f), ForceMode2D.Force);
+        }
+         else if (horDir == 0)
+        {
+        rb.AddForce(new Vector2(-knockForceX, 2f), ForceMode2D.Force);
+        }
+       // lastTimeJump = Time.time + jumpDelay;
+    }
 
 IEnumerator FinishKiai()
 {   

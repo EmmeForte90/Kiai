@@ -17,11 +17,11 @@ public class TriggerOrdalia : MonoBehaviour
     public float TimeStart = 2f;
     public GameObject Enemy;
     public GameObject Camera;
+    private CinemachineVirtualCamera virtualCamera; //riferimento alla virtual camera di Cinemachine
     private GameObject player; // Variabile per il player
     public GameObject Actor;
     public GameObject VFX;
     public BoxCollider2D trigger;
-    private CinemachineVirtualCamera virtualCamera; //riferimento alla virtual camera di Cinemachine
     public GameObject[] Arena;
 
     [Header("Ondate")]
