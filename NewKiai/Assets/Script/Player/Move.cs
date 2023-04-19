@@ -798,7 +798,7 @@ changeStyle();
                     //Thief.instance = GameObject.FindWithTag("Enemy");
                     Thief.instance.Damage(50);
                 }*/
-                //PlayerHealth.Instance.IncreaseKiai(10);
+                PlayerHealth.Instance.IncreaseKiai(10);
                 //PlayerHealth.Instance.currentHealth = 10;
                 //PlayerHealth.Instance.currentHealth = 0;
                 //Respawn();
