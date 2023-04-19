@@ -55,7 +55,7 @@ public class TriggerOrdalia : MonoBehaviour
 
     void Start()
     {
-    virtualCamera = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); 
+    virtualCamera = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>();
     //ottieni il riferimento alla virtual camera di Cinemachine
     player = GameObject.FindWithTag("Player");
     //EnemyCount = MinEnemy;
@@ -156,6 +156,8 @@ public void OrdaliaDosentExist()
     Actor.gameObject.SetActive(false);
     Enemy.gameObject.SetActive(true);
     GameplayManager.instance.ordalia = true;
+    GameplayManager.instance.battle = true;
+
     }
 
 
@@ -219,7 +221,7 @@ private IEnumerator EndOrdalia()
             virtualCamera.Follow = player.transform;
             foreach (GameObject arenaObject in Arena)
         {
-            print("L'ordina sta contando il tempo per la fine");
+            //print("L'ordina sta contando il tempo per la fine");
             arenaObject.SetActive(false);
             AudioManager.instance.CrossFadeOUTAudio(2);
             AudioManager.instance.CrossFadeINAudio(1);
@@ -229,7 +231,8 @@ private IEnumerator EndOrdalia()
             Quest.isComplete = true;
             }
             GameplayManager.instance.ordalia = false;
-            GameplayManager.instance.OrdaliaEnd(id);
+            GameplayManager.instance.battle = false;
+            GameplayManager.instance.BossEnd(id);
             //Destroy(gameObject);
         }    
     }

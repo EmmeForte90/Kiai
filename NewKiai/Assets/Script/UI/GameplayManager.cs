@@ -72,6 +72,8 @@ public class GameplayManager : MonoBehaviour
     public int EnemyDefeated = 0;
     public int EnemyDWave = 0;
     public bool ordalia = false;
+    public bool boss = false;
+    public bool battle = false;
 
     [Header("Abilitazioni")]
     public bool unlockWalljump = false;
@@ -506,7 +508,7 @@ public void DoorAct(int id)
     DoorActive[id] = true;   
 }
 
-public void BossActive(int id)
+public void BossEnd(int id)
 {
     // Imposta lo stato della quest a true
     BoosActive[id] = true;   

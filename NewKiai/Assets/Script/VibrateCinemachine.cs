@@ -43,8 +43,9 @@ public class VibrateCinemachine : MonoBehaviour
         }
 
         vCam.transform.position = originalPos;
-        if(!GameplayManager.instance.ordalia)
+        if(!GameplayManager.instance.battle)
         {vCam.Follow = originalFollow;}
+        
         
     }
 }

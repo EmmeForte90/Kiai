@@ -502,15 +502,17 @@ void RandomicDefence()
 
 void KiaiGive()
 {
-    int randomChance = Random.Range(1, 11); // Genera un numero casuale compreso tra 1 e 10
+    int randomChance = Random.Range(1, 10); // Genera un numero casuale compreso tra 1 e 10
 
     if (randomChance <= 8) // Se il numero casuale è compreso tra 1 e 8 (80% di probabilità), aggiungi 5 di essenza
     {
         PlayerHealth.Instance.currentKiai += 5;
+        PlayerHealth.Instance.IncreaseKiai(5);
     }
     else // Se il numero casuale è compreso tra 9 e 10 (20% di probabilità), aggiungi 10 di essenza
     {
         PlayerHealth.Instance.currentKiai += 10;
+        PlayerHealth.Instance.IncreaseKiai(10);
     }
 }
 

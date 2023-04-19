@@ -12,9 +12,17 @@ public class BossThief : MonoBehaviour, IDamegable
 {
 [SerializeField] public GameObject Boss;
     
-    [Header("Sistema Di HP")]
+    [Header("Il tipo di Quest che completa")]
+    public Quests Quest;
+    public bool isQuest = false;
+
+    [Header("Questo boss è il numero...?")]
+    public int id;
+
+    [Header("Camera")]
     public GameObject Camera;
     private CinemachineVirtualCamera virtualCamera; //riferimento alla virtual camera di Cinemachine
+    public GameObject[] Arena;
 
     [Header("Sistema Di HP")]
     public float maxHealth = 100f;
@@ -32,16 +40,12 @@ public class BossThief : MonoBehaviour, IDamegable
     public float moveSpeed = 2f; // velocità di movimento
     private Transform player;
     [SerializeField] LayerMask playerlayer;
-    public Transform JumpPoint;
     [SerializeField] float pauseDuration = 0.5f; // durata della pausa
     private float pauseTimer; // timer per la pausa
     [SerializeField] private Vector3[] positions;
     private int id_positions;
     private float horizontal;
     private bool direction_x = true;
-    public float JumpForce = 30f;
-    public float CrushForce = 10f;
-    public float YValue = -3.1f;
 
 
 
@@ -49,13 +53,6 @@ public class BossThief : MonoBehaviour, IDamegable
     public int AttackDamage = 20; // soglia di distanza per iniziare l'inseguimento
     public int AttackDamageLow = 5; // soglia di distanza per iniziare l'inseguimento
     public float damagestamina = 5; // danno d'attacco
-    //public float chaseSpeed = 4f; // velocità di inseguimento
-    //public float WaitAfterAtk = 2f;
-    //public float sightRadius = 5f; // raggio di vista del nemico
-    //public float attackrange = 2f;
-    //public float attackCooldown = 1f; // durata del cooldown dell'attacco
-    //private float attackTimer;
-    public float InvincibleTime = 1f;
     public int GuardChance = 1; // Se il numero casuale è compreso tra 1 e 8 (80% di probabilità), aggiungi 5 di essenza
     public int randomChanceEN; // Genera un numero casuale compreso tra 1 e 10
     Vector2 moveDirection;
@@ -67,7 +64,6 @@ public class BossThief : MonoBehaviour, IDamegable
 
     public float jumpSpeed = 10f;
     public float jumpHeight = 4f;
-    public float fallTime = 0.5f;
     public float waitTime = 1f;
 
     private int jumpCount = 0;
@@ -92,20 +88,16 @@ public class BossThief : MonoBehaviour, IDamegable
 
     [Header("Abilitations")]
     private bool isMove = false;
-    private bool isAttacking = false;
     private bool isHurt = false;
     private bool isDie = false;
     private bool isGuard = false;
     private bool isJump = false;
     private bool isThrow = false;
     private bool isCharge = false;
-    private bool canAttack = true;
-    private bool isPlayerInAttackRange = false;
     private bool isWait = false;
+    private bool isAttack = false;
     public bool StartCharging = false;
-    private bool activeActions = true;
     private bool isJumpAttacking = false;
-    private bool StopJ = false;
     private bool Schiaccio = true;
     private float waitTimer = 0f;
     private float waitDuration = 2f;
@@ -127,6 +119,7 @@ public class BossThief : MonoBehaviour, IDamegable
     [SpineAnimation][SerializeField] private string JumpCrushAnmAnimationName;
     [SpineAnimation][SerializeField] private string CrushRageAnmAnimationName;
     [SpineAnimation][SerializeField] private string ChargeCrushAnmAnimationName;
+    [SpineAnimation][SerializeField] private string DieAnmAnimationName;
 
     private string currentAnimationName;
     public SkeletonAnimation _skeletonAnimation;
@@ -148,6 +141,7 @@ public class BossThief : MonoBehaviour, IDamegable
     public static BossThief instance;
 private void Awake()
     {
+
     if (_skeletonAnimation == null) 
     {
         Debug.LogError("Componente SkeletonAnimation non trovato!");
@@ -194,11 +188,18 @@ void Start()
         maxHealth *= 2;
         maxStamina += 50;
     }
-    
+    virtualCamera = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); 
     currentHealth = maxHealth;
     currentStamina = maxStamina;
     player = GameObject.FindWithTag("Player").transform;
-    virtualCamera = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); 
+    foreach (GameObject arenaObject in Arena)
+        {
+            arenaObject.SetActive(true);
+            virtualCamera.Follow = Camera.transform;
+            GameplayManager.instance.boss = true;
+            GameplayManager.instance.battle = true;
+        }
+        
 
 }
 
@@ -251,13 +252,13 @@ return; // esce immediatamente se il personaggio è morto
 if (currentHealth <= 0) 
 { // controlla se il personaggio è morto
     ResetColor();
-    isAttacking = false;
     isMove = false;
     isGuard = false;
     isDie = true;
     isJumpAttacking = false; 
     isThrow = false;
     isCharge = false;  
+    StartDie();
     currentState = State.Death;
 }
 
@@ -267,15 +268,14 @@ if (isWait)
     isJumpAttacking = false; 
     isThrow = false;
     isCharge = false;  
-    isAttacking = false;
     isMove = false;
     isGuard = false;
-    isDie = true;
+    isDie = false;
     Wait();
     currentState = State.Wait;
 }
 
-if (isJumpAttacking && !isCharge && !isThrow)
+if (isJumpAttacking && !isCharge && !isThrow && !isAttack)
 {
     ResetColor();
     currentState = State.Jump;
@@ -336,7 +336,7 @@ if (isJumpAttacking && !isCharge && !isThrow)
 
 }
 
-if (isThrow && !isJumpAttacking && !isCharge)
+if (isThrow && !isJumpAttacking && !isCharge && !isAttack)
 {
     ResetColor();
     currentState = State.Throw;
@@ -382,7 +382,7 @@ if (isThrow && !isJumpAttacking && !isCharge)
 }
 
 
-if (isCharge && !isJumpAttacking && !isThrow)
+if (isCharge && !isJumpAttacking && !isThrow && !isAttack)
 {
         ResetColor();
         currentState = State.Crush;
@@ -428,35 +428,13 @@ if (isCharge && !isJumpAttacking && !isThrow)
 }
 
 
-/*
-if (Vector2.Distance(hitpoint.transform.position, player.position) < attackrange && 
-!isAttacking && !isJumpAttacking && !isCharge && !isThrow) 
-{ // controlla se il personaggio è dentro il raggio d'attacco
-    ResetColor();
-    isAttacking = true;
-    isJumpAttacking = false; 
-    isThrow = false;
-    isCharge = false;  
-    //Attack();
-    FacePlayer();
-    isMove = false;
-    isPlayerInAttackRange = true;
-    isGuard = false;
-    currentState = State.Attack;
-} 
-else if (Vector2.Distance(hitpoint.transform.position, player.position) > attackrange && isPlayerInAttackRange &&
-!isJumpAttacking && !isCharge && !isThrow) 
-{ // controlla se il personaggio è appena uscito dal raggio e si avvia il timer di attesa
-    ResetColor();
-    isAttacking = false;
-    isJumpAttacking = false; 
-    isThrow = false;
-    isCharge = false;  
-    isMove = false;
-    activeActions = false;
-    isGuard = false;
-    currentState = State.Wait;
-}*/
+if (isCharge && !isJumpAttacking && !isThrow && isAttack)
+{
+        ResetColor();
+        currentState = State.Attack;
+
+
+}
 
 }
 
@@ -471,25 +449,16 @@ private void Button()
     #region testDanno
             if(Input.GetKeyDown(KeyCode.B))
             {
-                //isJumpAttacking = true;
-                //isThrow = true;
-            isCharge = true;
+            //isJumpAttacking = true;
+            //isThrow = true;
+            //isCharge = true;
+            currentHealth -= 200;
 
             //Debug.Log("Il pulsante è stato premuto!");
             }
             #endregion
 
 }
-
- 
-
-//Il nemico torna al suo patter dattacco dopo tot tempo
-/*IEnumerator waitChase()
-    {
-        yield return new WaitForSeconds(WaitAfterAtk);
-        isPlayerInAttackRange = false;
-        activeActions = true;
-    }*/
 
 
 //Aspetta
@@ -506,39 +475,46 @@ private void Wait()
 
 }
 
+
+//Attacco ravvicinato
+private void Attack()
+{
+    if (isAttack) // Se il personaggio sta attaccando...
+    {
+            int randomChanceATK = Random.Range(1, 3); // Genera un numero casuale compreso tra 1 e 3
+
+            if (randomChanceATK == 1) // Se il numero casuale è compreso tra 1 e 5 (50% di probabilità)
+            {
+                    Attack1Anm();
+                    // ...esegui l'animazione dell'attacco...            }
+            } 
+            else if (randomChanceATK == 2)
+            {
+                    Attack2Anm(); 
+                    // ...esegui l'animazione dell'attacco...            }
+            }
+            else if (randomChanceATK == 3)
+            {
+                    Attack3Anm(); 
+                    // ...esegui l'animazione dell'attacco...            }
+            }
+    }   
+}
+           
+    
+
+
 private void OnTriggerEnter2D(Collider2D collision)
     {
     if(!take)
-        {
-        if (collision.CompareTag("Player"))
-        {
-             take = true;
-            StartCoroutine(StopD());
-            if(!Move.instance.isGuard)
-            {
-            if (!Move.instance.isDeath)
-            {
-                if (!Move.instance.isHurt)
-            {
-            PlayerHealth.Instance.Damage(AttackDamageLow);
-            //Move.instance.Knockback();     
-            //print("Colpito");       
-
-            }}}if(Move.instance.isGuard)
-            {
-                Move.instance.KnockbackLong(); 
-                Move.instance.GuardHit(); 
-                PlayerHealth.Instance.currentStamina -= damagestamina;           
-            }
-
-    }else if (collision.gameObject.tag == "Hitbox")
+    {
+        if (collision.gameObject.tag == "Hitbox")
     {
             take = true;
         Move.instance.sbam();
         Move.instance.KnockbackLong(); 
                   
            StartCoroutine(StopD());
-
     }
     }
     }
@@ -547,7 +523,9 @@ private void OnTriggerEnter2D(Collider2D collision)
 //Si muove da punto a punto
 private void Moving()
 {
-if (isMove && !isAttacking && !isJumpAttacking && !isCharge && !isThrow)
+if(!isWait)
+    {
+if (isMove && !isJumpAttacking && !isCharge && !isThrow && !isAttack )
     {
         // Controlla se l'oggetto deve spostarsi verso destra o sinistra
         if (transform.position.x < positions[id_positions].x)
@@ -602,7 +580,7 @@ if (isMove && !isAttacking && !isJumpAttacking && !isCharge && !isThrow)
     { MovingAnm();}
     else if(currentHealth <= 250)
     { RunAnm();}
-
+    }
 }
 
 //Si gira nella direzione
@@ -632,52 +610,6 @@ void FacePlayer()
             }
         }
     }
-
-/*
-//Attacco
-private void Attack()
-{
-    if (isAttacking) // Se il personaggio sta attaccando...
-    {
-        if (attackTimer > 0) // ...e l'attacco non è ancora disponibile...
-        {
-            attackTimer -= Time.deltaTime; // ...decrementa il timer dell'attacco...
-            canAttack = false; // ...e imposta la variabile "canAttack" su "false".
-            return; // Esci dalla funzione.
-        }
-        else // Altrimenti...
-        {
-            canAttack = true; // ...imposta la variabile "canAttack" su "true".
-        }
-
-        if (canAttack && Vector2.Distance(transform.position, player.position) < attackrange) 
-        // Se l'attacco è disponibile e il personaggio è abbastanza vicino al giocatore...
-        {
-            int randomChance = Random.Range(1, 3); // Genera un numero casuale compreso tra 1 e 10
-
-            if (randomChance == 1) // Se il numero casuale è compreso tra 1 e 5 (50% di probabilità)
-            {
-                    Attack1Anm();
-                                //print("1att");
-
-            } // ...esegui l'animazione dell'attacco...            }
-            else if (randomChance == 2)
-            {
-                    Attack2Anm(); 
-                               // print("2att");
-// ...esegui l'animazione dell'attacco...            }
-            }
-            }
-            else if (randomChance == 3)
-            {
-                    Attack3Anm(); 
-                                //print("3att");
-// ...esegui l'animazione dell'attacco...            }
-            }
-    }
-           
-            attackTimer = attackCooldown; // ...e reimposta il timer dell'attacco.
-}*/
 
 //Danno
 public void Damage(int damage)
@@ -710,31 +642,83 @@ RandomicDefence();
 //Processo di morte
 private void StartDie()
 {
-
-
+    PlayMFX(0);    
+    DieAnm();
+    StartCoroutine(EndBoss()); // chiama la funzione EndOrdalia
 }
+
+private IEnumerator EndBoss()
+    {
+            yield return new WaitForSeconds(2f);   
+            virtualCamera.Follow = player.transform;
+            foreach (GameObject arenaObject in Arena)
+        {
+           //print("L'ordina sta contando il tempo per la fine");
+            arenaObject.SetActive(false);
+            AudioManager.instance.CrossFadeOUTAudio(2);
+            AudioManager.instance.CrossFadeINAudio(1);
+            if(isQuest)
+            {
+            Quest.isActive = false;
+            Quest.isComplete = true;
+            }
+            GameplayManager.instance.boss = false;
+            GameplayManager.instance.battle = false;
+            GameplayManager.instance.BossEnd(id);
+            //Destroy(gameObject);
+        }    
+    }
+
+
 
 void RandomicAttack()
 {
-    int randomChance = Random.Range(1, 3); // Genera un numero casuale compreso tra 1 e 10
+    int randomChance = Random.Range(1, 5); // Genera un numero casuale compreso tra 1 e 10
 
     if (randomChance == 1) // Se il numero casuale è compreso tra 1 e 8 (80% di probabilità), aggiungi 5 di essenza
     {
     isJumpAttacking = true; 
     isThrow = false;
-    isCharge = false;  
+    isCharge = false; 
+    isAttack = false; 
+    isMove = false; 
+    isWait = false;       
     } 
     else if (randomChance == 2) // Se il numero casuale è compreso tra 1 e 8 (80% di probabilità), aggiungi 5 di essenza
     {
     isThrow = true;
     isJumpAttacking = false; 
-    isCharge = false;     
+    isCharge = false; 
+    isAttack = false; 
+    isMove = false;
+    isWait = false;                  
     }
     else if (randomChance == 3) // Se il numero casuale è compreso tra 1 e 8 (80% di probabilità), aggiungi 5 di essenza
     {
     isCharge = true;  
-    isThrow = true;
-    isJumpAttacking = false;    
+    isThrow = false;
+    isJumpAttacking = false; 
+    isAttack = false; 
+    isMove = false;  
+    isWait = false;          
+    }
+    else if (randomChance == 4) // Se il numero casuale è compreso tra 1 e 8 (80% di probabilità), aggiungi 5 di essenza
+    {
+    isCharge = false;  
+    isThrow = false;
+    isJumpAttacking = false; 
+    isAttack = true; 
+    isMove = false; 
+    isWait = false;           
+    }
+    else if (randomChance == 5) // Se il numero casuale è compreso tra 1 e 8 (80% di probabilità), aggiungi 5 di essenza
+    {
+    isCharge = false;  
+    isThrow = false;
+    isJumpAttacking = false; 
+    isAttack = false;
+    isMove = true;  
+    isWait = false;        
     }
 }
 
@@ -745,20 +729,20 @@ void RandomicDefence()
     if (randomChanceEN <= GuardChance) // Se il numero casuale è compreso tra 1 e 8 (80% di probabilità)
     {
     isMove = false;
-    isAttacking = false;
     isGuard = true;
     isThrow = false;
     isJumpAttacking = false; 
     isCharge = false;  
+    isAttack = false;  
     currentState = State.Guard;
     }else if (randomChanceEN >= GuardChance) // Se il numero casuale è compreso tra 1 e 8 (80% di probabilità)
     {
     isMove = false;
-    isAttacking = false;
     isGuard = false;
     isThrow = false;
     isJumpAttacking = false; 
-    isCharge = false;  
+    isCharge = false;
+    isAttack = false;  
     //Subisce il danno 
     }
 }
@@ -771,10 +755,12 @@ void KiaiGive()
     if (randomChance <= 8) // Se il numero casuale è compreso tra 1 e 8 (80% di probabilità), aggiungi 5 di essenza
     {
         PlayerHealth.Instance.currentKiai += 5;
+        PlayerHealth.Instance.IncreaseKiai(5);
     }
     else // Se il numero casuale è compreso tra 9 e 10 (20% di probabilità), aggiungi 10 di essenza
     {
         PlayerHealth.Instance.currentKiai += 10;
+        PlayerHealth.Instance.IncreaseKiai(10);
     }
 }
 
@@ -985,6 +971,18 @@ public void Throw()
                 }
                 // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+
+public void DieAnm()
+{
+    if (currentAnimationName != DieAnmAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(1, DieAnmAnimationName, true);
+                    currentAnimationName = DieAnmAnimationName;
+                    _spineAnimationState.Event += HandleEvent;
+                }
+                // Add event listener for when the animation completes
+                //_spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 
 public void NearAttk()
