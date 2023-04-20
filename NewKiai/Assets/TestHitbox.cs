@@ -7,12 +7,13 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 
 
-public class TestHitbox : MonoBehaviour
+public class TestHitbox : MonoBehaviour, IDamegable
 {
     [Header("Animations")]
     [SpineAnimation][SerializeField] private string idleAnimationName;
     [SpineAnimation][SerializeField] private string HitAnimationName;
    
+    private int none;
 
     private string currentAnimationName;
     private SkeletonAnimation _skeletonAnimation;
@@ -90,9 +91,13 @@ void Update()
 }
 }
 
+public void Damage(int damage)
+{
+    damage += none;
+}
 void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Hitbox")
+        if (other.gameObject.tag == "Hitbox" || other.gameObject.tag == "Throw")
         {  
             
             print("Hit the enm");

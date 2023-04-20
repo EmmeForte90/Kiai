@@ -17,19 +17,21 @@ MonoBehaviour:
   questName: Save the Baloon
   Description: Save the Baloon
   value: 1
-  Bigicon: {fileID: 0}
+  Bigicon: {fileID: 21300000, guid: ce8c0fa5b3e8cd048adf4f558da6c1a2, type: 3}
   Startdialogue:
-  - Proviamo questa cosa
-  - Salvami la pallavcbvcbbdf
+  - "Help! The wind take my folding fan\r, please help me!"
+  - 'It''s there, top of this tree. It''s to high for me, please help me '
   Middledialogue:
-  - Muoviti
-  - Mi annoio
+  - Why I have a folding fan and not a simple ball you said? It's not your business.
+  - Just... Take my folding fun, you can use double jump if you take that older paper
+    on that  old tree.
   Endingdialogue:
-  - Bravo
-  - KEK
+  - Bravo, well done!
+  - Now keep going with the prototype.
   Afterdialogue:
-  - Ancora qui?
-  - Zucm o merl
-  isActive: 0
+  - This is a dress, you can change your dress in your menu when you press ESC or
+    PAUSE.
+  - Try it! It's blu, it's cute, didn't you?
+  isActive: 1
   isComplete: 0
-  AfterQuest: 1
+  AfterQuest: 0

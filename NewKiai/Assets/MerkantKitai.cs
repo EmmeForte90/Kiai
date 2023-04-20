@@ -161,10 +161,26 @@ FacePlayer();
 }
     
 
-public void clang()
+public void Back()
 {
-sgm[0].Play();
+if (EndDia)
+        {
+            Move.instance.NotStrangeAnimationTalk = false;
+            button.gameObject.SetActive(false); // Initially hide the dialogue text
+            _isInTrigger = false;
+            _isDialogueActive = false;
+            dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
+            dialogueText.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
+            Menu.gameObject.SetActive(false);
+            Talk = false;
+            EndDia = false;
+            Move.instance.stopInput = false;
+            Move.instance.NotStrangeAnimationTalk = false;
+            
+        }
+
 }
+
 
 public void Buy(Item newItem)
 {

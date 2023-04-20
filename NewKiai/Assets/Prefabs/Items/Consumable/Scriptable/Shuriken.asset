@@ -16,5 +16,11 @@ MonoBehaviour:
   itemName: Shuriken
   Description: A iron star, very strong
   value: 1
+  prices: 5
   icon: {fileID: 21300000, guid: bcbf618e2bd8d2b468569efe69bb880c, type: 3}
+  NameSkin: 
+  Dialogue: A shuriken, it's fun to throw, less if hurt you!
   isConsumable: 1
+  isKey: 0
+  isKatana: 0
+  isDress: 0

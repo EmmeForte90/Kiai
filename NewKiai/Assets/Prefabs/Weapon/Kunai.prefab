@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8663648369644289306}
   m_Layer: 0
   m_Name: Kunai
-  m_TagString: Untagged
+  m_TagString: Throw
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,11 +102,6 @@ MonoBehaviour:
   speed: 40
   Explode: {fileID: 6277231454409640187, guid: 32425d44a5ce0b9488d7881e1f00c227, type: 3}
   damage: 50
-  rotationSpeed: 2500
-  isRotating: 0
-  kunai: 1
-  Needtwohands: 0
-  isBig: 0
   lifeTime: 0.5
   list: []
   SFX: {fileID: 24100000, guid: 63f598184995bda419cd1ee5db5e6d03, type: 2}

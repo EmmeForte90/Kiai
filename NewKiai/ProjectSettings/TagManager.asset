@@ -23,6 +23,7 @@ TagManager:
   - SpawnPoint_3
   - SpawnPoint_4
   - SpawnPoint_5
+  - Throw
   layers:
   - Default
   - TransparentFX

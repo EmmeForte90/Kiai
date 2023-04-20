@@ -43,18 +43,23 @@ public class QuestCharacters : MonoBehaviour
     private bool _isDialogueActive;
 
 [Header("Audio")]
-[SerializeField] public AudioClip[] listmusic; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
-private AudioSource[] bgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
-public AudioMixer SFX;
+  [HideInInspector] public float basePitch = 1f;
+    [HideInInspector] public float randomPitchOffset = 0.1f;
+    [SerializeField] public AudioClip[] listmusic; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
+    private AudioSource[] bgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
+    public AudioMixer SFX;
+    private bool bgmActive = false;
 
 [Header("Animations")]
     [SpineAnimation][SerializeField] private string idleAnimationName;
     [SpineAnimation][SerializeField] private string HitAnimationName;
+   
     private string currentAnimationName;
-    public SkeletonAnimation _skeletonAnimation;
+    private SkeletonAnimation _skeletonAnimation;
     private Spine.AnimationState _spineAnimationState;
     private Spine.Skeleton _skeleton;
     Spine.EventData eventData;
+
 public static QuestCharacters Instance;
 
 
@@ -95,21 +100,11 @@ void Awake()
         button.gameObject.SetActive(false); // Initially hide the dialogue text
         dialogueText.gameObject.SetActive(false); // Initially hide the dialogue text
         dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
-      //  anim = GetComponent<Animator>();
-        
-
+        //anim = GetComponent<Animator>();
     }
 
     void Update()
     {
-        
-dialogueDuration = GameplayManager.instance.dialogueDuration;
-
-if(Talk)
-{Hit();}
-else
-{Idle();}
-
         if (FirstD)
 {
     dialogue = Quest.Startdialogue;
@@ -127,7 +122,8 @@ else if (Quest.AfterQuest)
     dialogue = Quest.Afterdialogue;
 }
 
-      //  anim.SetBool("talk", Talk);
+        //anim.SetBool("talk", Talk);
+        Idle();
         if(heFlip)
         {
         FacePlayer();
@@ -151,10 +147,6 @@ if(!notGo)
 }
     
 
-public void clang()
-{
-bgm[0].Play();
-}
 
     private void OnTriggerEnter2D(Collider2D collision)
 {
@@ -196,7 +188,8 @@ bgm[0].Play();
 {    
     Talk = true;
     //talk.Play();
-    bgm[1].Play();
+    Hit();
+    PlayMFX(1);
     _isDialogueActive = true;
     elapsedTime = 0; // reset elapsed time
     dialogueBox.gameObject.SetActive(true); // Show dialogue box
@@ -217,6 +210,22 @@ bgm[0].Play();
             StopButton = true;
 }
 
+ public void StopMFX(int soundToPlay)
+    {
+        if (bgmActive)
+        {
+            bgm[soundToPlay].Stop();
+            bgmActive = false;
+        }
+    }
+
+public void PlayMFX(int soundToPlay)
+    {
+        bgm[soundToPlay].Stop();
+        // Imposta la pitch dell'AudioSource in base ai valori specificati.
+        bgm[soundToPlay].pitch = basePitch + Random.Range(-randomPitchOffset, randomPitchOffset); 
+        bgm[soundToPlay].Play();
+    }
 
 
     void NextDialogue()
@@ -230,12 +239,11 @@ bgm[0].Play();
             dialogueIndex = 0;
             _isDialogueActive = false;
             Talk = false;
+
             dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
             dialogueText.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
             if(FirstD)
             {
-                    print("inizia");
-
             StartCoroutine(StartQuest());
             }
             else if(Quest.isComplete)
@@ -260,12 +268,10 @@ bgm[0].Play();
 
  IEnumerator EndQuest()
 {
-        print("endQuest");
-
         notGo = true;
         QNameE.text = Quest.questName;
         QuestEnd.gameObject.SetActive(true); 
-        bgm[2].Play();
+        PlayMFX(2);
         yield return new WaitForSeconds(5f); 
         Instantiate(Reward, RewardPoint.position, transform.rotation);
         QuestEnd.gameObject.SetActive(false); 
@@ -282,11 +288,10 @@ bgm[0].Play();
             
  IEnumerator StartQuest()
 {            
-    print("StartQuest");
         notGo = true;
         QNameS.text = Quest.questName;
         Quest.isActive = true;
-        bgm[3].Play();
+        PlayMFX(3);
         QuestStart.gameObject.SetActive(true); 
         QuestManager.Instance.AddQuest(Quest);
         QuestManager.Instance.ListQuest(IDQuest);
@@ -316,6 +321,9 @@ bgm[0].Play();
         }
     }
 
+
+
+
      public void Idle()
 {
              if (currentAnimationName != idleAnimationName)
@@ -330,11 +338,11 @@ public void Hit()
              if (currentAnimationName != HitAnimationName)
                 { 
                     //_spineAnimationState.ClearTrack(1);
-                    _spineAnimationState.SetAnimation(1, HitAnimationName, false);
+                    _spineAnimationState.SetAnimation(2, HitAnimationName, true);
                     currentAnimationName = HitAnimationName;
                 }
                 // Add event listener for when the animation completes
-                _spineAnimationState.GetCurrent(1).Complete += OnAttackAnimationComplete;
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 
 private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
@@ -343,7 +351,7 @@ private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
     trackEntry.Complete -= OnAttackAnimationComplete;
 
     // Clear the track 1 and reset to the idle animation
-    //_spineAnimationState.ClearTrack(1);
+    _spineAnimationState.ClearTrack(2);
     _spineAnimationState.SetAnimation(1, idleAnimationName, true);
     currentAnimationName = idleAnimationName;
 

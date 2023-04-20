@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class LevelChanger : MonoBehaviour
 {
@@ -14,13 +15,18 @@ public bool interactWithKey = true;
 public string sceneName;
 public bool needButton;
 public bool isDoor = false;
-
+public Animator anim; // componente Animator del personaggio
 // Riferimento all'evento di cambio scena
 private SceneEvent sceneEvent;
 // Riferimento al game object del player
 private GameObject player;
-[Header("Audio")]
-[SerializeField] AudioSource Door;
+ [Header("Audio")]
+    [HideInInspector] public float basePitch = 1f;
+    [HideInInspector] public float randomPitchOffset = 0.1f;
+    [SerializeField] public AudioClip[] listmusic; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
+    private AudioSource[] bgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
+    public AudioMixer SFX;
+    private bool bgmActive = false;
 
 private void Start()
 {
@@ -30,7 +36,21 @@ private void Start()
     sceneEvent = GetComponent<SceneEvent>();
     // Aggiungiamo un listener all'evento di cambio scena
     sceneEvent.onSceneChange.AddListener(ChangeScene);
-   
+   bgm = new AudioSource[listmusic.Length]; // inizializza l'array di AudioSource con la stessa lunghezza dell'array di AudioClip
+        for (int i = 0; i < listmusic.Length; i++) // scorre la lista di AudioClip
+        {
+        bgm[i] = gameObject.AddComponent<AudioSource>(); // crea un nuovo AudioSource come componente del game object attuale (quello a cui è attaccato lo script)
+        bgm[i].clip = listmusic[i]; // assegna l'AudioClip corrispondente all'AudioSource creato
+        bgm[i].playOnAwake = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
+        bgm[i].loop = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
+
+        }
+
+        // Aggiunge i canali audio degli AudioSource all'output del mixer
+        foreach (AudioSource audioSource in bgm)
+        {
+        audioSource.outputAudioMixerGroup = SFX.FindMatchingGroups("Master")[0];
+        }
 }
 
 // Metodo per cambiare scena
@@ -94,13 +114,30 @@ private void OnTriggerStay2D(Collider2D other)
             // Riproduciamo l'audio della porta se necessario
             if(isDoor)
             {
-                Door.Play();
+                PlayMFX(0);
+                anim.SetBool("talk", true);
             }
             // Avviamo la coroutine per attendere il caricamento della scena
             StartCoroutine(WaitForSceneLoad());
         }  
     }
 }
+ public void StopMFX(int soundToPlay)
+    {
+        if (bgmActive)
+        {
+            bgm[soundToPlay].Stop();
+            bgmActive = false;
+        }
+    }
+
+public void PlayMFX(int soundToPlay)
+    {
+        bgm[soundToPlay].Stop();
+        // Imposta la pitch dell'AudioSource in base ai valori specificati.
+        bgm[soundToPlay].pitch = basePitch + Random.Range(-randomPitchOffset, randomPitchOffset); 
+        bgm[soundToPlay].Play();
+    }
 
 
 private void OnTriggerEnter2D(Collider2D other)

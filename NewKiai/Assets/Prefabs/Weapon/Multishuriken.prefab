@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 515121600462677443}
   m_Layer: 0
   m_Name: Shuriken (2)
-  m_TagString: Untagged
+  m_TagString: Throw
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 1676930759464965401}
   m_Layer: 0
   m_Name: Shuriken (1)
-  m_TagString: Untagged
+  m_TagString: Throw
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -355,7 +355,7 @@ GameObject:
   - component: {fileID: 4390798214808672383}
   m_Layer: 0
   m_Name: Shuriken
-  m_TagString: Untagged
+  m_TagString: Throw
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
