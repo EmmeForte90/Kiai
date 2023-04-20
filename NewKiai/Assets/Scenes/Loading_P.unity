@@ -554,9 +554,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81aca84ea5a43c648a0f00edc00ce9b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startScene: Test
-  levelToLoad: Test
+  startScene: Area1
+  levelToLoad: Area1
   Timelife: 5
+  spawnPointTag: SpawnPoint_1
 --- !u!114 &1055986938
 MonoBehaviour:
   m_ObjectHideFlags: 0

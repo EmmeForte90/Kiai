@@ -29,7 +29,7 @@ public class PauseMenu : MonoBehaviour
 
     public void MainMenu()
     {
-        GameplayManager.instance.gameplayOff = true;
+        //GameplayManager.instance.gameplayOff = true;
         SceneManager.LoadScene(mainMenu);
         Time.timeScale = 1;
         Destroy(GameManager);

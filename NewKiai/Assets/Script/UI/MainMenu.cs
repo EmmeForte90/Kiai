@@ -24,6 +24,7 @@ public class MainMenu : MonoBehaviour
     public AudioMixer SFX;
     private CinemachineVirtualCamera virtualCamera;
     private GameObject player; // Variabile per il player
+    public GameObject Fade;
 
     Resolution[] resolutions;
     //public Dropdown resolutionDropdown;
@@ -102,9 +103,8 @@ public void SetResolution(int resolutionIndex)
 
 IEnumerator fade()
     {
-        
+        Fade.gameObject.SetActive(true);
         yield return new WaitForSeconds(Timelife);
-
         AudioManager.instance.CrossFadeINAudio(0);
         SceneManager.LoadScene(startScene);       
     }

@@ -8,12 +8,21 @@ public class FocusCam : MonoBehaviour
 private CinemachineVirtualCamera vCam;
 private GameObject player;
 public GameObject CamFocus;
+[Tooltip("Musica di base")]
+public int MusicBefore;
+[Tooltip("Musica da attivare se necessario quando la telecamera inquadra l'evento")]
+public int MusicAfter;
+public bool needMusic = false;
 
 private void Start()
     {
     player = GameObject.FindGameObjectWithTag("Player");
     vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); 
     //ottieni il riferimento alla virtual camera di Cinemachine
+    if(needMusic)
+    {
+        AudioManager.instance.PlayMFX(MusicBefore);
+    }
 
     }
 
@@ -24,6 +33,10 @@ private void OnTriggerEnter2D(Collider2D other)
     if (other.CompareTag("Player"))
     {
         vCam.Follow = CamFocus.transform;
+        if(needMusic)
+    {
+        AudioManager.instance.PlayMFX(MusicAfter);
+    }
     }
 }
 
@@ -33,7 +46,10 @@ private void OnTriggerExit2D(Collider2D other)
     if (other.CompareTag("Player"))
     {
         vCam.Follow = player.transform;
-
+        if(needMusic)
+        {
+        AudioManager.instance.PlayMFX(MusicBefore);
+        }
     }
 }
 

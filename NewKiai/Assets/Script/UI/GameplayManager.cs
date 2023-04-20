@@ -28,10 +28,11 @@ public class GameplayManager : MonoBehaviour
     public float comboTimer = 3f; 
     public int C_Count = 0;
 
+[Tooltip("Attiva la spunta solo se sei nel main menu")]
+    public bool isStartGame;
+
     private CinemachineVirtualCamera virtualCamera;
     [HideInInspector]
-    public bool gameplayOff = false;
-    public bool StopDefaultSkill = false;
 
    
 
@@ -56,7 +57,6 @@ public class GameplayManager : MonoBehaviour
     [Header("Fade")]
     [SerializeField] GameObject callFadeIn;
     [SerializeField] GameObject callFadeOut;
-    private bool isStartGame;
 
     [Header("Pause")]
     [SerializeField] public GameObject PauseMenu;
@@ -141,6 +141,9 @@ public class GameplayManager : MonoBehaviour
             virtualCamera.LookAt = toy.transform;
         }else
         {
+        Move.instance.stopInput = true;
+        AudioManager.instance.PlayMFX(0);
+        virtualCamera.Follow = Menu.transform;
         unlockWalljump = false;   
         Walljump.gameObject.SetActive(false);
         unlockDoubleJump = false; 
@@ -194,10 +197,13 @@ public void Update()
 
 }
 
- public void Test()
+ public void FirstoOfPlay()
 {
-Thief.instance.Damage(50);
+    startGame = false;
+    virtualCamera.Follow = toy.transform;
+    virtualCamera.LookAt = toy.transform;
 }
+
 
 public void ComboCount()
 {
@@ -271,10 +277,10 @@ public void ActivationGame()
 
      if(Actor == null)
         {
-        print("NotFoundActor");
+        //print("NotFoundActor");
         }else if(Actor != null)
         {
-        print("FIND IT!");    
+        //print("FIND IT!");    
         player.gameObject.SetActive(true);
         toy.transform.position = Actor.transform.position;
         Actor.gameObject.SetActive(false);
@@ -289,10 +295,10 @@ public void DeactivationGame()
 
      if(Actor == null )
         {
-        print("NotFoundActor");
+        //print("NotFoundActor");
         }else
         {
-        print("FIND IT!");
+        //print("FIND IT!");
         toy.transform.position = Actor.transform.position;
         toy.gameObject.SetActive(false);
         Actor.gameObject.SetActive(true);
