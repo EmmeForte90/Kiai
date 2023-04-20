@@ -29769,25 +29769,49 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1045408677758359186, guid: f4ae430cb9df3ee45955923c434b36e8, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 429.8448
+      objectReference: {fileID: 0}
+    - target: {fileID: 1045408677758359186, guid: f4ae430cb9df3ee45955923c434b36e8, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1045408677758359186, guid: f4ae430cb9df3ee45955923c434b36e8, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -122
+      objectReference: {fileID: 0}
     - target: {fileID: 3251078662438753970, guid: f4ae430cb9df3ee45955923c434b36e8, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 3251078662438753973, guid: f4ae430cb9df3ee45955923c434b36e8, type: 3}
-      propertyPath: Reward
+    - target: {fileID: 3251078662611005271, guid: f4ae430cb9df3ee45955923c434b36e8, type: 3}
+      propertyPath: m_text
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 3251078662438753973, guid: f4ae430cb9df3ee45955923c434b36e8, type: 3}
-      propertyPath: dialogueDuration
-      value: 3
+    - target: {fileID: 3251078663777161623, guid: f4ae430cb9df3ee45955923c434b36e8, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3251078663777161623, guid: f4ae430cb9df3ee45955923c434b36e8, type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3251078663777161623, guid: f4ae430cb9df3ee45955923c434b36e8, type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3251078663777161623, guid: f4ae430cb9df3ee45955923c434b36e8, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3251078663777161623, guid: f4ae430cb9df3ee45955923c434b36e8, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 3251078663802348032, guid: f4ae430cb9df3ee45955923c434b36e8, type: 3}
       propertyPath: m_Name
       value: Kid
-      objectReference: {fileID: 0}
-    - target: {fileID: 3251078663802348032, guid: f4ae430cb9df3ee45955923c434b36e8, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3251078663802348047, guid: f4ae430cb9df3ee45955923c434b36e8, type: 3}
       propertyPath: m_RootOrder
@@ -29832,6 +29856,30 @@ PrefabInstance:
     - target: {fileID: 3251078663802348047, guid: f4ae430cb9df3ee45955923c434b36e8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3251078664145419247, guid: f4ae430cb9df3ee45955923c434b36e8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3251078664263127126, guid: f4ae430cb9df3ee45955923c434b36e8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3683868110265186038, guid: f4ae430cb9df3ee45955923c434b36e8, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 405.209
+      objectReference: {fileID: 0}
+    - target: {fileID: 3683868110265186038, guid: f4ae430cb9df3ee45955923c434b36e8, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 79.4702
+      objectReference: {fileID: 0}
+    - target: {fileID: 3683868110265186038, guid: f4ae430cb9df3ee45955923c434b36e8, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3683868110265186038, guid: f4ae430cb9df3ee45955923c434b36e8, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4ae430cb9df3ee45955923c434b36e8, type: 3}
