@@ -2,12 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using Spine.Unity;
+using UnityEngine.Audio;
 
 public class NPCDialogue : MonoBehaviour
 {
@@ -36,8 +33,12 @@ public class NPCDialogue : MonoBehaviour
 
 
 [Header("Audio")]
-[SerializeField] AudioSource talk;
-[SerializeField] AudioSource Clang;
+    [HideInInspector] public float basePitch = 1f;
+    [HideInInspector] public float randomPitchOffset = 0.1f;
+    [SerializeField] public AudioClip[] listSound; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
+    private AudioSource[] bgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
+    public AudioMixer SFX;
+    private bool bgmActive = false;
 
 public static NPCDialogue instance;
 
@@ -51,6 +52,15 @@ void Awake()
     player = GameObject.FindWithTag("Player");
     dialogue = DManager.dialogue;
     CharacterName.text = DManager.CharacterName;
+    bgm = new AudioSource[listSound.Length]; // inizializza l'array di AudioSource con la stessa lunghezza dell'array di AudioClip
+        for (int i = 0; i < listSound.Length; i++) // scorre la lista di AudioClip
+        {
+            bgm[i] = gameObject.AddComponent<AudioSource>(); // crea un nuovo AudioSource come componente del game object attuale (quello a cui è attaccato lo script)
+            bgm[i].clip = listSound[i]; // assegna l'AudioClip corrispondente all'AudioSource creato
+            bgm[i].playOnAwake = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
+            bgm[i].loop = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
+
+        }
 }
 
 public void changeDialogue()
@@ -75,13 +85,13 @@ public void changeDialogue()
         button.gameObject.SetActive(false); // Initially hide the dialogue text
         dialogueText.gameObject.SetActive(false); // Initially hide the dialogue text
         dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
     }
 
     void Update()
     {
         
-        anim.SetBool("talk", Talk);
+        //anim.SetBool("talk", Talk);
         if(heFlip)
         {
         FacePlayer();
@@ -101,11 +111,6 @@ public void changeDialogue()
             StopButton = false;
         }
     }
-
-public void clang()
-{
-Clang.Play();
-}
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -137,16 +142,34 @@ Clang.Play();
                 _isDialogueActive = false;
                 dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
                 dialogueText.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
-                talk.Stop();
+                StopMFX(1);
 
             }
         }
     }
 
+  public void StopMFX(int soundToPlay)
+    {
+        if (bgmActive)
+        {
+            bgm[soundToPlay].Stop();
+            bgmActive = false;
+        }
+    }
+
+public void PlayMFX(int soundToPlay)
+    {
+        bgm[soundToPlay].Stop();
+        // Imposta la pitch dell'AudioSource in base ai valori specificati.
+        bgm[soundToPlay].pitch = basePitch + Random.Range(-randomPitchOffset, randomPitchOffset); 
+        bgm[soundToPlay].Play();
+    }
+
+
     IEnumerator ShowDialogue()
 {
     Talk = true;
-    talk.Play();
+    PlayMFX(1);
     _isDialogueActive = true;
     elapsedTime = 0; // reset elapsed time
     dialogueBox.gameObject.SetActive(true); // Show dialogue box
@@ -177,7 +200,7 @@ Clang.Play();
         dialogueIndex++; // Increment the dialogue index
         if (dialogueIndex >= dialogue.Length)
         {
-            talk.Stop();
+            StopMFX(1);
             dialogueIndex = 0;
             _isDialogueActive = false;
             Talk = false;

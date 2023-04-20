@@ -19,7 +19,7 @@ private float timeBeforeDestroying = 3f;
 
 [Header("Moving")]
 public float moveSpeed = 2f; // velocità di movimento
-[SerializeField] float pauseDuration = 0.5f; // durata della pausa
+[SerializeField] float pauseDuration = 2f; // durata della pausa
 private float pauseTimer; // timer per la pausa
 [SerializeField] private Vector3[] positions;
 private int id_positions;
@@ -537,14 +537,14 @@ public void Damage(int damage)
     Instantiate(VFXSdeng, slashpoint.position, transform.rotation);
     Move.instance.sbam();
     damage = 0;
-    PlayMFX(2);
+    PlayMFX(0);
     return;
     }
 
     currentHealth -= damage;
     TemporaryChangeColor(Color.red);
     Instantiate(VFXHurt, hitpoint.position, transform.rotation);
-    PlayMFX(1);
+    PlayMFX(2);
     if (isSmall)
     {
         HurtAnm();
@@ -801,7 +801,7 @@ if (e.Data.Name == "VFXslash") {
         {Instantiate(attack, slashpoint.position, transform.rotation);}
         else if(Brain.transform.localScale.x < 0)
         {Instantiate(attack, slashpoint.position, transform.rotation);}
-        PlayMFX(0);
+        PlayMFX(1);
     }
 
 if (e.Data.Name == "Destroy") {
@@ -815,7 +815,7 @@ if (e.Data.Name == "VFXslash_h") {
         {Instantiate(attack_h, slashpoint.position, transform.rotation);}
         else if(Brain.transform.localScale.x < 0)
         {Instantiate(attack_h, -slashpoint.position, transform.rotation);}
-        PlayMFX(0);
+        PlayMFX(1);
     }
 if (e.Data.Name == "VFXSlashB") {
         // Inserisci qui il codice per gestire l'evento.
@@ -823,7 +823,7 @@ if (e.Data.Name == "VFXSlashB") {
         {Instantiate(attack_B, slashpoint.position, transform.rotation);}
         else if(Brain.transform.localScale.x < 0)
         {Instantiate(attack_B, -slashpoint.position, transform.rotation);}
-        PlayMFX(0);
+        PlayMFX(1);
     }
     if (e.Data.Name == "attack") {
         // Inserisci qui il codice per gestire l'evento.
