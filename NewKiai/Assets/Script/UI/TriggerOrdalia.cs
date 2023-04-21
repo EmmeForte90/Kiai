@@ -35,8 +35,8 @@ public class TriggerOrdalia : MonoBehaviour
     public int MaxOndate;
     public int EnemiesPerWave;
 
-    public bool canStartNextWave = true;
-    public bool ContatoreAum = true;
+    private bool canStartNextWave = true;
+    private bool ContatoreAum = true;
     [Header("Il valore deve sempre esse dato in negativo")]
     public int EnemyDefeated;
     
@@ -51,7 +51,10 @@ public class TriggerOrdalia : MonoBehaviour
     public int[] waves = {3, 5, 7, 9};//Numerp di nemici generati per ondate
     private int lastSpawnIndex = -1;
                
-    
+    [Tooltip("Musica di base")]
+    public int MusicBefore;
+    [Tooltip("Musica da attivare se necessario quando la telecamera inquadra l'evento")]
+    public int MusicAfter;
 
     void Start()
     {
@@ -148,8 +151,8 @@ public void OrdaliaDosentExist()
     trigger.enabled = false;
     ActorOrdalia.Instance.FacePlayer();
     ActorOrdalia.Instance.Standup();
-    AudioManager.instance.CrossFadeOUTAudio(1);
-    AudioManager.instance.CrossFadeINAudio(2);
+    AudioManager.instance.CrossFadeOUTAudio(MusicBefore);
+    AudioManager.instance.CrossFadeINAudio(MusicAfter);
     yield return new WaitForSeconds(2);
     ActorOrdalia.Instance.idle();
     yield return new WaitForSeconds(TimeStart);
@@ -223,8 +226,8 @@ private IEnumerator EndOrdalia()
         {
             //print("L'ordina sta contando il tempo per la fine");
             arenaObject.SetActive(false);
-            AudioManager.instance.CrossFadeOUTAudio(2);
-            AudioManager.instance.CrossFadeINAudio(1);
+            AudioManager.instance.CrossFadeOUTAudio(MusicAfter);
+            AudioManager.instance.CrossFadeINAudio(MusicBefore);
             if(isQuest)
             {
             Quest.isActive = false;
