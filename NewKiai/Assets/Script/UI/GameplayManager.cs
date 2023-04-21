@@ -45,6 +45,7 @@ public class GameplayManager : MonoBehaviour
     [HideInInspector]
     public bool PauseStop = false;
     //Variabile del testo dei money
+    private VibrateCinemachine vibrateCinemachine;
 
     [Header("Style")]
     [SerializeField] public GameObject[] StyleS;
@@ -124,6 +125,7 @@ public class GameplayManager : MonoBehaviour
 
         Scenary = GameObject.FindWithTag("Scenary");
         virtualCamera = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
+        vibrateCinemachine = GameObject.FindWithTag("MainCamera").GetComponent<VibrateCinemachine>(); //ottieni il riferimento alla virtual camera di Cinemachine
         //player = GameObject.FindWithTag("Player");
         Menu = GameObject.FindWithTag("Bound");
         //toy = GameObject.FindWithTag("Player");
@@ -196,6 +198,19 @@ public void Update()
         }
 
 }
+public void sbam()
+{
+    vibrateCinemachine = GameObject.FindWithTag("MainCamera").GetComponent<VibrateCinemachine>(); //ottieni il riferimento alla virtual camera di Cinemachine
+    if(vibrateCinemachine == null)
+    {
+    vibrateCinemachine.Vibrate(0.2f, 0.2f);
+    } else 
+    {
+    vibrateCinemachine.Vibrate(0.2f, 0.2f);
+    } 
+    //SuonoCrash
+}
+
 
  public void FirstoOfPlay()
 {

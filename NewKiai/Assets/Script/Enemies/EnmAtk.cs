@@ -60,7 +60,7 @@ IEnumerator StopD()
     }else if (collision.gameObject.tag == "Hitbox")
     {
         take = true;
-            Move.instance.sbam();
+            GameplayManager.instance.sbam();
            Move.instance.Knockback();            
            StartCoroutine(StopD());
 

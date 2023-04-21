@@ -163,7 +163,7 @@ if(GameplayManager.instance.styleIcon[5] == true)
             Move.instance.Knockback();
             if(Move.instance.rb.velocity.y > 0)
             {
-                Move.instance.sbam();
+                GameplayManager.instance.sbam();
                 Move.instance.Knockback(); 
                 Move.instance.isBump = true;
                 Move.instance.Bump();

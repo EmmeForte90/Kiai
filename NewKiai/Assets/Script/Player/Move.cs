@@ -28,7 +28,6 @@ public class Move : MonoBehaviour
     [HideInInspector] public float L2;
     [HideInInspector] public float R2;
     
-    private VibrateCinemachine vibrateCinemachine;
 
     [HideInInspector] public float runSpeedThreshold = 5f; // or whatever value you want
     [Header("Dash")]
@@ -372,7 +371,7 @@ public static Move instance;
         audioSource.outputAudioMixerGroup = SFX.FindMatchingGroups("Master")[0];
         }
 //Debug.Log("AudioMixer aggiunto correttamente agli AudioSource.");
-    vibrateCinemachine = GameObject.FindWithTag("MainCamera").GetComponent<VibrateCinemachine>(); //ottieni il riferimento alla virtual camera di Cinemachine
+    //vibrateCinemachine = GameObject.FindWithTag("MainCamera").GetComponent<VibrateCinemachine>(); //ottieni il riferimento alla virtual camera di Cinemachine
     }
     
 private void Update()
@@ -1575,17 +1574,7 @@ private void modifyPhysics()
 }
 
 
-public void sbam()
-{
-    if(vibrateCinemachine == null)
-    {
-    vibrateCinemachine.Vibrate(0.2f, 0.2f);
-    } else 
-    {
-    vibrateCinemachine.Vibrate(0.2f, 0.2f);
-    } 
-    //SuonoCrash
-}
+
 
 public void StopinputTrue()
 {
@@ -3526,7 +3515,7 @@ if (e.Data.Name == "ShakeCam") {
     // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
     if(!vfx)
         {
-        Move.instance.sbam();
+        GameplayManager.instance.sbam();
         vfx = true;
         }
     }

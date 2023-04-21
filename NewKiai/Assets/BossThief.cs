@@ -511,7 +511,7 @@ private void OnTriggerEnter2D(Collider2D collision)
         if (collision.gameObject.tag == "Hitbox")
     {
             take = true;
-        Move.instance.sbam();
+        GameplayManager.instance.sbam();
         Move.instance.KnockbackLong(); 
                   
            StartCoroutine(StopD());
@@ -622,7 +622,7 @@ RandomicDefence();
     {  
     Guard();
     Instantiate(VFXSdeng, slashpoint.position, transform.rotation);
-    Move.instance.sbam();
+    GameplayManager.instance.sbam();
     damage = 10;
     currentStamina -= 10;
     PlayMFX(2);    
