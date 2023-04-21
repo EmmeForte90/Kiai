@@ -108,7 +108,7 @@ public void changeDialogue()
         else if (_isDialogueActive && Input.GetButtonDown("Talk") && StopButton)
         {
             NextDialogue();
-            StopButton = false;
+            //StopButton = false;
         }
     }
 
@@ -131,6 +131,7 @@ public void changeDialogue()
     {
         if (collision.CompareTag("Player"))
         {
+            Move.instance.stopInput = false;
             Move.instance.NotStrangeAnimationTalk = false;
             button.gameObject.SetActive(false); // Initially hide the dialogue text
             _isInTrigger = false;
@@ -195,7 +196,7 @@ public void PlayMFX(int soundToPlay)
 
     void NextDialogue()
     {
-
+        StopButton = true;
         elapsedTime = 0; // reset elapsed time
         dialogueIndex++; // Increment the dialogue index
         if (dialogueIndex >= dialogue.Length)

@@ -15,7 +15,8 @@ MonoBehaviour:
   id: 0
   CharacterName: 
   dialogue:
-  - Well done, keep going you journey
+  - Well done, you can hide your sword with M button on keyboard or button the stick
+    analogic of the XBOX controller. Keep going you journey.
   Startdialogue: []
   Middledialogue: []
   Endingdialogue: []

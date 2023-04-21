@@ -1127,7 +1127,10 @@ HeavyHitRelease();
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   if ( GameplayManager.instance.unlockDash)
         {
- if (Input.GetButtonUp("Dash") ||  R2 == 1 && !dashing && coolDownTime <= 0)
+ if (Input.GetButtonUp("Dash") ||  R2 == 1 && !dashing && coolDownTime <= 0 && !FireSpecial
+&& !isAttacking && !isAttackingAir && !isGuard && !NotStrangeAnimationTalk && !isCharging 
+&& !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
+&& !StartKiai)
         {
             dashing = true;
             coolDownTime = dashCoolDown;

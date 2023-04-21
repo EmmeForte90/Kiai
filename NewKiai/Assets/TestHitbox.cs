@@ -22,6 +22,9 @@ public class TestHitbox : MonoBehaviour, IDamegable
     Spine.EventData eventData;
     public Rigidbody2D rb;
     public bool hit = false;
+    public GameObject VFX;
+    public Transform pos;
+
 [Header("Knockback")]
 [SerializeField] private float knockForce = 1f;
 private float KnockTime; //decrementa il timer ad ogni frame
@@ -33,9 +36,9 @@ private bool isKnockback = false;
     [HideInInspector] public float basePitch = 1f;
     [HideInInspector] public float randomPitchOffset = 0.1f;
     [SerializeField] public AudioClip[] listSound; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
-    private AudioSource[] sgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
+    private AudioSource[] bgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
     public AudioMixer SFX;
-    private bool sgmActive = false;
+    private bool bgmActive = false;
     [SerializeField] float lifeTime = 2f;
 
 private void Awake()
@@ -49,26 +52,27 @@ private void Awake()
         _spineAnimationState = _skeletonAnimation.AnimationState;
         _skeleton = _skeletonAnimation.skeleton;
         rb = GetComponent<Rigidbody2D>();
-        sgm = new AudioSource[listSound.Length]; // inizializza l'array di AudioSource con la stessa lunghezza dell'array di AudioClip
+        bgm = new AudioSource[listSound.Length]; // inizializza l'array di AudioSource con la stessa lunghezza dell'array di AudioClip
         for (int i = 0; i < listSound.Length; i++) // scorre la lista di AudioClip
         {
-            sgm[i] = gameObject.AddComponent<AudioSource>(); // crea un nuovo AudioSource come componente del game object attuale (quello a cui è attaccato lo script)
-            sgm[i].clip = listSound[i]; // assegna l'AudioClip corrispondente all'AudioSource creato
-            sgm[i].playOnAwake = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
-            sgm[i].loop = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
+            bgm[i] = gameObject.AddComponent<AudioSource>(); // crea un nuovo AudioSource come componente del game object attuale (quello a cui è attaccato lo script)
+            bgm[i].clip = listSound[i]; // assegna l'AudioClip corrispondente all'AudioSource creato
+            bgm[i].playOnAwake = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
+            bgm[i].loop = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
 
         }
  // Aggiunge i canali audio degli AudioSource all'output del mixer
-        foreach (AudioSource audioSource in sgm)
+        foreach (AudioSource audioSource in bgm)
         {
         audioSource.outputAudioMixerGroup = SFX.FindMatchingGroups("Master")[0];
         }
 
     }
 void Update()
-{
+{ 
+    /*
     #region testDanno
-            if(Input.GetKeyDown(KeyCode.B))
+           if(Input.GetKeyDown(KeyCode.B))
             {
             Debug.Log("Il pulsante è stato premuto!");
             rb.isKinematic = false;
@@ -77,6 +81,7 @@ void Update()
             //Damage(10);
             }
             #endregion
+            */
 
     if(isKnockback)
 {
@@ -102,6 +107,8 @@ void OnTriggerEnter2D(Collider2D other)
             
             print("Hit the enm");
             Hit();
+            Instantiate(VFX, pos.transform.position, transform.rotation);
+            PlayMFX(0);
             //hit = true;
             //Invoke("Resto", lifeTime);
             
@@ -112,6 +119,22 @@ private void Resto()
     {
        Idle();
         hit = false;
+    }
+public void StopMFX(int soundToPlay)
+    {
+        if (bgmActive)
+        {
+            bgm[soundToPlay].Stop();
+            bgmActive = false;
+        }
+    }
+
+public void PlayMFX(int soundToPlay)
+    {
+        bgm[soundToPlay].Stop();
+        // Imposta la pitch dell'AudioSource in base ai valori specificati.
+        bgm[soundToPlay].pitch = basePitch + Random.Range(-randomPitchOffset, randomPitchOffset); 
+        bgm[soundToPlay].Play();
     }
 
 public void Knockback()

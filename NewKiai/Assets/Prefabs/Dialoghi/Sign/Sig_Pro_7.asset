@@ -15,8 +15,7 @@ MonoBehaviour:
   id: 0
   CharacterName: 
   dialogue:
-  - You can hide your sword with M button on keyboard or button the stick analogic
-    of the XBOX controller.
+  - You can change your dress on the menu.
   Startdialogue: []
   Middledialogue: []
   Endingdialogue: []

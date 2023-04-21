@@ -74,6 +74,7 @@ private void OnTriggerEnter2D(Collider2D collision)
         {
            // Move.instance.NotStrangeAnimationTalk = true;
             Move.instance.sceneName = sceneName;
+            Instantiate(Sdeng, transform.position, transform.rotation);
             //GameplayManager.instance.StopDefaultSkill = true;
            // button.gameObject.SetActive(true); // Initially hide the dialogue text
            // _isInTrigger = true;
