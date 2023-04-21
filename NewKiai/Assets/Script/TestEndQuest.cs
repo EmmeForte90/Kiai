@@ -6,6 +6,7 @@ public class TestEndQuest : MonoBehaviour
 {
 
     public Quests Quest;
+    public GameObject VFX;
 
      public void Pickup()
     {
@@ -15,12 +16,12 @@ public class TestEndQuest : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
             Pickup();
-            //Instantiate(VFX, transform.position, transform.rotation);
+            Instantiate(VFX, transform.position, transform.rotation);
 
         }
     }

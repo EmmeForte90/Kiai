@@ -15,6 +15,7 @@ public class PlayerHealth : MonoBehaviour
     public float maxStamina = 100f;
     public float currentStamina;
     public Scrollbar staminaBar;
+    public float SpeeRestore = 5f; // il massimo valore di essenza disponibile
 
    
 
@@ -108,7 +109,7 @@ public static PlayerHealth Instance;
 
         if(Restore)
         {
-        currentStamina += 20f * Time.deltaTime;
+        currentStamina += SpeeRestore * Time.deltaTime;
         if(currentStamina >= maxStamina)
         {
             currentStamina = maxStamina;

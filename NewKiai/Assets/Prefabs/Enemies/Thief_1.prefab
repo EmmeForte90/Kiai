@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Hitbox: {fileID: 5231790005250075731}
-  attackDamage: 30
+  attackDamage: 10
   damagestamina: 50
 --- !u!114 &5231790005250075742
 MonoBehaviour:
@@ -287,11 +287,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c2926754cd2c3e4b85d746d98c48e82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 2
-  currentHealth: 2
+  maxHealth: 100
+  currentHealth: 100
   originalColor: {r: 1, g: 1, b: 1, a: 1}
   colorChangeDuration: 1
-  chaseThreshold: 7
+  chaseThreshold: 10
   Brain: {fileID: 5231790005348046395}
   playerlayer:
     serializedVersion: 2

@@ -18,6 +18,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Area3.unity
     guid: 243e6c28825b0e7428f2b35487887d3e
   - enabled: 1
+    path: Assets/Scenes/Area4.unity
+    guid: 9023487c52f6f8a44b28201d9a0b604c
+  - enabled: 1
+    path: Assets/Scenes/Area5.unity
+    guid: 2e9ee48c0b90b7b4b870cf9b0545e0a1
+  - enabled: 1
     path: Assets/Scenes/InnerHouse.unity
     guid: 2f350acdf3703394b8f4c1fe7ea31ff6
   - enabled: 1
