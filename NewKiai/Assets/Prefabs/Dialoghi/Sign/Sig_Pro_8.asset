@@ -15,8 +15,8 @@ MonoBehaviour:
   id: 0
   CharacterName: 
   dialogue:
-  - On this fountain you can save and activate checkpoint, in the game you can use
-    for teleport in another kind of area.
+  - On this fountain you can save and activate checkpoint, restore HP and stamina,
+    and during in the game you can use for teleport in another kind of area.
   Startdialogue: []
   Middledialogue: []
   Endingdialogue: []

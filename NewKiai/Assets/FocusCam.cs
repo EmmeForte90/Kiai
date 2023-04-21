@@ -21,7 +21,7 @@ private void Start()
     //ottieni il riferimento alla virtual camera di Cinemachine
     if(needMusic)
     {
-        AudioManager.instance.PlayMFX(MusicBefore);
+        AudioManager.instance.CrossFadeINAudio(MusicBefore);
     }
 
     }
@@ -33,9 +33,12 @@ private void OnTriggerEnter2D(Collider2D other)
     if (other.CompareTag("Player"))
     {
         vCam.Follow = CamFocus.transform;
+        GameplayManager.instance.battle = true;
         if(needMusic)
     {
-        AudioManager.instance.PlayMFX(MusicAfter);
+        AudioManager.instance.CrossFadeOUTAudio(MusicBefore);
+        AudioManager.instance.CrossFadeINAudio(MusicAfter);
+
     }
     }
 }
@@ -46,9 +49,11 @@ private void OnTriggerExit2D(Collider2D other)
     if (other.CompareTag("Player"))
     {
         vCam.Follow = player.transform;
+        GameplayManager.instance.battle = false;
         if(needMusic)
         {
-        AudioManager.instance.PlayMFX(MusicBefore);
+         AudioManager.instance.CrossFadeOUTAudio(MusicAfter);
+        AudioManager.instance.CrossFadeINAudio(MusicBefore);
         }
     }
 }

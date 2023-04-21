@@ -4,12 +4,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using Cinemachine;
 
 public class LevelChanger : MonoBehaviour
 {
    // Variabili per memorizzare la scena attuale e la posizione del player
 public string spawnPointTag = "SpawnPoint";
 public GameObject button;
+private CinemachineVirtualCamera vCam;
+
 public bool interactWithKey = true;
 //public KeyCode changeSceneKey = "Talk";
 public string sceneName;
@@ -68,7 +71,8 @@ private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     if (player != null)
     {
         Move.instance.stopInput = false;
-
+        vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
+        vCam.Follow = player.transform;
         // Troviamo il game object del punto di spawn
         GameObject spawnPoint = GameObject.FindWithTag(spawnPointTag);
         if (spawnPoint != null)

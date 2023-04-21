@@ -1147,7 +1147,7 @@ MonoBehaviour:
   initialSkinName: default
   initialFlipX: 0
   initialFlipY: 0
-  startingAnimation: 
+  startingAnimation: stay
   startingLoop: 1
   timeScale: 1
   freeze: 0
@@ -9185,7 +9185,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: 63f598184995bda419cd1ee5db5e6d03, type: 2}
   m_audioClip: {fileID: 8300000, guid: 85f50f09c3f2ceb41a1f63ff5d5f5b8c, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
