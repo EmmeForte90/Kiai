@@ -6,16 +6,15 @@ using UnityEngine.Audio;
 using UnityEngine.UI;
 using Cinemachine;
 using TMPro;
-using Spine.Unity.AttachmentTools;
-using Spine.Unity;
-using Spine;
+using UnityEngine.EventSystems;
+
 
 public class MainMenu : MonoBehaviour
 {
 
     public GameObject mainmenu;
     public GameObject menu;
-    public GameObject Music;
+    //public GameObject Music;
 
     public string startScene;
     public float Timelife;
@@ -24,13 +23,12 @@ public class MainMenu : MonoBehaviour
     public AudioMixer SFX;
     private CinemachineVirtualCamera virtualCamera;
     private GameObject player; // Variabile per il player
-    public GameObject Fade;
-
     Resolution[] resolutions;
-    //public Dropdown resolutionDropdown;
-    //public PlayerAbilityTracker player;
-
-    // Start is called before the first frame update
+   
+    public GameObject firstButton, secondButton, thirdButton,
+        newGameMenuYes, options, AreTS;
+    
+ 
     void Start()
     {
         AudioManager.instance.PlayMFX(0);
@@ -51,8 +49,42 @@ public class MainMenu : MonoBehaviour
         }
         player = GameObject.FindWithTag("Player");
         virtualCamera = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
-
+        EventSystem.current.SetSelectedGameObject(null); //necessary clear the event system
+        EventSystem.current.SetSelectedGameObject(firstButton);
+        
+        Cursor.visible = true;
     }
+
+   public void openNewGame()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(newGameMenuYes);
+    }
+
+    public void openPause()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(options);
+    }
+
+    public void openAreYouSure()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(AreTS);
+    }
+
+    public void backToNewGame()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(firstButton);
+    }
+
+    public void backToOptions()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(secondButton);
+    }
+
 
 
 public void SetResolution(int resolutionIndex)
@@ -103,7 +135,7 @@ public void SetResolution(int resolutionIndex)
 
 IEnumerator fade()
     {
-        Fade.gameObject.SetActive(true);
+        GameplayManager.instance.FadeOut();
         yield return new WaitForSeconds(Timelife);
         AudioManager.instance.CrossFadeINAudio(0);
         SceneManager.LoadScene(startScene);       

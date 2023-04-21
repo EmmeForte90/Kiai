@@ -1577,7 +1577,13 @@ private void modifyPhysics()
 
 public void sbam()
 {
+    if(vibrateCinemachine == null)
+    {
     vibrateCinemachine.Vibrate(0.2f, 0.2f);
+    } else 
+    {
+    vibrateCinemachine.Vibrate(0.2f, 0.2f);
+    } 
     //SuonoCrash
 }
 

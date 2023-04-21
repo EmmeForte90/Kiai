@@ -126,7 +126,7 @@ public class GameplayManager : MonoBehaviour
         virtualCamera = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
         //player = GameObject.FindWithTag("Player");
         Menu = GameObject.FindWithTag("Bound");
-        toy = GameObject.FindWithTag("Player");
+        //toy = GameObject.FindWithTag("Player");
 
 
         
@@ -136,9 +136,9 @@ public class GameplayManager : MonoBehaviour
 
         if(!startGame)
         {
-            toy = GameObject.FindWithTag("Player");
-            virtualCamera.Follow = toy.transform;
-            virtualCamera.LookAt = toy.transform;
+           // toy = GameObject.FindWithTag("Player");
+//            virtualCamera.Follow = toy.transform;
+//            virtualCamera.LookAt = toy.transform;
         }else
         {
         Move.instance.stopInput = true;
@@ -200,6 +200,10 @@ public void Update()
  public void FirstoOfPlay()
 {
     startGame = false;
+    toy.gameObject.SetActive(true);
+    toy = GameObject.FindWithTag("Player");
+    virtualCamera = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
+    Move.instance.Stop();
     virtualCamera.Follow = toy.transform;
     virtualCamera.LookAt = toy.transform;
 }

@@ -17,7 +17,9 @@ public class ChangeScene : MonoBehaviour
 
 void Awake()
 {        
-        StartCoroutine(FinishVideo());
+    GameplayManager.instance.FadeIn();
+    GameplayManager.instance.FirstoOfPlay();
+    StartCoroutine(FinishVideo());
 }
 
 
@@ -32,15 +34,17 @@ private void changeScene()
 private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 {
     GameplayManager.instance.FadeIn();
+
     SceneManager.sceneLoaded -= OnSceneLoaded;
     if (player != null)
     {
         Move.instance.stopInput = false;
-
+        Move.instance.Stop();
         // Troviamo il game object del punto di spawn
         GameObject spawnPoint = GameObject.FindWithTag(spawnPointTag);
         if (spawnPoint != null)
         {
+            GameplayManager.instance.FirstoOfPlay();
             // Muoviamo il player al punto di spawn
             player.transform.position = spawnPoint.transform.position;
             //yield return new WaitForSeconds(3f);
@@ -51,7 +55,10 @@ private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 
     IEnumerator FinishVideo()
     {
+        player = GameObject.FindWithTag("Player");
         yield return new WaitForSeconds(Timelife);
-        SceneManager.LoadScene(startScene);
+        SceneManager.LoadScene(startScene, LoadSceneMode.Single);
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        //SceneManager.LoadScene(startScene);
     }
 }
