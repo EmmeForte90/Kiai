@@ -45,9 +45,9 @@ public class MerkantKitai : MonoBehaviour
     [HideInInspector] public float basePitch = 1f;
     [HideInInspector] public float randomPitchOffset = 0.1f;
     [SerializeField] public AudioClip[] listSound; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
-    private AudioSource[] sgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
+    private AudioSource[] bgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
     public AudioMixer SFX;
-    private bool sgmActive = false;
+    private bool bgmActive = false;
 
  [Header("Animations")]
     [SpineAnimation][SerializeField] private string idleAnimationName;
@@ -73,17 +73,17 @@ void Awake()
         _spineAnimationState = _skeletonAnimation.AnimationState;
         _skeleton = _skeletonAnimation.skeleton;
         //rb = GetComponent<Rigidbody2D>();
-        sgm = new AudioSource[listSound.Length]; // inizializza l'array di AudioSource con la stessa lunghezza dell'array di AudioClip
+        bgm = new AudioSource[listSound.Length]; // inizializza l'array di AudioSource con la stessa lunghezza dell'array di AudioClip
         for (int i = 0; i < listSound.Length; i++) // scorre la lista di AudioClip
         {
-            sgm[i] = gameObject.AddComponent<AudioSource>(); // crea un nuovo AudioSource come componente del game object attuale (quello a cui è attaccato lo script)
-            sgm[i].clip = listSound[i]; // assegna l'AudioClip corrispondente all'AudioSource creato
-            sgm[i].playOnAwake = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
-            sgm[i].loop = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
+            bgm[i] = gameObject.AddComponent<AudioSource>(); // crea un nuovo AudioSource come componente del game object attuale (quello a cui è attaccato lo script)
+            bgm[i].clip = listSound[i]; // assegna l'AudioClip corrispondente all'AudioSource creato
+            bgm[i].playOnAwake = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
+            bgm[i].loop = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
 
         }
  // Aggiunge i canali audio degli AudioSource all'output del mixer
-        foreach (AudioSource audioSource in sgm)
+        foreach (AudioSource audioSource in bgm)
         {
         audioSource.outputAudioMixerGroup = SFX.FindMatchingGroups("Master")[0];
         }
@@ -159,7 +159,13 @@ FacePlayer();
         }
     
 }
-    
+    public void PlayMFX(int soundToPlay)
+    {
+        bgm[soundToPlay].Stop();
+        // Imposta la pitch dell'AudioSource in base ai valori specificati.
+        bgm[soundToPlay].pitch = basePitch + Random.Range(-randomPitchOffset, randomPitchOffset); 
+        bgm[soundToPlay].Play();
+    }
 
 public void Back()
 {
@@ -188,12 +194,14 @@ public void Buy(Item newItem)
     {
     InventoryManager.Instance.AddItem(newItem);
     InventoryManager.Instance.ListItem(newItem.id);
+    PlayMFX(0);
     dialogueMenu.text = "Thank you!"; // Reference to the TextMeshProUGUI component
     GameplayManager.instance.money -= prices;
     PuppetM.Instance.Idle();
     }else if(GameplayManager.instance.money < prices)
     {
     dialogueMenu.text = "Sorry, buddy, you don't have much money"; // Reference to the TextMeshProUGUI component
+    PlayMFX(1);
     PuppetM.Instance.Idle();
     }
 }

@@ -215,7 +215,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -225,10 +225,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: faaff3f97bc7d004bb3374c497bbf397, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: faaff3f97bc7d004bb3374c497bbf397, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: faaff3f97bc7d004bb3374c497bbf397, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: faaff3f97bc7d004bb3374c497bbf397, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -496,6 +496,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
+--- !u!1 &115293610
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 115293611}
+  m_Layer: 0
+  m_Name: Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &115293611
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 115293610}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 746844194}
+  - {fileID: 2098694910}
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &186776858
 GameObject:
   m_ObjectHideFlags: 0
@@ -1729,6 +1762,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -2.27
       objectReference: {fileID: 0}
+    - target: {fileID: 3234308231770481587, guid: d03ff32140337934cab50c089c6a504c, type: 3}
+      propertyPath: listSound.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3234308231770481587, guid: d03ff32140337934cab50c089c6a504c, type: 3}
+      propertyPath: listSound.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: d9e8c8422d2ed30409609eb3ab285453, type: 3}
     - target: {fileID: 3234308231770481588, guid: d03ff32140337934cab50c089c6a504c, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1739,27 +1780,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3234308232110505148, guid: d03ff32140337934cab50c089c6a504c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3234308232110505148, guid: d03ff32140337934cab50c089c6a504c, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3234308232110505148, guid: d03ff32140337934cab50c089c6a504c, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 683.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3234308232110505148, guid: d03ff32140337934cab50c089c6a504c, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 150
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3234308232110505148, guid: d03ff32140337934cab50c089c6a504c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 341.55
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3234308232110505148, guid: d03ff32140337934cab50c089c6a504c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3234308232241440065, guid: d03ff32140337934cab50c089c6a504c, type: 3}
       propertyPath: m_text
@@ -1890,13 +1931,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 746844192}
-  m_LocalRotation: {x: 0, y: 0, z: -0.30302897, w: 0.95298135}
+  m_LocalRotation: {x: -0, y: -0, z: -0.30302897, w: 0.95298135}
   m_LocalPosition: {x: 1.7, y: 1.17, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Father: {fileID: 115293611}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &781562653
 GameObject:
@@ -2274,7 +2315,7 @@ GameObject:
   m_Layer: 0
   m_Name: Gate
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2291,7 +2332,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.8638871, y: 0.92603135}
+  m_Offset: {x: 1.9617622, y: 0.92603135}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2302,7 +2343,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8122258, y: 4.182062}
+  m_Size: {x: 1.0078863, y: 4.182062}
   m_EdgeRadius: 0
 --- !u!114 &1054214681
 MonoBehaviour:
@@ -2900,7 +2941,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -2910,10 +2951,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: faaff3f97bc7d004bb3374c497bbf397, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: faaff3f97bc7d004bb3374c497bbf397, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: faaff3f97bc7d004bb3374c497bbf397, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: faaff3f97bc7d004bb3374c497bbf397, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -3354,7 +3395,7 @@ GameObject:
   m_Layer: 0
   m_Name: Treasure
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3492,7 +3533,7 @@ Transform:
   m_Children:
   - {fileID: 781562654}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1851341761
 BoxCollider2D:
@@ -3747,7 +3788,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -3757,10 +3798,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: faaff3f97bc7d004bb3374c497bbf397, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: faaff3f97bc7d004bb3374c497bbf397, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: faaff3f97bc7d004bb3374c497bbf397, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: faaff3f97bc7d004bb3374c497bbf397, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -4320,11 +4361,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2098694908}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -3.64, y: 0.18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_Father: {fileID: 115293611}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
