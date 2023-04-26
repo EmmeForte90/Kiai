@@ -20,6 +20,16 @@ public class InventoryManager : MonoBehaviour
     public TextMeshProUGUI NameItems;
     public int selectedId = -1; // Id dell'abilità selezionata  
 
+[Header("Menu Equip")]
+   //public Transform ItemContent_E;
+ // Riferimenti ai componenti delle immagini di preview e delle descrizioni
+    public Image previewImages_E;
+    public TextMeshProUGUI descriptions_E;
+    public TextMeshProUGUI Num_E;
+    public TextMeshProUGUI NameItems_E;
+    public Transform ItemContentKat;
+   public Transform ItemContentDres;
+
     [Header("Menu Non consumabili")]
    public Transform ItemContentIMP;
  // Riferimenti ai componenti delle immagini di preview e delle descrizioni
@@ -30,8 +40,7 @@ public class InventoryManager : MonoBehaviour
 
    public  GameObject InventoryItem;
 
-   public Transform ItemContentKat;
-   public Transform ItemContentDres;
+   
 
 
 
@@ -270,30 +279,39 @@ public void ListItem(int itemId)
     // Assegna i valori desiderati ai componenti dell'immagine di preview e della descrizione del pulsante della item
     if (previewImages != null)
     {
-       if(item.isConsumable || item.isKatana || item.isDress){previewImages.sprite = item.icon;}
-       else
+        if(item.isConsumable){previewImages.sprite = item.icon;}
+        else
         if(item.isKey){previewImages_C.sprite = item.icon;}
+        else
+        if(item.isKatana || item.isDress){previewImages_E.sprite = item.icon;}
     }
 
     if (descriptions != null)
     {
-        if(item.isConsumable || item.isKatana || item.isDress){descriptions.text = item.Description;}
+        if(item.isConsumable){descriptions.text = item.Description;}
         else
         if(item.isKey){descriptions_C.text = item.Description;}
+        else 
+        if(item.isKatana || item.isDress){descriptions_E.text = item.Description;}
+        
     }
 
     if (Num != null)
     {
-        if(item.isConsumable || item.isKatana || item.isDress){Num.text = val.ToString();}
+        if(item.isConsumable){Num.text = val.ToString();}
         else
         if(item.isKey){Num_C.text = val.ToString();}
+        else 
+        if(item.isKatana || item.isDress){Num_E.text = val.ToString();}
     }
 
     if (NameItems != null)
     {
-        if(item.isConsumable || item.isKatana || item.isDress){NameItems.text = item.itemName;}
+        if(item.isConsumable){NameItems.text = item.itemName;}
         else
         if(item.isKey){NameItems_C.text = item.itemName;}
+        else
+        if(item.isKatana || item.isDress){NameItems_E.text = item.itemName;}
     }
 
     // Aggiungi un listener per il click del bottone
@@ -430,6 +448,9 @@ public void OnQuestButtonClicked(int itemId, Image previewImages, TextMeshProUGU
             ItemRapidMenu.Instance.SlotKat_I.sprite = itemDatabase.Find(q => q.id == itemId).icon;
             ItemRapidMenu.Instance.SlotKat = selectedId;
             ChangeHeroSkin.Instance.katana = NameSkin;
+            previewImages_E.sprite = itemDatabase.Find(q => q.id == itemId).icon;
+            descriptions_E.text = itemDatabase.Find(q => q.id == itemId).Description;
+            NameItems_E.text = itemDatabase.Find(q => q.id == itemId).itemName;
             ChangeHeroSkin.Instance.UpdateCharacterSkin();
 		    ChangeHeroSkin.Instance.UpdateCombinedSkin(); 
             PuppetSkin.Instance.katana = NameSkin;
@@ -443,6 +464,9 @@ public void OnQuestButtonClicked(int itemId, Image previewImages, TextMeshProUGU
             ItemRapidMenu.Instance.SlotDres_I.sprite = itemDatabase.Find(q => q.id == itemId).icon;
             ItemRapidMenu.Instance.SlotDres = selectedId;
             ChangeHeroSkin.Instance.DressSkin = NameSkin;
+            previewImages_E.sprite = itemDatabase.Find(q => q.id == itemId).icon;
+            descriptions_E.text = itemDatabase.Find(q => q.id == itemId).Description;
+            NameItems_E.text = itemDatabase.Find(q => q.id == itemId).itemName;
             ChangeHeroSkin.Instance.UpdateCharacterSkin();
 	    	ChangeHeroSkin.Instance.UpdateCombinedSkin();
             PuppetSkin.Instance.DressSkin = NameSkin;

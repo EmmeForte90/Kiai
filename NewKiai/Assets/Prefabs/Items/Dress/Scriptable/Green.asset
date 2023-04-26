@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 101
   itemName: Green Kimono
-  Description: Blu like the sky, blu like the sea. Blu like my feet...
+  Description: Green like the grass, green like the tree. Green like my pee...
   value: 1
   prices: 1000
   icon: {fileID: 21300000, guid: 7f155705f5a67a74aa94da7ba0584e06, type: 3}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 200
   itemName: Muramasa
-  Description: 
+  Description: Demoniac sword, be carefull with that
   value: 1
   prices: 1000
   icon: {fileID: 21300000, guid: 52ff65cc00dcc5e42ab5eda5d44ea7af, type: 3}
