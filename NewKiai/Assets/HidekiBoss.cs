@@ -34,8 +34,10 @@ public class HidekiBoss : MonoBehaviour, IDamegable
     [SerializeField] GameObject attack_B;
     [SerializeField] GameObject VFXSdeng;
     [SerializeField] GameObject VFXHurt;
+    [SerializeField] GameObject TextFin;
 
     [Header("Attacks")]
+    public int CountAtk = 1;
     private Transform player;
     [SerializeField] LayerMask playerlayer;
     public int AttackDamage = 20; // soglia di distanza per iniziare l'inseguimento
@@ -58,6 +60,7 @@ public class HidekiBoss : MonoBehaviour, IDamegable
     [Header("Abilitations")]
     private bool isMove = false;
     private bool isHurt = false;
+    private bool isTired = false;
     private bool isDie = false;
     private bool isGuard = false;
     private bool isJump = false;
@@ -90,7 +93,8 @@ public class HidekiBoss : MonoBehaviour, IDamegable
     [SpineAnimation][SerializeField] private string JumpCrushAnmAnimationName;
     [SpineAnimation][SerializeField] private string CrushRageAnmAnimationName;
     [SpineAnimation][SerializeField] private string DieAnmAnimationName;
-
+    [SpineAnimation][SerializeField] private string TiredAnmAnimationName;
+    [SpineAnimation][SerializeField] private string restoAnimationName;
     private string currentAnimationName;
     public SkeletonAnimation _skeletonAnimation;
     private Spine.AnimationState _spineAnimationState;
@@ -152,18 +156,22 @@ void Start()
     }
     currentHealth = maxHealth;
     currentStamina = maxStamina;
-    player = GameObject.FindWithTag("Player").transform;    
+    player = GameObject.FindWithTag("Player").transform;  
+   
 }
 
 private void Update()
     {
         if (!GameplayManager.instance.PauseStop)
         {
+        Buttontest();
         healthBar.size = currentHealth / maxHealth;
         healthBar.size = Mathf.Clamp(healthBar.size, 0.01f, 1);
         staminaBar.size = currentStamina / maxStamina;
         staminaBar.size = Mathf.Clamp(staminaBar.size, 0.01f, 1);
-        //CheckState();
+
+        FacePlayer();
+
         if (currentHealth <= 0) 
         { // controlla se il personaggio è morto
             ResetColor();
@@ -173,23 +181,108 @@ private void Update()
             isJumpAttacking = false; 
             isThrow = false;
             isCharge = false;
-            ChooseAtk = false;    
             StartDie();
         }
-        }
-    }
-private void FixedUpdate()
-    {
-        if (!GameplayManager.instance.PauseStop)
-        {
-            if(ChooseAtk)
+
+            if(CountAtk == 1)
             {
-            RandomicAttack();
+                isJumpAttacking = true;
+                isThrow = false;
+                isCharge = false;
+            }else if(CountAtk == 2)
+            {            
+                isJumpAttacking = false; 
+                isThrow = true;
+                isCharge = false;
+            }else if(CountAtk == 3)
+            {   
+                isJumpAttacking = false; 
+                isThrow = false;
+                isCharge = true;
             }
+
+
+
+        if(!isWait || !isTired)
+        {
+            if(isJumpAttacking)
+            {
+            JumpAtk();
+            //print("Salto");
+            }else if(isThrow)
+            {
+            LanciaSasso();
+            //print("Sasso");
+            }else if(isCharge)
+            {
+           // print("Counter");
+            Charge();
+            }
+        }else if(isWait)
+            {
+            StartCoroutine(StopD());
+            }
+            }
+
+
+
+
+ if(currentStamina <= 0)
+        {
+            Tired();
+            Stop();
+            StartCoroutine(EndTired());
+            TextFin.gameObject.SetActive(true);
+            isTired = true;
         }
+}
+
+     private void Buttontest()
+    {
+       #region testForanysituation
+            if(Input.GetKeyDown(KeyCode.C))
+            {
+                currentStamina -= 50;
+            } 
+            #endregion
+    }
+
+IEnumerator StopD()
+    {
+        yield return new WaitForSeconds(1f);
+        //Controllo del conteggio degli attacchi
+        if(CountAtk > 3)
+        {
+            CountAtk = 1;
+        }else if(CountAtk == 1)
+        {
+            CountAtk = 2;
+        }else if(CountAtk == 2)
+        {
+            CountAtk = 3;
+        }else if(CountAtk == 3)
+        {
+            CountAtk = 4;
+        }
+
+        isWait = false;
+    }
+IEnumerator EndTired()
+    {
+        yield return new WaitForSeconds(5f);
+        TextFin.gameObject.SetActive(false);
+        currentStamina = maxStamina;
+        RestoreStamina();
+        isTired = false; 
     }
 
 
+public void Stop()
+    {
+        rb.velocity = new Vector2(0f, 0f);
+        //horDir = 0;
+        //Swalk.Stop();
+    }
 
     private void StartDie()
     {
@@ -212,89 +305,6 @@ void FacePlayer()
             }
         }
     }
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//Random
-
-void RandomicAttack()
-{
-    
-    int randomChance = Random.Range(1, 4); // Genera un numero casuale compreso tra 1 e 10
-    
-    if (randomChance == 1) // Se il numero casuale è compreso tra 1 e 8 (80% di probabilità), aggiungi 5 di essenza
-    {
-    JumpAtk();
-    isJumpAttacking = true; 
-    isThrow = false;
-    isCharge = false; 
-    isAttack = false; 
-    isMove = false; 
-    isWait = false;  
-    ChooseAtk = false;     
-    } 
-    else if (randomChance == 2) // Se il numero casuale è compreso tra 1 e 8 (80% di probabilità), aggiungi 5 di essenza
-    {
-    LanciaSasso();
-    isThrow = true;
-    isJumpAttacking = false; 
-    isCharge = false; 
-    isAttack = false; 
-    isMove = false;
-    isWait = false;   
-    ChooseAtk = false;             
-    }
-    else if (randomChance == 3) // Se il numero casuale è compreso tra 1 e 8 (80% di probabilità), aggiungi 5 di essenza
-    {
-    Charge();
-    isCharge = true;  
-    isThrow = false;
-    isJumpAttacking = false; 
-    isAttack = false; 
-    isMove = false;  
-    isWait = false;     
-    ChooseAtk = false;     
-    
-    }
-    else if (randomChance == 4) // Se il numero casuale è compreso tra 1 e 8 (80% di probabilità), aggiungi 5 di essenza
-    {
-    Attack();
-    isCharge = false;  
-    isThrow = false;
-    isJumpAttacking = false; 
-    isAttack = true; 
-    isMove = false; 
-    isWait = false;   
-    ChooseAtk = false;     
-      
-    }
-}
-
-void RandomicDefence()
-{
-    randomChanceEN = Random.Range(1, 10); // Genera un numero casuale compreso tra 1 e 10
-
-    if (randomChanceEN <= GuardChance && !isAttack && !isJumpAttacking && !isCharge && !isThrow) // Se il numero casuale è compreso tra 1 e 8 (80% di probabilità)
-    {
-    isMove = false;
-    isGuard = true;
-    isThrow = false;
-    isJumpAttacking = false; 
-    isCharge = false;  
-    isAttack = false;  
-    ChooseAtk = false;     
-    }else if (randomChanceEN >= GuardChance) // Se il numero casuale è compreso tra 1 e 8 (80% di probabilità)
-    {
-    isMove = false;
-    isGuard = false;
-    isThrow = false;
-    isJumpAttacking = false; 
-    isCharge = false;
-    isAttack = false; 
-    ChooseAtk = false;      
-    //Subisce il danno 
-    }
-}
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //attacks
 
@@ -359,7 +369,7 @@ private void JumpAtk()
         {
             if(Schiaccio)
             {
-            print("schiaccio!");
+            //print("schiaccio!");
             JumpCrushAnm();
             Schiaccio = false;
             }
@@ -369,8 +379,8 @@ private void JumpAtk()
     {
         if(Schiaccio)
             {
-            print("schiaccioFINALE!");
-            JumpCrushAnm();
+            //print("schiaccioFINALE!");
+            //JumpCrushAnm();
             Schiaccio = false;
             }
         
@@ -379,8 +389,10 @@ private void JumpAtk()
         
         // resetta il contatore dei salti e l'indicatore di attacco a salto
         jumpCount = 0;
+        //CountAtk = 2;
         isJumpAttacking = false;
-        ChooseAtk = true;    
+        isWait = true;    
+        StartCoroutine(StopD());
 
     }
 
@@ -410,8 +422,10 @@ if (isThrow && !isJumpAttacking && !isCharge && !isAttack)
         {
             // resetta il contatore dei lanci e l'indicatore di attacco a lancio
             ThrowCount = 0;
+            //CountAtk = 3;
             isThrow = false;
-            ChooseAtk = true;    
+             isWait = true;    
+        StartCoroutine(StopD());    
         }
     }
     else if (currentHealth < 250) 
@@ -430,8 +444,10 @@ if (isThrow && !isJumpAttacking && !isCharge && !isAttack)
         {
             // resetta il contatore dei lanci e l'indicatore di attacco a lancio
             ThrowCount = 0;
+            //CountAtk = 3;
             isThrow = false;
-            ChooseAtk = true;    
+            isWait = true;    
+        StartCoroutine(StopD());    
         }
     }
 }
@@ -452,6 +468,7 @@ private void Charge()
                 //print("StartCharge");
                 FacePlayer();
                 CrushAnm();
+                
                 HitCount++;
             } 
         }
@@ -459,8 +476,10 @@ private void Charge()
         {
             // resetta il contatore dei lanci e l'indicatore di attacco a lancio
             HitCount = 0;
+           // CountAtk = 4;
             isCharge = false;
-            ChooseAtk = true;    
+             isWait = true;    
+        StartCoroutine(StopD());    
 
         }
     }
@@ -480,12 +499,27 @@ private void Charge()
         {
             // resetta il contatore dei lanci e l'indicatore di attacco a lancio
             HitCount = 0;
+            //CountAtk = 4;
             isCharge = false;
-            ChooseAtk = true;    
+             isWait = true;    
+        StartCoroutine(StopD());   
 
         }
     }
 }
+}
+void RandomicDefence()
+{
+    randomChanceEN = Random.Range(1, 10); // Genera un numero casuale compreso tra 1 e 10
+
+    if (randomChanceEN <= GuardChance) // Se il numero casuale è compreso tra 1 e 8 (80% di probabilità)
+    {
+    isGuard = true; 
+    }else if (randomChanceEN >= GuardChance) // Se il numero casuale è compreso tra 1 e 8 (80% di probabilità)
+    {
+    isGuard = false;
+    //Subisce il danno 
+    }
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -495,7 +529,10 @@ public void Damage(int damage)
 {
     if (isDie) return;
 
-//RandomicDefence();
+    if (isWait || isThrow)
+    {
+    RandomicDefence();
+    }
 
     if (isGuard) 
     {  
@@ -503,7 +540,7 @@ public void Damage(int damage)
     Instantiate(VFXSdeng, slashpoint.position, transform.rotation);
     GameplayManager.instance.sbam();
     damage = 10;
-    currentStamina -= 10;
+    currentStamina -= 20;
     PlayMFX(2);    
     KiaiGive();
 
@@ -645,7 +682,19 @@ public void RunAnm()
                 // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
-
+public void RestoreStamina()
+{
+    
+    if (currentAnimationName != restoAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, restoAnimationName, false);
+                    currentAnimationName = restoAnimationName;
+                    _spineAnimationState.Event += HandleEvent;
+                    isWait = false;
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
 public void IdleAnm()
 {
     if (currentAnimationName != idleAnimationName)
@@ -668,7 +717,7 @@ public void Jump()
                     _spineAnimationState.Event += HandleEvent;
                 }
                 // Add event listener for when the animation completes
-                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+                //_spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 
 public void CrushAnm()
@@ -739,6 +788,18 @@ public void NearAttk()
                 {
                     _spineAnimationState.SetAnimation(1, NearAttkAnmAnimationName, false);
                     currentAnimationName = NearAttkAnmAnimationName;
+                    _spineAnimationState.Event += HandleEvent;
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+
+public void Tired()
+{
+    if (currentAnimationName != TiredAnmAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, TiredAnmAnimationName, true);
+                    currentAnimationName = TiredAnmAnimationName;
                     _spineAnimationState.Event += HandleEvent;
                 }
                 // Add event listener for when the animation completes

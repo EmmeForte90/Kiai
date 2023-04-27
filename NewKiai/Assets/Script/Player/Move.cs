@@ -789,23 +789,23 @@ changeStyle();
     #region testForanysituation
             if(Input.GetKeyDown(KeyCode.C))
             {
-                Debug.Log("KL");
-                KnockbackLong();
+                //Debug.Log("KL");
+                //KnockbackLong();
                 /*Thief.instance.Damage(50);
                 if(Thief.instance == null)
                 {
                     //Thief.instance = GameObject.FindWithTag("Enemy");
                     Thief.instance.Damage(50);
                 }*/
-                PlayerHealth.Instance.IncreaseKiai(10);
+                //PlayerHealth.Instance.IncreaseKiai(10);
                 //PlayerHealth.Instance.currentHealth = 10;
                 //PlayerHealth.Instance.currentHealth = 0;
                 //Respawn();
             }
 if(Input.GetKeyDown(KeyCode.X))
             {
-                Debug.Log("NK");
-                Knockback();
+                //Debug.Log("NK");
+                //Knockback();
                 //PlayerHealth.Instance.IncreaseKiai(-10);
                 //GuardHit(); 
                 //PlayerHealth.Instance.currentStamina -= 50;
