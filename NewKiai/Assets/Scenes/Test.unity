@@ -13222,6 +13222,7 @@ MonoBehaviour:
   DieAnmAnimationName: battle/pre_die
   TiredAnmAnimationName: battle/tired
   restoAnimationName: battle/stamina_recovered
+  PCAnmAnimationName: battle/attack_power/attack_power_charge
   _skeletonAnimation: {fileID: 1080951765}
   basePitch: 1
   randomPitchOffset: 0.1
@@ -20312,6 +20313,7 @@ MonoBehaviour:
   DieAnmAnimationName: battle/pre_die
   TiredAnmAnimationName: 
   restoAnimationName: 
+  PCAnmAnimationName: 
   _skeletonAnimation: {fileID: 1720627797}
   basePitch: 1
   randomPitchOffset: 0.1

@@ -95,6 +95,7 @@ public class HidekiBoss : MonoBehaviour, IDamegable
     [SpineAnimation][SerializeField] private string DieAnmAnimationName;
     [SpineAnimation][SerializeField] private string TiredAnmAnimationName;
     [SpineAnimation][SerializeField] private string restoAnimationName;
+    [SpineAnimation][SerializeField] private string PCAnmAnimationName;
     private string currentAnimationName;
     public SkeletonAnimation _skeletonAnimation;
     private Spine.AnimationState _spineAnimationState;
@@ -189,6 +190,7 @@ private void Update()
                 isJumpAttacking = true;
                 isThrow = false;
                 isCharge = false;
+                StartCharging = false;
             }else if(CountAtk == 2)
             {            
                 isJumpAttacking = false; 
@@ -199,6 +201,11 @@ private void Update()
                 isJumpAttacking = false; 
                 isThrow = false;
                 isCharge = true;
+            }else if(CountAtk == 4)
+            {   
+                isJumpAttacking = false; 
+                isThrow = false;
+                isCharge = false;
             }
 
 
@@ -262,9 +269,12 @@ IEnumerator StopD()
             CountAtk = 3;
         }else if(CountAtk == 3)
         {
-            CountAtk = 4;
+            CountAtk = 3;
+        }else if(CountAtk == 4)
+        {
+            CountAtk = 1;
         }
-
+//Raggiunto l'ultimo attacco il nemico non ripete il ciclo, bisogna fare dei controlli
         isWait = false;
     }
 IEnumerator EndTired()
@@ -275,7 +285,12 @@ IEnumerator EndTired()
         RestoreStamina();
         isTired = false; 
     }
+IEnumerator Crushi()
+    {
+        yield return new WaitForSeconds(1f);
+        CrushAnm();
 
+    }
 
 public void Stop()
     {
@@ -338,7 +353,7 @@ private void JumpAtk()
 {
     ResetColor();
 
-    if (jumpCount < 6)
+    if (jumpCount < 2)
     {
         if (rb.velocity.y == 0f)
         {
@@ -463,14 +478,17 @@ private void Charge()
     {
         if (HitCount < 1)
         {
+            if (!StartCharging)
+            {
             if (rb.velocity.y == 0f)
             {
                 //print("StartCharge");
                 FacePlayer();
-                CrushAnm();
-                
-                HitCount++;
+                PrepareCrush();
+                StartCoroutine(Crushi());
+                StartCharging = true;
             } 
+            }
         }
         else 
         {
@@ -499,9 +517,7 @@ private void Charge()
         {
             // resetta il contatore dei lanci e l'indicatore di attacco a lancio
             HitCount = 0;
-            //CountAtk = 4;
-            isCharge = false;
-             isWait = true;    
+             isWait = true;   
         StartCoroutine(StopD());   
 
         }
@@ -720,6 +736,18 @@ public void Jump()
                 //_spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 
+public void PrepareCrush()
+{
+    if (currentAnimationName != PCAnmAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, PCAnmAnimationName, true);
+                    currentAnimationName = PCAnmAnimationName;
+                    _spineAnimationState.Event += HandleEvent;
+                }
+                // Add event listener for when the animation completes
+                //_spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+
 public void CrushAnm()
 {
     if (currentAnimationName != CrushAnmAnimationName)
@@ -727,10 +755,9 @@ public void CrushAnm()
                     _spineAnimationState.SetAnimation(2, CrushAnmAnimationName, false);
                     currentAnimationName = CrushAnmAnimationName;
                     _spineAnimationState.Event += HandleEvent;
-                    StartCharging = false;
                 }
                 // Add event listener for when the animation completes
-                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+                //_spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 public void CrushRageAnm()
 {
@@ -860,7 +887,7 @@ if (e.Data.Name == "SpawnFury")
     {
         Instantiate(SlashDX, CrushP.position, transform.rotation);
         Instantiate(SlashSX, CrushP.position, transform.rotation);                             
-
+        StartCoroutine(StopD());    
     }
 
 if (e.Data.Name == "SpawnRock") 
@@ -868,6 +895,10 @@ if (e.Data.Name == "SpawnRock")
     Instantiate(Rock, slashpoint.position, transform.rotation);                                      
     }
 
+if (e.Data.Name == "endCount") 
+    {
+    CountAtk = 4;    
+    }
 
     }
 
