@@ -31,6 +31,7 @@ public class GameplayManager : MonoBehaviour
 [Tooltip("Attiva la spunta solo se sei nel main menu")]
     public bool isStartGame;
     private string sceneName = "Mainmenu";
+    private string congName = "ENDINGDEMO";
 
     private CinemachineVirtualCamera virtualCamera;
     [HideInInspector]
@@ -242,7 +243,7 @@ public void mainmenu()
 
 IEnumerator fade()
     {
-        GameplayManager.instance.FadeOut();
+        FadeOut();
         Move.instance.stopInput = true;
         Move.instance.Stop();
         yield return new WaitForSeconds(2);
@@ -260,14 +261,43 @@ private void ChangeScene()
 // Metodo eseguito quando la scena è stata caricata
 private void OnMainLoaded(Scene scene, LoadSceneMode mode)
 {
-    GameplayManager.instance.FadeIn();
+    FadeIn();
     SceneManager.sceneLoaded -= OnMainLoaded;
-    GameplayManager.instance.StopFade();    
+    StopFade();    
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//SOLO PER IL PROTOTIPO
+public void Congrat()
+    {
+        StartCoroutine(fadeC());
+        StopPlay();
+    }
+
+IEnumerator fadeC()
+    {
+        FadeOut();
+        Move.instance.stopInput = true;
+        Move.instance.Stop();
+        yield return new WaitForSeconds(2);
+        player.gameObject.SetActive(false);
+        // Invochiamo l'evento di cambio scena
+        ChangeSceneC();
+    }
+// Metodo per cambiare scena
+private void ChangeSceneC()
+{
+    SceneManager.LoadScene(congName, LoadSceneMode.Single);
+    SceneManager.sceneLoaded += OnCongLoaded;
 }
 
-
-
-
+// Metodo eseguito quando la scena è stata caricata
+private void OnCongLoaded(Scene scene, LoadSceneMode mode)
+{
+    FadeIn();
+    SceneManager.sceneLoaded -= OnCongLoaded;
+    StopFade();    
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 public void ComboCount()
 {
 C_Count++;

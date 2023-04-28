@@ -154,6 +154,7 @@ public class Move : MonoBehaviour
     [SerializeField] GameObject attack_n_sp;
     [SpineAnimation][SerializeField] private string NHeavyReleaseAnimationName;
     [SpineAnimation][SerializeField] private string NHeavyAnimationName;
+    [SerializeField] GameObject S_normalK_hitbox;
         [Header("Fire")]
     public GameObject S_Fire;
     [Tooltip("Animazione a singolo frame")]
@@ -175,6 +176,7 @@ public class Move : MonoBehaviour
     [SerializeField] GameObject attack_f_sp;
     [SpineAnimation][SerializeField] private string UpperFireKiaijumpAnimationName;
     [SpineAnimation][SerializeField] private string UpperFireEndjumpAnimationName;
+    [SerializeField] GameObject S_FireK_hitbox;
 
         [Header("Water")]
     public GameObject S_Water;
@@ -196,6 +198,7 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField] private string WaterLoopAnimationName;
     [SpineAnimation][SerializeField] private string WaterEndAnimationName;
     [SerializeField] GameObject attack_w_sp;
+    [SerializeField] GameObject S_waterK_hitbox;
 
         [Header("Rock")]
     public GameObject S_Rock;
@@ -220,6 +223,8 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField] private string attackRock3AnimationName;
     private bool RockSpecial = false;
     private bool attackRock = false;
+    [SerializeField] GameObject S_rockK_hitbox;
+
         [Header("Wind")]
     public GameObject S_Wind;
     [Tooltip("Animazione a singolo frame")]
@@ -241,6 +246,7 @@ public class Move : MonoBehaviour
     private bool WindSpecial = false;
     [SerializeField] GameObject attack_v_sp;
     [SpineAnimation][SerializeField] private string TornadoWindjumpAnimationName;
+    [SerializeField] GameObject S_windK_hitbox;
 
         [Header("Void")]
     public GameObject S_Void;
@@ -264,6 +270,7 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField] private string guardNoHitSAnimationName;
     private bool VoidSpecial = false;
     [SerializeField] GameObject attack_S_sp;
+    [SerializeField] GameObject S_voidK_hitbox;
     /////////////////////////////////////////////////////////////////////
      [Header("Dodge and defend")]
     [SpineAnimation][SerializeField] private string DashAttackAnimationName;
@@ -444,7 +451,6 @@ if (Input.GetButtonDown("Jump") && !isGuard && !NotStrangeAnimationTalk
         {
         if(isTouchingWall)
         {
-           // Vector2 direction = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
         rb.velocity = new Vector2(-transform.localScale.x * 14, 18);
         }
         else
@@ -454,7 +460,7 @@ if (Input.GetButtonDown("Jump") && !isGuard && !NotStrangeAnimationTalk
         }
         }
     
-    if (canDoubleJump && GameplayManager.instance.unlockDoubleJump)
+    if (canDoubleJump && GameplayManager.instance.unlockDoubleJump && !isTouchingWall)
     {
         // Double jump
         lastTimeJump = Time.time + jumpDelay;
@@ -498,20 +504,6 @@ if (Input.GetButtonDown("Jump") && !isGuard && !NotStrangeAnimationTalk && isTou
             rb.velocity = new Vector2(rb.velocity.x, -wallSlideSpeed);
             wallSlidedown();
         }
-        
-
-        // Walljump
-       /* if (Input.GetButtonDown("Jump") && isTouchingWall &&  GameplayManager.instance.unlockWalljump
-        && !isGuard && !NotStrangeAnimationTalk  
-        && !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
-        && !StartKiai)
-        {
-           float horizontalVelocity = Mathf.Sign(transform.localScale.x) * wallJumpForce;
-            rb.velocity = new Vector2(horizontalVelocity, jumpForce);
-            wallJumped = true;
-            canDoubleJump = true;
-            Invoke("SetWallJumpedToFalse", 0.5f);
-        }*/
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////             
 
 // gestione dell'input dello sparo
@@ -584,7 +576,7 @@ if (!isBlast && Time.time >= ShotTimer)
 //Activate kiai
 if(KiaiReady)
 {
-if (Input.GetButtonDown("Fire2") || L2 == 1 && R2 == 1)
+if (L2 == 1 && R2 == 1)
 {
     StopinputTrue();
     Stooping();
@@ -595,22 +587,21 @@ if (Input.GetButtonDown("Fire2") || L2 == 1 && R2 == 1)
             {KiaiWater();}}
             if(GameplayManager.instance.styleIcon[1] == true)
             {if (style == 1) //Rock
-            {KiaiRock();}} 
+            {KiaiRock();}}
             if(GameplayManager.instance.styleIcon[2] == true)
             {if (style == 2) //Fire
-            {KiaiFire();}}  
+            {KiaiFire();}}
             if(GameplayManager.instance.styleIcon[3] == true)
             {if (style == 3) //Wind
-            {KiaiWind();}}  
+            {KiaiWind();}}
             if(GameplayManager.instance.styleIcon[5] == true)
             {if (style == 5) //Void
-            {KiaiVoid();}}  
+            {KiaiVoid();}}
             if(GameplayManager.instance.styleIcon[0] == true)
             {if (style == 0)//Normal
-            {KiaiRock();}}
+            {KiaiNormal();}}
             StartCoroutine(FinishKiai());
         }
-        
 }
 
 
@@ -797,7 +788,7 @@ changeStyle();
                     //Thief.instance = GameObject.FindWithTag("Enemy");
                     Thief.instance.Damage(50);
                 }*/
-                //PlayerHealth.Instance.IncreaseKiai(10);
+                PlayerHealth.Instance.IncreaseKiai(50);
                 //PlayerHealth.Instance.currentHealth = 10;
                 //PlayerHealth.Instance.currentHealth = 0;
                 //Respawn();
@@ -1124,6 +1115,7 @@ HeavyHitRelease();
 #endregion
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Dash
   if ( GameplayManager.instance.unlockDash)
         {
  if (Input.GetButtonUp("Dash") ||  R2 == 1 && !dashing && coolDownTime <= 0 && !FireSpecial
@@ -1143,8 +1135,8 @@ HeavyHitRelease();
         }    
         }
 
- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
+//Pause
         }
         else if (stopInput)
         {//Bloccato
@@ -1530,8 +1522,8 @@ IEnumerator FinishKiai()
     yield return new WaitForSeconds(timeKiai);
     StopinputFalse();
     PlayerHealth.Instance.currentKiai = 0;
-    if (style == 0) //Normal
-    {Health.instance.currentHealth -= 100f;}
+    //if (style == 0) //Normal
+    //{Health.instance.currentHealth -= 100f;}
 
     KiaiReady = false;
 }
@@ -3582,8 +3574,7 @@ if (e.Data.Name == "VFXKiaiFire") {
     // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
     if(!vfx)
         {
-        //Instantiate(attack_w_h, slashpoint.position, attack_w_h.transform.rotation);
-        //PlayMFX(1);
+        Instantiate(S_FireK_hitbox, transform.position, transform.rotation);
         vfx = true;
         }
         
@@ -3592,8 +3583,7 @@ if (e.Data.Name == "VFXKiaiFire") {
     // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
     if(!vfx)
         {
-        //Instantiate(attack_w_h, slashpoint.position, attack_w_h.transform.rotation);
-        //PlayMFX(1);
+        Instantiate(S_waterK_hitbox, Player.transform.position, transform.rotation);
         vfx = true;
         }
         
@@ -3602,8 +3592,7 @@ if (e.Data.Name == "VFXKiaiFire") {
     // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
     if(!vfx)
         {
-        //Instantiate(attack_w_h, slashpoint.position, attack_w_h.transform.rotation);
-        //PlayMFX(1);
+        Instantiate(S_rockK_hitbox, bottom.transform.position, transform.rotation);
         vfx = true;
         }
         
@@ -3612,8 +3601,7 @@ if (e.Data.Name == "VFXKiaiWind") {
     // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
     if(!vfx)
         {
-        //Instantiate(attack_w_h, slashpoint.position, attack_w_h.transform.rotation);
-        //PlayMFX(1);
+        Instantiate(S_windK_hitbox, transform.position, transform.rotation);
         vfx = true;
         }
         
@@ -3623,8 +3611,7 @@ if (e.Data.Name == "VFXKiaiNormal") {
     // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
     if(!vfx)
         {
-        //Instantiate(attack_w_h, slashpoint.position, attack_w_h.transform.rotation);
-        //PlayMFX(1);
+        Instantiate(S_normalK_hitbox, slashpoint.position, transform.rotation);
         vfx = true;
         }
         
@@ -3633,8 +3620,7 @@ if (e.Data.Name == "VFXKiaiVoid") {
     // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
     if(!vfx)
         {
-        //Instantiate(attack_w_h, slashpoint.position, attack_w_h.transform.rotation);
-        //PlayMFX(1);
+        Instantiate(S_voidK_hitbox, Player.transform.position, transform.rotation);
         vfx = true;
         }
         

@@ -313,6 +313,14 @@ IEnumerator StopD()
     }
 }
 
+//SOLO PER IL PROTOTIPO
+IEnumerator END()
+{
+    yield return new WaitForSeconds(5f);
+   GameplayManager.instance.Congrat();
+
+}
+
 IEnumerator restoreSt()
 {    
     yield return new WaitForSeconds(2f);
@@ -337,6 +345,7 @@ public void Stop()
     {
         PlayMFX(0);    
         DieAnm();
+        StartCoroutine(END());
     }
 
 //Guarda verso il player

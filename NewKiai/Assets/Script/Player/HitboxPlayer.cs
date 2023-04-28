@@ -41,7 +41,7 @@ if(GameplayManager.instance.styleIcon[0] == true)
 {
  if(!CanTake)
     {
-            Debug.Log("Normal"+ Damage);
+            //Debug.Log("Normal"+ Damage);
 
         TimeHitbox = 0.5f;
         GameplayManager.instance.ComboCount();
@@ -62,7 +62,7 @@ if(GameplayManager.instance.styleIcon[1] == true)
 {
  if(!CanTake)
     {
-            Debug.Log("Rock"+ Damage);
+           // Debug.Log("Rock"+ Damage);
 
         TimeHitbox = 2f;
         GameplayManager.instance.ComboCount();
@@ -83,7 +83,7 @@ if(GameplayManager.instance.styleIcon[2] == true)
 {
  if(!CanTake)
     {
-            Debug.Log("Fire"+ Damage);
+            //Debug.Log("Fire"+ Damage);
 
         TimeHitbox = 0.7f;
         GameplayManager.instance.ComboCount();
@@ -104,7 +104,7 @@ if(GameplayManager.instance.styleIcon[3] == true)
 {
  if(!CanTake)
     {
-            Debug.Log("Wind"+ Damage);
+           // Debug.Log("Wind"+ Damage);
 
         TimeHitbox = 0.5f;
         GameplayManager.instance.ComboCount();
@@ -123,7 +123,7 @@ if(GameplayManager.instance.styleIcon[3] == true)
 if(GameplayManager.instance.styleIcon[4] == true)
 {if (Move.instance.style == 4) //Water
 {
-            Debug.Log("Water"+ Damage);
+            //Debug.Log("Water"+ Damage);
 
         TimeHitbox = 0.5f;
         GameplayManager.instance.ComboCount();
@@ -140,7 +140,7 @@ if(GameplayManager.instance.styleIcon[4] == true)
 if(GameplayManager.instance.styleIcon[5] == true)
 {if (Move.instance.style == 5) //Void
 {
-    Debug.Log("Void"+ Damage);
+    //Debug.Log("Void"+ Damage);
     TimeHitbox = 0.3f;
     GameplayManager.instance.ComboCount();
      IDamegable hit = other.GetComponent<IDamegable>();

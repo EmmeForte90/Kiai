@@ -12,6 +12,7 @@ public class LevelChanger : MonoBehaviour
 public string spawnPointTag = "SpawnPoint";
 public GameObject button;
 private CinemachineVirtualCamera vCam;
+public bool camFollowPlayer = true;
 
 public bool interactWithKey = true;
 //public KeyCode changeSceneKey = "Talk";
@@ -71,8 +72,11 @@ private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     if (player != null)
     {
         Move.instance.stopInput = false;
+        if(camFollowPlayer)
+        {
         vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
         vCam.Follow = player.transform;
+        }
         // Troviamo il game object del punto di spawn
         GameObject spawnPoint = GameObject.FindWithTag(spawnPointTag);
         if (spawnPoint != null)
