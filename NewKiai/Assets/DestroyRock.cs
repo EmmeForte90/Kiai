@@ -10,7 +10,7 @@ public class DestroyRock : MonoBehaviour
     public GameObject VFX;
     public GameObject VFXclang;
     public Transform pointVFX;
-    public int numPieces = 5;
+    public int numPieces = 10;
 
      [Header("Audio")]
     [HideInInspector] public float basePitch = 1f;

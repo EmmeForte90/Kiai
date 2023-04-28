@@ -5328,7 +5328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7759,6 +7759,7 @@ MonoBehaviour:
   attack_n_sp: {fileID: 619785596973808952, guid: 306d61f28f51afa4e8c911d9e32af90c, type: 3}
   NHeavyReleaseAnimationName: Attack/SwordPlay/Normal/Normal_special_end
   NHeavyAnimationName: Attack/SwordPlay/Normal/Normal_special_start
+  S_normalK_hitbox: {fileID: 0}
   S_Fire: {fileID: 7125378950673475242, guid: 362a763872be0aa4fbf8a0b0bfc99159, type: 3}
   fireposSAnimationName: Attack/SwordPosition/idle_fire_S
   fireposAnimationName: Attack/SwordPosition/idle_fire
@@ -7776,6 +7777,7 @@ MonoBehaviour:
   attack_f_sp: {fileID: 6910928394357869432, guid: da2b36487f81d1d4b9fcda38342700a3, type: 3}
   UpperFireKiaijumpAnimationName: Attack/SwordPlay/Fire/fire_special_start
   UpperFireEndjumpAnimationName: Attack/SwordPlay/Fire/fire_special_end
+  S_FireK_hitbox: {fileID: 0}
   S_Water: {fileID: 3652232480539716872, guid: 129d8aa0184444441b048b53b23e6d77, type: 3}
   waterposSAnimationName: Attack/SwordPosition/idle_water_S
   waterposAnimationName: Attack/SwordPosition/idle_water
@@ -7791,6 +7793,7 @@ MonoBehaviour:
   WaterLoopAnimationName: Attack/SwordPlay/Water/water_special_loop
   WaterEndAnimationName: Attack/SwordPlay/Water/water_special_end
   attack_w_sp: {fileID: 7281718554959331400, guid: acbb5ddad4aced6468d63c857764025a, type: 3}
+  S_waterK_hitbox: {fileID: 0}
   S_Rock: {fileID: 602412107544973198, guid: 469a8833e35825b40bca3a3a19a84b8a, type: 3}
   rockposSAnimationName: Attack/SwordPosition/idle_heart_S
   rockposAnimationName: Attack/SwordPosition/idle_heart
@@ -7809,6 +7812,9 @@ MonoBehaviour:
   attackRock1AnimationName: Attack/SwordPlay/Rock/attack_rock_horizontal
   attackRock2AnimationName: Attack/SwordPlay/Rock/attack_rock_vertical
   attackRock3AnimationName: Attack/SwordPlay/Rock/attack_rock_vertical
+  RockSpecial: 0
+  isCrushRock: 0
+  S_rockK_hitbox: {fileID: 0}
   S_Wind: {fileID: 6861923898795396708, guid: 258d7a23ff8f9e14c8680cb456d55d38, type: 3}
   windposSAnimationName: Attack/SwordPosition/idle_wind_S
   windposAnimationName: Attack/SwordPosition/idle_wind
@@ -7826,6 +7832,7 @@ MonoBehaviour:
   downatkWindjumpAnimationName: Attack/Jump_Attack/Wind/jump_wind_attack_bottom
   attack_v_sp: {fileID: 3318118948915292631, guid: c21e4a7332081034a91dd2ea66dfd71c, type: 3}
   TornadoWindjumpAnimationName: Attack/SwordPlay/Wind/wind_special
+  S_windK_hitbox: {fileID: 0}
   S_Void: {fileID: 2672608363936665784, guid: e496893ecb0e4864f8dfccc530bd769a, type: 3}
   voidposSAnimationName: Attack/SwordPosition/idle_soul_S
   voidposAnimationName: Attack/SwordPosition/idle_soul
@@ -7844,6 +7851,7 @@ MonoBehaviour:
   guardNoEndSAnimationName: Attack/SwordPlay/Void/guard_end_v
   guardNoHitSAnimationName: Attack/SwordPlay/Void/guard_hit_v
   attack_S_sp: {fileID: 0}
+  S_voidK_hitbox: {fileID: 0}
   DashAttackAnimationName: Attack/SwordPlay/dashAtk
   swordDownAnimationName: Attack/Movement/hide_sword
   guardDownAnimationName: Attack/SwordPlay/guard
@@ -9189,7 +9197,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -822.8, y: 507.8}
+  m_AnchoredPosition: {x: -848.3, y: 511.2}
   m_SizeDelta: {x: 60.9674, y: 67.2004}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5892456059670281366
@@ -10350,7 +10358,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -876.6, y: 455.9}
+  m_AnchoredPosition: {x: -910.4, y: 460}
   m_SizeDelta: {x: 60.9674, y: 67.2004}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5892456059767553968
@@ -13692,7 +13700,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -843.1, y: 307.1}
+  m_AnchoredPosition: {x: -855.5, y: 295.4}
   m_SizeDelta: {x: 60.9674, y: 67.2004}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5892456060058891894
@@ -18529,7 +18537,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -900.4, y: 385.2}
+  m_AnchoredPosition: {x: -921.8, y: 374.2}
   m_SizeDelta: {x: 60.9674, y: 67.2004}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5892456060492003037

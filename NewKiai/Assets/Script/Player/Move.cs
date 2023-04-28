@@ -1043,6 +1043,8 @@ WindLoop();
 #endregion
 
 #region Water
+if (PlayerHealth.Instance.currentStamina > 10) //Water
+{ 
 if (Input.GetButton("Fire2") && !WaterSpecial
 && !isAttacking && !isAttackingAir && !isGuard && !NotStrangeAnimationTalk && !isCharging 
 && !FireSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
@@ -1086,6 +1088,12 @@ if (WaterSpecial)
 {Stop();}
 
 }}}}
+}else if (Input.GetButtonUp("Fire2") || Input.GetButton("Fire2") && PlayerHealth.Instance.currentStamina < 1) //Water
+{ 
+EndWater();
+WaterSpecial = false;
+attackWater = false;
+}
 #endregion
 
 
