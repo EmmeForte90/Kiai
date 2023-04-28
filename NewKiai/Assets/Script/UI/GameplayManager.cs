@@ -30,6 +30,7 @@ public class GameplayManager : MonoBehaviour
 
 [Tooltip("Attiva la spunta solo se sei nel main menu")]
     public bool isStartGame;
+    private string sceneName = "Mainmenu";
 
     private CinemachineVirtualCamera virtualCamera;
     [HideInInspector]
@@ -128,10 +129,7 @@ public class GameplayManager : MonoBehaviour
         vibrateCinemachine = GameObject.FindWithTag("MainCamera").GetComponent<VibrateCinemachine>(); //ottieni il riferimento alla virtual camera di Cinemachine
         //player = GameObject.FindWithTag("Player");
         Menu = GameObject.FindWithTag("Bound");
-        //toy = GameObject.FindWithTag("Player");
 
-
-        
         // Cerca tutti i GameObjects con il tag "Timeline" all'inizio dello script
         //Ordalia = GameObject.FindGameObjectsWithTag("Ordalia");
         StartCoroutine(StartFadeInSTART());
@@ -215,13 +213,59 @@ public void sbam()
  public void FirstoOfPlay()
 {
     startGame = false;
+    player.gameObject.SetActive(true);
     toy.gameObject.SetActive(true);
+    PauseMenu.gameObject.SetActive(false);
     toy = GameObject.FindWithTag("Player");
     virtualCamera = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
     Move.instance.Stop();
     virtualCamera.Follow = toy.transform;
     virtualCamera.LookAt = toy.transform;
 }
+
+public void StopPlay()
+{
+    startGame = true;
+    //toy = GameObject.FindWithTag("Player");
+    toy.gameObject.SetActive(false);
+    virtualCamera = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
+    Move.instance.Stop();
+    //virtualCamera.Follow = toy.transform;
+    //virtualCamera.LookAt = toy.transform;
+}
+
+public void mainmenu()
+    {
+        StartCoroutine(fade());
+        StopPlay();
+    }
+
+IEnumerator fade()
+    {
+        GameplayManager.instance.FadeOut();
+        Move.instance.stopInput = true;
+        Move.instance.Stop();
+        yield return new WaitForSeconds(2);
+        player.gameObject.SetActive(false);
+        // Invochiamo l'evento di cambio scena
+        ChangeScene();
+    }
+// Metodo per cambiare scena
+private void ChangeScene()
+{
+    SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+    SceneManager.sceneLoaded += OnMainLoaded;
+}
+
+// Metodo eseguito quando la scena è stata caricata
+private void OnMainLoaded(Scene scene, LoadSceneMode mode)
+{
+    GameplayManager.instance.FadeIn();
+    SceneManager.sceneLoaded -= OnMainLoaded;
+    GameplayManager.instance.StopFade();    
+}
+
+
 
 
 public void ComboCount()
@@ -352,24 +396,6 @@ public void SetDSpeed(float volume)
 
 public void Restore()
 {
-    // Ripristina gli utilizzi se hai gli slot pieni
-   /* if (UpdateMenuRapido.Instance != null && SkillMenu.Instance != null && 
-        UpdateMenuRapido.Instance.gameObject.activeSelf && SkillMenu.Instance.gameObject.activeSelf &&
-        (UpdateMenuRapido.Instance.idup > 0 || UpdateMenuRapido.Instance.idleft > 0 ||
-         UpdateMenuRapido.Instance.idbottom > 0 || UpdateMenuRapido.Instance.idright > 0))
-    {
-        UpdateMenuRapido.Instance.Vleft = SkillMenu.Instance.MXVleft;
-        UpdateMenuRapido.Instance.Vup = SkillMenu.Instance.MXVup;
-        UpdateMenuRapido.Instance.Vright = SkillMenu.Instance.MXVright;
-        UpdateMenuRapido.Instance.Vbottom = SkillMenu.Instance.MXVbottom;
-
-        UpdateMenuRapido.Instance.SkillBottom_T.text = UpdateMenuRapido.Instance.Vbottom.ToString();
-        UpdateMenuRapido.Instance.SkillUp_T.text = UpdateMenuRapido.Instance.Vup.ToString();
-        UpdateMenuRapido.Instance.SkillLeft_T.text = UpdateMenuRapido.Instance.Vleft.ToString();
-        UpdateMenuRapido.Instance.SkillRight_T.text = UpdateMenuRapido.Instance.Vright.ToString();
-    }
-*/
-// Ripristina L'essenza
     if (PlayerHealth.Instance.gameObject.activeSelf)
     {
         PlayerHealth.Instance.currentHealth = PlayerHealth.Instance.maxHealth;

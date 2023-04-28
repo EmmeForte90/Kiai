@@ -29,6 +29,8 @@ public class HidekiBoss : MonoBehaviour, IDamegable
     [SerializeField] public GameObject Rock;
     [SerializeField] public GameObject SlashDX;
     [SerializeField] public GameObject SlashSX;
+    [SerializeField] public GameObject Crash;
+    [SerializeField] public GameObject scheggia;
     [SerializeField] GameObject attack;
     [SerializeField] GameObject attack_h;
     [SerializeField] GameObject attack_B;
@@ -38,6 +40,14 @@ public class HidekiBoss : MonoBehaviour, IDamegable
     [SerializeField] GameObject VFXDeath;
     private bool vfx = true;
     private float vfxTimer = 0.5f;
+    private bool  SpawnS = false;
+    [SerializeField] public Transform CoinPoint;
+    public int maxSche = 5; // numero massimo di monete che possono essere rilasciate
+    public float sSpawnDelay = 5f; // ritardo tra la spawn di ogni moneta
+    private int randomChance;
+    private float sForce = 5f; // forza con cui le monete saltano
+    private Vector2 sForceVar = new Vector2(1, 0); // varianza della forza con cui le monete saltano
+    private int sCount; // conteggio delle monete
 
     [Header("Attacks")]
     public int CountAtk = 1;
@@ -207,7 +217,7 @@ private void Update()
                 isThrow = false;
                 isCharge = false;
                 StartCharging = false;
-
+                SpawnS = false;
             }else if(CountAtk == 2)
             {            
                 isJumpAttacking = false; 
@@ -554,6 +564,24 @@ private void Charge()
     }
 }
 
+public void SpawnSchegg()
+{
+    if(!SpawnS)
+    {
+
+    for (int i = 0; i < maxSche; i++)
+    {
+        // crea una nuova moneta
+        GameObject newCoin = Instantiate(scheggia, CrushP.position, Quaternion.identity);
+
+        // applica una forza casuale alla moneta per farla saltare
+        Vector2 randomForce = new Vector2(
+        Random.Range(-sForceVar.x, sForceVar.x), 2);
+        newCoin.GetComponent<Rigidbody2D>().AddForce(randomForce * sForce, ForceMode2D.Impulse);
+    }
+        SpawnS = true;
+    }
+}
 
 void RandomicDefence()
 {
@@ -916,6 +944,13 @@ void HandleEvent (TrackEntry trackEntry, Spine.Event e)
     {
 
 if (e.Data.Name == "SpawnFury") 
+    {
+        Instantiate(Crash, CrushP.position, transform.rotation);
+        SpawnSchegg();
+        StartCoroutine(StopD());    
+    }
+
+if (e.Data.Name == "SpawnSlash") 
     {
         Instantiate(SlashDX, CrushP.position, transform.rotation);
         Instantiate(SlashSX, CrushP.position, transform.rotation);                             

@@ -10,7 +10,7 @@ public class ChaseBulletEn : MonoBehaviour
     public float attackDamage = 10; // danno d'attacco
     public float damagestamina = 30; // danno d'attacco
 
-    public int damageAmount;
+    //public int damageAmount;
     public GameObject impactEffect;
 
     // Start is called before the first frame update
