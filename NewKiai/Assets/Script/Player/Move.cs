@@ -222,8 +222,10 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField] private string attackRock1AnimationName;
     [SpineAnimation][SerializeField] private string attackRock2AnimationName;
     [SpineAnimation][SerializeField] private string attackRock3AnimationName;
-    private bool RockSpecial = false;
+    public bool RockSpecial = false;
     private bool attackRock = false;
+    public bool isCrushRock = false;
+
     [SerializeField] GameObject S_rockK_hitbox;
 
         [Header("Wind")]
@@ -926,6 +928,7 @@ GameplayManager.instance.styleIcon[4] == true)
     { 
         isCharging = true;
         drawsword = true;
+        isCrushRock = true;
         AnimationCharge();
         Stop();
         // Inizializza il timer al tempo massimo
@@ -3532,6 +3535,7 @@ if (e.Data.Name == "ShakeCam") {
     if(!vfx)
         {
         GameplayManager.instance.sbam();
+        isCrushRock = false;
         vfx = true;
         }
     }
