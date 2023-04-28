@@ -13191,6 +13191,7 @@ MonoBehaviour:
   VFXSdeng: {fileID: 715449030417092151, guid: 4d9b720303b97684bb97a9911845b6b8, type: 3}
   VFXHurt: {fileID: 6277231454409640187, guid: 32425d44a5ce0b9488d7881e1f00c227, type: 3}
   TextFin: {fileID: 874648892}
+  VFXDeath: {fileID: 1741904689016865191, guid: a18d155c42142d647963279938f15674, type: 3}
   CountAtk: 1
   playerlayer:
     serializedVersion: 2
@@ -20282,6 +20283,7 @@ MonoBehaviour:
   VFXSdeng: {fileID: 715449030417092151, guid: 4d9b720303b97684bb97a9911845b6b8, type: 3}
   VFXHurt: {fileID: 6277231454409640187, guid: 32425d44a5ce0b9488d7881e1f00c227, type: 3}
   TextFin: {fileID: 0}
+  VFXDeath: {fileID: 0}
   CountAtk: 0
   playerlayer:
     serializedVersion: 2

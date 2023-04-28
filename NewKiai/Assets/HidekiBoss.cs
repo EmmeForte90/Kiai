@@ -35,6 +35,9 @@ public class HidekiBoss : MonoBehaviour, IDamegable
     [SerializeField] GameObject VFXSdeng;
     [SerializeField] GameObject VFXHurt;
     [SerializeField] GameObject TextFin;
+    [SerializeField] GameObject VFXDeath;
+    private bool vfx = true;
+    private float vfxTimer = 0.5f;
 
     [Header("Attacks")]
     public int CountAtk = 1;
@@ -179,6 +182,7 @@ private void Update()
         if (currentHealth <= 0) 
         { // controlla se il personaggio è morto
             ResetColor();
+            CountAtk = 0;
             isMove = false;
             isGuard = false;
             isDie = true;
@@ -187,6 +191,13 @@ private void Update()
             isCharge = false;
             StartDie();
         }
+
+        if(vfx && isDie)
+        {vfxTimer -= Time.deltaTime; //decrementa il timer ad ogni frame
+        if (vfxTimer <= 0f) {
+        Instantiate(VFXDeath, transform.position, VFXDeath.transform.rotation);
+        vfx = false;
+        }}
 
         if(!isTired)
         {
@@ -267,18 +278,19 @@ private void Update()
 }
 
 }
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
      private void Buttontest()
     {
        #region testForanysituation
             if(Input.GetKeyDown(KeyCode.C))
             {
-                currentStamina -= 100;
-                //currentHealth -= 60;
+                //currentStamina -= 100;
+                currentHealth -= 100;
 
             } 
             #endregion
     }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 IEnumerator StopD()
 {
