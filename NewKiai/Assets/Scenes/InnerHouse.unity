@@ -641,6 +641,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 544485560677951914, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 544485560677951914, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5892456059567638948, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -724,6 +732,22 @@ PrefabInstance:
     - target: {fileID: 5892456059956868110, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5892456059972901846, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.000046521145
+      objectReference: {fileID: 0}
+    - target: {fileID: 5892456060309445665, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5892456060309445665, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5892456060309445665, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5892456060369802795, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2947,6 +2971,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPointTag: SpawnPoint_2
   button: {fileID: 521943802}
+  camFollowPlayer: 1
   interactWithKey: 0
   sceneName: Area2
   needButton: 0

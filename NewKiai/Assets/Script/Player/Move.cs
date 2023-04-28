@@ -510,7 +510,7 @@ if (Input.GetButtonDown("Jump") && !isGuard && !NotStrangeAnimationTalk && isTou
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////             
 
 // gestione dell'input dello sparo
-if (Input.GetButtonDown("Fire2") || L2 == 1 && isBlast && Time.time >= ShotTimer)
+if (L2 == 1 && isBlast && Time.time >= ShotTimer)
 {
     //print("Spara");
     //Se non hai finito gli utilizzi

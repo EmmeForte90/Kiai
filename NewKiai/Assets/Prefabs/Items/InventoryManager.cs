@@ -107,7 +107,7 @@ private void Awake()
     {
         existingItem.value++;
     }
-    else
+    else if (existingItem == null)
     {
         itemDatabase.Add(newItem);
     } 
@@ -150,6 +150,8 @@ public bool RemoveItemID(int itemToRemove)
             {
                 if (child.name == "ItemButton_" + existingItem.id)
                 {   
+                    //GameObject prefab = Resources.Load<GameObject>("MyPrefab");
+                    //Instantiate(prefab);
                     Destroy(child.gameObject);
                     break;
                 }
