@@ -179,6 +179,7 @@ public class Move : MonoBehaviour
     [SerializeField] GameObject S_FireK_hitbox;
 
         [Header("Water")]
+    private float SpeeRestore = 20f; // il massimo valore di essenza disponibile
     public GameObject S_Water;
     [Tooltip("Animazione a singolo frame")]
     [SpineAnimation][SerializeField] private string waterposSAnimationName;
@@ -814,7 +815,7 @@ GameplayManager.instance.styleIcon[1] == true ||
 GameplayManager.instance.styleIcon[2] == true ||
 GameplayManager.instance.styleIcon[3] == true ||
 GameplayManager.instance.styleIcon[4] == true)
-{if (style == 5) //Rock
+{if (style == 5) //Void
 { 
 isGuard = true;
 GuardArmAnm();
@@ -845,7 +846,7 @@ GameplayManager.instance.styleIcon[4] == true)
 {    
 if (isGuard)
 {
-if (style == 5) //Rock
+if (style == 5) //Void
 {isGuard = false;
 GuardArmAnmEnd();
 }
@@ -876,12 +877,13 @@ GameplayManager.instance.styleIcon[2] == true ||
 GameplayManager.instance.styleIcon[3] == true ||
 GameplayManager.instance.styleIcon[4] == true)
 {if (style == 0) //Normal
+{if (PlayerHealth.Instance.currentStamina > 50) //Water
 { 
 NormalSpecial = true;
 drawsword = true;
 HeavyHitS();
 Stop();
-}}}
+}}}}
 
 if (Input.GetButtonUp("Fire2") && !isAttacking && !isAttackingAir && !isGuard && !NotStrangeAnimationTalk && !isCharging 
 && !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && NormalSpecial && !VoidSpecial
@@ -898,6 +900,7 @@ if (NormalSpecial)
 {
 if (style == 0) //normal
 {
+PlayerHealth.Instance.currentStamina -= 50;
 NormalSpecial = false;
 HeavyHitRelease();
 }}}}
@@ -919,7 +922,8 @@ GameplayManager.instance.styleIcon[4] == true)
 && !isAttacking && !isAttackingAir && !isGuard && !NotStrangeAnimationTalk 
 && !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
 && !StartKiai)
-    {
+    {if (PlayerHealth.Instance.currentStamina > 50) //Water
+    { 
         isCharging = true;
         drawsword = true;
         AnimationCharge();
@@ -927,7 +931,7 @@ GameplayManager.instance.styleIcon[4] == true)
         // Inizializza il timer al tempo massimo
         currentTime = timeLimit;
         InvokeRepeating("CountDown", 1f, 1f);
-    }
+    }}
 
     if (Input.GetButtonDown("Fire2") && isCharging
     && !isAttacking && !isAttackingAir && !isGuard && !NotStrangeAnimationTalk  
@@ -954,9 +958,10 @@ GameplayManager.instance.styleIcon[4] == true)
         {
             HitboxPlayer.Instance.Damage = minDamage + (maxDamage - minDamage) * currentTime / timeLimit;
         }
+        PlayerHealth.Instance.currentStamina -= 50;
         AnimationChargeRelease();
         isCharging = false;
-        Debug.Log("Charge ratio: " + (float)currentTime / timeLimit + ", Damage: " + HitboxPlayer.Instance.Damage);
+        //Debug.Log("Charge ratio: " + (float)currentTime / timeLimit + ", Damage: " + HitboxPlayer.Instance.Damage);
         timeSinceLastAttack = Time.time;
         CancelInvoke("CountDown");
     }
@@ -982,12 +987,13 @@ GameplayManager.instance.styleIcon[2] == true ||
 GameplayManager.instance.styleIcon[3] == true ||
 GameplayManager.instance.styleIcon[4] == true)
 {if (style == 2) //Fire
+{ if (PlayerHealth.Instance.currentStamina > 50) //Water
 { 
 FireSpecial = true;
 drawsword = true;
 FireUpper();
 Stop();
-}}}
+}}}}
 
 if (Input.GetButtonUp("Fire2") && !isAttacking && !isAttackingAir && !isGuard && !NotStrangeAnimationTalk && !isCharging 
 && FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
@@ -1004,6 +1010,7 @@ if (FireSpecial)
 {
 if (style == 2) //Fire
 {FireSpecial = false;
+PlayerHealth.Instance.currentStamina -= 30;
 attackupper();
 }}}}
 if (FireSpecial)
@@ -1025,10 +1032,11 @@ GameplayManager.instance.styleIcon[2] == true ||
 GameplayManager.instance.styleIcon[3] == true ||
 GameplayManager.instance.styleIcon[4] == true)
 {if (style == 3) //Wind
+{ if (PlayerHealth.Instance.currentStamina > 50) 
 { 
 WindSpecial = true;
 WindLoop();
-}}}
+}}}}
 #endregion
 
 #region Water
@@ -1044,12 +1052,13 @@ GameplayManager.instance.styleIcon[2] == true ||
 GameplayManager.instance.styleIcon[3] == true ||
 GameplayManager.instance.styleIcon[4] == true)
 {if (style == 4) //Water
+{ if (PlayerHealth.Instance.currentStamina > 10) //Water
 { 
 WaterSpecial = true;
 drawsword = true;
 WaterLoop();
 Stop();
-}}}
+}}}}
 
 
 if (Input.GetButtonUp("Fire2")&& !isAttacking && !isAttackingAir && !isGuard && !NotStrangeAnimationTalk && !isCharging 
@@ -1166,7 +1175,7 @@ if(attackRock)
   {Stop();}  
 
 if(attackWater)
-  {Stop();}  
+  {Stop(); PlayerHealth.Instance.currentStamina -= SpeeRestore * Time.deltaTime;}  
     
 }
 
@@ -3342,7 +3351,10 @@ if (e.Data.Name == "waterjump") {
     if(!vfx)
         {
        Instantiate(attack_v_h2, slashpoint.position, attack_v_h.transform.rotation);
+       if(PlayerHealth.Instance.currentStamina > 10)
+        {
         Instantiate(VFXWindSlash_h, gun.position, VFXWindSlash_h.transform.rotation);
+        }
         PlayMFX(1);
         vfx = true;
         }
@@ -3354,7 +3366,10 @@ if (e.Data.Name == "waterjump") {
     if(!vfx)
         {
         Instantiate(attack_v_h, slashpoint.position, attack_v_h.transform.rotation);
+        if(PlayerHealth.Instance.currentStamina > 10)
+        {
         Instantiate(VFXWindSlash_h, gun.position, VFXWindSlash_h.transform.rotation);
+        }
         PlayMFX(1);
         vfx = true;
         }
@@ -3366,7 +3381,10 @@ if (e.Data.Name == "waterjump") {
     if(!vfx)
         {
         Instantiate(attack_v_v, slashpoint.position, attack_v_v.transform.rotation);
+        if(PlayerHealth.Instance.currentStamina > 10)
+        {
         Instantiate(VFXWindSlash, gun.position, VFXWindSlash.transform.rotation);
+        }
         PlayMFX(1);
         vfx = true;
         }
@@ -3439,7 +3457,10 @@ if (e.Data.Name == "upWind") {
     if(!vfx)
         {
         Instantiate(attack_v_air_up, top.position, attack_v_air_up.transform.rotation);
+        if(PlayerHealth.Instance.currentStamina > 10)
+        {
         Instantiate(VFXWindSlashTOP, top.position, VFXWindSlashTOP.transform.rotation);
+        }
         PlayMFX(1);
         vfx = true;
         }
@@ -3450,7 +3471,10 @@ if (e.Data.Name == "bottomWind") {
     if(!vfx)
         {
         Instantiate(attack_v_air_bottom, bottom.position, attack_v_air_bottom.transform.rotation);
+        if(PlayerHealth.Instance.currentStamina > 10)
+        {
         Instantiate(VFXWindSlashDOWN, bottom.position, VFXWindSlashDOWN.transform.rotation);
+        }
         PlayMFX(1);
         vfx = true;
         }
