@@ -53,6 +53,7 @@ public class HidekiBoss : MonoBehaviour, IDamegable
     private int ThrowCount = 0;
     private int HitCount = 0;
     private float tireTimer = 3f;
+    private float maxtiredTimer = 3f;
 
     private Vector2 lastPosition;
     public Rigidbody2D rb;
@@ -78,7 +79,7 @@ public class HidekiBoss : MonoBehaviour, IDamegable
     private bool ChooseAtk = true;    
     private bool improve = true; 
     private bool stopAnim = true;
-
+    private bool RestoAnm = false;
     [Header("Animations")]
     [SpineAnimation][SerializeField] private string idleAnimationName;
     [SpineAnimation][SerializeField] private string walkAnimationName;
@@ -195,28 +196,24 @@ private void Update()
                 isThrow = false;
                 isCharge = false;
                 StartCharging = false;
-                stopAnim = true;
 
             }else if(CountAtk == 2)
             {            
                 isJumpAttacking = false; 
                 isThrow = true;
                 isCharge = false;
-                stopAnim = true;
 
             }else if(CountAtk == 3)
             {   
                 isJumpAttacking = false; 
                 isThrow = false;
                 isCharge = true;
-                stopAnim = true;
 
             }else if(CountAtk == 4)
             {   
                 isJumpAttacking = false; 
                 isThrow = false;
                 isCharge = false;
-                stopAnim = true;
                 CountAtk = 1;
             }
         }
@@ -244,25 +241,31 @@ private void Update()
 
 
 
- if(currentStamina <= 0)
+ if(currentStamina <= 0) // verifica se la stamina corrente è minore o uguale a 0
+{
+     if(!RestoAnm) // verifica se la stamina corrente è minore o uguale a 0
+    {
+    Tired(); // chiama la funzione "Tired()"
+    Stop(); // chiama la funzione "Stop()"
+    isTired = true; // imposta la variabile "isTired" su true
+    TextFin.gameObject.SetActive(true); // attiva l'oggetto "TextFin" per mostrare il testo
+    RestoAnm = true;
+    }
+
+    if(isTired) // verifica se la variabile "isTired" è true
+    {
+        tireTimer -= Time.deltaTime; // decrementa "tireTimer" in base al tempo trascorso dall'ultimo frame
+
+        if (tireTimer <= 0f) // verifica se "tireTimer" ha raggiunto il valore di zero
         {
-            Tired();
-            Stop();
-            isTired = true;
-            TextFin.gameObject.SetActive(true);
-            if(isTired)
-            {tireTimer -= Time.deltaTime; //decrementa il timer ad ogni frame
-            if (tireTimer <= 0f) {
-            TextFin.gameObject.SetActive(false);
-            currentStamina = maxStamina;
-            if(stopAnim)
-            {
-            RestoreStamina();
-            stopAnim = false;
-            }
-            isTired = false; 
-            }}
+            TextFin.gameObject.SetActive(false); // disattiva l'oggetto "TextFin" per nascondere il testo
+            RestoreStamina(); // chiama la funzione "RestoreStamina()"
+            tireTimer = maxtiredTimer; // ripristina "tireTimer" al valore massimo
+            StartCoroutine(restoreSt());      
         }
+    }
+}
+
 }
 
      private void Buttontest()
@@ -270,8 +273,8 @@ private void Update()
        #region testForanysituation
             if(Input.GetKeyDown(KeyCode.C))
             {
-                currentStamina -= 50;
-                currentHealth -= 50;
+                currentStamina -= 100;
+                //currentHealth -= 60;
 
             } 
             #endregion
@@ -281,16 +284,18 @@ IEnumerator StopD()
 {
     yield return new WaitForSeconds(1f);
     // Controllo del conteggio degli attacchi
-    if (improve)
+    if (improve && !isTired)
     {
         CountAtk++;
         improve = false; // Imposta la variabile di stato a false dopo l'incremento
     }
+}
 
-
-//Raggiunto l'ultimo attacco il nemico non ripete il ciclo, bisogna fare dei controlli
-        isWait = false;
-    }
+IEnumerator restoreSt()
+{    
+    yield return new WaitForSeconds(2f);
+    isTired = false; // imposta la variabile "isTired" su false
+}
 
 IEnumerator Crushi()
     {
@@ -717,10 +722,10 @@ public void RestoreStamina()
     
     if (currentAnimationName != restoAnimationName)
                 {
+                    _spineAnimationState.ClearTrack(2);
                     _spineAnimationState.SetAnimation(2, restoAnimationName, false);
                     currentAnimationName = restoAnimationName;
                     _spineAnimationState.Event += HandleEvent;
-                    stopAnim = false;
                 }
                 // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
@@ -844,7 +849,7 @@ public void Tired()
                     _spineAnimationState.Event += HandleEvent;
                 }
                 // Add event listener for when the animation completes
-                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+                //_spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 
 private void OnChargeAnimationComplete(Spine.TrackEntry trackEntry)
@@ -876,6 +881,7 @@ private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
 
     // Clear the track 1 and reset to the idle animation
     _spineAnimationState.ClearTrack(2);
+    //_spineAnimationState.ClearTrack(3);
     _spineAnimationState.SetAnimation(1, idleAnimationName, true);
     currentAnimationName = idleAnimationName;
     isCharge = false;
@@ -915,9 +921,9 @@ if (e.Data.Name == "endCount")
     }
 if (e.Data.Name == "RestoreAtk") 
     {
+    RestoAnm = false;
+    currentStamina = maxStamina; // ripristina la stamina corrente al valore massimo
     CountAtk = 1;
     }
-
-
     }
 }
