@@ -38,8 +38,8 @@ public class GameplayManager : MonoBehaviour
 
     [Header("Money")]
     [SerializeField] public int money = 0;
-    [SerializeField] TextMeshProUGUI moneyText;
-    [SerializeField] TextMeshProUGUI moneyTextM;
+    [SerializeField] public TextMeshProUGUI moneyText;
+    [SerializeField] public TextMeshProUGUI moneyTextM;
     [SerializeField] GameObject moneyObject;
     [SerializeField] GameObject moneyObjectM;
     [HideInInspector]

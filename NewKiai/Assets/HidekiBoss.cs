@@ -52,6 +52,7 @@ public class HidekiBoss : MonoBehaviour, IDamegable
     private int jumpCount = 0;
     private int ThrowCount = 0;
     private int HitCount = 0;
+    private float tireTimer = 3f;
 
     private Vector2 lastPosition;
     public Rigidbody2D rb;
@@ -76,6 +77,7 @@ public class HidekiBoss : MonoBehaviour, IDamegable
     private bool take = false;
     private bool ChooseAtk = true;    
     private bool improve = true; 
+    private bool stopAnim = true;
 
     [Header("Animations")]
     [SpineAnimation][SerializeField] private string idleAnimationName;
@@ -185,29 +187,39 @@ private void Update()
             StartDie();
         }
 
+        if(!isTired)
+        {
             if(CountAtk == 1)
             {
                 isJumpAttacking = true;
                 isThrow = false;
                 isCharge = false;
                 StartCharging = false;
+                stopAnim = true;
+
             }else if(CountAtk == 2)
             {            
                 isJumpAttacking = false; 
                 isThrow = true;
                 isCharge = false;
+                stopAnim = true;
+
             }else if(CountAtk == 3)
             {   
                 isJumpAttacking = false; 
                 isThrow = false;
                 isCharge = true;
+                stopAnim = true;
+
             }else if(CountAtk == 4)
             {   
                 isJumpAttacking = false; 
                 isThrow = false;
                 isCharge = false;
+                stopAnim = true;
                 CountAtk = 1;
             }
+        }
 
 
 
@@ -236,9 +248,20 @@ private void Update()
         {
             Tired();
             Stop();
-            StartCoroutine(EndTired());
-            TextFin.gameObject.SetActive(true);
             isTired = true;
+            TextFin.gameObject.SetActive(true);
+            if(isTired)
+            {tireTimer -= Time.deltaTime; //decrementa il timer ad ogni frame
+            if (tireTimer <= 0f) {
+            TextFin.gameObject.SetActive(false);
+            currentStamina = maxStamina;
+            if(stopAnim)
+            {
+            RestoreStamina();
+            stopAnim = false;
+            }
+            isTired = false; 
+            }}
         }
 }
 
@@ -248,6 +271,8 @@ private void Update()
             if(Input.GetKeyDown(KeyCode.C))
             {
                 currentStamina -= 50;
+                currentHealth -= 50;
+
             } 
             #endregion
     }
@@ -266,14 +291,7 @@ IEnumerator StopD()
 //Raggiunto l'ultimo attacco il nemico non ripete il ciclo, bisogna fare dei controlli
         isWait = false;
     }
-IEnumerator EndTired()
-    {
-        yield return new WaitForSeconds(5f);
-        TextFin.gameObject.SetActive(false);
-        currentStamina = maxStamina;
-        RestoreStamina();
-        isTired = false; 
-    }
+
 IEnumerator Crushi()
     {
         yield return new WaitForSeconds(1f);
@@ -340,7 +358,6 @@ private void JumpAtk()
 {
     if (isJumpAttacking && !isCharge && !isThrow && !isAttack)
 {
-    ResetColor();
 
     if (jumpCount < 2)
     {
@@ -410,7 +427,6 @@ private void LanciaSasso()
 if (isThrow && !isJumpAttacking && !isCharge && !isAttack)
 {
     improve = true; 
-    ResetColor();
 
     if (currentHealth > 250)
     {
@@ -457,62 +473,71 @@ if (isThrow && !isJumpAttacking && !isCharge && !isAttack)
 }
 }
 
+// La funzione "Charge" controlla lo stato delle variabili relative all'attacco e si occupa di avviare l'attacco in base alle condizioni.
 private void Charge()
 {
+    // Verifica se il personaggio è in stato di "caricamento" e se non sta attualmente attaccando, saltando o lanciando qualcosa.
     if (isCharge && !isJumpAttacking && !isThrow && !isAttack)
-{
-        ResetColor();
-
-    if (currentHealth > 250)
     {
-        if (HitCount < 1)
+        // Se la vita del personaggio è maggiore di 250:
+        if (currentHealth > 250)
         {
-            if (!StartCharging)
+            // Controlla il numero di colpi inflitti all'avversario.
+            if (HitCount < 1)
             {
-            if (rb.velocity.y == 0f)
+                // Se il personaggio non sta ancora caricando l'attacco:
+                if (!StartCharging)
+                {
+                    // Verifica che il personaggio non stia saltando.
+                    if (rb.velocity.y == 0f)
+                    {
+                        // Prepara l'attacco di "crush", imposta il personaggio rivolto verso l'avversario e avvia la coroutine "Crushi()" per eseguire l'attacco.
+                        FacePlayer();
+                        PrepareCrush();
+                        StartCoroutine(Crushi());
+                        StartCharging = true; // Imposta il personaggio in stato di "caricamento".
+                    } 
+                }
+            }
+            else 
             {
-                //print("StartCharge");
-                FacePlayer();
-                PrepareCrush();
-                StartCoroutine(Crushi());
-                StartCharging = true;
-            } 
+                // Se il personaggio ha già inflitto almeno un colpo all'avversario:
+                // Resetta il contatore dei colpi inflitti, imposta la variabile "isCharge" a false (il personaggio non sta più caricando l'attacco) e avvia la coroutine "StopD()" per "fermare" l'attacco.
+                HitCount = 0;
+                isCharge = false;
+                isWait = true;    
+                StartCoroutine(StopD());    
             }
         }
-        else 
+        // Se la vita del personaggio è inferiore o uguale a 250:
+        else if (currentHealth < 250) 
         {
-            // resetta il contatore dei lanci e l'indicatore di attacco a lancio
-            HitCount = 0;
-           // CountAtk = 4;
-            isCharge = false;
-             isWait = true;    
-        StartCoroutine(StopD());    
-
-        }
-    }
-    else if (currentHealth < 250) 
-    {
-        if (HitCount < 1)
-        {
-            if (rb.velocity.y == 0f)
+            // Controlla il numero di colpi inflitti all'avversario.
+            if (HitCount < 1)
             {
-                //print("Fury");
-                FacePlayer();
-                CrushRageAnm();
-                HitCount++;
-            } 
-        }
-        else 
-        {
-            // resetta il contatore dei lanci e l'indicatore di attacco a lancio
-            HitCount = 0;
-             isWait = true;   
-        StartCoroutine(StopD());   
-
+                // Verifica che il personaggio non stia saltando.
+                if (rb.velocity.y == 0f)
+                {
+                    // Esegue un attacco "furioso" (CrushRageAnm()) e incrementa il contatore dei colpi inflitti.
+                    FacePlayer();
+                    CrushRageAnm();
+                    HitCount++;
+                } 
+            }
+            else 
+            {
+                // Se il personaggio ha già inflitto almeno un colpo all'avversario:
+                // Resetta il contatore dei colpi inflitti, imposta la variabile "isWait" a true e avvia la coroutine "StopD()" per "fermare" l'attacco.
+                HitCount = 0;
+                isCharge = false;
+                isWait = true;    
+                StartCoroutine(StopD());   
+            }
         }
     }
 }
-}
+
+
 void RandomicDefence()
 {
     randomChanceEN = Random.Range(1, 10); // Genera un numero casuale compreso tra 1 e 10
@@ -695,7 +720,7 @@ public void RestoreStamina()
                     _spineAnimationState.SetAnimation(2, restoAnimationName, false);
                     currentAnimationName = restoAnimationName;
                     _spineAnimationState.Event += HandleEvent;
-                    isWait = false;
+                    stopAnim = false;
                 }
                 // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
@@ -888,13 +913,11 @@ if (e.Data.Name == "endCount")
     {
     CountAtk = 4;    
     }
-
+if (e.Data.Name == "RestoreAtk") 
+    {
+    CountAtk = 1;
     }
 
 
-
-
-
-
-
+    }
 }

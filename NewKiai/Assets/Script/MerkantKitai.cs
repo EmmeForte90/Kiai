@@ -197,6 +197,8 @@ public void Buy(Item newItem)
     PlayMFX(0);
     dialogueMenu.text = "Thank you!"; // Reference to the TextMeshProUGUI component
     GameplayManager.instance.money -= prices;
+    GameplayManager.instance.moneyText.text = GameplayManager.instance.money.ToString();
+    GameplayManager.instance.moneyTextM.text = GameplayManager.instance.money.ToString(); ;
     PuppetM.Instance.Idle();
     }else if(GameplayManager.instance.money < prices)
     {
