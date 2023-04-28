@@ -75,7 +75,7 @@ public class HidekiBoss : MonoBehaviour, IDamegable
     private float waitDuration = 2f;
     private bool take = false;
     private bool ChooseAtk = true;    
-
+    private bool improve = true; 
 
     [Header("Animations")]
     [SpineAnimation][SerializeField] private string idleAnimationName;
@@ -206,6 +206,7 @@ private void Update()
                 isJumpAttacking = false; 
                 isThrow = false;
                 isCharge = false;
+                CountAtk = 1;
             }
 
 
@@ -225,10 +226,7 @@ private void Update()
            // print("Counter");
             Charge();
             }
-        }else if(isWait)
-            {
-            StartCoroutine(StopD());
-            }
+        }
             }
 
 
@@ -255,25 +253,16 @@ private void Update()
     }
 
 IEnumerator StopD()
+{
+    yield return new WaitForSeconds(1f);
+    // Controllo del conteggio degli attacchi
+    if (improve)
     {
-        yield return new WaitForSeconds(1f);
-        //Controllo del conteggio degli attacchi
-        if(CountAtk > 3)
-        {
-            CountAtk = 1;
-        }else if(CountAtk == 1)
-        {
-            CountAtk = 2;
-        }else if(CountAtk == 2)
-        {
-            CountAtk = 3;
-        }else if(CountAtk == 3)
-        {
-            CountAtk = 3;
-        }else if(CountAtk == 4)
-        {
-            CountAtk = 1;
-        }
+        CountAtk++;
+        improve = false; // Imposta la variabile di stato a false dopo l'incremento
+    }
+
+
 //Raggiunto l'ultimo attacco il nemico non ripete il ciclo, bisogna fare dei controlli
         isWait = false;
     }
@@ -407,6 +396,7 @@ private void JumpAtk()
         //CountAtk = 2;
         isJumpAttacking = false;
         isWait = true;    
+        improve = true; 
         StartCoroutine(StopD());
 
     }
@@ -419,6 +409,7 @@ private void LanciaSasso()
 {
 if (isThrow && !isJumpAttacking && !isCharge && !isAttack)
 {
+    improve = true; 
     ResetColor();
 
     if (currentHealth > 250)
@@ -438,8 +429,7 @@ if (isThrow && !isJumpAttacking && !isCharge && !isAttack)
             // resetta il contatore dei lanci e l'indicatore di attacco a lancio
             ThrowCount = 0;
             //CountAtk = 3;
-            isThrow = false;
-             isWait = true;    
+            isWait = true;    
         StartCoroutine(StopD());    
         }
     }
@@ -460,8 +450,7 @@ if (isThrow && !isJumpAttacking && !isCharge && !isAttack)
             // resetta il contatore dei lanci e l'indicatore di attacco a lancio
             ThrowCount = 0;
             //CountAtk = 3;
-            isThrow = false;
-            isWait = true;    
+            isWait = true;  
         StartCoroutine(StopD());    
         }
     }
