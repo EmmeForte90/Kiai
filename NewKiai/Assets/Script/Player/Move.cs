@@ -540,33 +540,109 @@ if (L2 == 1 && isBlast && Time.time >= ShotTimer)
   if(UpdateMenuRapido.Instance.MXV1 <= 0)
     {
         InventoryManager.Instance.RemoveItemID(UpdateMenuRapido.Instance.Slot1);
+        UpdateMenuRapido.Instance.Slot1_T.text = null;
+        //ItemRapidMenu.Instance.Slot1_T.text = null;
+        UpdateMenuRapido.Instance.imageColor = UpdateMenuRapido.Instance.Slot1_I.color;
+        UpdateMenuRapido.Instance.imageColor.a = 0f;
+        UpdateMenuRapido.Instance.Slot1_I.color = UpdateMenuRapido.Instance.imageColor;
+        //
+        InventoryManager.Instance.imageColor = InventoryManager.Instance.Slot1_I.color;
+        InventoryManager.Instance.imageColor.a = 0f;
+        InventoryManager.Instance.Slot1_I.color = InventoryManager.Instance.imageColor;
     }
     if(UpdateMenuRapido.Instance.MXV2 <= 0)
     {
         InventoryManager.Instance.RemoveItemID(UpdateMenuRapido.Instance.Slot2);
+        UpdateMenuRapido.Instance.Slot2_T.text = null;
+       // ItemRapidMenu.Instance.Slot2_T.text = null;
+        UpdateMenuRapido.Instance.imageColor = UpdateMenuRapido.Instance.Slot2_I.color;
+        UpdateMenuRapido.Instance.imageColor.a = 0f;
+        UpdateMenuRapido.Instance.Slot2_I.color = UpdateMenuRapido.Instance.imageColor;
+        //
+        InventoryManager.Instance.imageColor = InventoryManager.Instance.Slot2_I.color;
+        InventoryManager.Instance.imageColor.a = 0f;
+        InventoryManager.Instance.Slot2_I.color = InventoryManager.Instance.imageColor;
     }
     if(UpdateMenuRapido.Instance.MXV3 <= 0)
     {
         InventoryManager.Instance.RemoveItemID(UpdateMenuRapido.Instance.Slot3);
+        UpdateMenuRapido.Instance.Slot3_T.text = null;
+        //ItemRapidMenu.Instance.Slot3_T.text = null;
+        UpdateMenuRapido.Instance.imageColor = UpdateMenuRapido.Instance.Slot3_I.color;
+        UpdateMenuRapido.Instance.imageColor.a = 0f;
+        UpdateMenuRapido.Instance.Slot3_I.color = UpdateMenuRapido.Instance.imageColor;
+        //
+        InventoryManager.Instance.imageColor = InventoryManager.Instance.Slot3_I.color;
+        InventoryManager.Instance.imageColor.a = 0f;
+        InventoryManager.Instance.Slot3_I.color = InventoryManager.Instance.imageColor;    
     }
     if(UpdateMenuRapido.Instance.MXV4 <= 0)
     {
         InventoryManager.Instance.RemoveItemID(UpdateMenuRapido.Instance.Slot4);
+        UpdateMenuRapido.Instance.Slot4_T.text = null;
+        //ItemRapidMenu.Instance.Slot4_T.text = null;
+        UpdateMenuRapido.Instance.imageColor = UpdateMenuRapido.Instance.Slot4_I.color;
+        UpdateMenuRapido.Instance.imageColor.a = 0f;
+        UpdateMenuRapido.Instance.Slot4_I.color = UpdateMenuRapido.Instance.imageColor;
+        //
+        InventoryManager.Instance.imageColor = InventoryManager.Instance.Slot4_I.color;
+        InventoryManager.Instance.imageColor.a = 0f;
+        InventoryManager.Instance.Slot4_I.color = InventoryManager.Instance.imageColor;
     }
     if(UpdateMenuRapido.Instance.MXV5 <= 0)
     {
         InventoryManager.Instance.RemoveItemID(UpdateMenuRapido.Instance.Slot5);
+        UpdateMenuRapido.Instance.Slot5_T.text = null;
+        //ItemRapidMenu.Instance.Slot5_T.text = null;
+        UpdateMenuRapido.Instance.imageColor = UpdateMenuRapido.Instance.Slot5_I.color;
+        UpdateMenuRapido.Instance.imageColor.a = 0f;
+        UpdateMenuRapido.Instance.Slot5_I.color = UpdateMenuRapido.Instance.imageColor;
+        //
+        InventoryManager.Instance.imageColor = InventoryManager.Instance.Slot5_I.color;
+        InventoryManager.Instance.imageColor.a = 0f;
+        InventoryManager.Instance.Slot5_I.color = InventoryManager.Instance.imageColor;
+
     }
     if(UpdateMenuRapido.Instance.MXV6 <= 0)
     {
         InventoryManager.Instance.RemoveItemID(UpdateMenuRapido.Instance.Slot6);
+        UpdateMenuRapido.Instance.Slot6_T.text = null;
+        //ItemRapidMenu.Instance.Slot6_T.text = null;
+        UpdateMenuRapido.Instance.imageColor = UpdateMenuRapido.Instance.Slot6_I.color;
+        UpdateMenuRapido.Instance.imageColor.a = 0f;
+        UpdateMenuRapido.Instance.Slot6_I.color = UpdateMenuRapido.Instance.imageColor;
+        //
+        InventoryManager.Instance.imageColor = InventoryManager.Instance.Slot6_I.color;
+        InventoryManager.Instance.imageColor.a = 0f;
+        InventoryManager.Instance.Slot6_I.color = InventoryManager.Instance.imageColor;
+
     }
     if(UpdateMenuRapido.Instance.MXV7 <= 0)
     {
         InventoryManager.Instance.RemoveItemID(UpdateMenuRapido.Instance.Slot7);
+        UpdateMenuRapido.Instance.Slot7_T.text = null;
+        //ItemRapidMenu.Instance.Slot7_T.text = null;
+        UpdateMenuRapido.Instance.imageColor = UpdateMenuRapido.Instance.Slot7_I.color;
+        UpdateMenuRapido.Instance.imageColor.a = 0f;
+        UpdateMenuRapido.Instance.Slot7_I.color = UpdateMenuRapido.Instance.imageColor;
+        //
+        InventoryManager.Instance.imageColor = InventoryManager.Instance.Slot7_I.color;
+        InventoryManager.Instance.imageColor.a = 0f;
+        InventoryManager.Instance.Slot7_I.color = InventoryManager.Instance.imageColor;
+
     }if(UpdateMenuRapido.Instance.MXV8 <= 0)
     {
         InventoryManager.Instance.RemoveItemID(UpdateMenuRapido.Instance.Slot8);
+        UpdateMenuRapido.Instance.Slot8_T.text = null;
+       // ItemRapidMenu.Instance.Slot8_T.text = null;
+        UpdateMenuRapido.Instance.imageColor = UpdateMenuRapido.Instance.Slot8_I.color;
+        UpdateMenuRapido.Instance.imageColor.a = 0f;
+        UpdateMenuRapido.Instance.Slot8_I.color = UpdateMenuRapido.Instance.imageColor;
+        //
+        InventoryManager.Instance.imageColor = InventoryManager.Instance.Slot8_I.color;
+        InventoryManager.Instance.imageColor.a = 0f;
+        InventoryManager.Instance.Slot8_I.color = InventoryManager.Instance.imageColor;
+
     }
 
 }

@@ -8,6 +8,8 @@ public class UpdateMenuRapido : MonoBehaviour
 {
     // Mappa che mappa gli id delle skill ai loro valori
     Dictionary<int, Item> itemMap = new Dictionary<int, Item>();
+    
+    [HideInInspector] public Color imageColor;
 
  [HideInInspector]
     public int selectedId = -1; // Id dell'abilità selezionata  

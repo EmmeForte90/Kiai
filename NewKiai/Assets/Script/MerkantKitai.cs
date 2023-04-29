@@ -7,6 +7,7 @@ using UnityEngine.Audio;
 using Spine.Unity;
 using Spine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class MerkantKitai : MonoBehaviour
 {
@@ -58,6 +59,10 @@ public class MerkantKitai : MonoBehaviour
     private Spine.Skeleton _skeleton;
     Spine.EventData eventData;
 
+    public GameObject Sashimi, BackB,
+        Kunai, Shuriken, Onigiri;
+
+
 public static MerkantKitai Instance;
 
 
@@ -99,6 +104,36 @@ void Awake()
        // anim = GetComponent<Animator>();
         
 
+    }
+
+ public void KunaiI()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(Kunai);
+    }
+
+    public void ShurikenI()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(Shuriken);
+    }
+
+    public void OnighiriI()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(Onigiri);
+    }
+
+    public void SashimiI()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(Sashimi);
+    }
+
+    public void BackI()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(BackB);
     }
 
     void Update()
