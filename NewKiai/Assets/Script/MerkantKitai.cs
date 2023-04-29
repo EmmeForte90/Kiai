@@ -173,6 +173,9 @@ FacePlayer();
         }
         else if (_isDialogueActive && Input.GetButtonDown("Talk") && StopButton)
         {
+            EventSystem.current.SetSelectedGameObject(null); //necessary clear the event system
+            EventSystem.current.SetSelectedGameObject(Onigiri);
+            Cursor.visible = true;
             NextDialogue();
              StopButton = false;
         }
