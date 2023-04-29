@@ -37,19 +37,20 @@ public class InventoryManager : MonoBehaviour
     public TextMeshProUGUI descriptions_C;
     public TextMeshProUGUI Num_C;
     public TextMeshProUGUI NameItems_C;
-
+   
+   public  GameObject ItemPrefab;
    public  GameObject InventoryItem;
        [HideInInspector] public Color imageColor;
    
 
 
 
-   [HideInInspector] public int qID;
+    [HideInInspector] public int qID;
     // Scriptable Object delle item
-   public List<Item> itemDatabase;
+    public List<Item> itemDatabase;
     private int val = 1;
     public bool[] itemActive;
-
+    private bool buy = false; 
    
 
  [Header("MenuSlot")]
@@ -72,8 +73,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField]public Image Slot8_I;
 
     [SerializeField] public GameObject[] SlotTot;
-    [SerializeField] public GameObject[] SlotTotM;
-    [SerializeField] public GameObject Selector;
+    //[SerializeField] public GameObject[] SlotTotM;
     [SerializeField] public bool[] SlotIcon;
 
     private static int uniqueId;
@@ -97,11 +97,11 @@ private void Awake()
 
 private void Update()
     {
-        if(InventoryItem == null)
+        /*if(InventoryItem == null)
         {
             GameObject prefab = Resources.Load<GameObject>("Item");
             InventoryItem = prefab;
-        }
+        }*/
     //previewImages;
     //descriptions;
     //Num;
@@ -111,7 +111,7 @@ private void Update()
    public void SlotActivated(int id)
 {
     SlotTot[id].SetActive(true);
-    SlotTotM[id].SetActive(true);
+    //SlotTotM[id].SetActive(true);
     SlotIcon[id] = true;   
 }
 
@@ -135,6 +135,7 @@ private void Update()
 }
 
 
+
 public bool RemoveItem(Item itemToRemove)
 {
     Item existingItem = itemDatabase.Find(item => item.id == itemToRemove.id);
@@ -143,7 +144,7 @@ public bool RemoveItem(Item itemToRemove)
         return false; // l'oggetto non è stato trovato nella lista, restituisci false
     }
 
-    if (val <= 1)
+    if (val < 1)
     {
         itemDatabase.Remove(existingItem); // rimuovi completamente l'oggetto dalla lista
     }
@@ -156,6 +157,7 @@ public bool RemoveItem(Item itemToRemove)
     return true; // operazione completata con successo, restituisci true
 }
 
+
 public bool RemoveItemID(int itemToRemove)
 {
     Item existingItem = itemDatabase.Find(item => item.id == itemToRemove);
@@ -164,22 +166,22 @@ public bool RemoveItemID(int itemToRemove)
         return false; // l'oggetto non è stato trovato nella lista, restituisci false
     }
 
-    if (val <= 1)
+    if (val < 1)
     {
-        itemDatabase.Remove(existingItem); // rimuovi completamente l'oggetto dalla lista
+                            
+
+        //itemDatabase.Remove(existingItem); // rimuovi completamente l'oggetto dalla lista
             // Se l'item è già presente nella lista, incrementa il suo valore
             foreach (Transform child in ItemContent.transform)
             {
                 if (child.name == "ItemButton_" + existingItem.id)
                 {   
-                    GameObject prefab = Resources.Load<GameObject>("Item");
-                    Instantiate(prefab);
+                    
                     Destroy(child.gameObject);
-                    break;
+                    
                 }
+                    break;
             }
-            
-        
     }
     else
     {
@@ -195,7 +197,10 @@ public void ListItem(int itemId)
     {
         // Cerca la item con l'id specificato
         Item item = itemDatabase.Find(q => q.id == itemId);
-       
+        if(InventoryItem == null)
+        {
+        InventoryItem = ItemPrefab;
+        }
 
        if (item != null)
     {
@@ -291,8 +296,6 @@ public void ListItem(int itemId)
     // Assegna l'id univoco al game object istanziato
     InventoryItem.name = "ItemButton_" + item.id;
 
-    // Assegna il nome della item al componente del titolo
-    //questName.text = item.itemName;
 
     if (Itemimg != null && item.icon != null)
     {
@@ -345,6 +348,7 @@ public void ListItem(int itemId)
 }
     }
     
+//Serve per non creare cloni nel menu
  private bool ItemAlreadyInList(int itemId)
 {
     foreach (Transform child in ItemContent.transform)

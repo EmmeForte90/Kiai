@@ -230,6 +230,7 @@ public void Buy(Item newItem)
 {
     if(GameplayManager.instance.money >= prices)
     {
+    //InventoryManager.Instance.RestoreSlot(newItem);
     InventoryManager.Instance.AddItem(newItem);
     InventoryManager.Instance.ListItem(newItem.id);
     PlayMFX(0);
