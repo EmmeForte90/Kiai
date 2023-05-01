@@ -379,15 +379,19 @@ public void OnQuestButtonClicked(int itemId, Image previewImages, TextMeshProUGU
         selectedId = itemDatabase.Find(q => q.id == itemId).id;
         if(ItemRapidMenu.Instance.isSlot1)
         {
+            ItemRapidMenu.Instance.Slot1 = itemDatabase.Find(q => q.id == itemId).id;
+            UpdateMenuRapido.Instance.Slot1 = itemDatabase.Find(q => q.id == itemId).id;
+           if(ItemRapidMenu.Instance.isSlot1 != ItemRapidMenu.Instance.isSlot2 ||
+            ItemRapidMenu.Instance.isSlot1 != ItemRapidMenu.Instance.isSlot3 ||
+           ItemRapidMenu.Instance.isSlot1 != ItemRapidMenu.Instance.isSlot4)
+        { 
             ItemRapidMenu.Instance.MXV1 = itemDatabase.Find(q => q.id == itemId).value;
             UpdateMenuRapido.Instance.MXV1 = itemDatabase.Find(q => q.id == itemId).value;
             ItemRapidMenu.Instance.Slot1_T.text = itemDatabase.Find(q => q.id == itemId).value.ToString();
             ItemRapidMenu.Instance.Slot1_I.sprite = itemDatabase.Find(q => q.id == itemId).icon;
-            ItemRapidMenu.Instance.Slot1 = selectedId;
-            UpdateMenuRapido.Instance.Slot1 = selectedId;
+            Num.text = itemDatabase.Find(q => q.id == itemId).value.ToString();
             UpdateMenuRapido.Instance.Slot1_T.text = itemDatabase.Find(q => q.id == itemId).value.ToString();
             UpdateMenuRapido.Instance.Slot1_I.sprite = itemDatabase.Find(q => q.id == itemId).icon;
-            
             //
             imageColor = UpdateMenuRapido.Instance.Slot1_I.color;
             imageColor.a = 1f;
@@ -396,14 +400,20 @@ public void OnQuestButtonClicked(int itemId, Image previewImages, TextMeshProUGU
             imageColor = ItemRapidMenu.Instance.Slot1_I.color;
             imageColor.a = 1f;
             ItemRapidMenu.Instance.Slot1_I.color = imageColor;
+        }
         }else if(ItemRapidMenu.Instance.isSlot2)
         {
+            ItemRapidMenu.Instance.Slot2 = itemDatabase.Find(q => q.id == itemId).id;
+            UpdateMenuRapido.Instance.Slot2 = itemDatabase.Find(q => q.id == itemId).id;
+            if(ItemRapidMenu.Instance.isSlot2 != ItemRapidMenu.Instance.isSlot1 ||
+            ItemRapidMenu.Instance.isSlot2 != ItemRapidMenu.Instance.isSlot3 ||
+           ItemRapidMenu.Instance.isSlot2 != ItemRapidMenu.Instance.isSlot4)
+        { 
             ItemRapidMenu.Instance.MXV2 = itemDatabase.Find(q => q.id == itemId).value;
             UpdateMenuRapido.Instance.MXV2 = itemDatabase.Find(q => q.id == itemId).value;
             ItemRapidMenu.Instance.Slot2_T.text = itemDatabase.Find(q => q.id == itemId).value.ToString();
             ItemRapidMenu.Instance.Slot2_I.sprite = itemDatabase.Find(q => q.id == itemId).icon;
-            ItemRapidMenu.Instance.Slot2 = selectedId;
-            UpdateMenuRapido.Instance.Slot2 = selectedId;
+            Num.text = itemDatabase.Find(q => q.id == itemId).value.ToString();
             UpdateMenuRapido.Instance.Slot2_T.text = itemDatabase.Find(q => q.id == itemId).value.ToString();
             UpdateMenuRapido.Instance.Slot2_I.sprite = itemDatabase.Find(q => q.id == itemId).icon;
            
@@ -415,14 +425,20 @@ public void OnQuestButtonClicked(int itemId, Image previewImages, TextMeshProUGU
             imageColor = ItemRapidMenu.Instance.Slot2_I.color;
             imageColor.a = 1f;
             ItemRapidMenu.Instance.Slot2_I.color = imageColor;
+        }
         }else if(ItemRapidMenu.Instance.isSlot3)
         {
+            ItemRapidMenu.Instance.Slot3 = itemDatabase.Find(q => q.id == itemId).id;
+            UpdateMenuRapido.Instance.Slot3 = itemDatabase.Find(q => q.id == itemId).id;
+            if(ItemRapidMenu.Instance.isSlot3 != ItemRapidMenu.Instance.isSlot2 ||
+            ItemRapidMenu.Instance.isSlot3 != ItemRapidMenu.Instance.isSlot1 ||
+           ItemRapidMenu.Instance.isSlot3 != ItemRapidMenu.Instance.isSlot4)
+        { 
             ItemRapidMenu.Instance.MXV3 = itemDatabase.Find(q => q.id == itemId).value;
             UpdateMenuRapido.Instance.MXV3 = itemDatabase.Find(q => q.id == itemId).value;
             ItemRapidMenu.Instance.Slot3_T.text = itemDatabase.Find(q => q.id == itemId).value.ToString();
             ItemRapidMenu.Instance.Slot3_I.sprite = itemDatabase.Find(q => q.id == itemId).icon;
-            ItemRapidMenu.Instance.Slot3 = selectedId;
-            UpdateMenuRapido.Instance.Slot3 = selectedId;
+            Num.text = itemDatabase.Find(q => q.id == itemId).value.ToString();
             UpdateMenuRapido.Instance.Slot3_T.text = itemDatabase.Find(q => q.id == itemId).value.ToString();
             UpdateMenuRapido.Instance.Slot3_I.sprite = itemDatabase.Find(q => q.id == itemId).icon;
             //
@@ -433,14 +449,20 @@ public void OnQuestButtonClicked(int itemId, Image previewImages, TextMeshProUGU
             imageColor = ItemRapidMenu.Instance.Slot3_I.color;
             imageColor.a = 1f;
             ItemRapidMenu.Instance.Slot3_I.color = imageColor;
+        }
         }else if(ItemRapidMenu.Instance.isSlot4)
         {
+            ItemRapidMenu.Instance.Slot4 = itemDatabase.Find(q => q.id == itemId).id;
+            UpdateMenuRapido.Instance.Slot4 = itemDatabase.Find(q => q.id == itemId).id;
+            if(ItemRapidMenu.Instance.isSlot4 != ItemRapidMenu.Instance.isSlot2 ||
+            ItemRapidMenu.Instance.isSlot4 != ItemRapidMenu.Instance.isSlot3 ||
+           ItemRapidMenu.Instance.isSlot4 != ItemRapidMenu.Instance.isSlot1)
+        { 
             ItemRapidMenu.Instance.MXV4 = itemDatabase.Find(q => q.id == itemId).value;
             UpdateMenuRapido.Instance.MXV4 = itemDatabase.Find(q => q.id == itemId).value;
             ItemRapidMenu.Instance.Slot4_T.text = itemDatabase.Find(q => q.id == itemId).value.ToString();
             ItemRapidMenu.Instance.Slot4_I.sprite = itemDatabase.Find(q => q.id == itemId).icon;
-            ItemRapidMenu.Instance.Slot4 = selectedId;
-            UpdateMenuRapido.Instance.Slot4 = selectedId;
+            Num.text = itemDatabase.Find(q => q.id == itemId).value.ToString();
             UpdateMenuRapido.Instance.Slot4_T.text = itemDatabase.Find(q => q.id == itemId).value.ToString();
             UpdateMenuRapido.Instance.Slot4_I.sprite = itemDatabase.Find(q => q.id == itemId).icon;
             
@@ -452,6 +474,7 @@ public void OnQuestButtonClicked(int itemId, Image previewImages, TextMeshProUGU
             imageColor = ItemRapidMenu.Instance.Slot4_I.color;
             imageColor.a = 1f;
             ItemRapidMenu.Instance.Slot4_I.color = imageColor;
+        }
         }else if(ItemRapidMenu.Instance.isSlot5)
         {
             ItemRapidMenu.Instance.Slot5_T.text = itemDatabase.Find(q => q.id == itemId).value.ToString();

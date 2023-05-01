@@ -24,7 +24,8 @@ public bool isConsumable = false;
 public bool isKey = false;
 public bool isKatana = false;
 public bool isDress = false;
-	
+
+
 
   public Item(string name, int value, Sprite icon)
     {

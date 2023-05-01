@@ -86,6 +86,7 @@ public static ItemRapidMenu Instance;
         horDir = Input.GetAxisRaw("Horizontal");
         vertDir = Input.GetAxisRaw("Vertical");
 
+//Se il valore è zero cancella il numero dallo slot
     if(UpdateMenuRapido.Instance.MXV1 <= 0)
     {
         Slot1_T.text = null;
@@ -148,7 +149,7 @@ public static ItemRapidMenu Instance;
 }
    public void Assign1()
 {    
-    
+ 
     isSlot0 = false;
     isSlot1 = true;
     isSlot2 = false;
@@ -162,6 +163,7 @@ public static ItemRapidMenu Instance;
   
 public void Assign2()
 {    
+  
     isSlot0 = false;
     isSlot1 = false;
     isSlot2 = true;
@@ -175,6 +177,7 @@ public void Assign2()
   
 public void Assign3()
 {
+   
     isSlot0 = false;
     isSlot1 = false;
     isSlot2 = false;
@@ -188,6 +191,7 @@ public void Assign3()
 
  public void Assign4()
 {
+    
     isSlot0 = false;
     isSlot1 = false;
     isSlot2 = false;
