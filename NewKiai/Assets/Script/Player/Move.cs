@@ -10,6 +10,7 @@ using UnityEngine.Audio;
 public class Move : MonoBehaviour
 {
     [SerializeField] public GameObject Player;
+    [SerializeField] public GameObject Shadow;
 
 
     [Header("Movement")]
@@ -412,13 +413,14 @@ if(!stopInput)
             lastTimeGround = coyoteTime; 
             isAttackingAir = false;
             canDoubleJump = true;
-        
+            Shadow.gameObject.SetActive(true);
             rb.gravityScale = 1;
         }
         else
         {
             lastTimeGround -= Time.deltaTime;
             modifyPhysics();
+            Shadow.gameObject.SetActive(false);  
         }
 
         if(vfx)
@@ -438,8 +440,7 @@ isTouchingWall = Physics2D.Raycast(transform.position, direction, wallDistance, 
 if (Input.GetButtonDown("Jump") && !isGuard && !NotStrangeAnimationTalk  
         && !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
         && !StartKiai)
-{      
-      
+{            
     wallJumped = false;
     if(!isTouchingWall)
         {
@@ -484,6 +485,7 @@ if (Input.GetButtonDown("Jump") && !isGuard && !NotStrangeAnimationTalk && isTou
         && !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
         && !StartKiai)
 {
+
     // Walljump
         //print("Walljump");
         if(transform.localScale.x > 0)

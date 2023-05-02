@@ -197,6 +197,7 @@ public void ListItem(int itemId)
     {
         // Cerca la item con l'id specificato
         Item item = itemDatabase.Find(q => q.id == itemId);
+        selectedId = item.id;
         if(InventoryItem == null)
         {
         InventoryItem = ItemPrefab;
@@ -372,15 +373,15 @@ public void OnQuestButtonClicked(int itemId, Image previewImages, TextMeshProUGU
     {
         // Qui puoi fare qualcosa quando il pulsante della item viene cliccato, ad esempio aprire una finestra con i dettagli della item
         // Assegna i valori desiderati ai componenti dell'immagine di preview e della descrizione
-        
         previewImages.sprite = itemDatabase.Find(q => q.id == itemId).icon;
         descriptions.text = itemDatabase.Find(q => q.id == itemId).Description;
         NameItems.text = itemDatabase.Find(q => q.id == itemId).itemName;
         selectedId = itemDatabase.Find(q => q.id == itemId).id;
         if(ItemRapidMenu.Instance.isSlot1)
         {
-            ItemRapidMenu.Instance.Slot1 = itemDatabase.Find(q => q.id == itemId).id;
-            UpdateMenuRapido.Instance.Slot1 = itemDatabase.Find(q => q.id == itemId).id;
+            ItemRapidMenu.Instance.Slot1 = selectedId;
+            UpdateMenuRapido.Instance.Slot1 = selectedId;
+            print(selectedId);
            if(ItemRapidMenu.Instance.isSlot1 != ItemRapidMenu.Instance.isSlot2 ||
             ItemRapidMenu.Instance.isSlot1 != ItemRapidMenu.Instance.isSlot3 ||
            ItemRapidMenu.Instance.isSlot1 != ItemRapidMenu.Instance.isSlot4)
@@ -405,6 +406,8 @@ public void OnQuestButtonClicked(int itemId, Image previewImages, TextMeshProUGU
         {
             ItemRapidMenu.Instance.Slot2 = itemDatabase.Find(q => q.id == itemId).id;
             UpdateMenuRapido.Instance.Slot2 = itemDatabase.Find(q => q.id == itemId).id;
+                    print(selectedId);
+
             if(ItemRapidMenu.Instance.isSlot2 != ItemRapidMenu.Instance.isSlot1 ||
             ItemRapidMenu.Instance.isSlot2 != ItemRapidMenu.Instance.isSlot3 ||
            ItemRapidMenu.Instance.isSlot2 != ItemRapidMenu.Instance.isSlot4)
@@ -430,6 +433,8 @@ public void OnQuestButtonClicked(int itemId, Image previewImages, TextMeshProUGU
         {
             ItemRapidMenu.Instance.Slot3 = itemDatabase.Find(q => q.id == itemId).id;
             UpdateMenuRapido.Instance.Slot3 = itemDatabase.Find(q => q.id == itemId).id;
+                    print(selectedId);
+
             if(ItemRapidMenu.Instance.isSlot3 != ItemRapidMenu.Instance.isSlot2 ||
             ItemRapidMenu.Instance.isSlot3 != ItemRapidMenu.Instance.isSlot1 ||
            ItemRapidMenu.Instance.isSlot3 != ItemRapidMenu.Instance.isSlot4)
@@ -454,6 +459,8 @@ public void OnQuestButtonClicked(int itemId, Image previewImages, TextMeshProUGU
         {
             ItemRapidMenu.Instance.Slot4 = itemDatabase.Find(q => q.id == itemId).id;
             UpdateMenuRapido.Instance.Slot4 = itemDatabase.Find(q => q.id == itemId).id;
+                    print(selectedId);
+
             if(ItemRapidMenu.Instance.isSlot4 != ItemRapidMenu.Instance.isSlot2 ||
             ItemRapidMenu.Instance.isSlot4 != ItemRapidMenu.Instance.isSlot3 ||
            ItemRapidMenu.Instance.isSlot4 != ItemRapidMenu.Instance.isSlot1)
