@@ -48,7 +48,7 @@ public class InventoryManager : MonoBehaviour
     [HideInInspector] public int qID;
     // Scriptable Object delle item
     public List<Item> itemDatabase;
-    private int val = 1;
+    public int val = 1;
     public bool[] itemActive;
     private bool buy = false; 
    
@@ -176,7 +176,8 @@ public bool RemoveItemID(int itemToRemove)
             {
                 if (child.name == "ItemButton_" + existingItem.id)
                 {   
-                    
+                    itemDatabase.Remove(existingItem);
+                    //InventoryManager.Instance.RemoveItem(child);
                     Destroy(child.gameObject);
                     
                 }
@@ -293,6 +294,7 @@ public void ListItem(int itemId)
     // Recupera il riferimento al componente del titolo della item e del bottone
     //var questName = obj.transform.Find("Name_Item").GetComponent<TextMeshProUGUI>();
     var Itemimg = InventoryItem.transform.Find("Icon_item").GetComponent<Image>();
+    var Itemnum = InventoryItem.transform.Find("Num_item").GetComponent<TextMeshProUGUI>();
 
     // Assegna l'id univoco al game object istanziato
     InventoryItem.name = "ItemButton_" + item.id;
@@ -302,6 +304,11 @@ public void ListItem(int itemId)
     {
         Itemimg.sprite = item.icon;
        
+    }
+
+    if (Itemnum != null && item.value != null)
+    {
+       Itemnum.text = item.value.ToString();
     }
 
     // Assegna i valori desiderati ai componenti dell'immagine di preview e della descrizione del pulsante della item
@@ -344,7 +351,7 @@ public void ListItem(int itemId)
 
     // Aggiungi un listener per il click del bottone
     var button = InventoryItem.GetComponent<Button>();
-    button.onClick.AddListener(() => OnQuestButtonClicked(item.id, previewImages, descriptions, selectedId, item.isConsumable, item.isKey, item.isKatana, item.isDress, item.NameSkin));
+    button.onClick.AddListener(() => OnQuestButtonClicked(item.id, item.value, previewImages, descriptions, selectedId, item.isConsumable, item.isKey, item.isKatana, item.isDress, item.NameSkin));
         }
 }
     }
@@ -367,7 +374,7 @@ public void ListItem(int itemId)
 
     
 
-public void OnQuestButtonClicked(int itemId, Image previewImages, TextMeshProUGUI descriptions, int selectedId, bool isConsumable, bool isKey, bool isKatana, bool isDress, string NameSkin)
+public void OnQuestButtonClicked(int itemId, int itemValue, Image previewImages, TextMeshProUGUI descriptions, int selectedId, bool isConsumable, bool isKey, bool isKatana, bool isDress, string NameSkin)
 {
     if (itemId >= 0 && isConsumable)
     {
@@ -377,6 +384,7 @@ public void OnQuestButtonClicked(int itemId, Image previewImages, TextMeshProUGU
         descriptions.text = itemDatabase.Find(q => q.id == itemId).Description;
         NameItems.text = itemDatabase.Find(q => q.id == itemId).itemName;
         selectedId = itemDatabase.Find(q => q.id == itemId).id;
+        itemValue = itemDatabase.Find(q => q.id == itemId).value;
         if(ItemRapidMenu.Instance.isSlot1)
         {
             ItemRapidMenu.Instance.Slot1 = selectedId;

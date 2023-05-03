@@ -1942,7 +1942,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7912708449297722167}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ItemRapidMenu, Assembly-CSharp
         m_MethodName: Assign2
         m_Mode: 1
@@ -2152,7 +2152,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7912708449297722167}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ItemRapidMenu, Assembly-CSharp
         m_MethodName: Assign3
         m_Mode: 1
@@ -3166,7 +3166,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7912708449297722167}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ItemRapidMenu, Assembly-CSharp
         m_MethodName: Assign4
         m_Mode: 1
@@ -9335,7 +9335,6 @@ GameObject:
   - component: {fileID: 5892456059674487772}
   - component: {fileID: 5892456059674487774}
   - component: {fileID: 5892456059674487773}
-  - component: {fileID: 7912708449297722167}
   m_Layer: 5
   m_Name: Pause
   m_TagString: Untagged
@@ -9409,67 +9408,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7912708449297722167
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5892456059674487843}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b8f2acce856ce34aad20dd2e4d8005f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeSelection: 0.1
-  selectedId: -1
-  Slot1: -1
-  Slot2: -1
-  Slot3: -1
-  Slot4: -1
-  Slot5: -1
-  Slot6: -1
-  Slot7: -1
-  Slot8: -1
-  SlotKat: -1
-  SlotDres: -1
-  MXV1: 0
-  MXV2: 0
-  MXV3: 0
-  MXV4: 0
-  MXV5: 0
-  MXV6: 0
-  MXV7: 0
-  MXV8: 0
-  isSlot0: 0
-  isSlot1: 0
-  isSlot2: 0
-  isSlot3: 0
-  isSlot4: 0
-  isSlot5: 0
-  isSlot6: 0
-  isSlot7: 0
-  isSlot8: 0
-  isSlotKat: 0
-  isSlotDres: 0
-  Slot1_T: {fileID: 6489512361183757350}
-  Slot2_T: {fileID: 6894518500468513607}
-  Slot3_T: {fileID: 4338945878207490367}
-  Slot4_T: {fileID: 2236785622575527087}
-  Slot5_T: {fileID: 4685211931811178302}
-  Slot6_T: {fileID: 7880630935846097953}
-  Slot7_T: {fileID: 7684303680823990410}
-  Slot8_T: {fileID: 3850563076232616902}
-  Slot1_I: {fileID: 6017265081543708478}
-  Slot2_I: {fileID: 6840121042835641162}
-  Slot3_I: {fileID: 7755902238051641070}
-  Slot4_I: {fileID: 8190220778907138607}
-  Slot5_I: {fileID: 2935657521882893082}
-  Slot6_I: {fileID: 5131951402941159344}
-  Slot7_I: {fileID: 680914556011730432}
-  Slot8_I: {fileID: 7584689636647095240}
-  SlotKat_I: {fileID: 5892456060460167977}
-  SlotDres_I: {fileID: 5892456059626621041}
 --- !u!1 &5892456059676360942
 GameObject:
   m_ObjectHideFlags: 0
@@ -11502,7 +11440,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7912708449297722167}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ItemRapidMenu, Assembly-CSharp
         m_MethodName: AssignDres
         m_Mode: 1
@@ -15407,6 +15345,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5892456060195674085}
   - component: {fileID: 5892456060195674086}
+  - component: {fileID: 6383886496087196993}
   m_Layer: 0
   m_Name: ItemManager
   m_TagString: Untagged
@@ -15463,6 +15402,7 @@ MonoBehaviour:
   imageColor: {r: 0, g: 0, b: 0, a: 0}
   qID: 0
   itemDatabase: []
+  val: 1
   itemActive: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   Slot1_T: {fileID: 6489512361183757350}
   Slot2_T: {fileID: 6894518500468513607}
@@ -15490,6 +15430,67 @@ MonoBehaviour:
   - {fileID: 5892456059473725377}
   - {fileID: 5892456061242209152}
   SlotIcon: 0101010000000000
+--- !u!114 &6383886496087196993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5892456060195674084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b8f2acce856ce34aad20dd2e4d8005f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeSelection: 0.1
+  selectedId: -1
+  Slot1: -1
+  Slot2: -1
+  Slot3: -1
+  Slot4: -1
+  Slot5: -1
+  Slot6: -1
+  Slot7: -1
+  Slot8: -1
+  SlotKat: -1
+  SlotDres: -1
+  MXV1: 0
+  MXV2: 0
+  MXV3: 0
+  MXV4: 0
+  MXV5: 0
+  MXV6: 0
+  MXV7: 0
+  MXV8: 0
+  isSlot0: 0
+  isSlot1: 0
+  isSlot2: 0
+  isSlot3: 0
+  isSlot4: 0
+  isSlot5: 0
+  isSlot6: 0
+  isSlot7: 0
+  isSlot8: 0
+  isSlotKat: 0
+  isSlotDres: 0
+  Slot1_T: {fileID: 6489512361183757350}
+  Slot2_T: {fileID: 6894518500468513607}
+  Slot3_T: {fileID: 4338945878207490367}
+  Slot4_T: {fileID: 2236785622575527087}
+  Slot5_T: {fileID: 4685211931811178302}
+  Slot6_T: {fileID: 7880630935846097953}
+  Slot7_T: {fileID: 7684303680823990410}
+  Slot8_T: {fileID: 3850563076232616902}
+  Slot1_I: {fileID: 6017265081543708478}
+  Slot2_I: {fileID: 6840121042835641162}
+  Slot3_I: {fileID: 7755902238051641070}
+  Slot4_I: {fileID: 8190220778907138607}
+  Slot5_I: {fileID: 2935657521882893082}
+  Slot6_I: {fileID: 5131951402941159344}
+  Slot7_I: {fileID: 680914556011730432}
+  Slot8_I: {fileID: 7584689636647095240}
+  SlotKat_I: {fileID: 5892456060460167977}
+  SlotDres_I: {fileID: 5892456059626621041}
 --- !u!1 &5892456060207271365
 GameObject:
   m_ObjectHideFlags: 0
@@ -27387,7 +27388,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7912708449297722167}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ItemRapidMenu, Assembly-CSharp
         m_MethodName: AssignKat
         m_Mode: 1
@@ -30284,7 +30285,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7912708449297722167}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ItemRapidMenu, Assembly-CSharp
         m_MethodName: Assign1
         m_Mode: 1
@@ -30563,7 +30564,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 100, y: 100}
+  m_CellSize: {x: 200, y: 200}
   m_Spacing: {x: 20, y: 20}
   m_Constraint: 0
   m_ConstraintCount: 2

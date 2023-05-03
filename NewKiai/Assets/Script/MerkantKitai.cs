@@ -233,6 +233,7 @@ public void Buy(Item newItem)
     //InventoryManager.Instance.RestoreSlot(newItem);
     InventoryManager.Instance.AddItem(newItem);
     InventoryManager.Instance.ListItem(newItem.id);
+    Add();
     PlayMFX(0);
     dialogueMenu.text = "Thank you!"; // Reference to the TextMeshProUGUI component
     GameplayManager.instance.money -= prices;
@@ -246,6 +247,42 @@ public void Buy(Item newItem)
     PuppetM.Instance.Idle();
     }
 }
+
+// Questo metodo aggiunge un'unità all'inventario del giocatore nell'interfaccia utente del menu rapido.
+// In base alla posizione corrente dell'elemento selezionato nel menu rapido, il metodo aggiunge un'unità all'elemento corrispondente.
+
+public void Add()
+{
+// Se lo slot 4 del menu rapido è vuoto, aggiungi un'unità all'elemento corrispondente nel menu rapido.
+if(UpdateMenuRapido.Instance.Slot4 <= 0 && UpdateMenuRapido.Instance.MXV4 <= 0 && ItemRapidMenu.Instance.MXV4 <= 0)//Bottom
+{
+//UpdateMenuRapido.Instance.MXV4++;
+ItemRapidMenu.Instance.MXV4++;
+InventoryManager.Instance.val++;
+}
+// Altrimenti, Se lo slot 1 del menu rapido è vuoto, aggiungi un'unità all'elemento corrispondente nel menu rapido.
+else if(UpdateMenuRapido.Instance.Slot1 <= 0 && UpdateMenuRapido.Instance.MXV1 <= 0 && ItemRapidMenu.Instance.MXV1 <= 0)//up
+{
+//UpdateMenuRapido.Instance.MXV1++;
+ItemRapidMenu.Instance.MXV1++;
+InventoryManager.Instance.val++;
+}
+// Altrimenti, Se lo slot 2 del menu rapido è vuoto, aggiungi un'unità all'elemento corrispondente nel menu rapido.
+else if(UpdateMenuRapido.Instance.Slot2 <= 0 && UpdateMenuRapido.Instance.MXV2 <= 0 && ItemRapidMenu.Instance.MXV2 <= 0)//Left
+{
+//UpdateMenuRapido.Instance.MXV2++;
+ItemRapidMenu.Instance.MXV2++;
+InventoryManager.Instance.val++;
+}
+// Altrimenti, Se lo slot 3 del menu rapido è vuoto, aggiungi un'unità all'elemento corrispondente nel menu rapido.
+else if(UpdateMenuRapido.Instance.Slot3 <= 0 && UpdateMenuRapido.Instance.MXV3 <= 0 && ItemRapidMenu.Instance.MXV3 <= 0)//Right
+{
+//UpdateMenuRapido.Instance.MXV3++;
+ItemRapidMenu.Instance.MXV3++;
+InventoryManager.Instance.val++;
+}
+}
+   
 
 public void Preview(Item newItem)
 {
