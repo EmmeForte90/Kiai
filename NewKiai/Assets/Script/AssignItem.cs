@@ -66,8 +66,8 @@ public void Update()
             ItemRapidMenu.Instance.Slot1 = selectedId;
             UpdateMenuRapido.Instance.Slot1 = selectedId;
             print(selectedId);
-           if(ItemRapidMenu.Instance.Slot1 != ItemRapidMenu.Instance.Slot2 ||
-            ItemRapidMenu.Instance.Slot1 != ItemRapidMenu.Instance.Slot3 ||
+           if(ItemRapidMenu.Instance.Slot1 != ItemRapidMenu.Instance.Slot2 &&
+            ItemRapidMenu.Instance.Slot1 != ItemRapidMenu.Instance.Slot3 &&
            ItemRapidMenu.Instance.Slot1 != ItemRapidMenu.Instance.Slot4)
         { 
             ItemRapidMenu.Instance.MXV1 = Item.value;
@@ -94,8 +94,8 @@ public void Update()
             UpdateMenuRapido.Instance.Slot2 = selectedId;
                     print(selectedId);
 
-            if(ItemRapidMenu.Instance.Slot2 != ItemRapidMenu.Instance.Slot1 ||
-            ItemRapidMenu.Instance.Slot2 != ItemRapidMenu.Instance.Slot3 ||
+            if(ItemRapidMenu.Instance.Slot2 != ItemRapidMenu.Instance.Slot1 &&
+            ItemRapidMenu.Instance.Slot2 != ItemRapidMenu.Instance.Slot3 &&
            ItemRapidMenu.Instance.Slot2 != ItemRapidMenu.Instance.Slot4)
         { 
             ItemRapidMenu.Instance.MXV2 = Item.value;
@@ -123,8 +123,8 @@ public void Update()
             UpdateMenuRapido.Instance.Slot3 = selectedId;
                     print(selectedId);
 
-            if(ItemRapidMenu.Instance.Slot3 != ItemRapidMenu.Instance.Slot2 ||
-            ItemRapidMenu.Instance.Slot3 != ItemRapidMenu.Instance.Slot1 ||
+            if(ItemRapidMenu.Instance.Slot3 != ItemRapidMenu.Instance.Slot2 &&
+            ItemRapidMenu.Instance.Slot3 != ItemRapidMenu.Instance.Slot1 &&
            ItemRapidMenu.Instance.Slot3 != ItemRapidMenu.Instance.Slot4)
         { 
             ItemRapidMenu.Instance.MXV3 = Item.value;
@@ -151,8 +151,8 @@ public void Update()
             UpdateMenuRapido.Instance.Slot4 = selectedId;
                     print(selectedId);
 
-            if(ItemRapidMenu.Instance.Slot4 != ItemRapidMenu.Instance.Slot2 ||
-            ItemRapidMenu.Instance.Slot4 != ItemRapidMenu.Instance.Slot3 ||
+            if(ItemRapidMenu.Instance.Slot4 != ItemRapidMenu.Instance.Slot2 &&
+            ItemRapidMenu.Instance.Slot4 != ItemRapidMenu.Instance.Slot3 &&
            ItemRapidMenu.Instance.Slot4 != ItemRapidMenu.Instance.Slot1)
         { 
             ItemRapidMenu.Instance.MXV4 = Item.value;
