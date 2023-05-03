@@ -44,7 +44,8 @@ public class Move : MonoBehaviour
     private bool StartKiai = false;
     [HideInInspector] public float dashCoolDown = 1f;
     private float coolDownTime;
-    private bool drawsword = false;
+    [HideInInspector]
+    public bool drawsword = false;
 
     [Header("Jump")]
     [SerializeField] private float jumpForce;
@@ -275,6 +276,9 @@ public class Move : MonoBehaviour
     private bool VoidSpecial = false;
     [SerializeField] GameObject attack_S_sp;
     [SerializeField] GameObject S_voidK_hitbox;
+    /////////////////////////////////////////////////////////////////////
+     [Header("Fatalitis")]
+    [SpineAnimation][SerializeField] private string F_JumpAnimationName;
     /////////////////////////////////////////////////////////////////////
      [Header("Dodge and defend")]
     [SpineAnimation][SerializeField] private string DashAttackAnimationName;
@@ -2566,6 +2570,22 @@ public void KiaiFire()
                 // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+public void FatalityJump()
+{
+    if (currentAnimationName != F_JumpAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, F_JumpAnimationName, false);
+                    currentAnimationName = F_JumpAnimationName;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+
+
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 public void AddCombo()
