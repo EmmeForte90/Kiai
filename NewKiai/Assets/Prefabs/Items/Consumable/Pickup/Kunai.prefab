@@ -5126,6 +5126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Item: {fileID: 11400000, guid: c4e7f22b0e541d84fa1d0d84e327467a, type: 2}
   VFX: {fileID: 4331965279904828745, guid: 1b79c7dad815f1544b564d01f2920de0, type: 3}
+  isGadget: 1
   isCollected: 0
 --- !u!1 &5258335084245112537
 GameObject:

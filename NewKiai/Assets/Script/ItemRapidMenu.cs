@@ -36,7 +36,16 @@ public class ItemRapidMenu : MonoBehaviour
 
     private float horDir;
     private float vertDir;
-       
+        
+    [HideInInspector]
+    public Item Item_1;
+    [HideInInspector]
+    public Item Item_2;
+    [HideInInspector]
+    public Item Item_3;
+    [HideInInspector]
+    public Item Item_4;
+
     [HideInInspector]
     public bool isSlot0;
     public bool isSlot1;
@@ -69,7 +78,9 @@ public class ItemRapidMenu : MonoBehaviour
     [SerializeField]public Image Slot8_I;
     [SerializeField]public Image SlotKat_I;
     [SerializeField]public Image SlotDres_I;
-    
+        
+    public bool[] itemActive;
+
 public static ItemRapidMenu Instance;
 
 

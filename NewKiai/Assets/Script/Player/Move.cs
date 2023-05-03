@@ -533,17 +533,31 @@ if (L2 == 1 && isBlast && Time.time >= ShotTimer)
      )
      {  
     //L Animazione è gestita dagli script dei bullets visto che cambia a seconda del bullet
-    Blast();
     isBlast = false;
+    if(ItemRapidMenu.Instance.MXV1 > 0)
+    {
+        Blast(ItemRapidMenu.Instance.Item_1);
+    }  
+    if(ItemRapidMenu.Instance.MXV2 > 0)
+    {
+        Blast(ItemRapidMenu.Instance.Item_2);
+    }  
+    if(ItemRapidMenu.Instance.MXV3 > 0)
+    {
+        Blast(ItemRapidMenu.Instance.Item_3);
+    }  
+    if(ItemRapidMenu.Instance.MXV4 > 0)
+    {
+        Blast(ItemRapidMenu.Instance.Item_4);
+    }  
+
     ShotTimer = Time.time + 1f / attackRate;
      }
     } 
 }
-  if(ItemRapidMenu.Instance.MXV1 <= 0)
+    if(ItemRapidMenu.Instance.MXV1 <= 0)
     {
-        //InventoryManager.Instance.RemoveItemID(UpdateMenuRapido.Instance.Slot1);
         UpdateMenuRapido.Instance.Slot1_T.text = null;
-
         UpdateMenuRapido.Instance.imageColor = UpdateMenuRapido.Instance.Slot1_I.color;
         UpdateMenuRapido.Instance.imageColor.a = 0f;
         UpdateMenuRapido.Instance.Slot1_I.color = UpdateMenuRapido.Instance.imageColor;
@@ -554,7 +568,6 @@ if (L2 == 1 && isBlast && Time.time >= ShotTimer)
     }
     if(ItemRapidMenu.Instance.MXV2 <= 0)
     {
-        //InventoryManager.Instance.RemoveItemID(UpdateMenuRapido.Instance.Slot2);
         UpdateMenuRapido.Instance.Slot2_T.text = null;
         UpdateMenuRapido.Instance.imageColor = UpdateMenuRapido.Instance.Slot2_I.color;
         UpdateMenuRapido.Instance.imageColor.a = 0f;
@@ -566,7 +579,6 @@ if (L2 == 1 && isBlast && Time.time >= ShotTimer)
     }
     if(ItemRapidMenu.Instance.MXV3 <= 0)
     {
-        //InventoryManager.Instance.RemoveItemID(UpdateMenuRapido.Instance.Slot3);
         UpdateMenuRapido.Instance.Slot3_T.text = null;
         UpdateMenuRapido.Instance.imageColor = UpdateMenuRapido.Instance.Slot3_I.color;
         UpdateMenuRapido.Instance.imageColor.a = 0f;
@@ -574,11 +586,10 @@ if (L2 == 1 && isBlast && Time.time >= ShotTimer)
         //
         InventoryManager.Instance.imageColor = InventoryManager.Instance.Slot3_I.color;
         InventoryManager.Instance.imageColor.a = 0f;
-        InventoryManager.Instance.Slot3_I.color = InventoryManager.Instance.imageColor;    
+        InventoryManager.Instance.Slot3_I.color = InventoryManager.Instance.imageColor;
     }
     if(ItemRapidMenu.Instance.MXV4 <= 0)
     {
-        //InventoryManager.Instance.RemoveItemID(UpdateMenuRapido.Instance.Slot4);
         UpdateMenuRapido.Instance.Slot4_T.text = null;
         UpdateMenuRapido.Instance.imageColor = UpdateMenuRapido.Instance.Slot4_I.color;
         UpdateMenuRapido.Instance.imageColor.a = 0f;
@@ -588,7 +599,8 @@ if (L2 == 1 && isBlast && Time.time >= ShotTimer)
         InventoryManager.Instance.imageColor.a = 0f;
         InventoryManager.Instance.Slot4_I.color = InventoryManager.Instance.imageColor;
     }
-    
+
+
 }
 // ripristina la possibilità di attaccare dopo il tempo di attacco
 if (!isBlast && Time.time >= ShotTimer)
@@ -1721,7 +1733,7 @@ IEnumerator wak()
        bullet = newBullet;
     }    
     
-void Blast()
+void Blast(Item newItem)
 {
         isBlast = true;
         print("il blast è partito");
@@ -1731,6 +1743,7 @@ void Blast()
             {
         UpdateMenuRapido.Instance.MXV4--;
         ItemRapidMenu.Instance.MXV4--;
+        newItem.value--;
         UpdateMenuRapido.Instance.Slot4_T.text = UpdateMenuRapido.Instance.MXV4.ToString();
         ItemRapidMenu.Instance.Slot4_T.text = UpdateMenuRapido.Instance.MXV4.ToString();
         Instantiate(bullet, gun.position, transform.rotation);
@@ -1741,6 +1754,7 @@ void Blast()
             {
         UpdateMenuRapido.Instance.MXV1--;
         ItemRapidMenu.Instance.MXV1--;
+        newItem.value--;
         UpdateMenuRapido.Instance.Slot1_T.text = UpdateMenuRapido.Instance.MXV1.ToString();
         ItemRapidMenu.Instance.Slot1_T.text = UpdateMenuRapido.Instance.MXV1.ToString();
         Instantiate(bullet, gun.position, transform.rotation);
@@ -1751,6 +1765,7 @@ void Blast()
             {
         UpdateMenuRapido.Instance.MXV2--;
         ItemRapidMenu.Instance.MXV2--;
+        newItem.value--;
         UpdateMenuRapido.Instance.Slot2_T.text = UpdateMenuRapido.Instance.MXV2.ToString();
         ItemRapidMenu.Instance.Slot2_T.text = UpdateMenuRapido.Instance.MXV2.ToString();
         Instantiate(bullet, gun.position, transform.rotation);        
@@ -1761,6 +1776,7 @@ void Blast()
             {
         UpdateMenuRapido.Instance.MXV3--;
         ItemRapidMenu.Instance.MXV3--;
+        newItem.value--;
         UpdateMenuRapido.Instance.Slot3_T.text = UpdateMenuRapido.Instance.MXV3.ToString();
         ItemRapidMenu.Instance.Slot3_T.text = UpdateMenuRapido.Instance.MXV3.ToString();
         Instantiate(bullet, gun.position, transform.rotation);          

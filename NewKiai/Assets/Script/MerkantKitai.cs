@@ -231,9 +231,10 @@ public void Buy(Item newItem)
     if(GameplayManager.instance.money >= prices)
     {
     //InventoryManager.Instance.RestoreSlot(newItem);
-    InventoryManager.Instance.AddItem(newItem);
-    InventoryManager.Instance.ListItem(newItem.id);
-    Add();
+    //InventoryManager.Instance.AddItem(newItem);
+    //InventoryManager.Instance.ListItem(newItem.id);
+    //Add();
+    newItem.value++;
     PlayMFX(0);
     dialogueMenu.text = "Thank you!"; // Reference to the TextMeshProUGUI component
     GameplayManager.instance.money -= prices;
