@@ -63,12 +63,12 @@ public void Update()
         if(ItemRapidMenu.Instance.isSlot1)
         {
             ItemRapidMenu.Instance.Item_1 = Item;
-            ItemRapidMenu.Instance.Slot1 = Item.id;
-            UpdateMenuRapido.Instance.Slot1 = Item.id;
+            ItemRapidMenu.Instance.Slot1 = selectedId;
+            UpdateMenuRapido.Instance.Slot1 = selectedId;
             print(selectedId);
-           if(ItemRapidMenu.Instance.isSlot1 != ItemRapidMenu.Instance.isSlot2 ||
-            ItemRapidMenu.Instance.isSlot1 != ItemRapidMenu.Instance.isSlot3 ||
-           ItemRapidMenu.Instance.isSlot1 != ItemRapidMenu.Instance.isSlot4)
+           if(ItemRapidMenu.Instance.Slot1 != ItemRapidMenu.Instance.Slot2 ||
+            ItemRapidMenu.Instance.Slot1 != ItemRapidMenu.Instance.Slot3 ||
+           ItemRapidMenu.Instance.Slot1 != ItemRapidMenu.Instance.Slot4)
         { 
             ItemRapidMenu.Instance.MXV1 = Item.value;
             UpdateMenuRapido.Instance.MXV1 = Item.value;
@@ -86,16 +86,17 @@ public void Update()
             imageColor.a = 1f;
             ItemRapidMenu.Instance.Slot1_I.color = imageColor;
         }
-        }else if(ItemRapidMenu.Instance.isSlot2)
+        }
+        else if(ItemRapidMenu.Instance.isSlot2)
         {
             ItemRapidMenu.Instance.Item_2 = Item;
-            ItemRapidMenu.Instance.Slot2 = Item.id;
-            UpdateMenuRapido.Instance.Slot2 = Item.id;
+            ItemRapidMenu.Instance.Slot2 = selectedId;
+            UpdateMenuRapido.Instance.Slot2 = selectedId;
                     print(selectedId);
 
-            if(ItemRapidMenu.Instance.isSlot2 != ItemRapidMenu.Instance.isSlot1 ||
-            ItemRapidMenu.Instance.isSlot2 != ItemRapidMenu.Instance.isSlot3 ||
-           ItemRapidMenu.Instance.isSlot2 != ItemRapidMenu.Instance.isSlot4)
+            if(ItemRapidMenu.Instance.Slot2 != ItemRapidMenu.Instance.Slot1 ||
+            ItemRapidMenu.Instance.Slot2 != ItemRapidMenu.Instance.Slot3 ||
+           ItemRapidMenu.Instance.Slot2 != ItemRapidMenu.Instance.Slot4)
         { 
             ItemRapidMenu.Instance.MXV2 = Item.value;
             UpdateMenuRapido.Instance.MXV2 = Item.value;
@@ -114,16 +115,17 @@ public void Update()
             imageColor.a = 1f;
             ItemRapidMenu.Instance.Slot2_I.color = imageColor;
         }
-        }else if(ItemRapidMenu.Instance.isSlot3)
+        }
+        else if(ItemRapidMenu.Instance.isSlot3)
         {            
             ItemRapidMenu.Instance.Item_3 = Item;
-            ItemRapidMenu.Instance.Slot3 = Item.id;
-            UpdateMenuRapido.Instance.Slot3 = Item.id;
+            ItemRapidMenu.Instance.Slot3 = selectedId;
+            UpdateMenuRapido.Instance.Slot3 = selectedId;
                     print(selectedId);
 
-            if(ItemRapidMenu.Instance.isSlot3 != ItemRapidMenu.Instance.isSlot2 ||
-            ItemRapidMenu.Instance.isSlot3 != ItemRapidMenu.Instance.isSlot1 ||
-           ItemRapidMenu.Instance.isSlot3 != ItemRapidMenu.Instance.isSlot4)
+            if(ItemRapidMenu.Instance.Slot3 != ItemRapidMenu.Instance.Slot2 ||
+            ItemRapidMenu.Instance.Slot3 != ItemRapidMenu.Instance.Slot1 ||
+           ItemRapidMenu.Instance.Slot3 != ItemRapidMenu.Instance.Slot4)
         { 
             ItemRapidMenu.Instance.MXV3 = Item.value;
             UpdateMenuRapido.Instance.MXV3 = Item.value;
@@ -141,16 +143,17 @@ public void Update()
             imageColor.a = 1f;
             ItemRapidMenu.Instance.Slot3_I.color = imageColor;
         }
-        }else if(ItemRapidMenu.Instance.isSlot4)
+        }
+        else if(ItemRapidMenu.Instance.isSlot4)
         {
             ItemRapidMenu.Instance.Item_4 = Item;
-            ItemRapidMenu.Instance.Slot4 = Item.id;
-            UpdateMenuRapido.Instance.Slot4 = Item.id;
+            ItemRapidMenu.Instance.Slot4 = selectedId;
+            UpdateMenuRapido.Instance.Slot4 = selectedId;
                     print(selectedId);
 
-            if(ItemRapidMenu.Instance.isSlot4 != ItemRapidMenu.Instance.isSlot2 ||
-            ItemRapidMenu.Instance.isSlot4 != ItemRapidMenu.Instance.isSlot3 ||
-           ItemRapidMenu.Instance.isSlot4 != ItemRapidMenu.Instance.isSlot1)
+            if(ItemRapidMenu.Instance.Slot4 != ItemRapidMenu.Instance.Slot2 ||
+            ItemRapidMenu.Instance.Slot4 != ItemRapidMenu.Instance.Slot3 ||
+           ItemRapidMenu.Instance.Slot4 != ItemRapidMenu.Instance.Slot1)
         { 
             ItemRapidMenu.Instance.MXV4 = Item.value;
             UpdateMenuRapido.Instance.MXV4 = Item.value;
