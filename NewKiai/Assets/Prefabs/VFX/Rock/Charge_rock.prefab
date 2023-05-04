@@ -9775,6 +9775,7 @@ GameObject:
   - component: {fileID: 6839295213114482363}
   - component: {fileID: 6362557462714555159}
   - component: {fileID: 5622542231462005171}
+  - component: {fileID: 3592617363433690836}
   m_Layer: 0
   m_Name: Charge_rock
   m_TagString: Untagged
@@ -9811,6 +9812,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vertical: 1
+  OriginalSize: 0
   followPlayer: 0
 --- !u!114 &5622542231462005171
 MonoBehaviour:
@@ -9825,6 +9827,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 1
+--- !u!114 &3592617363433690836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2669267131746222598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4321fbb5c1998af4d8671c4f37f29c6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
 --- !u!1 &3059339421187847922
 GameObject:
   m_ObjectHideFlags: 0

@@ -79,6 +79,7 @@ public class Move : MonoBehaviour
     
     private readonly Vector3 raycastColliderOffset = new (0.25f, 0, 0);
     private const float distanceFromGroundRaycast = 0.3f;
+    private const float distanceFromGroundJR = 1f;
     [SerializeField] private LayerMask groundLayer;
    
     [HideInInspector] public bool slotR,slotL,slotU,slotB = false;
@@ -398,9 +399,10 @@ public static Move instance;
         }
 //Debug.Log("AudioMixer aggiunto correttamente agli AudioSource.");
 // Inizializza la posizione di destinazione del nemico a pointB
-        targetPosition = pointB.transform.position;    
+        targetPosition = pointB.transform.position; 
+        JumpRockTimer = JumpRockTimerMax;   
         }
-    
+
 private void Update()
 {
 
@@ -421,7 +423,6 @@ if(!stopInput)
         R2 = Input.GetAxis("R2");
         style = MaxStyle;
         item = MaxItem;
-        JumpRockTimer = JumpRockTimerMax;
         }
         }
 
@@ -442,12 +443,27 @@ if(!stopInput)
 
 if (JumpRock)
         {   
-            if (Physics2D.Raycast(transform.position, transform.TransformDirection(Vector3.down), 2f, groundLayer)) 
-            {   
-            stopInput = true;    
-            SbamRelease();           
+             RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down);
+             if (isGrounded())
+        {
+            if (hit.collider != null && hit.distance < distanceFromGroundJR)
+            {
+                stomp = true;
+                //print("fatto");
+                Stop();
+                SbamRelease();           
+            JumpRockTimer -= Time.deltaTime; //decrementa il timer ad ogni frame
+            if (JumpRockTimer <= 0f) 
+            {
+            JumpRockTimer = JumpRockTimerMax;
+            JumpRock = false;
+            //Il ripristino si trova nell'evento Rocklanding giù a tutto il codice
+            }
             }
         }
+        }
+        if (stomp)
+        {Stop();}
 
         if(vfx)
         {vfxTimer -= Time.deltaTime; //decrementa il timer ad ogni frame
@@ -639,6 +655,7 @@ if(KiaiReady)
 {
 if (L2 == 1 && R2 == 1)
 {
+    CameraZoom.instance.ZoomIn();
     StopinputTrue();
     Stooping();
     Stop();
@@ -963,7 +980,7 @@ if (style == 0) //normal
 {
 PlayerHealth.Instance.currentStamina -= 50;
 NormalSpecial = false;
-HeavyHitRelease();
+HeavyHitRelease();        
 }}}}
 
 if (NormalSpecial)
@@ -1605,6 +1622,7 @@ IEnumerator FinishKiai()
 {   
     yield return new WaitForSeconds(timeKiai);
     StopinputFalse();
+    CameraZoom.instance.ZoomOut();
     PlayerHealth.Instance.currentKiai = 0;
     //if (style == 0) //Normal
     //{Health.instance.currentHealth -= 100f;}
@@ -3617,13 +3635,26 @@ if (e.Data.Name == "RockLanding") {
     if(!vfx)
         {
         stopInput = false;    
-        Instantiate(VfxRock, slashpoint.position, attack.transform.rotation);
-        JumpRock = false;
+        stomp = false;        
         PlayMFX(1);
         vfx = true;
         }
         
     }
+
+if (e.Data.Name == "Rockjumpend") {     
+    // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
+    if(!vfx)
+        {
+        Instantiate(VfxRock, slashpoint.position, attack.transform.rotation);
+        PlayMFX(1);
+        vfx = true;
+        }
+        
+    }
+
+
+    
     if (e.Data.Name == "slash_v_void") {     
     // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
     if(!vfx)
@@ -3865,6 +3896,8 @@ private void OnDrawGizmos()
     Gizmos.color = Color.red;
     // disegna un Gizmo che rappresenta il Raycast
     Gizmos.DrawLine(transform.position, transform.position + new Vector3(transform.localScale.x, 0, 0) * wallDistance);
+     Gizmos.color = Color.blue;
+    Gizmos.DrawWireSphere(bottom.transform.position, distanceFromGroundJR);
     }
 #endregion
 
