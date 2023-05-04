@@ -446,6 +446,7 @@ public void Restore()
 
 public void TakeCamera()
     {
+            virtualCamera = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
             virtualCamera.Follow = player.transform;
             virtualCamera.LookAt = player.transform;    
     }

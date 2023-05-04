@@ -51,8 +51,10 @@ public class Move : MonoBehaviour
     [SerializeField] private float jumpForce;
     [SerializeField] private float jumpForceX;
     [SerializeField] private float bumpForce;
+
+    [Header("Knockback")]
     [SerializeField] public float knockForce = 10f;
-    [SerializeField] public float knockForceX = 10f;
+    [SerializeField] public int _knockForce = 200;
 
     bool canDoubleJump = false;
     [HideInInspector] public float groundDelay = 0.1f; // The minimum time before the player can jump again after touching the ground
@@ -103,6 +105,10 @@ public class Move : MonoBehaviour
     private bool vfx = false;
     private float vfxTimer = 0.5f;
 
+    private Vector2 targetPosition; // La posizione di destinazione del nemico
+    [SerializeField] GameObject pointB;
+    private float speedBack = 3f; // La velocità del movimento
+
     [Header("TimerKiai")]
     public float timerestoreKiai = 3f; // il massimo valore di essenza disponibile
     public float timeKiai; // il massimo valore di essenza disponibile
@@ -126,8 +132,8 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField] private string dashAnimationName;
     //////////////////////////////////////////////////////////////////////////
         [Header("HpAnm")]
-
     [SpineAnimation][SerializeField] private string hurtAnimationName;
+    [SpineAnimation][SerializeField] private string BighurtAnimationName;
     [SpineAnimation][SerializeField] private string deathAnimationName;
     [SpineAnimation][SerializeField] private string RestAnimationName;
     [SpineAnimation][SerializeField] private string respawnRestAnimationName;
@@ -217,6 +223,7 @@ public class Move : MonoBehaviour
     [SerializeField] GameObject attack_r_air_Charge;
     [SerializeField] GameObject pesante;
     [SerializeField] GameObject charge;
+    [SerializeField] GameObject VfxRock;
     [SpineAnimation][SerializeField] private string RockjumpAnimationName;
     [SpineAnimation][SerializeField] private string RockjumpLandingAnimationName;
     [SpineAnimation][SerializeField] private string chargeAnimationName;
@@ -224,10 +231,14 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField] private string attackRock1AnimationName;
     [SpineAnimation][SerializeField] private string attackRock2AnimationName;
     [SpineAnimation][SerializeField] private string attackRock3AnimationName;
+    [SpineAnimation][SerializeField] private string SbamreleaseAnimationName;
     public bool RockSpecial = false;
     private bool attackRock = false;
     public bool isCrushRock = false;
-
+    public bool JumpRock = false;
+    public bool stomp = false;
+    public float JumpRockTimer;
+    public float JumpRockTimerMax = 1f;
     [SerializeField] GameObject S_rockK_hitbox;
 
         [Header("Wind")]
@@ -386,8 +397,9 @@ public static Move instance;
         audioSource.outputAudioMixerGroup = SFX.FindMatchingGroups("Master")[0];
         }
 //Debug.Log("AudioMixer aggiunto correttamente agli AudioSource.");
-    //vibrateCinemachine = GameObject.FindWithTag("MainCamera").GetComponent<VibrateCinemachine>(); //ottieni il riferimento alla virtual camera di Cinemachine
-    }
+// Inizializza la posizione di destinazione del nemico a pointB
+        targetPosition = pointB.transform.position;    
+        }
     
 private void Update()
 {
@@ -409,11 +421,12 @@ if(!stopInput)
         R2 = Input.GetAxis("R2");
         style = MaxStyle;
         item = MaxItem;
+        JumpRockTimer = JumpRockTimerMax;
         }
         }
+
         if (isGrounded())
         {
-            //Debug.Log("isGrounded(): " + isGrounded());
             lastTimeGround = coyoteTime; 
             isAttackingAir = false;
             canDoubleJump = true;
@@ -425,6 +438,15 @@ if(!stopInput)
             lastTimeGround -= Time.deltaTime;
             modifyPhysics();
             Shadow.gameObject.SetActive(false);  
+        }
+
+if (JumpRock)
+        {   
+            if (Physics2D.Raycast(transform.position, transform.TransformDirection(Vector3.down), 2f, groundLayer)) 
+            {   
+            stopInput = true;    
+            SbamRelease();           
+            }
         }
 
         if(vfx)
@@ -767,7 +789,7 @@ AddCombo();
             {WaterJumpAtk();}}
             if(GameplayManager.instance.styleIcon[1] == true)
             {if (style == 1) //Rock
-            {RockJumpAtk();}}  
+            {RockJumpAtk(); JumpRock = true;}}  
             drawsword = true;
         }           
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
@@ -819,22 +841,23 @@ changeStyle();
     #region testForanysituation
             if(Input.GetKeyDown(KeyCode.C))
             {
-                //Debug.Log("KL");
-                //KnockbackLong();
+                Debug.Log("L");
+                KnockbackLong();
                 /*Thief.instance.Damage(50);
                 if(Thief.instance == null)
                 {
                     //Thief.instance = GameObject.FindWithTag("Enemy");
                     Thief.instance.Damage(50);
                 }*/
-                PlayerHealth.Instance.IncreaseKiai(50);
+                //PlayerHealth.Instance.IncreaseKiai(50);
                 //PlayerHealth.Instance.currentHealth = 10;
                 //PlayerHealth.Instance.currentHealth = 0;
                 //Respawn();
             }
 if(Input.GetKeyDown(KeyCode.X))
             {
-                //Debug.Log("NK");
+                Knockback();
+                Debug.Log("S");
                 //Knockback();
                 //PlayerHealth.Instance.IncreaseKiai(-10);
                 //GuardHit(); 
@@ -1000,7 +1023,6 @@ GameplayManager.instance.styleIcon[4] == true)
         }
         PlayerHealth.Instance.currentStamina -= 50;
         AnimationChargeRelease();
-        CameraZoom.instance.ZoomOut();
         isCharging = false;
         //Debug.Log("Charge ratio: " + (float)currentTime / timeLimit + ", Damage: " + HitboxPlayer.Instance.Damage);
         timeSinceLastAttack = Time.time;
@@ -1009,7 +1031,7 @@ GameplayManager.instance.styleIcon[4] == true)
 
     if (isCharging)
     {
-        Stop();
+    Stop();
     }
 }
 }
@@ -1226,6 +1248,7 @@ if(attackRock)
 if(attackWater)
   {Stop(); PlayerHealth.Instance.currentStamina -= SpeeRestore * Time.deltaTime;}  
     
+
 }
 
  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
@@ -1542,7 +1565,7 @@ public void Bump()
 public void Knockback()
     {
          // applica l'impulso del salto se il personaggio è a contatto con il terreno
-            if (transform.localScale.x < 0)
+        if (transform.localScale.x < 0)
         {
         rb.AddForce(new Vector2(knockForce, 0f), ForceMode2D.Impulse);
         }
@@ -1554,26 +1577,29 @@ public void Knockback()
         {
         rb.AddForce(new Vector2(-knockForce, 0f), ForceMode2D.Impulse);
         }
-       // lastTimeJump = Time.time + jumpDelay;
     }
 
 public void KnockbackLong()
     {
-         // applica l'impulso del salto se il personaggio è a contatto con il terreno
-            if (transform.localScale.x < 0)
+        BigHurt();
+          // applica l'impulso del salto se il personaggio è a contatto con il terreno
+        if (transform.localScale.x < 0)
         {
-        rb.AddForce(new Vector2(knockForceX, 2f), ForceMode2D.Force);
+        rb.AddForce(new Vector2(_knockForce, 0f), ForceMode2D.Impulse);
         }
         else if (transform.localScale.x > 0)
         {
-        rb.AddForce(new Vector2(-knockForceX, 2f), ForceMode2D.Force);
+        rb.AddForce(new Vector2(-_knockForce, 0f), ForceMode2D.Impulse);
         }
          else if (horDir == 0)
         {
-        rb.AddForce(new Vector2(-knockForceX, 2f), ForceMode2D.Force);
+        rb.AddForce(new Vector2(-_knockForce, 0f), ForceMode2D.Impulse);
         }
-       // lastTimeJump = Time.time + jumpDelay;
     }
+        
+    
+    
+    
 
 IEnumerator FinishKiai()
 {   
@@ -1702,8 +1728,10 @@ private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         GameObject respawnPoint = GameObject.FindWithTag("Respawn");
         if (respawnPoint != null)
         {
+            GameplayManager.instance.TakeCamera();
             // Muoviamo il player al punto di spawn
             Player.transform.position = respawnPoint.transform.position;
+            Player.transform.localScale = new Vector2(1, 1);
             //yield return new WaitForSeconds(3f);
         }
     respawnRest(); 
@@ -2159,7 +2187,17 @@ public void AnimationChargeRelease()
                 // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
-
+public void SbamRelease()
+{
+    if (currentAnimationName != SbamreleaseAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, SbamreleaseAnimationName, false);
+                    currentAnimationName = SbamreleaseAnimationName;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
 
 public void HeavyHitS()
 {
@@ -2340,6 +2378,7 @@ void CountDown()
         HitboxPlayer.Instance.Damage = maxDamage;
         AnimationChargeRelease();
         isCharging = false;
+        CameraZoom.instance.ZoomOut();
         Debug.Log("Charge ratio: 1.0, Damage: " + HitboxPlayer.Instance.Damage);
         timeSinceLastAttack = Time.time;
         CancelInvoke("CountDown");
@@ -2989,6 +3028,7 @@ public void AnmHurt()
 {
              if (currentAnimationName != hurtAnimationName)
                 {
+                    drawsword = true;
                     PlayMFX(2);
                     _spineAnimationState.ClearTrack(2);
                     _spineAnimationState.SetAnimation(2, hurtAnimationName, false);
@@ -3000,12 +3040,31 @@ public void AnmHurt()
                 // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
+
+public void BigHurt()
+{
+             if (currentAnimationName != BighurtAnimationName)
+                {
+                    drawsword = true;
+                    PlayMFX(2);
+                    _spineAnimationState.ClearTrack(2);
+                    _spineAnimationState.SetAnimation(2, BighurtAnimationName, false);
+                    currentAnimationName = BighurtAnimationName;
+                    _spineAnimationState.Event += HandleEvent;
+
+                    //Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+
+
 public void death()
 {
              if (currentAnimationName != deathAnimationName)
                 {
                     _spineAnimationState.ClearTrack(1);
-                    _spineAnimationState.SetAnimation(2, deathAnimationName, true);
+                    _spineAnimationState.SetAnimation(2, deathAnimationName, false);
                     currentAnimationName = deathAnimationName;
                     _spineAnimationState.Event += HandleEvent;
                     //Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
@@ -3106,7 +3165,7 @@ public void respawnWakeup()
 }
 
 private void moving() {
-   if(!isGuard || !isCharging)
+   if(!isGuard || !isCharging || !JumpRock)
    {
     if(!isTouchingWall)
     {
@@ -3553,7 +3612,18 @@ if (e.Data.Name == "bottomWind") {
         }
         
     }
-
+if (e.Data.Name == "RockLanding") {     
+    // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
+    if(!vfx)
+        {
+        stopInput = false;    
+        Instantiate(VfxRock, slashpoint.position, attack.transform.rotation);
+        JumpRock = false;
+        PlayMFX(1);
+        vfx = true;
+        }
+        
+    }
     if (e.Data.Name == "slash_v_void") {     
     // Controlla se la variabile "SwSl" è stata inizializzata correttamente.
     if(!vfx)

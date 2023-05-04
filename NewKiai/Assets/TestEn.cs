@@ -7,15 +7,18 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 
 
-public class Thief : Health, IDamegable
+
+public class TestEn : Health, IDamegable
 {
-   
+
+
 
 [Header("Enemy")]
 [SerializeField] GameObject Brain;
 private Transform player;
 [SerializeField] LayerMask playerlayer;
 private float timeBeforeDestroying = 3f;
+
 
 [Header("Moving")]
 public float moveSpeed = 2f; // velocità di movimento
@@ -32,21 +35,17 @@ public Rigidbody2D rb;
 public bool canChasesPlayer = false; // indica se il nemico sta inseguendo il player
 [Tooltip("Mettilo true per far in modo che il nemico subisca un knockback quando colpito")]
 public bool isSmall = false;
-[Tooltip("Mettilo true per far in modo che il nemico possa parare")]
-public bool isDefend = false;
-
 
 [Header("Attack")]
 public float chaseSpeed = 4f; // velocità di inseguimento
 public float WaitAfterAtk = 2f;
-[Tooltip("Raggio di attacco nemico")]
+public float attackDamage = 10; // danno d'attacco
+public float sightRadius = 5f; // raggio di vista del nemico
 public float attackrange = 2f;
 public float attackCooldown = 1f; // durata del cooldown dell'attacco
 private float attackTimer;
 public float InvincibleTime = 1f;
 public int GuardChance = 3; // Se il numero casuale è compreso tra 1 e 8 (80% di probabilità), aggiungi 5 di essenza
-
-
 
 [Header("Abilitations")]
 private bool isChasing = false; // indica se il nemico sta inseguendo il player
@@ -70,6 +69,7 @@ private bool  isGuard = false;
 private float KnockTime; //decrementa il timer ad ogni frame
 public float Knockmax = 1f; //decrementa il timer ad ogni frame
 private bool isKnockback = false;
+
 
  [Header("Audio")]
     [HideInInspector] public float basePitch = 1f;
@@ -104,7 +104,6 @@ private bool isKnockback = false;
 
 [Header("Animations")]
     [SpineAnimation][SerializeField] private string idleAnimationName;
-    [SpineAnimation][SerializeField] private string idleBattleAnimationName;
     [SpineAnimation][SerializeField] private string walkAnimationName;
     [SpineAnimation][SerializeField] private string runAnimationName;
     [SpineAnimation][SerializeField] private string attack1AnimationName;
@@ -125,7 +124,7 @@ private bool isKnockback = false;
 private enum State { Moving, Chase, Attack, Knockback, Dead, Hurt, Wait, Guard }
 private State currentState;
 
-public static Thief instance;
+public static TestEn instance;
     
 
     private void Awake()
@@ -166,9 +165,9 @@ private void Update()
             if(Input.GetKeyDown(KeyCode.B))
             {
             Debug.Log("Il pulsante è stato premuto!");
-            //isKnockback = true;
-            //Knockback();
-           
+            rb.isKinematic = false;
+            isKnockback = true;
+            Knockback();
             //Damage(10);
             }
             #endregion
@@ -268,7 +267,6 @@ if (currentHealth <= 0)
     ResetColor();
     if(canChasesPlayer)
     {isChasing = true;}
-    else{IdleBattle();}
     isAttacking = false;
     isMove = false;
     firstattack = true;
@@ -296,8 +294,7 @@ if(isAttacking){
 if (Move.instance.isAttacking || Move.instance.isAttackingAir) 
 { // controlla se il personaggio sta attaccando e quindi randomicamente parerà
     ResetColor();
-    if (isDefend)
-    {RandomicDefence();}
+    RandomicDefence();
 }}
 
 if(isKnockback)
@@ -312,8 +309,6 @@ if(isKnockback)
         currentState = State.Wait;
         }
 }
-
-
 
 
 }
@@ -333,6 +328,7 @@ private void Wait()
     IdleAnm();
 }
 
+#region Move
 // Controlla se l'oggetto deve essere in movimento, il rigedbody è in KInematic
 private void Moving()
 {
@@ -396,6 +392,7 @@ private void Moving()
     // Esegui l'animazione di movimento
     MovingAnm();
 }
+
 private void Flip()
     {
         if (direction_x && horizontal < 0f || !direction_x && horizontal > 0f)
@@ -406,6 +403,8 @@ private void Flip()
             transform.localScale = localScale;
         }
     }
+#endregion
+
 private void Chase()
 {
     if(isChasing && !isAttacking && !isKnockback)
@@ -426,6 +425,8 @@ private void Chase()
     ChaseAnm();
     }
 }
+
+
 private void Attack()
 {
     if (isAttacking && !isKnockback) // Se il personaggio sta attaccando...
@@ -448,7 +449,7 @@ private void Attack()
 
             if (randomChance == 5) // Se il numero casuale è compreso tra 1 e 5 (50% di probabilità)
             {
-                    Attack1Anm(); 
+                    Attack1Anm();
             } // ...esegui l'animazione dell'attacco...            }
             else if (randomChance <= 4)
             {
@@ -457,8 +458,7 @@ private void Attack()
             }
             else if (randomChance >= 6)
             {
-                    Attack3Anm(); // ...esegui l'animazione dell'attacco...            } 
-                    
+                    Attack3Anm(); // ...esegui l'animazione dell'attacco...            }
             }
     }
            
@@ -483,7 +483,8 @@ void FacePlayer()
 
 public void Knockback()
     {
-        rb.isKinematic = false;
+        if(isKnockback){
+        rb.velocity = new Vector2(0f, 0f);
          // applica l'impulso del salto se il personaggio è a contatto con il terreno
         print("dovrebbefare il knockback");
          // applica l'impulso del salto se il personaggio è a contatto con il terreno
@@ -495,8 +496,8 @@ public void Knockback()
         {
         rb.AddForce(new Vector2(-knockForce, 0f), ForceMode2D.Impulse);
         }
+        }
     }
-
 
 void RandomicDefence()
 {
@@ -559,7 +560,6 @@ public void Damage(int damage)
     TemporaryChangeColor(Color.red);
     Instantiate(VFXHurt, hitpoint.position, transform.rotation);
     PlayMFX(2);
-    
     if (isSmall)
     {
         HurtAnm();
@@ -573,6 +573,8 @@ public void Damage(int damage)
         StartCoroutine(WaitForHurt());
     }
 }
+
+
 
 private IEnumerator WaitForHurt()
 {
@@ -784,18 +786,6 @@ public void IdleAnm()
                 //_spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 
-public void IdleBattle()
-{
-    if (currentAnimationName != idleBattleAnimationName)
-                {
-                    _spineAnimationState.SetAnimation(1, idleBattleAnimationName, true);
-                    currentAnimationName = idleBattleAnimationName;
-                    _spineAnimationState.Event += HandleEvent;
-                }
-                // Add event listener for when the animation completes
-                //_spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
-}
-
 private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
 {
     // Remove the event listener
@@ -862,3 +852,4 @@ if (e.Data.Name == "VFXSlashB") {
     }
 }
 }
+

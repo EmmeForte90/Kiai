@@ -681,6 +681,37 @@ MonoBehaviour:
   Lock: {fileID: 2128195409537747428}
   imageColor: {r: 0, g: 0, b: 0, a: 0}
   selectedId: -1
+--- !u!1 &89308696448706784
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5948412259151997815}
+  m_Layer: 3
+  m_Name: KnockBackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5948412259151997815
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89308696448706784}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 35.97, y: -7.6399994, z: 0.05764409}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5892456060767389064}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &175095440647313776
 GameObject:
   m_ObjectHideFlags: 0
@@ -9527,7 +9558,7 @@ Transform:
   - {fileID: 5892456059679841438}
   - {fileID: 4845454484362955820}
   m_Father: {fileID: 5892456060767389064}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5892456059567638948
 MeshFilter:
@@ -9657,7 +9688,9 @@ MonoBehaviour:
   jumpForceX: 300
   bumpForce: 2
   knockForce: 10
-  knockForceX: 2000
+  _knockForce: 200
+  RknockForce: 0
+  LknockForce: 0
   groundDelay: 0.1
   wallLayer:
     serializedVersion: 2
@@ -9691,6 +9724,7 @@ MonoBehaviour:
   VFXWindSlash_h: {fileID: 6241768645796346959, guid: 114c014fdee23524cb19a6bcc18b09d6, type: 3}
   VFXWindSlashTOP: {fileID: 1222622960148544934, guid: 0b421973ddf6cd9489f186b06063c6d7, type: 3}
   VFXWindSlashDOWN: {fileID: 3978827659523724154, guid: 7f3e134520e3b7f428c2402a488e635e, type: 3}
+  pointB: {fileID: 89308696448706784}
   timerestoreKiai: 3
   timeKiai: 0
   KiaiReady: 0
@@ -9709,6 +9743,7 @@ MonoBehaviour:
   walljumpdownAnimationName: Movement/JumpCycles/wallsliding
   dashAnimationName: Movement/WalkCycles/dash
   hurtAnimationName: Damage/hurt
+  BighurtAnimationName: 
   deathAnimationName: Damage/tired
   RestAnimationName: Maditation/meditation_surprise
   respawnRestAnimationName: Maditation/sit_meditation_stay
@@ -23885,6 +23920,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 5948412259151997815}
   - {fileID: 5892456059567638963}
   - {fileID: 5892456061232906876}
   m_Father: {fileID: 5892456059956868104}
@@ -28248,7 +28284,7 @@ RectTransform:
   - {fileID: 5892456059870335597}
   - {fileID: 5892456059674487772}
   m_Father: {fileID: 5892456060767389064}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
