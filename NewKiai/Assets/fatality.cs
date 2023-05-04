@@ -46,6 +46,7 @@ private void Awake()
         Move.instance.drawsword = true;
         Move.instance.stopInput = true;
         toy.transform.position = FPoint.transform.position;
+        toy.transform.localScale = new Vector2(1, 1);
         StartCoroutine(PlayFatalityAnimation());
         }
     }
@@ -68,12 +69,13 @@ private void OnTriggerExit2D(Collider2D collision)
         // Avvia l'animazione di fatality sullo SpineAnimation
         Move.instance.FatalityJump();
         spineAnimation.state.SetAnimation(2, fatalityAnimationName, false);
-
         // Attendi che l'animazione di fatality sia completata
         yield return new WaitForSeconds(1f);
         endFata = true;
         Move.instance.NotStrangeAnimationTalk = false;
         Move.instance.stopInput = false;
         // Distruggi il nemico dal gioco
+        yield return new WaitForSeconds(1f);
+        //Destroy(gameObject);
     }
 }

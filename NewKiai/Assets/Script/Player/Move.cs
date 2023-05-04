@@ -966,6 +966,7 @@ GameplayManager.instance.styleIcon[4] == true)
         drawsword = true;
         isCrushRock = true;
         AnimationCharge();
+        CameraZoom.instance.ZoomIn();
         Stop();
         // Inizializza il timer al tempo massimo
         currentTime = timeLimit;
@@ -999,6 +1000,7 @@ GameplayManager.instance.styleIcon[4] == true)
         }
         PlayerHealth.Instance.currentStamina -= 50;
         AnimationChargeRelease();
+        CameraZoom.instance.ZoomOut();
         isCharging = false;
         //Debug.Log("Charge ratio: " + (float)currentTime / timeLimit + ", Damage: " + HitboxPlayer.Instance.Damage);
         timeSinceLastAttack = Time.time;

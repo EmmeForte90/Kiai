@@ -9499,6 +9499,7 @@ GameObject:
   - component: {fileID: 5892456059567638959}
   - component: {fileID: 5892456059567638958}
   - component: {fileID: 5892456059567638957}
+  - component: {fileID: 2015212352911655371}
   m_Layer: 3
   m_Name: Nekotaro
   m_TagString: Player
@@ -9651,6 +9652,7 @@ MonoBehaviour:
   dashForceAtk: 2
   upperForceAtk: 0.6
   dashCoolDown: 1
+  drawsword: 0
   jumpForce: 9
   jumpForceX: 300
   bumpForce: 2
@@ -9823,6 +9825,7 @@ MonoBehaviour:
   guardNoHitSAnimationName: Attack/SwordPlay/Void/guard_hit_v
   attack_S_sp: {fileID: 0}
   S_voidK_hitbox: {fileID: 0}
+  F_JumpAnimationName: Fatality/Fatality_jump
   DashAttackAnimationName: Attack/SwordPlay/dashAtk
   swordDownAnimationName: Attack/Movement/hide_sword
   guardDownAnimationName: Attack/SwordPlay/guard
@@ -9968,6 +9971,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DressSkin: Dress/Red
   katana: Katane/Izayoi
+--- !u!114 &2015212352911655371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5892456059567638962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f726fb798ad621458c431cb9966d91d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boneRoot: {fileID: 0}
+  flipBy180DegreeRotation: 1
+  skeletonRenderer: {fileID: 5892456059567638956}
+  skeletonGraphic: {fileID: 0}
 --- !u!1 &5892456059568806927
 GameObject:
   m_ObjectHideFlags: 0
