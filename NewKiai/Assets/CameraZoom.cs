@@ -6,14 +6,16 @@ using Cinemachine;
 
 public class CameraZoom : MonoBehaviour
 {
-    public float zoomAmount = 5f; // L'ammontare dello zoom
-    public float zoomSpeed = 2f; // La velocità di transizione dello zoom
-    public float zoomResetSpeed = 2f; // La velocità di transizione per tornare allo zoom originario
-    private float originalZoom; // Lo zoom originario della telecamera
+    private float zoomAmount = 50; // L'ammontare dello zoom
+    private float zoomSpeed = 0.5f; // velocità di transizione dello zoom
+    private float zoomResetSpeed = 2f; // velocità di reset dello zoom
+    private float originalZoom = 70; // Lo zoom originario della telecamera
+    private bool zoomIn = false;
+    private bool zoomout = false;
     public CinemachineVirtualCamera vcam; // La telecamera virtuale Cinemachine
     
     public static CameraZoom instance;
- 
+
  private void Awake()
     {
         if (instance == null)
@@ -27,24 +29,43 @@ public class CameraZoom : MonoBehaviour
         // Salva lo zoom originario
         originalZoom = vcam.m_Lens.FieldOfView;
     }
+private void Update()
+    {
+        // Salva lo zoom originario
+        if(zoomIn && !zoomout)
+        {
+        vcam.m_Lens.FieldOfView = Mathf.Lerp(vcam.m_Lens.FieldOfView, zoomAmount, zoomSpeed * Time.deltaTime);
+        }else if(!zoomIn && zoomout)
+        {
+        vcam.m_Lens.FieldOfView = Mathf.Lerp(vcam.m_Lens.FieldOfView, originalZoom, zoomResetSpeed * Time.deltaTime);
+        }
+
+        if(vcam.m_Lens.FieldOfView == 70 || vcam.m_Lens.FieldOfView == 50)
+        {
+            zoomIn = false;
+            zoomout = false;
+        }
+    }
 
 public void ZoomIn()
+{
+    if (!GameplayManager.instance.battle)
     {
-        if(!GameplayManager.instance.battle)
-         {// Setta lo zoom della telecamera
-            vcam.m_Lens.FieldOfView = zoomAmount;
-            // Aggiorna la transizione dello zoom
-            vcam.m_Lens.FieldOfView /= zoomSpeed;}
+        // Setta lo zoom della telecamera gradualmente
+        zoomIn = true;
+        zoomout = false;
     }
+}
 
 public void ZoomOut()
+{
+    if (!GameplayManager.instance.battle)
     {
-        if(!GameplayManager.instance.battle)
-          {// Setta lo zoom della telecamera
-            vcam.m_Lens.FieldOfView = originalZoom;
-            // Aggiorna la transizione dello zoom
-            vcam.m_Lens.FieldOfView /= zoomResetSpeed;}
+        // Resetta lo zoom della telecamera gradualmente
+        zoomIn = false;
+        zoomout = true;
     }
+}
     
 }
 
