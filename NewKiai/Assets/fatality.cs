@@ -15,6 +15,7 @@ public class fatality : MonoBehaviour
     private bool HideB = false;
     private bool _isInTrigger = false;
     private Transform toy; // Variabile per il player
+    public Transform Enemy; // Variabile per il player
 
     [SpineAnimation][SerializeField] private string tiredAnimationName;
     [SpineAnimation][SerializeField] private string fatalityAnimationName;
@@ -45,8 +46,17 @@ private void Awake()
         Move.instance.Stop();
         Move.instance.drawsword = true;
         Move.instance.stopInput = true;
-        toy.transform.position = FPoint.transform.position;
+        if(Move.instance.transform.localScale.x > 0)
+        {
         toy.transform.localScale = new Vector2(1, 1);
+        Enemy.transform.localScale = new Vector2(-1, 1);
+        toy.transform.position = FPoint.transform.position;
+        }else if(Move.instance.transform.localScale.x < 0)
+        {
+        Enemy.transform.localScale = new Vector2(1, 1);
+        toy.transform.localScale = new Vector2(-1, 1);
+        toy.transform.position = FPoint.transform.position;
+        }
         StartCoroutine(PlayFatalityAnimation());
         }
     }

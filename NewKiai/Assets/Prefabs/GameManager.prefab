@@ -681,37 +681,6 @@ MonoBehaviour:
   Lock: {fileID: 2128195409537747428}
   imageColor: {r: 0, g: 0, b: 0, a: 0}
   selectedId: -1
---- !u!1 &89308696448706784
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5948412259151997815}
-  m_Layer: 3
-  m_Name: KnockBackPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5948412259151997815
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 89308696448706784}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 35.97, y: -7.6399994, z: 0.05764409}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5892456060767389064}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &175095440647313776
 GameObject:
   m_ObjectHideFlags: 0
@@ -5460,7 +5429,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -9545,8 +9514,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5892456059567638962}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 41.4, y: -7.64, z: 0.05764409}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.64, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9558,7 +9527,7 @@ Transform:
   - {fileID: 5892456059679841438}
   - {fileID: 4845454484362955820}
   m_Father: {fileID: 5892456060767389064}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5892456059567638948
 MeshFilter:
@@ -9689,8 +9658,6 @@ MonoBehaviour:
   bumpForce: 2
   knockForce: 10
   _knockForce: 200
-  RknockForce: 0
-  LknockForce: 0
   groundDelay: 0.1
   wallLayer:
     serializedVersion: 2
@@ -9724,7 +9691,6 @@ MonoBehaviour:
   VFXWindSlash_h: {fileID: 6241768645796346959, guid: 114c014fdee23524cb19a6bcc18b09d6, type: 3}
   VFXWindSlashTOP: {fileID: 1222622960148544934, guid: 0b421973ddf6cd9489f186b06063c6d7, type: 3}
   VFXWindSlashDOWN: {fileID: 3978827659523724154, guid: 7f3e134520e3b7f428c2402a488e635e, type: 3}
-  pointB: {fileID: 89308696448706784}
   timerestoreKiai: 3
   timeKiai: 0
   KiaiReady: 0
@@ -9743,8 +9709,8 @@ MonoBehaviour:
   walljumpdownAnimationName: Movement/JumpCycles/wallsliding
   dashAnimationName: Movement/WalkCycles/dash
   hurtAnimationName: Damage/hurt
-  BighurtAnimationName: 
-  deathAnimationName: Damage/tired
+  BighurtAnimationName: Damage/big_hurt
+  deathAnimationName: Damage/die_away
   RestAnimationName: Maditation/meditation_surprise
   respawnRestAnimationName: Maditation/sit_meditation_stay
   UpAnimationName: Maditation/stand_meditation
@@ -9767,7 +9733,7 @@ MonoBehaviour:
   attack_n_sp: {fileID: 619785596973808952, guid: 306d61f28f51afa4e8c911d9e32af90c, type: 3}
   NHeavyReleaseAnimationName: Attack/SwordPlay/Normal/Normal_special_end
   NHeavyAnimationName: Attack/SwordPlay/Normal/Normal_special_start
-  S_normalK_hitbox: {fileID: 0}
+  S_normalK_hitbox: {fileID: 5249244259407118068, guid: 2f17e1e35e9b0114dab47ced54298a8b, type: 3}
   S_Fire: {fileID: 7125378950673475242, guid: 362a763872be0aa4fbf8a0b0bfc99159, type: 3}
   fireposSAnimationName: Attack/SwordPosition/idle_fire_S
   fireposAnimationName: Attack/SwordPosition/idle_fire
@@ -9785,7 +9751,7 @@ MonoBehaviour:
   attack_f_sp: {fileID: 6910928394357869432, guid: da2b36487f81d1d4b9fcda38342700a3, type: 3}
   UpperFireKiaijumpAnimationName: Attack/SwordPlay/Fire/fire_special_start
   UpperFireEndjumpAnimationName: Attack/SwordPlay/Fire/fire_special_end
-  S_FireK_hitbox: {fileID: 0}
+  S_FireK_hitbox: {fileID: 3506159930940778469, guid: ad4a05c32f15a9b4cbe1f5b7c312fb2e, type: 3}
   S_Water: {fileID: 3652232480539716872, guid: 129d8aa0184444441b048b53b23e6d77, type: 3}
   waterposSAnimationName: Attack/SwordPosition/idle_water_S
   waterposAnimationName: Attack/SwordPosition/idle_water
@@ -9801,7 +9767,7 @@ MonoBehaviour:
   WaterLoopAnimationName: Attack/SwordPlay/Water/water_special_loop
   WaterEndAnimationName: Attack/SwordPlay/Water/water_special_end
   attack_w_sp: {fileID: 7281718554959331400, guid: acbb5ddad4aced6468d63c857764025a, type: 3}
-  S_waterK_hitbox: {fileID: 0}
+  S_waterK_hitbox: {fileID: 8520800772540715490, guid: 7c55665b09aec1b4cb4b00f8afbee18f, type: 3}
   S_Rock: {fileID: 602412107544973198, guid: 469a8833e35825b40bca3a3a19a84b8a, type: 3}
   rockposSAnimationName: Attack/SwordPosition/idle_heart_S
   rockposAnimationName: Attack/SwordPosition/idle_heart
@@ -9813,6 +9779,7 @@ MonoBehaviour:
   attack_r_air_Charge: {fileID: 2669267131746222598, guid: dc427f4ba26848d4eae41247d4c4f244, type: 3}
   pesante: {fileID: 2657871515491055307, guid: ab19382cd249fee448ec7e864d944203, type: 3}
   charge: {fileID: 2669267131746222598, guid: dc427f4ba26848d4eae41247d4c4f244, type: 3}
+  VfxRock: {fileID: 7071445190980599945, guid: 6f619625bacd75f428d3375ad52cacc5, type: 3}
   RockjumpAnimationName: Attack/Jump_Attack/Rock/jump_heart_attack
   RockjumpLandingAnimationName: Attack/Jump_Attack/Rock/jump_heart_landing
   chargeAnimationName: Attack/SwordPlay/Rock/charge
@@ -9820,9 +9787,14 @@ MonoBehaviour:
   attackRock1AnimationName: Attack/SwordPlay/Rock/attack_rock_horizontal
   attackRock2AnimationName: Attack/SwordPlay/Rock/attack_rock_vertical
   attackRock3AnimationName: Attack/SwordPlay/Rock/attack_rock_vertical
+  SbamreleaseAnimationName: Attack/Jump_Attack/Rock/jump_heart_landing
   RockSpecial: 0
   isCrushRock: 0
-  S_rockK_hitbox: {fileID: 0}
+  JumpRock: 0
+  stomp: 0
+  JumpRockTimer: 0
+  JumpRockTimerMax: 0.1
+  S_rockK_hitbox: {fileID: 4269947415912702871, guid: 6be63119cd4336c4abcfb7bb10e7201b, type: 3}
   S_Wind: {fileID: 6861923898795396708, guid: 258d7a23ff8f9e14c8680cb456d55d38, type: 3}
   windposSAnimationName: Attack/SwordPosition/idle_wind_S
   windposAnimationName: Attack/SwordPosition/idle_wind
@@ -9840,7 +9812,7 @@ MonoBehaviour:
   downatkWindjumpAnimationName: Attack/Jump_Attack/Wind/jump_wind_attack_bottom
   attack_v_sp: {fileID: 3318118948915292631, guid: c21e4a7332081034a91dd2ea66dfd71c, type: 3}
   TornadoWindjumpAnimationName: Attack/SwordPlay/Wind/wind_special
-  S_windK_hitbox: {fileID: 0}
+  S_windK_hitbox: {fileID: 6869080826427219976, guid: 7eff858ad29053341a357943371ed526, type: 3}
   S_Void: {fileID: 2672608363936665784, guid: e496893ecb0e4864f8dfccc530bd769a, type: 3}
   voidposSAnimationName: Attack/SwordPosition/idle_soul_S
   voidposAnimationName: Attack/SwordPosition/idle_soul
@@ -9860,7 +9832,16 @@ MonoBehaviour:
   guardNoHitSAnimationName: Attack/SwordPlay/Void/guard_hit_v
   attack_S_sp: {fileID: 0}
   S_voidK_hitbox: {fileID: 0}
+  LoopStAnimationName: Attack/SwordPosition/loop_stalmate
+  StartStAnimationName: Attack/SwordPosition/start_stalmate
   F_JumpAnimationName: Fatality/Fatality_jump
+  F_BackAnimationName: Fatality/Fatality_back
+  F_DanceAnimationName: Fatality/Fatality_dance
+  F_BlockKAnimationName: Fatality/Fatality_blockKatana
+  F_LungeAnimationName: Fatality/Fatality_lunge
+  F_SbemAnimationName: Fatality/Fatality_sbabam
+  F_SickleAnimationName: Fatality/Fatality_sickle
+  F_SlashAnimationName: Fatality/Fatality_slash
   DashAttackAnimationName: Attack/SwordPlay/dashAtk
   swordDownAnimationName: Attack/Movement/hide_sword
   guardDownAnimationName: Attack/SwordPlay/guard
@@ -23920,7 +23901,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5948412259151997815}
   - {fileID: 5892456059567638963}
   - {fileID: 5892456061232906876}
   m_Father: {fileID: 5892456059956868104}
@@ -28284,7 +28264,7 @@ RectTransform:
   - {fileID: 5892456059870335597}
   - {fileID: 5892456059674487772}
   m_Father: {fileID: 5892456060767389064}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

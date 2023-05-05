@@ -107,7 +107,6 @@ public class Move : MonoBehaviour
     private float vfxTimer = 0.5f;
 
     private Vector2 targetPosition; // La posizione di destinazione del nemico
-    [SerializeField] GameObject pointB;
     private float speedBack = 3f; // La velocità del movimento
 
     [Header("TimerKiai")]
@@ -289,8 +288,20 @@ public class Move : MonoBehaviour
     [SerializeField] GameObject attack_S_sp;
     [SerializeField] GameObject S_voidK_hitbox;
     /////////////////////////////////////////////////////////////////////
+    [Header("Stalmate")]
+    [SpineAnimation][SerializeField] private string LoopStAnimationName;
+    [SpineAnimation][SerializeField] private string StartStAnimationName;
+    /////////////////////////////////////////////////////////////////////
+
      [Header("Fatalitis")]
     [SpineAnimation][SerializeField] private string F_JumpAnimationName;
+    [SpineAnimation][SerializeField] private string F_BackAnimationName;
+    [SpineAnimation][SerializeField] private string F_DanceAnimationName;
+    [SpineAnimation][SerializeField] private string F_BlockKAnimationName;
+    [SpineAnimation][SerializeField] private string F_LungeAnimationName;
+    [SpineAnimation][SerializeField] private string F_SbemAnimationName;
+    [SpineAnimation][SerializeField] private string F_SickleAnimationName;
+    [SpineAnimation][SerializeField] private string F_SlashAnimationName;
     /////////////////////////////////////////////////////////////////////
      [Header("Dodge and defend")]
     [SpineAnimation][SerializeField] private string DashAttackAnimationName;
@@ -399,7 +410,6 @@ public static Move instance;
         }
 //Debug.Log("AudioMixer aggiunto correttamente agli AudioSource.");
 // Inizializza la posizione di destinazione del nemico a pointB
-        targetPosition = pointB.transform.position; 
         JumpRockTimer = JumpRockTimerMax;   
         }
 
@@ -425,7 +435,7 @@ if(!stopInput)
         item = MaxItem;
         }
         }
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if (isGrounded())
         {
             lastTimeGround = coyoteTime; 
@@ -440,7 +450,7 @@ if(!stopInput)
             modifyPhysics();
             Shadow.gameObject.SetActive(false);  
         }
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 if (JumpRock)
         {   
              RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down);
@@ -464,7 +474,7 @@ if (JumpRock)
         }
         if (stomp)
         {Stop();}
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if(vfx)
         {vfxTimer -= Time.deltaTime; //decrementa il timer ad ogni frame
         if (vfxTimer <= 0f) {
@@ -1582,6 +1592,8 @@ public void Bump()
 public void Knockback()
     {
          // applica l'impulso del salto se il personaggio è a contatto con il terreno
+        lastTimeJump = Time.time + jumpDelay;
+        rb.gravityScale = 0f; // disattiva la gravità 
         if (transform.localScale.x < 0)
         {
         rb.AddForce(new Vector2(knockForce, 0f), ForceMode2D.Impulse);
@@ -1599,6 +1611,8 @@ public void Knockback()
 public void KnockbackLong()
     {
         BigHurt();
+        lastTimeJump = Time.time + jumpDelay;
+        rb.gravityScale = 0f; // disattiva la gravità
           // applica l'impulso del salto se il personaggio è a contatto con il terreno
         if (transform.localScale.x < 0)
         {
@@ -1649,10 +1663,10 @@ IEnumerator FinishKiai()
 
 private void modifyPhysics()
 {
-      if (rb.velocity.y > 0)
-            rb.gravityScale = gravityOnJump;
-        else if (rb.velocity.y < 0)
-            rb.gravityScale = gravityOnFall;
+    if (rb.velocity.y > 0)
+    {rb.gravityScale = gravityOnJump;}
+    else if (rb.velocity.y < 0)
+    {rb.gravityScale = gravityOnFall;}
 
 //Se può fare walljump annulla la gravità
     if (canWallJump)
@@ -2630,6 +2644,39 @@ public void KiaiFire()
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Stalmate
+public void LoopStalmate()
+{
+    if (currentAnimationName != LoopStAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, LoopStAnimationName, true);
+                    currentAnimationName = LoopStAnimationName;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+public void StartStalmate()
+{
+    if (currentAnimationName != StartStAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, StartStAnimationName, false);
+                    currentAnimationName = StartStAnimationName;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+public void poseStalmate()
+{
+    if (currentAnimationName != rockposAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, rockposAnimationName, true);
+                    currentAnimationName = rockposAnimationName;
+                }
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Fatality Anim
 public void FatalityJump()
 {
     if (currentAnimationName != F_JumpAnimationName)
@@ -2641,10 +2688,72 @@ public void FatalityJump()
                 // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
-
-
-
-
+public void FatalityBack()
+{
+    if (currentAnimationName != F_BackAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, F_BackAnimationName, false);
+                    currentAnimationName = F_BackAnimationName;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+public void FatalityDance()
+{
+    if (currentAnimationName != F_DanceAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, F_DanceAnimationName, false);
+                    currentAnimationName = F_DanceAnimationName;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+public void FatalityLunge()
+{
+    if (currentAnimationName != F_LungeAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, F_LungeAnimationName, false);
+                    currentAnimationName = F_LungeAnimationName;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+public void FatalitySickle()
+{
+    if (currentAnimationName != F_SickleAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, F_SickleAnimationName, false);
+                    currentAnimationName = F_SickleAnimationName;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+public void FatalitySbam()
+{
+    if (currentAnimationName != F_SbemAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, F_SbemAnimationName, false);
+                    currentAnimationName = F_SbemAnimationName;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+public void FatalitySlash()
+{
+    if (currentAnimationName != F_SlashAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, F_SlashAnimationName, false);
+                    currentAnimationName = F_SlashAnimationName;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 public void AddCombo()
