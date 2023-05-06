@@ -30885,6 +30885,14 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2030179917474177289, guid: f9d0451dd8176fb4bba33c673f913349, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 18627f84bd81a9f4a817620c408edaaa, type: 2}
+    - target: {fileID: 2030179917474177290, guid: f9d0451dd8176fb4bba33c673f913349, type: 3}
+      propertyPath: skeletonDataAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 3f512a02f074a744498550886158399c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9d0451dd8176fb4bba33c673f913349, type: 3}
 --- !u!1 &290609302
@@ -33268,7 +33276,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7244767379196921097, guid: b73382dd97a51fa4ea1e878d30728010, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.942356
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 7244767379700740900, guid: b73382dd97a51fa4ea1e878d30728010, type: 3}
       propertyPath: m_LocalPosition.x
@@ -33280,7 +33288,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7244767379700740900, guid: b73382dd97a51fa4ea1e878d30728010, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.942356
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 7244767379700740901, guid: b73382dd97a51fa4ea1e878d30728010, type: 3}
       propertyPath: m_Follow
