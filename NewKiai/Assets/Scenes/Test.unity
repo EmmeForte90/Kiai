@@ -13113,6 +13113,8 @@ GameObject:
   - component: {fileID: 1273384362}
   - component: {fileID: 1273384361}
   - component: {fileID: 1273384366}
+  - component: {fileID: 1273384367}
+  - component: {fileID: 1273384368}
   m_Layer: 6
   m_Name: Katana
   m_TagString: Enemy
@@ -13292,6 +13294,48 @@ MonoBehaviour:
   - {x: 43.9, y: -3.354, z: 0}
   - {x: 30.65, y: -3.354, z: 0}
   rb: {fileID: 0}
+--- !u!114 &1273384367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273384359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f726fb798ad621458c431cb9966d91d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boneRoot: {fileID: 0}
+  flipBy180DegreeRotation: 0
+  skeletonRenderer: {fileID: 1273384363}
+  skeletonGraphic: {fileID: 0}
+--- !u!114 &1273384368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273384359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f21c9538588898a45a3da22bf4779ab3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rootMotionBoneName: root
+  transformPositionX: 1
+  transformPositionY: 1
+  transformRotation: 0
+  rootMotionScaleX: 1
+  rootMotionScaleY: 1
+  rootMotionScaleRotation: 1
+  rootMotionTranslateXPerY: 0
+  rootMotionTranslateYPerX: 0
+  rigidBody2D: {fileID: 1273384361}
+  applyRigidbody2DGravity: 0
+  rigidBody: {fileID: 0}
+  disableOnOverride: 1
+  animationTrackFlags: -1
 --- !u!1 &1273493545
 GameObject:
   m_ObjectHideFlags: 0
@@ -19203,6 +19247,7 @@ GameObject:
   - component: {fileID: 1592399737}
   - component: {fileID: 1592399736}
   - component: {fileID: 1592399735}
+  - component: {fileID: 1592399740}
   m_Layer: 6
   m_Name: Lancia
   m_TagString: Enemy
@@ -19363,6 +19408,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1592399733}
   m_Mesh: {fileID: 0}
+--- !u!114 &1592399740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592399733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f726fb798ad621458c431cb9966d91d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boneRoot: {fileID: 0}
+  flipBy180DegreeRotation: 0
+  skeletonRenderer: {fileID: 1592399737}
+  skeletonGraphic: {fileID: 0}
 --- !u!1 &1745590546
 GameObject:
   m_ObjectHideFlags: 0

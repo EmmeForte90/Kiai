@@ -29,15 +29,14 @@ public class nemico_katana : MonoBehaviour
 
     [SerializeField] private Rigidbody2D rb;
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){
         GO_player=GameObject.Find("Nekotaro");
         skeletonAnimation = GetComponent<SkeletonAnimation>();
     }
 
     void Update(){
         if (tempo_stanchezza>0){
-            print ("stanchezza: "+tempo_stanchezza);
+            //print ("stanchezza: "+tempo_stanchezza);
             tempo_stanchezza-=(1f*Time.deltaTime);
             if (tempo_stanchezza>0){return;}
             stato="idle";
@@ -69,7 +68,7 @@ public class nemico_katana : MonoBehaviour
     }
 
     private IEnumerator ferma_attacco(){    
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.3f);
         stato="tired";
         tempo_stanchezza=2.5f;
     }
