@@ -1008,10 +1008,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.036, y: 0.0526}
-      - {x: -0.042199995, y: -0.0659}
-      - {x: 2.0447998, y: -0.0276}
-      - {x: 2.0245, y: 0.0858}
+    - - {x: -0.037, y: -0.0804}
+      - {x: 0.8919, y: -0.1046}
+      - {x: 0.8919, y: 0.11619999}
+      - {x: -0.048899997, y: 0.1291}
 --- !u!50 &278183192
 Rigidbody2D:
   serializedVersion: 4
@@ -13598,7 +13598,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1273384360
 Transform:
   m_ObjectHideFlags: 0
@@ -19726,13 +19726,14 @@ GameObject:
   - component: {fileID: 1592399736}
   - component: {fileID: 1592399735}
   - component: {fileID: 1592399740}
+  - component: {fileID: 1592399741}
   m_Layer: 6
   m_Name: Lancia
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1592399734
 Transform:
   m_ObjectHideFlags: 0
@@ -19741,7 +19742,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1592399733}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 30, y: -3.354, z: 0}
+  m_LocalPosition: {x: 43.12, y: -3.354, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -19903,6 +19904,25 @@ MonoBehaviour:
   flipBy180DegreeRotation: 0
   skeletonRenderer: {fileID: 1592399737}
   skeletonGraphic: {fileID: 0}
+--- !u!114 &1592399741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592399733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ce85e126205d3f479169a7599fc343f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GO_player: {fileID: 0}
+  distanza_guardia: 7
+  distanza_attacco: 4
+  posizioni:
+  - {x: 43.9, y: -3.354, z: 0}
+  - {x: 30.65, y: -3.354, z: 0}
+  rb: {fileID: 0}
 --- !u!1 &1732886562
 GameObject:
   m_ObjectHideFlags: 0
@@ -19916,7 +19936,7 @@ GameObject:
   - component: {fileID: 1732886567}
   - component: {fileID: 1732886566}
   - component: {fileID: 1732886565}
-  - component: {fileID: 1732886564}
+  - component: {fileID: 1732886569}
   m_Layer: 3
   m_Name: Hitbox
   m_TagString: Hitbox_E
@@ -19939,35 +19959,6 @@ Transform:
   m_Father: {fileID: 1273384360}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!60 &1732886564
-PolygonCollider2D:
-  m_ObjectHideFlags: 8
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1732886562}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.036, y: 0.0526}
-      - {x: -0.042199995, y: -0.0659}
-      - {x: 2.0447998, y: -0.0276}
-      - {x: 2.0245, y: 0.0858}
 --- !u!50 &1732886565
 Rigidbody2D:
   serializedVersion: 4
@@ -20044,6 +20035,35 @@ MonoBehaviour:
   Hitbox: {fileID: 1732886562}
   attackDamage: 10
   damagestamina: 50
+--- !u!60 &1732886569
+PolygonCollider2D:
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732886562}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.036, y: 0.0526}
+      - {x: -0.042199995, y: -0.0659}
+      - {x: 2.0447998, y: -0.0276}
+      - {x: 2.0245, y: 0.0858}
 --- !u!1 &1745590546
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@ using UnityEngine;
 using Spine;
 using Spine.Unity;
 
-public class nemico_katana : MonoBehaviour
+public class nemico_lancia : MonoBehaviour
 {
     private float horizontal;
     private float velocita = 4f;
@@ -12,8 +12,8 @@ public class nemico_katana : MonoBehaviour
     private bool bool_dir_dx = true;
     private SkeletonAnimation skeletonAnimation;
     public GameObject GO_player;
-    public float distanza_guardia=2f;
-    public float distanza_attacco=0.5f;
+    public float distanza_guardia=7f;
+    public float distanza_attacco=3f;
     private bool bool_morte_attiva=false;
     private float distanza_temp;
     private Vector2 xTarget;
@@ -68,7 +68,7 @@ public class nemico_katana : MonoBehaviour
     }
 
     private IEnumerator ferma_attacco(){    
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.5f);
         stato="tired";
         tempo_stanchezza=2.5f;
     }
@@ -87,12 +87,12 @@ public class nemico_katana : MonoBehaviour
 
         switch (stato){
             case "attacco":{
-                skeletonAnimation.AnimationName = "horizzontal/attack_horizzontal";
+                skeletonAnimation.AnimationName = "attack_lunge/attack_lunge";
                 StartCoroutine(ferma_attacco());
                 break;  
             }
             case "idle":{
-                skeletonAnimation.AnimationName = "walk_thief";
+                skeletonAnimation.AnimationName = "walk";
                 transform.position = Vector2.MoveTowards(transform.position,posizioni[index_posizioni], Time.deltaTime*velocita);
                 if (transform.position.x<posizioni[index_posizioni].x){horizontal=1;}
                 else {horizontal=-1;}
@@ -115,7 +115,7 @@ public class nemico_katana : MonoBehaviour
             case "puo_attaccare":{
                 if (transform.position.x<GO_player.transform.position.x){horizontal=1;}
                 else {horizontal=-1;}
-                skeletonAnimation.AnimationName = "run_thief";
+                skeletonAnimation.AnimationName = "run";
                 xTarget = new Vector2(GO_player.transform.position.x, transform.position.y);
                 transform.position = Vector2.MoveTowards(transform.position,xTarget, Time.deltaTime*velocita_corsa);
                 Flip();
