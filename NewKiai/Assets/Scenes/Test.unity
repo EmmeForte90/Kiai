@@ -35679,6 +35679,14 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5892456059567638954, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
+      propertyPath: VfxRock
+      value: 
+      objectReference: {fileID: 6811609168556801878, guid: 3e66091c93a249c4cbbc5e176e74d52b, type: 3}
+    - target: {fileID: 5892456059567638954, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
+      propertyPath: attack_r_air_Landing
+      value: 
+      objectReference: {fileID: 6811609168556801878, guid: 3e66091c93a249c4cbbc5e176e74d52b, type: 3}
     - target: {fileID: 5892456059679841438, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.6460985
