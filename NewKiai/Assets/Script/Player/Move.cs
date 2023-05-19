@@ -456,7 +456,7 @@ if (JumpRock)
              RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down);
              if (isGrounded())
         {
-            if (hit.collider != null && hit.distance < distanceFromGroundJR)
+            if (hit.collider != null && hit.distance <= distanceFromGroundJR)
             {
                 stomp = true;
                 //print("fatto");
