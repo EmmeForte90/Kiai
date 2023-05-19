@@ -14304,8 +14304,8 @@ MonoBehaviour:
   FPoint: {fileID: 2126353396}
   fatalit: {fileID: 315336070}
   Enemy: {fileID: 1377077438}
-  tiredAnimationName: battle/tired
-  fatalityAnimationName: Fatality/fatality_jump
+  tiredAnimationName: tired
+  fatalityAnimationName: Fatality/die_sbabam
 --- !u!114 &1377077435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14318,8 +14318,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 3f512a02f074a744498550886158399c, type: 2}
-  initialSkinName: 
+  skeletonDataAsset: {fileID: 11400000, guid: 276d85fc2e775854c9f063b54162bd47, type: 2}
+  initialSkinName: Thief1
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
   initialFlipY: 0
@@ -14343,7 +14343,7 @@ MonoBehaviour:
   disableRenderingOnOverride: 1
   updateTiming: 1
   unscaledTime: 0
-  _animationName: battle/tired
+  _animationName: tired
   loop: 1
   timeScale: 1
 --- !u!23 &1377077436
@@ -14366,7 +14366,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 18627f84bd81a9f4a817620c408edaaa, type: 2}
+  - {fileID: 2100000, guid: d675fc4abd137b043914c5fc86f481bc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
