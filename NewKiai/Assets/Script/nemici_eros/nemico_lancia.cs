@@ -68,7 +68,7 @@ public class nemico_lancia : MonoBehaviour
     }
 
     private IEnumerator ferma_attacco(){    
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         stato="tired";
         tempo_stanchezza=2.5f;
     }
