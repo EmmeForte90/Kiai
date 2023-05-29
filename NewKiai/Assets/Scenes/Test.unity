@@ -787,13 +787,14 @@ GameObject:
   - component: {fileID: 256961066}
   - component: {fileID: 256961065}
   - component: {fileID: 256961064}
+  - component: {fileID: 256961069}
   m_Layer: 6
   m_Name: BigKatana
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &256961063
 Transform:
   m_ObjectHideFlags: 0
@@ -948,6 +949,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 256961062}
   m_Mesh: {fileID: 0}
+--- !u!114 &256961069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256961062}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f0fa4543fe2ec34dafb4b893e84b035, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GO_player: {fileID: 0}
+  distanza_guardia: 7
+  distanza_attacco: 3
+  posizioni: []
+  rb: {fileID: 0}
 --- !u!1 &278183189
 GameObject:
   m_ObjectHideFlags: 0
@@ -7433,8 +7451,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 807274906}
-  m_LocalRotation: {x: 0, y: 0, z: 0.011636518, w: 0.9999323}
-  m_LocalPosition: {x: -0.48165724, y: 0.5281352, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0.9928251, w: 0.119575955}
+  m_LocalPosition: {x: 0.745988, y: 1.7718549, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19939,7 +19957,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1592399734
 Transform:
   m_ObjectHideFlags: 0

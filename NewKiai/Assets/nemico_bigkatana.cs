@@ -4,21 +4,22 @@ using UnityEngine;
 using Spine;
 using Spine.Unity;
 
-public class nemico_lancia : MonoBehaviour
+public class nemico_bigkatana : MonoBehaviour
 {
     private float horizontal;
     private float velocita = 4f;
-    private float velocita_corsa = 6f;
+    private float velocita_corsa = 2f;
     private bool bool_dir_dx = true;
     private SkeletonAnimation skeletonAnimation;
     public GameObject GO_player;
-    public float distanza_guardia=7f;
     public float distanza_attacco=3f;
     private bool bool_morte_attiva=false;
     private float distanza_temp;
     private Vector2 xTarget;
 
-    private float tempo_attuale_guardia=0;
+    private float velocita_ricarica_stamina=2;
+    private float stamina;
+    private float stamina_max=50;
 
     private string stato;
 
@@ -30,11 +31,17 @@ public class nemico_lancia : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     // Start is called before the first frame update
     void Start(){
+        stamina=stamina_max;
         GO_player=GameObject.Find("Nekotaro");
         skeletonAnimation = GetComponent<SkeletonAnimation>();
     }
 
     void Update(){
+        if (stamina<stamina_max){
+            stamina+=(velocita_ricarica_stamina*Time.deltaTime);
+            print ("stamina: "+stamina);
+        }
+
         if (tempo_stanchezza>0){
             //print ("stanchezza: "+tempo_stanchezza);
             tempo_stanchezza-=(1f*Time.deltaTime);
@@ -45,21 +52,18 @@ public class nemico_lancia : MonoBehaviour
         distanza_temp=calcola_distanza((int)(GO_player.transform.position.x),(int)(GO_player.transform.position.y),(int)(transform.position.x),(int)(transform.position.y));
         //print ("distanza: "+distanza_temp);
 
-        if (distanza_temp<distanza_guardia){
+        if (distanza_temp<distanza_attacco){
             if (stato=="idle"){
-                stato="guardia";
-                tempo_attuale_guardia=1;
-            }
-            if (stato=="guardia"){
-                tempo_attuale_guardia-=(1f*Time.deltaTime);
-                if (tempo_attuale_guardia<=0){
-                    stato="puo_attaccare";
+                if (stamina>=30){
+                    stato="attacco_grosso";
+                    stamina-=30;
                 }
-            }
-            if (stato=="puo_attaccare"){
-                if (distanza_temp<distanza_attacco){
-                    stato="attacco";
+                /*
+                else {
+                    stato="puo_attaccare_semplice";
                 }
+                */
+                
             }
         }
         else {
@@ -68,9 +72,9 @@ public class nemico_lancia : MonoBehaviour
     }
 
     private IEnumerator ferma_attacco(){    
-        yield return new WaitForSeconds(1f);
-        stato="tired";
-        tempo_stanchezza=2.5f;
+        yield return new WaitForSeconds(0.83f);
+        //stato="tired";
+        //tempo_stanchezza=2.5f;
     }
 
 
@@ -86,12 +90,14 @@ public class nemico_lancia : MonoBehaviour
         if (bool_morte_attiva){return;}
 
         switch (stato){
-            case "attacco":{
+            case "attacco_grosso":{
+                skeletonAnimation.AnimationName = "attack_power/attack_power";
+                StartCoroutine(ferma_attacco());
                 if (transform.position.x<GO_player.transform.position.x){horizontal=1;}
                 else {horizontal=-1;}
+                xTarget = new Vector2(GO_player.transform.position.x, transform.position.y);
+                transform.position = Vector2.MoveTowards(transform.position,xTarget, Time.deltaTime*velocita_corsa);
                 Flip();
-                skeletonAnimation.AnimationName = "attack_lunge/attack_lunge";
-                StartCoroutine(ferma_attacco());
                 break;  
             }
             case "idle":{
@@ -111,17 +117,14 @@ public class nemico_lancia : MonoBehaviour
             case "guardia":{
                 if (transform.position.x<GO_player.transform.position.x){horizontal=1;}
                 else {horizontal=-1;}
-                skeletonAnimation.AnimationName = "idle_battle";
+                skeletonAnimation.AnimationName = "guard";
                 Flip();
                 break;
             }
             case "puo_attaccare":{
                 if (transform.position.x<GO_player.transform.position.x){horizontal=1;}
                 else {horizontal=-1;}
-                skeletonAnimation.AnimationName = "run";
-                xTarget = new Vector2(GO_player.transform.position.x, transform.position.y);
-                transform.position = Vector2.MoveTowards(transform.position,xTarget, Time.deltaTime*velocita_corsa);
-                Flip();
+                skeletonAnimation.AnimationName = "walk";
                 break;
             }
         }
