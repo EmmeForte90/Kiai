@@ -87,9 +87,6 @@ public class nemico_lancia : MonoBehaviour
 
         switch (stato){
             case "attacco":{
-                if (transform.position.x<GO_player.transform.position.x){horizontal=1;}
-                else {horizontal=-1;}
-                Flip();
                 skeletonAnimation.AnimationName = "attack_lunge/attack_lunge";
                 StartCoroutine(ferma_attacco());
                 break;  
