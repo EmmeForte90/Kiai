@@ -301,6 +301,7 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField] private string F_SbemAnimationName;
     [SpineAnimation][SerializeField] private string F_SickleAnimationName;
     [SpineAnimation][SerializeField] private string F_SlashAnimationName;
+    [SpineAnimation][SerializeField] private string BossDSpAnimationName;
     /////////////////////////////////////////////////////////////////////
      [Header("Dodge and defend")]
     [SpineAnimation][SerializeField] private string DashAttackAnimationName;
@@ -2686,6 +2687,18 @@ public void poseStalmate()
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Fatality Anim
+public void BossSpider()
+{
+    if (currentAnimationName != BossDSpAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, BossDSpAnimationName, false);
+                    currentAnimationName = BossDSpAnimationName;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+
 public void FatalityJump()
 {
     if (currentAnimationName != F_JumpAnimationName)
