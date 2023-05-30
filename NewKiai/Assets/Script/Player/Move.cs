@@ -105,7 +105,6 @@ public class Move : MonoBehaviour
 
     private bool vfx = false;
     private float vfxTimer = 0.5f;
-
     private Vector2 targetPosition; // La posizione di destinazione del nemico
     private float speedBack = 3f; // La velocità del movimento
 
@@ -356,7 +355,8 @@ private int comboCount = 0;
     [HideInInspector]public bool isHeal;
     [HideInInspector]public bool isDeath;
     [HideInInspector]public bool isAttacking = false; // vero se il personaggio sta attaccando
-    [HideInInspector]public bool isAttackingAir = false; // vero se il personaggio sta attaccando
+    public bool isAttackingAir = false; // vero se il personaggio sta attaccando
+    public float isAttackingAirTimer = 2f;
     private bool isBlast = false; // vero se il personaggio sta attaccando
     public bool stopInput = false;
     [HideInInspector] public bool NotStrangeAnimationTalk = false;
@@ -754,6 +754,7 @@ AddCombo();
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Attacco in salto
         // controlla se il player è in aria e preme il tasto di attacco e il tasto direzionale basso
+        if(!isAttackingAir){
          if (!isGrounded() && Input.GetButtonDown("Fire1") && vertDir < 0
         && !NotStrangeAnimationTalk && !isGuard && !isCharging 
         && !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
@@ -818,7 +819,15 @@ AddCombo();
             {if (style == 1) //Rock
             {RockJumpAtk(); JumpRock = true;}}  
             drawsword = true;
-        }           
+            isAttackingAir = true;
+        }
+        }
+        else if(isAttackingAir)
+        {isAttackingAirTimer -= Time.deltaTime; //decrementa il timer ad ogni frame
+        if (isAttackingAirTimer <= 0f) {
+        isAttackingAir = false;
+        isAttackingAirTimer = 2f;
+        }}         
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 //Riporre spada
 if(drawsword)
@@ -2092,7 +2101,7 @@ private void OnJumpAnimationComplete(Spine.TrackEntry trackEntry)
             }
      // Reset the attack state
     isAttacking = false;
-    isAttackingAir = false;
+    //isAttackingAir = false;
     if (_skeletonAnimation != null)
     {
     _skeletonAnimation.timeScale = timeScale; // Impostare il valore di time scale
@@ -3128,7 +3137,7 @@ private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
             }
      // Reset the attack state
     isAttacking = false;
-    isAttackingAir = false;
+    //isAttackingAir = false;
     StartKiai = false;
     if (_skeletonAnimation != null)
     {
