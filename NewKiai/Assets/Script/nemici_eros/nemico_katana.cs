@@ -20,7 +20,7 @@ public class nemico_katana : MonoBehaviour
 
     private bool bool_colpibile=true;
     private int vitalita;
-    private int vitalita_max=30;
+    private int vitalita_max=50;
     private float tempo_ricolpibile=0.5f;
     private bool bool_morto=false;
 
