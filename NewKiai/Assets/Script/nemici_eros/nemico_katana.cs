@@ -18,6 +18,12 @@ public class nemico_katana : MonoBehaviour
     private float distanza_temp;
     private Vector2 xTarget;
 
+    private bool bool_colpibile=true;
+    private int vitalita;
+    private int vitalita_max=30;
+    private float tempo_ricolpibile=0.5f;
+    private bool bool_morto=false;
+
     private float tempo_attuale_guardia=0;
 
     private string stato;
@@ -32,9 +38,11 @@ public class nemico_katana : MonoBehaviour
     void Start(){
         GO_player=GameObject.Find("Nekotaro");
         skeletonAnimation = GetComponent<SkeletonAnimation>();
+        vitalita=vitalita_max;
     }
 
     void Update(){
+        if (bool_morto){return;}
         if (tempo_stanchezza>0){
             //print ("stanchezza: "+tempo_stanchezza);
             tempo_stanchezza-=(1f*Time.deltaTime);
@@ -76,6 +84,7 @@ public class nemico_katana : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (bool_morto){return;}
         //print ("stato: "+stato);
         if (tempo_stanchezza>0){
             if (stato=="tired"){
@@ -124,6 +133,52 @@ public class nemico_katana : MonoBehaviour
         }
 
         return;
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (bool_morto){return;}
+        //Debug.Log("triggo con "+col.name);
+        switch (col.name){
+            case "Hitbox":{
+                if (bool_colpibile){
+                    bool_colpibile=false;
+                    StartCoroutine(ritorna_ricolpibile());
+                    vitalita-=10;
+
+                    float posizione_x=transform.position.x;
+                    if (GO_player.transform.position.x<transform.position.x){posizione_x+=1.5f;}
+                    else {posizione_x-=1.5f;}
+                    iTween.MoveTo(
+                        this.gameObject, iTween.Hash(
+                            "position",new Vector3(
+                                posizione_x, transform.position.y,transform.position.z
+                            ),"time", 0.3f, "easetype", iTween.EaseType.easeOutSine
+                        )
+                    );
+
+                    if (vitalita<=0){
+                        return;
+                        bool_morto=true;
+                        print ("è morto!");
+                        skeletonAnimation.loop=false;
+                        skeletonAnimation.AnimationName="die1";
+                        StartCoroutine(rimuovi());
+                    }
+                }
+                break;
+            }
+        }
+    }
+
+    private IEnumerator rimuovi(){
+        yield return new WaitForSeconds(2f);
+        Destroy(gameObject);
+    }
+
+    private IEnumerator ritorna_ricolpibile(){    
+        yield return new WaitForSeconds(tempo_ricolpibile);
+        bool_colpibile=true;
     }
 
     private void Flip()
