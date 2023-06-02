@@ -158,7 +158,6 @@ public class nemico_katana : MonoBehaviour
                     );
 
                     if (vitalita<=0){
-                        return;
                         bool_morto=true;
                         print ("è morto!");
                         skeletonAnimation.loop=false;
