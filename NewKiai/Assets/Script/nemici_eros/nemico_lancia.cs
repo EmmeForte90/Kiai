@@ -14,7 +14,6 @@ public class nemico_lancia : MonoBehaviour
     public GameObject GO_player;
     public float distanza_guardia=7f;
     public float distanza_attacco=3f;
-    private bool bool_morte_attiva=false;
     private float distanza_temp;
     private Vector2 xTarget;
 
@@ -92,7 +91,6 @@ public class nemico_lancia : MonoBehaviour
             }
             return; 
         }
-        if (bool_morte_attiva){return;}
 
         switch (stato){
             case "attacco":{
