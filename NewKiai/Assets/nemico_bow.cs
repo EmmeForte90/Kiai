@@ -47,6 +47,7 @@ public class nemico_bow : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     // Start is called before the first frame update
     void Start(){
+        vitalita=vitalita_max;
         proiettile_default.SetActive(false);
         //bool_player_visto=true; //debug
         GO_player=GameObject.Find("Nekotaro");
