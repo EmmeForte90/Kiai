@@ -4,7 +4,7 @@ using UnityEngine;
 using Spine;
 using Spine.Unity;
 
-public class nemico_bow : MonoBehaviour
+public class nemico_rifle : MonoBehaviour
 {
     private float horizontal;
     private float velocita = 4f;
@@ -122,14 +122,14 @@ public class nemico_bow : MonoBehaviour
                 break;
             }
             case "spara":{
-                skeletonAnimation.AnimationName = "Shoot_Cycles/shoot_front";
+                skeletonAnimation.AnimationName = "shoot_front";
                 if (transform.position.x<GO_player.transform.position.x){horizontal=1;}
                 else {horizontal=-1;}
                 Flip();
                 break;  
             }
             case "mira":{
-                skeletonAnimation.AnimationName = "Aim_Cycles/aim_front";
+                skeletonAnimation.AnimationName = "aim_front";
                 if (transform.position.x<GO_player.transform.position.x){horizontal=1;}
                 else {horizontal=-1;}
                 Flip();
