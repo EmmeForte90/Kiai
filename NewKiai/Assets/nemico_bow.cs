@@ -169,6 +169,17 @@ public class nemico_bow : MonoBehaviour
                     StartCoroutine(ritorna_ricolpibile());
                     vitalita-=10;
 
+                    float posizione_x=transform.position.x;
+                    if (GO_player.transform.position.x<transform.position.x){posizione_x+=1.5f;}
+                    else {posizione_x-=1.5f;}
+                    iTween.MoveTo(
+                        this.gameObject, iTween.Hash(
+                            "position",new Vector3(
+                                posizione_x, transform.position.y,transform.position.z
+                            ),"time", 0.3f, "easetype", iTween.EaseType.easeOutSine
+                        )
+                    );
+
                     if (vitalita<=0){
                         bool_morto=true;
                         print ("è morto!");
