@@ -72,13 +72,23 @@ public class bullet_rule : MonoBehaviour
             //IDamegable hit = other.GetComponent<IDamegable>();
             //hit.Damage(damage);
             distruggi_freccia();
+             if(!Move.instance.isGuard)
+            {
+            if (!Move.instance.isDeath)
+            {
+                if (!Move.instance.isHurt)
+            {
+            PlayerHealth.Instance.Damage(damage);
+            Move.instance.Knockback();            
+            }
+            }
         }
         else {
             if(other.gameObject.tag == "Ground"){    
                 distruggi_freccia();
             }
         }
-    }
+    }}
 
     private void distruggi_freccia(){
         Instantiate(Explode, transform.position, transform.rotation);
