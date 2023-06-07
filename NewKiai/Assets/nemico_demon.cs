@@ -8,13 +8,13 @@ public class nemico_demon : MonoBehaviour
 {
     private float horizontal;
     private float velocita = 4f;
-    private float velocita_indietreggio = 2f;
     private bool bool_dir_dx = true;
     private SkeletonAnimation skeletonAnimation;
     public GameObject GO_player;
     public float distanza_attacco=7f;
     private float distanza_temp;
     private Vector2 xTarget;
+    private float distanza_contrattacco=2f;
 
     private bool bool_colpibile=true;
     private int vitalita;
@@ -28,7 +28,7 @@ public class nemico_demon : MonoBehaviour
     private float tempo_palla_nuova=10f;
     private float tempo_palla_nuova_attuale=0f;
 
-    private float tempo_vulnerabile=3;
+    private float tempo_vulnerabile=5;
     private float tempo_vulnerabile_attuale=0f;
 
     private bool bool_colpibile_palla=true;
@@ -87,7 +87,14 @@ public class nemico_demon : MonoBehaviour
                 tempo_sparo_attuale+=tempo_sparo;
                 stato="spara";
             } else {
-                stato="guardia";
+                if (tempo_vulnerabile_attuale>0){
+                    stato="stun";
+                } else {
+                    if (distanza_temp<distanza_contrattacco){
+                        stato="contrattacco";
+                    }
+                    else {stato="guardia";}
+                }
             }
         }
         else {
@@ -130,6 +137,17 @@ public class nemico_demon : MonoBehaviour
                 Flip();
                 break;
             }
+            case "stun":{
+                skeletonAnimation.AnimationName = "tired";
+                break;
+            }
+            case "contrattacco":{
+                skeletonAnimation.AnimationName = "attack_vertical/attack_vertical";
+                if (transform.position.x<GO_player.transform.position.x){horizontal=1;}
+                else {horizontal=-1;}
+                Flip();
+                break;
+            }
         }
 
         return;
@@ -158,7 +176,6 @@ public class nemico_demon : MonoBehaviour
                         bool_colpibile=false;
                         StartCoroutine(ritorna_ricolpibile());
                         vitalita-=10;
-                        print ("vitalita: "+vitalita);
 
                         if (vitalita<=0){
                             bool_morto=true;
