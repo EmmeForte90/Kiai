@@ -557,7 +557,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &196330969
 Transform:
   m_ObjectHideFlags: 0
@@ -7724,13 +7724,14 @@ GameObject:
   - component: {fileID: 820417655}
   - component: {fileID: 820417654}
   - component: {fileID: 820417653}
+  - component: {fileID: 820417658}
   m_Layer: 6
   m_Name: Demon
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &820417652
 Transform:
   m_ObjectHideFlags: 0
@@ -7745,6 +7746,7 @@ Transform:
   m_Children:
   - {fileID: 636360724}
   - {fileID: 1051890294}
+  - {fileID: 4412013135819557537}
   m_Father: {fileID: 81025073}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7885,6 +7887,25 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 820417651}
   m_Mesh: {fileID: 0}
+--- !u!114 &820417658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820417651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ad7d53de694d934e910fe962f3d2c12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GO_player: {fileID: 0}
+  distanza_attacco: 7
+  palla_fuoco: {fileID: 4412013135819557538}
+  posizioni:
+  - {x: 43.9, y: -3.354, z: 0}
+  - {x: 30.65, y: -3.354, z: 0}
+  rb: {fileID: 0}
 --- !u!1 &829988626
 GameObject:
   m_ObjectHideFlags: 0
@@ -34621,6 +34642,67 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3506159930940778474, guid: ad4a05c32f15a9b4cbe1f5b7c312fb2e, type: 3}
   m_PrefabInstance: {fileID: 3506159929107011235}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3529147739442679879
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 820417652}
+    m_Modifications:
+    - target: {fileID: 990954342976281317, guid: 187255eb087efbe48bdaad8b076579c7, type: 3}
+      propertyPath: m_Name
+      value: palla_fuoco_demone
+      objectReference: {fileID: 0}
+    - target: {fileID: 990954342976281317, guid: 187255eb087efbe48bdaad8b076579c7, type: 3}
+      propertyPath: m_TagString
+      value: Throw
+      objectReference: {fileID: 0}
+    - target: {fileID: 990954342976281318, guid: 187255eb087efbe48bdaad8b076579c7, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 990954342976281318, guid: 187255eb087efbe48bdaad8b076579c7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 990954342976281318, guid: 187255eb087efbe48bdaad8b076579c7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.94
+      objectReference: {fileID: 0}
+    - target: {fileID: 990954342976281318, guid: 187255eb087efbe48bdaad8b076579c7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 990954342976281318, guid: 187255eb087efbe48bdaad8b076579c7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 990954342976281318, guid: 187255eb087efbe48bdaad8b076579c7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 990954342976281318, guid: 187255eb087efbe48bdaad8b076579c7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 990954342976281318, guid: 187255eb087efbe48bdaad8b076579c7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 990954342976281318, guid: 187255eb087efbe48bdaad8b076579c7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 990954342976281318, guid: 187255eb087efbe48bdaad8b076579c7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 990954342976281318, guid: 187255eb087efbe48bdaad8b076579c7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 187255eb087efbe48bdaad8b076579c7, type: 3}
 --- !u!1001 &4269947416885956898
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34687,6 +34769,32 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4269947415912702874, guid: 6be63119cd4336c4abcfb7bb10e7201b, type: 3}
   m_PrefabInstance: {fileID: 4269947416885956898}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &4412013135819557537 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 990954342976281318, guid: 187255eb087efbe48bdaad8b076579c7, type: 3}
+  m_PrefabInstance: {fileID: 3529147739442679879}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4412013135819557538 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 990954342976281317, guid: 187255eb087efbe48bdaad8b076579c7, type: 3}
+  m_PrefabInstance: {fileID: 3529147739442679879}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4412013135819557540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4412013135819557538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d478f90950db48847b74aa3b732ef826, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocita_palla_di_fuoco: 1
+  tempo_distruzione_sola: 5
+  rb: {fileID: 0}
+  sprite: {fileID: 0}
 --- !u!114 &4493575304742239152
 MonoBehaviour:
   m_ObjectHideFlags: 0

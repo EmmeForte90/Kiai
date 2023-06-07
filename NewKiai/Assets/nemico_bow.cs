@@ -13,7 +13,6 @@ public class nemico_bow : MonoBehaviour
     private SkeletonAnimation skeletonAnimation;
     public GameObject GO_player;
     public float distanza_attacco=7f;
-    private bool bool_morte_attiva=false;
     private float distanza_temp;
     private Vector2 xTarget;
 
@@ -109,7 +108,6 @@ public class nemico_bow : MonoBehaviour
     private void FixedUpdate()
     {
         if (bool_morto){return;}
-        if (bool_morte_attiva){return;}
 
         switch (stato){
             case "indietreggia":{
