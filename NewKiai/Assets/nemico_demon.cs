@@ -25,10 +25,16 @@ public class nemico_demon : MonoBehaviour
     private float tempo_sparo=1f;
     private float tempo_sparo_attuale=0;
 
-    private float tempo_palla_nuova=5f;
+    private float tempo_palla_nuova=10f;
     private float tempo_palla_nuova_attuale=0f;
 
-    private bool bool_invulnerabile=true;
+    private float tempo_vulnerabile=3;
+    private float tempo_vulnerabile_attuale=0f;
+
+    private bool bool_colpibile_palla=true;
+    private float tempo_ricolpibile_palla=0.5f;
+
+    private bool bool_palla_appena_lanciata=false;
 
     public GameObject palla_fuoco;
 
@@ -49,6 +55,10 @@ public class nemico_demon : MonoBehaviour
     void Update(){
         if (bool_morto){return;}
 
+        if (tempo_vulnerabile_attuale>0){
+            tempo_vulnerabile_attuale-=(1f*Time.deltaTime);
+        }
+
         distanza_temp=calcola_distanza((int)(GO_player.transform.position.x),(int)(GO_player.transform.position.y),(int)(transform.position.x),(int)(transform.position.y));
         //print ("distanza: "+distanza_temp);
 
@@ -61,7 +71,10 @@ public class nemico_demon : MonoBehaviour
             tempo_sparo_attuale-=(1f*Time.deltaTime);
             if (tempo_sparo_attuale>0){return;}
             stato="spara";
+            bool_palla_appena_lanciata=true;
+            StartCoroutine(co_palla_lanciata());
             GameObject go_temp=Instantiate(palla_fuoco,transform);
+            go_temp.name="palla_fuoco_demone";
             go_temp.transform.parent = gameObject.transform.parent;
             go_temp.SetActive(true);
             tempo_palla_nuova_attuale+=tempo_palla_nuova;
@@ -127,12 +140,25 @@ public class nemico_demon : MonoBehaviour
         if (bool_morto){return;}
         //Debug.Log("triggo con "+col.name);
         switch (col.name){
+            case "palla_fuoco_demone":{
+                print (bool_colpibile_palla+" - "+bool_palla_appena_lanciata);
+                if (bool_colpibile_palla){
+                    if (!bool_palla_appena_lanciata){
+                        bool_colpibile_palla=false;
+                        StartCoroutine(ritorna_ricolpibile_palla());
+                        print ("colpito dalla mia stessa palla");
+                        tempo_vulnerabile_attuale=tempo_vulnerabile;
+                    }
+                }
+                break;
+            }
             case "Hitbox":{
-                if (!bool_invulnerabile){
+                if (tempo_vulnerabile_attuale>0){
                     if (bool_colpibile){
                         bool_colpibile=false;
                         StartCoroutine(ritorna_ricolpibile());
                         vitalita-=10;
+                        print ("vitalita: "+vitalita);
 
                         if (vitalita<=0){
                             bool_morto=true;
@@ -143,7 +169,7 @@ public class nemico_demon : MonoBehaviour
                         }
                     }
                 } else {
-                    print ("sono invulnerabile...");
+                    print ("è invulnerabile...");
                 }
                 break;
             }
@@ -158,6 +184,16 @@ public class nemico_demon : MonoBehaviour
     private IEnumerator ritorna_ricolpibile(){    
         yield return new WaitForSeconds(tempo_ricolpibile);
         bool_colpibile=true;
+    }
+
+    private IEnumerator co_palla_lanciata(){    
+        yield return new WaitForSeconds(0.5f);
+        bool_palla_appena_lanciata=false;
+    }
+
+    private IEnumerator ritorna_ricolpibile_palla(){    
+        yield return new WaitForSeconds(tempo_ricolpibile_palla);
+        bool_colpibile_palla=true;
     }
 
     private void Flip()

@@ -11,29 +11,33 @@ public class palla_fuoco_demone_rule : MonoBehaviour
     public SpriteRenderer sprite;
     private bool bool_distrutta=false;
 
-    private ParticleSystem[] particleSystems;
+    private bool bool_palla_appena_lanciata=true;
+
     // Start is called before the first frame update
     void Start()
     {
         target = GameObject.Find("Nekotaro");
         StartCoroutine(distruggi_col_tempo());
-        particleSystems = GetComponentsInChildren<ParticleSystem>();
+        StartCoroutine(co_palla_lanciata());
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Vector3 newPosition = Vector3.Lerp(transform.position, target.transform.position, velocita_palla_di_fuoco * Time.deltaTime);
-        //transform.position = newPosition;
-
         Vector3 direction = (target.transform.position - transform.position).normalized;
         transform.position += (direction * (velocita_palla_di_fuoco * Time.deltaTime));
     }
 
     void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.name == "Nekotaro"){
-            print ("colpito");
+            print ("colpito il personaggio!");
             distruggi_palla_di_fuoco();
+        }
+        else if(other.gameObject.name == "Demon"){
+            if (!bool_palla_appena_lanciata){
+                print ("colpito il demone!");
+                distruggi_palla_di_fuoco();
+            }
         }
     }
 
@@ -48,7 +52,8 @@ public class palla_fuoco_demone_rule : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnDestroy(){
-        foreach (ParticleSystem ps in particleSystems){ps.Stop();}
+    private IEnumerator co_palla_lanciata(){    
+        yield return new WaitForSeconds(0.5f);
+        bool_palla_appena_lanciata=false;
     }
 }

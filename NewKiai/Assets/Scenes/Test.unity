@@ -34701,6 +34701,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3907544656873770693, guid: 187255eb087efbe48bdaad8b076579c7, type: 3}
+      propertyPath: tempo_distruzione_sola
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 187255eb087efbe48bdaad8b076579c7, type: 3}
 --- !u!1001 &4269947416885956898
@@ -34779,22 +34783,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 990954342976281317, guid: 187255eb087efbe48bdaad8b076579c7, type: 3}
   m_PrefabInstance: {fileID: 3529147739442679879}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4412013135819557540
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4412013135819557538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d478f90950db48847b74aa3b732ef826, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocita_palla_di_fuoco: 1
-  tempo_distruzione_sola: 5
-  rb: {fileID: 0}
-  sprite: {fileID: 0}
 --- !u!114 &4493575304742239152
 MonoBehaviour:
   m_ObjectHideFlags: 0
