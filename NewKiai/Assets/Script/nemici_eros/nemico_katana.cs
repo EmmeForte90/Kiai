@@ -87,7 +87,7 @@ public class nemico_katana : MonoBehaviour
         //print ("stato: "+stato);
         if (tempo_stanchezza>0){
             if (stato=="tired"){
-                skeletonAnimation.AnimationName = "tired";
+                skeletonAnimation.AnimationName = "idle_battle";
             }
             return; 
         }

@@ -12,7 +12,7 @@ public class nemico_bow : MonoBehaviour
     private bool bool_dir_dx = true;
     private SkeletonAnimation skeletonAnimation;
     public GameObject GO_player;
-    public float distanza_attacco=7f;
+    public float distanza_attacco=10f;
     private float distanza_temp;
     private Vector2 xTarget;
 
