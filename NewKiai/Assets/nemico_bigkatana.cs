@@ -96,8 +96,8 @@ public class nemico_bigkatana : MonoBehaviour
                 skeletonAnimation.AnimationName = "attack_power/attack_power";
                 if (transform.position.x<GO_player.transform.position.x){horizontal=1;}
                 else {horizontal=-1;}
-                xTarget = new Vector2(GO_player.transform.position.x, transform.position.y);
-                transform.position = Vector2.MoveTowards(transform.position,xTarget, Time.deltaTime*velocita_corsa);
+                //xTarget = new Vector2(GO_player.transform.position.x, transform.position.y);
+                //transform.position = Vector2.MoveTowards(transform.position,xTarget, Time.deltaTime*velocita_corsa);
                 Flip();
                 break;  
             }
