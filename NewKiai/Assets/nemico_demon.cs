@@ -177,6 +177,9 @@ public class nemico_demon : MonoBehaviour
                         StartCoroutine(ritorna_ricolpibile());
                         vitalita-=10;
 
+                        skeletonAnimation.Skeleton.SetColor(Color.red);
+                        StartCoroutine(ripristina_colore());
+
                         if (vitalita<=0){
                             bool_morto=true;
                             print ("è morto!");
@@ -191,6 +194,11 @@ public class nemico_demon : MonoBehaviour
                 break;
             }
         }
+    }
+
+    private IEnumerator ripristina_colore(){
+        yield return new WaitForSeconds(0.1f);
+        skeletonAnimation.Skeleton.SetColor(Color.white);
     }
 
     private IEnumerator rimuovi(){
