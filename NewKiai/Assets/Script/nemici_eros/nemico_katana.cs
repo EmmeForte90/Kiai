@@ -28,6 +28,8 @@ public class nemico_katana : MonoBehaviour
     private string stato;
 
     private float tempo_stanchezza;
+
+    public float tempo_attacco=0.3f;
     
     [SerializeField] private Vector3[] posizioni;
     private int index_posizioni;
@@ -75,7 +77,7 @@ public class nemico_katana : MonoBehaviour
     }
 
     private IEnumerator ferma_attacco(){    
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(tempo_attacco);
         stato="tired";
         tempo_stanchezza=2.5f;
     }
