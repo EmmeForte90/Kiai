@@ -71,7 +71,7 @@ public class nemico_bigkatana : MonoBehaviour
                 if (stamina>=30){
                     stato="attacco_grosso";
                     stamina-=30;
-                    tempo_ritorna_idle+=0.8f;
+                    tempo_ritorna_idle+=2.5f;
                 }
                 /*
                 else {
