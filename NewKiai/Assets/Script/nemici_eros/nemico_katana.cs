@@ -75,7 +75,7 @@ public class nemico_katana : MonoBehaviour
     }
 
     private IEnumerator ferma_attacco(){    
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.3f);
         stato="tired";
         tempo_stanchezza=2.5f;
     }
@@ -94,7 +94,7 @@ public class nemico_katana : MonoBehaviour
 
         switch (stato){
             case "attacco":{
-                skeletonAnimation.AnimationName = "horizzontal/attack_horizzontal";
+                skeletonAnimation.AnimationName = "vertical_bottom/attack_vertical_bottom";
                 StartCoroutine(ferma_attacco());
                 break;  
             }
