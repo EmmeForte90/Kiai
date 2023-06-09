@@ -11,10 +11,10 @@ public class nemico_demon : MonoBehaviour
     private bool bool_dir_dx = true;
     private SkeletonAnimation skeletonAnimation;
     public GameObject GO_player;
-    public float distanza_attacco=7f;
+    public float distanza_attacco=8f;
     private float distanza_temp;
     private Vector2 xTarget;
-    private float distanza_contrattacco=2f;
+    private float distanza_contrattacco=5f;
 
     private bool bool_colpibile=true;
     private int vitalita;
@@ -159,7 +159,7 @@ public class nemico_demon : MonoBehaviour
         //Debug.Log("triggo con "+col.name);
         switch (col.name){
             case "palla_fuoco_demone":{
-                print (bool_colpibile_palla+" - "+bool_palla_appena_lanciata);
+                //print (bool_colpibile_palla+" - "+bool_palla_appena_lanciata);
                 if (bool_colpibile_palla){
                     if (!bool_palla_appena_lanciata){
                         bool_colpibile_palla=false;
