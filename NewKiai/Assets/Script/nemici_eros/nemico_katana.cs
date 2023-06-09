@@ -146,6 +146,9 @@ public class nemico_katana : MonoBehaviour
                     StartCoroutine(ritorna_ricolpibile());
                     vitalita-=10;
 
+                    skeletonAnimation.Skeleton.SetColor(Color.red);
+                    StartCoroutine(ripristina_colore());
+
                     float posizione_x=transform.position.x;
                     if (GO_player.transform.position.x<transform.position.x){posizione_x+=1.5f;}
                     else {posizione_x-=1.5f;}
@@ -168,6 +171,11 @@ public class nemico_katana : MonoBehaviour
                 break;
             }
         }
+    }
+
+    private IEnumerator ripristina_colore(){
+        yield return new WaitForSeconds(0.1f);
+        skeletonAnimation.Skeleton.SetColor(Color.white);
     }
 
     private IEnumerator rimuovi(){

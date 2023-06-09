@@ -143,18 +143,8 @@ public class nemico_lancia : MonoBehaviour
                     StartCoroutine(ritorna_ricolpibile());
                     vitalita-=10;
 
-                    /*  //lui non và in knockback...
-                    float posizione_x=transform.position.x;
-                    if (GO_player.transform.position.x<transform.position.x){posizione_x+=1.5f;}
-                    else {posizione_x-=1.5f;}
-                    iTween.MoveTo(
-                        this.gameObject, iTween.Hash(
-                            "position",new Vector3(
-                                posizione_x, transform.position.y,transform.position.z
-                            ),"time", 0.3f, "easetype", iTween.EaseType.easeOutSine
-                        )
-                    );
-                    */
+                    skeletonAnimation.Skeleton.SetColor(Color.red);
+                    StartCoroutine(ripristina_colore());
 
                     if (vitalita<=0){
                         bool_morto=true;
@@ -167,6 +157,11 @@ public class nemico_lancia : MonoBehaviour
                 break;
             }
         }
+    }
+
+    private IEnumerator ripristina_colore(){
+        yield return new WaitForSeconds(0.1f);
+        skeletonAnimation.Skeleton.SetColor(Color.white);
     }
 
     private IEnumerator rimuovi(){
