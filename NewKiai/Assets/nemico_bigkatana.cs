@@ -72,6 +72,8 @@ public class nemico_bigkatana : MonoBehaviour
                     stato="attacco_grosso";
                     stamina-=30;
                     tempo_ritorna_idle+=2.5f;
+                } else {
+                    stato="guardia";
                 }
                 /*
                 else {
@@ -152,7 +154,7 @@ public class nemico_bigkatana : MonoBehaviour
 
                     //dopodicchè dobbiamo caricare il numero di volte che è stato colpito
                     tempo_contrattacco+=1.8f;
-                    print ("tempo contrattacco: "+tempo_contrattacco);
+                    //print ("tempo contrattacco: "+tempo_contrattacco);
                     if (tempo_contrattacco>=3){
                         print ("devo contrattaccare");
                         stato="contrattacco";
@@ -169,8 +171,9 @@ public class nemico_bigkatana : MonoBehaviour
                             return;
                         }
                     }
-
                     vitalita-=10;
+
+                    print ("colpito! vitalita: "+vitalita);
 
                     skeletonAnimation.Skeleton.SetColor(Color.red);
                     StartCoroutine(ripristina_colore());
