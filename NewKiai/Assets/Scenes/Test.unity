@@ -838,7 +838,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &256961063
 Transform:
   m_ObjectHideFlags: 0
@@ -1984,7 +1984,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &526377623
 Transform:
   m_ObjectHideFlags: 0
@@ -2099,6 +2099,7 @@ MonoBehaviour:
   GO_player: {fileID: 0}
   distanza_guardia: 7
   distanza_attacco: 3
+  stamina_max: 50
   tempo_attacco: 0.3
   posizioni:
   - {x: 43.9, y: -3.354, z: 0}
@@ -14878,6 +14879,7 @@ MonoBehaviour:
   GO_player: {fileID: 0}
   distanza_guardia: 7
   distanza_attacco: 3
+  stamina_max: 0
   tempo_attacco: 0.3
   posizioni:
   - {x: 43.9, y: -3.354, z: 0}

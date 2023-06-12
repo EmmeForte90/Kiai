@@ -17,6 +17,13 @@ public class nemico_katana : MonoBehaviour
     private float distanza_temp;
     private Vector2 xTarget;
 
+    // valori per gli stessi ma con la stamina
+    private float velocita_ricarica_stamina=1;
+    private float stamina;
+    public float stamina_max=50;
+    private float tempo_contrattacco=0;
+    private float tempo_ritorna_idle=0;
+
     private bool bool_colpibile=true;
     private int vitalita;
     private int vitalita_max=50;
@@ -37,6 +44,7 @@ public class nemico_katana : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     // Start is called before the first frame update
     void Start(){
+        stamina=stamina_max;
         GO_player=GameObject.Find("Nekotaro");
         skeletonAnimation = GetComponent<SkeletonAnimation>();
         vitalita=vitalita_max;
@@ -44,6 +52,21 @@ public class nemico_katana : MonoBehaviour
 
     void Update(){
         if (bool_morto){return;}
+        if (tempo_contrattacco>0){
+            tempo_contrattacco-=(1*Time.deltaTime);
+            //print ("tempo contrattacco: "+tempo_contrattacco);
+        }
+        if (stamina<stamina_max){
+            stamina+=(velocita_ricarica_stamina*Time.deltaTime);
+            //print ("stamina: "+stamina);
+        }
+        if (tempo_ritorna_idle>0){
+            tempo_ritorna_idle-=(1*Time.deltaTime);
+            if (tempo_ritorna_idle<=0){
+                tempo_ritorna_idle=0;
+                stato="idle";
+            }
+        }
         if (tempo_stanchezza>0){
             //print ("stanchezza: "+tempo_stanchezza);
             tempo_stanchezza-=(1f*Time.deltaTime);
@@ -95,6 +118,13 @@ public class nemico_katana : MonoBehaviour
         }
 
         switch (stato){
+            case "contrattacco":{
+                if (transform.position.x<GO_player.transform.position.x){horizontal=1;}
+                else {horizontal=-1;}
+                skeletonAnimation.AnimationName = "vertical_up/attack_vertical_up";
+                Flip();
+                break;  
+            }
             case "attacco":{
                 skeletonAnimation.AnimationName = "vertical_bottom/attack_vertical_bottom";
                 StartCoroutine(ferma_attacco());
@@ -144,6 +174,25 @@ public class nemico_katana : MonoBehaviour
                 if (bool_colpibile){
                     bool_colpibile=false;
                     StartCoroutine(ritorna_ricolpibile());
+
+                    if (stamina_max>0){//vuol dire che è un nemico con stamina
+                        tempo_contrattacco+=1.8f;
+                        //print ("tempo contrattacco: "+tempo_contrattacco);
+                        if (tempo_contrattacco>=3){
+                            stato="contrattacco";
+                            tempo_ritorna_idle=1;
+                            //return;   //senza questo return, quando lui contrattacca, potrebbe essere ancora colpito; Mauro
+                        } else {
+                            //dobbiamo vedere quì se ha la stamina intanto per pararsi
+                            if (stamina>5){
+                                stamina-=5;
+                                stato="guardia";
+                                tempo_ritorna_idle=1;
+                                return;
+                            }
+                        }
+                    }
+
                     vitalita-=10;
 
                     skeletonAnimation.Skeleton.SetColor(Color.red);
