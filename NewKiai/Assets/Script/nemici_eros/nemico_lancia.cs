@@ -17,6 +17,13 @@ public class nemico_lancia : MonoBehaviour
     private float distanza_temp;
     private Vector2 xTarget;
 
+    // valori per gli stessi ma con la stamina
+    private float velocita_ricarica_stamina=2;
+    private float stamina;
+    public float stamina_max=50;
+    private float tempo_contrattacco=0;
+    private float tempo_ritorna_idle=0;
+
     private bool bool_colpibile=true;
     private int vitalita;
     private int vitalita_max=100;
@@ -35,6 +42,7 @@ public class nemico_lancia : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     // Start is called before the first frame update
     void Start(){
+        stamina=stamina_max;
         GO_player=GameObject.Find("Nekotaro");
         skeletonAnimation = GetComponent<SkeletonAnimation>();
         vitalita=vitalita_max;
@@ -42,6 +50,17 @@ public class nemico_lancia : MonoBehaviour
 
     void Update(){
         if (bool_morto){return;}
+        if (stamina<stamina_max){
+            stamina+=(velocita_ricarica_stamina*Time.deltaTime);
+            //print ("stamina: "+stamina);
+        }
+        if (tempo_ritorna_idle>0){
+            tempo_ritorna_idle-=(1*Time.deltaTime);
+            if (tempo_ritorna_idle<=0){
+                tempo_ritorna_idle=0;
+                stato="idle";
+            }
+        }
         if (tempo_stanchezza>0){
             //print ("stanchezza: "+tempo_stanchezza);
             tempo_stanchezza-=(1f*Time.deltaTime);
@@ -60,7 +79,12 @@ public class nemico_lancia : MonoBehaviour
             if (stato=="guardia"){
                 tempo_attuale_guardia-=(1f*Time.deltaTime);
                 if (tempo_attuale_guardia<=0){
-                    stato="puo_attaccare";
+                    if (stamina_max>0){
+                        if (stamina>=30){
+                            stamina-=30;
+                            stato="puo_attaccare";
+                        }
+                    else {stato="puo_attaccare";}
                 }
             }
             if (stato=="puo_attaccare"){
@@ -87,12 +111,24 @@ public class nemico_lancia : MonoBehaviour
         //print ("stato: "+stato);
         if (tempo_stanchezza>0){
             if (stato=="tired"){
-                skeletonAnimation.AnimationName = "idle_battle";
+                if ((stamina_max==0)||(stamina>0)){
+                    skeletonAnimation.AnimationName = "idle_battle";
+                }
+                else {skeletonAnimation.AnimationName = "tired";}
+            } else if (stato=="guardia"){
+                skeletonAnimation.AnimationName = "guard";
             }
             return; 
         }
 
         switch (stato){
+            case "contrattacco":{
+                if (transform.position.x<GO_player.transform.position.x){horizontal=1;}
+                else {horizontal=-1;}
+                skeletonAnimation.AnimationName = "attack_vertical/attack_vertical";
+                Flip();
+                break;  
+            }
             case "attacco":{
                 skeletonAnimation.AnimationName = "attack_lunge/attack_lunge";
                 StartCoroutine(ferma_attacco());
@@ -115,7 +151,8 @@ public class nemico_lancia : MonoBehaviour
             case "guardia":{
                 if (transform.position.x<GO_player.transform.position.x){horizontal=1;}
                 else {horizontal=-1;}
-                skeletonAnimation.AnimationName = "idle_battle";
+                //skeletonAnimation.AnimationName = "idle_battle";
+                skeletonAnimation.AnimationName = "guard";
                 Flip();
                 break;
             }
@@ -141,6 +178,27 @@ public class nemico_lancia : MonoBehaviour
                 if (bool_colpibile){
                     bool_colpibile=false;
                     StartCoroutine(ritorna_ricolpibile());
+
+                    if (stamina_max>0){//vuol dire che è un nemico con stamina
+                        if (stamina>5){
+                            stamina-=5;
+                            tempo_contrattacco+=1.8f;
+                            print ("tempo contrattacco: "+tempo_contrattacco);
+                            if (tempo_contrattacco>=3){
+                                stato="contrattacco";
+                                tempo_ritorna_idle=1f;
+                                return;   //senza questo return, quando lui contrattacca, potrebbe essere ancora colpito; Mauro
+                            } else {
+                                print ("paro. Stamina: "+stamina);
+                                stato="guardia";
+                                tempo_ritorna_idle=1;
+                                return;
+                            }
+                        } else {
+                            print ("stamina bassa: "+stamina);
+                        }
+                    }
+
                     vitalita-=10;
 
                     skeletonAnimation.Skeleton.SetColor(Color.red);

@@ -85,8 +85,13 @@ public class nemico_katana : MonoBehaviour
             if (stato=="guardia"){
                 tempo_attuale_guardia-=(1f*Time.deltaTime);
                 if (tempo_attuale_guardia<=0){
-                    if (stamina_max>0){stamina-=20;}
-                    stato="puo_attaccare";
+                    if (stamina_max>0){
+                        if (stamina>=20){
+                            stamina-=20;
+                            stato="puo_attaccare";
+                        }
+                    }
+                    else {stato="puo_attaccare";}
                 }
             }
             if (stato=="puo_attaccare"){
