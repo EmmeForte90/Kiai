@@ -24,6 +24,8 @@ public class nemico_katana : MonoBehaviour
     private float tempo_contrattacco=0;
     private float tempo_ritorna_idle=0;
 
+    public stamina_vfx_rule stamina_vfx_rule;
+
     private bool bool_colpibile=true;
     private int vitalita;
     private int vitalita_max=50;
@@ -56,6 +58,7 @@ public class nemico_katana : MonoBehaviour
             tempo_contrattacco-=(1*Time.deltaTime);
             //print ("tempo contrattacco: "+tempo_contrattacco);
         }
+        if (stamina_max>0){stamina_vfx_rule.scala_GO_stamina(stamina,stamina_max);}
         if (stamina<stamina_max){
             stamina+=(velocita_ricarica_stamina*Time.deltaTime);
             //print ("stamina: "+stamina);
@@ -88,6 +91,7 @@ public class nemico_katana : MonoBehaviour
                     if (stamina_max>0){
                         if (stamina>=20){
                             stamina-=20;
+                            stamina_vfx_rule.stamina_zero(stamina);
                             stato="puo_attaccare";
                         }
                     }
@@ -189,8 +193,9 @@ public class nemico_katana : MonoBehaviour
                     StartCoroutine(ritorna_ricolpibile());
 
                     if (stamina_max>0){//vuol dire che è un nemico con stamina
-                        if (stamina>5){
+                        if (stamina>0){
                             stamina-=5;
+                            stamina_vfx_rule.stamina_zero(stamina);
                             tempo_contrattacco+=1.8f;
                             print ("tempo contrattacco: "+tempo_contrattacco);
                             if (tempo_contrattacco>=3){
