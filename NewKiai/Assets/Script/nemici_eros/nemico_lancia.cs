@@ -84,7 +84,7 @@ public class nemico_lancia : MonoBehaviour
                             stamina-=30;
                             stato="puo_attaccare";
                         }
-                    else {stato="puo_attaccare";}
+                    }
                 }
             }
             if (stato=="puo_attaccare"){
