@@ -6,6 +6,7 @@ using Spine.Unity;
 
 public class nemico_demon : MonoBehaviour
 {
+
     private float horizontal;
     private float velocita = 4f;
     private bool bool_dir_dx = true;

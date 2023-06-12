@@ -6,6 +6,8 @@ using Spine.Unity;
 
 public class nemico_bigkatana : MonoBehaviour
 {
+    public stamina_vfx_rule stamina_vfx_rule;
+
     private float horizontal;
     private float velocita = 4f;
     private float velocita_corsa = 2f;
@@ -45,6 +47,7 @@ public class nemico_bigkatana : MonoBehaviour
 
     void Update(){
         if (bool_morto){return;}
+        if (stamina_max>0){stamina_vfx_rule.scala_GO_stamina(stamina,stamina_max);}
         if (tempo_contrattacco>0){
             tempo_contrattacco-=(1*Time.deltaTime);
             //print ("tempo contrattacco: "+tempo_contrattacco);
@@ -71,6 +74,7 @@ public class nemico_bigkatana : MonoBehaviour
                 if (stamina>=30){
                     stato="attacco_grosso";
                     stamina-=30;
+                    stamina_vfx_rule.stamina_zero(stamina);
                     tempo_ritorna_idle+=2.5f;
                 } else {
                     stato="guardia";
@@ -165,6 +169,7 @@ public class nemico_bigkatana : MonoBehaviour
                         //dobbiamo vedere quì se ha la stamina intanto per pararsi
                         if (stamina>5){
                             stamina-=5;
+                            stamina_vfx_rule.stamina_zero(stamina);
                             stato="guardia";
                             print ("devo pararmi");
                             tempo_ritorna_idle=1;

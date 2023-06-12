@@ -193,7 +193,7 @@ public class nemico_katana : MonoBehaviour
                     StartCoroutine(ritorna_ricolpibile());
 
                     if (stamina_max>0){//vuol dire che è un nemico con stamina
-                        if (stamina>0){
+                        if (stamina>5){
                             stamina-=5;
                             stamina_vfx_rule.stamina_zero(stamina);
                             tempo_contrattacco+=1.8f;

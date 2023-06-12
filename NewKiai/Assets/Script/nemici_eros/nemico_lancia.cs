@@ -6,6 +6,8 @@ using Spine.Unity;
 
 public class nemico_lancia : MonoBehaviour
 {
+    public stamina_vfx_rule stamina_vfx_rule;
+
     private float horizontal;
     private float velocita = 4f;
     private float velocita_corsa = 6f;
@@ -50,6 +52,7 @@ public class nemico_lancia : MonoBehaviour
 
     void Update(){
         if (bool_morto){return;}
+        if (stamina_max>0){stamina_vfx_rule.scala_GO_stamina(stamina,stamina_max);}
         if (stamina<stamina_max){
             stamina+=(velocita_ricarica_stamina*Time.deltaTime);
             //print ("stamina: "+stamina);
@@ -82,6 +85,7 @@ public class nemico_lancia : MonoBehaviour
                     if (stamina_max>0){
                         if (stamina>=30){
                             stamina-=30;
+                            stamina_vfx_rule.stamina_zero(stamina);
                             stato="puo_attaccare";
                         }
                     }
@@ -182,6 +186,7 @@ public class nemico_lancia : MonoBehaviour
                     if (stamina_max>0){//vuol dire che è un nemico con stamina
                         if (stamina>5){
                             stamina-=5;
+                            stamina_vfx_rule.stamina_zero(stamina);
                             tempo_contrattacco+=1.8f;
                             print ("tempo contrattacco: "+tempo_contrattacco);
                             if (tempo_contrattacco>=3){
