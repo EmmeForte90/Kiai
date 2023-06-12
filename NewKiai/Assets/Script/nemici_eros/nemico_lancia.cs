@@ -125,12 +125,12 @@ public class nemico_lancia : MonoBehaviour
             case "contrattacco":{
                 if (transform.position.x<GO_player.transform.position.x){horizontal=1;}
                 else {horizontal=-1;}
-                skeletonAnimation.AnimationName = "attack_vertical/attack_vertical";
+                skeletonAnimation.AnimationName = "attack_lunge/attack_lunge";
                 Flip();
                 break;  
             }
             case "attacco":{
-                skeletonAnimation.AnimationName = "attack_lunge/attack_lunge";
+                skeletonAnimation.AnimationName = "attack_vertical/attack_vertical";
                 StartCoroutine(ferma_attacco());
                 break;  
             }
