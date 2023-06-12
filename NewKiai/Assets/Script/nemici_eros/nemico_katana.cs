@@ -85,6 +85,7 @@ public class nemico_katana : MonoBehaviour
             if (stato=="guardia"){
                 tempo_attuale_guardia-=(1f*Time.deltaTime);
                 if (tempo_attuale_guardia<=0){
+                    if (stamina_max>0){stamina-=20;}
                     stato="puo_attaccare";
                 }
             }
@@ -101,6 +102,7 @@ public class nemico_katana : MonoBehaviour
 
     private IEnumerator ferma_attacco(){    
         yield return new WaitForSeconds(tempo_attacco);
+        print ("fermo attacco");
         stato="tired";
         tempo_stanchezza=2.5f;
     }
@@ -112,7 +114,12 @@ public class nemico_katana : MonoBehaviour
         //print ("stato: "+stato);
         if (tempo_stanchezza>0){
             if (stato=="tired"){
-                skeletonAnimation.AnimationName = "idle_battle";
+                if ((stamina_max==0)||(stamina>0)){
+                    skeletonAnimation.AnimationName = "idle_battle";
+                }
+                else {skeletonAnimation.AnimationName = "tired";}
+            } else if (stato=="guardia"){
+                skeletonAnimation.AnimationName = "guard";
             }
             return; 
         }
@@ -147,7 +154,8 @@ public class nemico_katana : MonoBehaviour
             case "guardia":{
                 if (transform.position.x<GO_player.transform.position.x){horizontal=1;}
                 else {horizontal=-1;}
-                skeletonAnimation.AnimationName = "idle_battle";
+                //skeletonAnimation.AnimationName = "idle_battle";
+                skeletonAnimation.AnimationName = "guard";
                 Flip();
                 break;
             }
@@ -176,16 +184,16 @@ public class nemico_katana : MonoBehaviour
                     StartCoroutine(ritorna_ricolpibile());
 
                     if (stamina_max>0){//vuol dire che è un nemico con stamina
-                        tempo_contrattacco+=1.8f;
-                        //print ("tempo contrattacco: "+tempo_contrattacco);
-                        if (tempo_contrattacco>=3){
-                            stato="contrattacco";
-                            tempo_ritorna_idle=1;
-                            //return;   //senza questo return, quando lui contrattacca, potrebbe essere ancora colpito; Mauro
-                        } else {
-                            //dobbiamo vedere quì se ha la stamina intanto per pararsi
-                            if (stamina>5){
-                                stamina-=5;
+                        if (stamina>5){
+                            stamina-=5;
+                            tempo_contrattacco+=1.8f;
+                            print ("tempo contrattacco: "+tempo_contrattacco);
+                            if (tempo_contrattacco>=3){
+                                stato="contrattacco";
+                                tempo_ritorna_idle=0.3f;
+                                return;   //senza questo return, quando lui contrattacca, potrebbe essere ancora colpito; Mauro
+                            } else {
+                                print ("paro. Stamina: "+stamina);
                                 stato="guardia";
                                 tempo_ritorna_idle=1;
                                 return;
