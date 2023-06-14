@@ -44,6 +44,12 @@ public class nemico_katana : MonoBehaviour
     private int index_posizioni;
 
     [SerializeField] private Rigidbody2D rb;
+
+    public float tempo_knockback = 1f;
+    private float tempo_knockback_attuale=0;
+    private Vector2 direzione_knockback;
+    public float forza_knockback=100f;
+
     // Start is called before the first frame update
     void Start(){
         stamina=stamina_max;
@@ -54,6 +60,10 @@ public class nemico_katana : MonoBehaviour
 
     void Update(){
         if (bool_morto){return;}
+        if (tempo_knockback_attuale>0){
+            rb.AddForce(direzione_knockback*forza_knockback);
+            tempo_knockback_attuale-=(1*Time.deltaTime);
+        }
         if (tempo_contrattacco>0){
             tempo_contrattacco-=(1*Time.deltaTime);
             //print ("tempo contrattacco: "+tempo_contrattacco);
@@ -111,7 +121,7 @@ public class nemico_katana : MonoBehaviour
 
     private IEnumerator ferma_attacco(){    
         yield return new WaitForSeconds(tempo_attacco);
-        print ("fermo attacco");
+        //print ("fermo attacco");
         stato="tired";
         tempo_stanchezza=2.5f;
     }
@@ -216,6 +226,10 @@ public class nemico_katana : MonoBehaviour
                     skeletonAnimation.Skeleton.SetColor(Color.red);
                     StartCoroutine(ripristina_colore());
 
+                    direzione_knockback = (transform.position - GO_player.transform.position).normalized;
+                    tempo_knockback_attuale+=tempo_knockback;
+
+                    /*  transizionale
                     float posizione_x=transform.position.x;
                     if (GO_player.transform.position.x<transform.position.x){posizione_x+=1.5f;}
                     else {posizione_x-=1.5f;}
@@ -226,6 +240,7 @@ public class nemico_katana : MonoBehaviour
                             ),"time", 0.3f, "easetype", iTween.EaseType.easeOutSine
                         )
                     );
+                    */
 
                     if (vitalita<=0){
                         bool_morto=true;

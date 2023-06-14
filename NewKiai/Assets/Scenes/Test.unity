@@ -2142,6 +2142,8 @@ MonoBehaviour:
   - {x: 43.9, y: -3.354, z: 0}
   - {x: 30.65, y: -3.354, z: 0}
   rb: {fileID: 526377628}
+  tempo_knockback: 1
+  forza_knockback: 100
 --- !u!50 &526377628
 Rigidbody2D:
   serializedVersion: 4
@@ -14747,7 +14749,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1273384360
 Transform:
   m_ObjectHideFlags: 0
@@ -14924,6 +14926,8 @@ MonoBehaviour:
   - {x: 43.9, y: -3.354, z: 0}
   - {x: 30.65, y: -3.354, z: 0}
   rb: {fileID: 1273384361}
+  tempo_knockback: 0.2
+  forza_knockback: 300
 --- !u!114 &1273384367
 MonoBehaviour:
   m_ObjectHideFlags: 0
