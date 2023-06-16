@@ -33,7 +33,7 @@ public class nemico_boss : MonoBehaviour
     private float tempo_riposo_salto_attuale=0;
 
     //funzioni relativi alla parabola di salto
-    private float t=5;
+    private float t=10;
     private float salto_attivo=0;   //il valore và da 0 a 1
     private Vector3 origione_salto;
     private Vector3 destinazione_salto;
@@ -72,9 +72,9 @@ public class nemico_boss : MonoBehaviour
         }
 
         print ("posizione di partenza: "+transform.position);
-        if (num_salti_attuale<num_salti_totale){
+        //if (num_salti_attuale<num_salti_totale){
             origione_salto=transform.position;
-            x_destinazione_salto=Random.Range(3,8);
+            x_destinazione_salto=Random.Range(5,12);
             x_destinazione_salto*=horizontal;
             destinazione_salto=new Vector3((origione_salto.x+x_destinazione_salto),transform.position.y,transform.position.z);
             destinazione_salto_media=transform.position+(destinazione_salto-transform.position)/2 +Vector3.up *t;
@@ -82,10 +82,12 @@ public class nemico_boss : MonoBehaviour
             tempo_salto_attuale=tempo_salto;
             stato="salto";
             num_salti_attuale++;
-
+        /*
         } else {
+            num_salti_attuale=0;
             print ("dovrei fare un altro tipo di attacco");
         }
+        */
     }
 
     private void FixedUpdate(){
