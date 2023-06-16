@@ -2010,6 +2010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c8b0d44b5b6cda41b3d1dc51b996d8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pietra_lancio_pf: {fileID: 2402484353416799066, guid: 63cfe4c42480d4a4dbace9b0c18833c4, type: 3}
   pietre_terreno: {fileID: 469240815}
   GO_player: {fileID: 0}
   distanza_guardia: 2
@@ -2017,6 +2018,7 @@ MonoBehaviour:
   rb: {fileID: 469240809}
   tempo_riposo_attacco_salti: 1
   tempo_riposo_attacco_mazza: 1
+  tempo_riposo_attacco_pietre: 3
 --- !u!114 &469240815
 MonoBehaviour:
   m_ObjectHideFlags: 0

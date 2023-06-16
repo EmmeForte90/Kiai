@@ -17,6 +17,7 @@ public class ChaseBulletEn : MonoBehaviour
     void Start()
     {
         Vector3 direction = transform.position - Move.instance.transform.position;
+        direction.y-=1.5f; //eros: per prendere il centro del personaggio
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
@@ -29,10 +30,8 @@ public class ChaseBulletEn : MonoBehaviour
         theRB.velocity = -transform.right * moveSpeed;
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if(other.gameObject.tag == "Player")
-        {
+    void OnTriggerEnter2D(Collider2D col){
+        if(col.name == "Nekotaro"){
             //Move.instance.DamagePlayer(damageAmount);
            if(!Move.instance.isGuard)
             {
@@ -49,15 +48,17 @@ public class ChaseBulletEn : MonoBehaviour
                 Move.instance.GuardHit(); 
                 PlayerHealth.Instance.currentStamina -= damagestamina;           
             }
+            esplosione();
         }
 
+        //AudioManager.instance.PlaySFXAdjusted(3);
+    }
+    private void esplosione(){
         if(impactEffect != null)
         {
             Instantiate(impactEffect, transform.position, transform.rotation);
 
             Destroy(gameObject);
         }
-
-        //AudioManager.instance.PlaySFXAdjusted(3);
     }
 }

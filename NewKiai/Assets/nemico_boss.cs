@@ -6,6 +6,7 @@ using Spine.Unity;
 
 public class nemico_boss : MonoBehaviour
 {
+    public GameObject pietra_lancio_pf;
     public pietre_terreno pietre_terreno;
 
     private float horizontal;
@@ -24,6 +25,9 @@ public class nemico_boss : MonoBehaviour
     private int num_salti_totale=3;
     private int num_salti_attuale=0;
 
+    private int num_pietre_lanciate_totale=3;
+    private int num_pietre_lanciate_attuale=0;
+
     private bool bool_morto=false;
 
     private string stato;
@@ -31,15 +35,25 @@ public class nemico_boss : MonoBehaviour
 
     private float tempo_salto=1f;
     private float tempo_salto_attuale=0;
+    private float tempo_lancio_pietra=2;
+    private float tempo_lancio_pietra_attuale=0;
+
     private float tempo_riposo_salto=1f;
     private float tempo_riposo_salto_attuale=0;
+    private float tempo_riposo_lancio_pietre=1f;
+    private float tempo_riposo_lancio_pietre_attuale=0;
+
     private float tempo_riposo_attacco_attuale=3f;
 
     private float tempo_anim_attacco_mazza=2.1f;
     private float tempo_anim_attacco_mazza_attuale=0;
 
+    private float tempo_anim_attacco_lancio_pietre=0.8f;
+    private float tempo_anim_attacco_lancio_pietre_attuale=0;
+
     public float tempo_riposo_attacco_salti=3;
     public float tempo_riposo_attacco_mazza=3;
+    public float tempo_riposo_attacco_pietre=3;
 
 
 
@@ -79,8 +93,21 @@ public class nemico_boss : MonoBehaviour
             return;
         }
 
+        if (tempo_anim_attacco_lancio_pietre_attuale>0){
+            tempo_anim_attacco_lancio_pietre_attuale-=(1f*Time.deltaTime);
+            if (tempo_anim_attacco_lancio_pietre_attuale<=0){
+                stato="tired";
+            }
+            return;
+        }
+
         if (tempo_riposo_salto_attuale>0){
             tempo_riposo_salto_attuale-=(1f*Time.deltaTime);
+            return;
+        }
+
+        if (tempo_riposo_lancio_pietre_attuale>0){
+            tempo_riposo_lancio_pietre_attuale-=(1f*Time.deltaTime);
             return;
         }
 
@@ -93,7 +120,7 @@ public class nemico_boss : MonoBehaviour
                 case 2:{attacco_tipo="mazza";break;}
                 case 3:{attacco_tipo="pietre";break;}
             }
-            attacco_tipo="mazza";
+            attacco_tipo="pietre";
         }
 
         if (tempo_salto_attuale>0){
@@ -104,6 +131,15 @@ public class nemico_boss : MonoBehaviour
 
             if (tempo_salto_attuale==0){
                 tempo_riposo_salto_attuale=tempo_riposo_salto;
+            }
+            return;
+        }
+
+        if (tempo_lancio_pietra_attuale>0){
+            tempo_lancio_pietra_attuale-=(1f*Time.deltaTime);
+
+            if (tempo_lancio_pietra_attuale==0){
+                tempo_riposo_lancio_pietre_attuale=tempo_riposo_lancio_pietre;
             }
             return;
         }
@@ -134,6 +170,22 @@ public class nemico_boss : MonoBehaviour
                 StartCoroutine(genera_pietre_suolo());
                 break;
             }
+            case "pietre":{
+                if (num_pietre_lanciate_attuale<num_pietre_lanciate_totale){
+                    tempo_anim_attacco_lancio_pietre_attuale=tempo_anim_attacco_lancio_pietre;
+                    tempo_lancio_pietra_attuale=tempo_lancio_pietra;
+                    stato="lancio_pietre";
+                    num_pietre_lanciate_attuale++;
+
+                    StartCoroutine(lancia_pietra());
+                } else {
+                    print ("ho finito il lanciare pietre");
+                    num_pietre_lanciate_attuale=0;
+                    tempo_riposo_attacco_attuale=tempo_riposo_attacco_pietre;
+                    stato="tired";
+                }
+                break;
+            }
         }
     }
 
@@ -151,7 +203,21 @@ public class nemico_boss : MonoBehaviour
                 skeletonAnimation.AnimationName="battle/idle_battle";
                 break;
             }
+            case "lancio_pietre":{
+                skeletonAnimation.AnimationName="battle/throw";
+                break;
+            }
         }
+    }
+
+    private IEnumerator lancia_pietra(){
+        yield return new WaitForSeconds(0.6f);
+        float xor=transform.position.x;
+        float yor=transform.position.y;
+        if (horizontal<0){xor-=2;} else {xor+=2;}
+        yor+=1.5f;
+        GameObject go_temp=Instantiate(pietra_lancio_pf);
+        go_temp.transform.position=new Vector3(xor,yor,transform.position.z);
     }
 
     private IEnumerator genera_pietre_suolo(){
