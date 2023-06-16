@@ -35,7 +35,7 @@ public class nemico_boss : MonoBehaviour
     private float tempo_riposo_salto_attuale=0;
     private float tempo_riposo_attacco_attuale=3f;
 
-    private float tempo_anim_attacco_mazza=0.4f;
+    private float tempo_anim_attacco_mazza=2.1f;
     private float tempo_anim_attacco_mazza_attuale=0;
 
     public float tempo_riposo_attacco_salti=3;
@@ -144,7 +144,7 @@ public class nemico_boss : MonoBehaviour
                 break;
             }
             case "mazza":{
-                skeletonAnimation.AnimationName="battle/attack_power/attack_power";
+                skeletonAnimation.AnimationName="battle/attack_power/attack_power_with_wait";
                 break;
             }
             case "tired":{
@@ -155,7 +155,8 @@ public class nemico_boss : MonoBehaviour
     }
 
     private IEnumerator genera_pietre_suolo(){
-        yield return new WaitForSeconds(0.2f);
+        //yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(1.75f);
         pietre_terreno.resetta();
         float xor=transform.position.x;
         if (horizontal<0){xor-=4;} else {xor+=4;}
