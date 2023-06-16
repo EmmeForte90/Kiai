@@ -11,7 +11,7 @@ public class pietre_terreno_boss : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(distruggi_oggetto());
     }
 
     // Update is called once per frame
@@ -50,5 +50,10 @@ public class pietre_terreno_boss : MonoBehaviour
 
             Destroy(gameObject);
         }
+    }
+
+    private IEnumerator distruggi_oggetto(){
+        yield return new WaitForSeconds(1.5f);
+        Destroy(gameObject);
     }
 }

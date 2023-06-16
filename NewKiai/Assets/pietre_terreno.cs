@@ -101,40 +101,4 @@ public class pietre_terreno : MonoBehaviour
     public void avvia(){
         bool_attivo=true;
     }
-
-
-    //public GameObject impactEffect;
-    /*
-        private void OnCollisionEnter2D(Collision2D other)
-    {
-        if(other.gameObject.tag == "Player")
-        {
-            //Move.instance.DamagePlayer(damageAmount);
-           if(!Move.instance.isGuard)
-            {
-            if (!Move.instance.isDeath)
-            {
-                if (!Move.instance.isHurt)
-            {
-            PlayerHealth.Instance.Damage(attackDamage);
-            Move.instance.Knockback();            
-
-            }}}if(Move.instance.isGuard)
-            {
-                Move.instance.Knockback(); 
-                Move.instance.GuardHit(); 
-                PlayerHealth.Instance.currentStamina -= damagestamina;           
-            }
-        }
-
-        if(impactEffect != null)
-        {
-            Instantiate(impactEffect, transform.position, transform.rotation);
-
-            Destroy(gameObject);
-        }
-
-        //AudioManager.instance.PlaySFXAdjusted(3);
-    }
-    */
 }

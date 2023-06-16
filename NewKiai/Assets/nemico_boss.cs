@@ -6,6 +6,9 @@ using Spine.Unity;
 
 public class nemico_boss : MonoBehaviour
 {
+    private float tempo_ricolpibile=0.5f;
+    private bool bool_arrabbiato=false;
+    private bool bool_colpibile=true;
     public GameObject pietra_lancio_pf;
     public pietre_terreno pietre_terreno;
 
@@ -54,6 +57,10 @@ public class nemico_boss : MonoBehaviour
     public float tempo_riposo_attacco_salti=3;
     public float tempo_riposo_attacco_mazza=3;
     public float tempo_riposo_attacco_pietre=3;
+
+    public float tempo_riposo_attacco_salti_arrabbiato=2;
+    public float tempo_riposo_attacco_mazza_arrabbiato=2;
+    public float tempo_riposo_attacco_pietre_arrabbiato=2;
 
 
 
@@ -120,7 +127,7 @@ public class nemico_boss : MonoBehaviour
                 case 2:{attacco_tipo="mazza";break;}
                 case 3:{attacco_tipo="pietre";break;}
             }
-            attacco_tipo="pietre";
+            attacco_tipo="mazza";
         }
 
         if (tempo_salto_attuale>0){
@@ -167,7 +174,13 @@ public class nemico_boss : MonoBehaviour
             case "mazza":{
                 stato="mazza";
                 tempo_anim_attacco_mazza_attuale=tempo_anim_attacco_mazza;
-                StartCoroutine(genera_pietre_suolo());
+                if (!bool_arrabbiato){
+                    StartCoroutine(genera_pietre_suolo(1.75f));
+                } else {
+                    StartCoroutine(genera_pietre_suolo(1.5f));
+                    StartCoroutine(genera_pietre_suolo(2.85f));
+                    StartCoroutine(genera_pietre_suolo(3.5f));
+                }
                 break;
             }
             case "pietre":{
@@ -190,13 +203,18 @@ public class nemico_boss : MonoBehaviour
     }
 
     private void FixedUpdate(){
+        if (bool_morto){return;}
         switch (stato){
             case "salto":{
 
                 break;
             }
             case "mazza":{
-                skeletonAnimation.AnimationName="battle/attack_power/attack_power_with_wait";
+                if (!bool_arrabbiato){
+                    skeletonAnimation.AnimationName="battle/attack_power/attack_power_with_wait";
+                } else {
+                    skeletonAnimation.AnimationName="battle/attack_power/attack_power_3times";
+                }
                 break;
             }
             case "tired":{
@@ -212,29 +230,92 @@ public class nemico_boss : MonoBehaviour
 
     private IEnumerator lancia_pietra(){
         yield return new WaitForSeconds(0.6f);
-        float xor=transform.position.x;
-        float yor=transform.position.y;
-        if (horizontal<0){xor-=2;} else {xor+=2;}
-        yor+=1.5f;
-        GameObject go_temp=Instantiate(pietra_lancio_pf);
-        go_temp.transform.position=new Vector3(xor,yor,transform.position.z);
+        if (!bool_morto){
+            float xor=transform.position.x;
+            float yor=transform.position.y;
+            if (horizontal<0){xor-=2;} else {xor+=2;}
+            yor+=1.5f;
+            GameObject go_temp=Instantiate(pietra_lancio_pf);
+            go_temp.transform.position=new Vector3(xor,yor,transform.position.z);
+        }
     }
 
-    private IEnumerator genera_pietre_suolo(){
-        //yield return new WaitForSeconds(0.2f);
-        yield return new WaitForSeconds(1.75f);
-        pietre_terreno.resetta();
-        float xor=transform.position.x;
-        if (horizontal<0){xor-=4;} else {xor+=4;}
-        for (int i=1;i<=5;i++){
-            j=xor-5;
-            j+=(i*1.5f);
-            j-=1.5f;
-            j+=Random.Range(0f,3f);
-            
-            pietre_terreno.aggiungi(i, xor, transform.position.y, j, transform.position.y, transform.position.z);
+    private IEnumerator genera_pietre_suolo(float tempo){
+        yield return new WaitForSeconds(tempo);
+        if (!bool_morto){
+            pietre_terreno.resetta();
+            float xor=transform.position.x;
+            if (horizontal<0){xor-=4;} else {xor+=4;}
+            for (int i=1;i<=5;i++){
+                j=xor-5;
+                j+=(i*1.5f);
+                j-=1.5f;
+                j+=Random.Range(0f,3f);
+                
+                pietre_terreno.aggiungi(i, xor, transform.position.y, j, transform.position.y, transform.position.z);
+            }
+            pietre_terreno.avvia();
         }
-        pietre_terreno.avvia();
+    }
+
+    void OnTriggerEnter2D(Collider2D col){
+        if (bool_morto){return;}
+        //Debug.Log("triggo con "+col.name);
+        switch (col.name){
+            case "Hitbox":{
+                if (bool_colpibile){
+                    bool_colpibile=false;
+                    StartCoroutine(ritorna_ricolpibile());
+
+                    vitalita-=10;
+
+                    skeletonAnimation.Skeleton.SetColor(Color.red);
+                    StartCoroutine(ripristina_colore());
+
+                    if (!bool_arrabbiato){
+                        //if (vitalita<(vitalita_max/2)){
+                            bool_arrabbiato=true;
+                            tempo_riposo_attacco_salti=tempo_riposo_attacco_salti_arrabbiato;
+                            tempo_riposo_attacco_mazza=tempo_riposo_attacco_mazza_arrabbiato;
+                            tempo_riposo_attacco_pietre=tempo_riposo_attacco_pietre_arrabbiato;
+
+                            num_salti_totale=4;
+                            num_pietre_lanciate_totale=4;
+
+                            tempo_riposo_lancio_pietre/=2;
+                            tempo_riposo_salto/=2;
+                            tempo_lancio_pietra/=2;
+
+                            tempo_anim_attacco_mazza=4.2f;
+                        //}
+                    }
+
+                    if (vitalita<=0){
+                        bool_morto=true;
+                        print ("è morto!");
+                        skeletonAnimation.loop=false;
+                        skeletonAnimation.AnimationName="die_back";
+                        StartCoroutine(rimuovi());
+                    }
+                }
+                break;
+            }
+        }
+    }
+
+    private IEnumerator ripristina_colore(){
+        yield return new WaitForSeconds(0.1f);
+        skeletonAnimation.Skeleton.SetColor(Color.white);
+    }
+
+    private IEnumerator rimuovi(){
+        yield return new WaitForSeconds(2f);
+        Destroy(gameObject);
+    }
+
+    private IEnumerator ritorna_ricolpibile(){    
+        yield return new WaitForSeconds(tempo_ricolpibile);
+        bool_colpibile=true;
     }
 
     private Vector3 punto_parabola(Vector3 start_point, Vector3 end_point, Vector3 mid_point, float t, float count){
