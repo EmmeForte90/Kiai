@@ -1836,6 +1836,7 @@ GameObject:
   - component: {fileID: 469240810}
   - component: {fileID: 469240809}
   - component: {fileID: 469240814}
+  - component: {fileID: 469240815}
   m_Layer: 8
   m_Name: Boss
   m_TagString: Boss
@@ -2009,10 +2010,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c8b0d44b5b6cda41b3d1dc51b996d8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pietre_terreno: {fileID: 469240815}
   GO_player: {fileID: 0}
   distanza_guardia: 2
   distanza_attacco: 0.5
   rb: {fileID: 469240809}
+  tempo_riposo_attacco_salti: 1
+  tempo_riposo_attacco_mazza: 1
+--- !u!114 &469240815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469240807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d90cf1014acefe4a9771b5a19778f9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pietre_terra_pf: {fileID: 2402484353416799066, guid: a54af0296cd23cf4c805f9c5b77fdaa6, type: 3}
 --- !u!1 &526377622
 GameObject:
   m_ObjectHideFlags: 0
@@ -7621,7 +7638,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 751572575}
   m_LocalRotation: {x: -0, y: 0, z: -0.54909563, w: 0.8357595}
-  m_LocalPosition: {x: 1.2810593, y: 2.2346427, z: 0}
+  m_LocalPosition: {x: 1.3410606, y: 2.2346427, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
