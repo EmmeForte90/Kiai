@@ -31,6 +31,9 @@ public class nemico_boss : MonoBehaviour
     private int num_pietre_lanciate_totale=3;
     private int num_pietre_lanciate_attuale=0;
 
+    private float tempo_rage=1f;
+    private float tempo_rage_attuale=0;
+
     private bool bool_morto=false;
 
     private string stato;
@@ -91,6 +94,14 @@ public class nemico_boss : MonoBehaviour
         else {horizontal=-1;}
         Flip();
 
+        if (tempo_rage_attuale>0){
+            tempo_rage_attuale-=(1f*Time.deltaTime);
+            if (tempo_rage_attuale<=0){
+                stato="tired";
+            }
+            return;
+        }
+
         if (tempo_anim_attacco_mazza_attuale>0){
             tempo_anim_attacco_mazza_attuale-=(1f*Time.deltaTime);
             if (tempo_anim_attacco_mazza_attuale<=0){
@@ -127,7 +138,7 @@ public class nemico_boss : MonoBehaviour
                 case 2:{attacco_tipo="mazza";break;}
                 case 3:{attacco_tipo="pietre";break;}
             }
-            attacco_tipo="mazza";
+            attacco_tipo="salti";
         }
 
         if (tempo_salto_attuale>0){
@@ -161,7 +172,7 @@ public class nemico_boss : MonoBehaviour
                     destinazione_salto_media=transform.position+(destinazione_salto-transform.position)/2 +Vector3.up *t;
 
                     tempo_salto_attuale=tempo_salto;
-                    stato="salto";
+                    stato="salti";
                     num_salti_attuale++;
 
                 } else {
@@ -178,7 +189,7 @@ public class nemico_boss : MonoBehaviour
                     StartCoroutine(genera_pietre_suolo(1.75f));
                 } else {
                     StartCoroutine(genera_pietre_suolo(1.5f));
-                    StartCoroutine(genera_pietre_suolo(2.85f));
+                    //StartCoroutine(genera_pietre_suolo(2.85f));
                     StartCoroutine(genera_pietre_suolo(3.5f));
                 }
                 break;
@@ -205,8 +216,8 @@ public class nemico_boss : MonoBehaviour
     private void FixedUpdate(){
         if (bool_morto){return;}
         switch (stato){
-            case "salto":{
-
+            case "salti":{
+                skeletonAnimation.AnimationName="battle/Jump/jump_loop";
                 break;
             }
             case "mazza":{
@@ -225,36 +236,44 @@ public class nemico_boss : MonoBehaviour
                 skeletonAnimation.AnimationName="battle/throw";
                 break;
             }
+            case "rage":{
+                skeletonAnimation.AnimationName="battle/rage";
+                break;
+            }
         }
     }
 
     private IEnumerator lancia_pietra(){
         yield return new WaitForSeconds(0.6f);
-        if (!bool_morto){
-            float xor=transform.position.x;
-            float yor=transform.position.y;
-            if (horizontal<0){xor-=2;} else {xor+=2;}
-            yor+=1.5f;
-            GameObject go_temp=Instantiate(pietra_lancio_pf);
-            go_temp.transform.position=new Vector3(xor,yor,transform.position.z);
+        if (tempo_rage_attuale<=0){
+            if (!bool_morto){
+                float xor=transform.position.x;
+                float yor=transform.position.y;
+                if (horizontal<0){xor-=2;} else {xor+=2;}
+                yor+=1.5f;
+                GameObject go_temp=Instantiate(pietra_lancio_pf);
+                go_temp.transform.position=new Vector3(xor,yor,transform.position.z);
+            }
         }
     }
 
     private IEnumerator genera_pietre_suolo(float tempo){
         yield return new WaitForSeconds(tempo);
-        if (!bool_morto){
-            pietre_terreno.resetta();
-            float xor=transform.position.x;
-            if (horizontal<0){xor-=4;} else {xor+=4;}
-            for (int i=1;i<=5;i++){
-                j=xor-5;
-                j+=(i*1.5f);
-                j-=1.5f;
-                j+=Random.Range(0f,3f);
-                
-                pietre_terreno.aggiungi(i, xor, transform.position.y, j, transform.position.y, transform.position.z);
+        if (tempo_rage_attuale<=0){
+            if (!bool_morto){
+                pietre_terreno.resetta();
+                float xor=transform.position.x;
+                if (horizontal<0){xor-=4;} else {xor+=4;}
+                for (int i=1;i<=5;i++){
+                    j=xor-5;
+                    j+=(i*1.5f);
+                    j-=1.5f;
+                    j+=Random.Range(0f,3f);
+                    
+                    pietre_terreno.aggiungi(i, xor, transform.position.y, j, transform.position.y, transform.position.z);
+                }
+                pietre_terreno.avvia();
             }
-            pietre_terreno.avvia();
         }
     }
 
@@ -287,6 +306,9 @@ public class nemico_boss : MonoBehaviour
                             tempo_lancio_pietra/=2;
 
                             tempo_anim_attacco_mazza=4.2f;
+
+                            tempo_rage_attuale+=tempo_rage;
+                            stato="rage";
                         //}
                     }
 
