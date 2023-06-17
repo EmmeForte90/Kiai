@@ -142,10 +142,19 @@ public class nemico_boss : MonoBehaviour
         }
 
         if (tempo_salto_attuale>0){
-            tempo_salto_attuale-=(1f*Time.deltaTime);
             salto_attivo=1-(tempo_salto_attuale/tempo_salto);
             if (tempo_salto_attuale<0){tempo_salto_attuale=0;}
+
+            if (salto_attivo>=0.9f){
+                if (stato!="schiacciare"){
+                    stato="schiacciare";
+                    StartCoroutine(termina_salto_crush());
+                }
+                return;
+            }
+            tempo_salto_attuale-=(1f*Time.deltaTime);
             transform.position=punto_parabola(origione_salto,destinazione_salto,destinazione_salto_media,t,salto_attivo);
+
 
             if (tempo_salto_attuale==0){
                 tempo_riposo_salto_attuale=tempo_riposo_salto;
@@ -216,6 +225,14 @@ public class nemico_boss : MonoBehaviour
     private void FixedUpdate(){
         if (bool_morto){return;}
         switch (stato){
+            case "idle":{
+                skeletonAnimation.AnimationName="battle/idle_battle";
+                break;
+            }
+            case "schiacciare":{
+                skeletonAnimation.AnimationName="battle/Jump/jump_crush";
+                break;
+            }
             case "salti":{
                 skeletonAnimation.AnimationName="battle/Jump/jump_loop";
                 break;
@@ -241,6 +258,13 @@ public class nemico_boss : MonoBehaviour
                 break;
             }
         }
+    }
+
+    private IEnumerator termina_salto_crush(){
+        yield return new WaitForSeconds(0.5f);
+        tempo_salto_attuale=0;
+        tempo_riposo_salto_attuale=tempo_riposo_salto;
+        stato="idle";
     }
 
     private IEnumerator lancia_pietra(){
