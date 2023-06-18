@@ -138,7 +138,7 @@ public class nemico_boss : MonoBehaviour
                 case 2:{attacco_tipo="mazza";break;}
                 case 3:{attacco_tipo="pietre";break;}
             }
-            attacco_tipo="salti";
+            //attacco_tipo="salti"; //debug
         }
 
         if (tempo_salto_attuale>0){
@@ -316,7 +316,7 @@ public class nemico_boss : MonoBehaviour
                     StartCoroutine(ripristina_colore());
 
                     if (!bool_arrabbiato){
-                        //if (vitalita<(vitalita_max/2)){
+                        if (vitalita<(vitalita_max/2)){
                             bool_arrabbiato=true;
                             tempo_riposo_attacco_salti=tempo_riposo_attacco_salti_arrabbiato;
                             tempo_riposo_attacco_mazza=tempo_riposo_attacco_mazza_arrabbiato;
@@ -333,7 +333,7 @@ public class nemico_boss : MonoBehaviour
 
                             tempo_rage_attuale+=tempo_rage;
                             stato="rage";
-                        //}
+                        }
                     }
 
                     if (vitalita<=0){
