@@ -8,7 +8,6 @@ public class ItemRapidMenu : MonoBehaviour
 {
     // Mappa che mappa gli id delle skill ai loro valori
     Dictionary<int, Item> itemMap = new Dictionary<int, Item>();
-   
     public float timeSelection = 0.1f; // ritardo tra la spawn di ogni moneta
 
     [HideInInspector]
@@ -98,6 +97,7 @@ public static ItemRapidMenu Instance;
         vertDir = Input.GetAxisRaw("Vertical");
 
 //Se il valore è zero cancella il numero dallo slot
+if(GameplayManager.instance.startGame){
     if(UpdateMenuRapido.Instance.MXV1 <= 0)
     {
         Slot1_T.text = null;
@@ -129,7 +129,7 @@ public static ItemRapidMenu Instance;
     {
         Slot8_T.text = null;
     }
-    }
+    }}
 
     public void AssignId(int id)
     {

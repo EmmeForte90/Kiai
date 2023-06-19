@@ -3738,6 +3738,11 @@ MonoBehaviour:
   idleAnimationName: idle
   HitAnimationName: talk
   _skeletonAnimation: {fileID: 3234308231770481590}
+  Sashimi: {fileID: 0}
+  BackB: {fileID: 0}
+  Kunai: {fileID: 0}
+  Shuriken: {fileID: 0}
+  Onigiri: {fileID: 0}
 --- !u!1 &3234308231773326392
 GameObject:
   m_ObjectHideFlags: 0

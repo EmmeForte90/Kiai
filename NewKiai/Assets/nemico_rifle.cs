@@ -62,6 +62,17 @@ public class nemico_rifle : MonoBehaviour
     public AudioMixer SFX;
     private bool sgmActive = false;
     // Start is called before the first frame update
+    
+[Header("Drop")]
+    public GameObject coinPrefab; // prefab per la moneta
+    private bool  SpawnC = false;
+    [SerializeField] public Transform CoinPoint;
+    public int maxCoins = 5; // numero massimo di monete che possono essere rilasciate
+    public float coinSpawnDelay = 5f; // ritardo tra la spawn di ogni moneta
+    private int randomChance;
+    private float coinForce = 5f; // forza con cui le monete saltano
+    private Vector2 coinForceVariance = new Vector2(1, 0); // varianza della forza con cui le monete saltano
+    private int coinCount; // conteggio delle monete
     void Start(){
         vitalita=vitalita_max;
         proiettile_default.SetActive(false);
@@ -223,6 +234,7 @@ public class nemico_rifle : MonoBehaviour
                     if (vitalita<=0){
                         bool_morto=true;
                         print ("è morto!");
+                        SpawnCoins();
                         skeletonAnimation.loop=false;
                         skeletonAnimation.AnimationName="die_back";
                         StartCoroutine(rimuovi());
@@ -232,6 +244,24 @@ public class nemico_rifle : MonoBehaviour
             }
         }
     }
+    public void SpawnCoins()
+{
+    if(!SpawnC)
+    {
+
+    for (int i = 0; i < maxCoins; i++)
+    {
+        // crea una nuova moneta
+        GameObject newCoin = Instantiate(coinPrefab, CoinPoint.position, Quaternion.identity);
+
+        // applica una forza casuale alla moneta per farla saltare
+        Vector2 randomForce = new Vector2(
+            Random.Range(-coinForceVariance.x, coinForceVariance.x), 2);
+        newCoin.GetComponent<Rigidbody2D>().AddForce(randomForce * coinForce, ForceMode2D.Impulse);
+    }
+        SpawnC = true;
+    }
+}
 void KiaiGive()
 {
     int randomChance = Random.Range(1, 10); // Genera un numero casuale compreso tra 1 e 10

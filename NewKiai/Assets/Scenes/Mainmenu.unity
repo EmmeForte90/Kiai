@@ -12301,6 +12301,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 466907426}
+    - target: {fileID: 5892456060195674086, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
+      propertyPath: GadgetM.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5892456060369802795, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1

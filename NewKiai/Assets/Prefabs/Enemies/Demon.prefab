@@ -182,6 +182,7 @@ MonoBehaviour:
   hitpoint: {fileID: 3605659403048453750}
   attack: {fileID: 9084018111640508060, guid: 8f8740b760cd40d42a709e29f2a953a7, type: 3}
   VFXSdeng: {fileID: 715449030417092151, guid: 4d9b720303b97684bb97a9911845b6b8, type: 3}
+  Noeff: {fileID: 5334578351707258239, guid: 7a9cf26f8dfef1d4c8eb484077596b47, type: 3}
   VFXExplode: {fileID: 7150525090956656152, guid: 2e6f6db1cc5e85f438c0156610186b85, type: 3}
   VFXHurt: {fileID: 6277231454409640187, guid: 32425d44a5ce0b9488d7881e1f00c227, type: 3}
   basePitch: 1
@@ -192,6 +193,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e9b886c147429ab4690603fe5038366d, type: 3}
   - {fileID: 8300000, guid: 58e7340de4968214f8fbcbf785906c4d, type: 3}
   - {fileID: 8300000, guid: a47440afe45923e459e7dd751296a9cc, type: 3}
+  - {fileID: 8300000, guid: 050aa3b8f55dc33409408ef7db9ecf23, type: 3}
   SFX: {fileID: 24100000, guid: 63f598184995bda419cd1ee5db5e6d03, type: 2}
 --- !u!33 &3788439280104206972
 MeshFilter:

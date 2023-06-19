@@ -17,9 +17,7 @@ public class palla_fuoco_demone_rule : MonoBehaviour
     private bool bool_distrutta=false;
 
     private bool bool_palla_appena_lanciata=true;
- [Header("VFX")]
-
-    [SerializeField] GameObject VFXExp;
+ 
 [Header("Audio")]
     [HideInInspector] public float basePitch = 1f;
     [HideInInspector] public float randomPitchOffset = 0.1f;
@@ -65,8 +63,7 @@ public class palla_fuoco_demone_rule : MonoBehaviour
             if (!bool_palla_appena_lanciata){
                 print ("colpito il demone!");
                 distruggi_palla_di_fuoco();
-                PlayMFX(0);
-                Instantiate(VFXExp, transform.position, transform.rotation);
+               
 
             }
         }

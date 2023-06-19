@@ -20,7 +20,8 @@ public class MerkantKitai : MonoBehaviour
     public TextMeshProUGUI Description; // Reference to the TextMeshProUGUI component
     public Image previewImages;
     private int prices;
-    
+    private int IDItem;
+
     public TextMeshProUGUI Value; // Reference to the TextMeshProUGUI component
     public Dialogues Dial;
 
@@ -234,6 +235,7 @@ public void Buy(Item newItem)
     //InventoryManager.Instance.AddItem(newItem);
     //InventoryManager.Instance.ListItem(newItem.id);
     //Add();
+    IDItem = newItem.id;
     newItem.value++;
     PlayMFX(0);
     dialogueMenu.text = "Thank you!"; // Reference to the TextMeshProUGUI component
@@ -241,6 +243,10 @@ public void Buy(Item newItem)
     GameplayManager.instance.moneyText.text = GameplayManager.instance.money.ToString();
     GameplayManager.instance.moneyTextM.text = GameplayManager.instance.money.ToString(); ;
     PuppetM.Instance.Idle();
+    InventoryManager.Instance.GadgetAc(IDItem);
+    InventoryManager.Instance.AddItem(newItem);
+    InventoryManager.Instance.ListItem(IDItem);
+    InventoryManager.Instance.ItemActive(IDItem);
     }else if(GameplayManager.instance.money < prices)
     {
     dialogueMenu.text = "Sorry, buddy, you don't have much money"; // Reference to the TextMeshProUGUI component

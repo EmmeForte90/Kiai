@@ -58,6 +58,7 @@ public class nemico_demon : MonoBehaviour
     [SerializeField] public Transform hitpoint;
     [SerializeField] GameObject attack;
     [SerializeField] GameObject VFXSdeng;
+    [SerializeField] GameObject Noeff;
     [SerializeField] GameObject VFXExplode;
     [SerializeField] GameObject VFXHurt;
 
@@ -267,6 +268,8 @@ public class nemico_demon : MonoBehaviour
                     }
                 } else {
                     print ("è invulnerabile...");
+                    Instantiate(Noeff, hitpoint.position, transform.rotation);
+                    PlayMFX(5);
                 }
                 break;
             }

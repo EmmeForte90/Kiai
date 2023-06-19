@@ -79,6 +79,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 86053142115f44044b608d87e9e6e582, type: 3}
   - {fileID: 8300000, guid: 58e7340de4968214f8fbcbf785906c4d, type: 3}
   SFX: {fileID: 24100000, guid: 63f598184995bda419cd1ee5db5e6d03, type: 2}
+  coinPrefab: {fileID: 8967968680885089756, guid: 6c7438847b08f434bac2a9a1def0c711, type: 3}
+  CoinPoint: {fileID: 1303270800597879337}
+  maxCoins: 5
+  coinSpawnDelay: 5
 --- !u!33 &1303270799086883145
 MeshFilter:
   m_ObjectHideFlags: 0
