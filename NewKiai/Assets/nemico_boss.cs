@@ -12,7 +12,7 @@ public class nemico_boss : MonoBehaviour
     [Header("Sistema Di HP")]
     public Scrollbar healthBar;
     private float vitalita;
-    private float vitalita_max=500;
+    public float vitalita_max=300;
 
     private float tempo_ricolpibile=0.5f;
     private bool bool_arrabbiato=false;
@@ -100,6 +100,11 @@ public class nemico_boss : MonoBehaviour
     private AudioSource[] bgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
     public AudioMixer SFX;
     private bool sgmActive = false;
+
+[Header("Fatality")]
+    public GameObject Fatality;
+    public GameObject Boss;
+
     void Start(){
         GO_player=GameObject.Find("Nekotaro");
         skeletonAnimation = GetComponent<SkeletonAnimation>();
@@ -271,6 +276,9 @@ void HandleEvent (TrackEntry trackEntry, Spine.Event e)
     }
     }
 
+/////////////////////////////////////////////////////////////////////////////////////////
+//SS
+
 void KiaiGive()
 {
     int randomChance = Random.Range(1, 10); // Genera un numero casuale compreso tra 1 e 10
@@ -287,7 +295,7 @@ void KiaiGive()
     }
 }
 
-
+/////////////////////////////////////////////////////////////////////////////////////////
 
     private void FixedUpdate(){
          if (!GameplayManager.instance.PauseStop)
@@ -327,6 +335,7 @@ void KiaiGive()
                 skeletonAnimation.AnimationName="battle/rage";
                 break;
             }
+            
         }
     }
     }
@@ -412,10 +421,21 @@ void KiaiGive()
 
                     if (vitalita<=0){
                         bool_morto=true;
-                        print ("è morto!");
                         skeletonAnimation.loop=false;
-                        skeletonAnimation.AnimationName="die_back";
-                        StartCoroutine(rimuovi());
+                        skeletonAnimation.AnimationName="tired";
+                        Fatality.gameObject.SetActive(true);
+                        Fatality.gameObject.transform.position = Boss.gameObject.transform.position; 
+                        if(Boss.transform.localScale.x > 0)
+                        {
+                        Fatality.transform.localScale = new Vector2(1, 1);
+                        }else if(Boss.transform.localScale.x < 0)
+                        {
+                        Fatality.transform.localScale = new Vector2(-1, 1);
+                        }
+                        Boss.gameObject.SetActive(false);
+
+
+                        //StartCoroutine(rimuovi());
                     }
                 }
                 break;
@@ -429,7 +449,10 @@ void KiaiGive()
     }
 
     private IEnumerator rimuovi(){
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(10f);
+         print ("è morto!");
+        skeletonAnimation.loop=false;
+        skeletonAnimation.AnimationName="die_back";
         Destroy(gameObject);
     }
 

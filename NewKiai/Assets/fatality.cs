@@ -8,6 +8,7 @@ using UnityEngine.Audio;
 
 public class fatality : MonoBehaviour
 {
+    [Header("Fatality")]
     public SkeletonAnimation spineAnimation;
     public GameObject FPoint;
     public GameObject fatalit;
@@ -16,6 +17,7 @@ public class fatality : MonoBehaviour
     private bool _isInTrigger = false;
     private Transform toy; // Variabile per il player
     public Transform Enemy; // Variabile per il player
+    public int watF;
 
     [SpineAnimation][SerializeField] private string tiredAnimationName;
     [SpineAnimation][SerializeField] private string fatalityAnimationName;
@@ -77,7 +79,7 @@ private void OnTriggerExit2D(Collider2D collision)
         yield return new WaitForSeconds(0.5f);
 
         // Avvia l'animazione di fatality sullo SpineAnimation
-        Move.instance.BossSpider();
+        Move.instance.Fatality(watF);
         spineAnimation.state.SetAnimation(2, fatalityAnimationName, false);
         // Attendi che l'animazione di fatality sia completata
         yield return new WaitForSeconds(1f);

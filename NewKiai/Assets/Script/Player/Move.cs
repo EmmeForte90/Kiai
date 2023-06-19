@@ -2687,6 +2687,43 @@ public void poseStalmate()
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Fatality Anim
+public void Fatality(int watF)
+{
+switch (watF) {
+        case 0:
+         if (currentAnimationName != BossDSpAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, BossDSpAnimationName, false);
+                    currentAnimationName = BossDSpAnimationName;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+                break;
+        case 1:
+         if (currentAnimationName != F_JumpAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, F_JumpAnimationName, false);
+                    currentAnimationName = F_JumpAnimationName;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+                break;
+        case 2:
+         if (currentAnimationName != F_DanceAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, F_DanceAnimationName, false);
+                    currentAnimationName = F_DanceAnimationName;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+                break;
+
+}
+
+}
 public void BossSpider()
 {
     if (currentAnimationName != BossDSpAnimationName)

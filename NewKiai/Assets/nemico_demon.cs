@@ -47,6 +47,11 @@ public class nemico_demon : MonoBehaviour
     private int index_posizioni;
 
     [SerializeField] private Rigidbody2D rb;
+    
+    [Header("Fatality")]
+    public GameObject Fatality;
+    public GameObject Boss;
+
  [Header("VFX")]
 
     [SerializeField] public Transform slashpoint;
@@ -194,6 +199,22 @@ public class nemico_demon : MonoBehaviour
         return;
     }}
 
+    void KiaiGive()
+{
+    int randomChance = Random.Range(1, 10); // Genera un numero casuale compreso tra 1 e 10
+
+    if (randomChance <= 8) // Se il numero casuale è compreso tra 1 e 8 (80% di probabilità), aggiungi 5 di essenza
+    {
+        PlayerHealth.Instance.currentKiai += 5;
+        PlayerHealth.Instance.IncreaseKiai(5);
+    }
+    else // Se il numero casuale è compreso tra 9 e 10 (20% di probabilità), aggiungi 10 di essenza
+    {
+        PlayerHealth.Instance.currentKiai += 10;
+        PlayerHealth.Instance.IncreaseKiai(10);
+    }
+}
+
     void OnTriggerEnter2D(Collider2D col)
     {
         if (bool_morto){return;}
@@ -229,9 +250,19 @@ public class nemico_demon : MonoBehaviour
                         if (vitalita<=0){
                             bool_morto=true;
                             print ("è morto!");
-                            skeletonAnimation.loop=false;
-                            skeletonAnimation.AnimationName="die_back";
-                            StartCoroutine(rimuovi());
+                           bool_morto=true;
+                        skeletonAnimation.loop=false;
+                        skeletonAnimation.AnimationName="tired";
+                        Fatality.gameObject.SetActive(true);
+                        Fatality.gameObject.transform.position = Boss.gameObject.transform.position; 
+                        if(Boss.transform.localScale.x > 0)
+                        {
+                        Fatality.transform.localScale = new Vector2(1, 1);
+                        }else if(Boss.transform.localScale.x < 0)
+                        {
+                        Fatality.transform.localScale = new Vector2(-1, 1);
+                        }
+                        Boss.gameObject.SetActive(false);
                         }
                     }
                 } else {
@@ -241,21 +272,7 @@ public class nemico_demon : MonoBehaviour
             }
         }
     }
-void KiaiGive()
-{
-    int randomChance = Random.Range(1, 10); // Genera un numero casuale compreso tra 1 e 10
 
-    if (randomChance <= 8) // Se il numero casuale è compreso tra 1 e 8 (80% di probabilità), aggiungi 5 di essenza
-    {
-        PlayerHealth.Instance.currentKiai += 5;
-        PlayerHealth.Instance.IncreaseKiai(5);
-    }
-    else // Se il numero casuale è compreso tra 9 e 10 (20% di probabilità), aggiungi 10 di essenza
-    {
-        PlayerHealth.Instance.currentKiai += 10;
-        PlayerHealth.Instance.IncreaseKiai(10);
-    }
-}
     private IEnumerator ripristina_colore(){
         yield return new WaitForSeconds(0.1f);
         skeletonAnimation.Skeleton.SetColor(Color.white);
