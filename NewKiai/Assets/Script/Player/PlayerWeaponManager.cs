@@ -23,6 +23,8 @@ public class PlayerWeaponManager : MonoBehaviour
     [SerializeField] private GameObject Taneghasima;
     [SerializeField] private GameObject multishuriken;
     [SerializeField] private GameObject Gigashuriken;
+    [SerializeField] private GameObject Sashimi;
+    [SerializeField] private GameObject Onigiri;
 
     public static PlayerWeaponManager instance;
 
@@ -91,7 +93,42 @@ public void SetWeapon(int WeaponID)
     case 6:
     Move.instance.SetBulletPrefab(Taneghasima);
     break; 
-      
+
+    case 7:
+    Move.instance.SetBulletPrefab(Taneghasima);
+    break;
+
+    case 8:
+    Move.instance.SetBulletPrefab(Taneghasima);
+    break;
+
+    case 9:
+    Move.instance.SetBulletPrefab(Taneghasima);
+    break;
+
+    case 10:
+    Move.instance.SetBulletPrefab(Taneghasima);
+    break; 
+
+    case 11:
+    Move.instance.SetBulletPrefab(Taneghasima);
+    break;
+    
+    case 12:
+    Move.instance.SetBulletPrefab(Taneghasima);
+    break;
+
+    case 13:
+    Move.instance.SetBulletPrefab(Taneghasima);
+    break;
+
+    case 14:
+    Move.instance.SetBulletPrefab(Onigiri);
+    break;
+
+    case 15:
+    Move.instance.SetBulletPrefab(Sashimi);
+    break; 
     }
     
 

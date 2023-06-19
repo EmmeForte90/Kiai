@@ -9842,6 +9842,7 @@ MonoBehaviour:
   F_SbemAnimationName: Fatality/Fatality_sbabam
   F_SickleAnimationName: Fatality/Fatality_sickle
   F_SlashAnimationName: Fatality/Fatality_slash
+  BossDSpAnimationName: 
   DashAttackAnimationName: Attack/SwordPlay/dashAtk
   swordDownAnimationName: Attack/Movement/hide_sword
   guardDownAnimationName: Attack/SwordPlay/guard
@@ -9864,6 +9865,7 @@ MonoBehaviour:
   isDeath: 0
   isAttacking: 0
   isAttackingAir: 0
+  isAttackingAirTimer: 2
   stopInput: 0
   NotStrangeAnimationTalk: 0
   basePitch: 1
@@ -9899,6 +9901,8 @@ MonoBehaviour:
   Taneghasima: {fileID: 7189770122163496149, guid: 13c8e3266382fc14a8f713c8ebc5b7c3, type: 3}
   multishuriken: {fileID: 2736084834115881256, guid: 3ed8236df75a0674a80b4730cc376614, type: 3}
   Gigashuriken: {fileID: 7280517522516413716, guid: 4f349302f0bc84c49af6e78faab0684a, type: 3}
+  Sashimi: {fileID: 1142641557336776611, guid: c1ab7781b8a96a04b99de37b7bc9a326, type: 3}
+  Onigiri: {fileID: 6301925181327904333, guid: f5b58137b16f969488d5540de3b5384e, type: 3}
 --- !u!114 &5892456059567638952
 MonoBehaviour:
   m_ObjectHideFlags: 0
