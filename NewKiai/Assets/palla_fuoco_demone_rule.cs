@@ -15,6 +15,8 @@ public class palla_fuoco_demone_rule : MonoBehaviour
     public Rigidbody2D rb;
     public SpriteRenderer sprite;
     private bool bool_distrutta=false;
+    [SerializeField] GameObject VFXExplode;
+    public int damage = 10;
 
     private bool bool_palla_appena_lanciata=true;
  
@@ -56,17 +58,22 @@ public class palla_fuoco_demone_rule : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.name == "Nekotaro"){
+            Instantiate(VFXExplode, transform.position, transform.rotation);
+            PlayMFX(0);
             print ("colpito il personaggio!");
             distruggi_palla_di_fuoco();
-        }
-        else if(other.gameObject.name == "Demon"){
-            if (!bool_palla_appena_lanciata){
-                print ("colpito il demone!");
-                distruggi_palla_di_fuoco();
-               
-
+              if(!Move.instance.isGuard)
+            {
+            if (!Move.instance.isDeath)
+            {
+                if (!Move.instance.isHurt)
+            {
+            PlayerHealth.Instance.Damage(damage);
+            //Move.instance.Knockback();            
             }
-        }
+            }
+        }}
+        
     }
  public void PlayMFX(int soundToPlay)
     {

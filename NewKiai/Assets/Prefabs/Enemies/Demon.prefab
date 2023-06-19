@@ -108,7 +108,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4937604793810966485}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.27, y: 0, z: 0}
+  m_LocalPosition: {x: 3.38, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -146,8 +146,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6086850762803232341}
   m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -1.37, z: 0}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3605659403048453750}
@@ -171,10 +171,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GO_player: {fileID: 0}
   distanza_attacco: 7
+  vitalita_max: 100
   palla_fuoco: {fileID: 4341635771391705194}
   posizioni:
-  - {x: 43.9, y: -3.354, z: 0}
-  - {x: 30.65, y: -3.354, z: 0}
+  - {x: -26, y: -1.3, z: 0}
+  - {x: -38, y: -1.3, z: 0}
   rb: {fileID: 0}
   Fatality: {fileID: 7218253081025985019}
   Boss: {fileID: 6086850762803232341}
@@ -331,7 +332,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &4200642553661735080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,7 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b33f9ad4580e915469c598ef5fa1f1f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VFXStamina_pf: {fileID: 8076617641765360351, guid: 7ecba01a0d04d814ba94bc49bf08dbe0, type: 3}
+  VFXStamina_pf: {fileID: 6465574130653637541, guid: 495bc30ef8c421c40bc92bcbfbbf4a78, type: 3}
   VFXStopStamina_pf: {fileID: 3711507905370246414, guid: 28c307509430d784893435f21c2f5133, type: 3}
   VFXStamina: {fileID: 0}
 --- !u!1 &6348808327879293856
@@ -460,8 +461,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7218253081025985019}
   m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.1000004, y: -0.045999527, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 33.22, y: -1.2, z: 0}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2150328018788504902}
@@ -854,9 +855,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8719254895777188612}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 36.27, y: -3.354, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6641154637500851804}
@@ -929,6 +930,10 @@ PrefabInstance:
       objectReference: {fileID: 24100000, guid: 63f598184995bda419cd1ee5db5e6d03, type: 2}
     - target: {fileID: 3907544656873770693, guid: 187255eb087efbe48bdaad8b076579c7, type: 3}
       propertyPath: VFXExp
+      value: 
+      objectReference: {fileID: 7150525090956656152, guid: 2e6f6db1cc5e85f438c0156610186b85, type: 3}
+    - target: {fileID: 3907544656873770693, guid: 187255eb087efbe48bdaad8b076579c7, type: 3}
+      propertyPath: VFXExplode
       value: 
       objectReference: {fileID: 7150525090956656152, guid: 2e6f6db1cc5e85f438c0156610186b85, type: 3}
     - target: {fileID: 3907544656873770693, guid: 187255eb087efbe48bdaad8b076579c7, type: 3}

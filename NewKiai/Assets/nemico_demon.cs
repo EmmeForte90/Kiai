@@ -21,7 +21,7 @@ public class nemico_demon : MonoBehaviour
 
     private bool bool_colpibile=true;
     private int vitalita;
-    private int vitalita_max=200;
+    public int vitalita_max=200;
     private float tempo_ricolpibile=0.5f;
     private bool bool_morto=false;
 

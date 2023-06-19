@@ -57,7 +57,6 @@ public static DestroyRock instance;
         {
             if(Move.instance.style == 1 && Move.instance.isCrushRock)
             {
-            Destroy(gameObject);
             PlayMFX(0);
             for (int i = 0; i < numPieces; i++)
             {
@@ -66,6 +65,7 @@ public static DestroyRock instance;
                 rockPiece.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-50, 50), Random.Range(-50, 50)));
                 Destroy(rockPiece, 2f);
             }
+            Destroy(gameObject);
             }else 
             {
                 Instantiate(VFXclang, pointVFX.transform.position, transform.rotation);
