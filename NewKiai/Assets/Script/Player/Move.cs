@@ -905,7 +905,7 @@ if(Input.GetKeyDown(KeyCode.X))
 //Guardia
 if (Input.GetButton("Fire3") && !isAttacking && !isAttackingAir && !isGuard && !NotStrangeAnimationTalk && !isCharging 
 && !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
-&& !StartKiai)
+&& !StartKiai && isGrounded())
 {
 if(GameplayManager.instance.styleIcon[5] == true ||
 GameplayManager.instance.styleIcon[0] == true ||
@@ -933,7 +933,7 @@ Stop();
 
 if (Input.GetButtonUp("Fire3") && !isAttacking && !isAttackingAir && isGuard && !NotStrangeAnimationTalk && !isCharging 
 && !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
-&& !StartKiai)
+&& !StartKiai && isGrounded())
 {
 if(GameplayManager.instance.styleIcon[5] == true ||
 GameplayManager.instance.styleIcon[0] == true ||
@@ -3213,6 +3213,7 @@ public void death()
              if (currentAnimationName != deathAnimationName)
                 {
                     _spineAnimationState.ClearTrack(1);
+                    Stop();
                     _spineAnimationState.SetAnimation(2, deathAnimationName, false);
                     currentAnimationName = deathAnimationName;
                     _spineAnimationState.Event += HandleEvent;

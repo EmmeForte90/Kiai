@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Spine;
 using Spine.Unity;
+using Spine;
+using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class nemico_bigkatana : MonoBehaviour
 {
@@ -38,14 +40,45 @@ public class nemico_bigkatana : MonoBehaviour
 
     [SerializeField] private Rigidbody2D rb;
     // Start is called before the first frame update
+ [Header("VFX")]
+
+    [SerializeField] public Transform slashpoint;
+    [SerializeField] public Transform hitpoint;
+    [SerializeField] GameObject attack;
+     [SerializeField] GameObject VFXSdeng;
+    [SerializeField] GameObject VFXHurt;
+ [Header("Audio")]
+    [HideInInspector] public float basePitch = 1f;
+    [HideInInspector] public float randomPitchOffset = 0.1f;
+    [SerializeField] public AudioClip[] listSound; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
+    private AudioSource[] bgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
+    public AudioMixer SFX;
+    private bool sgmActive = false;
+
     void Start(){
         stamina=stamina_max;
         vitalita=vitalita_max;
         GO_player=GameObject.Find("Nekotaro");
         skeletonAnimation = GetComponent<SkeletonAnimation>();
+        bgm = new AudioSource[listSound.Length]; // inizializza l'array di AudioSource con la stessa lunghezza dell'array di AudioClip
+        for (int i = 0; i < listSound.Length; i++) // scorre la lista di AudioClip
+        {
+            bgm[i] = gameObject.AddComponent<AudioSource>(); // crea un nuovo AudioSource come componente del game object attuale (quello a cui è attaccato lo script)
+            bgm[i].clip = listSound[i]; // assegna l'AudioClip corrispondente all'AudioSource creato
+            bgm[i].playOnAwake = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
+            bgm[i].loop = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
+
+        }
+ // Aggiunge i canali audio degli AudioSource all'output del mixer
+        foreach (AudioSource audioSource in bgm)
+        {
+        audioSource.outputAudioMixerGroup = SFX.FindMatchingGroups("Master")[0];
+        }
     }
 
     void Update(){
+         if (!GameplayManager.instance.PauseStop)
+        {
         if (bool_morto){return;}
         if (stamina_max>0){stamina_vfx_rule.scala_GO_stamina(stamina,stamina_max);}
         if (tempo_contrattacco>0){
@@ -90,16 +123,19 @@ public class nemico_bigkatana : MonoBehaviour
         else {
             stato="idle";
         }
-    }
+    }}
 
 
     private void FixedUpdate()
-    {
+    { 
+        if (!GameplayManager.instance.PauseStop)
+        {
         if (bool_morto){return;}
 
         switch (stato){
             case "attacco_grosso":{
                 skeletonAnimation.AnimationName = "attack_power/attack_power";
+                PlayMFX(0);
                 if (transform.position.x<GO_player.transform.position.x){horizontal=1;}
                 else {horizontal=-1;}
                 //xTarget = new Vector2(GO_player.transform.position.x, transform.position.y);
@@ -131,6 +167,7 @@ public class nemico_bigkatana : MonoBehaviour
                 if (transform.position.x<GO_player.transform.position.x){horizontal=1;}
                 else {horizontal=-1;}
                 skeletonAnimation.AnimationName = "attack_horizontal/attack_horizontal";
+                PlayMFX(0);
                 Flip();
                 break;
             }
@@ -144,7 +181,7 @@ public class nemico_bigkatana : MonoBehaviour
         }
 
         return;
-    }
+    }}
 
     void OnTriggerEnter2D(Collider2D col){
         if (bool_morto){return;}
@@ -153,6 +190,7 @@ public class nemico_bigkatana : MonoBehaviour
             case "Hitbox":{
                 if (stato=="contrattacco"){return;}
                 if (bool_colpibile){
+                    Move.instance.Knockback();            
                     bool_colpibile=false;
                     StartCoroutine(ritorna_ricolpibile());
 
@@ -162,6 +200,7 @@ public class nemico_bigkatana : MonoBehaviour
                     if (tempo_contrattacco>=3){
                         print ("devo contrattaccare");
                         stato="contrattacco";
+                        PlayMFX(0);
                         tempo_ritorna_idle=1;
                         //return;   //senza questo return, quando lui contrattacca, potrebbe essere ancora colpito; Mauro
                     } else {
@@ -171,6 +210,8 @@ public class nemico_bigkatana : MonoBehaviour
                             stamina-=5;
                             stamina_vfx_rule.stamina_zero(stamina);
                             stato="guardia";
+                            Instantiate(VFXSdeng, slashpoint.position, transform.rotation);
+                            PlayMFX(2);
                             print ("devo pararmi");
                             tempo_ritorna_idle=1;
                             return;
@@ -181,6 +222,9 @@ public class nemico_bigkatana : MonoBehaviour
                     print ("colpito! vitalita: "+vitalita);
 
                     skeletonAnimation.Skeleton.SetColor(Color.red);
+                    KiaiGive();
+                    PlayMFX(1);
+                    Instantiate(VFXHurt, hitpoint.position, transform.rotation);
                     StartCoroutine(ripristina_colore());
 
                     /*  //lui non và in knockback...
@@ -208,7 +252,21 @@ public class nemico_bigkatana : MonoBehaviour
             }
         }
     }
+void KiaiGive()
+{
+    int randomChance = Random.Range(1, 10); // Genera un numero casuale compreso tra 1 e 10
 
+    if (randomChance <= 8) // Se il numero casuale è compreso tra 1 e 8 (80% di probabilità), aggiungi 5 di essenza
+    {
+        PlayerHealth.Instance.currentKiai += 5;
+        PlayerHealth.Instance.IncreaseKiai(5);
+    }
+    else // Se il numero casuale è compreso tra 9 e 10 (20% di probabilità), aggiungi 10 di essenza
+    {
+        PlayerHealth.Instance.currentKiai += 10;
+        PlayerHealth.Instance.IncreaseKiai(10);
+    }
+}
     private IEnumerator ripristina_colore(){
         yield return new WaitForSeconds(0.1f);
         skeletonAnimation.Skeleton.SetColor(Color.white);
@@ -242,4 +300,13 @@ public class nemico_bigkatana : MonoBehaviour
         distanza=Mathf.Sqrt((dist_x*dist_x) + (dist_y*dist_y));
         return distanza;
     }
+
+    public void PlayMFX(int soundToPlay)
+    {
+        bgm[soundToPlay].Stop();
+        // Imposta la pitch dell'AudioSource in base ai valori specificati.
+        bgm[soundToPlay].pitch = basePitch + Random.Range(-randomPitchOffset, randomPitchOffset); 
+        bgm[soundToPlay].Play();
+    }
+
 }

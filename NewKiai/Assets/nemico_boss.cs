@@ -1,11 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Spine;
 using Spine.Unity;
+using Spine;
+using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class nemico_boss : MonoBehaviour
 {
+    [Header("Sistema Di HP")]
+    public Scrollbar healthBar;
+    private float vitalita;
+    private float vitalita_max=500;
+
     private float tempo_ricolpibile=0.5f;
     private bool bool_arrabbiato=false;
     private bool bool_colpibile=true;
@@ -22,8 +30,7 @@ public class nemico_boss : MonoBehaviour
     public float distanza_attacco=0.5f;
     private float distanza_temp;
     private Vector2 xTarget;
-    private float vitalita;
-    private float vitalita_max=500;
+
 
     private int num_salti_totale=3;
     private int num_salti_attuale=0;
@@ -77,17 +84,51 @@ public class nemico_boss : MonoBehaviour
     private Vector3 destinazione_salto_media;
     private float x_destinazione_salto;
     private int i;
-    private float j; 
+    private float j;
 
+ [Header("VFX")]
+
+    [SerializeField] public Transform slashpoint;
+    [SerializeField] public Transform hitpoint;
+    [SerializeField] GameObject attack;
+     [SerializeField] GameObject VFXSdeng;
+    [SerializeField] GameObject VFXHurt;
+ [Header("Audio")]
+    [HideInInspector] public float basePitch = 1f;
+    [HideInInspector] public float randomPitchOffset = 0.1f;
+    [SerializeField] public AudioClip[] listSound; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
+    private AudioSource[] bgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
+    public AudioMixer SFX;
+    private bool sgmActive = false;
     void Start(){
         GO_player=GameObject.Find("Nekotaro");
         skeletonAnimation = GetComponent<SkeletonAnimation>();
         vitalita=vitalita_max;
         attacco_tipo="mazza";
+        bgm = new AudioSource[listSound.Length]; // inizializza l'array di AudioSource con la stessa lunghezza dell'array di AudioClip
+        for (int i = 0; i < listSound.Length; i++) // scorre la lista di AudioClip
+        {
+            bgm[i] = gameObject.AddComponent<AudioSource>(); // crea un nuovo AudioSource come componente del game object attuale (quello a cui è attaccato lo script)
+            bgm[i].clip = listSound[i]; // assegna l'AudioClip corrispondente all'AudioSource creato
+            bgm[i].playOnAwake = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
+            bgm[i].loop = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
+
+        }
+ // Aggiunge i canali audio degli AudioSource all'output del mixer
+        foreach (AudioSource audioSource in bgm)
+        {
+        audioSource.outputAudioMixerGroup = SFX.FindMatchingGroups("Master")[0];
+        }
     }
 
     // Update is called once per frame
     void Update(){
+         if (!GameplayManager.instance.PauseStop)
+        {
+
+    healthBar.size = vitalita / vitalita_max;
+    healthBar.size = Mathf.Clamp(healthBar.size, 0.01f, 1);
+
         if (bool_morto){return;}
 
         if (transform.position.x<GO_player.transform.position.x){horizontal=1;}
@@ -221,8 +262,36 @@ public class nemico_boss : MonoBehaviour
             }
         }
     }
+    }
+void HandleEvent (TrackEntry trackEntry, Spine.Event e) 
+    {
+        if (e.Data.Name == "SpawnRock") 
+    {
+        PlayMFX(2);
+    }
+    }
+
+void KiaiGive()
+{
+    int randomChance = Random.Range(1, 10); // Genera un numero casuale compreso tra 1 e 10
+
+    if (randomChance <= 8) // Se il numero casuale è compreso tra 1 e 8 (80% di probabilità), aggiungi 5 di essenza
+    {
+        PlayerHealth.Instance.currentKiai += 5;
+        PlayerHealth.Instance.IncreaseKiai(5);
+    }
+    else // Se il numero casuale è compreso tra 9 e 10 (20% di probabilità), aggiungi 10 di essenza
+    {
+        PlayerHealth.Instance.currentKiai += 10;
+        PlayerHealth.Instance.IncreaseKiai(10);
+    }
+}
+
+
 
     private void FixedUpdate(){
+         if (!GameplayManager.instance.PauseStop)
+        {
         if (bool_morto){return;}
         switch (stato){
             case "idle":{
@@ -231,6 +300,7 @@ public class nemico_boss : MonoBehaviour
             }
             case "schiacciare":{
                 skeletonAnimation.AnimationName="battle/Jump/jump_crush";
+                PlayMFX(2);
                 break;
             }
             case "salti":{
@@ -258,6 +328,7 @@ public class nemico_boss : MonoBehaviour
                 break;
             }
         }
+    }
     }
 
     private IEnumerator termina_salto_crush(){
@@ -313,6 +384,9 @@ public class nemico_boss : MonoBehaviour
                     vitalita-=10;
 
                     skeletonAnimation.Skeleton.SetColor(Color.red);
+                    KiaiGive();
+                    PlayMFX(1);
+                    Instantiate(VFXHurt, hitpoint.position, transform.rotation);
                     StartCoroutine(ripristina_colore());
 
                     if (!bool_arrabbiato){
@@ -385,4 +459,13 @@ public class nemico_boss : MonoBehaviour
             transform.localScale = localScale;
         }
     }
+
+    public void PlayMFX(int soundToPlay)
+    {
+        bgm[soundToPlay].Stop();
+        // Imposta la pitch dell'AudioSource in base ai valori specificati.
+        bgm[soundToPlay].pitch = basePitch + Random.Range(-randomPitchOffset, randomPitchOffset); 
+        bgm[soundToPlay].Play();
+    }
+
 }

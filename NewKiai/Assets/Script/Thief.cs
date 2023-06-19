@@ -549,6 +549,7 @@ public void Damage(int damage)
     if (isGuard) 
     {  
     Instantiate(VFXSdeng, slashpoint.position, transform.rotation);
+    PlayMFX(0);
     GameplayManager.instance.sbam();
     damage = 0;
     PlayMFX(0);

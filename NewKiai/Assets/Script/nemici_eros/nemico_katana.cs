@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Spine;
 using Spine.Unity;
+using Spine;
+using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class nemico_katana : MonoBehaviour
 {
@@ -50,15 +52,48 @@ public class nemico_katana : MonoBehaviour
     private Vector2 direzione_knockback;
     public float forza_knockback=100f;
 
+    [Header("VFX")]
+
+    [SerializeField] public Transform slashpoint;
+    [SerializeField] public Transform hitpoint;
+    [SerializeField] GameObject attack;
+     [SerializeField] GameObject VFXSdeng;
+    [SerializeField] GameObject VFXHurt;
+
+ [Header("Audio")]
+    [HideInInspector] public float basePitch = 1f;
+    [HideInInspector] public float randomPitchOffset = 0.1f;
+    [SerializeField] public AudioClip[] listSound; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
+    private AudioSource[] bgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
+    public AudioMixer SFX;
+    private bool sgmActive = false;
+
+
     // Start is called before the first frame update
     void Start(){
         stamina=stamina_max;
         GO_player=GameObject.Find("Nekotaro");
         skeletonAnimation = GetComponent<SkeletonAnimation>();
         vitalita=vitalita_max;
+         bgm = new AudioSource[listSound.Length]; // inizializza l'array di AudioSource con la stessa lunghezza dell'array di AudioClip
+        for (int i = 0; i < listSound.Length; i++) // scorre la lista di AudioClip
+        {
+            bgm[i] = gameObject.AddComponent<AudioSource>(); // crea un nuovo AudioSource come componente del game object attuale (quello a cui è attaccato lo script)
+            bgm[i].clip = listSound[i]; // assegna l'AudioClip corrispondente all'AudioSource creato
+            bgm[i].playOnAwake = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
+            bgm[i].loop = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
+
+        }
+ // Aggiunge i canali audio degli AudioSource all'output del mixer
+        foreach (AudioSource audioSource in bgm)
+        {
+        audioSource.outputAudioMixerGroup = SFX.FindMatchingGroups("Master")[0];
+        }
     }
 
     void Update(){
+         if (!GameplayManager.instance.PauseStop)
+        {
         if (bool_morto){return;}
         if (tempo_knockback_attuale>0){
             rb.AddForce(direzione_knockback*forza_knockback);
@@ -117,7 +152,7 @@ public class nemico_katana : MonoBehaviour
         else {
             stato="idle";
         }
-    }
+    }}
 
     private IEnumerator ferma_attacco(){    
         yield return new WaitForSeconds(tempo_attacco);
@@ -129,6 +164,8 @@ public class nemico_katana : MonoBehaviour
 
     private void FixedUpdate()
     {
+         if (!GameplayManager.instance.PauseStop)
+        {
         if (bool_morto){return;}
         //print ("stato: "+stato);
         if (tempo_stanchezza>0){
@@ -148,11 +185,13 @@ public class nemico_katana : MonoBehaviour
                 if (transform.position.x<GO_player.transform.position.x){horizontal=1;}
                 else {horizontal=-1;}
                 skeletonAnimation.AnimationName = "vertical_up/attack_vertical_up";
+                PlayMFX(0);
                 Flip();
                 break;  
             }
             case "attacco":{
                 skeletonAnimation.AnimationName = "vertical_bottom/attack_vertical_bottom";
+                PlayMFX(0);
                 StartCoroutine(ferma_attacco());
                 break;  
             }
@@ -190,7 +229,7 @@ public class nemico_katana : MonoBehaviour
         }
 
         return;
-    }
+    }}
 
     void OnTriggerEnter2D(Collider2D col)
     {
@@ -214,6 +253,8 @@ public class nemico_katana : MonoBehaviour
                                 return;   //senza questo return, quando lui contrattacca, potrebbe essere ancora colpito; Mauro
                             } else {
                                 print ("paro. Stamina: "+stamina);
+                                Instantiate(VFXSdeng, hitpoint.position, transform.rotation);
+                                PlayMFX(2);
                                 stato="guardia";
                                 tempo_ritorna_idle=1;
                                 return;
@@ -224,6 +265,9 @@ public class nemico_katana : MonoBehaviour
                     vitalita-=10;
 
                     skeletonAnimation.Skeleton.SetColor(Color.red);
+                    KiaiGive();
+                    PlayMFX(1);
+                    Instantiate(VFXHurt, hitpoint.position, transform.rotation);
                     StartCoroutine(ripristina_colore());
 
                     direzione_knockback = (transform.position - GO_player.transform.position).normalized;
@@ -254,7 +298,21 @@ public class nemico_katana : MonoBehaviour
             }
         }
     }
+void KiaiGive()
+{
+    int randomChance = Random.Range(1, 10); // Genera un numero casuale compreso tra 1 e 10
 
+    if (randomChance <= 8) // Se il numero casuale è compreso tra 1 e 8 (80% di probabilità), aggiungi 5 di essenza
+    {
+        PlayerHealth.Instance.currentKiai += 5;
+        PlayerHealth.Instance.IncreaseKiai(5);
+    }
+    else // Se il numero casuale è compreso tra 9 e 10 (20% di probabilità), aggiungi 10 di essenza
+    {
+        PlayerHealth.Instance.currentKiai += 10;
+        PlayerHealth.Instance.IncreaseKiai(10);
+    }
+}
     private IEnumerator ripristina_colore(){
         yield return new WaitForSeconds(0.1f);
         skeletonAnimation.Skeleton.SetColor(Color.white);
@@ -288,4 +346,13 @@ public class nemico_katana : MonoBehaviour
         distanza=Mathf.Sqrt((dist_x*dist_x) + (dist_y*dist_y));
         return distanza;
     }
+
+    public void PlayMFX(int soundToPlay)
+    {
+        bgm[soundToPlay].Stop();
+        // Imposta la pitch dell'AudioSource in base ai valori specificati.
+        bgm[soundToPlay].pitch = basePitch + Random.Range(-randomPitchOffset, randomPitchOffset); 
+        bgm[soundToPlay].Play();
+    }
+
 }

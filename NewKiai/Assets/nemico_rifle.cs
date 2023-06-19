@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Spine;
 using Spine.Unity;
+using Spine;
+using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class nemico_rifle : MonoBehaviour
 {
@@ -44,6 +46,21 @@ public class nemico_rifle : MonoBehaviour
     private int index_posizioni;
 
     [SerializeField] private Rigidbody2D rb;
+
+    [Header("VFX")]
+
+    [SerializeField] public Transform slashpoint;
+    [SerializeField] public Transform hitpoint;
+    [SerializeField] GameObject attack;
+     [SerializeField] GameObject VFXSdeng;
+    [SerializeField] GameObject VFXHurt;
+    [Header("Audio")]
+    [HideInInspector] public float basePitch = 1f;
+    [HideInInspector] public float randomPitchOffset = 0.1f;
+    [SerializeField] public AudioClip[] listSound; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
+    private AudioSource[] bgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
+    public AudioMixer SFX;
+    private bool sgmActive = false;
     // Start is called before the first frame update
     void Start(){
         vitalita=vitalita_max;
@@ -51,9 +68,25 @@ public class nemico_rifle : MonoBehaviour
         //bool_player_visto=true; //debug
         GO_player=GameObject.Find("Nekotaro");
         skeletonAnimation = GetComponent<SkeletonAnimation>();
+         bgm = new AudioSource[listSound.Length]; // inizializza l'array di AudioSource con la stessa lunghezza dell'array di AudioClip
+        for (int i = 0; i < listSound.Length; i++) // scorre la lista di AudioClip
+        {
+            bgm[i] = gameObject.AddComponent<AudioSource>(); // crea un nuovo AudioSource come componente del game object attuale (quello a cui è attaccato lo script)
+            bgm[i].clip = listSound[i]; // assegna l'AudioClip corrispondente all'AudioSource creato
+            bgm[i].playOnAwake = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
+            bgm[i].loop = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
+
+        }
+ // Aggiunge i canali audio degli AudioSource all'output del mixer
+        foreach (AudioSource audioSource in bgm)
+        {
+        audioSource.outputAudioMixerGroup = SFX.FindMatchingGroups("Master")[0];
+        }
     }
 
     void Update(){
+         if (!GameplayManager.instance.PauseStop)
+        {
         if (bool_morto){return;}
         if (tempo_indietreggia_attuale>0){
             tempo_indietreggia_attuale-=(1f*Time.deltaTime);
@@ -103,10 +136,12 @@ public class nemico_rifle : MonoBehaviour
             stato="idle";
         }
         //print ("stato: "+stato);
-    }
+    }}
 
     private void FixedUpdate()
     {
+         if (!GameplayManager.instance.PauseStop)
+        {
         if (bool_morto){return;}
 
         switch (stato){
@@ -155,7 +190,7 @@ public class nemico_rifle : MonoBehaviour
         }
 
         return;
-    }
+    }}
 
     void OnTriggerEnter2D(Collider2D col)
     {
@@ -169,6 +204,9 @@ public class nemico_rifle : MonoBehaviour
                     vitalita-=10;
 
                     skeletonAnimation.Skeleton.SetColor(Color.red);
+                    PlayMFX(1);
+                    KiaiGive();
+                    Instantiate(VFXHurt, hitpoint.position, transform.rotation);
                     StartCoroutine(ripristina_colore());
 
                     float posizione_x=transform.position.x;
@@ -194,7 +232,21 @@ public class nemico_rifle : MonoBehaviour
             }
         }
     }
+void KiaiGive()
+{
+    int randomChance = Random.Range(1, 10); // Genera un numero casuale compreso tra 1 e 10
 
+    if (randomChance <= 8) // Se il numero casuale è compreso tra 1 e 8 (80% di probabilità), aggiungi 5 di essenza
+    {
+        PlayerHealth.Instance.currentKiai += 5;
+        PlayerHealth.Instance.IncreaseKiai(5);
+    }
+    else // Se il numero casuale è compreso tra 9 e 10 (20% di probabilità), aggiungi 10 di essenza
+    {
+        PlayerHealth.Instance.currentKiai += 10;
+        PlayerHealth.Instance.IncreaseKiai(10);
+    }
+}
     private IEnumerator ripristina_colore(){
         yield return new WaitForSeconds(0.1f);
         skeletonAnimation.Skeleton.SetColor(Color.white);
@@ -227,5 +279,13 @@ public class nemico_rifle : MonoBehaviour
         int dist_y=Mathf.Abs(yor - yar);
         distanza=Mathf.Sqrt((dist_x*dist_x) + (dist_y*dist_y));
         return distanza;
+    }
+
+    public void PlayMFX(int soundToPlay)
+    {
+        bgm[soundToPlay].Stop();
+        // Imposta la pitch dell'AudioSource in base ai valori specificati.
+        bgm[soundToPlay].pitch = basePitch + Random.Range(-randomPitchOffset, randomPitchOffset); 
+        bgm[soundToPlay].Play();
     }
 }
