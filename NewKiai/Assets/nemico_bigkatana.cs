@@ -16,6 +16,8 @@ public class nemico_bigkatana : MonoBehaviour
     private bool bool_dir_dx = true;
     private SkeletonAnimation skeletonAnimation;
     public GameObject GO_player;
+
+private bool OneDie = false;
     public float distanza_attacco=3f;
     private float distanza_temp;
     private Vector2 xTarget;
@@ -243,6 +245,14 @@ public class nemico_bigkatana : MonoBehaviour
                     if (vitalita<=0){
                         bool_morto=true;
                         print ("è morto!");
+                        if(GameplayManager.instance.ordalia)
+                        {//Se è in un ordalia lo conteggia
+                            if(!OneDie)
+                            {
+                            GameplayManager.instance.EnemyDefeat();
+                            OneDie = true;
+                            }
+                        }
                         skeletonAnimation.loop=false;
                         skeletonAnimation.AnimationName="die_back";
                         StartCoroutine(rimuovi());

@@ -28,6 +28,7 @@ public class nemico_bow : MonoBehaviour
 
     private float tempo_sparo=0.3f;
     private float tempo_sparo_attuale=0;
+private bool OneDie = false;
 
     private float tempo_ricarica=1f;
     private float tempo_ricarica_attuale=0;
@@ -253,6 +254,14 @@ public void SpawnCoins()
                         bool_morto=true;
                         print ("è morto!");
                         SpawnCoins();
+                        if(GameplayManager.instance.ordalia)
+                        {//Se è in un ordalia lo conteggia
+                            if(!OneDie)
+                            {
+                            GameplayManager.instance.EnemyDefeat();
+                            OneDie = true;
+                            }
+                        }
                         skeletonAnimation.loop=false;
                         skeletonAnimation.AnimationName="die_back";
                         StartCoroutine(rimuovi());

@@ -39,6 +39,7 @@ public class nemico_rifle : MonoBehaviour
     private int vitalita_max=30;
     private float tempo_ricolpibile=0.5f;
     private bool bool_morto=false;
+private bool OneDie = false;
 
     private string stato;
     
@@ -235,6 +236,14 @@ public class nemico_rifle : MonoBehaviour
                         bool_morto=true;
                         print ("è morto!");
                         SpawnCoins();
+                        if(GameplayManager.instance.ordalia)
+                        {//Se è in un ordalia lo conteggia
+                            if(!OneDie)
+                            {
+                            GameplayManager.instance.EnemyDefeat();
+                            OneDie = true;
+                            }
+                        }
                         skeletonAnimation.loop=false;
                         skeletonAnimation.AnimationName="die_back";
                         StartCoroutine(rimuovi());

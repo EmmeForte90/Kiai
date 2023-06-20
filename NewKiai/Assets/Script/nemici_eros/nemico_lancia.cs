@@ -14,6 +14,8 @@ public class nemico_lancia : MonoBehaviour
     private float velocita = 4f;
     private float velocita_corsa = 6f;
     private bool bool_dir_dx = true;
+    private bool OneDie = false;
+
     private SkeletonAnimation skeletonAnimation;
     public GameObject GO_player;
     public float distanza_guardia=7f;
@@ -282,6 +284,14 @@ void KiaiGive()
                         bool_morto=true;
                         print ("è morto!");
                         SpawnCoins();
+                        if(GameplayManager.instance.ordalia)
+                        {//Se è in un ordalia lo conteggia
+                            if(!OneDie)
+                            {
+                            GameplayManager.instance.EnemyDefeat();
+                            OneDie = true;
+                            }
+                        }
                         skeletonAnimation.loop=false;
                         skeletonAnimation.AnimationName="die_back";
                         StartCoroutine(rimuovi());

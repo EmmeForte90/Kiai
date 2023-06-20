@@ -18,6 +18,7 @@ public class nemico_katana : MonoBehaviour
     public float distanza_attacco=0.5f;
     private float distanza_temp;
     private Vector2 xTarget;
+private bool OneDie = false;
 
     // valori per gli stessi ma con la stamina
     private float velocita_ricarica_stamina=1;
@@ -315,6 +316,14 @@ public void SpawnCoins()
 
                     if (vitalita<=0){
                         bool_morto=true;
+                        if(GameplayManager.instance.ordalia)
+                        {//Se è in un ordalia lo conteggia
+                            if(!OneDie)
+                            {
+                            GameplayManager.instance.EnemyDefeat();
+                            OneDie = true;
+                            }
+                        }
                         print ("è morto!");
                         SpawnCoins();
                         skeletonAnimation.loop=false;
