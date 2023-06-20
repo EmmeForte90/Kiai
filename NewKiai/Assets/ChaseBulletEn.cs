@@ -40,11 +40,11 @@ public class ChaseBulletEn : MonoBehaviour
                 if (!Move.instance.isHurt)
             {
             PlayerHealth.Instance.Damage(attackDamage);
-            Move.instance.Knockback();            
+            Move.instance.KnockbackS();            
 
             }}}if(Move.instance.isGuard)
             {
-                Move.instance.Knockback(); 
+                Move.instance.KnockbackS(); 
                 Move.instance.GuardHit(); 
                 PlayerHealth.Instance.currentStamina -= damagestamina;           
             }

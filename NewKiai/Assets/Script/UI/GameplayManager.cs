@@ -545,7 +545,7 @@ private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
                 if (OrdaliaActive[i] && i == Id)
                 {
                     // Imposta ordaliT.FirstD a false
-                    ordaliT.OrdaliaDosentExist();
+                    ordaliT.OrdaliaDoesntExist();
                     break;
                 }
             }

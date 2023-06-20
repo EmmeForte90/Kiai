@@ -46,8 +46,8 @@ if(GameplayManager.instance.styleIcon[0] == true)
         TimeHitbox = 0.5f;
         GameplayManager.instance.ComboCount();
         CanTake = true;
-        IDamegable hit = other.GetComponent<IDamegable>();
-          hit.Damage(Damage);
+        //IDamegable hit = other.GetComponent<IDamegable>();
+          //hit.Damage(Damage);
             //Debug.Log("Damage:" + Player.Damage);
             if(Move.instance.rb.velocity.y > 0)
             {               
@@ -67,8 +67,8 @@ if(GameplayManager.instance.styleIcon[1] == true)
         TimeHitbox = 2f;
         GameplayManager.instance.ComboCount();
         CanTake = true;
-        IDamegable hit = other.GetComponent<IDamegable>();
-           hit.Damage(Damage);
+        //IDamegable hit = other.GetComponent<IDamegable>();
+          // hit.Damage(Damage);
             //Debug.Log("Damage:" + Player.Damage);
             if(Move.instance.rb.velocity.y > 0)
             {               
@@ -88,8 +88,8 @@ if(GameplayManager.instance.styleIcon[2] == true)
         TimeHitbox = 0.7f;
         GameplayManager.instance.ComboCount();
         CanTake = true;
-        IDamegable hit = other.GetComponent<IDamegable>();
-          hit.Damage(Damage);
+       // IDamegable hit = other.GetComponent<IDamegable>();
+       //   hit.Damage(Damage);
             //Debug.Log("Damage:" + Player.Damage);
             if(Move.instance.rb.velocity.y > 0)
             {               
@@ -109,8 +109,8 @@ if(GameplayManager.instance.styleIcon[3] == true)
         TimeHitbox = 0.5f;
         GameplayManager.instance.ComboCount();
         CanTake = true;
-        IDamegable hit = other.GetComponent<IDamegable>();
-         hit.Damage(Damage);
+       // IDamegable hit = other.GetComponent<IDamegable>();
+       //  hit.Damage(Damage);
             //Debug.Log("Damage:" + Player.Damage);
             if(Move.instance.rb.velocity.y > 0)
             {               
@@ -127,8 +127,8 @@ if(GameplayManager.instance.styleIcon[4] == true)
 
         TimeHitbox = 0.5f;
         GameplayManager.instance.ComboCount();
-        IDamegable hit = other.GetComponent<IDamegable>();
-         hit.Damage(Damage);
+       // IDamegable hit = other.GetComponent<IDamegable>();
+       //  hit.Damage(Damage);
             //Debug.Log("Damage:" + Player.Damage);
             if(Move.instance.rb.velocity.y > 0)
             {               
@@ -143,8 +143,8 @@ if(GameplayManager.instance.styleIcon[5] == true)
     //Debug.Log("Void"+ Damage);
     TimeHitbox = 0.3f;
     GameplayManager.instance.ComboCount();
-     IDamegable hit = other.GetComponent<IDamegable>();
-        hit.Damage(Damage);
+    // IDamegable hit = other.GetComponent<IDamegable>();
+      //  hit.Damage(Damage);
             //Debug.Log("Damage:" + Player.Damage);
             if(Move.instance.rb.velocity.y > 0)
             {               
@@ -160,11 +160,11 @@ if(GameplayManager.instance.styleIcon[5] == true)
         {       
             CanTake = true;
             //SClang.Play();                   
-            Move.instance.Knockback();
+            Move.instance.KnockbackS();
             if(Move.instance.rb.velocity.y > 0)
             {
                 GameplayManager.instance.sbam();
-                Move.instance.Knockback(); 
+                Move.instance.KnockbackS(); 
                 Move.instance.isBump = true;
                 Move.instance.Bump();
             }

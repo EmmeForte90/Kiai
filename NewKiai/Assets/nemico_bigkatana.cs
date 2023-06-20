@@ -190,7 +190,7 @@ public class nemico_bigkatana : MonoBehaviour
             case "Hitbox":{
                 if (stato=="contrattacco"){return;}
                 if (bool_colpibile){
-                    Move.instance.Knockback();            
+                    Move.instance.KnockbackS();            
                     bool_colpibile=false;
                     StartCoroutine(ritorna_ricolpibile());
 

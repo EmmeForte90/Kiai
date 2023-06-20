@@ -53,8 +53,8 @@ public class Move : MonoBehaviour
     [SerializeField] private float bumpForce;
 
     [Header("Knockback")]
-    [SerializeField] public float knockForce = 10f;
-    [SerializeField] public int _knockForce = 200;
+    [SerializeField] public int knockForceShort = 500;
+    [SerializeField] public int knockForceLong = 50000;
 
     bool canDoubleJump = false;
     [HideInInspector] public float groundDelay = 0.1f; // The minimum time before the player can jump again after touching the ground
@@ -835,7 +835,7 @@ if(drawsword)
 {if(Input.GetButtonDown("Hsword") 
 && !isAttacking && !isAttackingAir && !isGuard && !NotStrangeAnimationTalk && !isCharging 
 && !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
-&& !StartKiai)
+&& !StartKiai && isGrounded())
             {drawsword = false;
             PlayMFX(5);
             repostsword();
@@ -893,7 +893,7 @@ changeStyle();
             }
 if(Input.GetKeyDown(KeyCode.X))
             {
-                Knockback();
+                KnockbackS();
                 Debug.Log("S");
                 //Knockback();
                 //PlayerHealth.Instance.IncreaseKiai(-10);
@@ -1599,44 +1599,46 @@ public void Bump()
         }
     }
 
-public void Knockback()
+public void KnockbackS()
+{
+    Vector2 knockbackDirection = Vector2.zero;
+
+    if (transform.localScale.x < 0)
     {
-         // applica l'impulso del salto se il personaggio è a contatto con il terreno
-        lastTimeJump = Time.time + jumpDelay;
-        rb.gravityScale = 0f; // disattiva la gravità 
-        if (transform.localScale.x < 0)
-        {
-        rb.AddForce(new Vector2(knockForce, 0f), ForceMode2D.Impulse);
-        }
-        else if (transform.localScale.x > 0)
-        {
-        rb.AddForce(new Vector2(-knockForce, 0f), ForceMode2D.Impulse);
-        }
-         else if (horDir == 0)
-        {
-        rb.AddForce(new Vector2(-knockForce, 0f), ForceMode2D.Impulse);
-        }
+        knockbackDirection = new Vector2(knockForceShort, 0f);
+    }
+    else if (transform.localScale.x > 0)
+    {
+        knockbackDirection = new Vector2(-knockForceShort, 0f);
+    }
+    else if (horDir == 0)
+    {
+        knockbackDirection = new Vector2(-knockForceShort, 0f);
     }
 
+    rb.AddForce(knockbackDirection, ForceMode2D.Impulse);
+}
+
 public void KnockbackLong()
+{
+    BigHurt();
+    Vector2 knockbackDirection = Vector2.zero;
+
+    if (transform.localScale.x < 0)
     {
-        BigHurt();
-        lastTimeJump = Time.time + jumpDelay;
-        rb.gravityScale = 0f; // disattiva la gravità
-          // applica l'impulso del salto se il personaggio è a contatto con il terreno
-        if (transform.localScale.x < 0)
-        {
-        rb.AddForce(new Vector2(_knockForce, 0f), ForceMode2D.Impulse);
-        }
-        else if (transform.localScale.x > 0)
-        {
-        rb.AddForce(new Vector2(-_knockForce, 0f), ForceMode2D.Impulse);
-        }
-         else if (horDir == 0)
-        {
-        rb.AddForce(new Vector2(-_knockForce, 0f), ForceMode2D.Impulse);
-        }
+        knockbackDirection = new Vector2(-knockForceLong, 0f);
     }
+    else if (transform.localScale.x > 0)
+    {
+        knockbackDirection = new Vector2(knockForceLong, 0f);
+    }
+    else if (horDir == 0)
+    {
+        knockbackDirection = new Vector2(knockForceLong, 0f);
+    }
+
+    rb.AddForce(knockbackDirection, ForceMode2D.Impulse);
+}
         
     
     

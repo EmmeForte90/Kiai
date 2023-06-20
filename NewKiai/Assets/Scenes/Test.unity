@@ -33308,6 +33308,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6205270610583848479, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
+      propertyPath: knockbackForce
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
 --- !u!1001 &6606611648551425345
@@ -33802,6 +33806,22 @@ PrefabInstance:
     - target: {fileID: 3788439280104206972, guid: a43ab3bcfdfb5754f982aa6efefb14f1, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5283276487775872090, guid: a43ab3bcfdfb5754f982aa6efefb14f1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.4923702
+      objectReference: {fileID: 0}
+    - target: {fileID: 5283276487775872090, guid: a43ab3bcfdfb5754f982aa6efefb14f1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.8037984
+      objectReference: {fileID: 0}
+    - target: {fileID: 5283276487775872090, guid: a43ab3bcfdfb5754f982aa6efefb14f1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9977315
+      objectReference: {fileID: 0}
+    - target: {fileID: 5283276487775872090, guid: a43ab3bcfdfb5754f982aa6efefb14f1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.06731889
       objectReference: {fileID: 0}
     - target: {fileID: 5743503863124483513, guid: a43ab3bcfdfb5754f982aa6efefb14f1, type: 3}
       propertyPath: m_Mesh

@@ -79,7 +79,7 @@ public class bullet_rule : MonoBehaviour
                 if (!Move.instance.isHurt)
             {
             PlayerHealth.Instance.Damage(damage);
-            Move.instance.Knockback();            
+            Move.instance.KnockbackS();            
             }
             }
         }

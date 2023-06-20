@@ -71,7 +71,7 @@ public static DestroyRock instance;
                 Instantiate(VFXclang, pointVFX.transform.position, transform.rotation);
                 PlayMFX(1);
                 Move.instance.Bump();
-                Move.instance.Knockback();
+                Move.instance.KnockbackS();
             }
         }
     }
