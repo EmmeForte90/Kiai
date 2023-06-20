@@ -16,6 +16,7 @@ public class GameplayManager : MonoBehaviour
 
 
     public static bool playerExists;
+    public GameObject GM; // Variabile per il player
 
     public GameObject player; // Variabile per il player
     public GameObject toy; // Variabile per il player
@@ -398,7 +399,10 @@ public void DeactivationGame()
         }
 
 }
-
+public void DeactivationGame2()
+{
+        //GM.gameObject.SetActive(false);
+}
 public void EnemyDefeat()
     {
            EnemyDefeated++;

@@ -165,8 +165,8 @@ if(GameplayManager.instance.styleIcon[5] == true)
             {
                 GameplayManager.instance.sbam();
                 Move.instance.KnockbackS(); 
-                Move.instance.isBump = true;
-                Move.instance.Bump();
+                //Move.instance.isBump = true;
+                //Move.instance.Bump();
             }
         }
 }

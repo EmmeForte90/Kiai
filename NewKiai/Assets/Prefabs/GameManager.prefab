@@ -9657,8 +9657,8 @@ MonoBehaviour:
   jumpForce: 9
   jumpForceX: 300
   bumpForce: 2
-  knockForce: 10
-  _knockForce: 200
+  knockForceShort: 500
+  knockForceLong: 50000
   groundDelay: 0.1
   wallLayer:
     serializedVersion: 2
@@ -10020,6 +10020,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a4d777269162df4496ded0c8b47147c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knockbackForce: 10
+  knockbackDuration: 0.5
 --- !u!1 &5892456059568806927
 GameObject:
   m_ObjectHideFlags: 0
@@ -14793,6 +14795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 651dddca12b4ca044afdd6978992862e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GM: {fileID: 5892456059956868110}
   player: {fileID: 5892456059567638962}
   toy: {fileID: 5892456059567638962}
   comboC: {fileID: 5892456059856563512}

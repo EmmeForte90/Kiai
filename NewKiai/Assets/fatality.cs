@@ -116,7 +116,7 @@ private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         yield return new WaitForSeconds(2f);
         if(IsAboss){
         GameplayManager.instance.FadeIn();
-        GameplayManager.instance.DeactivationGame();
+        GameplayManager.instance.DeactivationGame2();
         SceneManager.LoadScene(startScene, LoadSceneMode.Single);
         SceneManager.sceneLoaded += OnSceneLoaded;
         }
