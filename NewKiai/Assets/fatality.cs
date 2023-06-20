@@ -11,6 +11,10 @@ public class fatality : MonoBehaviour
     [Header("Fatality")]
     public SkeletonAnimation spineAnimation;
     public GameObject FPoint;
+     public bool IsAboss = false;    
+     public string startScene;
+public string spawnPointTag = "SpawnPoint";
+    private GameObject player;
     public GameObject fatalit;
     private bool endFata = false;
     private bool HideB = false;
@@ -71,6 +75,28 @@ private void OnTriggerExit2D(Collider2D collision)
         
     }
 }
+
+private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+{
+    GameplayManager.instance.FadeIn();
+
+    SceneManager.sceneLoaded -= OnSceneLoaded;
+    if (player != null)
+    {
+        Move.instance.stopInput = false;
+        Move.instance.Stop();
+        // Troviamo il game object del punto di spawn
+        GameObject spawnPoint = GameObject.FindWithTag(spawnPointTag);
+        if (spawnPoint != null)
+        {
+            GameplayManager.instance.FirstoOfPlay();
+            // Muoviamo il player al punto di spawn
+            player.transform.position = spawnPoint.transform.position;
+            //yield return new WaitForSeconds(3f);
+        }
+    }
+    GameplayManager.instance.StopFade();    
+}
     private IEnumerator PlayFatalityAnimation()
     {
         // Sospende l'esecuzione dello script per un breve momento
@@ -87,7 +113,14 @@ private void OnTriggerExit2D(Collider2D collision)
         Move.instance.NotStrangeAnimationTalk = false;
         Move.instance.stopInput = false;
         // Distruggi il nemico dal gioco
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
+        if(IsAboss){
+        GameplayManager.instance.FadeIn();
+        GameplayManager.instance.DeactivationGame();
+        SceneManager.LoadScene(startScene, LoadSceneMode.Single);
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+        
         //Destroy(gameObject);
     }
 }

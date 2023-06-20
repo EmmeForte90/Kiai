@@ -284,7 +284,7 @@ GameObject:
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &81025073
 Transform:
   m_ObjectHideFlags: 0
@@ -11172,6 +11172,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ordalia
       objectReference: {fileID: 0}
+    - target: {fileID: 141258397797959256, guid: 64f64ec3bce87204984744ec33a64def, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 141258397797959257, guid: 64f64ec3bce87204984744ec33a64def, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -12295,6 +12299,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spineAnimation: {fileID: 1377077435}
   FPoint: {fileID: 2126353396}
+  IsAboss: 0
+  startScene: 
+  spawnPointTag: SpawnPoint
   fatalit: {fileID: 315336070}
   Enemy: {fileID: 1377077438}
   watF: 0
@@ -33088,7 +33095,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 962432070854186124, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000185847457830836, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
+      propertyPath: IsAboss
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000185847457830836, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
+      propertyPath: startScene
+      value: ENDINGDEMO
       objectReference: {fileID: 0}
     - target: {fileID: 5328909215188845296, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
       propertyPath: m_RootOrder
@@ -33140,7 +33155,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5328909215188845297, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5328909215452291270, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
       propertyPath: m_Mesh
@@ -33156,11 +33171,19 @@ PrefabInstance:
       objectReference: {fileID: 1592399737}
     - target: {fileID: 5328909215801200778, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5328909215801200778, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5328909215891547057, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5328909215891547057, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 5441090202755109207, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
       propertyPath: m_Mesh
@@ -33947,6 +33970,10 @@ PrefabInstance:
     - target: {fileID: 8719254895777188612, guid: a43ab3bcfdfb5754f982aa6efefb14f1, type: 3}
       propertyPath: m_Name
       value: Demon
+      objectReference: {fileID: 0}
+    - target: {fileID: 8719254895777188612, guid: a43ab3bcfdfb5754f982aa6efefb14f1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a43ab3bcfdfb5754f982aa6efefb14f1, type: 3}

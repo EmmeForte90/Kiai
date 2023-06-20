@@ -27,6 +27,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Area6.unity
     guid: 2e9ee48c0b90b7b4b870cf9b0545e0a1
   - enabled: 1
+    path: Assets/Scenes/ENDINGDEMO.unity
+    guid: eed4e0875292f12478c81caac4a42c6c
+  - enabled: 1
     path: Assets/Scenes/InnerHouse.unity
     guid: 2f350acdf3703394b8f4c1fe7ea31ff6
   - enabled: 1
