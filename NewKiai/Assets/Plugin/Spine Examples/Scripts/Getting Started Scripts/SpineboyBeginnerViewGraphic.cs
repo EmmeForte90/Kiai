@@ -2,7 +2,7 @@
  * Spine Runtimes License Agreement
  * Last updated September 24, 2021. Replaces all prior versions.
  *
- * Copyright (c) 2013-2021, Esoteric Software LLC
+ * Copyright (c) 2013-2023, Esoteric Software LLC
  *
  * Integration of the Spine Runtimes into software or otherwise creating
  * derivative works of the Spine Runtimes is permitted under the terms and
@@ -32,12 +32,12 @@ using System.Collections;
 using UnityEngine;
 
 namespace Spine.Unity.Examples {
-	public class SpineboyBeginnerView : MonoBehaviour {
+	public class SpineboyBeginnerViewGraphic : MonoBehaviour {
 
 		#region Inspector
 		[Header("Components")]
 		public SpineboyBeginnerModel model;
-		public SkeletonAnimation skeletonAnimation;
+		public SkeletonGraphic skeletonGraphic;
 
 		public AnimationReferenceAsset run, idle, aim, shoot, jump;
 		public EventDataReferenceAsset footstepEvent;
@@ -54,11 +54,11 @@ namespace Spine.Unity.Examples {
 		SpineBeginnerBodyState previousViewState;
 
 		void Start () {
-			if (skeletonAnimation == null) return;
+			if (skeletonGraphic == null) return;
 			model.ShootEvent += PlayShoot;
 			model.StartAimEvent += StartPlayingAim;
 			model.StopAimEvent += StopPlayingAim;
-			skeletonAnimation.AnimationState.Event += HandleEvent;
+			skeletonGraphic.AnimationState.Event += HandleEvent;
 		}
 
 		void HandleEvent (Spine.TrackEntry trackEntry, Spine.Event e) {
@@ -67,10 +67,10 @@ namespace Spine.Unity.Examples {
 		}
 
 		void Update () {
-			if (skeletonAnimation == null) return;
+			if (skeletonGraphic == null) return;
 			if (model == null) return;
 
-			if ((skeletonAnimation.skeleton.ScaleX < 0) != model.facingLeft) {  // Detect changes in model.facingLeft
+			if ((skeletonGraphic.Skeleton.ScaleX < 0) != model.facingLeft) {  // Detect changes in model.facingLeft
 				Turn(model.facingLeft);
 			}
 
@@ -105,7 +105,7 @@ namespace Spine.Unity.Examples {
 				}
 			}
 
-			skeletonAnimation.AnimationState.SetAnimation(0, nextAnimation, true);
+			skeletonGraphic.AnimationState.SetAnimation(0, nextAnimation, true);
 		}
 
 		void PlayFootstepSound () {
@@ -115,7 +115,7 @@ namespace Spine.Unity.Examples {
 
 		[ContextMenu("Check Tracks")]
 		void CheckTracks () {
-			AnimationState state = skeletonAnimation.AnimationState;
+			AnimationState state = skeletonGraphic.AnimationState;
 			Debug.Log(state.GetCurrent(0));
 			Debug.Log(state.GetCurrent(1));
 		}
@@ -123,16 +123,16 @@ namespace Spine.Unity.Examples {
 		#region Transient Actions
 		public void PlayShoot () {
 			// Play the shoot animation on track 1.
-			TrackEntry shootTrack = skeletonAnimation.AnimationState.SetAnimation(1, shoot, false);
+			TrackEntry shootTrack = skeletonGraphic.AnimationState.SetAnimation(1, shoot, false);
 			shootTrack.AttachmentThreshold = 1f;
 			shootTrack.MixDuration = 0f;
-			skeletonAnimation.state.AddEmptyAnimation(1, 0.5f, 0.1f);
+			skeletonGraphic.AnimationState.AddEmptyAnimation(1, 0.5f, 0.1f);
 
 			// Play the aim animation on track 2 to aim at the mouse target.
-			TrackEntry aimTrack = skeletonAnimation.AnimationState.SetAnimation(2, aim, false);
+			TrackEntry aimTrack = skeletonGraphic.AnimationState.SetAnimation(2, aim, false);
 			aimTrack.AttachmentThreshold = 1f;
 			aimTrack.MixDuration = 0f;
-			skeletonAnimation.state.AddEmptyAnimation(2, 0.5f, 0.1f);
+			skeletonGraphic.AnimationState.AddEmptyAnimation(2, 0.5f, 0.1f);
 
 			gunSource.pitch = GetRandomPitch(gunsoundPitchOffset);
 			gunSource.Play();
@@ -142,17 +142,17 @@ namespace Spine.Unity.Examples {
 
 		public void StartPlayingAim () {
 			// Play the aim animation on track 2 to aim at the mouse target.
-			TrackEntry aimTrack = skeletonAnimation.AnimationState.SetAnimation(2, aim, true);
+			TrackEntry aimTrack = skeletonGraphic.AnimationState.SetAnimation(2, aim, true);
 			aimTrack.AttachmentThreshold = 1f;
 			aimTrack.MixDuration = 0f;
 		}
 
 		public void StopPlayingAim () {
-			skeletonAnimation.state.AddEmptyAnimation(2, 0.5f, 0.1f);
+			skeletonGraphic.AnimationState.AddEmptyAnimation(2, 0.5f, 0.1f);
 		}
 
 		public void Turn (bool facingLeft) {
-			skeletonAnimation.Skeleton.ScaleX = facingLeft ? -1f : 1f;
+			skeletonGraphic.Skeleton.ScaleX = facingLeft ? -1f : 1f;
 			// Maybe play a transient turning animation too, then call ChangeStableAnimation.
 		}
 		#endregion

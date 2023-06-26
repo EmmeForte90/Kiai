@@ -2,7 +2,7 @@
  * Spine Runtimes License Agreement
  * Last updated September 24, 2021. Replaces all prior versions.
  *
- * Copyright (c) 2013-2021, Esoteric Software LLC
+ * Copyright (c) 2013-2023, Esoteric Software LLC
  *
  * Integration of the Spine Runtimes into software or otherwise creating
  * derivative works of the Spine Runtimes is permitted under the terms and
@@ -27,57 +27,38 @@
  * THE SPINE RUNTIMES, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
 
-using Spine;
-using Spine.Unity;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Spine.Unity.Prototyping {
-	/// <summary>
-	/// Stores and serializes initial settings for a Spine Skeleton component. The settings only get applied on Start at runtime.</summary>
-	public class SkeletonColorInitialize : MonoBehaviour {
-		public Color skeletonColor = Color.white;
-		public List<SlotSettings> slotSettings = new List<SlotSettings>();
+namespace Spine.Unity.Examples {
+	public class SpineboyTargetControllerGraphic : MonoBehaviour {
 
-		[System.Serializable]
-		public class SlotSettings {
-			[SpineSlot]
-			public string slot = string.Empty;
-			public Color color = Color.white;
-		}
+		public SkeletonGraphic skeletonGraphic;
 
-#if UNITY_EDITOR
+		[SpineBone(dataField: "skeletonGraphic")]
+		public string boneName;
+		public Camera cam;
+		public Canvas canvas;
+
+		Bone bone;
+
 		void OnValidate () {
-			ISkeletonComponent skeletonComponent = GetComponent<ISkeletonComponent>();
-			if (skeletonComponent != null) {
-				skeletonComponent.Skeleton.SetSlotsToSetupPose();
-				IAnimationStateComponent animationStateComponent = GetComponent<IAnimationStateComponent>();
-				if (animationStateComponent != null && animationStateComponent.AnimationState != null) {
-					animationStateComponent.AnimationState.Apply(skeletonComponent.Skeleton);
-				}
-			}
-			ApplySettings();
+			if (skeletonGraphic == null) skeletonGraphic = GetComponent<SkeletonGraphic>();
 		}
-#endif
 
 		void Start () {
-			ApplySettings();
+			bone = skeletonGraphic.Skeleton.FindBone(boneName);
 		}
 
-		void ApplySettings () {
-			ISkeletonComponent skeletonComponent = GetComponent<ISkeletonComponent>();
-			if (skeletonComponent != null) {
-				Skeleton skeleton = skeletonComponent.Skeleton;
-				skeleton.SetColor(skeletonColor);
-
-				foreach (SlotSettings s in slotSettings) {
-					Slot slot = skeleton.FindSlot(s.slot);
-					if (slot != null) slot.SetColor(s.color);
-				}
-
-			}
+		void Update () {
+			Vector3 mousePosition = Input.mousePosition;
+			Vector2 localRectPosition;
+			RectTransformUtility.ScreenPointToLocalPointInRectangle(
+				skeletonGraphic.rectTransform, mousePosition, null, out localRectPosition);
+			Vector3 skeletonSpacePoint = localRectPosition / skeletonGraphic.MeshScale;
+			skeletonSpacePoint.x *= skeletonGraphic.Skeleton.ScaleX;
+			skeletonSpacePoint.y *= skeletonGraphic.Skeleton.ScaleY;
+			bone.SetLocalPosition(skeletonSpacePoint);
 		}
-
 	}
 
 }

@@ -27,7 +27,9 @@
   * Support for `shortestRotation` in animation state. See https://github.com/esotericsoftware/spine-runtimes/issues/2027.
   * Added CMake parameter `SPINE_SANITIZE` which will enable sanitizers on macOS and Linux.
     * Added `SPINE_MAJOR_VERSION`, `SPINE_MINOR_VERSION`, and `SPINE_VERSION_STRING`. Parsing skeleton .JSON and .skel files will report an error if the skeleton version does not match the runtime version.
+  * Added `SkeletonBounds::getBoundingBox()`, `SkeletonBounds::getPolygons()`, and `SkeletonBounds::getBoundingBoxes()`.
 * **Breaking changes**
+  * `RegionAttachment` and `MeshAttachment` no longer implement `HasRendererObject`.
   * `RegionAttachment` and `MeshAttachment` now contain a `TextureRegion*` instead of encoding region fields directly.
   * `AttachmentLoader::newRegionAttachment()` and `AttachmentLoader::newMeshAttachment()` now take an additional `Sequence*` parameter.
   * `MeshAttachment::updateUVs()` was renamed to `MeshAttachment::updateRegion()`.
@@ -36,7 +38,7 @@
   * `VertexAttachment::getDeformAttachment()` was renamed to `VertexAttachment::getTimelineAttachment()`.
   * `Skeleton::update()` has been removed.
   * `Skeleton::getTime()` has been removed.
-  * `VertexEffect` has been removed.
+  * `VertexEffect` has been removed.  
   
 ### Cocos2d-x
 
@@ -95,7 +97,14 @@
   * `SkeletonRenderTexture` and `SkeletonGraphicRenderTexture` components now support automatic down-scaling when required size on screen exceeds `Max Render Texture Size`.
   * Added `Spine/SkeletonGraphic Fill` shader to provide functionality of `Spine/Skeleton Fill` shader for `SkeletonGraphic`.
   * Lit Spine URP shaders (`Universal Render Pipeline/Spine/Sprite` and `Universal Render Pipeline/Spine/Skeleton Lit`) now support `Forward+` rendering path as introduced by Unity 2022.2 and URP version 14.
- 
+  * `SkeletonGraphic` now supports automatic scaling based on its `RectTransform` bounds. Automatic scaling can be enabled by setting the added `Layout Scale Mode` Inspector property to either `Width Controls Height`, `Height Controls Width`, `FitInParent` or `EnvelopeParent`. It is set to `None` by default to keep previous behaviour and avoid breaking existing projects. To modify the reference layout bounds, hit the additional `Edit Layout Bounds` toggle button to switch into edit mode, adjust the bounds or hit `Match RectTransform with Mesh`, and hit the button again when done adjusting. The skeleton will now be scaled accordingly to fit the reference layout bounds to the object's `RectTransform`.
+  * Added previously missing unlit URP 2D shader variant, available under `Universal Render Pipeline/2D/Spine/Skeleton`.
+  * Added support for light cookies at `Universal Render Pipeline/Spine/Sprite` shader.
+  * Timeline extension package: An additional Spine preferences parameter `Timeline` - `Default Mix Duration` has been added, setting newly added `SpineAnimationStateClip` clips accordingly, defaults to false. This Spine preferences parameter can be enabled to default to the previous behaviour before this update.
+  * Tint Black: Added support for [Tint Black](http://en.esotericsoftware.com/spine-slots#Tint-black) functionality at all Spine URP shaders (2D and 3D shaders) and at all standard pipeline `Spine/Sprite` shaders. This feature can be enabled via the `Tint Black` material parameter in the Inspector. Note: The URP Sprite shaders provided in the Spine URP Shaders extension UPM package require the latest version of the spine-unity runtime (package version 4.1.12, 2023-05-31 or newer) to display the added material parameters in the Inspector GUI.
+  * Added `SkeletonGraphic.MeshScale` property to allow access to calculated mesh scale. `MeshScale` is based on (1) Canvas pixels per unit, and (2) `RectTransform` bounds when using `Layout Scale Mode` other than `None` at `SkeletonGraphic` which scales the skeleton mesh to fit the parent `RectTransform` bounds accordingly.
+  * Added `updateSeparatorPartScale` property to `SkeletonGraphic` to let render separator parts follow the scale (lossy scale) of the `SkeletonGraphic` GameObject. Defaults to `false` to maintain existing behaviour.
+
 * **Breaking changes**
   * Made `SkeletonGraphic.unscaledTime` parameter protected, use the new property `UnscaledTime` instead.
   * `SkeletonGraphic` `OnRebuild` callback delegate is now issued after the skeleton has been initialized, before the `AnimationState` component is initialized. This makes behaviour consistent with `SkeletonAnimation` and `SkeletonMecanim` component behaviour. Use the new callback `OnAnimationRebuild` if you want to receive a callback after the `SkeletonGraphic` `AnimationState` has been initialized.
@@ -103,6 +112,7 @@
 * **Changes of default values**
 
 * **Deprecated**
+  * Shader macro `RETURN_UNLIT_IF_ADDITIVE_SLOT` in `spine-unity/Shaders/Sprite/CGIncludes/ShaderShared.cginc` has been deprecated and will be removed in spine-unity 4.2. Use RETURN_UNLIT_IF_ADDITIVE_SLOT_TINT instead.
 
 * **Restructuring (Non-Breaking)**
 
@@ -141,9 +151,12 @@
   * `RegionAttachment#computeWorldVertices()` takes a `Slot` instead of a `Bone` as the first argument.
   * Removed `PlayerEditor`.
   * `VertexEffect` has been removed.
+  * Removed `RegionAttachment.rendererObject`.
+  * Renamed `TextureRegion.renderObject` to `TextureRegion.texture`.
+  
 
 ### WebGL backend
-  * `PolygonBatcher.start()` now disables culling and restores the previous state on `PolygonBatcher.end()`.
+  * `PolygonBatcher` can now disable culling automatically if the static variable `PolygonBatcher.disableCulling` is set to true.
   * Added `SpineCanvas`, a simpler way to render a scene via spine-webgl. See `spine-ts/spine-webgl/examples/barebones.html` and `spine-ts/spine-webgl/examples/mix-and-match.html`.
 
 ### Canvas backend
