@@ -125,7 +125,7 @@ private bool isKnockback = false;
 private enum State { Moving, Chase, Attack, Knockback, Dead, Hurt, Wait, Guard }
 private State currentState;
 
-public static Thief instance;
+public static Thief Instance;
     
 
     private void Awake()
@@ -135,9 +135,9 @@ public static Thief instance;
     }
     _spineAnimationState = _skeletonAnimation.AnimationState;
     _skeleton = _skeletonAnimation.skeleton;
-    if (instance == null)
+    if (Instance == null)
     {
-        instance = this;
+        Instance = this;
     }
     player = GameObject.FindWithTag("Player").transform;
     bgm = new AudioSource[listSound.Length]; // inizializza l'array di AudioSource con la stessa lunghezza dell'array di AudioClip

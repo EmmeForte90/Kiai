@@ -14,7 +14,7 @@ public float moveSpeed = 2f; // velocità di movimento
 public float chaseSpeed = 4f; // velocità di inseguimento
 public float attackDamage = 10; // danno d'attacco
 public float sightRadius = 5f; // raggio di vista del nemico
-public float chaseThreshold = 2f; // soglia di distanza per iniziare l'inseguimento
+//public float chaseThreshold = 2f; // soglia di distanza per iniziare l'inseguimento
 public float attackrange = 2f;
 public float attackCooldown = 2f; // durata del cooldown dell'attacco
 public GameObject DeathBack;

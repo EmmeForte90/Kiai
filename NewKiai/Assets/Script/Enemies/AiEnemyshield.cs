@@ -30,7 +30,7 @@ public float chaseSpeed = 4f; // velocità di inseguimento
 public float WaitAfterAtk = 2f;
 public float attackDamage = 10; // danno d'attacco
 public float sightRadius = 5f; // raggio di vista del nemico
-public float chaseThreshold = 2f; // soglia di distanza per iniziare l'inseguimento
+//public float chaseThreshold = 2f; // soglia di distanza per iniziare l'inseguimento
 public float attackrange = 2f;
 public float attackCooldown = 2f; // durata del cooldown dell'attacco
 private float attackTimer;
@@ -109,14 +109,14 @@ private AudioSource[] bgm; // array di AudioSource che conterrà gli oggetti Aud
 private enum State { Moving, Chase, Defence, Attack, Knockback, Dead, Hurt, Wait }
 private State currentState;
 
-public static AiEnemyshield instance;
+public static AiEnemyshield Instance;
 
 
     private void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
             health = GetComponent<Health>();
             player = GameObject.FindWithTag("Player").transform;

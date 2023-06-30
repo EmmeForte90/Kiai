@@ -34,7 +34,7 @@ public float chaseSpeed = 4f; // velocità di inseguimento
 public float WaitAfterAtk = 2f;
 public float attackDamage = 10; // danno d'attacco
 public float sightRadius = 5f; // raggio di vista del nemico
-public float chaseThreshold = 2f; // soglia di distanza per iniziare l'inseguimento
+//public float chaseThreshold = 2f; // soglia di distanza per iniziare l'inseguimento
 public float attackrange = 2f;
 public float attackCooldown = 2f; // durata del cooldown dell'attacco
 private float attackTimer;
@@ -113,7 +113,7 @@ private AudioSource[] bgm; // array di AudioSource che conterrà gli oggetti Aud
 private enum State { Moving, Chase, Attack, Knockback, Dead, Hurt, Wait }
 private State currentState;
 
-public static AiEnemysword instance;
+public static AiEnemysword Instance;
     
 
     private void Awake()
@@ -126,9 +126,9 @@ public static AiEnemysword instance;
     }
     _spineAnimationState = _skeletonAnimation.AnimationState;
     _skeleton = _skeletonAnimation.skeleton;
-    if (instance == null)
+    if (Instance == null)
     {
-        instance = this;
+        Instance = this;
     }
     player = GameObject.FindWithTag("Player").transform;
     bgm = new AudioSource[listmusic.Length]; // inizializza l'array di AudioSource con la stessa lunghezza dell'array di AudioClip

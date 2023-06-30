@@ -18,7 +18,7 @@ public class Pickup : MonoBehaviour
     public float takeradious = 2f;
     private Transform player;
 
-    [SerializeField]  GameObject light;
+    [SerializeField]  GameObject Lighter;
     //Bool per evitare che la moneta sia raccolta più volte
     //[SerializeField] public bool isHeal;
 

@@ -2,11 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using Spine.Unity;
 
 public class NPCDialogueWithStop : MonoBehaviour
