@@ -18,7 +18,7 @@ public class palla_fuoco_demone_rule : MonoBehaviour
     [SerializeField] GameObject VFXExplode;
     public int damage = 10;
 
-    private bool bool_palla_appena_lanciata=true;
+    //private bool bool_palla_appena_lanciata=true;
  
 [Header("Audio")]
     [HideInInspector] public float basePitch = 1f;
@@ -26,7 +26,7 @@ public class palla_fuoco_demone_rule : MonoBehaviour
     [SerializeField] public AudioClip[] listSound; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
     private AudioSource[] bgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
     public AudioMixer SFX;
-    private bool sgmActive = false;
+    //private bool sgmActive = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -95,6 +95,6 @@ public class palla_fuoco_demone_rule : MonoBehaviour
 
     private IEnumerator co_palla_lanciata(){    
         yield return new WaitForSeconds(0.5f);
-        bool_palla_appena_lanciata=false;
+        //bool_palla_appena_lanciata=false;
     }
 }

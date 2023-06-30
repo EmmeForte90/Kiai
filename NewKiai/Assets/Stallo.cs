@@ -38,14 +38,14 @@ public class Stallo : MonoBehaviour
 
 
     [Header("Audio")]
-    [HideInInspector] public float basePitch = 1f;
-    [HideInInspector] public float randomPitchOffset = 0.1f;
+   // [HideInInspector] public float basePitch = 1f;
+    //[HideInInspector] public float randomPitchOffset = 0.1f;
     [SerializeField] public AudioClip[] listSound; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
     private AudioSource[] sgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
     public AudioMixer SFX;
-    private bool sgmActive = false;
+  //  private bool sgmActive = false;
     private bool DuelStart = false;
-    private bool canStartTimer = false;
+   // private bool canStartTimer = false;
     public float DuelloTime;
     public int Duellomax = 10;
     private bool Win = false;

@@ -21,15 +21,15 @@ public class nemico_boss : MonoBehaviour
     public pietre_terreno pietre_terreno;
 
     private float horizontal;
-    private float velocita = 4f;
-    private float velocita_corsa = 6f;
+   // private float velocita = 4f;
+    //private float velocita_corsa = 6f;
     private bool bool_dir_dx = true;
     private SkeletonAnimation skeletonAnimation;
     public GameObject GO_player;
-    public float distanza_guardia=2f;
-    public float distanza_attacco=0.5f;
-    private float distanza_temp;
-    private Vector2 xTarget;
+   // public float distanza_guardia=2f;
+  //  public float distanza_attacco=0.5f;
+   // private float distanza_temp;
+  //  private Vector2 xTarget;
 
 
     private int num_salti_totale=3;
@@ -88,10 +88,10 @@ public class nemico_boss : MonoBehaviour
 
  [Header("VFX")]
 
-    [SerializeField] public Transform slashpoint;
+   // [SerializeField] public Transform slashpoint;
     [SerializeField] public Transform hitpoint;
-    [SerializeField] GameObject attack;
-     [SerializeField] GameObject VFXSdeng;
+   // [SerializeField] GameObject attack;
+    // [SerializeField] GameObject VFXSdeng;
     [SerializeField] GameObject VFXHurt;
  [Header("Audio")]
     [HideInInspector] public float basePitch = 1f;
@@ -99,7 +99,7 @@ public class nemico_boss : MonoBehaviour
     [SerializeField] public AudioClip[] listSound; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
     private AudioSource[] bgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
     public AudioMixer SFX;
-    private bool sgmActive = false;
+   // private bool sgmActive = false;
 
 [Header("Fatality")]
     public GameObject Fatality;

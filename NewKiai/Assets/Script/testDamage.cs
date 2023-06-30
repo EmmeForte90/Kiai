@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class testDamage : Health, IDamegable
+public class testDamage : MonoBehaviour
 {
-private Health health;
     private Rigidbody2D rb;
     private GameplayManager gM;
     private Transform player;
@@ -16,7 +15,6 @@ private Health health;
     void Awake()
     {
         player = GameObject.FindWithTag("Player").transform;
-        health = GetComponent<Health>();
         rb = GetComponent<Rigidbody2D>();
     if (gM == null)
     {
@@ -44,7 +42,6 @@ void Update()
             // Gestisci il danno ricevuto qui
             isInvincible = true; // Il personaggio diventa invincibile
             invincibleTimer = invincibleTime; // Imposta il tempo di invincibilità rimanente
-            health.currentHealth -= damage;
 
         }
         

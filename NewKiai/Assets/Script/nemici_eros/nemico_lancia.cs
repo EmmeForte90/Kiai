@@ -51,7 +51,7 @@ public class nemico_lancia : MonoBehaviour
 
     [SerializeField] public Transform slashpoint;
     [SerializeField] public Transform hitpoint;
-    [SerializeField] GameObject attack;
+    //[SerializeField] GameObject attack;
      [SerializeField] GameObject VFXSdeng;
     [SerializeField] GameObject VFXHurt;
  [Header("Audio")]
@@ -60,7 +60,7 @@ public class nemico_lancia : MonoBehaviour
     [SerializeField] public AudioClip[] listSound; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
     private AudioSource[] bgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
     public AudioMixer SFX;
-    private bool sgmActive = false;
+    //private bool sgmActive = false;
 
 
 [Header("Drop")]

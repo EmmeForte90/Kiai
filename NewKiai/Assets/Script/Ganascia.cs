@@ -11,7 +11,7 @@ public class Ganascia : MonoBehaviour
     public float speed = 10f; // velocità del proiettile
     [SerializeField] GameObject Explode;
    // [SerializeField] Transform prefabExp;
-    [SerializeField] int damage = 50;
+    //[SerializeField] int damage = 50;
     private string currentAnimationName;
     private SkeletonAnimation _skeletonAnimation;
     private Spine.AnimationState _spineAnimationState;
@@ -82,8 +82,8 @@ public class Ganascia : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {  
             Instantiate(Explode, transform.position, transform.rotation);
-            IDamegable hit = other.GetComponent<IDamegable>();
-            hit.Damage(damage);
+            //IDamegable hit = other.GetComponent<IDamegable>();
+            //hit.Damage(damage);
             Hit();
             Invoke("Destroy", lifeTime);
             

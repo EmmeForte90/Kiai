@@ -68,7 +68,7 @@ public class nemico_demon : MonoBehaviour
     [SerializeField] public AudioClip[] listSound; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
     private AudioSource[] bgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
     public AudioMixer SFX;
-    private bool sgmActive = false;
+    //private bool sgmActive = false;
     // Start is called before the first frame update
     void Start(){
         vitalita=vitalita_max;

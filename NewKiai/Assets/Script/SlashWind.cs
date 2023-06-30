@@ -20,7 +20,7 @@ public class SlashWind : MonoBehaviour
     [SerializeField] public AudioClip[] listSound; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
     private AudioSource[] sgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
     public AudioMixer SFX;
-    private bool sgmActive = false;
+    //private bool sgmActive = false;
     public bool isTop = false;
     public bool isBottom = false;
 
@@ -83,8 +83,8 @@ public class SlashWind : MonoBehaviour
         {  
             GameplayManager.instance.ComboCount();
             Instantiate(Explode, transform.position, transform.rotation);
-            IDamegable hit = other.GetComponent<IDamegable>();
-            hit.Damage(HitboxPlayer.Instance.Damage);
+            //IDamegable hit = other.GetComponent<IDamegable>();
+            //hit.Damage(HitboxPlayer.Instance.Damage);
             PlaySFX(0);
 
         }

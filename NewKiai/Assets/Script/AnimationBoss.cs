@@ -39,7 +39,7 @@ public class AnimationBoss : MonoBehaviour
     [SerializeField] public AudioClip[] listSound; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
     private AudioSource[] bgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
     public AudioMixer SFX;
-    private bool sgmActive = false;
+    //private bool sgmActive = false;
     
     public static AnimationBoss instance;
 
@@ -319,7 +319,7 @@ void HandleEvent (TrackEntry trackEntry, Spine.Event e)
 if (e.Data.Name == "StopCharge") 
     {
                                               
-    BossThief.instance.StartCharging = false;
+    //BossThief.instance.StartCharging = false;
 
     }
     

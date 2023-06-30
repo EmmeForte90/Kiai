@@ -12,7 +12,7 @@ public class nemico_bigkatana : MonoBehaviour
 
     private float horizontal;
     private float velocita = 4f;
-    private float velocita_corsa = 2f;
+    //private float velocita_corsa = 2f;
     private bool bool_dir_dx = true;
     private SkeletonAnimation skeletonAnimation;
     public GameObject GO_player;
@@ -55,7 +55,7 @@ private bool OneDie = false;
     [SerializeField] public AudioClip[] listSound; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
     private AudioSource[] bgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
     public AudioMixer SFX;
-    private bool sgmActive = false;
+    //private bool sgmActive = false;
 
     void Start(){
         stamina=stamina_max;

@@ -8,7 +8,7 @@ public class ProiettilePlayer : MonoBehaviour
     public float speed = 10f; // velocità del proiettile
     [SerializeField] GameObject Explode;
    // [SerializeField] Transform prefabExp;
-    [SerializeField] int damage = 50;
+    //[SerializeField] int damage = 50;
     public float rotationSpeed = 2500f;
 
     [SerializeField] float lifeTime = 0.5f;
@@ -82,8 +82,8 @@ Debug.Log("AudioMixer aggiunto correttamente agli AudioSource.");
         {  
             
             Instantiate(Explode, transform.position, transform.rotation);
-            IDamegable hit = other.GetComponent<IDamegable>();
-            hit.Damage(damage);
+            //IDamegable hit = other.GetComponent<IDamegable>();
+            //hit.Damage(damage);
             
         }
 

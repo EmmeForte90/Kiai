@@ -32,13 +32,13 @@ public void Awake()
         {
             Instance = this;
         }
-        Num.text = Item.value.ToString();
+//        Num.text = Item.value.ToString();
         iconImages.sprite = Item.icon;
     }
 
 public void Update()
     {
-        Num.text = Item.value.ToString();
+//        Num.text = Item.value.ToString();
         if(Item.value <= 0)
         {
         Lock.gameObject.SetActive(true);

@@ -35,12 +35,12 @@ public class Duello : MonoBehaviour
     [SerializeField] public AudioClip[] listSound; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
     private AudioSource[] sgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
     public AudioMixer SFX;
-    private bool sgmActive = false;
+    //private bool sgmActive = false;
     private bool DuelStart = false;
     private int randomChance;
     private bool TimeButton = false;
     private bool buttonPressed = false;
-    private bool buttonNotPressed = false;
+    //private bool buttonNotPressed = false;
     private bool canStartTimer = false;
     private bool Startbutton = true;
     private bool End = false;
@@ -135,7 +135,8 @@ private void Update()
     }   
         if(End && buttonPressed)
         { //Danno al boss
-            buttonPressed = false; print("Hai vinto");
+            buttonPressed = false; 
+            print("Hai vinto");
             End = false;
             ContMosse++;
             StartCoroutine(NextButton());
@@ -143,7 +144,8 @@ private void Update()
 
         if(End && !buttonPressed)
         { //Danno al boss
-            buttonNotPressed = false; print("Hai Perso");
+            //buttonNotPressed = false; 
+            print("Hai Perso");
             End = false;
             ContMosse++;
             StartCoroutine(NextButton());

@@ -41,8 +41,8 @@ void OnTriggerEnter2D(Collider2D other)
             TimeHitbox = 0.5f;
             GameplayManager.instance.ComboCount();
             CanTake = true;
-            IDamegable hit = other.GetComponent<IDamegable>();
-             hit.Damage(Damage);
+            //IDamegable hit = other.GetComponent<IDamegable>();
+             //hit.Damage(Damage);
     }
     }
 }

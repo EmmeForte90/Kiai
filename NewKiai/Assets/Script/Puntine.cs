@@ -8,7 +8,7 @@ public class Puntine : MonoBehaviour
     public float speed = 10f; // velocità del proiettile
     [SerializeField] GameObject Explode;
    // [SerializeField] Transform prefabExp;
-    [SerializeField] int damage = 10;
+    //[SerializeField] int damage = 10;
     public float rotationSpeed = 2500f;
 
     [SerializeField] float lifeTime = 5f;
@@ -80,8 +80,8 @@ Debug.Log("AudioMixer aggiunto correttamente agli AudioSource.");
         if (other.gameObject.tag == "Enemy")
         {  
             Instantiate(Explode, transform.position, transform.rotation);
-            IDamegable hit = other.GetComponent<IDamegable>();
-            hit.Damage(damage);
+            //IDamegable hit = other.GetComponent<IDamegable>();
+            //hit.Damage(damage);
 
             Invoke("Destroy", lifeTime);
             //Destroy(gameObject);

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShadowForInner : MonoBehaviour
 {	
-    private GameObject target;
+    /*private GameObject target;
     private float horizontal;
     public float speed;
 	
@@ -29,5 +29,5 @@ public class ShadowForInner : MonoBehaviour
         }
 		transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed*Time.deltaTime);
 
-    }
+    }*/
 }

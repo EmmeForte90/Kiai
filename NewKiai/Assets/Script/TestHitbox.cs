@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 
 
-public class TestHitbox : MonoBehaviour, IDamegable
+public class TestHitbox : MonoBehaviour
 {
     [Header("Animations")]
     [SpineAnimation][SerializeField] private string idleAnimationName;
@@ -39,7 +39,7 @@ private bool isKnockback = false;
     private AudioSource[] bgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
     public AudioMixer SFX;
     private bool bgmActive = false;
-    [SerializeField] float lifeTime = 2f;
+    //[SerializeField] float lifeTime = 2f;
 
 private void Awake()
     {

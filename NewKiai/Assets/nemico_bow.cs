@@ -60,7 +60,7 @@ private bool OneDie = false;
     [SerializeField] public AudioClip[] listSound; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
     private AudioSource[] bgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
     public AudioMixer SFX;
-    private bool sgmActive = false;
+    //private bool sgmActive = false;
 
     [Header("Drop")]
     public GameObject coinPrefab; // prefab per la moneta

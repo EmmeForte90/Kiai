@@ -19,7 +19,6 @@ public class testwalljump : MonoBehaviour
     bool facingRight = true;
     bool isGrounded = false;
     bool isTouchingWall = false;
-    bool wallJumped = false;
 
     private void Start()
     {
@@ -72,7 +71,7 @@ public class testwalljump : MonoBehaviour
             {
                 rb.velocity = new Vector2(wallJumpForce, jumpForce);
             }
-            wallJumped = true;
+           // wallJumped = true;
             Invoke("SetWallJumpedToFalse", 0.5f);
         }
         
@@ -87,9 +86,5 @@ public class testwalljump : MonoBehaviour
         transform.Rotate(0f, 180f, 0f);
     }
 
-    // Metodo per ripristinare il valore di wallJumped dopo 0.5 secondi
-    void SetWallJumpedToFalse()
-    {
-        wallJumped = false;
-    }
+    
 }

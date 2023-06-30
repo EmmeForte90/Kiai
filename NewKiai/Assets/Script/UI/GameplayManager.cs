@@ -23,7 +23,7 @@ public class GameplayManager : MonoBehaviour
 
     private GameObject Actor; // Variabile per il player
     private GameObject Menu; // Variabile per il player
-    private Health Enemy;
+    //private Health Enemy;
     public GameObject comboC; // Variabile per il player
     [SerializeField] TextMeshProUGUI ComboValue;
     public float comboTimer = 3f; 
@@ -324,8 +324,8 @@ public void SetDifficultAtt(){
 
 if (Easy)
     {
-        Enemy = GameObject.FindWithTag("Enemy").GetComponent<Health>();
-        Enemy.maxHealth /= 2;
+        //Enemy = GameObject.FindWithTag("Enemy").GetComponent<Health>();
+        //Enemy.maxHealth /= 2;
     }
     else if (Normal)
     {
@@ -333,13 +333,10 @@ if (Easy)
     }
     else if (Hard)
     {
-        Enemy = GameObject.FindWithTag("Enemy").GetComponent<Health>();
-        Enemy.maxHealth *= 2;
+        //Enemy = GameObject.FindWithTag("Enemy").GetComponent<Health>();
+        //Enemy.maxHealth *= 2;
     }
-    if (Enemy == null)
-    {
-        print("Non ci sono nemici in scena");
-    }
+    
 }
 
 

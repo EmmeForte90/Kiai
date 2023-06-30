@@ -9,9 +9,9 @@ public class ArrowPlayer : MonoBehaviour
    [Header("Bullet")]
     [SerializeField] float bombSpeed = 10f;
     [SerializeField] GameObject Explode;
-    [SerializeField] Transform prefabExp;
-    float xSpeed;
-    [SerializeField] int damage = 10;
+   // [SerializeField] Transform prefabExp;
+    //float xSpeed;
+    //[SerializeField] int damage = 10;
     public Vector3 LaunchOffset;
     public string targetTag = "Enemy";
     [SerializeField] float lifeTime = 1f;
@@ -23,8 +23,8 @@ public class ArrowPlayer : MonoBehaviour
       [Header("Audio")]
     [SerializeField] public AudioClip[] list; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
     private AudioSource[] sgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
-    private bool sgmActive = false;
-    public AudioMixer SFX;
+   // private bool sgmActive = false;
+   // public AudioMixer SFX;
     // Start is called before the first frame update
     void Start()
     {
@@ -85,8 +85,8 @@ public class ArrowPlayer : MonoBehaviour
             //SExp.Play();
 
             Instantiate(Explode, transform.position, transform.rotation);
-            IDamegable hit = other.GetComponent<IDamegable>();
-            hit.Damage(damage);
+            //IDamegable hit = other.GetComponent<IDamegable>();
+            //hit.Damage(damage);
             Invoke("Destroy", lifeTime);
 
         }

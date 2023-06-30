@@ -16,7 +16,7 @@ public class fatality : MonoBehaviour
 public string spawnPointTag = "SpawnPoint";
     private GameObject player;
     public GameObject fatalit;
-    private bool endFata = false;
+    //private bool endFata = false;
     private bool HideB = false;
     private bool _isInTrigger = false;
     private Transform toy; // Variabile per il player
@@ -109,7 +109,7 @@ private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         spineAnimation.state.SetAnimation(2, fatalityAnimationName, false);
         // Attendi che l'animazione di fatality sia completata
         yield return new WaitForSeconds(1f);
-        endFata = true;
+        //endFata = true;
         Move.instance.NotStrangeAnimationTalk = false;
         Move.instance.stopInput = false;
         // Distruggi il nemico dal gioco

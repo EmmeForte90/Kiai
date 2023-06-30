@@ -18,17 +18,17 @@ public class WindBall : MonoBehaviour
 
     private float timer;
 [SerializeField] GameObject Explode;
-[SerializeField] Transform prefabExp;
+//[SerializeField] Transform prefabExp;
 [SerializeField] GameObject Globe1,Globe2,Globe3,Globe4,Globe5,Globe6,Globe7;
 
-    [SerializeField] int damage = 50;
+    //[SerializeField] int damage = 50;
   [Header("Audio")]
     [HideInInspector] public float basePitch = 1f;
     [HideInInspector] public float randomPitchOffset = 0.1f;
     [SerializeField] public AudioClip[] listSound; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
     private AudioSource[] sgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
     public AudioMixer SFX;
-    private bool sgmActive = false;
+   // private bool sgmActive = false;
 
 
 void Start()
@@ -101,8 +101,8 @@ void OnTriggerEnter2D(Collider2D other)
         PlayMFX(0);    
 
         Instantiate(Explode, transform.position, transform.rotation);
-        IDamegable hit = other.GetComponent<IDamegable>();
-        hit.Damage(damage);
+        //IDamegable hit = other.GetComponent<IDamegable>();
+        //hit.Damage(damage);
         Destroy(gameObject);
     }
 }

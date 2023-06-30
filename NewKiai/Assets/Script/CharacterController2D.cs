@@ -18,7 +18,7 @@ public class CharacterController2D : MonoBehaviour
 
     public float wallJumpForce = 10f; // La forza da applicare per il Wall Jump
     public float wallJumpDelay = 0.2f; // Il ritardo in secondi prima di poter fare il Wall Jump di nuovo
-    private float wallJumpTimer = 0f; // Il timer per il ritardo del Wall Jump
+    //private float wallJumpTimer = 0f; // Il timer per il ritardo del Wall Jump
     private bool isWallJumping = false; // Il flag per indicare se il personaggio sta facendo il Wall Jump
 
     private bool isWallSliding = false; // il personaggio sta scivolando sul muro
@@ -89,7 +89,7 @@ public class CharacterController2D : MonoBehaviour
     private bool isGrounded = false; // vero se il personaggio sta saltando
     private bool isJumping = false; // vero se il personaggio sta saltando
     private bool isFall = false; // vero se il personaggio sta saltando
-    private bool isHurt = false; // vero se il personaggio sta saltando
+    //private bool isHurt = false; // vero se il personaggio sta saltando
     private bool isLoop = false; // vero se il personaggio sta saltando
     private bool isAttacking = false; // vero se il personaggio sta attaccando
     private bool isLanding = false; // vero se il personaggio sta attaccando
@@ -543,7 +543,7 @@ private void FixedUpdate()
 yield return new WaitForSeconds(wallJumpDelay);
 // Resetta il salto massimo e il timer per il ritardo del Wall Jump
 maxJumps = 2;
-wallJumpTimer = 0f;
+//wallJumpTimer = 0f;
 
 yield return null;
     }

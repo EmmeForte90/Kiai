@@ -57,16 +57,16 @@ public class Move : MonoBehaviour
     [SerializeField] public int knockForceLong = 50000;
 
     bool canDoubleJump = false;
-    [HideInInspector] public float groundDelay = 0.1f; // The minimum time before the player can jump again after touching the ground
+   // [HideInInspector] public float groundDelay = 0.1f; // The minimum time before the player can jump again after touching the ground
     bool isTouchingWall = false;
     public LayerMask wallLayer;         // layer del muro
-    public float wallJumpForce = 7f;    // forza del walljump
+    //public float wallJumpForce = 7f;    // forza del walljump
     public float wallSlideSpeed = 1f;   // velocità di scivolamento lungo il muro
     public float wallDistance = 0.5f;   // distanza dal muro per effettuare il walljump
     public bool canWallJump = false;
-    bool wallJumped = false;
+    //bool wallJumped = false;
 
-    float coyoteCounter = 0f;
+    //float coyoteCounter = 0f;
 
     [SerializeField] private float coyoteTime;
     private float lastTimeGround;
@@ -84,7 +84,7 @@ public class Move : MonoBehaviour
    
     [HideInInspector] public bool slotR,slotL,slotU,slotB = false;
     [Header("Respawn")]
-    private Transform respawnPoint; // il punto di respawn del giocatore
+    //private Transform respawnPoint; // il punto di respawn del giocatore
     public string sceneName; // il nome della scena in cui si trova il punto di respawn
 
     [Header("VFX")]
@@ -105,14 +105,14 @@ public class Move : MonoBehaviour
 
     private bool vfx = false;
     private float vfxTimer = 0.5f;
-    private Vector2 targetPosition; // La posizione di destinazione del nemico
-    private float speedBack = 3f; // La velocità del movimento
+    //private Vector2 targetPosition; // La posizione di destinazione del nemico
+    //private float speedBack = 3f; // La velocità del movimento
 
     [Header("TimerKiai")]
     public float timerestoreKiai = 3f; // il massimo valore di essenza disponibile
     public float timeKiai; // il massimo valore di essenza disponibile
     public bool KiaiReady = false;
-    public bool GoKiai = false;
+    //public bool GoKiai = false;
     [Header("Animations")]
 
     [SpineAnimation][SerializeField] private string walkAnimationName;
@@ -125,7 +125,7 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField] private string jumpSwordAnimationName;
     [SpineAnimation][SerializeField] private string jumpDownAnimationName;
     [SpineAnimation][SerializeField] private string jumpDownSwordAnimationName;
-    [SpineAnimation][SerializeField] private string landingAnimationName;
+    //[SpineAnimation][SerializeField] private string landingAnimationName;
     [SpineAnimation][SerializeField] private string walljumpAnimationName;
     [SpineAnimation][SerializeField] private string walljumpdownAnimationName;
     [SpineAnimation][SerializeField] private string dashAnimationName;
@@ -196,7 +196,7 @@ public class Move : MonoBehaviour
     [SerializeField] GameObject attack_w_v;
     [SerializeField] GameObject attack_w_h;
     [SerializeField] GameObject attack_w_h2;
-    [SerializeField] GameObject attack_w_air;
+   // [SerializeField] GameObject attack_w_air;
     [SpineAnimation][SerializeField] private string attackWater1AnimationName;
     [SpineAnimation][SerializeField] private string attackWater2AnimationName;
     [SpineAnimation][SerializeField] private string attackWater3AnimationName;
@@ -218,8 +218,8 @@ public class Move : MonoBehaviour
     [SerializeField] GameObject attack_r_v;
     [SerializeField] GameObject attack_r_h;
     [SerializeField] GameObject attack_r_h2;
-    [SerializeField] GameObject attack_r_air_Landing;
-    [SerializeField] GameObject attack_r_air_Charge;
+    //[SerializeField] GameObject attack_r_air_Landing;
+    //[SerializeField] GameObject attack_r_air_Charge;
     [SerializeField] GameObject pesante;
     [SerializeField] GameObject charge;
     [SerializeField] GameObject VfxRock;
@@ -229,7 +229,7 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField] private string releaseAnimationName;
     [SpineAnimation][SerializeField] private string attackRock1AnimationName;
     [SpineAnimation][SerializeField] private string attackRock2AnimationName;
-    [SpineAnimation][SerializeField] private string attackRock3AnimationName;
+    //[SpineAnimation][SerializeField] private string attackRock3AnimationName;
     [SpineAnimation][SerializeField] private string SbamreleaseAnimationName;
     public bool RockSpecial = false;
     private bool attackRock = false;
@@ -273,8 +273,8 @@ public class Move : MonoBehaviour
     [SerializeField] GameObject attack_m_v;
     [SerializeField] GameObject attack_m_h;
     [SerializeField] GameObject attack_m_h2;
-    [SerializeField] GameObject attack_m_air_bottom;
-    [SerializeField] GameObject attack_m_air_up;
+    //[SerializeField] GameObject attack_m_air_bottom;
+    //[SerializeField] GameObject attack_m_air_up;
     [SpineAnimation][SerializeField] private string attackVoid1AnimationName;
     [SpineAnimation][SerializeField] private string attackVoid2AnimationName;
     [SpineAnimation][SerializeField] private string attackVoid3AnimationName;
@@ -314,7 +314,7 @@ public class Move : MonoBehaviour
     [Header("Items")]
     [SpineAnimation][SerializeField] private string HealAnimationName;
     [SpineAnimation][SerializeField] private string throwAnimationName;
-    [SpineAnimation][SerializeField] private string bigthrowAnimationName;
+   // [SpineAnimation][SerializeField] private string bigthrowAnimationName;
     [SpineAnimation][SerializeField] private string BowAnimationName;
     [SpineAnimation][SerializeField] private string RifleAnimationName;
 
@@ -328,12 +328,12 @@ private int comboCount = 0;
     //public int Damage;
     private int timeScale = 1;
     private int FastCombo = 2;
-    private float TimeAtk = 4f;
+    //private float TimeAtk = 4f;
     private bool canAttack = true;
-    private bool ComboFinish;
-    private float comboTimer; //imposta la durata del timer a 1 secondi
-    [HideInInspector] public float comboDurata = 0.5f; //imposta la durata del timer a 1 secondi
-    [SerializeField] public int comboCounter = 0; // contatore delle combo
+    //private bool ComboFinish;
+    //private float comboTimer; //imposta la durata del timer a 1 secondi
+    //[HideInInspector] public float comboDurata = 0.5f; //imposta la durata del timer a 1 secondi
+    //[SerializeField] public int comboCounter = 0; // contatore delle combo
     private float ShotTimer = 0f;
     private float attackRate = 0.5f;
     //[SerializeField] public float shootTimer = 2f; // tempo per completare una combo
@@ -362,11 +362,11 @@ private int comboCount = 0;
     public bool stopInput = false;
     [HideInInspector] public bool NotStrangeAnimationTalk = false;
 
-    private int facingDirection = 1; // La direzione in cui il personaggio sta guardando: 1 per destra, -1 per sinistra
+    //private int facingDirection = 1; // La direzione in cui il personaggio sta guardando: 1 per destra, -1 per sinistra
     
     [Header("Audio")]
-    [HideInInspector] public float basePitch = 1f;
-    [HideInInspector] public float randomPitchOffset = 0.1f;
+    //[HideInInspector] public float basePitch = 1f;
+    //[HideInInspector] public float randomPitchOffset = 0.1f;
     [SerializeField] public AudioClip[] listSound; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
     private AudioSource[] sgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
     public AudioMixer SFX;
@@ -494,7 +494,7 @@ if (Input.GetButtonDown("Jump") && !isGuard && !NotStrangeAnimationTalk
         && !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
         && !StartKiai)
 {            
-    wallJumped = false;
+    //wallJumped = false;
     if(!isTouchingWall)
         {
             //print("Walljump not");
@@ -1657,12 +1657,6 @@ IEnumerator FinishKiai()
 }
 
 
- 
-// Metodo per ripristinare il valore di wallJumped dopo 0.5 secondi
-    void SetWallJumpedToFalse()
-    {
-        wallJumped = false;
-    }
 
     private void jump()
     {

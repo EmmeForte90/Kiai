@@ -14,7 +14,7 @@ public class TestEndQuest : MonoBehaviour
     [SerializeField] public AudioClip[] listSound; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
     private AudioSource[] bgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
     public AudioMixer SFX;
-    private bool bgmActive = false;
+    //private bool bgmActive = false;
 
 private void Awake()
     {
@@ -54,7 +54,7 @@ public void PlayMFX(int soundToPlay)
         if (collision.CompareTag("Player"))
         {
             Pickup();
-            PlayMFX(0);
+            //PlayMFX(0);
             Instantiate(VFX, transform.position, transform.rotation);
 
         }

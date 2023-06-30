@@ -18,8 +18,8 @@ public class DestroyRock : MonoBehaviour
     [SerializeField] public AudioClip[] listSound; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
     private AudioSource[] bgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
     public AudioMixer SFX;
-    private bool bgmActive = false;
-    private bool Go = false;
+    //private bool bgmActive = false;
+    //private bool Go = false;
 
 public static DestroyRock instance;
     

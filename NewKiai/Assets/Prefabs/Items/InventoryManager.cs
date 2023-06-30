@@ -52,7 +52,7 @@ public class InventoryManager : MonoBehaviour
     public List<Item> itemDatabase;
     public int val = 1;
     public bool[] itemActive;
-    private bool buy = false; 
+    //private bool buy = false; 
    
 
  [Header("MenuSlot")]

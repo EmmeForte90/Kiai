@@ -37,7 +37,7 @@ public class QuestCharacters : MonoBehaviour
     public bool heFlip;
     public bool FirstD = true;
     private bool StopButton = false; // o la variabile che deve attivare la sostituzione
-    private bool Talk = false;
+    //private bool Talk = false;
 
     private bool _isInTrigger;
     private bool _isDialogueActive;
@@ -186,7 +186,7 @@ if(!notGo)
 
     IEnumerator ShowDialogue()
 {    
-    Talk = true;
+    //Talk = true;
     //talk.Play();
     Hit();
     PlayMFX(1);
@@ -238,7 +238,7 @@ public void PlayMFX(int soundToPlay)
             //talk.Stop();
             dialogueIndex = 0;
             _isDialogueActive = false;
-            Talk = false;
+            //Talk = false;
 
             dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
             dialogueText.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger

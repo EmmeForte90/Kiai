@@ -29,7 +29,7 @@ public class NPCDialogue : MonoBehaviour
     public bool moreDialogue;
     private bool _isInTrigger;
     private bool _isDialogueActive;
-    private bool Talk = false;
+    //private bool Talk = false;
 
 
 [Header("Audio")]
@@ -169,7 +169,7 @@ public void PlayMFX(int soundToPlay)
 
     IEnumerator ShowDialogue()
 {
-    Talk = true;
+    //Talk = true;
     PlayMFX(1);
     _isDialogueActive = true;
     elapsedTime = 0; // reset elapsed time
@@ -204,7 +204,7 @@ public void PlayMFX(int soundToPlay)
             StopMFX(1);
             dialogueIndex = 0;
             _isDialogueActive = false;
-            Talk = false;
+            //Talk = false;
             dialogueBox.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
             dialogueText.gameObject.SetActive(false); // Hide dialogue text when player exits the trigger
             Move.instance.stopInput = false;

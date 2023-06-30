@@ -28,7 +28,7 @@ public class TriggerOrdalia : MonoBehaviour
      public GameObject[] EnemyPrefab;
      [Tooltip("array di punti di spawn")]
     public Transform[] SpawnPoints; // array di punti di spawn
-    private bool generateWaves = true;
+    //private bool generateWaves = true;
     private bool StartOndata = false;
     [Tooltip("contatore delle ondate")]
     public int waveCount; // contatore delle ondate
