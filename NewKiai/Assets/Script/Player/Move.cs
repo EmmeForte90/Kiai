@@ -53,8 +53,10 @@ public class Move : MonoBehaviour
     [SerializeField] private float bumpForce;
 
     [Header("Knockback")]
-    [SerializeField] public int knockForceShort = 500;
-    [SerializeField] public int knockForceLong = 50000;
+    private bool KnockbackAt = false;
+    private bool KnockbackAtL = false;
+    private float knockForceShort = 10f;
+    private float knockForceLong = 60f;
 
     bool canDoubleJump = false;
    // [HideInInspector] public float groundDelay = 0.1f; // The minimum time before the player can jump again after touching the ground
@@ -273,8 +275,7 @@ public class Move : MonoBehaviour
     [SerializeField] GameObject attack_m_v;
     [SerializeField] GameObject attack_m_h;
     [SerializeField] GameObject attack_m_h2;
-    //[SerializeField] GameObject attack_m_air_bottom;
-    //[SerializeField] GameObject attack_m_air_up;
+    
     [SpineAnimation][SerializeField] private string attackVoid1AnimationName;
     [SpineAnimation][SerializeField] private string attackVoid2AnimationName;
     [SpineAnimation][SerializeField] private string attackVoid3AnimationName;
@@ -320,23 +321,16 @@ public class Move : MonoBehaviour
 
 private string currentAnimationName;
 
-//private CharacterState currentState = CharacterState.Idle;
 private int comboCount = 0;
      
 
     [Header("Attacks")]
-    //public int Damage;
     private int timeScale = 1;
     private int FastCombo = 2;
-    //private float TimeAtk = 4f;
     private bool canAttack = true;
-    //private bool ComboFinish;
-    //private float comboTimer; //imposta la durata del timer a 1 secondi
-    //[HideInInspector] public float comboDurata = 0.5f; //imposta la durata del timer a 1 secondi
-    //[SerializeField] public int comboCounter = 0; // contatore delle combo
+
     private float ShotTimer = 0f;
     private float attackRate = 0.5f;
-    //[SerializeField] public float shootTimer = 2f; // tempo per completare una combo
     [SerializeField] private GameObject bullet;
     [HideInInspector] public int style = 0;
     [HideInInspector] public int item = 0;
@@ -362,11 +356,8 @@ private int comboCount = 0;
     public bool stopInput = false;
     [HideInInspector] public bool NotStrangeAnimationTalk = false;
 
-    //private int facingDirection = 1; // La direzione in cui il personaggio sta guardando: 1 per destra, -1 per sinistra
     
     [Header("Audio")]
-    //[HideInInspector] public float basePitch = 1f;
-    //[HideInInspector] public float randomPitchOffset = 0.1f;
     [SerializeField] public AudioClip[] listSound; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
     private AudioSource[] sgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
     public AudioMixer SFX;
@@ -390,11 +381,10 @@ public static Move instance;
         _skeletonAnimation = GetComponent<SkeletonAnimation>();
         if (_skeletonAnimation == null) {
             Debug.LogError("Componente SkeletonAnimation non trovato!");
-        }        
+        }   
         _spineAnimationState = GetComponent<Spine.Unity.SkeletonAnimation>().AnimationState;
         _spineAnimationState = _skeletonAnimation.AnimationState;
         _skeleton = _skeletonAnimation.skeleton;
-        //rb = GetComponent<Rigidbody2D>();
         sgm = new AudioSource[listSound.Length]; // inizializza l'array di AudioSource con la stessa lunghezza dell'array di AudioClip
         for (int i = 0; i < listSound.Length; i++) // scorre la lista di AudioClip
         {
@@ -1477,19 +1467,16 @@ public void attackupper()
     {
         if(!GameplayManager.instance.PauseStop || !isAttacking || !isCharging || !touchGround || !isDashing || !isDeath)
         {
-
-
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
         if (isHeal)
         {
             PlayerHealth.Instance.currentKiai -= PlayerHealth.Instance.KiaiPerSecond * Time.fixedDeltaTime;
             PlayerHealth.Instance.IncreaseHP(PlayerHealth.Instance.hpIncreasePerSecond * Time.fixedDeltaTime);
         }
-
         float playerSpeed = horDir * speed;
         float accelRate = Mathf.Abs(playerSpeed) > 0.01f? acceleration : deceleration;
         rb.AddForce((playerSpeed - rb.velocity.x) * accelRate * Vector2.right);
         rb.velocity = new Vector2(Vector2.ClampMagnitude(rb.velocity, speed).x, rb.velocity.y); //Limit velocity
-        
         if (lastTimeJump > Time.time && lastTimeGround > 0)
            { 
             jump();
@@ -1498,14 +1485,11 @@ public void attackupper()
         {
             if (horDir < 0)
         {
-
            rb.AddForce(-transform.right * dashForce, ForceMode2D.Impulse);
             dashTime -= Time.deltaTime;
         }
         else if (horDir > 0)
         {
-            //anim.SetTrigger("Dash");
-
             rb.AddForce(transform.right * dashForce, ForceMode2D.Impulse);
             dashTime -= Time.deltaTime;
         }
@@ -1519,23 +1503,87 @@ public void attackupper()
         }
         else if (rb.transform.localScale.x == 1)
         {
-            //anim.SetTrigger("Dash");
-
             rb.AddForce(transform.right * dashForce, ForceMode2D.Impulse);
             dashTime -= Time.deltaTime;
         }
-                //dashing = false;
-                //Atkdashing = false;
         }
-
             if (dashTime <= 0)
             {
                 dashing = false;
                 Atkdashing = false;
-
             }
         }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        if (KnockbackAt)
+        {
+            if (horDir < 0)
+        {
 
+           rb.AddForce(transform.right * knockForceShort, ForceMode2D.Impulse);
+            dashTime -= Time.deltaTime;
+        }
+        else if (horDir > 0)
+        {
+            rb.AddForce(-transform.right * knockForceShort, ForceMode2D.Impulse);
+            dashTime -= Time.deltaTime;
+        }
+         else if (horDir == 0)
+        {
+            if (rb.transform.localScale.x == -1)
+        {
+
+           rb.AddForce(transform.right * knockForceShort, ForceMode2D.Impulse);
+            dashTime -= Time.deltaTime;
+        }
+        else if (rb.transform.localScale.x == 1)
+        {
+            rb.AddForce(-transform.right * knockForceShort, ForceMode2D.Impulse);
+            dashTime -= Time.deltaTime;
+        }
+        }
+            if (dashTime <= 0)
+            {
+                dashing = false;
+                attackNormal = false;
+                KnockbackAt = false;
+            }
+        }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        if (KnockbackAtL)
+        {
+            if (horDir < 0)
+        {
+
+           rb.AddForce(transform.right * knockForceLong, ForceMode2D.Impulse);
+            dashTime -= Time.deltaTime;
+        }
+        else if (horDir > 0)
+        {
+            rb.AddForce(-transform.right * knockForceLong, ForceMode2D.Impulse);
+            dashTime -= Time.deltaTime;
+        }
+         else if (horDir == 0)
+        {
+            if (rb.transform.localScale.x == -1)
+        {
+
+           rb.AddForce(transform.right * knockForceLong, ForceMode2D.Impulse);
+            dashTime -= Time.deltaTime;
+        }
+        else if (rb.transform.localScale.x == 1)
+        {
+            rb.AddForce(-transform.right * knockForceLong, ForceMode2D.Impulse);
+            dashTime -= Time.deltaTime;
+        }
+        }
+            if (dashTime <= 0)
+            {
+                dashing = false;
+                attackNormal = false;
+                KnockbackAtL = false;
+            }
+        }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
         if (attackNormal)
         {
             if (horDir < 0)
@@ -1569,7 +1617,9 @@ public void attackupper()
                 attackNormal = false;
 
             }
-        } else if (attackUpper)
+        } 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        else if (attackUpper)
         { 
 
             //Bisogna aggiungere un limite a questo punto
@@ -1584,11 +1634,9 @@ public void attackupper()
                 attackUpper = false;
             }
         }
-
-
-
     }
     }
+
 public void Bump()
     {
         if(isBump)
@@ -1601,48 +1649,16 @@ public void Bump()
 
 public void KnockbackS()
 {
-    Vector2 knockbackDirection = Vector2.zero;
-
-    if (transform.localScale.x < 0)
-    {
-        knockbackDirection = new Vector2(knockForceShort, 0f);
-    }
-    else if (transform.localScale.x > 0)
-    {
-        knockbackDirection = new Vector2(-knockForceShort, 0f);
-    }
-    else if (horDir == 0)
-    {
-        knockbackDirection = new Vector2(-knockForceShort, 0f);
-    }
-
-    rb.AddForce(knockbackDirection, ForceMode2D.Impulse);
+    Stop();
+    KnockbackAt = true;
 }
 
 public void KnockbackLong()
 {
+    Stop();
+    KnockbackAtL = true;
     BigHurt();
-    Vector2 knockbackDirection = Vector2.zero;
-
-    if (transform.localScale.x < 0)
-    {
-        knockbackDirection = new Vector2(-knockForceLong, 0f);
-    }
-    else if (transform.localScale.x > 0)
-    {
-        knockbackDirection = new Vector2(knockForceLong, 0f);
-    }
-    else if (horDir == 0)
-    {
-        knockbackDirection = new Vector2(knockForceLong, 0f);
-    }
-
-    rb.AddForce(knockbackDirection, ForceMode2D.Impulse);
 }
-        
-    
-    
-    
 
 IEnumerator FinishKiai()
 {   
@@ -1650,13 +1666,8 @@ IEnumerator FinishKiai()
     StopinputFalse();
     CameraZoom.instance.ZoomOut();
     PlayerHealth.Instance.currentKiai = 0;
-    //if (style == 0) //Normal
-    //{Health.instance.currentHealth -= 100f;}
-
     KiaiReady = false;
 }
-
-
 
     private void jump()
     {
@@ -1665,7 +1676,6 @@ IEnumerator FinishKiai()
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.AddForce(new Vector2(rb.velocity.x, jumpForce), ForceMode2D.Impulse);
     }
-
 
 private void modifyPhysics()
 {
