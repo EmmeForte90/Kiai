@@ -13,8 +13,6 @@ using Spine;
 
 public class GameplayManager : MonoBehaviour
 {
-
-
     public static bool playerExists;
     public GameObject GM; // Variabile per il player
 
@@ -37,7 +35,8 @@ public class GameplayManager : MonoBehaviour
     private CinemachineVirtualCamera virtualCamera;
     [HideInInspector]
 
-   
+   public string spawnPointTag = "SpawnPoint";
+
 
     [Header("Money")]
     [SerializeField] public int money = 0;
@@ -136,12 +135,7 @@ public class GameplayManager : MonoBehaviour
         //Ordalia = GameObject.FindGameObjectsWithTag("Ordalia");
         StartCoroutine(StartFadeInSTART());
 
-        if(!startGame)
-        {
-           // toy = GameObject.FindWithTag("Player");
-//            virtualCamera.Follow = toy.transform;
-//            virtualCamera.LookAt = toy.transform;
-        }else
+        if(startGame)
         {
         Move.instance.stopInput = true;
         AudioManager.instance.PlayMFX(0);
@@ -154,10 +148,7 @@ public class GameplayManager : MonoBehaviour
         Dash.gameObject.SetActive(false);  
         unlockRampino = false; 
         Rampino.gameObject.SetActive(false);  
-
         }
-
-
 
 
         if(!moneyObject.gameObject)
@@ -439,19 +430,14 @@ public void Restore()
         PlayerHealth.Instance.KiaiImg();
     }
 }
-
-
-    
-
-
+  
 
 public void TakeCamera()
     {
             virtualCamera = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
             virtualCamera.Follow = player.transform;
             virtualCamera.LookAt = player.transform;    
-    }
-    
+    } 
 
 public void StartPlay()
     {
@@ -486,24 +472,17 @@ public void StartPlay()
 
         public void Resume()
         {
-            //Time.timeScale = 1;
             PauseStop = false;
             PauseMenu.gameObject.SetActive(false);
-           // Scenary.gameObject.SetActive(true);
-
-            //Move.instance.Player.gameObject.SetActive(true);
-
         }
 public void StopInput()
         //Funzione pausa
         {
             PauseStop = true;
-            //Time.timeScale = 0f;
         }
 
         public void StopInputResume()
         {
-            //Time.timeScale = 1;
             PauseStop = false;
         }
 #endregion
@@ -511,14 +490,21 @@ public void StopInput()
    
 private void OnEnable()
 {
-    SceneManager.sceneLoaded += OnSceneLoaded;
-    
+    //SceneManager.sceneLoaded += OnSceneLoaded;
+    // Troviamo il game object del punto di spawn
+      if(!isStartGame) 
+      {
+        TakeCamera();
+        GameObject spawnPoint = GameObject.FindWithTag(spawnPointTag);
+        player.transform.position = spawnPoint.transform.position;
+            
+      }
 }
 
 
 private void OnDisable()
 {
-    SceneManager.sceneLoaded -= OnSceneLoaded;
+   // SceneManager.sceneLoaded -= OnSceneLoaded;
 }
 
 

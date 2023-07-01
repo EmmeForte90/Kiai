@@ -866,29 +866,16 @@ changeStyle();
 }}
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     #region testForanysituation
-            if(Input.GetKeyDown(KeyCode.C))
+            if(Input.GetKeyDown(KeyCode.O))
             {
                 Debug.Log("L");
-                KnockbackLong();
-                /*Thief.instance.Damage(50);
-                if(Thief.instance == null)
-                {
-                    //Thief.instance = GameObject.FindWithTag("Enemy");
-                    Thief.instance.Damage(50);
-                }*/
-                //PlayerHealth.Instance.IncreaseKiai(50);
-                //PlayerHealth.Instance.currentHealth = 10;
-                //PlayerHealth.Instance.currentHealth = 0;
-                //Respawn();
+                GameplayManager.instance.TakeCamera();
+                //KnockbackLong();
             }
-if(Input.GetKeyDown(KeyCode.X))
+if(Input.GetKeyDown(KeyCode.P))
             {
-                KnockbackS();
+                //KnockbackS();
                 Debug.Log("S");
-                //Knockback();
-                //PlayerHealth.Instance.IncreaseKiai(-10);
-                //GuardHit(); 
-                //PlayerHealth.Instance.currentStamina -= 50;
             }   
             #endregion
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   

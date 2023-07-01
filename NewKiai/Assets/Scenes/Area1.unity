@@ -22310,6 +22310,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5892456059956868111, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
+      propertyPath: isStartGame
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5892456060369802795, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -23673,7 +23677,7 @@ MonoBehaviour:
       m_CornerMode: 1
     - position: {x: -23.472647, y: 4.2482953, z: 0}
       leftTangent: {x: -0.54065895, y: 2.5318794, z: 0}
-      rightTangent: {x: 0.5642071, y: -2.6422746, z: 0}
+      rightTangent: {x: 0.19809532, y: -0.9277127, z: 0}
       mode: 1
       height: 1
       bevelCutoff: 0
@@ -23681,8 +23685,18 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
+    - position: {x: -23.221004, y: 1.2636721, z: 0}
+      leftTangent: {x: -0.03386116, y: 0.9683485, z: 0}
+      rightTangent: {x: 0.0650692, y: -1.794575, z: 0}
+      mode: 1
+      height: 0.98
+      bevelCutoff: 0
+      bevelSize: 0
+      spriteIndex: 0
+      corner: 1
+      m_CornerMode: 1
     - position: {x: -22.805159, y: -1.9887332, z: 0}
-      leftTangent: {x: -0.5586872, y: -0.037201762, z: 0}
+      leftTangent: {x: -0.36252975, y: -0.02414, z: 0}
       rightTangent: {x: 1.9690723, y: 0.13119721, z: 0}
       mode: 1
       height: 1
@@ -23957,7 +23971,7 @@ SpriteShapeRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -25028,7 +25042,7 @@ SpriteShapeRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -25450,7 +25464,7 @@ SpriteShapeRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -31275,7 +31289,7 @@ SpriteShapeRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -32178,7 +32192,7 @@ SpriteShapeRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -32667,6 +32681,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4552094642177843883, guid: 4f342c755c58b7d4a92e0b2339c24f14, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.24891387
+      objectReference: {fileID: 0}
+    - target: {fileID: 4552094642177843883, guid: 4f342c755c58b7d4a92e0b2339c24f14, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.46522382
+      objectReference: {fileID: 0}
+    - target: {fileID: 4552094642177843883, guid: 4f342c755c58b7d4a92e0b2339c24f14, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.999615
+      objectReference: {fileID: 0}
+    - target: {fileID: 4552094642177843883, guid: 4f342c755c58b7d4a92e0b2339c24f14, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.027747186
+      objectReference: {fileID: 0}
     - target: {fileID: 4552094642905526048, guid: 4f342c755c58b7d4a92e0b2339c24f14, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -33259,7 +33289,7 @@ SpriteShapeRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -33825,7 +33855,7 @@ SpriteShapeRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -35675,7 +35705,7 @@ SpriteShapeRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -36268,7 +36298,7 @@ SpriteShapeRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1

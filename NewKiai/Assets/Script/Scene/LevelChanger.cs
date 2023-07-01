@@ -110,6 +110,8 @@ private void OnTriggerStay2D(Collider2D other)
          // Troviamo il game object del player
         player = GameObject.FindGameObjectWithTag("Player");
         GameplayManager.instance.startGame = false;
+        GameplayManager.instance.isStartGame = false;
+        GameplayManager.instance.spawnPointTag = spawnPointTag;
         // Mostriamo il testo del dialogo se necessario
         if(needButton)
         {

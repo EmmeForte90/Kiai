@@ -57,6 +57,7 @@ private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         player = GameObject.FindWithTag("Player");
         yield return new WaitForSeconds(Timelife);
+        GameplayManager.instance.spawnPointTag = spawnPointTag;
         SceneManager.LoadScene(startScene, LoadSceneMode.Single);
         SceneManager.sceneLoaded += OnSceneLoaded;
         //SceneManager.LoadScene(startScene);
