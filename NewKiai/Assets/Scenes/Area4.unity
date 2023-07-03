@@ -968,11 +968,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7244767379961141855, guid: b73382dd97a51fa4ea1e878d30728010, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].x
-      value: -49.10503
+      value: -46.83861
       objectReference: {fileID: 0}
     - target: {fileID: 7244767379961141855, guid: b73382dd97a51fa4ea1e878d30728010, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].y
-      value: 10.766861
+      value: 10.874785
       objectReference: {fileID: 0}
     - target: {fileID: 7244767379961141855, guid: b73382dd97a51fa4ea1e878d30728010, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].x
@@ -984,19 +984,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7244767379961141855, guid: b73382dd97a51fa4ea1e878d30728010, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].x
-      value: 77.221306
+      value: 61.140533
       objectReference: {fileID: 0}
     - target: {fileID: 7244767379961141855, guid: b73382dd97a51fa4ea1e878d30728010, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].y
-      value: -10.928655
+      value: -11.036579
       objectReference: {fileID: 0}
     - target: {fileID: 7244767379961141855, guid: b73382dd97a51fa4ea1e878d30728010, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[4].x
-      value: 77.56729
+      value: 61.16275
       objectReference: {fileID: 0}
     - target: {fileID: 7244767379961141855, guid: b73382dd97a51fa4ea1e878d30728010, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[4].y
-      value: 10.223556
+      value: 10.601292
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b73382dd97a51fa4ea1e878d30728010, type: 3}
@@ -1987,7 +1987,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: -17.718622, y: -6.2653494, z: 0}
+    - position: {x: -18.098783, y: -4.5546293, z: 0}
       leftTangent: {x: -1.4943142, y: -0.31527376, z: 0}
       rightTangent: {x: 1.0032997, y: 0.21202278, z: 0}
       mode: 1
@@ -1997,7 +1997,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: -14.139788, y: -5.1499453, z: 0}
+    - position: {x: -15.16622, y: -5.11193, z: 0}
       leftTangent: {x: -1.5464001, y: -0.004887104, z: 0}
       rightTangent: {x: 1.1785698, y: 0.0037050247, z: 0}
       mode: 1
@@ -2007,9 +2007,9 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: -10.174038, y: -6.078483, z: 0}
+    - position: {x: -9.679831, y: -4.633875, z: 0}
       leftTangent: {x: -1.3477516, y: 0.038089752, z: 0}
-      rightTangent: {x: 2.9251423, y: -0.08218384, z: 0}
+      rightTangent: {x: 2.925146, y: -0.08218384, z: 0}
       mode: 1
       height: 1
       bevelCutoff: 0
@@ -2017,7 +2017,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 1.8945198, y: -6.1717334, z: 0}
+    - position: {x: 1.8565025, y: -4.7271256, z: 0}
       leftTangent: {x: -3.1265526, y: -0.58629274, z: 0}
       rightTangent: {x: 1.9621468, y: 0.36827278, z: 0}
       mode: 1
@@ -2037,7 +2037,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 7.747486, y: -6.2192845, z: 0}
+    - position: {x: 10.104477, y: -4.3184843, z: 0}
       leftTangent: {x: -0.993042, y: 0.25044823, z: 0}
       rightTangent: {x: 2.3310852, y: -0.5849395, z: 0}
       mode: 1
@@ -2047,7 +2047,7 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 12.437405, y: -6.455292, z: 0}
+    - position: {x: 12.969631, y: -4.0983, z: 0}
       leftTangent: {x: -0.21191406, y: -0.0003581047, z: 0}
       rightTangent: {x: 0.46601868, y: 0.0007882118, z: 0}
       mode: 1
@@ -5565,9 +5565,9 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 68.50002, y: -8.445397, z: 0}
+    - position: {x: 68.99423, y: -7.1908693, z: 0}
       leftTangent: {x: -1.7047424, y: -0.11422348, z: 0}
-      rightTangent: {x: 6.301178, y: 0.42174911, z: 0}
+      rightTangent: {x: 6.301178, y: 0.42175007, z: 0}
       mode: 1
       height: 1
       bevelCutoff: 0
