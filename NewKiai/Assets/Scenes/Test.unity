@@ -11462,6 +11462,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4035995709214027549, guid: 99114502debd5f342b1e71f5da28230b, type: 3}
   m_PrefabInstance: {fileID: 4035995708175140056}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1213400773 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4191824687572075621, guid: 845aa819d8aeb294eac4b4676c721bd2, type: 3}
+  m_PrefabInstance: {fileID: 248546154}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1218051452
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30098,7 +30103,7 @@ MonoBehaviour:
   stamina_max: 50
   DamageStamina: 10
   Staminaobj: {fileID: 7337296666157482183}
-  StaminaVFX: {fileID: 0}
+  StaminaVFX: {fileID: 1213400773}
   staminaBar: {fileID: 3279543225907792086}
   isKnock: 1
   knockForceShort: 1

@@ -130,6 +130,8 @@ public class Katana : MonoBehaviour
         }
 
         //Se la stamina è a zero si stanca ed è vulnerabile
+        if(!IsStamina)
+        {
         if(stamina <= 0)
         {
         stato = "tired";
@@ -137,6 +139,7 @@ public class Katana : MonoBehaviour
         if(stato == "tired"){
         Anm.SetBool("tired", true);        
         StartCoroutine(ripristina_Stamina());}
+        }
         }
         }
         ////////////////////////////////////////////////
@@ -218,9 +221,7 @@ public class Katana : MonoBehaviour
         #endregion
         
         if(vitalita <= 0)
-        {
-            isDead = true;
-        } 
+        {isDead = true;} 
         } 
 }
 
@@ -230,7 +231,7 @@ public class Katana : MonoBehaviour
         {  
             if(!isDead)
             {
-              if(IsStamina)
+            if(IsStamina)
         {
             if(stamina > 0)
         {
@@ -239,41 +240,41 @@ public class Katana : MonoBehaviour
                     stamina -= 10;
                     stato = "guard";
                     if(stato == "guard")
-                    {
-                    Anm.SetBool("def", true);        
-//skeletonAnimation.state.SetAnimation(0, guard, true);
-                    }
+                    {Anm.SetBool("def", true);}
                     PlayerHealth.Instance.currentStamina -=30;
                     StartCoroutine(ripristina_Posa());                    
                     Instantiate(VFXSdeng, hitpoint.position, transform.rotation);
                     if(isKnock)
-                    {
-                    KnockbackAt = true;
-                    }
+                    {KnockbackAt = true;}
         }else
-        {
-                    vitalita -= HitboxPlayer.Instance.Damage; 
-                    PlayMFX(1);
-                    skeletonAnimation.Skeleton.SetColor(Color.red);
-                    Instantiate(VFXHurt, hitpoint.position, transform.rotation);
-                    StartCoroutine(ripristina_colore());
-                    if(isKnock){ KnockbackAtL = true;}
-        }}} else{Die();}
+        {Damage();}}
+        Damage();
+        } else{Die();}
 }     
 }
 
+#region Die
 private void Die()
     {
         SpawnCoins();
         KiaiGive();
         stato = "die";
-        Anm.SetBool("die1", true); 
+        Anm.SetBool("die1", true);
+          /*if (horizontal < 0)
+        {Anm.SetBool("die1", true);}
+        else if (horizontal > 0)
+        {Anm.SetBool("die2", true);}
+         else if (horizontal == 0)
+        {if (rb.transform.localScale.x == -1)
+        {Anm.SetBool("die3", true);}*/
         StartCoroutine(DestroyEnm());
     }
+
      private IEnumerator DestroyEnm(){
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
     }
+#endregion
 
  private void Flip()
     {
@@ -285,7 +286,15 @@ private void Die()
             transform.localScale = localScale;
         }
     }
-
+ private void Damage()
+    {
+        vitalita -= HitboxPlayer.Instance.Damage; 
+                    PlayMFX(1);
+                    skeletonAnimation.Skeleton.SetColor(Color.red);
+                    Instantiate(VFXHurt, hitpoint.position, transform.rotation);
+                    StartCoroutine(ripristina_colore());
+                    if(isKnock){ KnockbackAtL = true;}
+    }
 private IEnumerator ripristina_Stamina(){
         yield return new WaitForSeconds(2f);
         stamina = stamina_max;
@@ -327,7 +336,7 @@ void KiaiGive()
     else // Se il numero casuale è compreso tra 9 e 10 (20% di probabilità), aggiungi 10 di essenza
     {
         PlayerHealth.Instance.currentKiai += 10;
-        PlayerHealth.Instance.IncreaseKiai(5);
+        PlayerHealth.Instance.IncreaseKiai(2);
     }
 }
 
