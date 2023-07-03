@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class stamina_vfx_rule : MonoBehaviour
 {
@@ -28,7 +29,7 @@ public class stamina_vfx_rule : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+       
     }
 
     public void scala_GO_stamina(float stamina, float stamina_max){

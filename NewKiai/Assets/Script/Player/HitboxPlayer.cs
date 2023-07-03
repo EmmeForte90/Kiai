@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class HitboxPlayer : MonoBehaviour
 {
-    [SerializeField] public Transform Pos;
     private bool CanTake = false;
     public float TimeHitbox; 
     public int Damage = 10;
@@ -43,7 +42,7 @@ if(GameplayManager.instance.styleIcon[0] == true)
     {
             //Debug.Log("Normal"+ Damage);
 
-        TimeHitbox = 0.5f;
+        TimeHitbox = 0.2f;
         GameplayManager.instance.ComboCount();
         CanTake = true;
         //IDamegable hit = other.GetComponent<IDamegable>();
@@ -85,7 +84,7 @@ if(GameplayManager.instance.styleIcon[2] == true)
     {
             //Debug.Log("Fire"+ Damage);
 
-        TimeHitbox = 0.7f;
+        TimeHitbox = 1f;
         GameplayManager.instance.ComboCount();
         CanTake = true;
        // IDamegable hit = other.GetComponent<IDamegable>();
@@ -125,7 +124,7 @@ if(GameplayManager.instance.styleIcon[4] == true)
 {
             //Debug.Log("Water"+ Damage);
 
-        TimeHitbox = 0.5f;
+        TimeHitbox = 0.3f;
         GameplayManager.instance.ComboCount();
        // IDamegable hit = other.GetComponent<IDamegable>();
        //  hit.Damage(Damage);

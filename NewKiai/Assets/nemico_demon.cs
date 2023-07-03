@@ -14,10 +14,12 @@ public class nemico_demon : MonoBehaviour
     private bool bool_dir_dx = true;
     private SkeletonAnimation skeletonAnimation;
     public GameObject GO_player;
+    public GameObject Warining;
+    public GameObject Aura;
     public float distanza_attacco=8f;
     private float distanza_temp;
     private Vector2 xTarget;
-    private float distanza_contrattacco=5f;
+    //private float distanza_contrattacco=5f;
 
     private bool bool_colpibile=true;
     private int vitalita;
@@ -133,12 +135,7 @@ public class nemico_demon : MonoBehaviour
             } else {
                 if (tempo_vulnerabile_attuale>0){
                     stato="stun";
-                } else {
-                    if (distanza_temp<distanza_contrattacco){
-                        stato="contrattacco";
-                    }
-                    else {stato="guardia";}
-                }
+                } 
             }
         }
         else {
@@ -156,6 +153,8 @@ public class nemico_demon : MonoBehaviour
 
         switch (stato){
             case "idle":{
+                Warining.gameObject.SetActive(false);
+                Aura.gameObject.SetActive(true);
                 skeletonAnimation.AnimationName = "walk";
                 transform.position = Vector2.MoveTowards(transform.position,posizioni[index_posizioni], Time.deltaTime*velocita);
                 if (transform.position.x<posizioni[index_posizioni].x){horizontal=1;}
@@ -170,6 +169,8 @@ public class nemico_demon : MonoBehaviour
                 break;
             }
             case "spara":{
+                Warining.gameObject.SetActive(false);
+                Aura.gameObject.SetActive(true);
                 skeletonAnimation.AnimationName = "attack_shoot";
                 if (transform.position.x<GO_player.transform.position.x){horizontal=1;}
                 else {horizontal=-1;}
@@ -177,6 +178,8 @@ public class nemico_demon : MonoBehaviour
                 break;
             }
             case "guardia":{
+                Warining.gameObject.SetActive(false);
+                Aura.gameObject.SetActive(true);
                 skeletonAnimation.AnimationName = "guard";
                 if (transform.position.x<GO_player.transform.position.x){horizontal=1;}
                 else {horizontal=-1;}
@@ -185,14 +188,8 @@ public class nemico_demon : MonoBehaviour
             }
             case "stun":{
                 skeletonAnimation.AnimationName = "tired";
-                break;
-            }
-            case "contrattacco":{
-                skeletonAnimation.AnimationName = "attack_vertical/attack_vertical";
-                PlayMFX(0);
-                if (transform.position.x<GO_player.transform.position.x){horizontal=1;}
-                else {horizontal=-1;}
-                Flip();
+                Warining.gameObject.SetActive(true);
+                Aura.gameObject.SetActive(false);
                 break;
             }
         }

@@ -5,13 +5,16 @@ using Spine.Unity;
 using Spine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class nemico_katana : MonoBehaviour
 {
+    public float DamageStamina;
     private float horizontal;
     private float velocita = 4f;
     private float velocita_corsa = 6f;
     private bool bool_dir_dx = true;
+    public Scrollbar staminaBar;
     private SkeletonAnimation skeletonAnimation;
     public GameObject GO_player;
     public float distanza_guardia=2f;
@@ -22,16 +25,15 @@ private bool OneDie = false;
 
     // valori per gli stessi ma con la stamina
     private float velocita_ricarica_stamina=1;
-    private float stamina;
+    public float stamina;
     public float stamina_max=50;
-    private float tempo_contrattacco=0;
     private float tempo_ritorna_idle=0;
 
     public stamina_vfx_rule stamina_vfx_rule;
 
     private bool bool_colpibile=true;
     private int vitalita;
-    private int vitalita_max=50;
+    public int vitalita_max=50;
     private float tempo_ricolpibile=0.5f;
     private bool bool_morto=false;
 
@@ -122,15 +124,17 @@ public void SpawnCoins()
     void Update(){
          if (!GameplayManager.instance.PauseStop)
         {
+
         if (bool_morto){return;}
+        staminaBar.size = stamina / stamina_max;
+        staminaBar.size = Mathf.Clamp(staminaBar.size, 0.01f, 1);
+
+
         if (tempo_knockback_attuale>0){
             rb.AddForce(direzione_knockback*forza_knockback);
             tempo_knockback_attuale-=(1*Time.deltaTime);
         }
-        if (tempo_contrattacco>0){
-            tempo_contrattacco-=(1*Time.deltaTime);
-            //print ("tempo contrattacco: "+tempo_contrattacco);
-        }
+       
         if (stamina_max>0){stamina_vfx_rule.scala_GO_stamina(stamina,stamina_max);}
         if (stamina<stamina_max){
             stamina+=(velocita_ricarica_stamina*Time.deltaTime);
@@ -146,38 +150,50 @@ public void SpawnCoins()
         if (tempo_stanchezza>0){
             //print ("stanchezza: "+tempo_stanchezza);
             tempo_stanchezza-=(1f*Time.deltaTime);
-            if (tempo_stanchezza>0){return;}
+            if (tempo_stanchezza>0)
+            {
+                return;
+            }
             stato="idle";
         }
 
-        distanza_temp=calcola_distanza((int)(GO_player.transform.position.x),(int)(GO_player.transform.position.y),(int)(transform.position.x),(int)(transform.position.y));
+        distanza_temp=calcola_distanza
+        ((int)(GO_player.transform.position.x),
+        (int)(GO_player.transform.position.y),
+        (int)(transform.position.x),
+        (int)(transform.position.y));
         //print ("distanza: "+distanza_temp);
 
         if (distanza_temp<distanza_guardia){
-            if (stato=="idle"){
+            if (stato=="idle")
+            {
                 stato="guardia";
                 tempo_attuale_guardia=1;
             }
-            if (stato=="guardia"){
+            if (stato=="guardia")
+            {
                 tempo_attuale_guardia-=(1f*Time.deltaTime);
                 if (tempo_attuale_guardia<=0){
-                    if (stamina_max>0){
-                        if (stamina>=20){
-                            stamina-=20;
-                            stamina_vfx_rule.stamina_zero(stamina);
-                            stato="puo_attaccare";
-                        }
+                    if (stamina_max>0)
+                    {
+                        stato="puo_attaccare";
                     }
-                    else {stato="puo_attaccare";}
+                    else 
+                    {
+                        stato="puo_attaccare";
+                    }
                 }
             }
-            if (stato=="puo_attaccare"){
-                if (distanza_temp<distanza_attacco){
+            if (stato=="puo_attaccare")
+            {
+                if (distanza_temp<distanza_attacco)
+                {
                     stato="attacco";
                 }
             }
         }
-        else {
+        else 
+        {
             stato="idle";
         }
     }}
@@ -186,6 +202,7 @@ public void SpawnCoins()
         yield return new WaitForSeconds(tempo_attacco);
         //print ("fermo attacco");
         stato="tired";
+        skeletonAnimation.AnimationName = "tired";
         tempo_stanchezza=2.5f;
     }
 
@@ -197,11 +214,14 @@ public void SpawnCoins()
         if (bool_morto){return;}
         //print ("stato: "+stato);
         if (tempo_stanchezza>0){
-            if (stato=="tired"){
+            if (stato=="tired")
+            {
                 if ((stamina_max==0)||(stamina>0)){
                     skeletonAnimation.AnimationName = "idle_battle";
                 }
                 else {skeletonAnimation.AnimationName = "tired";}
+
+                
             } else if (stato=="guardia"){
                 skeletonAnimation.AnimationName = "guard";
             }
@@ -209,14 +229,6 @@ public void SpawnCoins()
         }
 
         switch (stato){
-            case "contrattacco":{
-                if (transform.position.x<GO_player.transform.position.x){horizontal=1;}
-                else {horizontal=-1;}
-                skeletonAnimation.AnimationName = "vertical_up/attack_vertical_up";
-                PlayMFX(0);
-                Flip();
-                break;  
-            }
             case "attacco":{
                 skeletonAnimation.AnimationName = "vertical_bottom/attack_vertical_bottom";
                 PlayMFX(0);
@@ -224,6 +236,8 @@ public void SpawnCoins()
                 break;  
             }
             case "idle":{
+                if(GameplayManager.instance.ordalia)
+                {//Se è in
                 skeletonAnimation.AnimationName = "walk_thief";
                 transform.position = Vector2.MoveTowards(transform.position,posizioni[index_posizioni], Time.deltaTime*velocita);
                 if (transform.position.x<posizioni[index_posizioni].x){horizontal=1;}
@@ -235,6 +249,7 @@ public void SpawnCoins()
                     } else {index_posizioni++;}
                 }
                 Flip();
+                }
                 break;
             }
             case "guardia":{
@@ -272,21 +287,8 @@ public void SpawnCoins()
                     if (stamina_max>0){//vuol dire che è un nemico con stamina
                         if (stamina>5){
                             stamina-=5;
+                            PlayerHealth.Instance.currentStamina -= DamageStamina;
                             stamina_vfx_rule.stamina_zero(stamina);
-                            tempo_contrattacco+=1.8f;
-                            print ("tempo contrattacco: "+tempo_contrattacco);
-                            if (tempo_contrattacco>=3){
-                                stato="contrattacco";
-                                tempo_ritorna_idle=0.3f;
-                                return;   //senza questo return, quando lui contrattacca, potrebbe essere ancora colpito; Mauro
-                            } else {
-                                print ("paro. Stamina: "+stamina);
-                                Instantiate(VFXSdeng, hitpoint.position, transform.rotation);
-                                PlayMFX(2);
-                                stato="guardia";
-                                tempo_ritorna_idle=1;
-                                return;
-                            }
                         }
                     }
 
@@ -301,19 +303,7 @@ public void SpawnCoins()
                     direzione_knockback = (transform.position - GO_player.transform.position).normalized;
                     tempo_knockback_attuale+=tempo_knockback;
 
-                    /*  transizionale
-                    float posizione_x=transform.position.x;
-                    if (GO_player.transform.position.x<transform.position.x){posizione_x+=1.5f;}
-                    else {posizione_x-=1.5f;}
-                    iTween.MoveTo(
-                        this.gameObject, iTween.Hash(
-                            "position",new Vector3(
-                                posizione_x, transform.position.y,transform.position.z
-                            ),"time", 0.3f, "easetype", iTween.EaseType.easeOutSine
-                        )
-                    );
-                    */
-
+                    
                     if (vitalita<=0){
                         bool_morto=true;
                         if(GameplayManager.instance.ordalia)

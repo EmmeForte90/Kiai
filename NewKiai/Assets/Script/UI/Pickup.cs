@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Pickup : MonoBehaviour
 {
@@ -49,7 +50,7 @@ private void Update()
             //La moneta è collezionata
             GameplayManager.instance.AddTomoney(pointsForCoinPickup);
             //Richiama la funzione dello script GameSessione e aumenta lo score
-            AudioSource.PlayClipAtPoint(coinPickupSFX, Camera.main.transform.position);
+            //AudioSource.PlayClipAtPoint(coinPickupSFX, Camera.main.transform.position);
             //Avvia l'audio
             myAnimator.SetTrigger("take");
             //Attiva il suono

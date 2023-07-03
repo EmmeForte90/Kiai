@@ -24,7 +24,7 @@ public void Update()
         if(!isCollected)
         {
         GameplayManager.instance.StyleActivated(StyleID);
-        AudioSource.PlayClipAtPoint(PickupSFX, Camera.main.transform.position);
+        //AudioSource.PlayClipAtPoint(PickupSFX, Camera.main.transform.position);
         Instantiate(VFX, transform.position, transform.rotation);
         isCollected = true;
         }
