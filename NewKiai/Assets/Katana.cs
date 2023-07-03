@@ -16,7 +16,8 @@ public class Katana : MonoBehaviour
 
     private int vitalita;
     public int vitalita_max = 50;
-
+    
+    public bool isDead = false;
 
     [Header("Stamina")]
     [Tooltip("Il nemico possiede una stamina?")]
@@ -25,6 +26,8 @@ public class Katana : MonoBehaviour
     public float stamina_max = 50;
     public float DamageStamina;
     [SerializeField] GameObject Staminaobj;
+    [SerializeField] GameObject StaminaVFX;
+
     public Scrollbar staminaBar;
     private float horizontal;
 
@@ -40,7 +43,8 @@ public class Katana : MonoBehaviour
     public float knockForceLong = 5f;
     private float dashTime;
     [SerializeField] private Rigidbody2D rb;
-
+    
+    [Header("Timer")]
 
     [Header("VFX")]
 
@@ -68,14 +72,28 @@ public class Katana : MonoBehaviour
     private float coinForce = 5f; // forza con cui le monete saltano
     private Vector2 coinForceVariance = new Vector2(1, 0); // varianza della forza con cui le monete saltano
     private int coinCount; // conteggio delle monete
-    private SkeletonAnimation skeletonAnimation;
+    
+    [Header("Animations")]
+
+    private Animator Anm;
+    private SkeletonMecanim skeletonAnimation;
+    private string stato;
+    //private bool  anmDie = false;
+    //[SpineAnimation][SerializeField] string idle;
+    //[SpineAnimation][SerializeField] string walk;
+//    [SpineAnimation][SerializeField] string tired;
+    //[SpineAnimation][SerializeField] string guard;
+   // [SpineAnimation][SerializeField] string idle_battle;
+   // [SpineAnimation][SerializeField] string die;
+
     // Start is called before the first frame update
     void Start(){
         vitalita = vitalita_max;
         if(IsStamina)
         {stamina = stamina_max;}
         toy = GameObject.FindWithTag("Player");
-        skeletonAnimation = GetComponent<SkeletonAnimation>();
+        skeletonAnimation = GetComponent<SkeletonMecanim>();
+        Anm =  GetComponent<Animator>();
          bgm = new AudioSource[listSound.Length]; // inizializza l'array di AudioSource con la stessa lunghezza dell'array di AudioClip
         for (int i = 0; i < listSound.Length; i++) // scorre la lista di AudioClip
         {
@@ -92,24 +110,37 @@ public class Katana : MonoBehaviour
         }
     }
  void Update(){
-         if (!GameplayManager.instance.PauseStop)
+        
+        ////////////////////////////////////////////////
+         if (!GameplayManager.instance.PauseStop || isDead)
         {
-            if(IsStamina)
+            //Se gli HP sono a zero è mort
+        Flip();
+        if(IsStamina)
         {
         staminaBar.size = stamina / stamina_max;
         staminaBar.size = Mathf.Clamp(staminaBar.size, 0.01f, 1);
         Staminaobj.gameObject.SetActive(true);
+        StaminaVFX.gameObject.SetActive(true);
         } 
         else if(!IsStamina)
         {
         Staminaobj.gameObject.SetActive(false);
+        StaminaVFX.gameObject.SetActive(false);
         }
 
+        //Se la stamina è a zero si stanca ed è vulnerabile
         if(stamina <= 0)
         {
-         skeletonAnimation.AnimationName = "tired";
+        stato = "tired";
+        StaminaVFX.gameObject.SetActive(false);
+        if(stato == "tired"){
+        Anm.SetBool("tired", true);        
+        StartCoroutine(ripristina_Stamina());}
         }
         }
+        ////////////////////////////////////////////////
+        
  }
 
  private void FixedUpdate()
@@ -117,7 +148,7 @@ public class Katana : MonoBehaviour
         if(!GameplayManager.instance.PauseStop)
         {
         ////////////////////////////////////////////////////////////////////////////////////////////////////
-        
+        #region Knockback
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         if (KnockbackAt)
         {
@@ -184,6 +215,12 @@ public class Katana : MonoBehaviour
                 KnockbackAtL = false;
             }
         }
+        #endregion
+        
+        if(vitalita <= 0)
+        {
+            isDead = true;
+        } 
         } 
 }
 
@@ -191,13 +228,23 @@ public class Katana : MonoBehaviour
 {
         if(other.gameObject.tag == "Hitbox")
         {  
-             vitalita-=10;
-              if(IsStamina && stamina > 0)
+            if(!isDead)
+            {
+              if(IsStamina)
         {
-                    KiaiGive();
+            if(stamina > 0)
+        {
+                    vitalita -= 5; 
                     PlayMFX(2);
                     stamina -= 10;
-                    skeletonAnimation.AnimationName = "guard";
+                    stato = "guard";
+                    if(stato == "guard")
+                    {
+                    Anm.SetBool("def", true);        
+//skeletonAnimation.state.SetAnimation(0, guard, true);
+                    }
+                    PlayerHealth.Instance.currentStamina -=30;
+                    StartCoroutine(ripristina_Posa());                    
                     Instantiate(VFXSdeng, hitpoint.position, transform.rotation);
                     if(isKnock)
                     {
@@ -205,23 +252,28 @@ public class Katana : MonoBehaviour
                     }
         }else
         {
-                    KiaiGive();
-                    PlayMFX(1);
                     vitalita -= HitboxPlayer.Instance.Damage; 
+                    PlayMFX(1);
                     skeletonAnimation.Skeleton.SetColor(Color.red);
                     Instantiate(VFXHurt, hitpoint.position, transform.rotation);
                     StartCoroutine(ripristina_colore());
-                    if(isKnock)
-                    {
-                    KnockbackAtL = true;
-                    }
-
-        }
-
-                   
-        }
-
+                    if(isKnock){ KnockbackAtL = true;}
+        }}} else{Die();}
 }     
+}
+
+private void Die()
+    {
+        SpawnCoins();
+        KiaiGive();
+        stato = "die";
+        Anm.SetBool("die1", true); 
+        StartCoroutine(DestroyEnm());
+    }
+     private IEnumerator DestroyEnm(){
+        yield return new WaitForSeconds(1f);
+        Destroy(gameObject);
+    }
 
  private void Flip()
     {
@@ -234,10 +286,35 @@ public class Katana : MonoBehaviour
         }
     }
 
+private IEnumerator ripristina_Stamina(){
+        yield return new WaitForSeconds(2f);
+        stamina = stamina_max;
+        stato = "idle_battle";
+        if(stato == "idle_battle")
+        {
+        StaminaVFX.gameObject.SetActive(true);
+        Anm.SetBool("def", false);        
+        Anm.SetBool("tired", false);        
+        }
+    }
+
+    private IEnumerator ripristina_Posa(){
+        yield return new WaitForSeconds(1f);
+        stato = "idle_battle";
+        if(stato == "idle_battle")
+        {
+            Anm.SetBool("def", false);        
+            Anm.SetBool("battle", true);        
+        }
+    }
+
+
 private IEnumerator ripristina_colore(){
         yield return new WaitForSeconds(0.1f);
         skeletonAnimation.Skeleton.SetColor(Color.white);
     }
+
+
 void KiaiGive()
 {
     int randomChance = Random.Range(1, 10); // Genera un numero casuale compreso tra 1 e 10
