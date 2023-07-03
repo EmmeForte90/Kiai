@@ -500,7 +500,12 @@ private void OnEnable()
             
       }
 }
-
+public void TakePlayer()
+{
+        TakeCamera();
+        GameObject spawnPoint = GameObject.FindWithTag(spawnPointTag);
+        player.transform.position = spawnPoint.transform.position;
+}
 
 private void OnDisable()
 {

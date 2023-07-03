@@ -1774,10 +1774,12 @@ MonoBehaviour:
   spawnPointTag: SpawnPoint_1
   button: {fileID: 863590113}
   camFollowPlayer: 1
+  Timelife: 5
   interactWithKey: 0
   sceneName: Area2
   needButton: 0
   isDoor: 0
+  isTimer: 0
   anim: {fileID: 0}
   basePitch: 1
   randomPitchOffset: 0.1
@@ -24899,8 +24901,8 @@ PolygonCollider2D:
       - {x: 1.0392944, y: 6.542866}
       - {x: -1.1044643, y: 6.376487}
       - {x: -4.315767, y: 6.324058}
-      - {x: -2.0275388, y: 4.2143173}
-      - {x: -1.67, y: 1.305}
+      - {x: -3.071667, y: 4.128246}
+      - {x: -2.8672671, y: 1.4894421}
       - {x: -2.23, y: 1.3149999}
       - {x: -2.34, y: 1.3349999}
       - {x: -2.52, y: 1.3349999}
@@ -28131,6 +28133,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DestroyRock
       objectReference: {fileID: 0}
+    - target: {fileID: 3369649573641927998, guid: 9b8bc3da7fa2ff94da94455c770efabe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b8bc3da7fa2ff94da94455c770efabe, type: 3}
 --- !u!1 &1193876761
@@ -29454,11 +29460,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5892456059567638963, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.63
+      value: 47.31
       objectReference: {fileID: 0}
     - target: {fileID: 5892456059567638963, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.63
+      value: 23.32
       objectReference: {fileID: 0}
     - target: {fileID: 5892456059679841438, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -30586,11 +30592,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7244767379196921097, guid: b73382dd97a51fa4ea1e878d30728010, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -38.57
+      value: -0.980721
       objectReference: {fileID: 0}
     - target: {fileID: 7244767379196921097, guid: b73382dd97a51fa4ea1e878d30728010, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.9
+      value: 32.8786
       objectReference: {fileID: 0}
     - target: {fileID: 7244767379196921097, guid: b73382dd97a51fa4ea1e878d30728010, type: 3}
       propertyPath: m_LocalPosition.z
@@ -30602,11 +30608,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7244767379700740900, guid: b73382dd97a51fa4ea1e878d30728010, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -38.57
+      value: 1.1100006
       objectReference: {fileID: 0}
     - target: {fileID: 7244767379700740900, guid: b73382dd97a51fa4ea1e878d30728010, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.9
+      value: 32.85
       objectReference: {fileID: 0}
     - target: {fileID: 7244767379700740900, guid: b73382dd97a51fa4ea1e878d30728010, type: 3}
       propertyPath: m_LocalPosition.z
@@ -31571,13 +31577,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 942c3b20352d00f4a827b59b14a1c165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPointTag: SpawnPoint
+  spawnPointTag: SpawnPoint_2
   button: {fileID: 1679759399}
   camFollowPlayer: 1
+  Timelife: 5
   interactWithKey: 0
   sceneName: Area4
   needButton: 0
   isDoor: 0
+  isTimer: 0
   anim: {fileID: 0}
   basePitch: 1
   randomPitchOffset: 0.1

@@ -13,12 +13,15 @@ public string spawnPointTag = "SpawnPoint";
 public GameObject button;
 private CinemachineVirtualCamera vCam;
 public bool camFollowPlayer = true;
-
+public int Timelife = 5;
 public bool interactWithKey = true;
 //public KeyCode changeSceneKey = "Talk";
 public string sceneName;
 public bool needButton;
 public bool isDoor = false;
+
+public bool isTimer = false;
+
 public Animator anim; // componente Animator del personaggio
 // Riferimento all'evento di cambio scena
 private SceneEvent sceneEvent;
@@ -55,6 +58,15 @@ private void Start()
         {
         audioSource.outputAudioMixerGroup = SFX.FindMatchingGroups("Master")[0];
         }
+        
+        if(isTimer){
+         // Troviamo il game object del player
+        GameplayManager.instance.startGame = false;
+        GameplayManager.instance.isStartGame = false;
+        GameplayManager.instance.spawnPointTag = spawnPointTag;
+        StartCoroutine(loading());
+        }  
+
 }
 
 // Metodo per cambiare scena
@@ -72,11 +84,8 @@ private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     if (player != null)
     {
         Move.instance.stopInput = false;
-        if(camFollowPlayer)
-        {
-        vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
-        vCam.Follow = player.transform;
-        }
+        player = GameObject.FindGameObjectWithTag("Player");
+        player.gameObject.SetActive(true);
         // Troviamo il game object del punto di spawn
         GameObject spawnPoint = GameObject.FindWithTag(spawnPointTag);
         if (spawnPoint != null)
@@ -90,6 +99,14 @@ private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 }
 
 // Coroutine per attendere il caricamento della scena
+IEnumerator loading()
+{   
+    GameplayManager.instance.FadeOut();
+    yield return new WaitForSeconds(Timelife);
+    // Invochiamo l'evento di cambio scena
+    sceneEvent.InvokeOnSceneChange();
+    
+}
 IEnumerator WaitForSceneLoad()
 {   
     GameplayManager.instance.FadeOut();
@@ -108,7 +125,6 @@ private void OnTriggerStay2D(Collider2D other)
     if (other.CompareTag("Player"))
     {
          // Troviamo il game object del player
-        player = GameObject.FindGameObjectWithTag("Player");
         GameplayManager.instance.startGame = false;
         GameplayManager.instance.isStartGame = false;
         GameplayManager.instance.spawnPointTag = spawnPointTag;

@@ -6590,6 +6590,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -931.99994
       objectReference: {fileID: 0}
+    - target: {fileID: 5892456060464224160, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5892456060510546767, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -8259,10 +8263,12 @@ MonoBehaviour:
   spawnPointTag: SpawnPoint
   button: {fileID: 1345757587}
   camFollowPlayer: 1
+  Timelife: 5
   interactWithKey: 0
   sceneName: Area3
   needButton: 0
   isDoor: 0
+  isTimer: 0
   anim: {fileID: 0}
   basePitch: 1
   randomPitchOffset: 0.1
@@ -8328,7 +8334,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1182753017}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 65.53, y: 2.65, z: 0}
+  m_LocalPosition: {x: 65.4, y: 2.5, z: 0}
   m_LocalScale: {x: 1.5, y: 1.6983, z: 1.6983}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -41143,7 +41149,7 @@ SpriteShapeRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -41174,7 +41180,7 @@ SpriteShapeRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1794954071
   m_SortingLayer: 6
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Color: {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 0}
@@ -42210,13 +42216,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 942c3b20352d00f4a827b59b14a1c165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPointTag: SpawnPoint
+  spawnPointTag: SpawnPoint_1
   button: {fileID: 1953117430}
   camFollowPlayer: 1
+  Timelife: 5
   interactWithKey: 0
   sceneName: Area1
   needButton: 0
   isDoor: 0
+  isTimer: 0
   anim: {fileID: 0}
   basePitch: 1
   randomPitchOffset: 0.1
@@ -44352,10 +44360,12 @@ MonoBehaviour:
   spawnPointTag: SpawnPoint_1
   button: {fileID: 2052683314}
   camFollowPlayer: 0
+  Timelife: 5
   interactWithKey: 1
   sceneName: InnerHouse
   needButton: 1
   isDoor: 1
+  isTimer: 0
   anim: {fileID: 2113235336}
   basePitch: 1
   randomPitchOffset: 0.1
@@ -55081,7 +55091,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &1830889690
 BoxCollider2D:
   m_ObjectHideFlags: 0

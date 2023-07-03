@@ -16,7 +16,7 @@ public class stamina_vfx_rule : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        print ("scale: "+VFXStamina_pf.transform.localScale.y);
+       // print ("scale: "+VFXStamina_pf.transform.localScale.y);
         //start_local_scale_x=VFXStamina.transform.localScale.x;
         start_local_scale_y=VFXStamina_pf.transform.localScale.y;
         start_local_scale_z=VFXStamina_pf.transform.localScale.z;
@@ -38,7 +38,7 @@ public class stamina_vfx_rule : MonoBehaviour
     }
 
     public void stamina_zero(float stamina){
-        print ("f stamina zero: "+stamina);
+        //print ("f stamina zero: "+stamina);
         if (stamina<=5){
             if (bool_stamina_zero){
                 bool_stamina_zero=false;

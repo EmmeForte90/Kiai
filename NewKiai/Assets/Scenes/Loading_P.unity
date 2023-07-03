@@ -625,7 +625,7 @@ MonoBehaviour:
   startScene: Area1
   levelToLoad: Area1
   Timelife: 5
-  spawnPointTag: SpawnPoint_1
+  spawnPointTag: SpawnPoint
 --- !u!114 &1055986938
 MonoBehaviour:
   m_ObjectHideFlags: 0
