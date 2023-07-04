@@ -9,15 +9,23 @@ using UnityEngine.UI;
 public class Katana : MonoBehaviour
 {    
     private GameObject toy; // Variabile per il player
-    [SerializeField] GameObject Enemy;
 
-
-    [Header("HP")]
-
+    [Header("Vita")]
     private int vitalita;
     public int vitalita_max = 50;
-    
     public bool isDead = false;
+
+    [Header("Movimenti")]
+    [SerializeField] private Vector3[] posizioni;
+    private int index_posizioni;
+    public float velocita = 2f;
+    public float velocita_corsa = 4f;    
+    public bool isWalk = true;
+    public bool isChase = false;   
+    public bool  isAttack = false;
+    private float horizontal;
+    private bool facingR = true;
+    private Vector2 xTarget;
 
     [Header("Stamina")]
     [Tooltip("Il nemico possiede una stamina?")]
@@ -29,9 +37,7 @@ public class Katana : MonoBehaviour
     [SerializeField] GameObject StaminaVFX;
 
     public Scrollbar staminaBar;
-    private float horizontal;
-
-    private bool facingR = true;
+   
 
     [Header("Knockback")]
     [Tooltip("Il nemico fa knockback?")]
@@ -44,13 +50,17 @@ public class Katana : MonoBehaviour
     private float dashTime;
     [SerializeField] private Rigidbody2D rb;
     
-    [Header("Timer")]
+    [Header("Attacks")]
+    public float attackrange = 2f;
+    [SerializeField] GameObject attack;
+    private float distanza_temp;
+    public float distanza_attacco = 3f;
+    public float chaseThreshold = 2f; // soglia di distanza per iniziare l'inseguimento
 
     [Header("VFX")]
 
     [SerializeField] public Transform slashpoint;
     [SerializeField] public Transform hitpoint;
-    [SerializeField] GameObject attack;
      [SerializeField] GameObject VFXSdeng;
     [SerializeField] GameObject VFXHurt;
 
@@ -74,17 +84,23 @@ public class Katana : MonoBehaviour
     private int coinCount; // conteggio delle monete
     
     [Header("Animations")]
-
-    private Animator Anm;
-    private SkeletonMecanim skeletonAnimation;
-    private string stato;
+    [SerializeField] GameObject Enemy;
+    private SkeletonAnimation skeletonAnimation;
+     
+    private string currentAnimationName;
+    private Spine.AnimationState spineAnimationState;
+    private Spine.Skeleton skeleton;
+    Spine.EventData eventData;
     //private bool  anmDie = false;
-    //[SpineAnimation][SerializeField] string idle;
-    //[SpineAnimation][SerializeField] string walk;
-//    [SpineAnimation][SerializeField] string tired;
-    //[SpineAnimation][SerializeField] string guard;
-   // [SpineAnimation][SerializeField] string idle_battle;
-   // [SpineAnimation][SerializeField] string die;
+    [SpineAnimation][SerializeField] string idle;
+    [SpineAnimation][SerializeField] string walk;
+    [SpineAnimation][SerializeField] string run;
+    [SpineAnimation][SerializeField] string tired;
+    [SpineAnimation][SerializeField] string guard;
+    [SpineAnimation][SerializeField] string idle_battle;
+    [SpineAnimation][SerializeField] string die;
+    [SpineAnimation][SerializeField] string AttackV;
+
 
     // Start is called before the first frame update
     void Start(){
@@ -92,8 +108,14 @@ public class Katana : MonoBehaviour
         if(IsStamina)
         {stamina = stamina_max;}
         toy = GameObject.FindWithTag("Player");
-        skeletonAnimation = GetComponent<SkeletonMecanim>();
-        Anm =  GetComponent<Animator>();
+        skeletonAnimation = GetComponent<SkeletonAnimation>();
+        if (skeletonAnimation == null) {
+            Debug.LogError("Componente SkeletonAnimation non trovato!");
+        }   
+        spineAnimationState = GetComponent<Spine.Unity.SkeletonAnimation>().AnimationState;
+        spineAnimationState = skeletonAnimation.AnimationState;
+        skeleton = skeletonAnimation.skeleton;
+
          bgm = new AudioSource[listSound.Length]; // inizializza l'array di AudioSource con la stessa lunghezza dell'array di AudioClip
         for (int i = 0; i < listSound.Length; i++) // scorre la lista di AudioClip
         {
@@ -115,7 +137,7 @@ public class Katana : MonoBehaviour
          if (!GameplayManager.instance.PauseStop || isDead)
         {
             //Se gli HP sono a zero è mort
-        Flip();
+         #region StaminaLogic
         if(IsStamina)
         {
         staminaBar.size = stamina / stamina_max;
@@ -134,17 +156,55 @@ public class Katana : MonoBehaviour
         {
         if(stamina <= 0)
         {
-        stato = "tired";
         StaminaVFX.gameObject.SetActive(false);
-        if(stato == "tired"){
-        Anm.SetBool("tired", true);        
-        StartCoroutine(ripristina_Stamina());}
+        TiredAnm();        
+        StartCoroutine(ripristina_Stamina());
         }
         }
-        }
+#endregion
         ////////////////////////////////////////////////
+        #region Move
+        if(isWalk && !GameplayManager.instance.battle)
+        {
+        isChase = false;   
+        isAttack = false;
+        WalkAnm();
+        Enemy.transform.position = Vector2.MoveTowards(Enemy.transform.position,posizioni[index_posizioni], Time.deltaTime * velocita);
+        if (Enemy.transform.position.x<posizioni[index_posizioni].x){horizontal = -1;}
+        else {horizontal = 1;}
+                
+        if (Enemy.transform.position == posizioni[index_posizioni]){
+        if (index_posizioni == posizioni.Length -1)
+        {index_posizioni = 0;} else {index_posizioni++;}
+        }
+        Flip();
+        }
+#endregion
+        ////////////////////////////////////////////////
+        #region RilevaPlayer e Insegue il Player
+        if (Vector2.Distance(transform.position, toy.transform.position) < chaseThreshold && !isAttack)
+        {
+        isChase = true;   
+        isWalk = false;
+        isAttack = false;
+        if(isChase){Chase();}  
+        }
+        #endregion
+        ////////////////////////////////////////////////
+        #region Attacca il Player
+        if (Vector2.Distance(transform.position, toy.transform.position) < attackrange)
+        {
+        isChase = false;   
+        isWalk = false;
+        isAttack = true;
+        if(isAttack){Attack();}
+        }else{isWalk = true;}
+        #endregion
+        ////////////////////////////////////////////////
+        }
         
  }
+ 
 
  private void FixedUpdate()
     {
@@ -238,9 +298,7 @@ public class Katana : MonoBehaviour
                     vitalita -= 5; 
                     PlayMFX(2);
                     stamina -= 10;
-                    stato = "guard";
-                    if(stato == "guard")
-                    {Anm.SetBool("def", true);}
+                    GuardAnm();
                     PlayerHealth.Instance.currentStamina -=30;
                     StartCoroutine(ripristina_Posa());                    
                     Instantiate(VFXSdeng, hitpoint.position, transform.rotation);
@@ -253,20 +311,35 @@ public class Katana : MonoBehaviour
 }     
 }
 
+private void Chase()
+{
+    RunAnm();
+    // inseguimento del giocatore
+    if (toy.transform.position.x > Enemy.transform.position.x)
+    {
+        Enemy.transform.localScale = new Vector2(1f, 1f);
+    }
+    else if (toy.transform.position.x < Enemy.transform.position.x)
+    {
+        Enemy.transform.localScale = new Vector2(-1f, 1f);
+    }
+    Vector2 targetPosition = new Vector2(toy.transform.position.x, transform.position.y);
+    Enemy.transform.position = Vector2.MoveTowards(Enemy.transform.position, targetPosition, velocita_corsa * Time.deltaTime);
+}
+
+private void Attack()
+{
+    AttackAnm();
+    ripristina_Atk();
+}
+
+
 #region Die
 private void Die()
     {
         SpawnCoins();
         KiaiGive();
-        stato = "die";
-        Anm.SetBool("die1", true);
-          /*if (horizontal < 0)
-        {Anm.SetBool("die1", true);}
-        else if (horizontal > 0)
-        {Anm.SetBool("die2", true);}
-         else if (horizontal == 0)
-        {if (rb.transform.localScale.x == -1)
-        {Anm.SetBool("die3", true);}*/
+        DieAnm();
         StartCoroutine(DestroyEnm());
     }
 
@@ -276,7 +349,8 @@ private void Die()
     }
 #endregion
 
- private void Flip()
+#region Direction
+private void Flip()
     {
         if (facingR && horizontal > 0f || !facingR && horizontal < 0f)
         {
@@ -286,6 +360,30 @@ private void Die()
             transform.localScale = localScale;
         }
     }
+
+void FacePlayer()
+    {
+        if (toy != null)
+        {
+            if (toy.transform.position.x > Enemy.transform.position.x)
+            {
+                transform.localScale = new Vector3(-1, 1, 1);
+            }
+            else
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+            }
+        }
+    }
+#endregion
+
+private void Wait()
+{
+    rb.velocity = new Vector3(0, 0, 0);
+    isAttack = false;
+    IdleBattleAnm();
+}
+
  private void Damage()
     {
         vitalita -= HitboxPlayer.Instance.Damage; 
@@ -295,35 +393,47 @@ private void Die()
                     StartCoroutine(ripristina_colore());
                     if(isKnock){ KnockbackAtL = true;}
     }
-private IEnumerator ripristina_Stamina(){
+
+#region Gizmos
+private void OnDrawGizmos()
+    {
+    Gizmos.color = Color.red;
+    Gizmos.DrawWireSphere(transform.position, chaseThreshold);
+    Gizmos.color = Color.blue;
+    Gizmos.DrawWireSphere(transform.position, attackrange);
+    }
+#endregion
+
+#region Timers
+private IEnumerator ripristina_Atk()
+    {
+    yield return new WaitForSeconds(1f);
+    isAttack = false;  
+    yield return new WaitForSeconds(0.5f);
+    Wait();    
+    }
+
+private IEnumerator ripristina_Stamina()
+    {
         yield return new WaitForSeconds(2f);
         stamina = stamina_max;
-        stato = "idle_battle";
-        if(stato == "idle_battle")
-        {
         StaminaVFX.gameObject.SetActive(true);
-        Anm.SetBool("def", false);        
-        Anm.SetBool("tired", false);        
-        }
+        IdleBattleAnm();    
     }
 
-    private IEnumerator ripristina_Posa(){
+    private IEnumerator ripristina_Posa()
+    {
         yield return new WaitForSeconds(1f);
-        stato = "idle_battle";
-        if(stato == "idle_battle")
-        {
-            Anm.SetBool("def", false);        
-            Anm.SetBool("battle", true);        
-        }
+        IdleBattleAnm(); 
     }
-
 
 private IEnumerator ripristina_colore(){
         yield return new WaitForSeconds(0.1f);
         skeletonAnimation.Skeleton.SetColor(Color.white);
     }
+#endregion
 
-
+#region Drops
 void KiaiGive()
 {
     int randomChance = Random.Range(1, 10); // Genera un numero casuale compreso tra 1 e 10
@@ -358,7 +468,9 @@ public void SpawnCoins()
         SpawnC = true;
     }
 }
+#endregion
 
+#region Music
 public void PlayMFX(int soundToPlay)
     {
         bgm[soundToPlay].Stop();
@@ -366,5 +478,120 @@ public void PlayMFX(int soundToPlay)
         bgm[soundToPlay].pitch = basePitch + Random.Range(-randomPitchOffset, randomPitchOffset); 
         bgm[soundToPlay].Play();
     }
+#endregion
+
+#region Animations
+
+public void IdleAnm()
+{
+    if (currentAnimationName != idle)
+                {
+                    spineAnimationState.SetAnimation(2, idle, true);
+                    currentAnimationName = idle;
+                }
+                // Add event listener for when the animation completes
+                spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+
+public void IdleBattleAnm()
+{
+    if (currentAnimationName != idle_battle)
+                {
+                    spineAnimationState.SetAnimation(2, idle_battle, true);
+                    currentAnimationName = idle_battle;
+                }
+                // Add event listener for when the animation completes
+                spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+public void WalkAnm()
+{
+    if (currentAnimationName != walk)
+                {
+                    spineAnimationState.SetAnimation(2, walk, false);
+                    currentAnimationName = walk;
+                }
+                // Add event listener for when the animation completes
+                spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+public void RunAnm()
+{
+    if (currentAnimationName != run)
+                {
+                    spineAnimationState.SetAnimation(2, run, false);
+                    currentAnimationName = run;
+                }
+                // Add event listener for when the animation completes
+                spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+public void GuardAnm()
+{
+    if (currentAnimationName != guard)
+                {
+                    spineAnimationState.SetAnimation(2, guard, true);
+                    currentAnimationName = guard;
+                }
+                // Add event listener for when the animation completes
+                spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+public void TiredAnm()
+{
+    if (currentAnimationName != tired)
+                {
+                    spineAnimationState.SetAnimation(2, tired, true);
+                    currentAnimationName = tired;
+                }
+                // Add event listener for when the animation completes
+                spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+public void DieAnm()
+{
+    if (currentAnimationName != die)
+                {
+                    spineAnimationState.SetAnimation(2, die, true);
+                    currentAnimationName = die;
+                }
+                // Add event listener for when the animation completes
+                spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+
+public void AttackAnm()
+{
+    if (currentAnimationName != AttackV)
+                {
+                    spineAnimationState.SetAnimation(2, AttackV, false);
+                    currentAnimationName = AttackV;
+                }
+                // Add event listener for when the animation completes
+                spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
+
+private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
+{
+    // Remove the event listener
+    trackEntry.Complete -= OnAttackAnimationComplete;
+
+    // Clear the track 1 and reset to the idle animation
+    spineAnimationState.ClearTrack(2); 
+                if (currentAnimationName != idle) 
+                {
+                    spineAnimationState.SetAnimation(1, idle, true);
+                    currentAnimationName = idle;
+                }
+}
+
+#endregion
+
+#region Events
+void HandleEvent (TrackEntry trackEntry, Spine.Event e) 
+{
+    if (e.Data.Name == "slash_h2_normal") 
+    {     
+    
+    
+    }
+
+}
+#endregion
+
 
 }

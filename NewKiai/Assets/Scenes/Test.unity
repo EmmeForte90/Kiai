@@ -30047,7 +30047,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 72479223442003371}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 35.42, y: -3.354, z: 0}
+  m_LocalPosition: {x: 30.54, y: -3.354, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -30075,8 +30075,7 @@ GameObject:
   - component: {fileID: 72479223442003363}
   - component: {fileID: 72479223442003360}
   - component: {fileID: 72479223442003361}
-  - component: {fileID: 72479223442003375}
-  - component: {fileID: 72479223442003374}
+  - component: {fileID: 72479223442003376}
   m_Layer: 6
   m_Name: Katana_stamina (1)
   m_TagString: Enemy
@@ -30096,10 +30095,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88e02e85a54f0ec47a8e046e1fb05014, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enemy: {fileID: 72479223442003371}
   vitalita_max: 50
   isDead: 0
-  IsStamina: 1
+  posizioni:
+  - {x: 40, y: -3.354, z: 0}
+  - {x: 30, y: -3.354, z: 0}
+  velocita: 2
+  velocita_corsa: 4
+  isWalk: 1
+  IsStamina: 0
   stamina_max: 50
   DamageStamina: 10
   Staminaobj: {fileID: 7337296666157482183}
@@ -30109,9 +30113,12 @@ MonoBehaviour:
   knockForceShort: 1
   knockForceLong: 3
   rb: {fileID: 72479223442003361}
+  attackrange: 2.5
+  attack: {fileID: 990365191}
+  distanza_attacco: 3
+  chaseThreshold: 5.4
   slashpoint: {fileID: 990365192}
   hitpoint: {fileID: 72479224076390082}
-  attack: {fileID: 990365191}
   VFXSdeng: {fileID: 4331965279904828745, guid: 1b79c7dad815f1544b564d01f2920de0, type: 3}
   VFXHurt: {fileID: 7071445190980599945, guid: 6f619625bacd75f428d3375ad52cacc5, type: 3}
   basePitch: 1
@@ -30125,6 +30132,14 @@ MonoBehaviour:
   CoinPoint: {fileID: 72479224076390082}
   maxCoins: 5
   coinSpawnDelay: 5
+  Enemy: {fileID: 72479223442003371}
+  idle: idle
+  walk: walk_thief
+  run: run_thief
+  tired: tired
+  guard: guard
+  idle_battle: idle_battle
+  die: die3
 --- !u!114 &72479223442003373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30139,7 +30154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knockbackForce: 50
   knockbackDuration: 0.5
---- !u!114 &72479223442003374
+--- !u!114 &72479223442003376
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -30148,7 +30163,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 72479223442003371}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9db98c60740638449864eb028fbe7ad, type: 3}
+  m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skeletonDataAsset: {fileID: 11400000, guid: 276d85fc2e775854c9f063b54162bd47, type: 2}
@@ -30174,33 +30189,11 @@ MonoBehaviour:
     materialsInsideMask: []
     materialsOutsideMask: []
   disableRenderingOnOverride: 1
-  translator:
-    autoReset: 1
-    useCustomMixMode: 1
-    layerMixModes: 01000000
-    layerBlendModes: 01000000
   updateTiming: 1
---- !u!95 &72479223442003375
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 72479223442003371}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 712bf9e5539280f409ad4aa642b98684, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  unscaledTime: 0
+  _animationName: idle
+  loop: 0
+  timeScale: 1
 --- !u!4 &72479224076390082
 Transform:
   m_ObjectHideFlags: 0
@@ -32444,6 +32437,10 @@ PrefabInstance:
       propertyPath: attack_r_air_Landing
       value: 
       objectReference: {fileID: 6811609168556801878, guid: 3e66091c93a249c4cbbc5e176e74d52b, type: 3}
+    - target: {fileID: 5892456059567638963, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -21.61
+      objectReference: {fileID: 0}
     - target: {fileID: 5892456059679841432, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -32757,7 +32754,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7244767379196921097, guid: b73382dd97a51fa4ea1e878d30728010, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 26.23
+      value: 4.619999
       objectReference: {fileID: 0}
     - target: {fileID: 7244767379196921333, guid: b73382dd97a51fa4ea1e878d30728010, type: 3}
       propertyPath: m_IsActive
@@ -32769,7 +32766,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7244767379700740900, guid: b73382dd97a51fa4ea1e878d30728010, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 26.23
+      value: 4.619999
       objectReference: {fileID: 0}
     - target: {fileID: 7244767379700740901, guid: b73382dd97a51fa4ea1e878d30728010, type: 3}
       propertyPath: m_Follow
