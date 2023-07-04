@@ -11,17 +11,17 @@ public class fatality : MonoBehaviour
     [Header("Fatality")]
     public SkeletonAnimation spineAnimation;
     public GameObject FPoint;
-     public bool IsAboss = false;    
-     public string startScene;
-public string spawnPointTag = "SpawnPoint";
-    private GameObject player;
     public GameObject fatalit;
     //private bool endFata = false;
     private bool HideB = false;
     private bool _isInTrigger = false;
     private Transform toy; // Variabile per il player
     public Transform Enemy; // Variabile per il player
-    public int watF;
+    //public Transform Spawn; // Variabile per il player
+   
+   
+    [Tooltip("Quale fatality deve eseguire il player?")]
+    public int ChooseFatality;
 
     [SpineAnimation][SerializeField] private string tiredAnimationName;
     [SpineAnimation][SerializeField] private string fatalityAnimationName;
@@ -29,7 +29,8 @@ public string spawnPointTag = "SpawnPoint";
 private void Awake()
     {
         toy = GameObject.FindWithTag("Player").transform;
-        }  
+        //transform.position = Spawn.transform.position;
+    }  
 
 
 
@@ -76,27 +77,7 @@ private void OnTriggerExit2D(Collider2D collision)
     }
 }
 
-private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-{
-    GameplayManager.instance.FadeIn();
 
-    SceneManager.sceneLoaded -= OnSceneLoaded;
-    if (player != null)
-    {
-        Move.instance.stopInput = false;
-        Move.instance.Stop();
-        // Troviamo il game object del punto di spawn
-        GameObject spawnPoint = GameObject.FindWithTag(spawnPointTag);
-        if (spawnPoint != null)
-        {
-            GameplayManager.instance.FirstoOfPlay();
-            // Muoviamo il player al punto di spawn
-            player.transform.position = spawnPoint.transform.position;
-            //yield return new WaitForSeconds(3f);
-        }
-    }
-    GameplayManager.instance.StopFade();    
-}
     private IEnumerator PlayFatalityAnimation()
     {
         // Sospende l'esecuzione dello script per un breve momento
@@ -105,22 +86,15 @@ private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         yield return new WaitForSeconds(0.5f);
 
         // Avvia l'animazione di fatality sullo SpineAnimation
-        Move.instance.Fatality(watF);
+        Move.instance.Fatality(ChooseFatality);
         spineAnimation.state.SetAnimation(2, fatalityAnimationName, false);
         // Attendi che l'animazione di fatality sia completata
         yield return new WaitForSeconds(1f);
         //endFata = true;
         Move.instance.NotStrangeAnimationTalk = false;
         Move.instance.stopInput = false;
-        // Distruggi il nemico dal gioco
-        yield return new WaitForSeconds(2f);
-        if(IsAboss){
-        GameplayManager.instance.FadeIn();
-        GameplayManager.instance.DeactivationGame2();
-        SceneManager.LoadScene(startScene, LoadSceneMode.Single);
-        SceneManager.sceneLoaded += OnSceneLoaded;
-        }
-        
-        //Destroy(gameObject);
+        yield return new WaitForSeconds(1f);
+        Destroy(gameObject);
+
     }
 }

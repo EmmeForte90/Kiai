@@ -14,21 +14,23 @@ public class Katana : MonoBehaviour
     private float vitalita;
     public float vitalita_max = 50;
     public Scrollbar HPBar;
-    public bool isDead = false;
+    private bool isDead = false;
 
     [Header("Movimenti")]
     [SerializeField] private Vector3[] posizioni;
     private int index_posizioni;
     public float velocita = 2f;
     public float velocita_corsa = 4f;    
-    public bool isWalk = true;
-    public bool isChase = false;  
-    public bool Follow = true; 
-    public bool  isAttack = false;
-    public bool isHurt = false;
+    private bool isWalk = true;
+    private bool isChase = false;  
+    private bool Follow = true; 
+    private bool  isAttack = false;
+    private bool isHurt = false;
     private float horizontal;
-    private bool facingR = true;
-    private Vector2 xTarget;
+    [Header("Timer")]
+    [Tooltip("Il tempo tra il ripristino della stamina o dell'attacco")]
+    public float TimeRestoreAtk = 1f;
+    public float TimeRestoreStamina = 2f;
 
     [Header("Stamina")]
     [Tooltip("Il nemico possiede una stamina?")]
@@ -45,7 +47,6 @@ public class Katana : MonoBehaviour
     [Header("Knockback")]
     [Tooltip("Il nemico fa knockback?")]
     public bool isKnock = false;
-
     private bool KnockbackAt = false;
     private bool KnockbackAtL = false;
     public float knockForceShort = 3f;
@@ -54,12 +55,14 @@ public class Katana : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     
     [Header("Attacks")]
+    [Tooltip("A quale distanza attacca il nemico?")]
     public float attackrange = 2f;
     [SerializeField] GameObject attack;
+
+    [Tooltip("A quale distanza il nemico insegue il player?")]
     public float chaseThreshold = 2f; // soglia di distanza per iniziare l'inseguimento
 
     [Header("VFX")]
-
     [SerializeField] public Transform slashpoint;
     [SerializeField] public Transform hitpoint;
     [SerializeField] GameObject VFXSdeng;
@@ -99,6 +102,12 @@ public class Katana : MonoBehaviour
     [SpineAnimation][SerializeField] string die;
     [SpineAnimation][SerializeField] string AttackV;
 
+    [Header("Fatality")]
+    private int result;
+    public bool isFatality;
+    [SerializeField] GameObject Fatality;
+
+
 
     // Start is called before the first frame update
     void Start(){
@@ -123,10 +132,18 @@ public class Katana : MonoBehaviour
             bgm[i].loop = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
 
         }
- // Aggiunge i canali audio degli AudioSource all'output del mixer
+        //Aggiunge i canali audio degli AudioSource all'output del mixer
         foreach (AudioSource audioSource in bgm)
         {
         audioSource.outputAudioMixerGroup = SFX.FindMatchingGroups("Master")[0];
+        }
+        if(isFatality)
+        {
+        // Genera un numero casuale tra 1 e 2
+        float randomNumber = Random.Range(1f, 2f);
+        // Converte il numero in intero
+        result = Mathf.RoundToInt(randomNumber);
+        Debug.Log("result"+ result);
         }
     }
  void Update(){
@@ -170,8 +187,8 @@ public class Katana : MonoBehaviour
         isAttack = false;
         WalkAnm();
         Enemy.transform.position = Vector2.MoveTowards(Enemy.transform.position,posizioni[index_posizioni], Time.deltaTime * velocita);
-        if (Enemy.transform.position.x<posizioni[index_posizioni].x){horizontal = -1;}
-        else {horizontal = 1;}
+        if (Enemy.transform.position.x<posizioni[index_posizioni].x){horizontal = 1;}
+        else {horizontal = -1;}
                 
         if (Enemy.transform.position == posizioni[index_posizioni]){
         if (index_posizioni == posizioni.Length -1)
@@ -186,22 +203,20 @@ public class Katana : MonoBehaviour
         {
         if (Vector2.Distance(transform.position, toy.transform.position) < chaseThreshold && !isAttack && !isHurt)
         {
-        isChase = true;   
-        isWalk = false;
-        isAttack = false;
+        isChase = true;   isWalk = false;  isAttack = false;
         if(isChase){Chase();}  
-        }}
+        }else if (Vector2.Distance(transform.position, toy.transform.position) > chaseThreshold && !isAttack && !isHurt)
+        {Follow = true; isChase = false;  isWalk = true; isAttack = false;}
+        }
         #endregion
         ////////////////////////////////////////////////
         #region Attacca il Player
         if (Vector2.Distance(transform.position, toy.transform.position) < attackrange && !isHurt)
         {
-        isChase = false;   
-        isWalk = false;
-        isAttack = true;
-        Follow = false;
+        isChase = false;   isWalk = false; isAttack = true; Follow = false;
         if(isAttack){Attack();}
-        }else{isWalk = true;}
+        }else if (Vector2.Distance(transform.position, toy.transform.position) > attackrange && isAttack && !isHurt)
+        {Follow = true; isChase = false;  isWalk = true; isAttack = false;}
         #endregion
         ////////////////////////////////////////////////
         }
@@ -218,18 +233,18 @@ public class Katana : MonoBehaviour
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         if (KnockbackAt)
         {
-            if (horizontal < 0)
+            if (Enemy.transform.localScale.x < 0)
         {
 
            rb.AddForce(Enemy.transform.right * knockForceShort, ForceMode2D.Impulse);
             dashTime -= Time.deltaTime;
         }
-        else if (horizontal > 0)
+        else if (Enemy.transform.localScale.x > 0)
         {
             rb.AddForce(-Enemy.transform.right * knockForceShort, ForceMode2D.Impulse);
             dashTime -= Time.deltaTime;
         }
-         else if (horizontal == 0)
+         else if (Enemy.transform.localScale.x == 0)
         {
             if (rb.transform.localScale.x == -1)
         {
@@ -251,18 +266,18 @@ public class Katana : MonoBehaviour
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         if (KnockbackAtL)
         {
-            if (horizontal < 0)
+            if (Enemy.transform.localScale.x < 0)
         {
 
            rb.AddForce(Enemy.transform.right * knockForceLong, ForceMode2D.Impulse);
             dashTime -= Time.deltaTime;
         }
-        else if (horizontal > 0)
+        else if (Enemy.transform.localScale.x > 0)
         {
             rb.AddForce(-Enemy.transform.right * knockForceLong, ForceMode2D.Impulse);
             dashTime -= Time.deltaTime;
         }
-         else if (horizontal == 0)
+         else if (Enemy.transform.localScale.x == 0)
         {
             if (rb.transform.localScale.x == -1)
         {
@@ -343,8 +358,18 @@ private void Die()
     {
         SpawnCoins();
         KiaiGive();
-        DieAnm();
-        StartCoroutine(DestroyEnm());
+        if(isFatality){
+        if(result == 1)
+        {DieAnm(); StartCoroutine(DestroyEnm());
+        }else if(result == 2)
+        {Fatality.gameObject.SetActive(true); 
+        Fatality.transform.position = Enemy.transform.position;
+        if(Enemy.transform.localScale.x > 0){Fatality.transform.localScale = new Vector2(1, 1);}
+        else if(Enemy.transform.localScale.x < 0){Fatality.transform.localScale = new Vector2(-1, 1);}
+        Enemy.gameObject.SetActive(false);}}
+        else
+        {DieAnm(); StartCoroutine(DestroyEnm());
+        }
     }
 
      private IEnumerator DestroyEnm(){
@@ -356,13 +381,10 @@ private void Die()
 #region Direction
 private void Flip()
     {
-        if (facingR && horizontal > 0f || !facingR && horizontal < 0f)
-        {
-            facingR = !facingR;
-            Vector3 localScale = transform.localScale;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
-        }
+        if (horizontal > 0)
+            Enemy.transform.localScale = new Vector2(1, 1);
+        else if (horizontal < 0)
+            Enemy.transform.localScale = new Vector2(-1, 1);
     }
 
 void FacePlayer()
@@ -371,11 +393,11 @@ void FacePlayer()
         {
             if (toy.transform.position.x > Enemy.transform.position.x)
             {
-                transform.localScale = new Vector3(-1, 1, 1);
+                transform.localScale = new Vector3(1, 1, 1);
             }
             else
             {
-                transform.localScale = new Vector3(1, 1, 1);
+                transform.localScale = new Vector3(-1, 1, 1);
             }
         }
     }
@@ -385,7 +407,6 @@ private void Wait()
 {
     rb.velocity = new Vector3(0, 0, 0);
     isAttack = false;
-    Follow = true;
     IdleBattleAnm();
 }
 
@@ -412,16 +433,14 @@ private void OnDrawGizmos()
 #region Timers
 private IEnumerator ripristina_Atk()
     {
-    yield return new WaitForSeconds(1f);
+    yield return new WaitForSeconds(TimeRestoreAtk);
     isAttack = false;  
     Wait();    
-    yield return new WaitForSeconds(0.5f);
-    Follow = true;
     }
 
 private IEnumerator ripristina_Stamina()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(TimeRestoreStamina);//2
         stamina = stamina_max;
         StaminaVFX.gameObject.SetActive(true);
         isHurt = false;

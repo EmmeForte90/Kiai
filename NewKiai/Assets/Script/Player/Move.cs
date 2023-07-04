@@ -2713,6 +2713,16 @@ switch (watF) {
                 // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
                 break;
+        case 3:
+         if (currentAnimationName != F_BackAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, F_BackAnimationName, false);
+                    currentAnimationName = F_BackAnimationName;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+                break;
 
 }
 
