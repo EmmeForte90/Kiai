@@ -11,8 +11,9 @@ public class Katana : MonoBehaviour
     private GameObject toy; // Variabile per il player
 
     [Header("Vita")]
-    private int vitalita;
-    public int vitalita_max = 50;
+    private float vitalita;
+    public float vitalita_max = 50;
+    public Scrollbar HPBar;
     public bool isDead = false;
 
     [Header("Movimenti")]
@@ -21,8 +22,10 @@ public class Katana : MonoBehaviour
     public float velocita = 2f;
     public float velocita_corsa = 4f;    
     public bool isWalk = true;
-    public bool isChase = false;   
+    public bool isChase = false;  
+    public bool Follow = true; 
     public bool  isAttack = false;
+    public bool isHurt = false;
     private float horizontal;
     private bool facingR = true;
     private Vector2 xTarget;
@@ -53,15 +56,13 @@ public class Katana : MonoBehaviour
     [Header("Attacks")]
     public float attackrange = 2f;
     [SerializeField] GameObject attack;
-    private float distanza_temp;
-    public float distanza_attacco = 3f;
     public float chaseThreshold = 2f; // soglia di distanza per iniziare l'inseguimento
 
     [Header("VFX")]
 
     [SerializeField] public Transform slashpoint;
     [SerializeField] public Transform hitpoint;
-     [SerializeField] GameObject VFXSdeng;
+    [SerializeField] GameObject VFXSdeng;
     [SerializeField] GameObject VFXHurt;
 
     [Header("Audio")]
@@ -77,11 +78,8 @@ public class Katana : MonoBehaviour
     private bool  SpawnC = false;
     [SerializeField] public Transform CoinPoint;
     public int maxCoins = 5; // numero massimo di monete che possono essere rilasciate
-    public float coinSpawnDelay = 5f; // ritardo tra la spawn di ogni moneta
-    private int randomChance;
     private float coinForce = 5f; // forza con cui le monete saltano
     private Vector2 coinForceVariance = new Vector2(1, 0); // varianza della forza con cui le monete saltano
-    private int coinCount; // conteggio delle monete
     
     [Header("Animations")]
     [SerializeField] GameObject Enemy;
@@ -137,7 +135,9 @@ public class Katana : MonoBehaviour
          if (!GameplayManager.instance.PauseStop || isDead)
         {
             //Se gli HP sono a zero è mort
-         #region StaminaLogic
+        HPBar.size = vitalita / vitalita_max;
+        HPBar.size = Mathf.Clamp(HPBar.size, 0.01f, 1);
+        #region StaminaLogic
         if(IsStamina)
         {
         staminaBar.size = stamina / stamina_max;
@@ -164,7 +164,7 @@ public class Katana : MonoBehaviour
 #endregion
         ////////////////////////////////////////////////
         #region Move
-        if(isWalk && !GameplayManager.instance.battle)
+        if(isWalk && !GameplayManager.instance.battle && !isHurt)
         {
         isChase = false;   
         isAttack = false;
@@ -182,21 +182,24 @@ public class Katana : MonoBehaviour
 #endregion
         ////////////////////////////////////////////////
         #region RilevaPlayer e Insegue il Player
-        if (Vector2.Distance(transform.position, toy.transform.position) < chaseThreshold && !isAttack)
+        if (Follow)
+        {
+        if (Vector2.Distance(transform.position, toy.transform.position) < chaseThreshold && !isAttack && !isHurt)
         {
         isChase = true;   
         isWalk = false;
         isAttack = false;
         if(isChase){Chase();}  
-        }
+        }}
         #endregion
         ////////////////////////////////////////////////
         #region Attacca il Player
-        if (Vector2.Distance(transform.position, toy.transform.position) < attackrange)
+        if (Vector2.Distance(transform.position, toy.transform.position) < attackrange && !isHurt)
         {
         isChase = false;   
         isWalk = false;
         isAttack = true;
+        Follow = false;
         if(isAttack){Attack();}
         }else{isWalk = true;}
         #endregion
@@ -295,6 +298,7 @@ public class Katana : MonoBehaviour
         {
             if(stamina > 0)
         {
+                    isHurt = true;
                     vitalita -= 5; 
                     PlayMFX(2);
                     stamina -= 10;
@@ -381,17 +385,18 @@ private void Wait()
 {
     rb.velocity = new Vector3(0, 0, 0);
     isAttack = false;
+    Follow = true;
     IdleBattleAnm();
 }
 
  private void Damage()
     {
         vitalita -= HitboxPlayer.Instance.Damage; 
-                    PlayMFX(1);
-                    skeletonAnimation.Skeleton.SetColor(Color.red);
-                    Instantiate(VFXHurt, hitpoint.position, transform.rotation);
-                    StartCoroutine(ripristina_colore());
-                    if(isKnock){ KnockbackAtL = true;}
+        PlayMFX(1);
+        skeletonAnimation.Skeleton.SetColor(Color.red);
+        Instantiate(VFXHurt, hitpoint.position, transform.rotation);
+        StartCoroutine(ripristina_colore());
+        if(isKnock){ KnockbackAtL = true;}
     }
 
 #region Gizmos
@@ -409,8 +414,9 @@ private IEnumerator ripristina_Atk()
     {
     yield return new WaitForSeconds(1f);
     isAttack = false;  
-    yield return new WaitForSeconds(0.5f);
     Wait();    
+    yield return new WaitForSeconds(0.5f);
+    Follow = true;
     }
 
 private IEnumerator ripristina_Stamina()
@@ -418,6 +424,7 @@ private IEnumerator ripristina_Stamina()
         yield return new WaitForSeconds(2f);
         stamina = stamina_max;
         StaminaVFX.gameObject.SetActive(true);
+        isHurt = false;
         IdleBattleAnm();    
     }
 
@@ -592,6 +599,5 @@ void HandleEvent (TrackEntry trackEntry, Spine.Event e)
 
 }
 #endregion
-
 
 }
