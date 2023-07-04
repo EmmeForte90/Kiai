@@ -1289,7 +1289,7 @@ if(attackWater)
     
 if(PlayerHealth.Instance.currentStamina <=0 && isGrounded())
   {Stop(); TiredAnm(); StopinputTrue();} 
-else if(PlayerHealth.Instance.currentStamina > 50)
+else if(PlayerHealth.Instance.currentStamina > 20)
   {StopinputFalse();} 
 
 }
@@ -2131,11 +2131,10 @@ public void TiredAnm()
                 {
                     _spineAnimationState.ClearTrack(2);
                     _spineAnimationState.ClearTrack(1);
-                    _spineAnimationState.SetAnimation(2, TiredAnimationName, true);
+                    _spineAnimationState.SetAnimation(1, TiredAnimationName, true);
                     currentAnimationName = TiredAnimationName;
                     _spineAnimationState.Event += HandleEvent;
                 }
-            _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;  
 }
 #endregion
 
