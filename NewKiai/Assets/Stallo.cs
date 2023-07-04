@@ -165,7 +165,7 @@ IEnumerator EndDuello()
     {
             print("Hai vinto");
             Move.instance.drawsword = true;
-            Move.instance.FatalityJump();
+            //Move.instance.FatalityJump();
             spineAnimation.state.SetAnimation(2, DefeatAnimationName, false);
             KiaiGive();
     }else if(!Win)

@@ -6,7 +6,6 @@ using Spine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 
-
 public class Move : MonoBehaviour
 {
     [SerializeField] public GameObject Player;
@@ -117,122 +116,117 @@ public class Move : MonoBehaviour
     //public bool GoKiai = false;
     [Header("Animations")]
 
-    [SpineAnimation][SerializeField] private string walkAnimationName;
-    [SpineAnimation][SerializeField] private string walkSwordAnimationName;
-    [SpineAnimation][SerializeField] private string runAnimationName;
-    [SpineAnimation][SerializeField] private string runSwordAnimationName;
-    [SpineAnimation][SerializeField] private string talkAnimationName;
+    [SpineAnimation][SerializeField]  string walkAnimationName;
+    [SpineAnimation][SerializeField]  string walkSwordAnimationName;
+    [SpineAnimation][SerializeField]  string runAnimationName;
+    [SpineAnimation][SerializeField]  string runSwordAnimationName;
+    [SpineAnimation][SerializeField]  string talkAnimationName;
     [Header("Jump")]
-    [SpineAnimation][SerializeField] private string jumpAnimationName;
-    [SpineAnimation][SerializeField] private string jumpSwordAnimationName;
-    [SpineAnimation][SerializeField] private string jumpDownAnimationName;
-    [SpineAnimation][SerializeField] private string jumpDownSwordAnimationName;
-    //[SpineAnimation][SerializeField] private string landingAnimationName;
-    [SpineAnimation][SerializeField] private string walljumpAnimationName;
-    [SpineAnimation][SerializeField] private string walljumpdownAnimationName;
-    [SpineAnimation][SerializeField] private string dashAnimationName;
+    [SpineAnimation][SerializeField]  string jumpAnimationName;
+    [SpineAnimation][SerializeField]  string jumpSwordAnimationName;
+    [SpineAnimation][SerializeField]  string jumpDownAnimationName;
+    [SpineAnimation][SerializeField]  string jumpDownSwordAnimationName;
+    [SpineAnimation][SerializeField]  string walljumpAnimationName;
+    [SpineAnimation][SerializeField]  string walljumpdownAnimationName;
+    [SpineAnimation][SerializeField]  string dashAnimationName;
     //////////////////////////////////////////////////////////////////////////
         [Header("HpAnm")]
-    [SpineAnimation][SerializeField] private string hurtAnimationName;
-    [SpineAnimation][SerializeField] private string BighurtAnimationName;
-    [SpineAnimation][SerializeField] private string deathAnimationName;
-    [SpineAnimation][SerializeField] private string RestAnimationName;
-    [SpineAnimation][SerializeField] private string respawnRestAnimationName;
-    [SpineAnimation][SerializeField] private string UpAnimationName;
-    [SpineAnimation][SerializeField] private string respawnAnimationName;
+    [SpineAnimation][SerializeField]  string hurtAnimationName;
+    [SpineAnimation][SerializeField]  string BighurtAnimationName;
+    [SpineAnimation][SerializeField]  string deathAnimationName;
+    [SpineAnimation][SerializeField]  string RestAnimationName;
+    [SpineAnimation][SerializeField]  string respawnRestAnimationName;
+    [SpineAnimation][SerializeField]  string UpAnimationName;
+    [SpineAnimation][SerializeField]  string respawnAnimationName;
     ///////////////////////////////////////////////////////////////////////////
         [Header("NormalStyle")]
     public GameObject S_Normal;
     [Tooltip("Animazione a singolo frame")]
-    [SpineAnimation][SerializeField] private string idleSAnimationName;
+    [SpineAnimation][SerializeField]  string idleSAnimationName;
     [Tooltip("Animazione Completa")]
-    [SpineAnimation][SerializeField] private string idleAnimationName;
-    [SpineAnimation][SerializeField] private string idleSwordAnimationName;
+    [SpineAnimation][SerializeField]  string idleAnimationName;
+    [SpineAnimation][SerializeField]  string idleSwordAnimationName;
     [SerializeField] GameObject attack;
     [SerializeField] GameObject attack_h;
     [SerializeField] GameObject attack_h2;
     [SerializeField] GameObject attack_air_bottom;
     [SerializeField] GameObject attack_air_up;
-    [SpineAnimation][SerializeField] private string KiaiNormalAnimationName;
-    [SpineAnimation][SerializeField] private string attackNormal1AnimationName;
-    [SpineAnimation][SerializeField] private string attackNormal2AnimationName;
-    [SpineAnimation][SerializeField] private string attackNormal3AnimationName;
-    [SpineAnimation][SerializeField] private string upatkjumpAnimationName;
-    [SpineAnimation][SerializeField] private string downatkjumpAnimationName;
+    [SpineAnimation][SerializeField]  string KiaiNormalAnimationName;
+    [SpineAnimation][SerializeField]  string attackNormal1AnimationName;
+    [SpineAnimation][SerializeField]  string attackNormal2AnimationName;
+    [SpineAnimation][SerializeField]  string attackNormal3AnimationName;
+    [SpineAnimation][SerializeField]  string upatkjumpAnimationName;
+    [SpineAnimation][SerializeField]  string downatkjumpAnimationName;
     private bool NormalSpecial = false;
     [SerializeField] GameObject attack_n_sp;
-    [SpineAnimation][SerializeField] private string NHeavyReleaseAnimationName;
-    [SpineAnimation][SerializeField] private string NHeavyAnimationName;
+    [SpineAnimation][SerializeField]  string NHeavyReleaseAnimationName;
+    [SpineAnimation][SerializeField]  string NHeavyAnimationName;
     [SerializeField] GameObject S_normalK_hitbox;
         [Header("Fire")]
     public GameObject S_Fire;
     [Tooltip("Animazione a singolo frame")]
-    [SpineAnimation][SerializeField] private string fireposSAnimationName;
+    [SpineAnimation][SerializeField]  string fireposSAnimationName;
     [Tooltip("Animazione Completa")]
-    [SpineAnimation][SerializeField] private string fireposAnimationName;
-    [SpineAnimation][SerializeField] private string KiaiFireAnimationName;
+    [SpineAnimation][SerializeField]  string fireposAnimationName;
+    [SpineAnimation][SerializeField]  string KiaiFireAnimationName;
     [SerializeField] GameObject attack_f_v;
     [SerializeField] GameObject attack_f_h;
     [SerializeField] GameObject attack_f_h2;
     [SerializeField] GameObject attack_f_air_bottom;
     [SerializeField] GameObject attack_f_air_up;
-    [SpineAnimation][SerializeField] private string attackFire1AnimationName;
-    [SpineAnimation][SerializeField] private string attackFire2AnimationName;
-    [SpineAnimation][SerializeField] private string attackFire3AnimationName;
-    [SpineAnimation][SerializeField] private string upatkFirejumpAnimationName;
-    [SpineAnimation][SerializeField] private string downatkFirejumpAnimationName;
+    [SpineAnimation][SerializeField]  string attackFire1AnimationName;
+    [SpineAnimation][SerializeField]  string attackFire2AnimationName;
+    [SpineAnimation][SerializeField]  string attackFire3AnimationName;
+    [SpineAnimation][SerializeField]  string upatkFirejumpAnimationName;
+    [SpineAnimation][SerializeField]  string downatkFirejumpAnimationName;
     private bool FireSpecial = false;
     [SerializeField] GameObject attack_f_sp;
-    [SpineAnimation][SerializeField] private string UpperFireKiaijumpAnimationName;
-    [SpineAnimation][SerializeField] private string UpperFireEndjumpAnimationName;
+    [SpineAnimation][SerializeField]  string UpperFireKiaijumpAnimationName;
+    [SpineAnimation][SerializeField]  string UpperFireEndjumpAnimationName;
     [SerializeField] GameObject S_FireK_hitbox;
 
         [Header("Water")]
     private float SpeeRestore = 20f; // il massimo valore di essenza disponibile
     public GameObject S_Water;
     [Tooltip("Animazione a singolo frame")]
-    [SpineAnimation][SerializeField] private string waterposSAnimationName;
+    [SpineAnimation][SerializeField]  string waterposSAnimationName;
     [Tooltip("Animazione Completa")]
-    [SpineAnimation][SerializeField] private string waterposAnimationName;
-    [SpineAnimation][SerializeField] private string KiaiWaterAnimationName;
+    [SpineAnimation][SerializeField]  string waterposAnimationName;
+    [SpineAnimation][SerializeField]  string KiaiWaterAnimationName;
     [SerializeField] GameObject attack_w_v;
     [SerializeField] GameObject attack_w_h;
     [SerializeField] GameObject attack_w_h2;
-   // [SerializeField] GameObject attack_w_air;
-    [SpineAnimation][SerializeField] private string attackWater1AnimationName;
-    [SpineAnimation][SerializeField] private string attackWater2AnimationName;
-    [SpineAnimation][SerializeField] private string attackWater3AnimationName;
-    [SpineAnimation][SerializeField] private string WaterjumpAnimationName;
+    [SpineAnimation][SerializeField]  string attackWater1AnimationName;
+    [SpineAnimation][SerializeField]  string attackWater2AnimationName;
+    [SpineAnimation][SerializeField]  string attackWater3AnimationName;
+    [SpineAnimation][SerializeField]  string WaterjumpAnimationName;
     private bool WaterSpecial = false;
     private bool attackWater = false;
-    [SpineAnimation][SerializeField] private string WaterLoopAnimationName;
-    [SpineAnimation][SerializeField] private string WaterEndAnimationName;
+    [SpineAnimation][SerializeField]  string WaterLoopAnimationName;
+    [SpineAnimation][SerializeField]  string WaterEndAnimationName;
     [SerializeField] GameObject attack_w_sp;
     [SerializeField] GameObject S_waterK_hitbox;
 
         [Header("Rock")]
     public GameObject S_Rock;
     [Tooltip("Animazione a singolo frame")]
-    [SpineAnimation][SerializeField] private string rockposSAnimationName;
+    [SpineAnimation][SerializeField]  string rockposSAnimationName;
     [Tooltip("Animazione Completa")]
-    [SpineAnimation][SerializeField] private string rockposAnimationName;
-    [SpineAnimation][SerializeField] private string KiaiRockAnimationName;
+    [SpineAnimation][SerializeField]  string rockposAnimationName;
+    [SpineAnimation][SerializeField]  string KiaiRockAnimationName;
     [SerializeField] GameObject attack_r_v;
     [SerializeField] GameObject attack_r_h;
     [SerializeField] GameObject attack_r_h2;
-    //[SerializeField] GameObject attack_r_air_Landing;
-    //[SerializeField] GameObject attack_r_air_Charge;
     [SerializeField] GameObject pesante;
     [SerializeField] GameObject charge;
     [SerializeField] GameObject VfxRock;
-    [SpineAnimation][SerializeField] private string RockjumpAnimationName;
-    [SpineAnimation][SerializeField] private string RockjumpLandingAnimationName;
-    [SpineAnimation][SerializeField] private string chargeAnimationName;
-    [SpineAnimation][SerializeField] private string releaseAnimationName;
-    [SpineAnimation][SerializeField] private string attackRock1AnimationName;
-    [SpineAnimation][SerializeField] private string attackRock2AnimationName;
-    //[SpineAnimation][SerializeField] private string attackRock3AnimationName;
-    [SpineAnimation][SerializeField] private string SbamreleaseAnimationName;
+    [SpineAnimation][SerializeField]  string RockjumpAnimationName;
+    [SpineAnimation][SerializeField]  string RockjumpLandingAnimationName;
+    [SpineAnimation][SerializeField]  string chargeAnimationName;
+    [SpineAnimation][SerializeField]  string releaseAnimationName;
+    [SpineAnimation][SerializeField]  string attackRock1AnimationName;
+    [SpineAnimation][SerializeField]  string attackRock2AnimationName;
+    [SpineAnimation][SerializeField]  string SbamreleaseAnimationName;
     public bool RockSpecial = false;
     private bool attackRock = false;
     public bool isCrushRock = false;
@@ -245,79 +239,77 @@ public class Move : MonoBehaviour
         [Header("Wind")]
     public GameObject S_Wind;
     [Tooltip("Animazione a singolo frame")]
-    [SpineAnimation][SerializeField] private string windposSAnimationName;
+    [SpineAnimation][SerializeField]  string windposSAnimationName;
     [Tooltip("Animazione Completa")]
-    [SpineAnimation][SerializeField] private string windposAnimationName;
-    [SpineAnimation][SerializeField] private string KiaiWindAnimationName;
+    [SpineAnimation][SerializeField]  string windposAnimationName;
+    [SpineAnimation][SerializeField]  string KiaiWindAnimationName;
     [SerializeField] GameObject attack_v_v;
     [SerializeField] GameObject attack_v_h;
     [SerializeField] GameObject attack_v_h2;
     [SerializeField] GameObject attack_v_air_bottom;
     [SerializeField] GameObject attack_v_air_up;
-    [SpineAnimation][SerializeField] private string attackWind1AnimationName;
-    [SpineAnimation][SerializeField] private string attackWind2AnimationName;
-    [SpineAnimation][SerializeField] private string attackWind3AnimationName;
-    [SpineAnimation][SerializeField] private string attackWind4AnimationName;
-    [SpineAnimation][SerializeField] private string upatkWindjumpAnimationName;
-    [SpineAnimation][SerializeField] private string downatkWindjumpAnimationName;
+    [SpineAnimation][SerializeField]  string attackWind1AnimationName;
+    [SpineAnimation][SerializeField]  string attackWind2AnimationName;
+    [SpineAnimation][SerializeField]  string attackWind3AnimationName;
+    [SpineAnimation][SerializeField]  string attackWind4AnimationName;
+    [SpineAnimation][SerializeField]  string upatkWindjumpAnimationName;
+    [SpineAnimation][SerializeField]  string downatkWindjumpAnimationName;
     private bool WindSpecial = false;
     [SerializeField] GameObject attack_v_sp;
-    [SpineAnimation][SerializeField] private string TornadoWindjumpAnimationName;
+    [SpineAnimation][SerializeField]  string TornadoWindjumpAnimationName;
     [SerializeField] GameObject S_windK_hitbox;
 
         [Header("Void")]
     public GameObject S_Void;
     [Tooltip("Animazione a singolo frame")]
-    [SpineAnimation][SerializeField] private string voidposSAnimationName;
+    [SpineAnimation][SerializeField]  string voidposSAnimationName;
     [Tooltip("Animazione Completa")]
-    [SpineAnimation][SerializeField] private string voidposAnimationName;
-    [SpineAnimation][SerializeField] private string KiaiVoidAnimationName;
+    [SpineAnimation][SerializeField]  string voidposAnimationName;
+    [SpineAnimation][SerializeField]  string KiaiVoidAnimationName;
     [SerializeField] GameObject attack_m_v;
     [SerializeField] GameObject attack_m_h;
     [SerializeField] GameObject attack_m_h2;
     
-    [SpineAnimation][SerializeField] private string attackVoid1AnimationName;
-    [SpineAnimation][SerializeField] private string attackVoid2AnimationName;
-    [SpineAnimation][SerializeField] private string attackVoid3AnimationName;
-    [SpineAnimation][SerializeField] private string upatkVoidjumpAnimationName;
-    [SpineAnimation][SerializeField] private string downatkVoidjumpAnimationName;
-    [SpineAnimation][SerializeField] private string guardNoSAnimationName;
-    [SpineAnimation][SerializeField] private string guardNoEndSAnimationName;
-    [SpineAnimation][SerializeField] private string guardNoHitSAnimationName;
+    [SpineAnimation][SerializeField]  string attackVoid1AnimationName;
+    [SpineAnimation][SerializeField]  string attackVoid2AnimationName;
+    [SpineAnimation][SerializeField]  string attackVoid3AnimationName;
+    [SpineAnimation][SerializeField]  string upatkVoidjumpAnimationName;
+    [SpineAnimation][SerializeField]  string downatkVoidjumpAnimationName;
+    [SpineAnimation][SerializeField]  string guardNoSAnimationName;
+    [SpineAnimation][SerializeField]  string guardNoEndSAnimationName;
+    [SpineAnimation][SerializeField]  string guardNoHitSAnimationName;
     private bool VoidSpecial = false;
     [SerializeField] GameObject attack_S_sp;
     [SerializeField] GameObject S_voidK_hitbox;
     /////////////////////////////////////////////////////////////////////
     [Header("Stalmate")]
-    [SpineAnimation][SerializeField] private string LoopStAnimationName;
-    [SpineAnimation][SerializeField] private string StartStAnimationName;
+    [SpineAnimation][SerializeField]  string LoopStAnimationName;
+    [SpineAnimation][SerializeField]  string StartStAnimationName;
     /////////////////////////////////////////////////////////////////////
-
      [Header("Fatalitis")]
-    [SpineAnimation][SerializeField] private string F_JumpAnimationName;
-    [SpineAnimation][SerializeField] private string F_BackAnimationName;
-    [SpineAnimation][SerializeField] private string F_DanceAnimationName;
-    [SpineAnimation][SerializeField] private string F_BlockKAnimationName;
-    [SpineAnimation][SerializeField] private string F_LungeAnimationName;
-    [SpineAnimation][SerializeField] private string F_SbemAnimationName;
-    [SpineAnimation][SerializeField] private string F_SickleAnimationName;
-    [SpineAnimation][SerializeField] private string F_SlashAnimationName;
-    [SpineAnimation][SerializeField] private string BossDSpAnimationName;
+    [SpineAnimation][SerializeField]  string F_JumpAnimationName;
+    [SpineAnimation][SerializeField]  string F_BackAnimationName;
+    [SpineAnimation][SerializeField]  string F_DanceAnimationName;
+    [SpineAnimation][SerializeField]  string F_BlockKAnimationName;
+    [SpineAnimation][SerializeField]  string F_LungeAnimationName;
+    [SpineAnimation][SerializeField]  string F_SbemAnimationName;
+    [SpineAnimation][SerializeField]  string F_SickleAnimationName;
+    [SpineAnimation][SerializeField]  string F_SlashAnimationName;
+    [SpineAnimation][SerializeField]  string BossDSpAnimationName;
     /////////////////////////////////////////////////////////////////////
      [Header("Dodge and defend")]
-    [SpineAnimation][SerializeField] private string DashAttackAnimationName;
-    //[SpineAnimation][SerializeField] private string pesanteAnimationName;
-    [SpineAnimation][SerializeField] private string swordDownAnimationName;
-    [SpineAnimation][SerializeField] private string guardDownAnimationName;
-    [SpineAnimation][SerializeField] private string guardEndDownAnimationName;
-    [SpineAnimation][SerializeField] private string guardHitDownAnimationName;
+    [SpineAnimation][SerializeField]  string TiredAnimationName;
+    [SpineAnimation][SerializeField]  string DashAttackAnimationName;
+    [SpineAnimation][SerializeField]  string swordDownAnimationName;
+    [SpineAnimation][SerializeField]  string guardDownAnimationName;
+    [SpineAnimation][SerializeField]  string guardEndDownAnimationName;
+    [SpineAnimation][SerializeField]  string guardHitDownAnimationName;
     /////////////////////////////////////////////////////////////////////
     [Header("Items")]
-    [SpineAnimation][SerializeField] private string HealAnimationName;
-    [SpineAnimation][SerializeField] private string throwAnimationName;
-   // [SpineAnimation][SerializeField] private string bigthrowAnimationName;
-    [SpineAnimation][SerializeField] private string BowAnimationName;
-    [SpineAnimation][SerializeField] private string RifleAnimationName;
+    [SpineAnimation][SerializeField]  string HealAnimationName;
+    [SpineAnimation][SerializeField]  string throwAnimationName;
+    [SpineAnimation][SerializeField]  string BowAnimationName;
+    [SpineAnimation][SerializeField]  string RifleAnimationName;
 
 private string currentAnimationName;
 
@@ -325,6 +317,7 @@ private int comboCount = 0;
      
 
     [Header("Attacks")]
+    [HideInInspector] public int Damage;
     private int timeScale = 1;
     private int FastCombo = 2;
     private bool canAttack = true;
@@ -399,7 +392,6 @@ public static Move instance;
         {
         audioSource.outputAudioMixerGroup = SFX.FindMatchingGroups("Master")[0];
         }
-//Debug.Log("AudioMixer aggiunto correttamente agli AudioSource.");
 // Inizializza la posizione di destinazione del nemico a pointB
         JumpRockTimer = JumpRockTimerMax;   
         }
@@ -472,7 +464,7 @@ if (JumpRock)
         vfx = false;
         }}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+#region Salto
  // Controllo se il personaggio è a contatto con un muro
  if( GameplayManager.instance.unlockWalljump)
  {
@@ -552,11 +544,14 @@ if (Input.GetButtonDown("Jump") && !isGuard && !NotStrangeAnimationTalk && isTou
             rb.velocity = new Vector2(rb.velocity.x, -wallSlideSpeed);
             wallSlidedown();
         }
+#endregion
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////             
 
 // gestione dell'input dello sparo
-if (L2 == 1 && isBlast && Time.time >= ShotTimer)
-{
+#region  Usare Items
+
+    if (L2 == 1 && isBlast && Time.time >= ShotTimer)
+    {
     //print("Spara");
     //Se non hai finito gli utilizzi
    if(
@@ -650,8 +645,10 @@ if (!isBlast && Time.time >= ShotTimer)
 {
     isBlast = true;
 }
+#endregion
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Activate kiai
+#region  Kiai
 if(KiaiReady)
 {
 if (L2 == 1 && R2 == 1)
@@ -682,10 +679,12 @@ if (L2 == 1 && R2 == 1)
             StartCoroutine(FinishKiai());
         }
 }
-
+#endregion
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Scelta della skill dal menu rapido
+
+#region Scelta MenuRapido
 if (Input.GetButtonDown("SlotUp") || DpadY == 1)
 {
     if (UpdateMenuRapido.Instance.Slot1 > 0)
@@ -730,8 +729,12 @@ else if (Input.GetButtonDown("SlotBottom")|| DpadY == -1)
     slotR = false;
     }
 }
+#endregion
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
 //Attacco
+
+#region Attacco
 if (Input.GetButtonDown("Fire1") 
 && !isAttacking && !isAttackingAir && !isGuard && !NotStrangeAnimationTalk && !isCharging 
 && !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
@@ -742,8 +745,12 @@ drawsword = true;
 ComboContatore();
 AddCombo();
 }
+#endregion
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Attacco in salto
+
+#region  Attacchi in salto
         // controlla se il player è in aria e preme il tasto di attacco e il tasto direzionale basso
         if(!isAttackingAir){
          if (!isGrounded() && Input.GetButtonDown("Fire1") && vertDir < 0
@@ -818,9 +825,13 @@ AddCombo();
         if (isAttackingAirTimer <= 0f) {
         isAttackingAir = false;
         isAttackingAirTimer = 2f;
-        }}         
+        }}   
+#endregion      
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 //Riporre spada
+
+#region Riporre Spada
 if(drawsword)
 {if(Input.GetButtonDown("Hsword") 
 && !isAttacking && !isAttackingAir && !isGuard && !NotStrangeAnimationTalk && !isCharging 
@@ -832,8 +843,12 @@ if(drawsword)
             if (_skeletonAnimation != null)
             {_skeletonAnimation.timeScale = timeScale;}}
 }
+#endregion
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////             
 //Cambio stile
+
+#region Tasti CambioStile
 if (Input.GetButtonDown("R1"))
 {
 //print("Hai premuto R1");
@@ -864,9 +879,11 @@ MaxStyle--;
 comboCount = 0;
 changeStyle();
 }}
+#endregion
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     #region testForanysituation
-            if(Input.GetKeyDown(KeyCode.O))
+          /*  if(Input.GetKeyDown(KeyCode.O))
             {
                 Debug.Log("L");
                 GameplayManager.instance.TakeCamera();
@@ -876,10 +893,12 @@ if(Input.GetKeyDown(KeyCode.P))
             {
                 //KnockbackS();
                 Debug.Log("S");
-            }   
+            }  */ 
             #endregion
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 //Guardia
+
+#region Guardia
 if (Input.GetButton("Fire3") && !isAttacking && !isAttackingAir && !isGuard && !NotStrangeAnimationTalk && !isCharging 
 && !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
 && !StartKiai && isGrounded())
@@ -938,6 +957,8 @@ isGuard = false;}
 
 if (isGuard)
 {Stop();}
+#endregion
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 //Special
 #region Normal
@@ -1170,7 +1191,6 @@ attackWater = false;
 }
 #endregion
 
-
 #region Void
 if (Input.GetButton("Fire2") && !VoidSpecial
 && !isAttacking && !isAttackingAir && !isGuard && !NotStrangeAnimationTalk && !isCharging 
@@ -1210,6 +1230,7 @@ HeavyHitRelease();
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Dash
+#region Dash
   if ( GameplayManager.instance.unlockDash)
         {
  if (Input.GetButtonUp("Dash") ||  R2 == 1 && !dashing && coolDownTime <= 0 && !FireSpecial
@@ -1221,6 +1242,7 @@ HeavyHitRelease();
             coolDownTime = dashCoolDown;
             dashTime = dashDuration;
             dashAnm();
+
         }
 
         if (coolDownTime > 0)
@@ -1228,10 +1250,12 @@ HeavyHitRelease();
             coolDownTime -= Time.deltaTime;
         }    
         }
-
+#endregion
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 //Pause
-        }
+}
+#region Pause
+
         else if (stopInput)
         {//Bloccato
         }
@@ -1254,6 +1278,7 @@ HeavyHitRelease();
         }
         checkFlip();
         moving();
+#endregion
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 //Bloccatori per animazioni
 if(attackRock)
@@ -1262,10 +1287,14 @@ if(attackRock)
 if(attackWater)
   {Stop(); PlayerHealth.Instance.currentStamina -= SpeeRestore * Time.deltaTime;}  
     
+if(PlayerHealth.Instance.currentStamina <=0 && isGrounded())
+  {Stop(); TiredAnm(); StopinputTrue();} 
+else if(PlayerHealth.Instance.currentStamina > 50)
+  {StopinputFalse();} 
 
 }
-
  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
+#region ContatoreCombo
 public void ComboContatore()
 {
 //QUI PUOI DECIDERE QUANTE COMBO FARE PER STILE//
@@ -1336,7 +1365,9 @@ if(comboCount == 3)
 {
 comboCount = 0;}}}
 }
+#endregion
 
+#region Cambia stile di combattimento
 public void changeStyle()
 {
      if(MaxStyle >= 5)
@@ -1346,7 +1377,7 @@ public void changeStyle()
         {
         PlayerWeaponManager.instance.SetStyle(5);
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[5].transform.position;
-        HitboxPlayer.Instance.Damage = 2;
+        Damage = 2;
         VoidPose();
         drawsword = false;
         }
@@ -1358,7 +1389,7 @@ public void changeStyle()
         {
         PlayerWeaponManager.instance.SetStyle(0);
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[0].transform.position;
-        HitboxPlayer.Instance.Damage = 10;
+        Damage = 10;
         NormalPose();
         drawsword = true;
         }        
@@ -1369,7 +1400,7 @@ public void changeStyle()
         MaxStyle = 1;
         PlayerWeaponManager.instance.SetStyle(1);
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[1].transform.position;
-        HitboxPlayer.Instance.Damage = 50;
+        Damage = 50;
         RockPose();
         drawsword = true;
         }        
@@ -1380,7 +1411,7 @@ public void changeStyle()
         MaxStyle = 2;
         PlayerWeaponManager.instance.SetStyle(2);
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[2].transform.position;
-        HitboxPlayer.Instance.Damage = 30;
+        Damage = 30;
         FirePose();
         drawsword = true;
         }        
@@ -1391,7 +1422,7 @@ public void changeStyle()
             MaxStyle = 3;
         PlayerWeaponManager.instance.SetStyle(3);
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[3].transform.position;
-        HitboxPlayer.Instance.Damage = 5;
+        Damage = 5;
         WindPose();
         drawsword = true;
         }       
@@ -1402,7 +1433,7 @@ public void changeStyle()
         MaxStyle = 4;
         PlayerWeaponManager.instance.SetStyle(4);
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[4].transform.position;
-        HitboxPlayer.Instance.Damage = 5;
+        Damage = 5;
         WaterPose();
         drawsword = true;
         }       
@@ -1413,7 +1444,7 @@ public void changeStyle()
         MaxStyle = 5;
         PlayerWeaponManager.instance.SetStyle(5);
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[5].transform.position;
-        HitboxPlayer.Instance.Damage = 2;
+        Damage = 2;
         VoidPose();
         drawsword = false;
         }        
@@ -1424,14 +1455,15 @@ public void changeStyle()
             MaxStyle = 0;
         PlayerWeaponManager.instance.SetStyle(0);
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[0].transform.position;
-        HitboxPlayer.Instance.Damage = 10;
+        Damage = 10;
         NormalPose();
         drawsword = true;
         }        
     }
 }
+#endregion
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+#region Fisica attacchi (FixedUpdate)
 public void attackDash()
 {
     //Sistemare il cooldown
@@ -1633,7 +1665,7 @@ public void Bump()
             isBump = false;
         }
     }
-
+#endregion
 public void KnockbackS()
 {
     Stop();
@@ -1656,6 +1688,7 @@ IEnumerator FinishKiai()
     KiaiReady = false;
 }
 
+#region Fisica
     private void jump()
     {
         lastTimeJump = 0;
@@ -1683,20 +1716,7 @@ private void modifyPhysics()
 
     }
 }
-
-
-
-
-public void StopinputTrue()
-{
-   stopInput = true;   
-}
-public void StopinputFalse()
-{
-    stopInput = false;   
-}
-
-    private bool isGrounded()
+private bool isGrounded()
 {
     //TRIPLE RAYCAST FOR GROUND: check if you touch the ground even with just one leg 
     return (
@@ -1709,7 +1729,17 @@ public void StopinputFalse()
             
         );
 }
-    
+#endregion
+
+public void StopinputTrue()
+{
+   stopInput = true;   
+}
+public void StopinputFalse()
+{
+    stopInput = false;   
+}
+  
     private void checkFlip()
     {
         
@@ -1719,6 +1749,30 @@ public void StopinputFalse()
             transform.localScale = new Vector2(-1, 1);
     }
 
+
+void CountDown()
+{
+    currentTime--;
+    if (currentTime == 0)
+    {
+        HitboxPlayer.Instance.Damage = maxDamage;
+        AnimationChargeRelease();
+        isCharging = false;
+        CameraZoom.instance.ZoomOut();
+        Debug.Log("Charge ratio: 1.0, Damage: " + HitboxPlayer.Instance.Damage);
+        timeSinceLastAttack = Time.time;
+        CancelInvoke("CountDown");
+    }
+}
+
+ public void Stop()
+    {
+        rb.velocity = new Vector2(0f, 0f);
+        horDir = 0;
+        //Swalk.Stop();
+    }
+
+#region Respawn Meccanica
 public void Respawn()
 {
 
@@ -1732,16 +1786,6 @@ public void Respawn()
     StartCoroutine(WaitForSceneLoad());
 
 }
-
-
- public void Stop()
-    {
-        rb.velocity = new Vector2(0f, 0f);
-        horDir = 0;
-        //Swalk.Stop();
-    }
-
-
 IEnumerator WaitForSceneLoad()
 {   
     yield return new WaitForSeconds(2f);
@@ -1786,10 +1830,11 @@ IEnumerator wak()
     GameplayManager.instance.StopFade(); 
 
 }
- 
+#endregion
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
+#region Set Oggetti e stili
     public void SetStylePrefab(int newstyle)
     //Funzione per cambiare arma
     {
@@ -1853,10 +1898,11 @@ void Blast(Item newItem)
         }
         
 }
+#endregion
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+#region Animazione salti
 public void UpAtk()
 {
     if (currentAnimationName != upatkjumpAnimationName)
@@ -1866,10 +1912,7 @@ public void UpAtk()
                     _spineAnimationState.SetAnimation(2, upatkjumpAnimationName, false);
                     currentAnimationName = upatkjumpAnimationName;
                                         _spineAnimationState.Event += HandleEvent;
-
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
             _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
     
 }
@@ -1883,10 +1926,7 @@ public void DownAtk()
                     _spineAnimationState.SetAnimation(2, downatkjumpAnimationName, false);
                     currentAnimationName = downatkjumpAnimationName;
                                         _spineAnimationState.Event += HandleEvent;
-
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
             _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
     
 }
@@ -1897,10 +1937,7 @@ public void UpAtkFire()
                     _spineAnimationState.SetAnimation(2, upatkFirejumpAnimationName, false);
                     currentAnimationName = upatkFirejumpAnimationName;
                                         _spineAnimationState.Event += HandleEvent;
-
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
             _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
     
 }
@@ -1912,10 +1949,7 @@ public void DownAtkFire()
                     _spineAnimationState.SetAnimation(2, downatkFirejumpAnimationName, false);
                     currentAnimationName = downatkFirejumpAnimationName;
                                         _spineAnimationState.Event += HandleEvent;
-
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
             _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
     
 }
@@ -1926,10 +1960,7 @@ public void UpAtkWind()
                     _spineAnimationState.SetAnimation(2, upatkWindjumpAnimationName, false);
                     currentAnimationName = upatkWindjumpAnimationName;
                                         _spineAnimationState.Event += HandleEvent;
-
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
             _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
     
 }
@@ -1942,10 +1973,7 @@ public void DownAtkWind()
                     _spineAnimationState.SetAnimation(2, downatkWindjumpAnimationName, false);
                     currentAnimationName = downatkWindjumpAnimationName;
                                         _spineAnimationState.Event += HandleEvent;
-
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
             _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
     
 }
@@ -1958,10 +1986,7 @@ public void UpAtkVoid()
                     _spineAnimationState.SetAnimation(2, upatkVoidjumpAnimationName, false);
                     currentAnimationName = upatkVoidjumpAnimationName;
                                         _spineAnimationState.Event += HandleEvent;
-
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
             _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
     
 }
@@ -1973,10 +1998,7 @@ public void DownAtkVoid()
                     _spineAnimationState.SetAnimation(2, downatkVoidjumpAnimationName, false);
                     currentAnimationName = downatkVoidjumpAnimationName;
                                         _spineAnimationState.Event += HandleEvent;
-
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
             _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
     
 }
@@ -1991,10 +2013,7 @@ public void WaterJumpAtk()
                     _spineAnimationState.SetAnimation(2, WaterjumpAnimationName, true);
                     currentAnimationName = WaterjumpAnimationName;
                                         _spineAnimationState.Event += HandleEvent;
-
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
             _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 
@@ -2007,10 +2026,7 @@ public void RockJumpAtk()
                     _spineAnimationState.SetAnimation(2, RockjumpAnimationName, true);
                     currentAnimationName = RockjumpAnimationName;
                                         _spineAnimationState.Event += HandleEvent;
-
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
             _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 public void RockJumpLanding()
@@ -2022,10 +2038,7 @@ public void RockJumpLanding()
                     _spineAnimationState.SetAnimation(2, RockjumpLandingAnimationName, false);
                     currentAnimationName = RockjumpLandingAnimationName;
                                         _spineAnimationState.Event += HandleEvent;
-
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
             _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 
@@ -2038,10 +2051,7 @@ public void wallJump()
                     _spineAnimationState.SetAnimation(1, walljumpAnimationName, true);
                     currentAnimationName = walljumpAnimationName;
                                         _spineAnimationState.Event += HandleEvent;
-
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
             _spineAnimationState.GetCurrent(1).Complete += OnJumpAnimationComplete;
     
 }
@@ -2095,12 +2105,15 @@ private void OnJumpAnimationComplete(Spine.TrackEntry trackEntry)
             }
      // Reset the attack state
     isAttacking = false;
-    //isAttackingAir = false;
     if (_skeletonAnimation != null)
     {
     _skeletonAnimation.timeScale = timeScale; // Impostare il valore di time scale
     }
 }
+
+#endregion
+
+#region Heal e tired animation
 public void AnimationHeal()
 {
     if (currentAnimationName != HealAnimationName)
@@ -2108,13 +2121,25 @@ public void AnimationHeal()
                     _spineAnimationState.SetAnimation(2, HealAnimationName, false);
                     currentAnimationName = HealAnimationName;
                          _spineAnimationState.Event += HandleEvent;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 
+public void TiredAnm()
+{
+    if (currentAnimationName != TiredAnimationName)
+                {
+                    _spineAnimationState.ClearTrack(2);
+                    _spineAnimationState.ClearTrack(1);
+                    _spineAnimationState.SetAnimation(2, TiredAnimationName, true);
+                    currentAnimationName = TiredAnimationName;
+                    _spineAnimationState.Event += HandleEvent;
+                }
+            _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;  
+}
+#endregion
 
+#region Guardia
 public void GuardAnm()
 {
     if (currentAnimationName != guardDownAnimationName)
@@ -2122,10 +2147,7 @@ public void GuardAnm()
                     _spineAnimationState.SetAnimation(2, guardDownAnimationName, true);
                     currentAnimationName = guardDownAnimationName;
                          _spineAnimationState.Event += HandleEvent;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
-               //_spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 public void endGuard()
 {
@@ -2134,9 +2156,7 @@ public void endGuard()
                     _spineAnimationState.SetAnimation(2, guardEndDownAnimationName, false);
                     currentAnimationName = guardEndDownAnimationName;
                          _spineAnimationState.Event += HandleEvent;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 
@@ -2150,10 +2170,7 @@ public void GuardHit()
                     _spineAnimationState.SetAnimation(2, guardHitDownAnimationName, false);
                     currentAnimationName = guardHitDownAnimationName;
                          _spineAnimationState.Event += HandleEvent;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
-              //  _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 
 public void GuardArmAnm()
@@ -2163,10 +2180,7 @@ public void GuardArmAnm()
                     _spineAnimationState.SetAnimation(2, guardNoSAnimationName, true);
                     currentAnimationName = guardNoSAnimationName;
                          _spineAnimationState.Event += HandleEvent;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
-               //_spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 public void GuardArmAnmEnd()
 {
@@ -2175,9 +2189,7 @@ public void GuardArmAnmEnd()
                     _spineAnimationState.SetAnimation(2, guardNoEndSAnimationName, false);
                     currentAnimationName = guardNoEndSAnimationName;
                          _spineAnimationState.Event += HandleEvent;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 
@@ -2190,11 +2202,11 @@ public void GuardArmHit()
                     _spineAnimationState.SetAnimation(2, guardNoHitSAnimationName, false);
                     currentAnimationName = guardNoHitSAnimationName;
                          _spineAnimationState.Event += HandleEvent;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
-               // _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
+#endregion
+
+#region Charge and Rock
 
 
 public void AnimationCharge()
@@ -2204,10 +2216,7 @@ public void AnimationCharge()
                     _spineAnimationState.SetAnimation(2, chargeAnimationName, true);
                     currentAnimationName = chargeAnimationName;
                          _spineAnimationState.Event += HandleEvent;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
-               // _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 
 public void AnimationChargeRelease()
@@ -2217,9 +2226,7 @@ public void AnimationChargeRelease()
                     PlayerHealth.Instance.currentStamina -= 50f;
                     _spineAnimationState.SetAnimation(2, releaseAnimationName, false);
                     currentAnimationName = releaseAnimationName;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 public void SbamRelease()
@@ -2228,9 +2235,7 @@ public void SbamRelease()
                 {
                     _spineAnimationState.SetAnimation(2, SbamreleaseAnimationName, false);
                     currentAnimationName = SbamreleaseAnimationName;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 
@@ -2241,10 +2246,7 @@ public void HeavyHitS()
                     _spineAnimationState.SetAnimation(2, NHeavyAnimationName, false);
                     currentAnimationName = NHeavyAnimationName;
                          _spineAnimationState.Event += HandleEvent;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
-               // _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 
 public void HeavyHitRelease()
@@ -2255,12 +2257,12 @@ public void HeavyHitRelease()
                     PlayerHealth.Instance.currentStamina -= 30f;
                     _spineAnimationState.SetAnimation(2, NHeavyReleaseAnimationName, false);
                     currentAnimationName = NHeavyReleaseAnimationName;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
+#endregion
 
+#region Qualche special e lancio oggetti
 public void WaterLoop()
 {
     if (currentAnimationName != WaterLoopAnimationName)
@@ -2269,10 +2271,7 @@ public void WaterLoop()
                     _spineAnimationState.SetAnimation(2, WaterLoopAnimationName, true);
                     currentAnimationName = WaterLoopAnimationName;
                          _spineAnimationState.Event += HandleEvent;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
-               // _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 
 public void EndWater()
@@ -2281,9 +2280,7 @@ public void EndWater()
                 {
                     _spineAnimationState.SetAnimation(2, WaterEndAnimationName, false);
                     currentAnimationName = WaterEndAnimationName;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 
@@ -2293,10 +2290,7 @@ public void FireUpper()
                 {
                     _spineAnimationState.SetAnimation(2, UpperFireKiaijumpAnimationName, false);
                     currentAnimationName = UpperFireKiaijumpAnimationName;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
-                //_spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 public void FireUpperEnd()
 {
@@ -2305,9 +2299,7 @@ public void FireUpperEnd()
                     PlayerHealth.Instance.currentStamina -= 30f;
                     _spineAnimationState.SetAnimation(2, UpperFireEndjumpAnimationName, false);
                     currentAnimationName = UpperFireEndjumpAnimationName;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 
@@ -2320,9 +2312,7 @@ public void WindLoop()
                     _spineAnimationState.SetAnimation(2, TornadoWindjumpAnimationName, false);
                     currentAnimationName = TornadoWindjumpAnimationName;
                          _spineAnimationState.Event += HandleEvent;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 public void dashAnm()
@@ -2334,10 +2324,7 @@ public void dashAnm()
                     _spineAnimationState.SetAnimation(2, dashAnimationName, false);
                     currentAnimationName = dashAnimationName;
                                         _spineAnimationState.Event += HandleEvent;
-
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
             _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 public void DashAttack()
@@ -2346,10 +2333,7 @@ public void DashAttack()
                 {
                     _spineAnimationState.SetAnimation(2, DashAttackAnimationName, false);
                     currentAnimationName = DashAttackAnimationName;
-                    
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 
@@ -2359,9 +2343,7 @@ public void Blasting()
                 {
                     _spineAnimationState.SetAnimation(2, throwAnimationName, false);
                     currentAnimationName = throwAnimationName;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 
@@ -2371,9 +2353,7 @@ public void Bow()
                 {
                     _spineAnimationState.SetAnimation(2, BowAnimationName, false);
                     currentAnimationName = BowAnimationName;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 
@@ -2383,13 +2363,9 @@ public void Rifle()
                 {
                     _spineAnimationState.SetAnimation(2, RifleAnimationName, false);
                     currentAnimationName = RifleAnimationName;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
-
-
 
 
 public void Throw()
@@ -2398,30 +2374,15 @@ public void Throw()
                 {
                     _spineAnimationState.SetAnimation(2, throwAnimationName, false);
                     currentAnimationName = throwAnimationName;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
+#endregion
 
-
-void CountDown()
-{
-    currentTime--;
-    if (currentTime == 0)
-    {
-        HitboxPlayer.Instance.Damage = maxDamage;
-        AnimationChargeRelease();
-        isCharging = false;
-        CameraZoom.instance.ZoomOut();
-        Debug.Log("Charge ratio: 1.0, Damage: " + HitboxPlayer.Instance.Damage);
-        timeSinceLastAttack = Time.time;
-        CancelInvoke("CountDown");
-    }
-}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //SINGLE FRAME
 
+#region Pose a singolo frame(Per quando si sta fermi)
 public void NormalPose()
 {
     if (currentAnimationName != idleSAnimationName)
@@ -2505,21 +2466,20 @@ public void WindPose()
                 // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
+#endregion
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Complete Animations
 
+#region Pose 
 public void NormalPoseC()
 {
     if (currentAnimationName != idleSwordAnimationName)
                 {
                     _spineAnimationState.SetAnimation(1, idleSwordAnimationName, true);
                     currentAnimationName = idleSwordAnimationName;
-
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
-               //_spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 public void FirePoseC()
 {
@@ -2527,10 +2487,7 @@ public void FirePoseC()
                 {
                     _spineAnimationState.SetAnimation(1, fireposAnimationName, true);
                     currentAnimationName = fireposAnimationName;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
-               // _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 public void RockPoseC()
 {
@@ -2538,10 +2495,7 @@ public void RockPoseC()
                 {
                     _spineAnimationState.SetAnimation(1, rockposAnimationName, true);
                     currentAnimationName = rockposAnimationName;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
-               // _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 public void WaterPoseC()
 {
@@ -2549,10 +2503,7 @@ public void WaterPoseC()
                 {
                     _spineAnimationState.SetAnimation(1, waterposAnimationName, true);
                     currentAnimationName = waterposAnimationName;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
-                //_spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 public void VoidPoseC()
 {
@@ -2560,10 +2511,7 @@ public void VoidPoseC()
                 {
                     _spineAnimationState.SetAnimation(1, voidposAnimationName, true);
                     currentAnimationName = voidposAnimationName;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
-                //_spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 public void WindPoseC()
 {
@@ -2571,14 +2519,13 @@ public void WindPoseC()
                 {
                     _spineAnimationState.SetAnimation(1, windposAnimationName, true);
                     currentAnimationName = windposAnimationName;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
-               // _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
+#endregion
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+#region Kiai Animazioni
 
 public void KiaiNormal()
 {
@@ -2586,9 +2533,7 @@ public void KiaiNormal()
                 {
                     _spineAnimationState.SetAnimation(2, KiaiNormalAnimationName, false);
                     currentAnimationName = KiaiNormalAnimationName;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 public void KiaiRock()
@@ -2597,9 +2542,7 @@ public void KiaiRock()
                 {
                     _spineAnimationState.SetAnimation(2, KiaiRockAnimationName, false);
                     currentAnimationName = KiaiRockAnimationName;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 public void KiaiWater()
@@ -2608,9 +2551,7 @@ public void KiaiWater()
                 {
                     _spineAnimationState.SetAnimation(2, KiaiWaterAnimationName, false);
                     currentAnimationName = KiaiWaterAnimationName;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 public void KiaiWind()
@@ -2619,9 +2560,7 @@ public void KiaiWind()
                 {
                     _spineAnimationState.SetAnimation(2, KiaiWindAnimationName, false);
                     currentAnimationName = KiaiWindAnimationName;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 public void KiaiVoid()
@@ -2630,9 +2569,7 @@ public void KiaiVoid()
                 {
                     _spineAnimationState.SetAnimation(2, KiaiVoidAnimationName, false);
                     currentAnimationName = KiaiVoidAnimationName;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 public void KiaiFire()
@@ -2641,13 +2578,15 @@ public void KiaiFire()
                 {
                     _spineAnimationState.SetAnimation(2, KiaiFireAnimationName, false);
                     currentAnimationName = KiaiFireAnimationName;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
+#endregion
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Stalmate
+
+#region Animazioni minigioco stallo
 public void LoopStalmate()
 {
     if (currentAnimationName != LoopStAnimationName)
@@ -2678,8 +2617,12 @@ public void poseStalmate()
                     currentAnimationName = rockposAnimationName;
                 }
 }
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#endregion
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Fatality Anim
+
+#region Fatality Animation Function
 public void Fatality(int watF)
 {
 switch (watF) {
@@ -2725,99 +2668,12 @@ switch (watF) {
                 break;
 
 }
+}
+#endregion
 
-}
-public void BossSpider()
-{
-    if (currentAnimationName != BossDSpAnimationName)
-                {
-                    _spineAnimationState.SetAnimation(2, BossDSpAnimationName, false);
-                    currentAnimationName = BossDSpAnimationName;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
-                }
-                // Add event listener for when the animation completes
-                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
-}
-
-public void FatalityJump()
-{
-    if (currentAnimationName != F_JumpAnimationName)
-                {
-                    _spineAnimationState.SetAnimation(2, F_JumpAnimationName, false);
-                    currentAnimationName = F_JumpAnimationName;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
-                }
-                // Add event listener for when the animation completes
-                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
-}
-public void FatalityBack()
-{
-    if (currentAnimationName != F_BackAnimationName)
-                {
-                    _spineAnimationState.SetAnimation(2, F_BackAnimationName, false);
-                    currentAnimationName = F_BackAnimationName;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
-                }
-                // Add event listener for when the animation completes
-                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
-}
-public void FatalityDance()
-{
-    if (currentAnimationName != F_DanceAnimationName)
-                {
-                    _spineAnimationState.SetAnimation(2, F_DanceAnimationName, false);
-                    currentAnimationName = F_DanceAnimationName;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
-                }
-                // Add event listener for when the animation completes
-                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
-}
-public void FatalityLunge()
-{
-    if (currentAnimationName != F_LungeAnimationName)
-                {
-                    _spineAnimationState.SetAnimation(2, F_LungeAnimationName, false);
-                    currentAnimationName = F_LungeAnimationName;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
-                }
-                // Add event listener for when the animation completes
-                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
-}
-public void FatalitySickle()
-{
-    if (currentAnimationName != F_SickleAnimationName)
-                {
-                    _spineAnimationState.SetAnimation(2, F_SickleAnimationName, false);
-                    currentAnimationName = F_SickleAnimationName;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
-                }
-                // Add event listener for when the animation completes
-                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
-}
-public void FatalitySbam()
-{
-    if (currentAnimationName != F_SbemAnimationName)
-                {
-                    _spineAnimationState.SetAnimation(2, F_SbemAnimationName, false);
-                    currentAnimationName = F_SbemAnimationName;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
-                }
-                // Add event listener for when the animation completes
-                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
-}
-public void FatalitySlash()
-{
-    if (currentAnimationName != F_SlashAnimationName)
-                {
-                    _spineAnimationState.SetAnimation(2, F_SlashAnimationName, false);
-                    currentAnimationName = F_SlashAnimationName;
-                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
-                }
-                // Add event listener for when the animation completes
-                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
-}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+#region Combo attacchi animazioni
 public void AddCombo()
 {
     //Se sta attaccando
@@ -2827,6 +2683,7 @@ public void AddCombo()
         comboCount++;
 
 //Normal style
+#region Normal
 if(GameplayManager.instance.styleIcon[0] == true){
 if(style == 0)
 {
@@ -2875,7 +2732,9 @@ if(style == 0)
         }
     }
 }
+#endregion
 //Rock style
+#region Rock
 if(GameplayManager.instance.styleIcon[1] == true){
 if(style == 1)
 {
@@ -2911,10 +2770,9 @@ if(style == 1)
         }
     }
 } 
-
-
-
+#endregion
 //Fire style
+#region Fire
 if(GameplayManager.instance.styleIcon[2] == true){
 if(style == 2)
 {
@@ -2963,11 +2821,9 @@ if(style == 2)
     }
 
 }
-
-
-
-
+#endregion
 //Wind style
+#region Wind
 if(GameplayManager.instance.styleIcon[3] == true){
 if(style == 3)
 {
@@ -2978,7 +2834,7 @@ if(style == 3)
                 if (currentAnimationName != attackWind1AnimationName)
                 {
                     Stop();
-                    PlayerHealth.Instance.currentStamina -= 30;
+                    PlayerHealth.Instance.currentStamina -= 5;
                     _spineAnimationState.SetAnimation(2, attackWind1AnimationName, false);
                     currentAnimationName = attackWind1AnimationName;
                     _spineAnimationState.Event += HandleEvent;
@@ -2991,7 +2847,7 @@ if(style == 3)
                 if (currentAnimationName != attackWind2AnimationName)
                 {
                     Stop();
-                    PlayerHealth.Instance.currentStamina -= 30;
+                    PlayerHealth.Instance.currentStamina -= 5;
                     _spineAnimationState.SetAnimation(2, attackWind2AnimationName, false);
                     currentAnimationName = attackWind2AnimationName;
                     _spineAnimationState.Event += HandleEvent;
@@ -3005,7 +2861,7 @@ if(style == 3)
             if (currentAnimationName != attackWind3AnimationName)
                 {
                     Stop();
-                    PlayerHealth.Instance.currentStamina -= 30;
+                    PlayerHealth.Instance.currentStamina -= 5;
                     _spineAnimationState.SetAnimation(2, attackWind3AnimationName, false);
                     currentAnimationName = attackWind3AnimationName;
                     _spineAnimationState.Event += HandleEvent;
@@ -3021,7 +2877,7 @@ if(style == 3)
                 if (currentAnimationName != attackWind4AnimationName)
                 {
                     Stop();
-                    PlayerHealth.Instance.currentStamina -= 30;
+                    PlayerHealth.Instance.currentStamina -= 5;
                     _spineAnimationState.SetAnimation(2, attackWind4AnimationName, false);
                     currentAnimationName = attackWind4AnimationName;
                     _spineAnimationState.Event += HandleEvent;
@@ -3036,8 +2892,9 @@ if(style == 3)
         }
     }
 }
-
+#endregion
 //Water style
+#region Water
 if(GameplayManager.instance.styleIcon[4] == true){
 if(style == 4)
 {
@@ -3086,9 +2943,9 @@ if(style == 4)
         }
     }
 }
-
-
+#endregion
 //Void style
+#region Void
 if(GameplayManager.instance.styleIcon[5] == true){
 if(style == 5)
 {
@@ -3150,12 +3007,13 @@ if(style == 5)
         }
     }
 }
+#endregion
+}}
+#endregion
 
-}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-}
-
-
+#region Pose animazioni
 private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
 {
     // Remove the event listener
@@ -3213,6 +3071,9 @@ public void Stooping()
                 // Add event listener for when the animation completes
 //                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
+#endregion
+
+#region Danni, morte e respawn animazioni
 public void AnmHurt()
 {
              if (currentAnimationName != hurtAnimationName)
@@ -3223,8 +3084,6 @@ public void AnmHurt()
                     _spineAnimationState.SetAnimation(2, hurtAnimationName, false);
                     currentAnimationName = hurtAnimationName;
                     _spineAnimationState.Event += HandleEvent;
-
-                    //Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
                 // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
@@ -3240,13 +3099,10 @@ public void BigHurt()
                     _spineAnimationState.SetAnimation(2, BighurtAnimationName, false);
                     currentAnimationName = BighurtAnimationName;
                     _spineAnimationState.Event += HandleEvent;
-
-                    //Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
                 // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
-
 
 public void death()
 {
@@ -3257,11 +3113,7 @@ public void death()
                     _spineAnimationState.SetAnimation(2, deathAnimationName, false);
                     currentAnimationName = deathAnimationName;
                     _spineAnimationState.Event += HandleEvent;
-                    //Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
-            //_spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
-
 }
 public void respawn()
 {
@@ -3284,11 +3136,7 @@ public void respawnRest()
                     _spineAnimationState.SetAnimation(2, respawnRestAnimationName, true);
                     currentAnimationName = respawnRestAnimationName;
                     _spineAnimationState.Event += HandleEvent;
-
-                    //Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
-            //_spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 
 }
 
@@ -3301,13 +3149,8 @@ public void repostsword()
                     _spineAnimationState.SetAnimation(2, swordDownAnimationName, false);
                     currentAnimationName = swordDownAnimationName;
                     _spineAnimationState.Event += HandleEvent;
-
-                    //Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
-                //_spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
-
 }
 
 
@@ -3319,11 +3162,7 @@ public void AnimationRest()
                     _spineAnimationState.SetAnimation(2, RestAnimationName, false);
                     currentAnimationName = RestAnimationName;
                     _spineAnimationState.Event += HandleEvent;
-
-                    //Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
-                //_spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 public void animationWakeup()
 {
@@ -3333,10 +3172,7 @@ public void animationWakeup()
                     _spineAnimationState.SetAnimation(2, UpAnimationName, false);
                     currentAnimationName = UpAnimationName;
                     _spineAnimationState.Event += HandleEvent;
-
-                    //Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 
@@ -3347,13 +3183,12 @@ public void respawnWakeup()
                     _spineAnimationState.SetAnimation(2, respawnAnimationName, false);
                     currentAnimationName = respawnAnimationName;
                     _spineAnimationState.Event += HandleEvent;
-
-                    //Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
-                // Add event listener for when the animation completes
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
+#endregion
 
+#region Movimento Animazioni
 private void moving() {
    if(!isGuard || !isCharging || !JumpRock)
    {
@@ -3473,16 +3308,13 @@ private void moving() {
     }
 }
 }
-
-
+#endregion
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//MUSICA
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//EVENTS
-//Non puoi giocare di local scale sui vfx perché sono vincolati dal localscale del player PERò puoi giocare sulla rotazione E ottenere gli
-//stessi effetti
- public void PlayMFX(int soundToPlay)
+#region  Musica
+public void PlayMFX(int soundToPlay)
     {
         if (!sgmActive)
         {
@@ -3500,6 +3332,14 @@ public void StopMFX(int soundToPlay)
            // sgmActive = true;
         }
     }
+#endregion
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//EVENTS
+//stessi effetti
+
+#region Eventi
+ 
 void HandleEvent (TrackEntry trackEntry, Spine.Event e) {
 
 
@@ -4059,7 +3899,7 @@ if(!vfx)
         
     }
 
-   
+   #endregion
 }
 
     #region Gizmos

@@ -105,9 +105,13 @@ public class AudioManager : MonoBehaviour
         {
             sgm[soundToPlay].Play();
             sgmActive = true;
+            StartCoroutine(restoresfx());
         }
     }
-
+private IEnumerator restoresfx(){
+        yield return new WaitForSeconds(1f);
+        sgmActive = false;
+    }
 
   public void CrossFadeINAudio(int soundToPlay)
     {        

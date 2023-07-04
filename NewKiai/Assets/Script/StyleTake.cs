@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class StyleTake : MonoBehaviour
 {     
     [SerializeField] public int StyleID = 0;
     [SerializeField] GameObject VFX;
     public bool isCollected = false;
-    [SerializeField] AudioClip PickupSFX;
-
+    //[SerializeField] AudioClip PickupSFX;
 
 public void Update()
     {
@@ -24,10 +24,13 @@ public void Update()
         if(!isCollected)
         {
         GameplayManager.instance.StyleActivated(StyleID);
+        AudioManager.instance.PlaySFX(1);
         //AudioSource.PlayClipAtPoint(PickupSFX, Camera.main.transform.position);
         Instantiate(VFX, transform.position, transform.rotation);
         isCollected = true;
         }
         }
     }
+
+      
 }

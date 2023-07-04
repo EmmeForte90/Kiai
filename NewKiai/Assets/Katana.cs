@@ -9,7 +9,6 @@ using UnityEngine.UI;
 public class Katana : MonoBehaviour
 {    
     private GameObject toy; // Variabile per il player
-
     [Header("Vita")]
     private float vitalita;
     public float vitalita_max = 50;
@@ -85,6 +84,7 @@ public class Katana : MonoBehaviour
     private Vector2 coinForceVariance = new Vector2(1, 0); // varianza della forza con cui le monete saltano
     
     [Header("Animations")]
+    public GameObject EnmContent;
     [SerializeField] GameObject Enemy;
     private SkeletonAnimation skeletonAnimation;
      
@@ -145,6 +145,18 @@ public class Katana : MonoBehaviour
         result = Mathf.RoundToInt(randomNumber);
         Debug.Log("result"+ result);
         }
+        if(IsStamina)
+        {
+        staminaBar.size = stamina / stamina_max;
+        staminaBar.size = Mathf.Clamp(staminaBar.size, 0.01f, 1);
+        Staminaobj.gameObject.SetActive(true);
+        StaminaVFX.gameObject.SetActive(true);
+        } 
+        else if(!IsStamina)
+        {
+        Staminaobj.gameObject.SetActive(false);
+        StaminaVFX.gameObject.SetActive(false);
+        }
     }
  void Update(){
         
@@ -159,29 +171,17 @@ public class Katana : MonoBehaviour
         {
         staminaBar.size = stamina / stamina_max;
         staminaBar.size = Mathf.Clamp(staminaBar.size, 0.01f, 1);
-        Staminaobj.gameObject.SetActive(true);
-        StaminaVFX.gameObject.SetActive(true);
-        } 
-        else if(!IsStamina)
-        {
-        Staminaobj.gameObject.SetActive(false);
-        StaminaVFX.gameObject.SetActive(false);
-        }
-
         //Se la stamina è a zero si stanca ed è vulnerabile
-        if(!IsStamina)
-        {
         if(stamina <= 0)
         {
         StaminaVFX.gameObject.SetActive(false);
         TiredAnm();        
         StartCoroutine(ripristina_Stamina());
-        }
-        }
+        }}
 #endregion
         ////////////////////////////////////////////////
         #region Move
-        if(isWalk && !GameplayManager.instance.battle && !isHurt)
+        if(isWalk && !GameplayManager.instance.battle && !isHurt && !isDead)
         {
         isChase = false;   
         isAttack = false;
@@ -201,21 +201,21 @@ public class Katana : MonoBehaviour
         #region RilevaPlayer e Insegue il Player
         if (Follow)
         {
-        if (Vector2.Distance(transform.position, toy.transform.position) < chaseThreshold && !isAttack && !isHurt)
+        if (Vector2.Distance(transform.position, toy.transform.position) < chaseThreshold && !isAttack && !isHurt && !isDead)
         {
         isChase = true;   isWalk = false;  isAttack = false;
         if(isChase){Chase();}  
-        }else if (Vector2.Distance(transform.position, toy.transform.position) > chaseThreshold && !isAttack && !isHurt)
+        }else if (Vector2.Distance(transform.position, toy.transform.position) > chaseThreshold && !isAttack && !isHurt && !isDead)
         {Follow = true; isChase = false;  isWalk = true; isAttack = false;}
         }
         #endregion
         ////////////////////////////////////////////////
         #region Attacca il Player
-        if (Vector2.Distance(transform.position, toy.transform.position) < attackrange && !isHurt)
+        if (Vector2.Distance(transform.position, toy.transform.position) < attackrange && !isHurt && !isDead)
         {
         isChase = false;   isWalk = false; isAttack = true; Follow = false;
         if(isAttack){Attack();}
-        }else if (Vector2.Distance(transform.position, toy.transform.position) > attackrange && isAttack && !isHurt)
+        }else if (Vector2.Distance(transform.position, toy.transform.position) > attackrange && isAttack && !isHurt && !isDead)
         {Follow = true; isChase = false;  isWalk = true; isAttack = false;}
         #endregion
         ////////////////////////////////////////////////
@@ -307,8 +307,8 @@ public class Katana : MonoBehaviour
 {
         if(other.gameObject.tag == "Hitbox")
         {  
-            if(!isDead)
-            {
+        if(!isDead)
+        {
             if(IsStamina)
         {
             if(stamina > 0)
@@ -318,14 +318,14 @@ public class Katana : MonoBehaviour
                     PlayMFX(2);
                     stamina -= 10;
                     GuardAnm();
+                    PlayMFX(3);
                     PlayerHealth.Instance.currentStamina -=30;
                     StartCoroutine(ripristina_Posa());                    
                     Instantiate(VFXSdeng, hitpoint.position, transform.rotation);
-                    if(isKnock)
-                    {KnockbackAt = true;}
-        }else
-        {Damage();}}
-        Damage();
+                    if(isKnock) {KnockbackAt = true;}
+        }else if(stamina <= 0)
+        {Damage(); TiredAnm(); StaminaVFX.gameObject.SetActive(false); StartCoroutine(ripristina_Stamina());}
+        } else if(!IsStamina){Damage();}
         } else{Die();}
 }     
 }
@@ -352,6 +352,23 @@ private void Attack()
     ripristina_Atk();
 }
 
+private void Wait()
+{
+    rb.velocity = new Vector3(0, 0, 0);
+    isAttack = false;
+    IdleBattleAnm();
+}
+
+ private void Damage()
+    {
+        vitalita -= Move.instance.Damage; 
+        PlayMFX(1);
+        skeletonAnimation.Skeleton.SetColor(Color.red);
+        Instantiate(VFXHurt, hitpoint.position, transform.rotation);
+        StartCoroutine(ripristina_colore());
+        if(isKnock){ KnockbackAtL = true;}
+    }
+
 
 #region Die
 private void Die()
@@ -374,7 +391,7 @@ private void Die()
 
      private IEnumerator DestroyEnm(){
         yield return new WaitForSeconds(1f);
-        Destroy(gameObject);
+        Destroy(EnmContent);
     }
 #endregion
 
@@ -402,23 +419,6 @@ void FacePlayer()
         }
     }
 #endregion
-
-private void Wait()
-{
-    rb.velocity = new Vector3(0, 0, 0);
-    isAttack = false;
-    IdleBattleAnm();
-}
-
- private void Damage()
-    {
-        vitalita -= HitboxPlayer.Instance.Damage; 
-        PlayMFX(1);
-        skeletonAnimation.Skeleton.SetColor(Color.red);
-        Instantiate(VFXHurt, hitpoint.position, transform.rotation);
-        StartCoroutine(ripristina_colore());
-        if(isKnock){ KnockbackAtL = true;}
-    }
 
 #region Gizmos
 private void OnDrawGizmos()
@@ -450,6 +450,7 @@ private IEnumerator ripristina_Stamina()
     private IEnumerator ripristina_Posa()
     {
         yield return new WaitForSeconds(1f);
+        isHurt = false;
         IdleBattleAnm(); 
     }
 

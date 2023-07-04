@@ -163,13 +163,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa0b357a2efc7b4aa55285283d8d3f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinPickupSFX: {fileID: 8300000, guid: 7bd7479ba9b3e314cabac247ffc1247e, type: 3}
+  coinPickupSFX: {fileID: 0}
   pointsForCoinPickup: 5
   loadDelay: 0.1
   myAnimator: {fileID: 8967968680885089744}
   lifeTime: 20
   takeradious: 1
-  light: {fileID: 8967968681365245898}
+  Lighter: {fileID: 0}
+  basePitch: 1
+  randomPitchOffset: 0.1
+  listSound:
+  - {fileID: 8300000, guid: 7bd7479ba9b3e314cabac247ffc1247e, type: 3}
+  SFX: {fileID: 24100000, guid: 63f598184995bda419cd1ee5db5e6d03, type: 2}
 --- !u!61 &8967968680885089747
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -17494,7 +17494,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1506472099}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Katana
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17821,7 +17821,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 448257151
   m_SortingLayer: 4
-  m_SortingOrder: -1
+  m_SortingOrder: 1
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1543192625
 MeshFilter:
@@ -32506,7 +32506,7 @@ GameObject:
   - component: {fileID: 72479223442003361}
   - component: {fileID: 72479223442003376}
   m_Layer: 6
-  m_Name: Katana_stamina (1)
+  m_Name: Brain
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32555,11 +32555,13 @@ MonoBehaviour:
   listSound:
   - {fileID: 0}
   - {fileID: 8300000, guid: 86053142115f44044b608d87e9e6e582, type: 3}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: a5baeb2cfbd3d5945940f284d96c0b72, type: 3}
+  - {fileID: 8300000, guid: 58e7340de4968214f8fbcbf785906c4d, type: 3}
   SFX: {fileID: 24100000, guid: 63f598184995bda419cd1ee5db5e6d03, type: 2}
   coinPrefab: {fileID: 8967968680885089756, guid: 6c7438847b08f434bac2a9a1def0c711, type: 3}
   CoinPoint: {fileID: 72479224076390082}
   maxCoins: 5
+  EnmContent: {fileID: 1506472098}
   Enemy: {fileID: 72479223442003371}
   idle: idle
   walk: walk_thief
@@ -34865,6 +34867,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6811609168556801878, guid: 3e66091c93a249c4cbbc5e176e74d52b, type: 3}
     - target: {fileID: 5892456059567638954, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
+      propertyPath: TiredAnimationName
+      value: Damage/tired
+      objectReference: {fileID: 0}
+    - target: {fileID: 5892456059567638954, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
       propertyPath: attack_r_air_Landing
       value: 
       objectReference: {fileID: 6811609168556801878, guid: 3e66091c93a249c4cbbc5e176e74d52b, type: 3}
@@ -34960,6 +34966,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5892456060442747771, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
+      propertyPath: SoundDestroy.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7bd7479ba9b3e314cabac247ffc1247e, type: 3}
+    - target: {fileID: 5892456060442747771, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
+      propertyPath: SoundDestroy.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 85f50f09c3f2ceb41a1f63ff5d5f5b8c, type: 3}
     - target: {fileID: 6205270610583848479, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
       propertyPath: knockbackForce
       value: 50

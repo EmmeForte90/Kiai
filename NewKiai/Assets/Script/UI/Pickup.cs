@@ -5,7 +5,7 @@ using UnityEngine.Audio;
 
 public class Pickup : MonoBehaviour
 {
-   [SerializeField] AudioClip coinPickupSFX;
+   //[SerializeField] AudioClip coinPickupSFX;
     //Variabile per il suono
     [SerializeField] public int pointsForCoinPickup;
     //Valore della moneta quando raccolta
@@ -21,8 +21,6 @@ public class Pickup : MonoBehaviour
 
     [SerializeField]  GameObject Lighter;
     //Bool per evitare che la moneta sia raccolta più volte
-    //[SerializeField] public bool isHeal;
-
 
 void Start()
 {    
@@ -31,6 +29,7 @@ void Start()
     myAnimator = GetComponent<Animator>();
     //Recupera i componenti dell'animator
  Invoke("Destroy", lifeTime);
+
 
 }
 private void Update()
@@ -50,6 +49,7 @@ private void Update()
             //La moneta è collezionata
             GameplayManager.instance.AddTomoney(pointsForCoinPickup);
             //Richiama la funzione dello script GameSessione e aumenta lo score
+            AudioManager.instance.PlaySFX(0);
             //AudioSource.PlayClipAtPoint(coinPickupSFX, Camera.main.transform.position);
             //Avvia l'audio
             myAnimator.SetTrigger("take");
@@ -71,7 +71,6 @@ private void OnDrawGizmos()
 #endregion
     
 
-        
        
     
  private void Destroy()
