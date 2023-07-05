@@ -400,13 +400,9 @@ private void Update()
 {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-if(!stopInput)
+if(!stopInput && !isDeath)
         {
-        if(!isDeath)
-        {
-        if(!isHeal)
-        {
-        if(!isGuard || !isCharging)
+        if(!isGuard || !isCharging || !isHeal)
         {
         horDir = Input.GetAxisRaw("Horizontal");
         vertDir = Input.GetAxisRaw("Vertical");
@@ -417,7 +413,7 @@ if(!stopInput)
         style = MaxStyle;
         item = MaxItem;
         }
-        }
+        
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if (isGrounded())
         {
@@ -548,7 +544,7 @@ if (Input.GetButtonDown("Jump") && !isGuard && !NotStrangeAnimationTalk && isTou
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////             
 
 // gestione dell'input dello sparo
-#region  Usare Items
+    #region  Usare Items
 
     if (L2 == 1 && isBlast && Time.time >= ShotTimer)
     {
@@ -639,13 +635,14 @@ if (Input.GetButtonDown("Jump") && !isGuard && !NotStrangeAnimationTalk && isTou
     }
 
 
-}
+
 // ripristina la possibilità di attaccare dopo il tempo di attacco
 if (!isBlast && Time.time >= ShotTimer)
 {
     isBlast = true;
 }
-#endregion
+        
+        #endregion
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Activate kiai
 #region  Kiai
@@ -1288,9 +1285,9 @@ if(attackWater)
   {Stop(); PlayerHealth.Instance.currentStamina -= SpeeRestore * Time.deltaTime;}  
     
 if(PlayerHealth.Instance.currentStamina <=0 && isGrounded())
-  {Stop(); TiredAnm(); StopinputTrue();} 
+  {Stop(); TiredAnm(); /*StopinputTrue();*/} 
 else if(PlayerHealth.Instance.currentStamina > 20)
-  {StopinputFalse();} 
+  {/*StopinputFalse();*/} 
 
 }
  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
