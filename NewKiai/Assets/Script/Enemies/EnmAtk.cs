@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnmAtk : MonoBehaviour
 {        
-    public GameObject Hitbox;
     public float attackDamage = 10; // danno d'attacco
     public float damagestamina = 50; // danno d'attacco
     private bool take = false;

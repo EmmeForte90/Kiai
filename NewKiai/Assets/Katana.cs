@@ -66,6 +66,8 @@ public class Katana : MonoBehaviour
     [SerializeField] public Transform hitpoint;
     [SerializeField] GameObject VFXSdeng;
     [SerializeField] GameObject VFXHurt;
+    [SerializeField] GameObject VFXSlash;
+
 
     [Header("Audio")]
     [HideInInspector] public float basePitch = 1f;
@@ -611,9 +613,17 @@ private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
 #region Events
 void HandleEvent (TrackEntry trackEntry, Spine.Event e) 
 {
-    if (e.Data.Name == "slash_h2_normal") 
+    if (e.Data.Name == "VFXSlashB") 
     {     
-    
+    Instantiate(VFXSlash, hitpoint.position, transform.rotation);
+    if (Enemy.transform.position.x > 0)
+    {
+        VFXSlash.transform.localScale = new Vector2(1f, 1f);
+    }
+    else if (Enemy.transform.position.x < 0)
+    {
+        VFXSlash.transform.localScale = new Vector2(-1f, 1f);
+    }
     
     }
 

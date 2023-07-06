@@ -12632,7 +12632,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1080236770}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.59, y: -0.13, z: 0}
+  m_LocalPosition: {x: -0.59, y: -0.13, z: -0.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -34301,7 +34301,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2ef12c8bdae2e4aa9eb0da9b2ef821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hitbox: {fileID: 72479222640647642}
   attackDamage: 10
   damagestamina: 50
 --- !u!114 &72479222640647633
@@ -34693,6 +34692,7 @@ MonoBehaviour:
   hitpoint: {fileID: 72479224076390082}
   VFXSdeng: {fileID: 4331965279904828745, guid: 1b79c7dad815f1544b564d01f2920de0, type: 3}
   VFXHurt: {fileID: 7071445190980599945, guid: 6f619625bacd75f428d3375ad52cacc5, type: 3}
+  VFXSlash: {fileID: 9084018111640508060, guid: abab6dd056b280142bcc4ac726e2d4b1, type: 3}
   basePitch: 1
   randomPitchOffset: 0.1
   listSound:
