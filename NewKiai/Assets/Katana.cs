@@ -68,6 +68,8 @@ public class Katana : MonoBehaviour
     [SerializeField] GameObject VFXHurt;
     [SerializeField] GameObject VFXSlash;
 
+    private bool vfx = false;
+    private float vfxTimer = 0.5f;
 
     [Header("Audio")]
     [HideInInspector] public float basePitch = 1f;
@@ -222,6 +224,14 @@ public class Katana : MonoBehaviour
         #endregion
         ////////////////////////////////////////////////
         }
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if(vfx)
+        {vfxTimer -= Time.deltaTime; //decrementa il timer ad ogni frame
+        if (vfxTimer <= 0f) {
+        VFXSlash.gameObject.SetActive(false);
+        vfx = false;
+        }}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
  }
  
@@ -592,6 +602,7 @@ public void AttackAnm()
                 }
                 // Add event listener for when the animation completes
                 spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+                spineAnimationState.Event += HandleEvent;
 }
 
 private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
@@ -613,18 +624,18 @@ private void OnAttackAnimationComplete(Spine.TrackEntry trackEntry)
 #region Events
 void HandleEvent (TrackEntry trackEntry, Spine.Event e) 
 {
-    if (e.Data.Name == "VFXSlashB") 
+    if (e.Data.Name == "VFXslash") 
     {     
-    Instantiate(VFXSlash, hitpoint.position, transform.rotation);
-    if (Enemy.transform.position.x > 0)
-    {
-        VFXSlash.transform.localScale = new Vector2(1f, 1f);
-    }
-    else if (Enemy.transform.position.x < 0)
-    {
-        VFXSlash.transform.localScale = new Vector2(-1f, 1f);
-    }
     
+     if(!vfx)
+        {
+        vfxTimer = 0.5f;
+        VFXSlash.gameObject.SetActive(true);
+        PlayMFX(2);
+        vfx = true;
+        }
+
+
     }
 
 }

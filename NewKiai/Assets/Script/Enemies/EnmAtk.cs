@@ -7,6 +7,9 @@ public class EnmAtk : MonoBehaviour
     public float attackDamage = 10; // danno d'attacco
     public float damagestamina = 50; // danno d'attacco
     private bool take = false;
+    [Header("VFX")]
+    private bool vfx = false;
+    private float vfxTimer = 0.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -25,12 +28,17 @@ public class EnmAtk : MonoBehaviour
     
     
 }
-
-IEnumerator StopD()
+void Update()
     {
-        yield return new WaitForSeconds(0.5f);
+        if(vfx)
+        {vfxTimer -= Time.deltaTime; //decrementa il timer ad ogni frame
+        if (vfxTimer <= 0f) {
         take = false;
+        vfx = false;
+        }} 
     }
+
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -38,8 +46,11 @@ IEnumerator StopD()
         {
         if (collision.CompareTag("Player"))
         {
-             take = true;
-            StartCoroutine(StopD());
+        
+        take = true;
+        if(!vfx)
+        {
+            vfxTimer = 0.3f;
             if(!Move.instance.isGuard)
             {
             if (!Move.instance.isDeath)
@@ -55,15 +66,18 @@ IEnumerator StopD()
                 Move.instance.GuardHit(); 
                 PlayerHealth.Instance.currentStamina -= damagestamina;           
             }
+            vfx = true;
+        }
 
     }else if (collision.gameObject.tag == "Hitbox")
     {
+        if(!vfx)
+        {
+        vfxTimer = 0.3f;
         take = true;
         GameplayManager.instance.sbam();
         Move.instance.KnockbackS();            
-        StartCoroutine(StopD());
-
-    }
-    }
-    }
+        }
+        vfx = true;
+    }}}
 }
