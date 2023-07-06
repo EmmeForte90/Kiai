@@ -296,6 +296,7 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField]  string F_SickleAnimationName;
     [SpineAnimation][SerializeField]  string F_SlashAnimationName;
     [SpineAnimation][SerializeField]  string BossDSpAnimationName;
+    [SpineAnimation][SerializeField]  string LanceFAnimationName;
     /////////////////////////////////////////////////////////////////////
      [Header("Dodge and defend")]
     [SpineAnimation][SerializeField]  string TiredAnimationName;
@@ -2657,6 +2658,16 @@ switch (watF) {
                 {
                     _spineAnimationState.SetAnimation(2, F_BackAnimationName, false);
                     currentAnimationName = F_BackAnimationName;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+                break;
+        case 4:
+         if (currentAnimationName != LanceFAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, LanceFAnimationName, false);
+                    currentAnimationName = LanceFAnimationName;
                    // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
                 // Add event listener for when the animation completes

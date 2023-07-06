@@ -40,7 +40,7 @@ private void Update()
         vcam.m_Lens.FieldOfView = Mathf.Lerp(vcam.m_Lens.FieldOfView, originalZoom, zoomResetSpeed * Time.deltaTime);
         }
 
-        if(vcam.m_Lens.FieldOfView == 70 || vcam.m_Lens.FieldOfView == 50)
+        if(vcam.m_Lens.FieldOfView == 80 || vcam.m_Lens.FieldOfView == 50)
         {
             zoomIn = false;
             zoomout = false;

@@ -9521,6 +9521,8 @@ MonoBehaviour:
   F_SickleAnimationName: Fatality/Fatality_sickle
   F_SlashAnimationName: Fatality/Fatality_slash
   BossDSpAnimationName: 
+  LanceFAnimationName: Fatality/Fatality_blockKatana
+  TiredAnimationName: 
   DashAttackAnimationName: Attack/SwordPlay/dashAtk
   swordDownAnimationName: Attack/Movement/hide_sword
   guardDownAnimationName: Attack/SwordPlay/guard
@@ -9530,6 +9532,7 @@ MonoBehaviour:
   throwAnimationName: Attack/Shoot/throw
   BowAnimationName: Attack/Shoot/bow_up_shoot
   RifleAnimationName: Attack/Shoot/tanegashima_shoot
+  Damage: 0
   bullet: {fileID: 5058409871759962079, guid: dd15859e3ab53324d8a659de7a60fdb6, type: 3}
   style: 0
   item: 0

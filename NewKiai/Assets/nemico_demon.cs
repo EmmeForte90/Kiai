@@ -5,15 +5,25 @@ using Spine.Unity;
 using Spine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class nemico_demon : MonoBehaviour
-{
-
+{ 
+    [Header("Fatality")]
+    public Scrollbar HPBar;
+    public Scrollbar staminaBar;
+    private float stamina;
+    public float stamina_max = 50;
+    private int vitalita;
+    public int vitalita_max = 200;
+    //public float DamageStamina;
+    [SerializeField] GameObject Staminaobj;
+    [SerializeField] GameObject StaminaVFX;
     private float horizontal;
     private float velocita = 4f;
     private bool bool_dir_dx = true;
     private SkeletonAnimation skeletonAnimation;
-    public GameObject GO_player;
+    private GameObject GO_player;
     public GameObject Warining;
     public GameObject Aura;
     public float distanza_attacco=8f;
@@ -22,8 +32,7 @@ public class nemico_demon : MonoBehaviour
     //private float distanza_contrattacco=5f;
 
     private bool bool_colpibile=true;
-    private int vitalita;
-    public int vitalita_max=200;
+    
     private float tempo_ricolpibile=0.5f;
     private bool bool_morto=false;
 
@@ -94,6 +103,10 @@ public class nemico_demon : MonoBehaviour
     }
 
     void Update(){
+        staminaBar.size = stamina / stamina_max;
+        staminaBar.size = Mathf.Clamp(staminaBar.size, 0.01f, 1);
+        Staminaobj.gameObject.SetActive(true);
+        StaminaVFX.gameObject.SetActive(true);
          if (!GameplayManager.instance.PauseStop)
         {
         if (bool_morto){return;}
@@ -180,6 +193,7 @@ public class nemico_demon : MonoBehaviour
             case "guardia":{
                 Warining.gameObject.SetActive(false);
                 Aura.gameObject.SetActive(true);
+                stamina = stamina_max;
                 skeletonAnimation.AnimationName = "guard";
                 if (transform.position.x<GO_player.transform.position.x){horizontal=1;}
                 else {horizontal=-1;}
@@ -188,6 +202,7 @@ public class nemico_demon : MonoBehaviour
             }
             case "stun":{
                 skeletonAnimation.AnimationName = "tired";
+                stamina = 0;
                 Warining.gameObject.SetActive(true);
                 Aura.gameObject.SetActive(false);
                 break;
