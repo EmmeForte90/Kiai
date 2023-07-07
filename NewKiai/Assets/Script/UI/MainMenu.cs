@@ -54,7 +54,7 @@ public class MainMenu : MonoBehaviour
         
         Cursor.visible = true;
     }
-
+/*
    public void openNewGame()
     {
         EventSystem.current.SetSelectedGameObject(null);
@@ -85,7 +85,7 @@ public class MainMenu : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(secondButton);
     }
 
-
+*/
 
 public void SetResolution(int resolutionIndex)
 {

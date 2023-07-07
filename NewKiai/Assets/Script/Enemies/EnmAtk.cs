@@ -75,7 +75,7 @@ void Update()
         {
         vfxTimer = 0.3f;
         take = true;
-        GameplayManager.instance.sbam();
+        //GameplayManager.instance.sbam();
         Move.instance.KnockbackS();            
         }
         vfx = true;

@@ -9403,7 +9403,6 @@ GameObject:
   - component: {fileID: 5892456059567638958}
   - component: {fileID: 5892456059567638957}
   - component: {fileID: 2015212352911655371}
-  - component: {fileID: 6205270610583848479}
   m_Layer: 3
   m_Name: Nekotaro
   m_TagString: Player
@@ -9553,7 +9552,7 @@ MonoBehaviour:
   runSpeedThreshold: 5
   dashForce: 10
   dashDuration: 0.5
-  dashForceAtk: 2
+  dashForceAtk: 1
   upperForceAtk: 0.6
   dashCoolDown: 1
   drawsword: 0
@@ -9899,20 +9898,6 @@ MonoBehaviour:
   flipBy180DegreeRotation: 1
   skeletonRenderer: {fileID: 5892456059567638956}
   skeletonGraphic: {fileID: 0}
---- !u!114 &6205270610583848479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5892456059567638962}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a4d777269162df4496ded0c8b47147c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  knockbackForce: 10
-  knockbackDuration: 0.5
 --- !u!1 &5892456059568806927
 GameObject:
   m_ObjectHideFlags: 0
