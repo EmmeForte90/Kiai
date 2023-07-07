@@ -130,7 +130,7 @@ if(GameplayManager.instance.styleIcon[5] == true)
             Move.instance.KnockbackS();
             if(Move.instance.rb.velocity.y > 0)
             {
-                GameplayManager.instance.sbam();
+              //  GameplayManager.instance.sbam();
                 Move.instance.KnockbackS(); 
             }
         }

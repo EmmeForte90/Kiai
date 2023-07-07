@@ -36,6 +36,7 @@ private void Update()
     {
         if (Vector2.Distance(transform.position, player.position) < takeradious) 
         {
+            AudioManager.instance.PlaySFX(0);
             if (!wasCollected)
         //Se il player tocca la moneta e non è stato collezionata
         {
@@ -48,10 +49,6 @@ private void Update()
     
             //La moneta è collezionata
             GameplayManager.instance.AddTomoney(pointsForCoinPickup);
-            //Richiama la funzione dello script GameSessione e aumenta lo score
-            AudioManager.instance.PlaySFX(0);
-            //AudioSource.PlayClipAtPoint(coinPickupSFX, Camera.main.transform.position);
-            //Avvia l'audio
             myAnimator.SetTrigger("take");
             //Attiva il suono
             Invoke("takeCoin", loadDelay);

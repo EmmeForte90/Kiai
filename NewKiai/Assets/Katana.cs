@@ -38,6 +38,7 @@ public class Katana : MonoBehaviour
     public float stamina_max = 50;
     public float DamageStamina;
     [SerializeField] GameObject Staminaobj;
+    [SerializeField] GameObject VFXendStamina;
     [SerializeField] GameObject StaminaVFX;
 
     public Scrollbar staminaBar;
@@ -155,11 +156,13 @@ public class Katana : MonoBehaviour
         staminaBar.size = Mathf.Clamp(staminaBar.size, 0.01f, 1);
         Staminaobj.gameObject.SetActive(true);
         StaminaVFX.gameObject.SetActive(true);
+        VFXendStamina.gameObject.SetActive(false);
         } 
         else if(!IsStamina)
         {
         Staminaobj.gameObject.SetActive(false);
         StaminaVFX.gameObject.SetActive(false);
+        VFXendStamina.gameObject.SetActive(false);
         }
     }
  void Update(){
@@ -179,6 +182,7 @@ public class Katana : MonoBehaviour
         if(stamina <= 0)
         {
         StaminaVFX.gameObject.SetActive(false);
+        VFXendStamina.gameObject.SetActive(true);
         TiredAnm();        
         StartCoroutine(ripristina_Stamina());
         }}
@@ -338,8 +342,30 @@ public class Katana : MonoBehaviour
         }else if(stamina <= 0)
         {Damage(); TiredAnm(); StaminaVFX.gameObject.SetActive(false); StartCoroutine(ripristina_Stamina());}
         } else if(!IsStamina){Damage();}
-        } else{Die();}
-}     
+        } else{Die();}} 
+
+        if(other.gameObject.tag == "Throw")
+        {  
+        if(!isDead)
+        {
+            if(IsStamina)
+        {
+            if(stamina > 0)
+        {
+                    isHurt = true;
+                    vitalita -= 5; 
+                    PlayMFX(2);
+                    stamina -= 10;
+                    GuardAnm();
+                    PlayMFX(3);
+                    PlayerHealth.Instance.currentStamina -= 10;
+                    StartCoroutine(ripristina_Posa());                    
+                    Instantiate(VFXSdeng, hitpoint.position, transform.rotation);
+                    if(isKnock) {KnockbackAt = true;}
+        }else if(stamina <= 0)
+        {DamageConsumable(); TiredAnm(); StaminaVFX.gameObject.SetActive(false); StartCoroutine(ripristina_Stamina());}
+        } else if(!IsStamina){DamageConsumable();}
+        } else{Die();}}     
 }
 
 private void Chase()
@@ -370,7 +396,15 @@ private void Wait()
     isAttack = false;
     IdleBattleAnm();
 }
-
+private void DamageConsumable()
+    {
+        vitalita -= 20; 
+        PlayMFX(1);
+        skeletonAnimation.Skeleton.SetColor(Color.red);
+        Instantiate(VFXHurt, hitpoint.position, transform.rotation);
+        StartCoroutine(ripristina_colore());
+        if(isKnock){ KnockbackAtL = true;}
+    }
  private void Damage()
     {
         vitalita -= GameplayManager.instance.Damage; 
@@ -455,6 +489,7 @@ private IEnumerator ripristina_Stamina()
         yield return new WaitForSeconds(TimeRestoreStamina);//2
         stamina = stamina_max;
         StaminaVFX.gameObject.SetActive(true);
+        VFXendStamina.gameObject.SetActive(false);
         isHurt = false;
         IdleBattleAnm();    
     }

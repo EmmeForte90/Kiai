@@ -298,6 +298,7 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField]  string F_SlashAnimationName;
     [SpineAnimation][SerializeField]  string BossDSpAnimationName;
     [SpineAnimation][SerializeField]  string LanceFAnimationName;
+    [SpineAnimation][SerializeField]  string VeloceFAnimationName;
     /////////////////////////////////////////////////////////////////////
      [Header("Dodge and defend")]
     [SpineAnimation][SerializeField]  string TiredAnimationName;
@@ -1508,6 +1509,7 @@ public void attackupper()
            }
         if (dashing || Atkdashing)
         {
+            PlayMFX(4);
             if (horDir < 0)
         {
            rb.AddForce(-transform.right * dashForce, ForceMode2D.Impulse);
@@ -2676,6 +2678,16 @@ switch (watF) {
                 {
                     _spineAnimationState.SetAnimation(2, LanceFAnimationName, false);
                     currentAnimationName = LanceFAnimationName;
+                   // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
+                }
+                // Add event listener for when the animation completes
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+                break;
+        case 5:
+         if (currentAnimationName != VeloceFAnimationName)
+                {
+                    _spineAnimationState.SetAnimation(2, VeloceFAnimationName, false);
+                    currentAnimationName = VeloceFAnimationName;
                    // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
                 // Add event listener for when the animation completes

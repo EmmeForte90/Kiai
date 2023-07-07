@@ -25,6 +25,7 @@ public class nemico_demon : MonoBehaviour
     private SkeletonAnimation skeletonAnimation;
     private GameObject GO_player;
     public GameObject Warining;
+    public GameObject VFXVulnerabile;
     public GameObject Aura;
     public float distanza_attacco=8f;
     private float distanza_temp;
@@ -177,6 +178,7 @@ public class nemico_demon : MonoBehaviour
         switch (stato){
             case "idle":{
                 Warining.gameObject.SetActive(false);
+                VFXVulnerabile.gameObject.SetActive(false);
                 Aura.gameObject.SetActive(true);
                 skeletonAnimation.AnimationName = "walk";
                 transform.position = Vector2.MoveTowards(transform.position,posizioni[index_posizioni], Time.deltaTime*velocita);
@@ -193,6 +195,7 @@ public class nemico_demon : MonoBehaviour
             }
             case "spara":{
                 Warining.gameObject.SetActive(false);
+                VFXVulnerabile.gameObject.SetActive(false);
                 Aura.gameObject.SetActive(true);
                 skeletonAnimation.AnimationName = "attack_shoot";
                 if (transform.position.x<GO_player.transform.position.x){horizontal=1;}
@@ -202,6 +205,7 @@ public class nemico_demon : MonoBehaviour
             }
             case "guardia":{
                 Warining.gameObject.SetActive(false);
+                VFXVulnerabile.gameObject.SetActive(false);
                 Aura.gameObject.SetActive(true);
                 stamina = stamina_max;
                 skeletonAnimation.AnimationName = "guard";
@@ -214,6 +218,7 @@ public class nemico_demon : MonoBehaviour
                 skeletonAnimation.AnimationName = "tired";
                 stamina = 0;
                 Warining.gameObject.SetActive(true);
+                VFXVulnerabile.gameObject.SetActive(true);
                 Aura.gameObject.SetActive(false);
                 break;
             }

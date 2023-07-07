@@ -18,35 +18,12 @@ public class palla_fuoco_demone_rule : MonoBehaviour
     [SerializeField] GameObject VFXExplode;
     public int damage = 10;
 
-    //private bool bool_palla_appena_lanciata=true;
  
-[Header("Audio")]
-    [HideInInspector] public float basePitch = 1f;
-    [HideInInspector] public float randomPitchOffset = 0.1f;
-    [SerializeField] public AudioClip[] listSound; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
-    private AudioSource[] bgm; // array di AudioSource che conterrà gli oggetti AudioSource creati
-    public AudioMixer SFX;
-    //private bool sgmActive = false;
-    // Start is called before the first frame update
     void Start()
     {
         target = GameObject.Find("Nekotaro");
         StartCoroutine(distruggi_col_tempo());
         StartCoroutine(co_palla_lanciata());
-        bgm = new AudioSource[listSound.Length]; // inizializza l'array di AudioSource con la stessa lunghezza dell'array di AudioClip
-        for (int i = 0; i < listSound.Length; i++) // scorre la lista di AudioClip
-        {
-            bgm[i] = gameObject.AddComponent<AudioSource>(); // crea un nuovo AudioSource come componente del game object attuale (quello a cui è attaccato lo script)
-            bgm[i].clip = listSound[i]; // assegna l'AudioClip corrispondente all'AudioSource creato
-            bgm[i].playOnAwake = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
-            bgm[i].loop = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
-
-        }
- // Aggiunge i canali audio degli AudioSource all'output del mixer
-        foreach (AudioSource audioSource in bgm)
-        {
-        audioSource.outputAudioMixerGroup = SFX.FindMatchingGroups("Master")[0];
-        }
     }
 
     // Update is called once per frame
@@ -59,8 +36,8 @@ public class palla_fuoco_demone_rule : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.name == "Nekotaro"){
             Instantiate(VFXExplode, transform.position, transform.rotation);
-            PlayMFX(0);
-            print ("colpito il personaggio!");
+            AudioManager.instance.PlaySFX(2);
+            //print ("colpito il personaggio!");
             distruggi_palla_di_fuoco();
               if(!Move.instance.isGuard)
             {
@@ -73,15 +50,8 @@ public class palla_fuoco_demone_rule : MonoBehaviour
             }
             }
         }}
-        
     }
- public void PlayMFX(int soundToPlay)
-    {
-        bgm[soundToPlay].Stop();
-        // Imposta la pitch dell'AudioSource in base ai valori specificati.
-        bgm[soundToPlay].pitch = basePitch + Random.Range(-randomPitchOffset, randomPitchOffset); 
-        bgm[soundToPlay].Play();
-    }
+
     private IEnumerator distruggi_col_tempo(){
         yield return new WaitForSeconds(tempo_distruzione_sola);
         distruggi_palla_di_fuoco();
@@ -90,6 +60,8 @@ public class palla_fuoco_demone_rule : MonoBehaviour
     private void distruggi_palla_di_fuoco(){
         if (bool_distrutta){return;}
         bool_distrutta=true;
+        Instantiate(VFXExplode, transform.position, transform.rotation);
+        AudioManager.instance.PlaySFX(2);
         Destroy(gameObject);
     }
 

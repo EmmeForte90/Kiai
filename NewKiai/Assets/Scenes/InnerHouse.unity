@@ -540,6 +540,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5892456060442747771, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
+      propertyPath: SoundDestroy.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3eaca7ca2bc926742a062bc41bca0986, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
 --- !u!1 &115293610
@@ -3289,11 +3293,6 @@ MonoBehaviour:
   coinForce: 5
   coinForceVariance: {x: 1, y: 1}
   spawnPoint: {fileID: 781562653}
-  basePitch: 1
-  randomPitchOffset: 0.1
-  listSound:
-  - {fileID: 8300000, guid: 13f62342530463644ad1ec6d97f3042a, type: 3}
-  SFX: {fileID: 24100000, guid: 63f598184995bda419cd1ee5db5e6d03, type: 2}
   idleAnimationName: idle
   openAnimationName: open
   _skeletonAnimation: {fileID: 1851341757}

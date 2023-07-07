@@ -97,7 +97,7 @@ Transform:
   - {fileID: 2030179915807860862}
   - {fileID: 2030179916777039127}
   - {fileID: 2030179916498984956}
-  - {fileID: 105485837518930862}
+  - {fileID: 2203214729877314658}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -143,7 +143,7 @@ MonoBehaviour:
   isQuest: 0
   id: 0
   TimeStart: 2
-  Enemy: {fileID: 105485837518930849}
+  Enemy: {fileID: 0}
   Camera: {fileID: 2030179915807860863}
   Actor: {fileID: 2030179915816114711}
   trigger: {fileID: 2030179916204073037}
@@ -416,6 +416,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2030179916204073036}
     m_Modifications:
+    - target: {fileID: 5328909215188845296, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5328909215452291270, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5328909215801200778, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5328909215801200778, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6201932098223955251, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
       propertyPath: m_Name
       value: Boss
@@ -482,13 +498,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
---- !u!1 &105485837518930849 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6201932098223955251, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
-  m_PrefabInstance: {fileID: 6298128691819830930}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &105485837518930862 stripped
+--- !u!4 &2203214729877314658 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 6201932098223955260, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
+  m_CorrespondingSourceObject: {fileID: 5328909215188845296, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
   m_PrefabInstance: {fileID: 6298128691819830930}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6491486895511104780 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 968579983659709342, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
+  m_PrefabInstance: {fileID: 6298128691819830930}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &511806786982113338
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6491486895511104780}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 638d0ca9b326f7a4da6fe41cd60d29f1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

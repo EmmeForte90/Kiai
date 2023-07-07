@@ -19705,9 +19705,12 @@ MonoBehaviour:
   SoundDestroy:
   - {fileID: 8300000, guid: 7bd7479ba9b3e314cabac247ffc1247e, type: 3}
   - {fileID: 8300000, guid: 85f50f09c3f2ceb41a1f63ff5d5f5b8c, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: e9b886c147429ab4690603fe5038366d, type: 3}
+  - {fileID: 8300000, guid: 050aa3b8f55dc33409408ef7db9ecf23, type: 3}
+  - {fileID: 8300000, guid: 7bd7479ba9b3e314cabac247ffc1247e, type: 3}
+  - {fileID: 8300000, guid: 13f62342530463644ad1ec6d97f3042a, type: 3}
+  - {fileID: 8300000, guid: 6292ab44734142b44bbe9bb13f3a1d19, type: 3}
+  - {fileID: 8300000, guid: 6292ab44734142b44bbe9bb13f3a1d19, type: 3}
   MSX: {fileID: 24100000, guid: 22f3d7d1311904840bc278bbeeae1a75, type: 2}
   SFX: {fileID: 24100000, guid: 63f598184995bda419cd1ee5db5e6d03, type: 2}
 --- !u!1 &5892456060449731562

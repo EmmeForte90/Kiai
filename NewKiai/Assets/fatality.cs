@@ -9,6 +9,8 @@ using UnityEngine.Audio;
 public class fatality : MonoBehaviour
 {
     [Header("Fatality")]
+    public GameObject ContentENM;
+
     public SkeletonAnimation spineAnimation;
     public GameObject FPoint;
     public GameObject fatalit;
@@ -20,7 +22,7 @@ public class fatality : MonoBehaviour
     //public Transform Spawn; // Variabile per il player
    
    
-    [Tooltip("Quale fatality deve eseguire il player?")]
+    [Tooltip("Quale fatality deve eseguire il player? 1-Jump 2-Dance(DemonMonk) 3-Back 4-For Lance and BigKatana 5-Veloce")]
     public int ChooseFatality;
 
     [SpineAnimation][SerializeField] private string tiredAnimationName;
@@ -93,8 +95,8 @@ private void OnTriggerExit2D(Collider2D collision)
         //endFata = true;
         Move.instance.NotStrangeAnimationTalk = false;
         Move.instance.stopInput = false;
-        yield return new WaitForSeconds(1f);
-        Destroy(gameObject);
+        yield return new WaitForSeconds(3f);
+        Destroy(ContentENM);
 
     }
 }
