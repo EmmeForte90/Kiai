@@ -86,7 +86,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 448257151
   m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingOrder: 11
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &5903323668880781530
 MonoBehaviour:
@@ -194,5 +194,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b6567bcc2a81744693243eaaad8b44b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeHitbox: 0
-  Damage: 10

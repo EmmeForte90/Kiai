@@ -36,8 +36,8 @@ public class Move : MonoBehaviour
     private float dashTime;
     private bool dashing;
     private bool Atkdashing;
-    public float dashForceAtk = 5f;
-    public float upperForceAtk = 0.5f;
+    public float dashForceAtk = 50f;
+    public float upperForceAtk = 5f;
     private bool attackNormal;
     private bool attackUpper;
     private bool StartKiai = false;
@@ -116,7 +116,7 @@ public class Move : MonoBehaviour
     public bool KiaiReady = false;
     //public bool GoKiai = false;
     [Header("Animations")]
-
+#region Animazioni
     [SpineAnimation][SerializeField]  string walkAnimationName;
     [SpineAnimation][SerializeField]  string walkSwordAnimationName;
     [SpineAnimation][SerializeField]  string runAnimationName;
@@ -315,7 +315,7 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField]  string RifleAnimationName;
 
 private string currentAnimationName;
-
+#endregion
 private int comboCount = 0;
      
 
@@ -328,9 +328,9 @@ private int comboCount = 0;
     private float ShotTimer = 0f;
     private float attackRate = 0.5f;
     [SerializeField] private GameObject bullet;
-    [HideInInspector] public int style = 0;
     [HideInInspector] public int item = 0;
     // Dichiarazione delle variabili
+    [HideInInspector] public int style = 0;
     private int MaxStyle;
     private int MaxItem;
     private int currentTime;
@@ -1244,7 +1244,7 @@ HeavyHitRelease();
             coolDownTime = dashCoolDown;
             dashTime = dashDuration;
             dashAnm();
-
+            PlayMFX(4);
         }
 
         if (coolDownTime > 0)
@@ -1474,7 +1474,7 @@ public void changeStyle()
 public void attackDash()
 {
     //Sistemare il cooldown
-            attackNormal = true;
+            Atkdashing = true;
             coolDownTime = dashCoolDown;
             dashTime = dashDuration;
             DashAttack();        
@@ -2931,7 +2931,6 @@ if(style == 4)
             case 1:
                 if (currentAnimationName != attackWater1AnimationName)
                 {Stop();
-                    attackDash();
                     _spineAnimationState.SetAnimation(2, attackWater1AnimationName, false);
                     currentAnimationName = attackWater1AnimationName;
                     _spineAnimationState.Event += HandleEvent;
@@ -3884,11 +3883,7 @@ if (e.Data.Name == "charge") {
         vfx = true;
         }
     }
-if (e.Data.Name == "dash") {
-            
-    PlayMFX(5);
 
-    }
     if (e.Data.Name == "pesante") {
         if(!vfx)
         {  

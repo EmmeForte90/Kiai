@@ -9736,7 +9736,7 @@ MonoBehaviour:
   F_SlashAnimationName: Fatality/Fatality_slash
   BossDSpAnimationName: 
   LanceFAnimationName: Fatality/Fatality_blockKatana
-  VeloceFAnimationName: 
+  VeloceFAnimationName: Fatality/Fatality_slash
   TiredAnimationName: Damage/tired
   DashAttackAnimationName: Attack/SwordPlay/dashAtk
   swordDownAnimationName: Attack/Movement/hide_sword
@@ -9748,8 +9748,8 @@ MonoBehaviour:
   BowAnimationName: Attack/Shoot/bow_up_shoot
   RifleAnimationName: Attack/Shoot/tanegashima_shoot
   bullet: {fileID: 5058409871759962079, guid: dd15859e3ab53324d8a659de7a60fdb6, type: 3}
-  style: 0
   item: 0
+  style: 0
   isCharging: 0
   isGuard: 0
   isPray: 0

@@ -26157,7 +26157,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 141258397797959257, guid: 64f64ec3bce87204984744ec33a64def, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 141258397797959257, guid: 64f64ec3bce87204984744ec33a64def, type: 3}
       propertyPath: m_LocalPosition.x
@@ -37914,7 +37914,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7379351818697915308, guid: adde3298e67d0ab499d663a35ac5dce8, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7379351818697915308, guid: adde3298e67d0ab499d663a35ac5dce8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -85331,6 +85331,10 @@ PrefabInstance:
       value: Damage/tired
       objectReference: {fileID: 0}
     - target: {fileID: 5892456059567638954, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
+      propertyPath: VeloceFAnimationName
+      value: Fatality/Fatality_slash
+      objectReference: {fileID: 0}
+    - target: {fileID: 5892456059567638954, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
       propertyPath: attack_r_air_Landing
       value: 
       objectReference: {fileID: 6811609168556801878, guid: 3e66091c93a249c4cbbc5e176e74d52b, type: 3}
@@ -85376,7 +85380,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5892456059956868104, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5892456059956868104, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
       propertyPath: m_LocalPosition.x
