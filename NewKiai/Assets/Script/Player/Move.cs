@@ -103,6 +103,7 @@ public class Move : MonoBehaviour
     [SerializeField] GameObject VFXWindSlash_h;
     [SerializeField] GameObject VFXWindSlashTOP;
     [SerializeField] GameObject VFXWindSlashDOWN;
+    [SerializeField] GameObject VFXDash;
 
     private bool vfx = false;
     private float vfxTimer = 0.5f;
@@ -396,6 +397,7 @@ public static Move instance;
         }
 // Inizializza la posizione di destinazione del nemico a pointB
         JumpRockTimer = JumpRockTimerMax;   
+        VFXDash.gameObject.SetActive(false);
         }
 
 private void Update()
@@ -1289,6 +1291,11 @@ if(PlayerHealth.Instance.currentStamina <=0 && isGrounded())
   {Stop(); TiredAnm(); isTired = true;} 
 else if(PlayerHealth.Instance.currentStamina > 20)
   {isTired = false;} 
+
+if(dashing)
+  {VFXDash.gameObject.SetActive(true);} 
+else if(!dashing)
+  {VFXDash.gameObject.SetActive(false);} 
 
 }
  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
