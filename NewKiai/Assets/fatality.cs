@@ -96,6 +96,7 @@ private void OnTriggerExit2D(Collider2D collision)
         // Avvia l'animazione di fatality sullo SpineAnimation
         Move.instance.Fatality(ChooseFatality);
         spineAnimation.state.SetAnimation(2, fatalityAnimationName, false);
+        spineAnimation.state.Event += HandleEvent;
         // Attendi che l'animazione di fatality sia completata
         yield return new WaitForSeconds(1f);
         //endFata = true;
@@ -104,6 +105,7 @@ private void OnTriggerExit2D(Collider2D collision)
         yield return new WaitForSeconds(3f);
         if(needFinalVFX)
         {
+            AudioManager.instance.PlaySFX(1);
             VFXEnding.gameObject.SetActive(true);
         }
         Destroy(ContentENM);
