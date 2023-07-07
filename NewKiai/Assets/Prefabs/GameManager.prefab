@@ -19701,7 +19701,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d2cb32498658fb4498266b6466b7149b, type: 3}
   - {fileID: 8300000, guid: 35b5bae0cd0d659458c32109d37a11bf, type: 3}
   - {fileID: 8300000, guid: 8719a9d90e0b545439d9a057f3d3c98b, type: 3}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 0ee860c85da796e4bb2ae393acec5db5, type: 3}
   SoundDestroy:
   - {fileID: 8300000, guid: 7bd7479ba9b3e314cabac247ffc1247e, type: 3}
   - {fileID: 8300000, guid: 85f50f09c3f2ceb41a1f63ff5d5f5b8c, type: 3}

@@ -82,7 +82,12 @@ public class nemico_demon : MonoBehaviour
     //private bool sgmActive = false;
     // Start is called before the first frame update
     void Start(){
+        HPBar.size = vitalita / vitalita_max;
+        HPBar.size = Mathf.Clamp(HPBar.size, 0.01f, 1);
+        staminaBar.size = stamina / stamina_max;
+        staminaBar.size = Mathf.Clamp(staminaBar.size, 0.01f, 1);
         vitalita=vitalita_max;
+        stamina=stamina_max;
         palla_fuoco.SetActive(false);
         GO_player=GameObject.Find("Nekotaro");
         skeletonAnimation = GetComponent<SkeletonAnimation>();
