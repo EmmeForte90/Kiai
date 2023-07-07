@@ -331,7 +331,7 @@ public class Katana : MonoBehaviour
                     stamina -= 10;
                     GuardAnm();
                     PlayMFX(3);
-                    PlayerHealth.Instance.currentStamina -=30;
+                    PlayerHealth.Instance.currentStamina -= 10;
                     StartCoroutine(ripristina_Posa());                    
                     Instantiate(VFXSdeng, hitpoint.position, transform.rotation);
                     if(isKnock) {KnockbackAt = true;}

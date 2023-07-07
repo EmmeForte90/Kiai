@@ -14,8 +14,8 @@ public class nemico_demon : MonoBehaviour
     public Scrollbar staminaBar;
     private float stamina;
     public float stamina_max = 50;
-    private int vitalita;
-    public int vitalita_max = 200;
+    private float vitalita;
+    public float vitalita_max = 200;
     //public float DamageStamina;
     [SerializeField] GameObject Staminaobj;
     [SerializeField] GameObject StaminaVFX;
@@ -103,8 +103,13 @@ public class nemico_demon : MonoBehaviour
     }
 
     void Update(){
+        
         staminaBar.size = stamina / stamina_max;
         staminaBar.size = Mathf.Clamp(staminaBar.size, 0.01f, 1);
+
+        HPBar.size = vitalita / vitalita_max;
+        HPBar.size = Mathf.Clamp(HPBar.size, 0.01f, 1);
+
         Staminaobj.gameObject.SetActive(true);
         StaminaVFX.gameObject.SetActive(true);
          if (!GameplayManager.instance.PauseStop)
@@ -232,29 +237,18 @@ public class nemico_demon : MonoBehaviour
     {
         if (bool_morto){return;}
         //Debug.Log("triggo con "+col.name);
-        switch (col.name){
-            case "palla_fuoco_demone":{
-                //print (bool_colpibile_palla+" - "+bool_palla_appena_lanciata);
-                if (bool_colpibile_palla){
-                    if (!bool_palla_appena_lanciata){
-                        bool_colpibile_palla=false;
-                        StartCoroutine(ritorna_ricolpibile_palla());
-                        Instantiate(VFXExplode, hitpoint.position, transform.rotation);
-                        PlayMFX(3);
-                        print ("colpito dalla mia stessa palla");
-                        tempo_vulnerabile_attuale=tempo_vulnerabile;
-                    }
-                }
-                break;
-            }
-            case "Hitbox":{
+
+    if(col.gameObject.tag == "Hitbox")
+        {
+           
                 if (tempo_vulnerabile_attuale>0){
                     if (bool_colpibile){
                         bool_colpibile=false;
+                        print ("colpito dalla mia stessa palla");
+
                         StartCoroutine(ritorna_ricolpibile());
                         PlayMFX(1);
-                        vitalita-=10;
-
+                        vitalita -= GameplayManager.instance.Damage;
                         skeletonAnimation.Skeleton.SetColor(Color.red);
                         KiaiGive();
                         Instantiate(VFXHurt, hitpoint.position, transform.rotation);
@@ -282,9 +276,23 @@ public class nemico_demon : MonoBehaviour
                     print ("è invulnerabile...");
                     Instantiate(Noeff, hitpoint.position, transform.rotation);
                     PlayMFX(5);
+                } 
+    }
+    switch (col.name){
+            case "palla_fuoco_demone":{
+                //print (bool_colpibile_palla+" - "+bool_palla_appena_lanciata);
+                if (bool_colpibile_palla){
+                    if (!bool_palla_appena_lanciata){
+                        bool_colpibile_palla=false;
+                        StartCoroutine(ritorna_ricolpibile_palla());
+                        Instantiate(VFXExplode, hitpoint.position, transform.rotation);
+                        PlayMFX(3);
+                        print ("colpito dalla mia stessa palla");
+                        tempo_vulnerabile_attuale=tempo_vulnerabile;
+                    }
                 }
                 break;
-            }
+            }      
         }
     }
 

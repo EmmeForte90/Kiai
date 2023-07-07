@@ -383,14 +383,15 @@ void KiaiGive()
 
     void OnTriggerEnter2D(Collider2D col){
         if (bool_morto){return;}
-        //Debug.Log("triggo con "+col.name);
-        switch (col.name){
-            case "Hitbox":{
-                if (bool_colpibile){
+
+ if(col.gameObject.tag == "Hitbox")
+        {
+
+ if (bool_colpibile){
                     bool_colpibile=false;
                     StartCoroutine(ritorna_ricolpibile());
 
-                    vitalita-=10;
+                    vitalita-= GameplayManager.instance.Damage;
 
                     skeletonAnimation.Skeleton.SetColor(Color.red);
                     KiaiGive();
@@ -435,13 +436,9 @@ void KiaiGive()
                         Boss.gameObject.SetActive(false);
 
 
-                        //StartCoroutine(rimuovi());
                     }
                 }
-                break;
-            }
-        }
-    }
+    }}
 
     private IEnumerator ripristina_colore(){
         yield return new WaitForSeconds(0.1f);
