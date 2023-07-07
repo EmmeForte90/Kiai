@@ -236,7 +236,7 @@ public void Buy(Item newItem)
     //InventoryManager.Instance.ListItem(newItem.id);
     //Add();
     IDItem = newItem.id;
-    newItem.value++;
+    //newItem.value++;
     PlayMFX(0);
     dialogueMenu.text = "Thank you!"; // Reference to the TextMeshProUGUI component
     GameplayManager.instance.money -= prices;

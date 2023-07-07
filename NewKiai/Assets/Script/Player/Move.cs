@@ -1048,6 +1048,7 @@ GameplayManager.instance.styleIcon[4] == true)
 && !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
 && !StartKiai)
     {
+        CameraZoom.instance.ZoomOut();
         if (currentTime == 0)
         {
              GameplayManager.instance.Damage  = maxDamage;

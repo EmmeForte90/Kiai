@@ -75,6 +75,9 @@ private void OnTriggerEnter2D(Collider2D collision)
            // Move.instance.NotStrangeAnimationTalk = true;
             Move.instance.sceneName = sceneName;
             Instantiate(Sdeng, transform.position, transform.rotation);
+            PlayerHealth.Instance.currentHealth = PlayerHealth.Instance.maxHealth;
+            PlayerHealth.Instance.currentStamina = PlayerHealth.Instance.maxStamina;
+
             //GameplayManager.instance.StopDefaultSkill = true;
            // button.gameObject.SetActive(true); // Initially hide the dialogue text
            // _isInTrigger = true;

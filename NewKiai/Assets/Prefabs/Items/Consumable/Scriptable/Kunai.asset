@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 1
   itemName: Kunai
   Description: A simple Kunai, damage 1 enemy
-  value: 1
+  value: 3
   prices: 5
   icon: {fileID: 21300000, guid: a4a9d50c3be73bd49930590a253c1a12, type: 3}
   NameSkin: Kunai

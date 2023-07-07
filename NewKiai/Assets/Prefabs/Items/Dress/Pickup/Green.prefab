@@ -14738,6 +14738,7 @@ GameObject:
   - component: {fileID: 2634852373150225537}
   - component: {fileID: 2634852373150225534}
   - component: {fileID: 2634852373150225535}
+  - component: {fileID: 2727944100151833826}
   m_Layer: 0
   m_Name: Green
   m_TagString: Item
@@ -14853,4 +14854,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Item: {fileID: 11400000, guid: 347205fa635853347955bc13a1f5079a, type: 2}
   VFX: {fileID: 4331965279904828745, guid: 1b79c7dad815f1544b564d01f2920de0, type: 3}
+  isGadget: 0
+  isDress: 1
   isCollected: 0
+--- !u!50 &2727944100151833826
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2634852373150225533}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
