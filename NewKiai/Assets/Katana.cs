@@ -669,8 +669,6 @@ void HandleEvent (TrackEntry trackEntry, Spine.Event e)
         PlayMFX(2);
         vfx = true;
         }
-
-
     }
 
 }

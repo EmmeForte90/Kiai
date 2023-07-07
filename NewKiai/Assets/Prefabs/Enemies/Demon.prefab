@@ -11298,6 +11298,8 @@ MonoBehaviour:
   spineAnimation: {fileID: 5693095838579363660}
   FPoint: {fileID: 4937604793810966485}
   fatalit: {fileID: 6348808327879293856}
+  needFinalVFX: 0
+  VFXEnding: {fileID: 0}
   Enemy: {fileID: 2736335564705445560}
   ChooseFatality: 2
   tiredAnimationName: tired

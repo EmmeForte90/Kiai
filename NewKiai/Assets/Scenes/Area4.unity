@@ -3331,6 +3331,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5892456060442747771, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
+      propertyPath: SoundDestroy.Array.data[7]
+      value: 
+      objectReference: {fileID: 8300000, guid: 48d05d845ba3a4c42bcc3827ec4f6ea9, type: 3}
     - target: {fileID: 5892456061232906879, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25

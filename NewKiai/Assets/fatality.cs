@@ -17,6 +17,12 @@ public class fatality : MonoBehaviour
     //private bool endFata = false;
     private bool HideB = false;
     private bool _isInTrigger = false;
+        
+    [Header("VFX Ending")]
+
+    public bool needFinalVFX = false;
+    public GameObject VFXEnding;
+
     private Transform toy; // Variabile per il player
     public Transform Enemy; // Variabile per il player
     //public Transform Spawn; // Variabile per il player
@@ -96,7 +102,27 @@ private void OnTriggerExit2D(Collider2D collision)
         Move.instance.NotStrangeAnimationTalk = false;
         Move.instance.stopInput = false;
         yield return new WaitForSeconds(3f);
+        if(needFinalVFX)
+        {
+            VFXEnding.gameObject.SetActive(true);
+        }
         Destroy(ContentENM);
-
     }
+
+    #region Events
+void HandleEvent (TrackEntry trackEntry, Spine.Event e) 
+{
+    if (e.Data.Name == "SoundSword") 
+    {     
+        AudioManager.instance.PlaySFX(8);
+    }
+
+    if (e.Data.Name == "SoundDeath") 
+    {     
+        AudioManager.instance.PlaySFX(7);
+    }
+
+}
+#endregion
+
 }

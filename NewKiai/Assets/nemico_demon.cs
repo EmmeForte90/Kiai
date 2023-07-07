@@ -358,5 +358,4 @@ public class nemico_demon : MonoBehaviour
         bgm[soundToPlay].Play();
     }
     
-
 }
