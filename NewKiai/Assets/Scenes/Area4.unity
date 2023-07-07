@@ -47988,11 +47988,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3210197942319543539, guid: 71501ab62d47c2449bc45989632961cf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -45.88
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3210197942319543539, guid: 71501ab62d47c2449bc45989632961cf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.41
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3210197942319543539, guid: 71501ab62d47c2449bc45989632961cf, type: 3}
       propertyPath: m_LocalPosition.z
@@ -48004,15 +48004,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3210197942319543539, guid: 71501ab62d47c2449bc45989632961cf, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3210197942319543539, guid: 71501ab62d47c2449bc45989632961cf, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3210197942319543539, guid: 71501ab62d47c2449bc45989632961cf, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3210197942319543539, guid: 71501ab62d47c2449bc45989632961cf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -48040,23 +48040,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3282444068830106106, guid: 71501ab62d47c2449bc45989632961cf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 26.53
+      value: -18.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 3282444068830106106, guid: 71501ab62d47c2449bc45989632961cf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 3282444068830106108, guid: 71501ab62d47c2449bc45989632961cf, type: 3}
       propertyPath: posizioni.Array.data[0].x
-      value: 27
+      value: -26
       objectReference: {fileID: 0}
     - target: {fileID: 3282444068830106108, guid: 71501ab62d47c2449bc45989632961cf, type: 3}
       propertyPath: posizioni.Array.data[0].y
-      value: -1.824
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 3282444068830106108, guid: 71501ab62d47c2449bc45989632961cf, type: 3}
       propertyPath: posizioni.Array.data[1].x
-      value: 20
+      value: -18
       objectReference: {fileID: 0}
     - target: {fileID: 3282444068830106108, guid: 71501ab62d47c2449bc45989632961cf, type: 3}
       propertyPath: posizioni.Array.data[1].y
-      value: -1.824
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 8749324258387389309, guid: 71501ab62d47c2449bc45989632961cf, type: 3}
       propertyPath: m_AnchorMax.x

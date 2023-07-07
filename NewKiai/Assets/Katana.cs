@@ -373,7 +373,7 @@ private void Wait()
 
  private void Damage()
     {
-        vitalita -= Move.instance.Damage; 
+        vitalita -= GameplayManager.instance.Damage; 
         PlayMFX(1);
         skeletonAnimation.Skeleton.SetColor(Color.red);
         Instantiate(VFXHurt, hitpoint.position, transform.rotation);

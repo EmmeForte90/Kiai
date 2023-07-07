@@ -14567,9 +14567,10 @@ GameObject:
   - component: {fileID: 7878632997175533598}
   - component: {fileID: 7878632997175533593}
   - component: {fileID: 7878632997175533592}
+  - component: {fileID: 1327901156459390898}
   m_Layer: 0
   m_Name: Torcia
-  m_TagString: Untagged
+  m_TagString: Torcia
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14657,7 +14658,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.14047837}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -14668,7 +14669,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.0002441}
+  m_Size: {x: 1, y: 2.7172027}
   m_EdgeRadius: 0
 --- !u!114 &7878632997175533592
 MonoBehaviour:
@@ -14693,6 +14694,27 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e4c55694badf308498ae1a2fcddc1d08, type: 3}
   - {fileID: 8300000, guid: 25478f76e826d9e4ca32df84db3807df, type: 3}
   SFX: {fileID: 24100000, guid: 63f598184995bda419cd1ee5db5e6d03, type: 2}
+--- !u!50 &1327901156459390898
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7878632997175533597}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &7878632997397151144
 GameObject:
   m_ObjectHideFlags: 0

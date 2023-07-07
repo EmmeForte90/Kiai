@@ -9,7 +9,6 @@ public class Torcia : MonoBehaviour
     public GameObject VFX;
     public GameObject VFXOff;
     public Transform pointVFX;
-
     [Header("Audio")]
     [HideInInspector] public float basePitch = 1f;
     [HideInInspector] public float randomPitchOffset = 0.1f;
@@ -18,10 +17,8 @@ public class Torcia : MonoBehaviour
     public AudioMixer SFX;
     private bool bgmActive = false;
     private bool Go = false;
-
-public static Torcia instance;
+    public static Torcia instance;
     
-
     private void Awake()
     {
         torcia.gameObject.SetActive(false);
@@ -41,8 +38,6 @@ public static Torcia instance;
         audioSource.outputAudioMixerGroup = SFX.FindMatchingGroups("Master")[0];
         }
     }
-
-
 public void StopMFX(int soundToPlay)
     {
         if (bgmActive)
@@ -54,8 +49,8 @@ public void StopMFX(int soundToPlay)
 public void Fire()
     {
         PlayMFX(1);
-        bgm[1].loop = true; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
-
+        bgm[1].loop = true; 
+        // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
     }
     
 public void PlayMFX(int soundToPlay)
@@ -65,25 +60,20 @@ public void PlayMFX(int soundToPlay)
         bgm[soundToPlay].pitch = basePitch + Random.Range(-randomPitchOffset, randomPitchOffset); 
         bgm[soundToPlay].Play();
     }
-
+/*public void TorciaFun()
+{}*/
 void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Hitbox")
         {  
             if(Move.instance.style == 2)
-            {
-            torcia.gameObject.SetActive(true);
-            //print("Hit the enm");
-            //Hit();
+            {torcia.gameObject.SetActive(true);
             Instantiate(VFX, pointVFX.transform.position, transform.rotation);
             PlayMFX(0);
             Fire();
             Go = true;
-            } else if(Move.instance.style == 4 && Go)
-            {
-            torcia.gameObject.SetActive(false);
-            //print("Hit the enm");
-            //Hit();
+            }else if(Move.instance.style == 4 && Go)
+            {torcia.gameObject.SetActive(false);
             Instantiate(VFXOff, pointVFX.transform.position, transform.rotation);
             PlayMFX(2);
             Go = false;

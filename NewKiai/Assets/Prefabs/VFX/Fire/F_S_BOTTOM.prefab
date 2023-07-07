@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 819761725344519918}
   - component: {fileID: 7448145671550433773}
   - component: {fileID: 4119628152699323700}
-  - component: {fileID: 5218887054275525324}
-  - component: {fileID: 5415825917615003058}
   m_Layer: 0
   m_Name: Fire Slash v1
   m_TagString: Untagged
@@ -4834,46 +4832,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!61 &5218887054275525324
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1024703540077258771}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.61428916, y: 0.6338881}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2.6485777, y: 2.687776}
-  m_EdgeRadius: 0
---- !u!114 &5415825917615003058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1024703540077258771}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b6567bcc2a81744693243eaaad8b44b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TimeHitbox: 0
-  Damage: 10
 --- !u!1 &1048174874960095076
 GameObject:
   m_ObjectHideFlags: 0
@@ -14649,9 +14607,11 @@ GameObject:
   - component: {fileID: 7259568554409514713}
   - component: {fileID: 2119568302407126581}
   - component: {fileID: 4838575431821899562}
+  - component: {fileID: 3891704578076365295}
+  - component: {fileID: 4670451368798063308}
   m_Layer: 0
   m_Name: F_S_BOTTOM
-  m_TagString: Untagged
+  m_TagString: Hitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14700,6 +14660,44 @@ MonoBehaviour:
   vertical: 1
   OriginalSize: 0
   followPlayer: 0
+--- !u!61 &3891704578076365295
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2423965461617203510}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.61428916, y: 0.6338881}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.6485777, y: 2.687776}
+  m_EdgeRadius: 0
+--- !u!114 &4670451368798063308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2423965461617203510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b6567bcc2a81744693243eaaad8b44b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2694035075791906270
 GameObject:
   m_ObjectHideFlags: 0

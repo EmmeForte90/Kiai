@@ -4893,9 +4893,11 @@ GameObject:
   - component: {fileID: 2222901798491642431}
   - component: {fileID: 1743715753052218783}
   - component: {fileID: 833065169527128927}
+  - component: {fileID: 249519812600436100}
+  - component: {fileID: 1024077436763405889}
   m_Layer: 0
   m_Name: W_S_V
-  m_TagString: Untagged
+  m_TagString: Hitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4944,6 +4946,44 @@ MonoBehaviour:
   vertical: 1
   OriginalSize: 0
   followPlayer: 0
+--- !u!61 &249519812600436100
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2222901798491642368}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.9987979, y: -0.021951675}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.4175959, y: 4.0541916}
+  m_EdgeRadius: 0
+--- !u!114 &1024077436763405889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2222901798491642368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b6567bcc2a81744693243eaaad8b44b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2356858678666910983
 GameObject:
   m_ObjectHideFlags: 0
@@ -14719,8 +14759,6 @@ GameObject:
   - component: {fileID: 904361372503813975}
   - component: {fileID: 8194009714924498067}
   - component: {fileID: 3027520377464820034}
-  - component: {fileID: 7031433296642268563}
-  - component: {fileID: 3670027431542540337}
   m_Layer: 0
   m_Name: Lightning Slash v1
   m_TagString: Untagged
@@ -19541,46 +19579,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!61 &7031433296642268563
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6458909986595671914}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.9987979, y: -0.021951675}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 3.4175959, y: 4.0541916}
-  m_EdgeRadius: 0
---- !u!114 &3670027431542540337
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6458909986595671914}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b6567bcc2a81744693243eaaad8b44b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TimeHitbox: 0
-  Damage: 10
 --- !u!1 &7918751336561855691
 GameObject:
   m_ObjectHideFlags: 0

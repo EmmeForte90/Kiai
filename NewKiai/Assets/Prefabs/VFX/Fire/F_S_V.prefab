@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 5649433224472449112}
   - component: {fileID: 4013765628945172660}
   - component: {fileID: 7638078643804680619}
+  - component: {fileID: 2287005749841429401}
+  - component: {fileID: 5928646646917618905}
   m_Layer: 0
   m_Name: F_S_V
-  m_TagString: Untagged
+  m_TagString: Hitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,6 +64,44 @@ MonoBehaviour:
   vertical: 1
   OriginalSize: 0
   followPlayer: 0
+--- !u!61 &2287005749841429401
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827075772083003319}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 1.0642118, y: 0.14189494}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.5484238, y: 3.6903188}
+  m_EdgeRadius: 0
+--- !u!114 &5928646646917618905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827075772083003319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b6567bcc2a81744693243eaaad8b44b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1133455847315235679
 GameObject:
   m_ObjectHideFlags: 0
@@ -9837,8 +9877,7 @@ GameObject:
   - component: {fileID: 2430143094638481519}
   - component: {fileID: 5585830988936970092}
   - component: {fileID: 1437247844246553525}
-  - component: {fileID: 3879314793475304946}
-  - component: {fileID: 598871562454907134}
+  - component: {fileID: 4523207375007995080}
   m_Layer: 0
   m_Name: Fire Slash v1
   m_TagString: Untagged
@@ -14660,7 +14699,7 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!61 &3879314793475304946
+--- !u!61 &4523207375007995080
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14686,20 +14725,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.5484238, y: 3.6903188}
   m_EdgeRadius: 0
---- !u!114 &598871562454907134
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2657546843163422354}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b6567bcc2a81744693243eaaad8b44b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TimeHitbox: 0
-  Damage: 10
 --- !u!1 &4089746966591001346
 GameObject:
   m_ObjectHideFlags: 0

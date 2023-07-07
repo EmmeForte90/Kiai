@@ -24,6 +24,7 @@ TagManager:
   - SpawnPoint_4
   - SpawnPoint_5
   - Throw
+  - Torcia
   layers:
   - Default
   - TransparentFX
@@ -34,7 +35,7 @@ TagManager:
   - Enemy
   - Ground
   - Boss
-  - 
+  - Torcia
   - 
   - 
   - 

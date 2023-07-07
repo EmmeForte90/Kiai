@@ -1620,23 +1620,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4240852097867764337, guid: 082f02f603d379c46930999673e69c4e, type: 3}
       propertyPath: posizioni.Array.data[0].x
-      value: 48
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4240852097867764337, guid: 082f02f603d379c46930999673e69c4e, type: 3}
       propertyPath: posizioni.Array.data[0].y
-      value: -1.824
+      value: -3.5
       objectReference: {fileID: 0}
     - target: {fileID: 4240852097867764337, guid: 082f02f603d379c46930999673e69c4e, type: 3}
       propertyPath: posizioni.Array.data[1].x
-      value: 55
+      value: 38
       objectReference: {fileID: 0}
     - target: {fileID: 4240852097867764337, guid: 082f02f603d379c46930999673e69c4e, type: 3}
       propertyPath: posizioni.Array.data[1].y
-      value: -1.824
+      value: -3.5
       objectReference: {fileID: 0}
     - target: {fileID: 4240852097867764343, guid: 082f02f603d379c46930999673e69c4e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 48
+      value: 38.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240852097867764343, guid: 082f02f603d379c46930999673e69c4e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.33
       objectReference: {fileID: 0}
     - target: {fileID: 4240852097867764351, guid: 082f02f603d379c46930999673e69c4e, type: 3}
       propertyPath: m_Mesh
@@ -1656,15 +1660,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4313313729596979070, guid: 082f02f603d379c46930999673e69c4e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -17.9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4313313729596979070, guid: 082f02f603d379c46930999673e69c4e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.43
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4313313729596979070, guid: 082f02f603d379c46930999673e69c4e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.8380337
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4313313729596979070, guid: 082f02f603d379c46930999673e69c4e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1697,6 +1701,14 @@ PrefabInstance:
     - target: {fileID: 4313313729596979071, guid: 082f02f603d379c46930999673e69c4e, type: 3}
       propertyPath: m_Name
       value: Katana NOS
+      objectReference: {fileID: 0}
+    - target: {fileID: 4313313729627342828, guid: 082f02f603d379c46930999673e69c4e, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4313313729627342834, guid: 082f02f603d379c46930999673e69c4e, type: 3}
+      propertyPath: initialSkinName
+      value: Thief3
       objectReference: {fileID: 0}
     - target: {fileID: 7943441478535571696, guid: 082f02f603d379c46930999673e69c4e, type: 3}
       propertyPath: m_AnchorMax.x
@@ -3331,7 +3343,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 297488673}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 28.260002, y: -4.7993, z: -0.96000004}
+  m_LocalPosition: {x: 28.260002, y: -4.7993, z: -2.591}
   m_LocalScale: {x: 2.5721042, y: 1.9016, z: 1.9016}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -23920,6 +23932,10 @@ PrefabInstance:
     - target: {fileID: 5892456059567638948, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5892456059567638954, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
+      propertyPath: Damage
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5892456059567638963, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
       propertyPath: m_LocalPosition.x

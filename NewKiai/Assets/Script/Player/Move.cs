@@ -318,7 +318,7 @@ private int comboCount = 0;
      
 
     [Header("Attacks")]
-    [HideInInspector] public int Damage;
+    //[HideInInspector] public int Damage;
     private int timeScale = 1;
     private int FastCombo = 2;
     private bool canAttack = true;
@@ -344,6 +344,7 @@ private int comboCount = 0;
     [HideInInspector]public bool isHeal;
     [HideInInspector]public bool isDeath;
     [HideInInspector]public bool isAttacking = false; // vero se il personaggio sta attaccando
+    [HideInInspector]public bool isTired = false;
     public bool isAttackingAir = false; // vero se il personaggio sta attaccando
     public float isAttackingAirTimer = 2f;
     private bool isBlast = false; // vero se il personaggio sta attaccando
@@ -399,10 +400,9 @@ public static Move instance;
 
 private void Update()
 {
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 if(!stopInput && !isDeath)
-        {
+        { if(!isTired){
         if(!isGuard || !isCharging || !isHeal)
         {
         horDir = Input.GetAxisRaw("Horizontal");
@@ -1038,7 +1038,7 @@ GameplayManager.instance.styleIcon[4] == true)
         // Decrementa il timer di un secondo
         currentTime--;
         // Aggiorna il danno dell'attacco in base al tempo rimanente
-        HitboxPlayer.Instance.Damage = minDamage + (maxDamage - minDamage) * currentTime / timeLimit;
+         GameplayManager.instance.Damage = minDamage + (maxDamage - minDamage) * currentTime / timeLimit;
     }
 
     if (Input.GetButtonUp("Fire2") && isCharging
@@ -1048,11 +1048,11 @@ GameplayManager.instance.styleIcon[4] == true)
     {
         if (currentTime == 0)
         {
-            HitboxPlayer.Instance.Damage = maxDamage;
+             GameplayManager.instance.Damage  = maxDamage;
         }
         else
         {
-            HitboxPlayer.Instance.Damage = minDamage + (maxDamage - minDamage) * currentTime / timeLimit;
+             GameplayManager.instance.Damage = minDamage + (maxDamage - minDamage) * currentTime / timeLimit;
         }
         PlayerHealth.Instance.currentStamina -= 50;
         AnimationChargeRelease();
@@ -1251,7 +1251,7 @@ HeavyHitRelease();
 #endregion
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 //Pause
-}
+}}
 #region Pause
 
         else if (stopInput)
@@ -1286,9 +1286,9 @@ if(attackWater)
   {Stop(); PlayerHealth.Instance.currentStamina -= SpeeRestore * Time.deltaTime;}  
     
 if(PlayerHealth.Instance.currentStamina <=0 && isGrounded())
-  {Stop(); TiredAnm(); /*StopinputTrue();*/} 
+  {Stop(); TiredAnm(); isTired = true;} 
 else if(PlayerHealth.Instance.currentStamina > 20)
-  {/*StopinputFalse();*/} 
+  {isTired = false;} 
 
 }
  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
@@ -1375,7 +1375,7 @@ public void changeStyle()
         {
         PlayerWeaponManager.instance.SetStyle(5);
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[5].transform.position;
-        Damage = 2;
+        GameplayManager.instance.Damage = 2;
         VoidPose();
         drawsword = false;
         }
@@ -1387,7 +1387,7 @@ public void changeStyle()
         {
         PlayerWeaponManager.instance.SetStyle(0);
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[0].transform.position;
-        Damage = 10;
+        GameplayManager.instance.Damage = 10;
         NormalPose();
         drawsword = true;
         }        
@@ -1398,7 +1398,7 @@ public void changeStyle()
         MaxStyle = 1;
         PlayerWeaponManager.instance.SetStyle(1);
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[1].transform.position;
-        Damage = 50;
+        GameplayManager.instance.Damage = 50;
         RockPose();
         drawsword = true;
         }        
@@ -1409,7 +1409,7 @@ public void changeStyle()
         MaxStyle = 2;
         PlayerWeaponManager.instance.SetStyle(2);
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[2].transform.position;
-        Damage = 30;
+        GameplayManager.instance.Damage =  30;
         FirePose();
         drawsword = true;
         }        
@@ -1420,7 +1420,7 @@ public void changeStyle()
             MaxStyle = 3;
         PlayerWeaponManager.instance.SetStyle(3);
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[3].transform.position;
-        Damage = 5;
+        GameplayManager.instance.Damage = 5;
         WindPose();
         drawsword = true;
         }       
@@ -1431,7 +1431,7 @@ public void changeStyle()
         MaxStyle = 4;
         PlayerWeaponManager.instance.SetStyle(4);
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[4].transform.position;
-        Damage = 5;
+        GameplayManager.instance.Damage =  5;
         WaterPose();
         drawsword = true;
         }       
@@ -1442,7 +1442,7 @@ public void changeStyle()
         MaxStyle = 5;
         PlayerWeaponManager.instance.SetStyle(5);
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[5].transform.position;
-        Damage = 2;
+        GameplayManager.instance.Damage =  2;
         VoidPose();
         drawsword = false;
         }        
@@ -1453,7 +1453,7 @@ public void changeStyle()
             MaxStyle = 0;
         PlayerWeaponManager.instance.SetStyle(0);
         GameplayManager.instance.Selector.transform.position = GameplayManager.instance.StyleS[0].transform.position;
-        Damage = 10;
+        GameplayManager.instance.Damage =  10;
         NormalPose();
         drawsword = true;
         }        
@@ -1753,11 +1753,11 @@ void CountDown()
     currentTime--;
     if (currentTime == 0)
     {
-        HitboxPlayer.Instance.Damage = maxDamage;
+         GameplayManager.instance.Damage = maxDamage;
         AnimationChargeRelease();
         isCharging = false;
         CameraZoom.instance.ZoomOut();
-        Debug.Log("Charge ratio: 1.0, Damage: " + HitboxPlayer.Instance.Damage);
+        Debug.Log("Charge ratio: 1.0, Damage: " +  GameplayManager.instance.Damage);
         timeSinceLastAttack = Time.time;
         CancelInvoke("CountDown");
     }

@@ -18,7 +18,7 @@ public class GameplayManager : MonoBehaviour
 
     public GameObject player; // Variabile per il player
     public GameObject toy; // Variabile per il player
-
+    public int Damage;
     private GameObject Actor; // Variabile per il player
     private GameObject Menu; // Variabile per il player
     //private Health Enemy;

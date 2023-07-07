@@ -9532,7 +9532,6 @@ MonoBehaviour:
   throwAnimationName: Attack/Shoot/throw
   BowAnimationName: Attack/Shoot/bow_up_shoot
   RifleAnimationName: Attack/Shoot/tanegashima_shoot
-  Damage: 0
   bullet: {fileID: 5058409871759962079, guid: dd15859e3ab53324d8a659de7a60fdb6, type: 3}
   style: 0
   item: 0
@@ -9542,6 +9541,7 @@ MonoBehaviour:
   isHeal: 0
   isDeath: 0
   isAttacking: 0
+  isTired: 0
   isAttackingAir: 0
   isAttackingAirTimer: 2
   stopInput: 0
@@ -14195,6 +14195,7 @@ MonoBehaviour:
   GM: {fileID: 5892456059956868110}
   player: {fileID: 5892456059567638962}
   toy: {fileID: 5892456059567638962}
+  Damage: 10
   comboC: {fileID: 5892456059856563512}
   ComboValue: {fileID: 5892456060182725841}
   comboTimer: 3

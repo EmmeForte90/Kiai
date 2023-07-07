@@ -5,9 +5,7 @@ using UnityEngine;
 public class HitboxPlayer : MonoBehaviour
 {
     private bool CanTake = false;
-    public float TimeHitbox; 
-    public int Damage = 10;
-
+    private float TimeHitbox; 
     public static HitboxPlayer Instance;
 
     private void Awake()
@@ -34,20 +32,16 @@ void OnTriggerEnter2D(Collider2D other)
         if(other.gameObject.tag == "Enemy" || other.gameObject.tag == "Boss")
         //Se il proiettile tocca il nemico
         {       
+            //print("colpito torcia(ENM)");
 
 if(GameplayManager.instance.styleIcon[0] == true)
 {if (Move.instance.style == 0) //Normal
 {
  if(!CanTake)
     {
-            //Debug.Log("Normal"+ Damage);
-
         TimeHitbox = 0.2f;
         GameplayManager.instance.ComboCount();
         CanTake = true;
-        //IDamegable hit = other.GetComponent<IDamegable>();
-          //hit.Damage(Damage);
-            //Debug.Log("Damage:" + Player.Damage);
             if(Move.instance.rb.velocity.y > 0)
             {               
                 Move.instance.isBump = true;
@@ -61,14 +55,9 @@ if(GameplayManager.instance.styleIcon[1] == true)
 {
  if(!CanTake)
     {
-           // Debug.Log("Rock"+ Damage);
-
         TimeHitbox = 2f;
         GameplayManager.instance.ComboCount();
         CanTake = true;
-        //IDamegable hit = other.GetComponent<IDamegable>();
-          // hit.Damage(Damage);
-            //Debug.Log("Damage:" + Player.Damage);
             if(Move.instance.rb.velocity.y > 0)
             {               
                 Move.instance.isBump = true;
@@ -82,14 +71,9 @@ if(GameplayManager.instance.styleIcon[2] == true)
 {
  if(!CanTake)
     {
-            //Debug.Log("Fire"+ Damage);
-
         TimeHitbox = 1f;
         GameplayManager.instance.ComboCount();
         CanTake = true;
-       // IDamegable hit = other.GetComponent<IDamegable>();
-       //   hit.Damage(Damage);
-            //Debug.Log("Damage:" + Player.Damage);
             if(Move.instance.rb.velocity.y > 0)
             {               
                 Move.instance.isBump = true;
@@ -103,14 +87,9 @@ if(GameplayManager.instance.styleIcon[3] == true)
 {
  if(!CanTake)
     {
-           // Debug.Log("Wind"+ Damage);
-
         TimeHitbox = 0.5f;
         GameplayManager.instance.ComboCount();
         CanTake = true;
-       // IDamegable hit = other.GetComponent<IDamegable>();
-       //  hit.Damage(Damage);
-            //Debug.Log("Damage:" + Player.Damage);
             if(Move.instance.rb.velocity.y > 0)
             {               
                 Move.instance.isBump = true;
@@ -122,13 +101,8 @@ if(GameplayManager.instance.styleIcon[3] == true)
 if(GameplayManager.instance.styleIcon[4] == true)
 {if (Move.instance.style == 4) //Water
 {
-            //Debug.Log("Water"+ Damage);
-
         TimeHitbox = 0.3f;
         GameplayManager.instance.ComboCount();
-       // IDamegable hit = other.GetComponent<IDamegable>();
-       //  hit.Damage(Damage);
-            //Debug.Log("Damage:" + Player.Damage);
             if(Move.instance.rb.velocity.y > 0)
             {               
                 Move.instance.isBump = true;
@@ -139,12 +113,8 @@ if(GameplayManager.instance.styleIcon[4] == true)
 if(GameplayManager.instance.styleIcon[5] == true)
 {if (Move.instance.style == 5) //Void
 {
-    //Debug.Log("Void"+ Damage);
     TimeHitbox = 0.3f;
     GameplayManager.instance.ComboCount();
-    // IDamegable hit = other.GetComponent<IDamegable>();
-      //  hit.Damage(Damage);
-            //Debug.Log("Damage:" + Player.Damage);
             if(Move.instance.rb.velocity.y > 0)
             {               
                 Move.instance.isBump = true;
@@ -155,19 +125,17 @@ if(GameplayManager.instance.styleIcon[5] == true)
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
          if(other.gameObject.tag == "Hitbox_E")
-        //Se il proiettile tocca il nemico
         {       
             CanTake = true;
-            //SClang.Play();                   
             Move.instance.KnockbackS();
             if(Move.instance.rb.velocity.y > 0)
             {
                 GameplayManager.instance.sbam();
                 Move.instance.KnockbackS(); 
-                //Move.instance.isBump = true;
-                //Move.instance.Bump();
             }
         }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+       
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }    
