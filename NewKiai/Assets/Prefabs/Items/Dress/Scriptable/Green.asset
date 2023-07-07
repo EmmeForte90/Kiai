@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c85ffa15f85f8cf41a4902559ce464bb, type: 3}
   m_Name: Green
   m_EditorClassIdentifier: 
-  id: 101
+  id: 2
   itemName: Green Kimono
   Description: Green like the grass, green like the tree. Green like my pee...
   value: 1

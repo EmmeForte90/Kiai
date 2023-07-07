@@ -243,7 +243,8 @@ public void Buy(Item newItem)
     GameplayManager.instance.moneyText.text = GameplayManager.instance.money.ToString();
     GameplayManager.instance.moneyTextM.text = GameplayManager.instance.money.ToString(); ;
     PuppetM.Instance.Idle();
-    InventoryManager.Instance.GadgetAc(IDItem);
+    if(newItem.isConsumable)
+    {InventoryManager.Instance.GadgetAc(IDItem);}
     InventoryManager.Instance.AddItem(newItem);
     InventoryManager.Instance.ListItem(IDItem);
     InventoryManager.Instance.ItemActive(IDItem);

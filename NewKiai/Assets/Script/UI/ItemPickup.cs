@@ -10,6 +10,8 @@ public class ItemPickup : MonoBehaviour
     [SerializeField] GameObject VFX;
     private int IDItem;
     public bool isGadget = false;
+    public bool isDress = false;
+
     [HideInInspector]
     public bool isCollected = false;
 
@@ -27,10 +29,15 @@ public void Update()
      
     public void Pickup()
     {   
-        if(isGadget)
+        if(isDress)
+        {
+        InventoryManager.Instance.DressTake(IDItem);
+        }
+        else if(isGadget)
         {
         InventoryManager.Instance.GadgetAc(IDItem);
         }else if(!isGadget){
+        //Item.value++;
         InventoryManager.Instance.AddItem(Item);
         InventoryManager.Instance.ListItem(IDItem);
         InventoryManager.Instance.ItemActive(IDItem);

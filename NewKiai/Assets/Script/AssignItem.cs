@@ -8,7 +8,8 @@ using TMPro;
 public class AssignItem : MonoBehaviour
 {
        public Item Item;
- 
+    public bool isEquip = false;
+    private string NameSkin;
  // Riferimento al contenitore dei pulsanti delle item
     [Header("Menu Consumabili")]
    //public Transform ItemContent;
@@ -39,6 +40,7 @@ public void Awake()
 public void Update()
     {
 //        Num.text = Item.value.ToString();
+        if(!isEquip){
         if(Item.value <= 0)
         {
         Lock.gameObject.SetActive(true);
@@ -47,8 +49,20 @@ public void Update()
         if(Item.value > 0)
         {
         Lock.gameObject.SetActive(false);
-        }
+        }}
     }
+
+ public void AssignEquip(Item Item)
+    {
+            NameSkin = Item.NameSkin;
+            ChangeHeroSkin.Instance.UpdateCharacterSkin();
+	    	ChangeHeroSkin.Instance.UpdateCombinedSkin();
+            PuppetSkin.Instance.DressSkin = NameSkin;
+            PuppetSkin.Instance.UpdateCharacterSkinUI(NameSkin);
+            PuppetSkin.Instance.UpdateCombinedSkinUI(); 
+    }
+
+    
 
  public void AssignId(Item Item)
     {

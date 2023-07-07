@@ -8,18 +8,8 @@ using UnityEngine.SceneManagement;
 public class InventoryManager : MonoBehaviour
 {
    public static InventoryManager Instance;
-   //public List<Item> Items = new List<Item>();
-/*
-   // Riferimento al contenitore dei pulsanti delle item
-    [Header("Menu Consumabili")]
-   public Transform ItemContent;
- // Riferimenti ai componenti delle immagini di preview e delle descrizioni
-    public Image previewImages;
-    public TextMeshProUGUI descriptions;
-    public TextMeshProUGUI Num;
-    public TextMeshProUGUI NameItems;
-    */    
-    //public TextMeshProUGUI Num_G;
+ 
+
     public int selectedId = -1; // Id dell'abilità selezionata  
 
 [Header("Menu Equip")]
@@ -52,8 +42,12 @@ public class InventoryManager : MonoBehaviour
     public List<Item> itemDatabase;
     public int val = 1;
     public bool[] itemActive;
-    //private bool buy = false; 
-   
+
+    public GameObject[] DressTaking;
+    public bool[] DressTakingB;
+
+    private string NameSkin;
+
 
  [Header("MenuSlot")]
     [SerializeField]public TextMeshProUGUI Slot1_T;
@@ -102,18 +96,6 @@ public void GadgetAc(int id)
 }
 
 
-private void Update()
-    {
-        /*if(InventoryItem == null)
-        {
-            GameObject prefab = Resources.Load<GameObject>("Item");
-            InventoryItem = prefab;
-        }*/
-    //previewImages;
-    //descriptions;
-    //Num;
-    //NameItems;
-    }
 
    public void SlotActivated(int id)
 {
@@ -141,6 +123,12 @@ private void Update()
       } 
 }
 
+public void DressTake(int id)
+{
+    // Imposta lo stato della quest a true
+    DressTaking[id].SetActive(true);
+    DressTakingB[id] = true;   
+}
 
 
 public bool RemoveItem(Item itemToRemove)
@@ -350,7 +338,8 @@ public void ListItem(int itemId)
 
     
 
-public void OnQuestButtonClicked(int itemId, int itemValue, Image previewImages_C, TextMeshProUGUI descriptions_C, int selectedId, bool isKey, bool isKatana, bool isDress, string NameSkin)
+public void OnQuestButtonClicked(int itemId, int itemValue, Image previewImages_C, TextMeshProUGUI descriptions_C, 
+int selectedId, bool isKey, bool isKatana, bool isDress, string NameSkin)
 {
     if(itemId >= 0 && isKey)
     {
@@ -390,6 +379,23 @@ public void OnQuestButtonClicked(int itemId, int itemValue, Image previewImages_
             PuppetSkin.Instance.UpdateCombinedSkinUI(); 
 		   // PuppetSkin.Instance.UpdateCombinedSkinUI();
     }
+}
+
+
+public void AssignDress(Item Item)
+{
+            NameSkin = Item.NameSkin;
+            ItemRapidMenu.Instance.SlotDres_I.sprite = Item.icon;
+            ItemRapidMenu.Instance.SlotDres = selectedId;
+            ChangeHeroSkin.Instance.DressSkin = NameSkin;
+            previewImages_E.sprite = Item.icon;
+            descriptions_E.text = Item.Description;
+            NameItems_E.text = Item.itemName;
+            ChangeHeroSkin.Instance.UpdateCharacterSkin();
+	    	ChangeHeroSkin.Instance.UpdateCombinedSkin();
+            PuppetSkin.Instance.DressSkin = NameSkin;
+            PuppetSkin.Instance.UpdateCharacterSkinUI(NameSkin);
+            PuppetSkin.Instance.UpdateCombinedSkinUI(); 
 }
 
 private void OnEnable()
