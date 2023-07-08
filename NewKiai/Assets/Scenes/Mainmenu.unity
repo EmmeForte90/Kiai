@@ -1695,6 +1695,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &505506917 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5892456059567638962, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
+  m_PrefabInstance: {fileID: 3690082734541234639}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &519877545
 GameObject:
   m_ObjectHideFlags: 0
@@ -12393,7 +12398,7 @@ PrefabInstance:
     - target: {fileID: 5892456059956868111, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 466907426}
+      objectReference: {fileID: 505506917}
     - target: {fileID: 5892456060195674086, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
       propertyPath: GadgetM.Array.size
       value: 3

@@ -161,6 +161,12 @@ public static PlayerHealth Instance;
 
 
     }
+public void testDie()
+    {
+        currentHealth -= 100;
+        Move.instance.Respawn();
+    }
+
 
 public void ChangeSkinK()
     {
