@@ -1485,6 +1485,8 @@ public void attackupper()
             attackUpper = true;
             coolDownTime = dashCoolDown;
             dashTime = dashDuration;
+            Instantiate(attack_f_sp, bottom.position, attack_f_sp.transform.rotation);
+            PlayMFX(1);
             FireUpperEnd();
 }
 
