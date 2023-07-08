@@ -229,6 +229,8 @@ public void StopPlay()
 public void mainmenu()
     {
         StartCoroutine(fade());
+        toy.gameObject.SetActive(false);
+        player.gameObject.SetActive(false);
         StopPlay();
     }
 
