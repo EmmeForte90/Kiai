@@ -56,7 +56,10 @@ public class Stallo : MonoBehaviour
     public int Duellomax = 10;
     private bool Win = false;
     public SkeletonAnimation spineAnimation;
-
+    
+    [Header("VFX")]
+    public GameObject StalVFX;
+    public GameObject Smoke;
 
     [Header("Fatalitis")]
     [SpineAnimation][SerializeField] private string StartAnimationName;
@@ -127,6 +130,8 @@ private void Update()
     if(DuelStart)
     {
         UI.gameObject.SetActive(true);
+        StalVFX.gameObject.SetActive(true);
+        Smoke.gameObject.SetActive(true);
         Move.instance.LoopStalmate();
         spineAnimation.state.SetAnimation(1, LoopAnimationName, true);
         StalloBar.size = currentBar / maxBar;
@@ -158,6 +163,8 @@ private void Update()
 
 IEnumerator EndDuello()
 {
+    StalVFX.gameObject.SetActive(false);
+    Smoke.gameObject.SetActive(false);
     print("Il duello è finito");
     if(Win)
     {

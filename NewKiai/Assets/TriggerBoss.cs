@@ -85,7 +85,7 @@ private IEnumerator StartOrdalia()
     AudioManager.instance.CrossFadeOUTAudio(MusicBefore);
     AudioManager.instance.CrossFadeINAudio(MusicAfter);
     yield return new WaitForSeconds(2);
-    Move.instance.RockPose();
+    Move.instance.RockPoseC();
     ActorOrdalia.Instance.idle();
     yield return new WaitForSeconds(TimeStart);
     Actor.gameObject.SetActive(false);

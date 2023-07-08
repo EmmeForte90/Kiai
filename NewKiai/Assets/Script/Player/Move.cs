@@ -3176,7 +3176,6 @@ public void DrawSword()
                     _spineAnimationState.ClearTrack(2);
                     _spineAnimationState.SetAnimation(2, swordupAnimationName, false);
                     currentAnimationName = swordupAnimationName;
-                    _spineAnimationState.Event += HandleEvent;
                 }
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
