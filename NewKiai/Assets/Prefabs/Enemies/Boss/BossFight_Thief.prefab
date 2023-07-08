@@ -473,11 +473,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2878792323778501028, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221960884088154690, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221960884088154690, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.1
       objectReference: {fileID: 0}
     - target: {fileID: 3306162920416921279, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.14
+      value: -2.56
       objectReference: {fileID: 0}
     - target: {fileID: 3306162920416921279, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -485,7 +493,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3381354712051839946, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3864018171134123570, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
       propertyPath: m_Mesh
@@ -517,7 +525,7 @@ PrefabInstance:
       objectReference: {fileID: 2030179915807860863}
     - target: {fileID: 5002796488040815849, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.19
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 5002796488040815849, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -587,9 +595,17 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5341830360541948778, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5441090202755109207, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5715147881507207188, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6201932098223955251, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
       propertyPath: m_Name
