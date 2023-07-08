@@ -107,6 +107,7 @@ void OnTriggerEnter2D(Collider2D other)
             
             print("Hit the enm");
             Hit();
+            //PlayerHealth.Instance.currentStamina -= 40;
             Instantiate(VFX, pos.transform.position, transform.rotation);
             PlayMFX(0);
             //hit = true;

@@ -8,7 +8,6 @@ public class ActiveGame : MonoBehaviour
     void Start()
     {
         //GameplayManager.instance.FirstoOfPlay();
-        
         GameplayManager.instance.TakePlayer();
     }
 }

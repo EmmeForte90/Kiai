@@ -466,10 +466,18 @@ if (JumpRock)
 if (Input.GetButtonDown("Jump") && Input.GetButtonDown("Fire1"))
 {
     //Non succede nulla
+    Stop();
 }
 if (Input.GetButtonDown("Jump") && Input.GetButtonDown("Fire2"))
 {
     //Non succede nulla
+    Stop();
+}
+if (Input.GetButtonDown("Jump") && Input.GetButtonDown("Fire2") && Input.GetButtonDown("Fire1")  && Input.GetButtonDown("Fire3")
+ && Input.GetButtonDown("Dash")  && Input.GetButtonDown("Hsword"))
+{
+    //Non succede nulla
+    Stop();
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #region Salto
@@ -1282,16 +1290,25 @@ if(attackRock)
 if(attackWater)
   {Stop(); PlayerHealth.Instance.currentStamina -= SpeeRestore * Time.deltaTime;}  
     
-if(PlayerHealth.Instance.currentStamina <=0 && isGrounded())
+/*if(PlayerHealth.Instance.currentStamina <= 0 && isGrounded())
   {Stop(); TiredAnm(); isTired = true;} 
 else if(PlayerHealth.Instance.currentStamina > 20)
-  {isTired = false;} 
+  {isTired = false;}*/ 
 
 if(dashing)
   {VFXDash.gameObject.SetActive(true);} 
 else if(!dashing)
   {VFXDash.gameObject.SetActive(false);} 
 
+}
+ ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
+public void TiredFunc()
+{
+    Stop(); TiredAnm(); isTired = true; stopInput = true; drawsword = true;      
+}
+public void RestoreTiredFunc()
+{
+    isTired = false; stopInput = false; TiredAnmWithEnd(); drawsword = true;        
 }
  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 #region ContatoreCombo
@@ -2133,11 +2150,25 @@ public void TiredAnm()
     if (currentAnimationName != TiredAnimationName)
                 {
                     _spineAnimationState.ClearTrack(2);
-                    _spineAnimationState.ClearTrack(1);
-                    _spineAnimationState.SetAnimation(1, TiredAnimationName, true);
+                    _spineAnimationState.ClearTrack(2);
+                    _spineAnimationState.SetAnimation(2, TiredAnimationName, true);
                     currentAnimationName = TiredAnimationName;
                     _spineAnimationState.Event += HandleEvent;
                 }
+}
+
+public void TiredAnmWithEnd()
+{
+    if (currentAnimationName != TiredAnimationName)
+                {
+                    _spineAnimationState.ClearTrack(2);
+                    _spineAnimationState.ClearTrack(2);
+                    _spineAnimationState.SetAnimation(2, TiredAnimationName, true);
+                    currentAnimationName = TiredAnimationName;
+                    _spineAnimationState.Event += HandleEvent;
+                }
+            _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+
 }
 #endregion
 

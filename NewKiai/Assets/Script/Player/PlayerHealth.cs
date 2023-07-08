@@ -20,8 +20,8 @@ public class PlayerHealth : MonoBehaviour
    
 
     public GameObject Kiai;
-    public GameObject KiaiCom;
-
+    public GameObject KiaiCom;  
+    private bool isTired = false;
     public Image Kcol;
     public Color normal;
     public Color red;
@@ -78,14 +78,6 @@ public static PlayerHealth Instance;
         staminaBar.size = currentStamina / maxStamina;
         staminaBar.size = Mathf.Clamp(staminaBar.size, 0.01f, 1);
        
-        /*if(currentStamina <= 0)
-        {
-        t_Start -= Time.deltaTime; //decrementa il timer ad ogni frame
-        if (t_Start <= 0f) {
-        t_Start = t_store; //riavvia il timer alla sua durata originale
-        Restore = true;
-        }
-        }*/
 
         if(currentStamina < maxStamina && timeStart <= 0f)
         {
@@ -99,7 +91,16 @@ public static PlayerHealth Instance;
         if(currentStamina <= 0)
         {
             currentStamina = 1;
+            Move.instance.TiredFunc();
+            Move.instance.TiredAnm();
+            isTired = true;
+        }else if(currentStamina > 20 && isTired)
+        {
+            Move.instance.RestoreTiredFunc();
+            isTired = false;
+
         }
+
 
         if (timeStart == timerestore) 
         {
@@ -166,7 +167,10 @@ public void testDie()
         currentHealth -= 100;
         Move.instance.Respawn();
     }
-
+public void testStamina()
+    {
+        currentStamina -= 100;
+    }
 
 public void ChangeSkinK()
     {

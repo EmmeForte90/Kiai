@@ -8980,7 +8980,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -8994,7 +8994,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 5892456060369802788}
   m_HandleRect: {fileID: 5892456060369802795}
   m_Direction: 1
@@ -9418,7 +9418,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5892456059567638962}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 39.13, y: -7.48, z: 0}
+  m_LocalPosition: {x: -1.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9674,7 +9674,7 @@ MonoBehaviour:
   attack_r_h2: {fileID: 4564213686030900471, guid: 2b3567d1e4210eb4cb4ee893e7fa3748, type: 3}
   pesante: {fileID: 2657871515491055307, guid: ab19382cd249fee448ec7e864d944203, type: 3}
   charge: {fileID: 2669267131746222598, guid: dc427f4ba26848d4eae41247d4c4f244, type: 3}
-  VfxRock: {fileID: 7071445190980599945, guid: 6f619625bacd75f428d3375ad52cacc5, type: 3}
+  VfxRock: {fileID: 6811609168556801878, guid: 3e66091c93a249c4cbbc5e176e74d52b, type: 3}
   RockjumpAnimationName: Attack/Jump_Attack/Rock/jump_heart_attack
   RockjumpLandingAnimationName: Attack/Jump_Attack/Rock/jump_heart_landing
   chargeAnimationName: Attack/SwordPlay/Rock/charge
@@ -10625,7 +10625,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -10639,7 +10639,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 5892456059735399360}
   m_HandleRect: {fileID: 5892456059735399367}
   m_Direction: 1
