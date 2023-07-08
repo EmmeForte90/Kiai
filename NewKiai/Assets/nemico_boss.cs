@@ -9,10 +9,9 @@ using UnityEngine.UI;
 
 public class nemico_boss : MonoBehaviour
 {
-    [Header("Sistema Di HP")]
-    public Scrollbar healthBar;
-    private float vitalita;
-    public float vitalita_max=300;
+    public static nemico_boss instance;
+
+    
 
     private float tempo_ricolpibile=0.5f;
     private bool bool_arrabbiato=false;
@@ -101,14 +100,23 @@ public class nemico_boss : MonoBehaviour
     public AudioMixer SFX;
    // private bool sgmActive = false;
 
+[Header("Stallo")]
+    public GameObject Stallo;
+    public GameObject ActorStallo;
+
 [Header("Fatality")]
     public GameObject Fatality;
+[Header("Boss")]
     public GameObject Boss;
+    public GameObject ActorBoss;
 
     void Start(){
+         if (instance == null)
+        {
+            instance = this;
+        }
         GO_player=GameObject.Find("Nekotaro");
         skeletonAnimation = GetComponent<SkeletonAnimation>();
-        vitalita=vitalita_max;
         attacco_tipo="mazza";
         bgm = new AudioSource[listSound.Length]; // inizializza l'array di AudioSource con la stessa lunghezza dell'array di AudioClip
         for (int i = 0; i < listSound.Length; i++) // scorre la lista di AudioClip
@@ -130,10 +138,6 @@ public class nemico_boss : MonoBehaviour
     void Update(){
          if (!GameplayManager.instance.PauseStop)
         {
-
-    healthBar.size = vitalita / vitalita_max;
-    healthBar.size = Mathf.Clamp(healthBar.size, 0.01f, 1);
-
         if (bool_morto){return;}
 
         if (transform.position.x<GO_player.transform.position.x){horizontal=1;}
@@ -264,10 +268,7 @@ public class nemico_boss : MonoBehaviour
                     stato="tired";
                 }
                 break;
-            }
-        }
-    }
-    }
+            }}}}
 void HandleEvent (TrackEntry trackEntry, Spine.Event e) 
     {
         if (e.Data.Name == "SpawnRock") 
@@ -391,7 +392,7 @@ void KiaiGive()
                     bool_colpibile=false;
                     StartCoroutine(ritorna_ricolpibile());
 
-                    vitalita-= GameplayManager.instance.Damage;
+                    TriggerBoss.instance.vitalita -= GameplayManager.instance.Damage;
 
                     skeletonAnimation.Skeleton.SetColor(Color.red);
                     KiaiGive();
@@ -400,7 +401,7 @@ void KiaiGive()
                     StartCoroutine(ripristina_colore());
 
                     if (!bool_arrabbiato){
-                        if (vitalita<(vitalita_max/2)){
+                        if (TriggerBoss.instance.vitalita<(TriggerBoss.instance.vitalita_max/2)){
                             bool_arrabbiato=true;
                             tempo_riposo_attacco_salti=tempo_riposo_attacco_salti_arrabbiato;
                             tempo_riposo_attacco_mazza=tempo_riposo_attacco_mazza_arrabbiato;
@@ -417,10 +418,14 @@ void KiaiGive()
 
                             tempo_rage_attuale+=tempo_rage;
                             stato="rage";
+                            Stallo.gameObject.SetActive(true);
+                            ActorStallo.gameObject.transform.position = ActorBoss.gameObject.transform.position;
+                            Boss.gameObject.SetActive(false);
+
                         }
                     }
 
-                    if (vitalita<=0){
+                    if (TriggerBoss.instance.vitalita<=0){
                         bool_morto=true;
                         skeletonAnimation.loop=false;
                         skeletonAnimation.AnimationName="tired";
@@ -439,7 +444,9 @@ void KiaiGive()
                     }
                 }
     }}
-
+    public void ColorChange(){
+        StartCoroutine(ripristina_colore());
+    }
     private IEnumerator ripristina_colore(){
         yield return new WaitForSeconds(0.1f);
         skeletonAnimation.Skeleton.SetColor(Color.white);

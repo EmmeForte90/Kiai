@@ -10,7 +10,6 @@ using Spine.Unity.AttachmentTools;
 using Spine.Unity;
 using Spine;
 
-
 public class GameplayManager : MonoBehaviour
 {
     public static bool playerExists;

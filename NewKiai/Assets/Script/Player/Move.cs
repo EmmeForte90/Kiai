@@ -304,6 +304,7 @@ public class Move : MonoBehaviour
     [SpineAnimation][SerializeField]  string TiredAnimationName;
     [SpineAnimation][SerializeField]  string DashAttackAnimationName;
     [SpineAnimation][SerializeField]  string swordDownAnimationName;
+    [SpineAnimation][SerializeField]  string swordupAnimationName;
     [SpineAnimation][SerializeField]  string guardDownAnimationName;
     [SpineAnimation][SerializeField]  string guardEndDownAnimationName;
     [SpineAnimation][SerializeField]  string guardHitDownAnimationName;
@@ -3167,6 +3168,18 @@ public void repostsword()
                 _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
 }
 
+public void DrawSword()
+{
+    if (currentAnimationName != swordupAnimationName)
+                {
+                    Stop();
+                    _spineAnimationState.ClearTrack(2);
+                    _spineAnimationState.SetAnimation(2, swordupAnimationName, false);
+                    currentAnimationName = swordupAnimationName;
+                    _spineAnimationState.Event += HandleEvent;
+                }
+                _spineAnimationState.GetCurrent(2).Complete += OnAttackAnimationComplete;
+}
 
 public void AnimationRest()
 {

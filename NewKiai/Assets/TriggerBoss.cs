@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class TriggerBoss : MonoBehaviour
 {
@@ -21,11 +23,17 @@ public class TriggerBoss : MonoBehaviour
     public GameObject Actor;
     public BoxCollider2D trigger;
     public GameObject[] Arena;
+    
+    [Header("Sistema Di HP")]
+    public Scrollbar healthBar;
+    public float vitalita;
+    public float vitalita_max = 300;
 
     [Tooltip("Musica di base")]
     public int MusicBefore;
     [Tooltip("Musica da attivare se necessario quando la telecamera inquadra l'evento")]
     public int MusicAfter;
+public static TriggerBoss instance;
 
 public void OrdaliaDosentExist()
     {
@@ -33,13 +41,21 @@ public void OrdaliaDosentExist()
  }
 
  void Start()
-    {
+    {if (instance == null)
+        {
+            instance = this;
+        }
     virtualCamera = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>();
     //ottieni il riferimento alla virtual camera di Cinemachine
     player = GameObject.FindWithTag("Player");
     //EnemyCount = MinEnemy;            
+    vitalita = vitalita_max;}
 
-    }
+void Update()
+{
+    healthBar.size = vitalita / vitalita_max;
+    healthBar.size = Mathf.Clamp(healthBar.size, 0.01f, 1);
+}
 
  private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -59,16 +75,25 @@ private IEnumerator StartOrdalia()
     trigger.enabled = false;
     ActorOrdalia.Instance.FacePlayer();
     ActorOrdalia.Instance.Standup();
+
+    Move.instance.NotStrangeAnimationTalk = true;
+        Move.instance.Stop();
+        Move.instance.DrawSword();
+        Move.instance.drawsword = true;
+        Move.instance.stopInput = true;
+
     AudioManager.instance.CrossFadeOUTAudio(MusicBefore);
     AudioManager.instance.CrossFadeINAudio(MusicAfter);
     yield return new WaitForSeconds(2);
+    Move.instance.RockPose();
     ActorOrdalia.Instance.idle();
     yield return new WaitForSeconds(TimeStart);
     Actor.gameObject.SetActive(false);
     Enemy.gameObject.SetActive(true);
     GameplayManager.instance.ordalia = true;
     GameplayManager.instance.battle = true;
-
+    Move.instance.NotStrangeAnimationTalk = false;
+    Move.instance.stopInput = false;
     }
 
     private IEnumerator EndOrdalia()

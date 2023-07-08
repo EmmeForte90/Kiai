@@ -58,8 +58,8 @@ void Update()
                 if (!Move.instance.isHurt)
             {
             PlayerHealth.Instance.Damage(attackDamage);
-            Move.instance.KnockbackS();            
-
+            Move.instance.KnockbackS(); 
+            GameplayManager.instance.ResetComboCount();           
             }}}if(Move.instance.isGuard)
             {
                 Move.instance.KnockbackS(); 

@@ -9740,6 +9740,7 @@ MonoBehaviour:
   TiredAnimationName: Damage/tired
   DashAttackAnimationName: Attack/SwordPlay/dashAtk
   swordDownAnimationName: Attack/Movement/hide_sword
+  swordupAnimationName: Attack/Movement/draw_sword
   guardDownAnimationName: Attack/SwordPlay/guard
   guardEndDownAnimationName: Attack/SwordPlay/guard_end
   guardHitDownAnimationName: Attack/SwordPlay/guard_hit

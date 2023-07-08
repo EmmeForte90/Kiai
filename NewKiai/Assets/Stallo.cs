@@ -34,8 +34,14 @@ public class Stallo : MonoBehaviour
     public float currentBar;
     public Scrollbar StalloBar;
     public GameObject UI; // Variabile per il player
+     [Tooltip("Quale fatality deve eseguire il player? 1-Jump 2-Dance(DemonMonk) 3-Back 4-For Lance and BigKatana 5-Veloce")]
+    public int ChooseFatality;
 
+    [Header("Stallo")]
+    public GameObject StalloObj;
 
+    [Header("Boss")]
+    public GameObject Boss;
 
     [Header("Audio")]
    // [HideInInspector] public float basePitch = 1f;
@@ -75,34 +81,31 @@ public class Stallo : MonoBehaviour
             sgm[i].clip = listSound[i]; // assegna l'AudioClip corrispondente all'AudioSource creato
             sgm[i].playOnAwake = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
             sgm[i].loop = false; // imposto il flag playOnAwake a false per evitare che il suono venga riprodotto automaticamente all'avvio del gioco
-
         }
  // Aggiunge i canali audio degli AudioSource all'output del mixer
         foreach (AudioSource audioSource in sgm)
         {
         audioSource.outputAudioMixerGroup = SFX.FindMatchingGroups("Master")[0];
         }
-
-
     vibrateCinemachine = GameObject.FindWithTag("MainCamera").GetComponent<VibrateCinemachine>(); //ottieni il riferimento alla virtual camera di Cinemachine
-    virtualCamera = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
+    //virtualCamera = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
     toy = GameObject.FindWithTag("Player");
     Actor = GameObject.FindWithTag("Boss");
     currentBar = 0;
     DuelloTime = Duellomax;
     toy.transform.position = PointPlayer.transform.position;
+    toy.transform.localScale = new Vector2(1, 1);    
     Actor.transform.position = PointEnemy.transform.position;
+    StalloObj.transform.position = Boss.transform.position;
     }
 
 private void Start()
     {
-   
     Move.instance.StopinputTrue();
     Move.instance.poseStalmate();
     StartIntermezzo.gameObject.SetActive(true);
     StartCoroutine(DuringInter());
-    virtualCamera.Follow = PointForCamera.transform;
-    
+    //virtualCamera.Follow = PointForCamera.transform; 
     }
 
 IEnumerator DuringInter()
@@ -120,8 +123,7 @@ IEnumerator DuringInter()
     }
 
 private void Update()
-{
-    
+{  
     if(DuelStart)
     {
         UI.gameObject.SetActive(true);
@@ -130,7 +132,6 @@ private void Update()
         StalloBar.size = currentBar / maxBar;
         StalloBar.size = Mathf.Clamp(StalloBar.size, 0.01f, 1);
         _Time.text = DuelloTime.ToString();
-
         DuelloTime -= Time.deltaTime; //decrementa il timer ad ogni frame
         if (DuelloTime <= 0f) 
         {
@@ -146,15 +147,12 @@ private void Update()
         }
         StartCoroutine(EndDuello());
         DuelStart = false;
-        }
-       
+        }   
     if (Input.GetButtonDown("Fire1"))
         {
             currentBar++;
-        } 
-        
+        }     
     }
-
 }
 
 
@@ -165,7 +163,7 @@ IEnumerator EndDuello()
     {
             print("Hai vinto");
             Move.instance.drawsword = true;
-            //Move.instance.FatalityJump();
+            Move.instance.Fatality(ChooseFatality);
             spineAnimation.state.SetAnimation(2, DefeatAnimationName, false);
             KiaiGive();
     }else if(!Win)
@@ -176,8 +174,11 @@ IEnumerator EndDuello()
             Move.instance.BigHurt();
             spineAnimation.state.SetAnimation(2, WinAnimationName, false);
     }
-        yield return new WaitForSeconds(5f);
-    virtualCamera.Follow = toy.transform;
+    yield return new WaitForSeconds(5f);
+    Boss.gameObject.SetActive(true);
+    TriggerBoss.instance.vitalita -= 50;
+    nemico_boss.instance.ColorChange();
+    //virtualCamera.Follow = toy.transform;
     Move.instance.StopinputFalse();
     Destroy(gameObject);
 }
