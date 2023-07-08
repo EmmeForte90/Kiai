@@ -446,23 +446,30 @@ if (JumpRock)
                 Stop();
                 SbamRelease();           
             JumpRockTimer -= Time.deltaTime; //decrementa il timer ad ogni frame
-            if (JumpRockTimer <= 0f) 
-            {
+            if (JumpRockTimer <= 0f && isGrounded()){
             JumpRockTimer = JumpRockTimerMax;
             JumpRock = false;
-            //Il ripristino si trova nell'evento Rocklanding giù a tutto il codice
-            }
-            }
-        }
-        }
-        if (stomp)
-        {Stop();}
+            stopInput = false;    
+            stomp = false;        
+            PlayMFX(1);
+            }}}}
+        if (stomp){Stop();}
+        if (rb.velocity.y < 0 && stomp)
+        {SbamRelease();  JumpRock = false; stopInput = false;  stomp = false;}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if(vfx)
         {vfxTimer -= Time.deltaTime; //decrementa il timer ad ogni frame
         if (vfxTimer <= 0f) {
-        vfx = false;
-        }}
+        vfx = false;}}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+if (Input.GetButtonDown("Jump") && Input.GetButtonDown("Fire1"))
+{
+    //Non succede nulla
+}
+if (Input.GetButtonDown("Jump") && Input.GetButtonDown("Fire2"))
+{
+    //Non succede nulla
+}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #region Salto
  // Controllo se il personaggio è a contatto con un muro
@@ -546,7 +553,6 @@ if (Input.GetButtonDown("Jump") && !isGuard && !NotStrangeAnimationTalk && isTou
         }
 #endregion
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////             
-
 // gestione dell'input dello sparo
     #region  Usare Items
 
@@ -681,10 +687,8 @@ if (L2 == 1 && R2 == 1)
         }
 }
 #endregion
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Scelta della skill dal menu rapido
-
 #region Scelta MenuRapido
 if (Input.GetButtonDown("SlotUp") || DpadY == 1)
 {
@@ -731,10 +735,8 @@ else if (Input.GetButtonDown("SlotBottom")|| DpadY == -1)
     }
 }
 #endregion
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
 //Attacco
-
 #region Attacco
 if (Input.GetButtonDown("Fire1") 
 && !isAttacking && !isAttackingAir && !isGuard && !NotStrangeAnimationTalk && !isCharging 
@@ -747,10 +749,8 @@ ComboContatore();
 AddCombo();
 }
 #endregion
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Attacco in salto
-
 #region  Attacchi in salto
         // controlla se il player è in aria e preme il tasto di attacco e il tasto direzionale basso
         if(!isAttackingAir){
@@ -828,10 +828,8 @@ AddCombo();
         isAttackingAirTimer = 2f;
         }}   
 #endregion      
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 //Riporre spada
-
 #region Riporre Spada
 if(drawsword)
 {if(Input.GetButtonDown("Hsword") 
@@ -845,10 +843,8 @@ if(drawsword)
             {_skeletonAnimation.timeScale = timeScale;}}
 }
 #endregion
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////             
 //Cambio stile
-
 #region Tasti CambioStile
 if (Input.GetButtonDown("R1"))
 {
@@ -881,7 +877,6 @@ comboCount = 0;
 changeStyle();
 }}
 #endregion
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     #region testForanysituation
           /*  if(Input.GetKeyDown(KeyCode.O))
@@ -898,7 +893,6 @@ if(Input.GetKeyDown(KeyCode.P))
             #endregion
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 //Guardia
-
 #region Guardia
 if (Input.GetButton("Fire3") && !isAttacking && !isAttackingAir && !isGuard && !NotStrangeAnimationTalk && !isCharging 
 && !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
@@ -959,7 +953,6 @@ isGuard = false;}
 if (isGuard)
 {Stop();}
 #endregion
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 //Special
 #region Normal
@@ -1229,7 +1222,6 @@ if (style == 5) //Void
 HeavyHitRelease();
 }}}}
 #endregion
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Dash
 #region Dash
@@ -2400,8 +2392,6 @@ public void NormalPose()
                 Instantiate(S_Normal, top.transform.position, S_Normal.transform.rotation);
                     _spineAnimationState.SetAnimation(2, idleSAnimationName, false);
                     currentAnimationName = idleSAnimationName;
-                Stop();
-
                    // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
                 // Add event listener for when the animation completes
@@ -2415,7 +2405,6 @@ public void FirePose()
                     Instantiate(S_Fire, top.transform.position, S_Fire.transform.rotation);
                     _spineAnimationState.SetAnimation(2, fireposSAnimationName, false);
                     currentAnimationName = fireposSAnimationName;
-                    Stop();
                    // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
                 // Add event listener for when the animation completes
@@ -2429,7 +2418,6 @@ public void RockPose()
                     Instantiate(S_Rock, top.transform.position, S_Rock.transform.rotation);
                     _spineAnimationState.SetAnimation(2, rockposSAnimationName, false);
                     currentAnimationName = rockposSAnimationName;
-                    Stop();
                    // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
                 // Add event listener for when the animation completes
@@ -2442,7 +2430,6 @@ public void RockPose()
                     Instantiate(S_Water, top.transform.position, S_Water.transform.rotation);
                     _spineAnimationState.SetAnimation(2, waterposSAnimationName, false);
                     currentAnimationName = waterposSAnimationName;
-                    Stop();
                    // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
                 // Add event listener for when the animation completes
@@ -2456,7 +2443,6 @@ public void VoidPose()
                     Instantiate(S_Void, top.transform.position, S_Void.transform.rotation);
                     _spineAnimationState.SetAnimation(2, voidposSAnimationName, false);
                     currentAnimationName = voidposSAnimationName;
-                    Stop();
                    // Debug.Log("Combo Count: " + comboCount + ", Playing Animation: combo_1");
                 }
                 // Add event listener for when the animation completes
