@@ -208,11 +208,11 @@ public void sbam()
     player.gameObject.SetActive(true);
     toy.gameObject.SetActive(true);
     PauseMenu.gameObject.SetActive(false);
-    toy = GameObject.FindWithTag("Player");
+    player = GameObject.FindWithTag("Player");
     virtualCamera = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); //ottieni il riferimento alla virtual camera di Cinemachine
     Move.instance.Stop();
-    virtualCamera.Follow = toy.transform;
-    virtualCamera.LookAt = toy.transform;
+    virtualCamera.Follow = player.transform;
+    virtualCamera.LookAt = player.transform;
 }
 
 public void StopPlay()
@@ -229,6 +229,7 @@ public void StopPlay()
 public void mainmenu()
     {
         StartCoroutine(fade());
+
         toy.gameObject.SetActive(false);
         player.gameObject.SetActive(false);
         StopPlay();
