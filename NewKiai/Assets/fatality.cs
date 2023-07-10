@@ -8,6 +8,10 @@ using UnityEngine.Audio;
 
 public class fatality : MonoBehaviour
 {
+    [Header("End")]
+    public GameObject EndPrototype;
+
+
     [Header("Fatality")]
     public GameObject ContentENM;
 
@@ -99,7 +103,7 @@ private void OnTriggerExit2D(Collider2D collision)
         spineAnimation.state.Event += HandleEvent;
         // Attendi che l'animazione di fatality sia completata
         yield return new WaitForSeconds(1f);
-        //endFata = true;
+        EndPrototype.gameObject.SetActive(true);
         Move.instance.NotStrangeAnimationTalk = false;
         Move.instance.stopInput = false;
         yield return new WaitForSeconds(3f);
