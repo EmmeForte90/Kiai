@@ -22,6 +22,7 @@ public class nemico_boss : MonoBehaviour
     private float horizontal;
    // private float velocita = 4f;
     //private float velocita_corsa = 6f;
+    private bool zeroPoint = false;
     private bool bool_dir_dx = true;
     private SkeletonAnimation skeletonAnimation;
     public GameObject GO_player;
@@ -30,6 +31,7 @@ public class nemico_boss : MonoBehaviour
    // private float distanza_temp;
   //  private Vector2 xTarget;
 
+    public GameObject NoMap;
 
     private int num_salti_totale=3;
     private int num_salti_attuale=0;
@@ -103,6 +105,7 @@ public class nemico_boss : MonoBehaviour
 [Header("Stallo")]
     public GameObject Stallo;
     public GameObject ActorStallo;
+    public GameObject AfterStallo;
 
 [Header("Fatality")]
     public GameObject Fatality;
@@ -136,7 +139,7 @@ public class nemico_boss : MonoBehaviour
 
     // Update is called once per frame
     void Update(){
-         if (!GameplayManager.instance.PauseStop)
+         if (!GameplayManager.instance.PauseStop || !zeroPoint)
         {
         if (bool_morto){return;}
 
@@ -223,7 +226,7 @@ public class nemico_boss : MonoBehaviour
 
         switch (attacco_tipo){
             case "salti":{
-                if (num_salti_attuale<num_salti_totale){
+                if (num_salti_attuale<num_salti_totale && !zeroPoint){
                     origione_salto=transform.position;
                     x_destinazione_salto=Random.Range(5,12);
                     x_destinazione_salto*=horizontal;
@@ -254,7 +257,7 @@ public class nemico_boss : MonoBehaviour
                 break;
             }
             case "pietre":{
-                if (num_pietre_lanciate_attuale<num_pietre_lanciate_totale){
+                if (num_pietre_lanciate_attuale<num_pietre_lanciate_totale && !zeroPoint){
                     tempo_anim_attacco_lancio_pietre_attuale=tempo_anim_attacco_lancio_pietre;
                     tempo_lancio_pietra_attuale=tempo_lancio_pietra;
                     stato="lancio_pietre";
@@ -273,7 +276,8 @@ void HandleEvent (TrackEntry trackEntry, Spine.Event e)
     {
         if (e.Data.Name == "SpawnRock") 
     {
-        PlayMFX(2);
+        if(!zeroPoint)
+        {PlayMFX(2);}
     }
     }
 
@@ -299,7 +303,7 @@ void KiaiGive()
 /////////////////////////////////////////////////////////////////////////////////////////
 
     private void FixedUpdate(){
-         if (!GameplayManager.instance.PauseStop)
+         if (!GameplayManager.instance.PauseStop || !zeroPoint)
         {
         if (bool_morto){return;}
         switch (stato){
@@ -309,7 +313,8 @@ void KiaiGive()
             }
             case "schiacciare":{
                 skeletonAnimation.AnimationName="battle/Jump/jump_crush";
-                PlayMFX(2);
+                if(!zeroPoint)
+                {PlayMFX(2);}
                 break;
             }
             case "salti":{
@@ -396,7 +401,8 @@ void KiaiGive()
 
                     skeletonAnimation.Skeleton.SetColor(Color.red);
                     KiaiGive();
-                    PlayMFX(1);
+                    if(!zeroPoint)
+                    { PlayMFX(1);}                   
                     Instantiate(VFXHurt, hitpoint.position, transform.rotation);
                     StartCoroutine(ripristina_colore());
 
@@ -419,8 +425,10 @@ void KiaiGive()
                             tempo_rage_attuale+=tempo_rage;
                             stato="rage";
                             Stallo.gameObject.SetActive(true);
+                            zeroPoint = true;
                             ActorStallo.gameObject.transform.position = ActorBoss.gameObject.transform.position;
-                            Boss.gameObject.SetActive(false);
+                            ActorBoss.transform.position = NoMap.transform.position;
+                            //Boss.gameObject.SetActive(false);
 
                         }
                     }
@@ -444,6 +452,11 @@ void KiaiGive()
                     }
                 }
     }}
+
+    public void RestorePoint(){
+        ActorBoss.transform.position = AfterStallo.transform.position;
+        zeroPoint = false;
+    }
     public void ColorChange(){
         StartCoroutine(ripristina_colore());
     }

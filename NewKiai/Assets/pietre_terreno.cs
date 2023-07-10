@@ -25,26 +25,36 @@ public class pietre_terreno : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+{
+    if (bool_attivo)
     {
-        if (bool_attivo){
-            foreach(KeyValuePair<int,Vector3> attachStat in lista_pietre_terra_destinazione){
-                //if (lista_pietre_terra_ritardo[attachStat.Key]){
-                    if (lista_pietre_terra_attivi[attachStat.Key]<1){
-                        lista_pietre_terra_attivi[attachStat.Key]+=(1f*Time.deltaTime);
-                        //print ("pietre_terra: "+attachStat.Key+" - "+lista_pietre_terra_attivi[attachStat.Key]);
-                        lista_pietre_terra_GO[attachStat.Key].transform.position=punto_parabola(lista_pietre_terra_origine[attachStat.Key],lista_pietre_terra_destinazione[attachStat.Key],lista_pietre_terra_mid_destinazione[attachStat.Key],t,lista_pietre_terra_attivi[attachStat.Key]);
-                        lista_pietre_terra_GO[attachStat.Key].transform.Rotate(0,0,6*lista_pietre_terra_rotazione[attachStat.Key]*Time.deltaTime);
+        foreach (KeyValuePair<int, Vector3> attachStat in lista_pietre_terra_destinazione)
+        {
+            if (lista_pietre_terra_attivi[attachStat.Key] < 1)
+            {
+                lista_pietre_terra_attivi[attachStat.Key] += (1f * Time.deltaTime);
+                lista_pietre_terra_GO[attachStat.Key].transform.position = punto_parabola(lista_pietre_terra_origine[attachStat.Key], 
+                lista_pietre_terra_destinazione[attachStat.Key], lista_pietre_terra_mid_destinazione[attachStat.Key], t, 
+                lista_pietre_terra_attivi[attachStat.Key]);
+                lista_pietre_terra_GO[attachStat.Key].transform.Rotate(0, 0, 6 * lista_pietre_terra_rotazione[attachStat.Key] * Time.deltaTime);
 
-                        if (lista_pietre_terra_attivi[attachStat.Key]>=1){
-                            lista_pietre_terra_GO[attachStat.Key].SetActive(false);
-                        }
-                    } else {
-                        lista_pietre_terra_ritardo[attachStat.Key]=false;
+                if (lista_pietre_terra_attivi[attachStat.Key] >= 1)
+                {
+                    // Add a null check before accessing the GameObject
+                    if (lista_pietre_terra_GO[attachStat.Key] != null)
+                    {
+                        lista_pietre_terra_GO[attachStat.Key].SetActive(false);
                     }
-                //}
+                }
+            }
+            else
+            {
+                lista_pietre_terra_ritardo[attachStat.Key] = false;
             }
         }
     }
+}
+
 
     private Vector3 punto_parabola(Vector3 start_point, Vector3 end_point, Vector3 mid_point, float t, float count){
         Vector3 vor=start_point;

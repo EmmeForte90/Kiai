@@ -89,6 +89,10 @@ public class Move : MonoBehaviour
     public string sceneName; // il nome della scena in cui si trova il punto di respawn
 
     [Header("VFX")]
+    
+    [SerializeField] ParticleSystem ParticleMove;
+    [SerializeField] GameObject ParticleFall;
+
     [SerializeField] public Transform gun;
     [SerializeField] public Transform top;
     [SerializeField] public Transform bottom;
@@ -367,7 +371,7 @@ private int comboCount = 0;
     Spine.EventData eventData;
 
     public Rigidbody2D rb;
-
+    private bool vfxFall = false;
 public static Move instance;
 
     private void Awake()
@@ -376,6 +380,8 @@ public static Move instance;
         {
             instance = this;
         }
+        ParticleMove.Stop();
+        //ParticleFall.Stop();
         _skeletonAnimation = GetComponent<SkeletonAnimation>();
         if (_skeletonAnimation == null) {
             Debug.LogError("Componente SkeletonAnimation non trovato!");
@@ -427,6 +433,8 @@ if(!stopInput && !isDeath)
             canDoubleJump = true;
             Shadow.gameObject.SetActive(true);
             rb.gravityScale = 1;
+            if(vfxFall)
+            {Instantiate(ParticleFall, transform.position, transform.rotation); vfx = true;}
         }
         else
         {
@@ -461,7 +469,7 @@ if (JumpRock)
         if(vfx)
         {vfxTimer -= Time.deltaTime; //decrementa il timer ad ogni frame
         if (vfxTimer <= 0f) {
-        vfx = false;}}
+        vfx = false; vfxFall = false;}}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 if (Input.GetButtonDown("Jump") && Input.GetButtonDown("Fire1"))
 {
@@ -1304,11 +1312,11 @@ else if(!dashing)
  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 public void TiredFunc()
 {
-    Stop(); TiredAnm(); isTired = true; stopInput = true; drawsword = true;      
+    Stop(); TiredAnm(); isTired = true; stopInput = true; drawsword = true; isGuard = false;      
 }
 public void RestoreTiredFunc()
 {
-    isTired = false; stopInput = false; TiredAnmWithEnd(); drawsword = true;        
+    isTired = false; stopInput = false; TiredAnmWithEnd(); drawsword = true; isGuard = false;       
 }
  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 #region ContatoreCombo
@@ -1746,7 +1754,6 @@ private bool isGrounded()
             Physics2D.Raycast(transform.position - raycastColliderOffset, Vector3.down, distanceFromGroundRaycast, groundLayer)
             ||
             Physics2D.Raycast(transform.position, Vector3.down, distanceFromGroundRaycast, groundLayer)
-            
         );
 }
 #endregion
@@ -3263,6 +3270,7 @@ private void moving() {
             Test = speed;
             if (Mathf.Abs(Input.GetAxis("Horizontal")) < 0.01f) {
                 // Player is not moving
+                ParticleMove.Stop();
                 if(!drawsword)
             {
                 if (currentAnimationName != idleAnimationName) {
@@ -3290,6 +3298,7 @@ private void moving() {
             }
             } else if (speed > runSpeedThreshold) {
                 // Player is running
+                ParticleMove.Play();
                 if(!drawsword)
             {
                 if (currentAnimationName != runAnimationName) {
@@ -3323,6 +3332,7 @@ private void moving() {
 
         case > 0:
             // Player is jumping
+            vfxFall = true;
             if(!drawsword)
             {
             if (currentAnimationName != jumpAnimationName) {
@@ -3339,6 +3349,7 @@ private void moving() {
 
         case < 0:
             // Player is falling
+            vfxFall = true;
             if(!isTouchingWall)
             {
             if(!drawsword)

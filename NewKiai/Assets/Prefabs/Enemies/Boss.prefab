@@ -454,7 +454,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 33, y: -445}
+  m_AnchoredPosition: {x: 33, y: -474}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8218834881701379778
@@ -560,7 +560,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1055216788482352667
 Transform:
   m_ObjectHideFlags: 0
@@ -611,15 +611,16 @@ MonoBehaviour:
   StalloBar: {fileID: 1479038449518540190}
   UI: {fileID: 5341830360541948778}
   ChooseFatality: 0
-  StalloObj: {fileID: 0}
-  Boss: {fileID: 0}
+  StalloObj: {fileID: 2699890037196605074}
+  WinUI: {fileID: 0}
+  Boss: {fileID: 5328909215188845297}
   listSound: []
   SFX: {fileID: 24100000, guid: 63f598184995bda419cd1ee5db5e6d03, type: 2}
   DuelloTime: 0
   Duellomax: 10
   spineAnimation: {fileID: 5822053656139580053}
-  StalVFX: {fileID: 0}
-  Smoke: {fileID: 0}
+  StalVFX: {fileID: 5002796488040815850}
+  Smoke: {fileID: 3306162920416921278}
   StartAnimationName: start_stalmate
   LoopAnimationName: loop_stalmate
   DefeatAnimationName: fail_stalmate
@@ -1153,6 +1154,7 @@ MonoBehaviour:
   pietra_lancio_pf: {fileID: 2402484353416799066, guid: 63cfe4c42480d4a4dbace9b0c18833c4, type: 3}
   pietre_terreno: {fileID: 5328909215452291268}
   GO_player: {fileID: 0}
+  NoMap: {fileID: 0}
   rb: {fileID: 5328909215452291266}
   tempo_riposo_attacco_salti: 0.5
   tempo_riposo_attacco_mazza: 0.5
@@ -1173,6 +1175,7 @@ MonoBehaviour:
   SFX: {fileID: 24100000, guid: 63f598184995bda419cd1ee5db5e6d03, type: 2}
   Stallo: {fileID: 0}
   ActorStallo: {fileID: 0}
+  AfterStallo: {fileID: 0}
   Fatality: {fileID: 962432070854186124}
   Boss: {fileID: 5328909215452291276}
   ActorBoss: {fileID: 0}
@@ -2256,7 +2259,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5332295924173830901
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3274,6 +3277,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7456753073225232854, guid: 09b575f2c0e74a4459dad057648a7c7c, type: 3}
   m_PrefabInstance: {fileID: 2456209539274042687}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5002796488040815850 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7456753073225232853, guid: 09b575f2c0e74a4459dad057648a7c7c, type: 3}
+  m_PrefabInstance: {fileID: 2456209539274042687}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8683354341750382973
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3411,6 +3419,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80a1e847916935445a0cd9b1883174c4, type: 3}
+--- !u!1 &3306162920416921278 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6152094579436054467, guid: 80a1e847916935445a0cd9b1883174c4, type: 3}
+  m_PrefabInstance: {fileID: 8683354341750382973}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3306162920416921279 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6152094579436054466, guid: 80a1e847916935445a0cd9b1883174c4, type: 3}

@@ -150,6 +150,7 @@ private void Update()
         {
             Win = false;
         }
+        
         StartCoroutine(EndDuello());
         DuelStart = false;
         }   
@@ -182,9 +183,10 @@ IEnumerator EndDuello()
             spineAnimation.state.SetAnimation(2, WinAnimationName, false);
     }
     yield return new WaitForSeconds(5f);
-    Boss.gameObject.SetActive(true);
+    //Boss.gameObject.SetActive(true);
     TriggerBoss.instance.vitalita -= 50;
     nemico_boss.instance.ColorChange();
+    nemico_boss.instance.RestorePoint();
     //virtualCamera.Follow = toy.transform;
     Move.instance.StopinputFalse();
     Destroy(gameObject);

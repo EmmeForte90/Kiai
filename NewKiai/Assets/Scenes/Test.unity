@@ -5967,10 +5967,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BossFight_Thief
       objectReference: {fileID: 0}
-    - target: {fileID: 2030179916204073039, guid: f9d0451dd8176fb4bba33c673f913349, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2030179917474177288, guid: f9d0451dd8176fb4bba33c673f913349, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -5978,19 +5974,15 @@ PrefabInstance:
     - target: {fileID: 2082299218043490245, guid: f9d0451dd8176fb4bba33c673f913349, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: -2270502874591599280, guid: f9d0451dd8176fb4bba33c673f913349, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 2203214730154950228, guid: f9d0451dd8176fb4bba33c673f913349, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: -3430611769309263641, guid: f9d0451dd8176fb4bba33c673f913349, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 7131646413452558496, guid: f9d0451dd8176fb4bba33c673f913349, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8572034773933725547, guid: f9d0451dd8176fb4bba33c673f913349, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5987283193596581945, guid: f9d0451dd8176fb4bba33c673f913349, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9d0451dd8176fb4bba33c673f913349, type: 3}
 --- !u!4 &550903632 stripped
@@ -32795,7 +32787,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1129002362}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.82, y: -14.696413, z: -0.07759185}
+  m_LocalPosition: {x: -24.89, y: -14.696413, z: -0.07759185}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -37820,7 +37812,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1215556204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38377,7 +38369,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7379351818697915303, guid: adde3298e67d0ab499d663a35ac5dce8, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7379351818697915308, guid: adde3298e67d0ab499d663a35ac5dce8, type: 3}
       propertyPath: m_RootOrder
@@ -83468,7 +83460,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1285357667494519072, guid: b82332bea26839543a620a374a8d2991, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 27.576672
+      value: 20.26
       objectReference: {fileID: 0}
     - target: {fileID: 1285357667494519072, guid: b82332bea26839543a620a374a8d2991, type: 3}
       propertyPath: m_LocalPosition.y
