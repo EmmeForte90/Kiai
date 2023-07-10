@@ -34050,6 +34050,63 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &524456316
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -20.163
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350992568828012724, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_Name
+      value: Onigiri (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
 --- !u!1001 &532360828
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35597,6 +35654,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 654348400}
   m_CullTransparentMesh: 1
+--- !u!1001 &678816179
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_RootOrder
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -18.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350992568828012724, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_Name
+      value: Onigiri (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
 --- !u!1 &685774139
 GameObject:
   m_ObjectHideFlags: 0
@@ -47958,6 +48072,63 @@ SpriteShapeRenderer:
   m_LocalAABB:
     m_Center: {x: -31.267456, y: -3.429018, z: 0}
     m_Extent: {x: 62.783035, y: 10.192002, z: 0}
+--- !u!1001 &1764805889
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -19.551
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350992568828012724, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
+      propertyPath: m_Name
+      value: Onigiri (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
 --- !u!1 &1767422797
 GameObject:
   m_ObjectHideFlags: 0
