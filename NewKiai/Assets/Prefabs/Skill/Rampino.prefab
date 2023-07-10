@@ -4802,7 +4802,7 @@ GameObject:
   - component: {fileID: 8373701536673003298}
   m_Layer: 0
   m_Name: Rampino
-  m_TagString: Item
+  m_TagString: Skill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4913,6 +4913,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f64e38b0d4b05f4a983ae114e6b2795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IdSkill: 4
   Isdoublejump: 0
   IsDash: 0
   Iswalljump: 0

@@ -951,6 +951,26 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5328909216925287545, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5328909216925287545, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5328909216925287545, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5328909216925287545, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5328909216925287545, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5341830360541948778, guid: 642865ae9e55f2f408ff5ecb4133408f, type: 3}
       propertyPath: m_IsActive
       value: 0

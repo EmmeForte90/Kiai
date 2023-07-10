@@ -19213,7 +19213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GM: {fileID: 5892456059956868110}
   player: {fileID: 5892456059567638962}
-  toy: {fileID: 5892456059567638962}
+  toy: {fileID: 5892456060767389071}
   Damage: 10
   comboC: {fileID: 5892456059856563512}
   ComboValue: {fileID: 5892456060182725841}
@@ -19257,6 +19257,9 @@ MonoBehaviour:
   ordalia: 0
   boss: 0
   battle: 0
+  MusicBefore: 0
+  MusicAfter: 1
+  SkillActive: 00000000
   unlockWalljump: 0
   unlockDoubleJump: 0
   unlockDash: 0

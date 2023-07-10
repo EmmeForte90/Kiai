@@ -25,6 +25,7 @@ TagManager:
   - SpawnPoint_5
   - Throw
   - Torcia
+  - Style
   layers:
   - Default
   - TransparentFX

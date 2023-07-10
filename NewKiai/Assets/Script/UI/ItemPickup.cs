@@ -8,7 +8,11 @@ public class ItemPickup : MonoBehaviour
 {
     public Item Item;
     [SerializeField] GameObject VFX;
-    private int IDItem;
+    private int IDItem;     
+    
+    [Tooltip("Si deve cancellare dalla scena?")]
+    public bool isdelete = false;
+    public int idForDelete;
     public bool isGadget = false;
     public bool isDress = false;
 
@@ -18,6 +22,8 @@ public class ItemPickup : MonoBehaviour
 public void Awake()
     {
     IDItem = Item.id;
+    if(isCollected)
+    {Destroy(gameObject);}
     }
 
 public void Update()
@@ -36,6 +42,7 @@ public void Update()
         else if(isGadget)
         {
         InventoryManager.Instance.GadgetAc(IDItem);
+        if(isdelete){InventoryManager.Instance.ItemActive(idForDelete);}
         }else if(!isGadget){
         //Item.value++;
         InventoryManager.Instance.AddItem(Item);

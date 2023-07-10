@@ -428,7 +428,7 @@ private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         if (ItemTake != null)
         {
             // Recupera l'identificatore dell'oggetto
-            int ItemId = ItemTake.Item.id;
+            int ItemId = ItemTake.idForDelete;
 
             // Verifica se l'oggetto è già stato raccolto
             for (int i = 0; i < itemActive.Length; i++)

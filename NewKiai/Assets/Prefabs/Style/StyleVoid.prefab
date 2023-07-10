@@ -4838,7 +4838,7 @@ GameObject:
   - component: {fileID: 7177458097074435271}
   m_Layer: 0
   m_Name: StyleVoid
-  m_TagString: Skill
+  m_TagString: Style
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4952,11 +4952,6 @@ MonoBehaviour:
   StyleID: 5
   VFX: {fileID: 4331965279904828745, guid: 1b79c7dad815f1544b564d01f2920de0, type: 3}
   isCollected: 0
-  basePitch: 1
-  randomPitchOffset: 0.1
-  listSound:
-  - {fileID: 8300000, guid: 85f50f09c3f2ceb41a1f63ff5d5f5b8c, type: 3}
-  SFX: {fileID: 24100000, guid: 63f598184995bda419cd1ee5db5e6d03, type: 2}
 --- !u!1 &7177458097263664996
 GameObject:
   m_ObjectHideFlags: 0

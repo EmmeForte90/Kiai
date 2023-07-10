@@ -41,18 +41,18 @@ public class GameplayManager : MonoBehaviour
     [SerializeField] public int money = 0;
     [SerializeField] public TextMeshProUGUI moneyText;
     [SerializeField] public TextMeshProUGUI moneyTextM;
-    [SerializeField] GameObject moneyObject;
-    [SerializeField] GameObject moneyObjectM;
+    [SerializeField] public GameObject moneyObject;
+    [SerializeField] public GameObject moneyObjectM;
     [HideInInspector]
     public bool PauseStop = false;
     //Variabile del testo dei money
     private VibrateCinemachine vibrateCinemachine;
 
     [Header("Style")]
-    [SerializeField] public GameObject[] StyleS;
-    [SerializeField] public GameObject[] StyleM;
-    [SerializeField] public GameObject Selector;
-    [SerializeField] public bool[] styleIcon;
+    [SerializeField]  public GameObject[] StyleS;
+    [SerializeField]  public GameObject[] StyleM;
+    [SerializeField]  public GameObject Selector;
+    [SerializeField]  public bool[] styleIcon;
     
     
 
@@ -61,7 +61,7 @@ public class GameplayManager : MonoBehaviour
     [SerializeField] GameObject callFadeOut;
 
     [Header("Pause")]
-    [SerializeField] public GameObject PauseMenu;
+    [SerializeField]  GameObject PauseMenu;
     private GameObject Scenary;
     public AudioMixer MSX;
     public AudioMixer SFX;
@@ -81,6 +81,7 @@ public class GameplayManager : MonoBehaviour
     [Tooltip("Musica da attivare se necessario quando Si ritorna al mainmenu")]
     public int MusicAfter;
     [Header("Abilitazioni")]
+    public bool[] SkillActive;
     public bool unlockWalljump = false;
     public bool unlockDoubleJump = false;
     public bool unlockDash = false;
@@ -315,12 +316,7 @@ C_Count = 0;
 ComboValue.text = C_Count.ToString();
 }
 
-public void StyleActivated(int id)
-{
-    StyleS[id].SetActive(true);
-    StyleM[id].SetActive(true);
-    styleIcon[id] = true;   
-}
+
 
 public void SetDifficultAtt(){
 
@@ -501,7 +497,7 @@ public void StopInput()
    
 private void OnEnable()
 {
-    //SceneManager.sceneLoaded += OnSceneLoaded;
+    SceneManager.sceneLoaded += OnSceneLoaded;
     // Troviamo il game object del punto di spawn
       if(!isStartGame) 
       {
@@ -529,8 +525,11 @@ private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     // Cerca tutti i GameObjects con il tag "Ch_Quest"
     GameObject[] Ordalia = GameObject.FindGameObjectsWithTag("Ordalia");
     GameObject[] Door = GameObject.FindGameObjectsWithTag("Door");
+    GameObject[] styleIcon = GameObject.FindGameObjectsWithTag("Style");
     GameObject[] SkillIt = GameObject.FindGameObjectsWithTag("Skill");
     GameObject[] BossIt = GameObject.FindGameObjectsWithTag("Boss");
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // Itera attraverso tutti gli oggetti trovati
     foreach (GameObject Character in Ordalia)
@@ -554,9 +553,53 @@ private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
             }
         }
     }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    foreach (GameObject Character in SkillIt)
+    {
+        // Ottiene il componente QuestCharacters
+        unlockSkill Skillt = Character.GetComponent<unlockSkill>();
 
+        // Verifica se il componente esiste
+        if (Skillt != null)
+        {
+            // Verifica se l'id della quest corrisponde all'id di un gameobject in OrdaliaActive
+            int Id = Skillt.IdSkill;
+            for (int i = 0; i <  SkillActive.Length; i++)
+            {
+                if ( SkillActive[i] && i == Id)
+                {
+                    // Imposta ordaliT.FirstD a false
+                    Skillt.Take();
+                    break;
+                }
+            }
+        }
+    }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    
+   /*foreach (GameObject Character in styleIcon)
+    {
+        // Ottiene il componente QuestCharacters
+        StyleTake styleIconS = Character.GetComponent<StyleTake>();
+
+        // Verifica se il componente esiste
+        if (styleIconS != null)
+        {
+            // Verifica se l'id della quest corrisponde all'id di un gameobject in OrdaliaActive
+            int Id = styleIconS.StyleID;
+            for (int i = 0; i <  styleIcon.Length; i++)
+            {
+                if ( styleIcon[i] && i == Id)
+                {
+                    // Imposta ordaliT.FirstD a false
+                    styleIconS.Take();
+                    break;
+                }
+            }
+        }
+    } */
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     foreach (GameObject Character in Door)
     {
         // Ottiene il componente QuestCharacters
@@ -580,11 +623,24 @@ private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     }
 
 }
-
+public void StyleActivated(int id)
+{
+    StyleS[id].SetActive(true);
+    StyleM[id].SetActive(true);
+    styleIcon[id] = true;   
+}
 public void OrdaliaEnd(int id)
 {
     // Imposta lo stato della quest a true
     OrdaliaActive[id] = true;   
+}
+
+
+
+public void SkillTaking(int id)
+{
+    // Imposta lo stato della quest a true
+    SkillActive[id] = true;   
 }
 
 public void DoorAct(int id)

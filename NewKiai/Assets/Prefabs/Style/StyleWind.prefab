@@ -38664,7 +38664,7 @@ GameObject:
   - component: {fileID: 5834999257492139668}
   m_Layer: 0
   m_Name: StyleWind
-  m_TagString: Skill
+  m_TagString: Style
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38676,9 +38676,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5834999257492139669}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7.62, y: -2.16, z: 0}
-  m_LocalScale: {x: 0.31057, y: 0.31057, z: 0.31057}
+  m_LocalScale: {x: 0.155285, y: 0.155285, z: 0.155285}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5834999256447908549}
@@ -38776,13 +38776,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StyleID: 3
+  Oggetto: {fileID: 5834999257492139669}
   VFX: {fileID: 4971197863994821707, guid: 2853d211d4214d647a1a0bf75c1fb0cf, type: 3}
   isCollected: 0
-  basePitch: 1
-  randomPitchOffset: 0.1
-  listSound:
-  - {fileID: 8300000, guid: 85f50f09c3f2ceb41a1f63ff5d5f5b8c, type: 3}
-  SFX: {fileID: 24100000, guid: 63f598184995bda419cd1ee5db5e6d03, type: 2}
 --- !u!1 &6685177490908799690
 GameObject:
   m_ObjectHideFlags: 0
