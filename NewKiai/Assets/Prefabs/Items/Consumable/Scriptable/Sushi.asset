@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c85ffa15f85f8cf41a4902559ce464bb, type: 3}
   m_Name: Sushi
   m_EditorClassIdentifier: 
-  id: 15
+  id: 4
   itemName: Sushi
   Description: Delicious rice ball with salmon
   value: 1

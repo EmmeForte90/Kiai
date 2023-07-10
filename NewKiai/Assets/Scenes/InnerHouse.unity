@@ -476,14 +476,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 5892456059567638963, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 40.12
-      objectReference: {fileID: 0}
-    - target: {fileID: 5892456059567638963, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -7.2
-      objectReference: {fileID: 0}
     - target: {fileID: 5892456059735399367, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -540,10 +532,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
-    - target: {fileID: 5892456059956868111, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
-      propertyPath: SkillActive.Array.size
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 5892456060369802795, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -552,10 +540,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5892456060442747771, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
-      propertyPath: SoundDestroy.Array.data[4]
-      value: 
-      objectReference: {fileID: 8300000, guid: 3eaca7ca2bc926742a062bc41bca0986, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4932c9fba311ed848adfb4a7c3136ba0, type: 3}
 --- !u!1 &115293610
@@ -3925,71 +3909,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &2081923967
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
-      propertyPath: m_RootOrder
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3.67
-      objectReference: {fileID: 0}
-    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.78
-      objectReference: {fileID: 0}
-    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3350992568828012616, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3350992568828012724, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
-      propertyPath: m_Name
-      value: Onigiri (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3350992568828012727, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
-      propertyPath: isdelete
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3350992568828012727, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
-      propertyPath: idForDelete
-      value: 5
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f2fa4598d2350ff47afadc1c37d80633, type: 3}
 --- !u!1 &2098694908
 GameObject:
   m_ObjectHideFlags: 0
