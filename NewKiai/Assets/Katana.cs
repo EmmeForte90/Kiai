@@ -42,7 +42,8 @@ public class Katana : MonoBehaviour
     [SerializeField] GameObject StaminaVFX;
 
     public Scrollbar staminaBar;
-   
+    private bool OneDie = false;
+
 
     [Header("Knockback")]
     [Tooltip("Il nemico fa knockback?")]
@@ -108,6 +109,7 @@ public class Katana : MonoBehaviour
     [SpineAnimation][SerializeField] string AttackV;
 
     [Header("Fatality")]
+    [Tooltip("Il nemico può morire con una fatality?")]
     private int result;
     public bool isFatality;
     [SerializeField] GameObject Fatality;
@@ -396,6 +398,13 @@ private void Wait()
     isAttack = false;
     IdleBattleAnm();
 }
+
+private IEnumerator ripristina_Atk()
+    {
+    yield return new WaitForSeconds(TimeRestoreAtk);
+    isAttack = false;  
+    Wait();    
+    }
 private void DamageConsumable()
     {
         vitalita -= 20; 
@@ -421,6 +430,14 @@ private void Die()
     {
         SpawnCoins();
         KiaiGive();
+        if(GameplayManager.instance.ordalia)
+                        {//Se è in un ordalia lo conteggia
+                            if(!OneDie)
+                            {
+                            GameplayManager.instance.EnemyDefeat();
+                            OneDie = true;
+                            }
+                        }
         if(isFatality){
         if(result == 1)
         {DieAnm(); StartCoroutine(DestroyEnm());
@@ -477,12 +494,7 @@ private void OnDrawGizmos()
 #endregion
 
 #region Timers
-private IEnumerator ripristina_Atk()
-    {
-    yield return new WaitForSeconds(TimeRestoreAtk);
-    isAttack = false;  
-    Wait();    
-    }
+
 
 private IEnumerator ripristina_Stamina()
     {

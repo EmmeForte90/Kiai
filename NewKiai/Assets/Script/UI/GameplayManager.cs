@@ -76,7 +76,10 @@ public class GameplayManager : MonoBehaviour
     public bool ordalia = false;
     public bool boss = false;
     public bool battle = false;
-
+    [Tooltip("Musica di base")]
+    public int MusicBefore;
+    [Tooltip("Musica da attivare se necessario quando Si ritorna al mainmenu")]
+    public int MusicAfter;
     [Header("Abilitazioni")]
     public bool unlockWalljump = false;
     public bool unlockDoubleJump = false;
@@ -229,12 +232,18 @@ public void StopPlay()
 public void mainmenu()
     {
         StartCoroutine(fade());
-
+        StartCoroutine(Returnmm());
+        AudioManager.instance.CrossFadeOUTAudio(MusicBefore);
+        AudioManager.instance.CrossFadeINAudio(MusicAfter);
+        StopPlay();
+    }
+IEnumerator Returnmm()
+    {
+        yield return new WaitForSeconds(2);
         toy.gameObject.SetActive(false);
         player.gameObject.SetActive(false);
         StopPlay();
     }
-
 IEnumerator fade()
     {
         FadeOut();
