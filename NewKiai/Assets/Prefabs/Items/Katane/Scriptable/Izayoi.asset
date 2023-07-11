@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c85ffa15f85f8cf41a4902559ce464bb, type: 3}
-  m_Name: Muramasa
+  m_Name: Izayoi
   m_EditorClassIdentifier: 
-  id: 1
-  itemName: Muramasa
-  Description: Demoniac sword, be carefull with that
+  id: 0
+  itemName: Izayoi
+  Description: 'Nekotaro''s katana. '
   value: 0
-  prices: 1000
-  icon: {fileID: 21300000, guid: 52ff65cc00dcc5e42ab5eda5d44ea7af, type: 3}
-  NameSkin: Katane/Muramasa
+  prices: 0
+  icon: {fileID: 21300000, guid: 87f93e3317f2c3f418df24c6d3cf512a, type: 3}
+  NameSkin: Katane/Izayoi
   Dialogue: 
   isConsumable: 0
   isKey: 0

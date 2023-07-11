@@ -50,7 +50,8 @@ public class InventoryManager : MonoBehaviour
 
     public GameObject[] DressTaking;
     public bool[] DressTakingB;
-
+    public GameObject[] KataTaking;
+    public bool[] KataTakingB;
     private string NameSkin;
 
 
@@ -133,7 +134,12 @@ public void DressTake(int id)
     DressTaking[id].SetActive(true);
     DressTakingB[id] = true;   
 }
-
+public void KataTake(int id)
+{
+    // Imposta lo stato della quest a true
+    KataTaking[id].SetActive(true);
+    KataTakingB[id] = true;   
+}
 
 public bool RemoveItem(Item itemToRemove)
 {
@@ -401,6 +407,23 @@ public void AssignDress(Item Item)
             PuppetSkin.Instance.UpdateCharacterSkinUI(NameSkin);
             PuppetSkin.Instance.UpdateCombinedSkinUI(); 
 }
+
+public void AssignKatana(Item Item)
+{
+            NameSkin = Item.NameSkin;
+            ItemRapidMenu.Instance.SlotKat_I.sprite = Item.icon;
+            ItemRapidMenu.Instance.SlotKat = selectedId;
+            ChangeHeroSkin.Instance.katana = NameSkin;
+            previewImages_E.sprite = Item.icon;
+            descriptions_E.text = Item.itemName;
+            NameItems_E.text = Item.itemName;
+            ChangeHeroSkin.Instance.UpdateCharacterSkin();
+		    ChangeHeroSkin.Instance.UpdateCombinedSkin(); 
+            PuppetSkin.Instance.katana = NameSkin;
+            PuppetSkin.Instance.UpdateCharacterSkinUI(NameSkin);
+            PuppetSkin.Instance.UpdateCombinedSkinUI(); 
+}
+
 
 private void OnEnable()
 {

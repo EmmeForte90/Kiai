@@ -16,6 +16,7 @@ public class ItemPickup : MonoBehaviour
     public int idForDelete;
     public bool isGadget = false;
     public bool isDress = false;
+    public bool isKatana = false;
 
     [HideInInspector]
     public bool isCollected = false;
@@ -42,6 +43,11 @@ public void Update()
         InventoryManager.Instance.DressTake(IDItem);
         }
 
+        if(isKatana)
+        {
+        InventoryManager.Instance.KataTake(IDItem);
+        }
+
 
         else if(isGadget)
         {
@@ -49,15 +55,15 @@ public void Update()
         //if(isdelete){InventoryManager.Instance.ItemActive(idForDelete);}
         }
         
-        else if(!isGadget){
+        /*else if(!isGadget){
         //Item.value++;
         InventoryManager.Instance.AddItem(Item);
         InventoryManager.Instance.ListItem(IDItem);
         InventoryManager.Instance.ItemActive(IDItem);
-        /*if( AssignItem.Instance == null)
+        if( AssignItem.Instance == null)
         {
         //AssignItem.Instance.AssignId(IDItem);
-        }*/}
+        }}*/
         isCollected = true; // Imposta la variabile booleana a "true" quando l'oggetto viene raccolto
     }
     private void OnTriggerEnter2D(Collider2D collision)
