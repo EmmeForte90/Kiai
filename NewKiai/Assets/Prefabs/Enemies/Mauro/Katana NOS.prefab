@@ -24927,7 +24927,7 @@ MonoBehaviour:
   VFXendStamina: {fileID: 6130860679098377078}
   StaminaVFX: {fileID: 141772831847956690}
   staminaBar: {fileID: 1610231254949449483}
-  isKnock: 1
+  isKnock: 0
   knockForceShort: 1
   knockForceLong: 2
   rb: {fileID: 4240852097867764348}
@@ -25797,6 +25797,7 @@ MonoBehaviour:
   CamFocus: {fileID: 0}
   Enemy: {fileID: 4313313729627342833}
   ChooseFatality: 3
+  FatalityActive: 0
   tiredAnimationName: stun
   fatalityAnimationName: Fatality/die_back
   MusicBefore: 0
