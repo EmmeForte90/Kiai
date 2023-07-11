@@ -47,12 +47,10 @@ public class Move : MonoBehaviour
     public bool drawsword = false;
 
     [Header("Jump")]
-    [SerializeField]  float jumpForce;
-    [SerializeField]  float wallForce;
+    [SerializeField] private float jumpForce;
+    [SerializeField] private float jumpForceX;
     [SerializeField] private float bumpForce;
-    private int maxJumps = 1;
 
-    public int jumpsRemaining;
     [Header("Knockback")]
     private bool KnockbackAt = false;
     private bool KnockbackAtL = false;
@@ -72,13 +70,13 @@ public class Move : MonoBehaviour
     //float coyoteCounter = 0f;
 
     [SerializeField] private float coyoteTime;
-    //private float lastTimeGround;
+    private float lastTimeGround;
     
     [SerializeField] private float jumpDelay;
     private float lastTimeJump;
 
-    [SerializeField] float gravityOnJump;
-    [SerializeField] float gravityOnFall;
+    [SerializeField] private float gravityOnJump;
+    [SerializeField] private float gravityOnFall;
     
     private readonly Vector3 raycastColliderOffset = new (0.25f, 0, 0);
     private const float distanceFromGroundRaycast = 0.3f;
@@ -406,7 +404,6 @@ public static Move instance;
         audioSource.outputAudioMixerGroup = SFX.FindMatchingGroups("Master")[0];
         }
 // Inizializza la posizione di destinazione del nemico a pointB
-        jumpsRemaining = maxJumps;
         JumpRockTimer = JumpRockTimerMax;   
         VFXDash.gameObject.SetActive(false);
         }
@@ -431,18 +428,17 @@ if(!stopInput && !isDeath)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if (isGrounded())
         {
-            //lastTimeGround = coyoteTime; 
+            lastTimeGround = coyoteTime; 
             isAttackingAir = false;
             canDoubleJump = true;
             Shadow.gameObject.SetActive(true);
             rb.gravityScale = 1;
-            //jumpsRemaining = maxJumps;
             if(vfxFall)
             {Instantiate(ParticleFall, transform.position, transform.rotation); vfx = true;}
         }
         else
         {
-            //lastTimeGround -= Time.deltaTime;
+            lastTimeGround -= Time.deltaTime;
             modifyPhysics();
             Shadow.gameObject.SetActive(false);  
         }
@@ -493,28 +489,22 @@ if (Input.GetButtonDown("Jump") && Input.GetButtonDown("Fire2") && Input.GetButt
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #region Salto
-        if(GameplayManager.instance.unlockDoubleJump)
-        {maxJumps = 2; canDoubleJump = true;}
+ // Controllo se il personaggio è a contatto con un muro
+ if( GameplayManager.instance.unlockWalljump)
+ {
+        Vector2 direction = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
+isTouchingWall = Physics2D.Raycast(transform.position, direction, wallDistance, wallLayer);
+ }
 
-        if(Input.GetButtonDown("Jump") && GameplayManager.instance.unlockDoubleJump && jumpsRemaining == 1)
-        {Instantiate(Circle, circlePoint.position, transform.rotation);}
-
-        if (Input.GetButtonDown("Jump") && jumpsRemaining > 0 && !isTouchingWall
-        && !isGuard && !NotStrangeAnimationTalk && !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial 
-        && !NormalSpecial && !VoidSpecial && !StartKiai)
-        {
-        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-        jumpsRemaining--;
-        }
-        
-/*
-if (Input.GetButtonDown("Jump") )
+if (Input.GetButtonDown("Jump") && !isGuard && !NotStrangeAnimationTalk  
+        && !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
+        && !StartKiai)
 {            
     //wallJumped = false;
     if(!isTouchingWall)
         {
             //print("Walljump not");
-            //lastTimeJump = Time.time + jumpDelay;
+            lastTimeJump = Time.time + jumpDelay;
         }
         //Pre-interrupt jump if button released
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0 
@@ -528,11 +518,8 @@ if (Input.GetButtonDown("Jump") )
         }
         else
         {
-            lastTimeJump = Time.time + jumpDelay;       
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            //jump();
-            //lastTimeGround = 0; //Avoid spam button
-            //rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);   
+            lastTimeGround = 0; //Avoid spam button
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);   
         }
         }
     
@@ -552,14 +539,7 @@ if (Input.GetButtonDown("Jump") )
         canDoubleJump = false;
         }
     }
-}*/
-
-if( GameplayManager.instance.unlockWalljump)
- {
-        Vector2 direction = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
-    isTouchingWall = Physics2D.Raycast(transform.position, direction, wallDistance, wallLayer);
- }
-
+}
 if (Input.GetButtonDown("Jump") && !isGuard && !NotStrangeAnimationTalk && isTouchingWall 
         && !FireSpecial && !WaterSpecial && !WindSpecial && !RockSpecial && !NormalSpecial && !VoidSpecial
         && !StartKiai)
@@ -570,13 +550,13 @@ if (Input.GetButtonDown("Jump") && !isGuard && !NotStrangeAnimationTalk && isTou
         if(transform.localScale.x > 0)
         {
             horDir = -1;
-        rb.AddForce(new Vector2(jumpForce, wallForce), ForceMode2D.Impulse);
+        rb.AddForce(new Vector2(jumpForceX, jumpForce), ForceMode2D.Impulse);
         //rb.velocity = new Vector2(jumpForceX, jumpForce);}
         }
         else if(transform.localScale.x < 0)
         {
             horDir = 1;
-        rb.AddForce(new Vector2(-jumpForce, wallForce), ForceMode2D.Impulse);
+        rb.AddForce(new Vector2(-jumpForceX, jumpForce), ForceMode2D.Impulse);
         //rb.velocity = new Vector2(-jumpForceX, jumpForce);}
         //wallJumped = true;
         }
@@ -1545,10 +1525,10 @@ public void attackupper()
         float accelRate = Mathf.Abs(playerSpeed) > 0.01f? acceleration : deceleration;
         rb.AddForce((playerSpeed - rb.velocity.x) * accelRate * Vector2.right);
         rb.velocity = new Vector2(Vector2.ClampMagnitude(rb.velocity, speed).x, rb.velocity.y); //Limit velocity
-        /*if (lastTimeJump > Time.time && lastTimeGround > 0)
+        if (lastTimeJump > Time.time && lastTimeGround > 0)
            { 
             jump();
-           }*/
+           }
         if (dashing || Atkdashing)
         {
             if (horDir < 0)
@@ -1738,15 +1718,13 @@ IEnumerator FinishKiai()
 }
 
 #region Fisica
-    /*private void jump()
+    private void jump()
     {
-        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-        jumpsRemaining--;
         lastTimeJump = 0;
         lastTimeGround = 0;
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.AddForce(new Vector2(rb.velocity.x, jumpForce), ForceMode2D.Impulse);
-    } */
+    }
 
 private void modifyPhysics()
 {
@@ -1779,14 +1757,6 @@ private bool isGrounded()
             Physics2D.Raycast(transform.position, Vector3.down, distanceFromGroundRaycast, groundLayer)
         );
 }
-
-void OnCollisionEnter2D(Collision2D collision) 
-{
-        if(collision.gameObject.CompareTag("Ground"))
-        //Se il proiettile tocca il nemico
-        {jumpsRemaining = maxJumps;}
-}
-
 #endregion
 
 public void StopinputTrue()
