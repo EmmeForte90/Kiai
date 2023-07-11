@@ -41,6 +41,7 @@ public class fatality : MonoBehaviour
     [Tooltip("Quale fatality deve eseguire il player? 1-Jump 2-Dance(DemonMonk) 3-Back 4-For Lance and BigKatana 5-Veloce")]
     public int ChooseFatality;
 
+    public bool FatalityActive;
     [SpineAnimation][SerializeField] private string tiredAnimationName;
     [SpineAnimation][SerializeField] private string fatalityAnimationName;
        
@@ -51,8 +52,15 @@ public class fatality : MonoBehaviour
     [Tooltip("Musica da attivare se necessario quando la telecamera inquadra l'evento")]
     public int MusicAfter;
     public bool needMusic = false;
+
+    public static fatality instance;
+
 private void Awake()
     {
+         if (instance == null)
+        {
+            instance = this;
+        }
         toy = GameObject.FindWithTag("Player").transform;
         //transform.position = Spawn.transform.position;
         vCam = GameObject.FindWithTag("MainCamera").GetComponent<CinemachineVirtualCamera>(); 
@@ -78,6 +86,7 @@ private void Awake()
         if (Input.GetButtonDown("Fire1") && !_isInTrigger)
         {
         HideB = true;
+        FatalityActive = true;
         _isInTrigger = true;
         Move.instance.NotStrangeAnimationTalk = true;
         Move.instance.Stop();
@@ -128,6 +137,7 @@ private void OnTriggerExit2D(Collider2D collision)
         Move.instance.NotStrangeAnimationTalk = false;
         Move.instance.stopInput = false;
         yield return new WaitForSeconds(3f);
+        FatalityActive = false;
         if(needFinalVFX)
         {
             AudioManager.instance.PlaySFX(1);

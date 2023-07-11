@@ -172,7 +172,7 @@ public class nemico_bow : MonoBehaviour
  void Update(){
         
         ////////////////////////////////////////////////
-         if (!GameplayManager.instance.PauseStop || isDead)
+         if (!GameplayManager.instance.PauseStop || !isDead || !fatality.instance.FatalityActive)
         {
             //Se gli HP sono a zero è mort
         HPBar.size = vitalita / vitalita_max;
