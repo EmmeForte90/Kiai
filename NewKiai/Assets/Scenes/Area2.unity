@@ -55408,6 +55408,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1345488432}
     m_Modifications:
+    - target: {fileID: 1221962393463549001, guid: f4ae430cb9df3ee45955923c434b36e8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 3251078662438753970, guid: f4ae430cb9df3ee45955923c434b36e8, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -55420,6 +55424,10 @@ PrefabInstance:
       propertyPath: listmusic.Array.data[3]
       value: 
       objectReference: {fileID: 8300000, guid: 10a19f73634420d4a9d80839d0e4bff0, type: 3}
+    - target: {fileID: 3251078662438753975, guid: f4ae430cb9df3ee45955923c434b36e8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.88
+      objectReference: {fileID: 0}
     - target: {fileID: 3251078663183260390, guid: f4ae430cb9df3ee45955923c434b36e8, type: 3}
       propertyPath: m_Camera
       value: 
