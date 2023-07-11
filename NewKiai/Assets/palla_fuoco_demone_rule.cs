@@ -34,7 +34,7 @@ public class palla_fuoco_demone_rule : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.name == "Nekotaro"){
+        if(other.CompareTag("Player")){
             Instantiate(VFXExplode, transform.position, transform.rotation);
             AudioManager.instance.PlaySFX(2);
             //print ("colpito il personaggio!");

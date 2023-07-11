@@ -9,7 +9,7 @@ public class HealItem : MonoBehaviour
    // [SerializeField] Transform prefabExp;
     [SerializeField] int heal = 50;
 
-    [SerializeField] float lifeTime = 0.5f;
+    [SerializeField] float lifeTime = 0.2f;
     [SerializeField] Rigidbody2D rb;
 
 
@@ -26,7 +26,17 @@ public class HealItem : MonoBehaviour
         }
 }
 
-   
+   void OnTriggerStay2D(Collider2D other) 
+{
+        if(other.CompareTag("Player"))
+        { Move.instance.AnimationHeal();
+        Move.instance.Stop();
+        AudioManager.instance.PlaySFX(4);
+        Instantiate(Explode, transform.position, transform.rotation);
+        PlayerHealth.Instance.IncreaseHP(heal);
+        Invoke("Destroy", lifeTime); 
+        }
+}
     
     private void Destroy()
     {

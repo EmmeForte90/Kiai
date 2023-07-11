@@ -20,6 +20,8 @@ public class StyleTake : MonoBehaviour
             instance = this;
         }
         /////////////////////////////////////////////
+        if(GameplayManager.instance == null || GameplayManager.instance != null)
+        {
         if(GameplayManager.instance.styleIcon[1] == true)
         {Destroy(Oggetto.gameObject);}
         if(GameplayManager.instance.styleIcon[2] == true)
@@ -29,7 +31,7 @@ public class StyleTake : MonoBehaviour
         if(GameplayManager.instance.styleIcon[4] == true)
         {Destroy(Oggetto.gameObject);}
         if(GameplayManager.instance.styleIcon[5] == true)
-        {Destroy(Oggetto.gameObject);}
+        {Destroy(Oggetto.gameObject);}}
 }
 
 public void Update()

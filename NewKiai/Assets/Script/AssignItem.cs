@@ -62,7 +62,14 @@ public void Update()
             PuppetSkin.Instance.UpdateCombinedSkinUI(); 
     }
 
-    
+    public void UpdateNumId(Item Item)
+    {
+        previewImages.sprite = Item.icon;
+        descriptions.text = Item.Description;
+        NameItems.text = Item.itemName;
+        selectedId = Item.id;
+        itemValue = Item.value;
+    }
 
  public void AssignId(Item Item)
     {

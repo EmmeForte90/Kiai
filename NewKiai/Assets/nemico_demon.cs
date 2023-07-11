@@ -248,13 +248,13 @@ public class nemico_demon : MonoBehaviour
         if (bool_morto){return;}
         //Debug.Log("triggo con "+col.name);
 
-    if(col.gameObject.tag == "Hitbox")
+    if(col.CompareTag("Hitbox"))
         {
            
                 if (tempo_vulnerabile_attuale>0){
                     if (bool_colpibile){
                         bool_colpibile=false;
-                        print ("colpito dalla mia stessa palla");
+                        //print ("colpito dalla mia stessa palla");
 
                         StartCoroutine(ritorna_ricolpibile());
                         PlayMFX(1);
@@ -266,7 +266,7 @@ public class nemico_demon : MonoBehaviour
 
                         if (vitalita<=0){
                             bool_morto=true;
-                            print ("è morto!");
+                            //print ("è morto!");
                            bool_morto=true;
                         skeletonAnimation.loop=false;
                         skeletonAnimation.AnimationName="tired";
@@ -283,7 +283,7 @@ public class nemico_demon : MonoBehaviour
                         }
                     }
                 } else {
-                    print ("è invulnerabile...");
+                    //print ("è invulnerabile...");
                     Instantiate(Noeff, hitpoint.position, transform.rotation);
                     PlayMFX(5);
                 } 
@@ -297,7 +297,8 @@ public class nemico_demon : MonoBehaviour
                         StartCoroutine(ritorna_ricolpibile_palla());
                         Instantiate(VFXExplode, hitpoint.position, transform.rotation);
                         PlayMFX(3);
-                        print ("colpito dalla mia stessa palla");
+                        palla_fuoco.SetActive(false);
+                        //print ("colpito dalla mia stessa palla");
                         tempo_vulnerabile_attuale=tempo_vulnerabile;
                     }
                 }

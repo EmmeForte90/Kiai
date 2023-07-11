@@ -150,7 +150,7 @@ public class Katana : MonoBehaviour
         float randomNumber = Random.Range(1f, 2f);
         // Converte il numero in intero
         result = Mathf.RoundToInt(randomNumber);
-        Debug.Log("result"+ result);
+        //Debug.Log("result"+ result);
         }
         if(IsStamina)
         {

@@ -5,7 +5,11 @@ using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
-
+    [Tooltip("Musica di base")]
+    public int MusicBefore;
+    [Tooltip("Musica da attivare se necessario quando la telecamera inquadra l'evento")]
+    public int MusicAfter;
+    
     [Header("Music")]
     [SerializeField] public AudioClip[] listmusic; // array di AudioClip contenente tutti i suoni che si vogliono riprodurre
     private AudioSource[] bgm; // array di AudioSource che conterrà gli oggetti AudioSource creati

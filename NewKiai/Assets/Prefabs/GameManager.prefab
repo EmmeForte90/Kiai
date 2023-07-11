@@ -14509,8 +14509,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kunai: {fileID: 5058409871759962079, guid: dd15859e3ab53324d8a659de7a60fdb6, type: 3}
   Shuriken: {fileID: 183260821265666991, guid: 0351dd06f98621b4f93f654ac9973f88, type: 3}
-  Bomb: {fileID: 8517300511900586252, guid: 02ca8ac0f5ce0ee49acb698059ac1f39, type: 3}
-  Spille: {fileID: 2001819834038951328, guid: 375a486cad64b79478f170562c8446de, type: 3}
+  Bomb: {fileID: 6301925181327904333, guid: f5b58137b16f969488d5540de3b5384e, type: 3}
+  Spille: {fileID: 1142641557336776611, guid: c1ab7781b8a96a04b99de37b7bc9a326, type: 3}
   freccia: {fileID: 6149724480348352139, guid: c40d43ac8713a2940b2e580f476e54a6, type: 3}
   Taneghasima: {fileID: 7189770122163496149, guid: 13c8e3266382fc14a8f713c8ebc5b7c3, type: 3}
   multishuriken: {fileID: 2736084834115881256, guid: 3ed8236df75a0674a80b4730cc376614, type: 3}
@@ -21605,6 +21605,10 @@ MonoBehaviour:
   ItemPrefab: {fileID: 5717832152573519106, guid: e4d9b768bd80cd0479691abc71e46e58, type: 3}
   InventoryItem: {fileID: 5717832152573519106, guid: e4d9b768bd80cd0479691abc71e46e58, type: 3}
   imageColor: {r: 0, g: 0, b: 0, a: 0}
+  Onigiri_T: {fileID: 5391799824044200508}
+  Shuriken_T: {fileID: 1394827959}
+  Kunai_T: {fileID: 4812111911008056356}
+  Sushi_T: {fileID: 8707018823749668685}
   qID: 0
   itemDatabase: []
   val: 1
@@ -24393,6 +24397,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8ed0771277fdd942871b016938e845c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MusicBefore: 0
+  MusicAfter: 0
   listmusic:
   - {fileID: 8300000, guid: 01189bb3f58945c479b9db72e7cfdff0, type: 3}
   - {fileID: 8300000, guid: d2cb32498658fb4498266b6466b7149b, type: 3}

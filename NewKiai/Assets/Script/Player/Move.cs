@@ -1818,7 +1818,9 @@ IEnumerator WaitForSceneLoad()
 {   
     yield return new WaitForSeconds(2f);
     GameplayManager.instance.FadeOut();
+    AudioManager.instance.CrossFadeOUTAudio(AudioManager.instance.MusicAfter);
     yield return new WaitForSeconds(5f);
+    AudioManager.instance.CrossFadeINAudio(AudioManager.instance.MusicBefore);
     // Cambia la scena
     SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     SceneManager.sceneLoaded += OnSceneLoaded;

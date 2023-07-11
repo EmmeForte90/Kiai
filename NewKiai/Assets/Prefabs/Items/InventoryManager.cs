@@ -34,7 +34,12 @@ public class InventoryManager : MonoBehaviour
    public  GameObject InventoryItem;
        [HideInInspector] public Color imageColor;
    
+    [Header("Menu Gadgets")]
 
+    public TextMeshProUGUI Onigiri_T;
+    public TextMeshProUGUI Shuriken_T;
+    public TextMeshProUGUI Kunai_T;
+    public TextMeshProUGUI Sushi_T;
 
 
     [HideInInspector] public int qID;
@@ -113,13 +118,12 @@ public void GadgetAc(int id)
       // Se viene trovato un oggetto esistente, incrementa il suo valore di uno.
       if (existingItem != null)
       {
-          existingItem.value++;
-      }
-      
+        existingItem.value++;  
+      }  
       // Se non viene trovato un oggetto esistente, aggiungi il nuovo oggetto al database.
       else if (existingItem == null)
       {
-          itemDatabase.Add(newItem);
+        itemDatabase.Add(newItem);
       } 
 }
 

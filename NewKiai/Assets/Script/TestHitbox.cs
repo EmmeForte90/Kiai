@@ -72,7 +72,7 @@ void OnTriggerEnter2D(Collider2D other)
         if (other.CompareTag("Hitbox") || other.CompareTag("Throw"))
         {  
             
-            print("Hit the enm");
+            //print("Hit the enm");
             Hit();
             Instantiate(VFX, pos.transform.position, transform.rotation);
             PlayMFX(0);
@@ -83,7 +83,7 @@ void OnTriggerStay2D(Collider2D other)
 {
     if(other.CompareTag("H_Water"))
         {  
-         print("Hit the enm");
+         //print("Hit the enm");
             Hit();
             Instantiate(VFX, pos.transform.position, transform.rotation);
             PlayMFX(0);

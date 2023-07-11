@@ -36,6 +36,8 @@ private void OnTriggerEnter2D(Collider2D other)
         GameplayManager.instance.battle = true;
         if(needMusic)
     {
+        AudioManager.instance.MusicBefore = MusicBefore;
+        AudioManager.instance.MusicAfter = MusicAfter;
         AudioManager.instance.CrossFadeOUTAudio(MusicBefore);
         AudioManager.instance.CrossFadeINAudio(MusicAfter);
 
@@ -52,7 +54,9 @@ private void OnTriggerExit2D(Collider2D other)
         GameplayManager.instance.battle = false;
         if(needMusic)
         {
-         AudioManager.instance.CrossFadeOUTAudio(MusicAfter);
+        AudioManager.instance.MusicBefore = MusicBefore;
+        AudioManager.instance.MusicAfter = MusicAfter;
+        AudioManager.instance.CrossFadeOUTAudio(MusicAfter);
         AudioManager.instance.CrossFadeINAudio(MusicBefore);
         }
     }

@@ -241,13 +241,14 @@ public void Buy(Item newItem)
     dialogueMenu.text = "Thank you!"; // Reference to the TextMeshProUGUI component
     GameplayManager.instance.money -= prices;
     GameplayManager.instance.moneyText.text = GameplayManager.instance.money.ToString();
-    GameplayManager.instance.moneyTextM.text = GameplayManager.instance.money.ToString(); ;
+    GameplayManager.instance.moneyTextM.text = GameplayManager.instance.money.ToString();
     PuppetM.Instance.Idle();
     if(newItem.isConsumable)
     {InventoryManager.Instance.GadgetAc(IDItem);}
     InventoryManager.Instance.AddItem(newItem);
     InventoryManager.Instance.ListItem(IDItem);
     InventoryManager.Instance.ItemActive(IDItem);
+    //AssignItem.Instance.UpdateNumId(newItem);
     }else if(GameplayManager.instance.money < prices)
     {
     dialogueMenu.text = "Sorry, buddy, you don't have much money"; // Reference to the TextMeshProUGUI component
@@ -267,6 +268,7 @@ if(UpdateMenuRapido.Instance.Slot4 <= 0 && UpdateMenuRapido.Instance.MXV4 <= 0 &
 //UpdateMenuRapido.Instance.MXV4++;
 ItemRapidMenu.Instance.MXV4++;
 InventoryManager.Instance.val++;
+InventoryManager.Instance.Num_C.ToString();
 }
 // Altrimenti, Se lo slot 1 del menu rapido è vuoto, aggiungi un'unità all'elemento corrispondente nel menu rapido.
 else if(UpdateMenuRapido.Instance.Slot1 <= 0 && UpdateMenuRapido.Instance.MXV1 <= 0 && ItemRapidMenu.Instance.MXV1 <= 0)//up
@@ -274,6 +276,8 @@ else if(UpdateMenuRapido.Instance.Slot1 <= 0 && UpdateMenuRapido.Instance.MXV1 <
 //UpdateMenuRapido.Instance.MXV1++;
 ItemRapidMenu.Instance.MXV1++;
 InventoryManager.Instance.val++;
+InventoryManager.Instance.Num_C.ToString();
+
 }
 // Altrimenti, Se lo slot 2 del menu rapido è vuoto, aggiungi un'unità all'elemento corrispondente nel menu rapido.
 else if(UpdateMenuRapido.Instance.Slot2 <= 0 && UpdateMenuRapido.Instance.MXV2 <= 0 && ItemRapidMenu.Instance.MXV2 <= 0)//Left
@@ -281,6 +285,8 @@ else if(UpdateMenuRapido.Instance.Slot2 <= 0 && UpdateMenuRapido.Instance.MXV2 <
 //UpdateMenuRapido.Instance.MXV2++;
 ItemRapidMenu.Instance.MXV2++;
 InventoryManager.Instance.val++;
+InventoryManager.Instance.Num_C.ToString();
+
 }
 // Altrimenti, Se lo slot 3 del menu rapido è vuoto, aggiungi un'unità all'elemento corrispondente nel menu rapido.
 else if(UpdateMenuRapido.Instance.Slot3 <= 0 && UpdateMenuRapido.Instance.MXV3 <= 0 && ItemRapidMenu.Instance.MXV3 <= 0)//Right
@@ -288,6 +294,8 @@ else if(UpdateMenuRapido.Instance.Slot3 <= 0 && UpdateMenuRapido.Instance.MXV3 <
 //UpdateMenuRapido.Instance.MXV3++;
 ItemRapidMenu.Instance.MXV3++;
 InventoryManager.Instance.val++;
+InventoryManager.Instance.Num_C.ToString();
+
 }
 }
    
