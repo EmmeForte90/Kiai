@@ -14761,7 +14761,7 @@ GameObject:
   - component: {fileID: 3027520377464820034}
   m_Layer: 0
   m_Name: Lightning Slash v1
-  m_TagString: Untagged
+  m_TagString: H_Water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

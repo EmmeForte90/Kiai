@@ -9916,6 +9916,11 @@ MonoBehaviour:
   startingLoop: 0
   timeScale: 1
   freeze: 0
+  layoutScaleMode: 0
+  referenceSize: {x: 1, y: 1}
+  referenceScale: 1
+  rectTransformSize: {x: 0, y: 0}
+  editReferenceRect: 0
   updateWhenInvisible: 3
   allowMultipleCanvasRenderers: 0
   canvasRenderers: []
@@ -9923,6 +9928,7 @@ MonoBehaviour:
   enableSeparatorSlots: 0
   separatorParts: []
   updateSeparatorPartLocation: 1
+  updateSeparatorPartScale: 0
   disableMeshAssignmentOnOverride: 1
   meshGenerator:
     settings:
@@ -10568,7 +10574,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -957.83, y: -539.87}
+  m_AnchoredPosition: {x: -957.83, y: -540.31}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3251078663342880355
@@ -10688,6 +10694,11 @@ MonoBehaviour:
   startingLoop: 0
   timeScale: 1
   freeze: 0
+  layoutScaleMode: 0
+  referenceSize: {x: 1, y: 1}
+  referenceScale: 1
+  rectTransformSize: {x: 0, y: 0}
+  editReferenceRect: 0
   updateWhenInvisible: 3
   allowMultipleCanvasRenderers: 0
   canvasRenderers: []
@@ -10695,6 +10706,7 @@ MonoBehaviour:
   enableSeparatorSlots: 0
   separatorParts: []
   updateSeparatorPartLocation: 1
+  updateSeparatorPartScale: 0
   disableMeshAssignmentOnOverride: 1
   meshGenerator:
     settings:
@@ -10743,7 +10755,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -70}
+  m_AnchoredPosition: {x: -21, y: -89.5}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3251078663587788597
@@ -10774,7 +10786,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Talk
+  m_text: 'Press E to talk
 
 '
   m_isRightToLeft: 0
@@ -10803,8 +10815,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48
-  m_fontSizeBase: 48
+  m_fontSize: 26
+  m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -10839,7 +10851,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: -61.720627, z: 0, w: 58.08586}
+  m_margin: {x: 0, y: -61.720627, z: -86.32584, w: 58.08586}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -10924,6 +10936,11 @@ MonoBehaviour:
   startingLoop: 1
   timeScale: 1
   freeze: 0
+  layoutScaleMode: 0
+  referenceSize: {x: 1, y: 1}
+  referenceScale: 1
+  rectTransformSize: {x: 0, y: 0}
+  editReferenceRect: 0
   updateWhenInvisible: 3
   allowMultipleCanvasRenderers: 0
   canvasRenderers: []
@@ -10931,6 +10948,7 @@ MonoBehaviour:
   enableSeparatorSlots: 0
   separatorParts: []
   updateSeparatorPartLocation: 1
+  updateSeparatorPartScale: 0
   disableMeshAssignmentOnOverride: 1
   meshGenerator:
     settings:
