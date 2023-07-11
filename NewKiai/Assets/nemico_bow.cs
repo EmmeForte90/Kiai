@@ -325,7 +325,7 @@ public class nemico_bow : MonoBehaviour
 
    void OnTriggerEnter2D(Collider2D other) 
 {
-        if(other.gameObject.tag == "Hitbox")
+        if(other.CompareTag("Hitbox"))
         {  
         if(!isDead)
         {
@@ -348,7 +348,7 @@ public class nemico_bow : MonoBehaviour
         } else if(!IsStamina){Damage();}
         } else{Die();}} 
 
-        if(other.gameObject.tag == "Throw")
+        if(other.CompareTag("Throw"))
         {  
         if(!isDead)
         {
@@ -371,7 +371,31 @@ public class nemico_bow : MonoBehaviour
         } else if(!IsStamina){DamageConsumable();}
         } else{Die();}}     
 }
+void OnTriggerStay2D(Collider2D other) 
+{
+    if(other.CompareTag("H_Water"))
+        {  
+        if(!isDead)
+        {
+            if(IsStamina)
+        {
+            if(stamina > 0)
+        {
+                    isHurt = true;
+                    vitalita -= 5; 
+                    PlayMFX(2);
+                    stamina -= 10;
+                    PlayMFX(3);
+                    PlayerHealth.Instance.currentStamina -= 3;
+                    StartCoroutine(ripristina_Posa());                    
+                    Instantiate(VFXSdeng, hitpoint.position, transform.rotation);
+                    if(isKnock) {KnockbackAt = true;}
+        }else if(stamina <= 0)
+        {Damage(); TiredAnm(); StaminaVFX.gameObject.SetActive(false); StartCoroutine(ripristina_Stamina());}
+        } else if(!IsStamina){Damage();}
+        } else{Die();}} 
 
+}
 private void Chase()
 {
     AimANM();

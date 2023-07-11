@@ -19485,7 +19485,7 @@ GameObject:
   - component: {fileID: 8616785940295895719}
   m_Layer: 0
   m_Name: Water_V
-  m_TagString: Hitbox
+  m_TagString: H_Water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

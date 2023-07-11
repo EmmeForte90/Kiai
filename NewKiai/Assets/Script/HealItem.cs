@@ -10,20 +10,21 @@ public class HealItem : MonoBehaviour
     [SerializeField] int heal = 50;
 
     [SerializeField] float lifeTime = 0.5f;
-    Rigidbody2D rb;
+    [SerializeField] Rigidbody2D rb;
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        //Recupera i componenti del rigidbody
-        Move.instance.AnimationHeal();
+
+     void OnTriggerEnter2D(Collider2D other) 
+{
+        if(other.CompareTag("Player"))
+        { Move.instance.AnimationHeal();
         Move.instance.Stop();
         AudioManager.instance.PlaySFX(4);
         Instantiate(Explode, transform.position, transform.rotation);
         PlayerHealth.Instance.IncreaseHP(heal);
-        Invoke("Destroy", lifeTime);
-    }
+        Invoke("Destroy", lifeTime); 
+        }
+}
 
    
     

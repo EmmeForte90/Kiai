@@ -10265,7 +10265,7 @@ MonoBehaviour:
   rb: {fileID: 5438953639862422208}
   attackrange: 2.5
   attack: {fileID: 7232406045611814925}
-  chaseThreshold: 5.4
+  chaseThreshold: 10
   slashpoint: {fileID: 4240624357342992011}
   hitpoint: {fileID: 8619701525481231441}
   VFXSdeng: {fileID: 4331965279904828745, guid: 1b79c7dad815f1544b564d01f2920de0, type: 3}
@@ -35562,16 +35562,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebd2b98edcdd6b84a97bf2e0c54e0b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ContentENM: {fileID: 0}
+  EndPrototype: {fileID: 0}
+  EndPrototypebool: 0
+  ContentENM: {fileID: 4527011756496501238}
   spineAnimation: {fileID: 5587501058862899915}
   FPoint: {fileID: 3139101547839553824}
   fatalit: {fileID: 551474489063237877}
   needFinalVFX: 0
   VFXEnding: {fileID: 0}
+  CamFocus: {fileID: 0}
   Enemy: {fileID: 8744689313856235592}
   ChooseFatality: 4
   tiredAnimationName: stun
   fatalityAnimationName: Fatality/die_katana
+  MusicBefore: 0
+  MusicAfter: 0
+  needMusic: 0
 --- !u!61 &8309240717959683315
 BoxCollider2D:
   m_ObjectHideFlags: 0

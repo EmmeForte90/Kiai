@@ -10268,7 +10268,7 @@ MonoBehaviour:
   rb: {fileID: 7215584877815851821}
   attackrange: 2.5
   attack: {fileID: 5406370457461051872}
-  chaseThreshold: 5.4
+  chaseThreshold: 10
   slashpoint: {fileID: 1549338126189197158}
   hitpoint: {fileID: 6397002003750729148}
   VFXSdeng: {fileID: 4331965279904828745, guid: 1b79c7dad815f1544b564d01f2920de0, type: 3}
@@ -35981,16 +35981,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebd2b98edcdd6b84a97bf2e0c54e0b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ContentENM: {fileID: 0}
+  EndPrototype: {fileID: 0}
+  EndPrototypebool: 0
+  ContentENM: {fileID: 1264049723082807323}
   spineAnimation: {fileID: 7121080688762274598}
   FPoint: {fileID: 345008651245625549}
   fatalit: {fileID: 2954036533796555032}
   needFinalVFX: 0
   VFXEnding: {fileID: 0}
+  CamFocus: {fileID: 0}
   Enemy: {fileID: 6197660257028376997}
   ChooseFatality: 4
   tiredAnimationName: stun
   fatalityAnimationName: Fatality/die_back
+  MusicBefore: 0
+  MusicAfter: 0
+  needMusic: 0
 --- !u!61 &6632036276898331934
 BoxCollider2D:
   m_ObjectHideFlags: 0

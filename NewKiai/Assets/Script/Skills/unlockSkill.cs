@@ -46,6 +46,7 @@ public class unlockSkill : MonoBehaviour
             if(!isCool)
             {
             Pickup();
+            AudioManager.instance.PlaySFX(1);
             Instantiate(VFX, transform.position, transform.rotation);
             isCool = true;
             }

@@ -25,12 +25,6 @@ public class TestHitbox : MonoBehaviour
     public GameObject VFX;
     public Transform pos;
 
-[Header("Knockback")]
-[SerializeField] private float knockForce = 1f;
-private float KnockTime; //decrementa il timer ad ogni frame
-public float Knockmax = 1f; //decrementa il timer ad ogni frame
-private bool isKnockback = false;
-
 
  [Header("Audio")]
     [HideInInspector] public float basePitch = 1f;
@@ -68,33 +62,6 @@ private void Awake()
         }
 
     }
-void Update()
-{ 
-    /*
-    #region testDanno
-           if(Input.GetKeyDown(KeyCode.B))
-            {
-            Debug.Log("Il pulsante è stato premuto!");
-            rb.isKinematic = false;
-            isKnockback = true;
-            Knockback();
-            //Damage(10);
-            }
-            #endregion
-            */
-
-    if(isKnockback)
-{
-        KnockTime -= Time.deltaTime; //decrementa il timer ad ogni frame
-        if (KnockTime <= 0f) 
-        {
-        isKnockback = false; 
-        rb.isKinematic = true;
-        rb.velocity = new Vector2(0f, 0f);
-        KnockTime = Knockmax;
-        }
-}
-}
 
 public void Damage(int damage)
 {
@@ -102,20 +69,25 @@ public void Damage(int damage)
 }
 void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Hitbox" || other.gameObject.tag == "Throw")
+        if (other.CompareTag("Hitbox") || other.CompareTag("Throw"))
         {  
             
             print("Hit the enm");
             Hit();
-            //PlayerHealth.Instance.currentStamina -= 40;
             Instantiate(VFX, pos.transform.position, transform.rotation);
             PlayMFX(0);
-            //hit = true;
-            //Invoke("Resto", lifeTime);
             
         } else{Idle();}   
     }
-
+void OnTriggerStay2D(Collider2D other) 
+{
+    if(other.CompareTag("H_Water"))
+        {  
+         print("Hit the enm");
+            Hit();
+            Instantiate(VFX, pos.transform.position, transform.rotation);
+            PlayMFX(0);
+}else{Idle();} }
 private void Resto()
     {
        Idle();
@@ -138,26 +110,6 @@ public void PlayMFX(int soundToPlay)
         bgm[soundToPlay].Play();
     }
 
-public void Knockback()
-    {
-        if(isKnockback){
-         // applica l'impulso del salto se il personaggio è a contatto con il terreno
-        print("dovrebbefare il knockback");
-         // applica l'impulso del salto se il personaggio è a contatto con il terreno
-        if (transform.localScale.x < 0)
-        {
-        rb.AddForce(new Vector2(-knockForce, 2f), ForceMode2D.Impulse);
-        }
-        else if (transform.localScale.x > 0)
-        {
-        rb.AddForce(new Vector2(knockForce, 2f), ForceMode2D.Impulse);
-        }
-        //isKnockback = false;
-        }
-        
-        //isKnockback = false;
-        
-    }
 
 public void Idle()
 {

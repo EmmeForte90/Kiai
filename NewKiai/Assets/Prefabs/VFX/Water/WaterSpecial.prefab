@@ -4872,8 +4872,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b6567bcc2a81744693243eaaad8b44b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeHitbox: 0
-  Damage: 10
 --- !u!1 &2465825102120096975
 GameObject:
   m_ObjectHideFlags: 0
@@ -38771,7 +38769,7 @@ GameObject:
   - component: {fileID: 6736561815847115943}
   m_Layer: 0
   m_Name: WaterSpecial
-  m_TagString: Untagged
+  m_TagString: H_Water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

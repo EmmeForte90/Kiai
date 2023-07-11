@@ -29,7 +29,7 @@ private void Update()
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void OnTriggerEnter2D(Collider2D other) 
 {
-        if(other.gameObject.tag == "Enemy" || other.gameObject.tag == "Boss")
+        if(other.CompareTag("Enemy") || other.CompareTag("Boss"))
         //Se il proiettile tocca il nemico
         {       
             //print("colpito torcia(ENM)");
@@ -124,7 +124,7 @@ if(GameplayManager.instance.styleIcon[5] == true)
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-         if(other.gameObject.tag == "Hitbox_E")
+         if(other.CompareTag("Hitbox_E"))
         {       
             CanTake = true;
             Move.instance.KnockbackS();

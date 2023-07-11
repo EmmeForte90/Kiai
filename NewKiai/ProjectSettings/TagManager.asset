@@ -26,6 +26,7 @@ TagManager:
   - Throw
   - Torcia
   - Style
+  - H_Water
   layers:
   - Default
   - TransparentFX

@@ -64,7 +64,7 @@ public void PlayMFX(int soundToPlay)
 {}*/
 void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Hitbox")
+        if (other.CompareTag("Hitbox"))
         {  
             if(Move.instance.style == 2)
             {torcia.gameObject.SetActive(true);
@@ -72,7 +72,11 @@ void OnTriggerEnter2D(Collider2D other)
             PlayMFX(0);
             Fire();
             Go = true;
-            }else if(Move.instance.style == 4 && Go)
+            }
+        }   
+        if (other.CompareTag("H_Water"))
+        {  
+            if(Move.instance.style == 4 && Go)
             {torcia.gameObject.SetActive(false);
             Instantiate(VFXOff, pointVFX.transform.position, transform.rotation);
             PlayMFX(2);

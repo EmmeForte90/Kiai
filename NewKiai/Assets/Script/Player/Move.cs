@@ -1312,11 +1312,13 @@ else if(!dashing)
  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 public void TiredFunc()
 {
-    Stop(); TiredAnm(); isTired = true; stopInput = true; drawsword = true; isGuard = false;      
+    Stop(); TiredAnm(); isTired = true; stopInput = true; drawsword = true; isGuard = false;  WaterSpecial = false; FireSpecial = false;
+    attackWater = false;  isCharging = false; NormalSpecial = false;
 }
 public void RestoreTiredFunc()
 {
-    isTired = false; stopInput = false; TiredAnmWithEnd(); drawsword = true; isGuard = false;       
+    isTired = false; stopInput = false; TiredAnmWithEnd(); drawsword = true; isGuard = false;   WaterSpecial = false;
+    attackWater = false;  FireSpecial = false;  isCharging = false;  NormalSpecial = false; 
 }
  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 #region ContatoreCombo
@@ -1529,7 +1531,6 @@ public void attackupper()
            }
         if (dashing || Atkdashing)
         {
-            PlayMFX(4);
             if (horDir < 0)
         {
            rb.AddForce(-transform.right * dashForce, ForceMode2D.Impulse);
@@ -1877,7 +1878,7 @@ IEnumerator wak()
 void Blast(Item newItem)
 {
         isBlast = true;
-        print("il blast è partito");
+        //print("il blast è partito");
         if(slotB)
         {
             if(UpdateMenuRapido.Instance.Slot4 > 0 && UpdateMenuRapido.Instance.MXV4 > 0)//Bottom
