@@ -10439,6 +10439,7 @@ MonoBehaviour:
   CamFocus: {fileID: 0}
   Enemy: {fileID: 3210197942284895356}
   ChooseFatality: 3
+  FatalityActive: 0
   tiredAnimationName: stun
   fatalityAnimationName: Fatality/die_back
   MusicBefore: 0
@@ -11020,7 +11021,7 @@ MonoBehaviour:
   VFXendStamina: {fileID: 3830632982001280281}
   StaminaVFX: {fileID: 1630496980378403679}
   staminaBar: {fileID: 76470163421678726}
-  isKnock: 1
+  isKnock: 0
   knockForceShort: 1
   knockForceLong: 2
   rb: {fileID: 3282444068830106097}

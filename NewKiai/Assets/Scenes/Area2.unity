@@ -55424,6 +55424,22 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 911489448}
+    - target: {fileID: 3251078663342880357, guid: f4ae430cb9df3ee45955923c434b36e8, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -540.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 3251078663342880358, guid: f4ae430cb9df3ee45955923c434b36e8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3251078663587788598, guid: f4ae430cb9df3ee45955923c434b36e8, type: 3}
+      propertyPath: m_text
+      value: E to Talk
+      objectReference: {fileID: 0}
+    - target: {fileID: 3251078663587788598, guid: f4ae430cb9df3ee45955923c434b36e8, type: 3}
+      propertyPath: m_margin.z
+      value: -22.664612
+      objectReference: {fileID: 0}
     - target: {fileID: 3251078663802348032, guid: f4ae430cb9df3ee45955923c434b36e8, type: 3}
       propertyPath: m_Name
       value: Kid
@@ -55438,7 +55454,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3251078663802348047, guid: f4ae430cb9df3ee45955923c434b36e8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.51
+      value: 4.44
       objectReference: {fileID: 0}
     - target: {fileID: 3251078663802348047, guid: f4ae430cb9df3ee45955923c434b36e8, type: 3}
       propertyPath: m_LocalPosition.z

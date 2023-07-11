@@ -9916,6 +9916,11 @@ MonoBehaviour:
   startingLoop: 0
   timeScale: 1
   freeze: 0
+  layoutScaleMode: 0
+  referenceSize: {x: 1, y: 1}
+  referenceScale: 1
+  rectTransformSize: {x: 0, y: 0}
+  editReferenceRect: 0
   updateWhenInvisible: 3
   allowMultipleCanvasRenderers: 0
   canvasRenderers: []
@@ -9923,6 +9928,7 @@ MonoBehaviour:
   enableSeparatorSlots: 0
   separatorParts: []
   updateSeparatorPartLocation: 1
+  updateSeparatorPartScale: 0
   disableMeshAssignmentOnOverride: 1
   meshGenerator:
     settings:
@@ -10098,8 +10104,8 @@ MonoBehaviour:
   listmusic:
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 8300000, guid: 10a19f73634420d4a9d80839d0e4bff0, type: 3}
   - {fileID: 8300000, guid: fbe91795a02cf784eab39d847f5fcb1f, type: 3}
+  - {fileID: 8300000, guid: 10a19f73634420d4a9d80839d0e4bff0, type: 3}
   SFX: {fileID: 24100000, guid: 63f598184995bda419cd1ee5db5e6d03, type: 2}
   idleAnimationName: hello
   HitAnimationName: talk2
@@ -10568,7 +10574,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -957.83, y: -539.87}
+  m_AnchoredPosition: {x: -957.83, y: -540.62}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3251078663342880355
@@ -10688,6 +10694,11 @@ MonoBehaviour:
   startingLoop: 0
   timeScale: 1
   freeze: 0
+  layoutScaleMode: 0
+  referenceSize: {x: 1, y: 1}
+  referenceScale: 1
+  rectTransformSize: {x: 0, y: 0}
+  editReferenceRect: 0
   updateWhenInvisible: 3
   allowMultipleCanvasRenderers: 0
   canvasRenderers: []
@@ -10695,6 +10706,7 @@ MonoBehaviour:
   enableSeparatorSlots: 0
   separatorParts: []
   updateSeparatorPartLocation: 1
+  updateSeparatorPartScale: 0
   disableMeshAssignmentOnOverride: 1
   meshGenerator:
     settings:
@@ -10774,9 +10786,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Talk
-
-'
+  m_text: E to Talk
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 291346a758ce68a48945b83b01e5a1ef, type: 2}
   m_sharedMaterial: {fileID: -5332836139326283541, guid: 291346a758ce68a48945b83b01e5a1ef, type: 2}
@@ -10839,7 +10849,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: -61.720627, z: 0, w: 58.08586}
+  m_margin: {x: 0, y: -61.720627, z: -22.664612, w: 58.08586}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -10924,6 +10934,11 @@ MonoBehaviour:
   startingLoop: 1
   timeScale: 1
   freeze: 0
+  layoutScaleMode: 0
+  referenceSize: {x: 1, y: 1}
+  referenceScale: 1
+  rectTransformSize: {x: 0, y: 0}
+  editReferenceRect: 0
   updateWhenInvisible: 3
   allowMultipleCanvasRenderers: 0
   canvasRenderers: []
@@ -10931,6 +10946,7 @@ MonoBehaviour:
   enableSeparatorSlots: 0
   separatorParts: []
   updateSeparatorPartLocation: 1
+  updateSeparatorPartScale: 0
   disableMeshAssignmentOnOverride: 1
   meshGenerator:
     settings:

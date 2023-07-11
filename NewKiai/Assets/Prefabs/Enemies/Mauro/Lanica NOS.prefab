@@ -30678,6 +30678,7 @@ MonoBehaviour:
   CamFocus: {fileID: 0}
   Enemy: {fileID: 5175012947064434495}
   ChooseFatality: 4
+  FatalityActive: 0
   tiredAnimationName: stun
   fatalityAnimationName: Fatality/die_katana
   MusicBefore: 0
